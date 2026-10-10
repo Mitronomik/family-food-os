@@ -1,3 +1,24 @@
+# PR10-ARCH — independent-review correction of three blockers — 2026-10-10
+
+Issue #191 / PR #192, branch `docs/pr10-prep-freezer-contract`. Accepted base `main@545c86b4dd39ba3b14e0c36fcbc4733da1137d14` (#190 merged). Reviewer REQUEST CHANGES addressed **in the same docs-only branch**:
+1. Three-table Prep schema frozen: `prep_plans`, `prep_tasks`, `prep_unresolved_obligations`, reason enum, event/step/Household FK and NULL-safe unique expression index; COMPLETE iff every mandatory recipe step is covered and there are zero unresolved.
+2. Measurable usefulness: >=1 source-backed safe shared/advance operation for >=2 MealEvents and strictly fewer physical tasks vs ungrouped baseline. Bounded audit of 30 accepted DC4 candidates shows 0/30 batch/freezer/storage-ready flags, so **mandatory separate PR10-META readiness/source-evidence gate** before PR10-A/B/C and any benefit claim.
+3. Numeric recipe steps: reviewed type/mapping and explicit source-step hash, separate authoritative scaled RecipeIngredients, unreviewed numeric directions withheld with `STEP_QUANTITY_REVIEW_REQUIRED`.
+
+New [audit](../docs/family-food/pr10-prep-metadata-readiness-audit.md) and updated [contract](../docs/family-food/pr10-prep-freezer-implementation-contract.md) are **PROPOSED until independent review/merge**. Docs CI required on corrected head; no production code, migration, PR10 runtime, Pantry writes, PR10-PDF or Gate 2 start.
+
+---
+
+# PR10-ARCH — Prep / Freezer Implementation Contract Gate — 2026-10-10
+
+**Accepted main:** `545c86b4dd39ba3b14e0c36fcbc4733da1137d14`, PR #190 PR9-C MERGED 2026-10-10T11:58:23Z; PR9-ARCH #184, PR9-A #186 and PR9-B #188 were previously merged. Generic Shopping engine and HTTP API are integrated; **PR9 implementation accepted**. **Gate 2 NOT COMPLETE**.
+
+**CURRENT authorized operation:** Issue #191 / branch `docs/pr10-prep-freezer-contract`. Draft and independently review the docs-only [PR10 implementation contract](../docs/family-food/pr10-prep-freezer-implementation-contract.md) covering trustworthy recipe process/freezer metadata, conservative deterministic preparation, immutable PrepPlan identity, persistence/UoW scope, Household isolation, no Pantry mutation and adversarial acceptance. **NO PR10 production code, migration, Prep execution, invented storage facts or next milestone** until this contract PR is accepted/merged. PR10-PDF follows accepted PR10 runtime, and Gate 2 follows PR10-PDF.
+
+Historical PR9-C / PR9-B work below is superseded as authorization, retained only as prior handoff evidence.
+
+---
+
 # PR9-C — Shopping HTTP API implementation — 2026-10-10
 
 **Accepted main:** `9e9db57e7d8ffc8b155c662b0091555de7dc8a34` (#188 PR9-B MERGED at 2026-10-10T09:38:44Z; accepted exact-head 26/26 SUCCESS). PR9-A #186 and PR9-ARCH #184 MERGED; Gate1 COMPLETE.
