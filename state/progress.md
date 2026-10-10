@@ -1,3 +1,13 @@
+# PR9-C — HTTP query validation review correction — 2026-10-10
+
+- Independent review of PR #190 at `09a5678ab47c9d8338c4a2b055777ee37404ef7b` found one blocking HTTP validation gap: unknown Shopping query parameters were ignored, unlike the strict request body.
+- Scoped fix in `backend/app/api/shopping.py`: router-wide FastAPI dependency rejects **all** query parameters on generate/detail/current/regenerate/history before ShoppingService, returning structured Russian-safe `422 SHOPPING_INVALID_REQUEST`.
+- Added TestClient regression matrix for `purchase_quantity`, `price`, `required_quantity`, arbitrary unknown parameter and combined `purchase_quantity&price`, asserting **zero Shopping/Pantry writes** on rejected generation/regeneration.
+- PR9-A/B calculator, ShoppingService, SQLite transaction, DB tables/migrations and previously approved provenance policies unchanged.
+- Exact-head focused + full backend/launcher CI must be rerun; earlier 23/23 receipt applies to pre-correction head only. PR #190 remains unmerged; PR10 NOT AUTHORIZED.
+
+---
+
 # PR9-C — Shopping API delivery in progress — 2026-10-10
 
 - #188 PR9-B MERGED at `main@9e9db57e7d8ffc8b155c662b0091555de7dc8a34`, immutable SQLite Shopping foundation accepted; exact-head 26/26 CI SUCCESS.

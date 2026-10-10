@@ -10,7 +10,7 @@ from contextlib import contextmanager
 from decimal import Decimal, InvalidOperation
 from uuid import UUID
 
-from fastapi import APIRouter, Body, HTTPException
+from fastapi import APIRouter, Body, Depends, HTTPException, Request
 
 from app.domain.shopping_calculation import ShoppingCalculationError
 from app.domain.shopping_lists import ShoppingCurrent, ShoppingListDetail
@@ -79,6 +79,19 @@ def _message(mapping: dict[str, str], code: str) -> str:
 
 def _error_detail(code: str, message: str, next_action: str) -> dict[str, str]:
     return {"code": code, "message": message, "next_action": next_action}
+
+
+def _reject_unsupported_query_parameters(request: Request) -> None:
+    """PR9-C defines no query parameters on any Shopping endpoint."""
+    if request.query_params:
+        raise HTTPException(
+            status_code=422,
+            detail=_error_detail(
+                "SHOPPING_INVALID_REQUEST",
+                "Некорректные параметры списка покупок.",
+                "Проверьте идентификаторы и формат запроса.",
+            ),
+        )
 
 
 @contextmanager
@@ -265,7 +278,11 @@ def _current_response(current: ShoppingCurrent) -> ShoppingCurrentResponse:
 
 
 def create_shopping_router(service_provider: ShoppingServiceProvider) -> APIRouter:
-    router = APIRouter(prefix="/households/{household_id}", tags=["shopping"])
+    router = APIRouter(
+        prefix="/households/{household_id}",
+        tags=["shopping"],
+        dependencies=[Depends(_reject_unsupported_query_parameters)],
+    )
 
     @router.post(
         "/meal-plans/{plan_id}/shopping-lists",

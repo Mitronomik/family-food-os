@@ -1,3 +1,11 @@
+# PR9-C — query validation review blocker correction — 2026-10-10
+
+The latest independent review of PR #190 requested strict rejection of **all Shopping query parameters** (none are supported in PR9-C). Correction is a single router-level FastAPI `Depends` gate on `APIRouter(dependencies=[...])`, executed before endpoint handlers and service/database writes. It returns exactly the existing `SHOPPING_INVALID_REQUEST` 422 JSON envelope, with Russian message/next_action; invalid body and path values still use existing Shopping-safe 422 translation. Focused TestClient verifies all five routes and that rejected POSTs do not create lists, child obligations or Pantry movements. No ShoppingService, PR9-A/B, migration or architecture change.
+
+Verify **new exact head** with PR9-C specialized workflow, Ruff/format/whitespace, and full backend/launcher regression per verification policy; do not reuse old 23/23 as post-fix CI. PR #190 remains open, no merge. PR9-C next independent review; PR9 overall/PR10 still gated.
+
+---
+
 # PR9-C — HTTP API handoff — 2026-10-10
 
 Accepted `main@9e9db57e7d8ffc8b155c662b0091555de7dc8a34`: PR #188 PR9-B merged after exact-head 26/26 SUCCESS. Current issue #189, branch `feat/pr9-c-shopping-http-api`. Read root/scoped AGENTS, Issue #189, frozen `docs/family-food/pr9-shopping-implementation-contract.md` §6, `backend/app/services/shopping.py`, `backend/app/api/shopping.py`, `backend/app/schemas/shopping.py`, `backend/app/persistence/sqlalchemy_core/shopping_composition.py`, `backend/app/tests/test_shopping_api.py`.

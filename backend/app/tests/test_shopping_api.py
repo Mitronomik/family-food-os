@@ -195,6 +195,61 @@ def test_empty_state_generation_and_idempotent_http_contract(api):
     assert _rows(config, "pantry_movements") == 0
 
 
+
+@pytest.mark.parametrize(
+    "query",
+    [
+        {"purchase_quantity": "0", "price": "0"},
+        {"price": "0"},
+        {"required_quantity": "100"},
+        {"some_unknown_parameter": "ignored-not-allowed"},
+    ],
+)
+def test_all_shopping_routes_reject_query_parameters_without_mutation(api, query):
+    client, engine, _, config = api
+    household, plan = _prepare(engine, unresolved=True)
+    root, prefix = _urls(household, plan)
+    invalid = {
+        "detail": {
+            "code": "SHOPPING_INVALID_REQUEST",
+            "message": "Некорректные параметры списка покупок.",
+            "next_action": "Проверьте идентификаторы и формат запроса.",
+        }
+    }
+
+    # Both write endpoints must validate before ShoppingService or any INSERT.
+    for url in (prefix, prefix + "/regenerate"):
+        response = client.post(url, params=query, json={})
+        assert response.status_code == 422, response.text
+        assert response.json() == invalid
+    assert _rows(config, "shopping_lists") == 0
+    assert _rows(config, "shopping_list_items") == 0
+    assert _rows(config, "shopping_unresolved_obligations") == 0
+    assert _rows(config, "pantry_movements") == 0
+
+    saved = client.post(prefix, json={}).json()
+    assert saved["lifecycle"] == "CURRENT"
+
+    # The same router-wide validation applies to each read endpoint and
+    # regeneration after a legitimate snapshot exists.
+    for url in (
+        prefix + "/current",
+        prefix,
+        root + "/shopping-lists/" + saved["id"],
+    ):
+        response = client.get(url, params=query)
+        assert response.status_code == 422, response.text
+        assert response.json() == invalid
+    regenerated = client.post(prefix + "/regenerate", params=query, json={})
+    assert regenerated.status_code == 422
+    assert regenerated.json() == invalid
+
+    assert _rows(config, "shopping_lists") == 1
+    assert _rows(config, "shopping_unresolved_obligations") == 1
+    assert _rows(config, "pantry_movements") == 0
+    assert client.get(prefix + "/current").json()["lifecycle"] == "CURRENT"
+
+
 def test_exact_quantities_fefo_evidence_and_no_pantry_write(api):
     client, engine, _, config = api
     household, plan, rice, leaf, stock = _seed_recipe_case(engine)
