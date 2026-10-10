@@ -19,9 +19,9 @@ from app.api.demo_data import router as demo_data_router
 from app.api.exports import router as exports_router
 from app.api.health import router as health_router
 from app.api.households import create_households_router
-from app.api.ingredients import router as ingredients_router
 from app.api.imports import router as imports_router
 from app.api.ingredient_lots import router as ingredient_lots_router
+from app.api.ingredients import router as ingredients_router
 from app.api.inventory import router as inventory_router
 from app.api.onboarding import router as onboarding_router
 from app.api.orders import router as orders_router
