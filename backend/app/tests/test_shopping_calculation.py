@@ -414,7 +414,6 @@ def test_pantry_metadata_and_date_change_fingerprints():
     assert c.source_fingerprint != a.source_fingerprint
 
 
-
 @pytest.mark.parametrize(
     ("field", "new_value"),
     [
