@@ -1,3 +1,15 @@
+# PR10-META-ALTERNATIVE — seven-day same-day source-pair audit — 2026-10-10
+
+**Accepted main:** `9a8e978c5aecb5c5390e9189acb0a0536f05e426` (#200 PR10-META-SAFETY MERGED 2026-10-10T15:48:06Z). PR10-META remains **BLOCKED** after case-level NO-GO on overnight raw beef/milk-soaked-bread mixture; PR10-A/B/C, PR10-PDF and Gate2 NOT AUTHORIZED.
+
+**CURRENT docs/evidence-only bounded work:** Issue #201 / branch `docs/pr10-meta-same-day-pair-audit`. Read [7-day 21-pair source audit](../docs/family-food/pr10-meta-same-day-pair-audit.md) and [machine receipt](../docs/family-food/pr10-meta-same-day-pair-evidence.json), grounded in accepted #196 synthetic 3-member persisted MealPlan. All 21 unordered same-date event pairs have 0 identical source RecipeStep hashes, but overlapping real FoodIngredient/process stages may be reviewable.
+
+**Best source/process research candidate:** Tue 2026-09-15 lunch MR2019 beef/vegetable ragout and dinner potato/split-pea soup share FoodIngredient identities `CARROT`, `ONION_BULB_FRESH`, `POTATO` and separate carrot/onion preparation. The source steps have different exact text/cut semantics and unknown internal water allocation. No confirmed shared physical action, cooking clock/hold state, safe storage or reduced total work; no source-ready `shared_work_group_key` published.
+
+Next only after independent approval: reviewed shared raw-vegetable stage authority / potential immutable source-data publication contract, or explicit BLOCKED if insufficient. No recipe/runtime/schema mutation now; do not autonomously merge.
+
+---
+
 # PR10-META-SAFETY — source applicability for 2-event raw composite — 2026-10-10
 
 **Accepted main:** `326480f42aa5f3bada5398a369eb75003d6cceaa` (#198 PR10-META-SHARED MERGED 2026-10-10T15:01:31Z). #196 fixture and #194 BLOCKED META receipt merged; PR10-ARCH #192 merged. **PR10-META remains BLOCKED**. No PR10-A/B/C, PR10-PDF or Gate 2 authorization.
