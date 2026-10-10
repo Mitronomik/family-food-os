@@ -1,3 +1,11 @@
+# PR9-B independent-review corrections — 2026-10-10
+
+Same Issue #187 / PR #188 / branch feat/pr9-b-shopping-persistence; accepted base main@c83dba190b957300cad54c9c8df5afc01f86de60. The 2026-10-10 review identified missing FoodIngredient sort fields in the previously accepted PR9-A source fingerprint, raw SQLAlchemy exceptions during PR9-B repository INSERT, and missing two-Service same-input concurrency proof. The corrective changes are intentionally within PR9-B: pin category_code and canonical_name_key as well as canonical_code/default_unit, translate IntegrityError into ShoppingPersistenceConflictError and other DBAPI errors into ShoppingPersistenceError (busy/locked remains a retryable conflict), preserve exception chaining, and verify rollback/current/stale/successor semantics.
+
+New regression tests specifically exercise category/name-key reorder, immutable historic snapshots, header UUID collision, FK and CHECK failures during child INSERT, and concurrent ShoppingService.generate() on separate SQLite engines with one snapshot/no fork. No schema/migration change, Pantry writes, API, Retail, Prep, AI or next milestone. Run exact-head focused Shopping tests, full backend/launcher checks and independent review; do not claim prior exact-head CI receipt applies to changed code. Leave PR unmerged pending review.
+
+---
+
 # PR9-B — active transaction/persistence handoff — 2026-10-09
 
 Accepted main `c83dba190b957300cad54c9c8df5afc01f86de60` (#186 merged; PR9-A complete), #184 PR9-ARCH implementation contract merged. Current Issue #187, branch `feat/pr9-b-shopping-persistence`.
