@@ -1,3 +1,13 @@
+# PR10-META-PUBLICATION — recipe-stage source authority feasibility handoff — 2026-10-11
+
+**Base:** `main@506e4c9f6f493bf2c91ce698a2d6c2eee0a413cb` (#204 merged). Current docs-only Issue #205 / branch `docs/pr10-meta-publication-path-gate`. Start with `AGENTS.md`, `state/current-focus.md`, accepted PR10-ARCH, [publication feasibility](../docs/family-food/pr10-meta-publication-path-feasibility.md), [machine matrix](../docs/family-food/pr10-meta-publication-path-feasibility.json), [accepted stage preflight](../docs/family-food/pr10-meta-reviewed-stage-authority.md), `backend/app/services/food_recipes.py` append version and `backend/app/domain/food_recipes.py` RecipeStep contracts, R3-D frozen original source cards.
+
+**Exact two-event example:** Tue 2026-09-15 ragout lunch `cf0e3fe3-4c59-4447-9fbd-7a9e19c6ff49`, RecipeVersion `063694fb-92cf-4731-adf6-041d36a532e4`; pea soup dinner `d000a213-d169-4f10-a2ad-08180f40aea6`, RecipeVersion `116e25fa-12f3-4926-8a2a-7aa2cf99bb9c`. Soup original source includes explicit sort/peel/wash preamble, published steps compressed; ragout source only says prepared carrot/onion with fine chop, no independent equivalent wash/peel provenance.
+
+**Three options:** A immutable sidecar currently **not** runtime authoritative, B source-reviewed per-recipe immutable append mechanically available but soup-only process correction cannot clear cross-recipe threshold, C shared-stage registry/retrieval requires a **new reviewed implementation/data publication contract**; no silent new Prep table. **PR10-META BLOCKED**, no PR10-A/B/C, source data mutation, migrations, PDF or household Prep. Follow-up: independently verify source evidence covering both processes and actual shared physical work B<A before selecting any publication route; independently review PR and docs CI; no autonomous merge.
+
+---
+
 # PR10-META-DATA — source/stage authority decision handoff — 2026-10-10
 
 Accepted base `main@577bbeab86ba77f1d05ae8c6a4cabd042e98d05d`, PR #202 merged. Current Issue #203, branch `docs/pr10-meta-reviewed-stage-authority-current`; read root `AGENTS.md`, `state/current-focus.md`, accepted PR10-ARCH, [reviewed stage preflight](../docs/family-food/pr10-meta-reviewed-stage-authority.md), [evidence JSON](../docs/family-food/pr10-meta-reviewed-stage-authority.json), [PR #202 same-day pair](../docs/family-food/pr10-meta-same-day-pair-evidence.json), R3-D primary source card 2.11/1.16.

@@ -1,3 +1,13 @@
+# PR10-META-PUBLICATION — immutable stage authority feasibility gate — 2026-10-11
+
+**Accepted main:** `506e4c9f6f493bf2c91ce698a2d6c2eee0a413cb` (#204 PR10-META-DATA MERGED 2026-10-11T07:39:19Z). Previous PR10-ARCH #192 and PR10-META #194, fixture #196, source #198/#200, alternative #202, stage contract #204 all merged. **PR10-META remains BLOCKED**; PR10-A/B/C, PR10-PDF and Gate2 not authorized.
+
+**CURRENT bounded work:** Issue #205 / `docs/pr10-meta-publication-path-gate`; review [publication-path decision](../docs/family-food/pr10-meta-publication-path-feasibility.md) and [machine matrix](../docs/family-food/pr10-meta-publication-path-feasibility.json). Source-backed verified `RecipeVersion` can be appended through existing FoodRecipeCatalogueService, but current `RecipeStep` lacks typed reusable shared stage/form/holding authority. Sidecar JSON is only reviewer evidence without an approved source reader; new version of soup could restore its explicit source vegetable-prep preamble after separate review, but ragout original card only says “prepared” onion/carrot and does **not** establish equivalent RAW_WASH/PEEL.
+
+**Proposed case decision:** `BLOCKED_RECIPE_STAGE_PUBLICATION_AND_SHARED_COMPONENT_AUTHORITY`. No RecipeVersion append, immutable source publication, stage registry, migration or PR10 runtime. Next meaningful source completeness: obtain independently accepted stage evidence for *both* event recipes or select another source-verified pair, then separately approve publication/read path and actual B<A work-count proof. No autonomous merge.
+
+---
+
 # PR10-META-DATA — reviewed reusable stage authority proposal — 2026-10-10
 
 **Accepted main:** `577bbeab86ba77f1d05ae8c6a4cabd042e98d05d` (#202 PR10-META-ALTERNATIVE MERGED). PR10-ARCH #192, PR10-META-BLOCKED #194, fixture #196, shared/safety #198/#200 merged. PR10-META **BLOCKED**; PR10-A/B/C, PR10-PDF and Gate 2 remain unauthorized.
