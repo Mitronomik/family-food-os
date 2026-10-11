@@ -1,3 +1,13 @@
+# PR10-META-DATA — reviewed reusable stage authority proposal — 2026-10-10
+
+**Accepted main:** `577bbeab86ba77f1d05ae8c6a4cabd042e98d05d` (#202 PR10-META-ALTERNATIVE MERGED). PR10-ARCH #192, PR10-META-BLOCKED #194, fixture #196, shared/safety #198/#200 merged. PR10-META **BLOCKED**; PR10-A/B/C, PR10-PDF and Gate 2 remain unauthorized.
+
+**Current docs-only bounded task:** Issue #203, branch `docs/pr10-meta-reviewed-stage-authority-current`; [stage/process source decision](../docs/family-food/pr10-meta-reviewed-stage-authority.md) + [review receipt](../docs/family-food/pr10-meta-reviewed-stage-authority.json). Review exact Tuesday 2026-09-15 ragout lunch / split-pea soup dinner MealEvent and RecipeVersion/step pins. Original MR1.16 source explicitly says clean/sort/peel/wash vegetables, yet *published* RecipeSteps compress it; MR2.11 says **prepared** carrot/onion then fine-chop and poach, no same explicit raw wash/peel stage. Rospotrebnadzor general washing guidance is safety context only.
+
+**Current evidence decision:** `BLOCKED_RECIPE_STAGE_BINDING_NOT_PUBLISHED`. A proposed ReviewedPrepStageBindingV1 source curation receipt needs independent review and a separate approved future publication path; not an accepted runtime entity or fourth Prep table. Net physical action reduction for >=2 actual MealEvents and same-session/no-hold conditions not proven. No migrations, recipe process publication, AI/Retail/Prep backend, safe storage assumptions. Review docs scope/CI; no merge autonomously.
+
+---
+
 # PR10-META-ALTERNATIVE — seven-day same-day source-pair audit — 2026-10-10
 
 **Accepted main:** `9a8e978c5aecb5c5390e9189acb0a0536f05e426` (#200 PR10-META-SAFETY MERGED 2026-10-10T15:48:06Z). PR10-META remains **BLOCKED** after case-level NO-GO on overnight raw beef/milk-soaked-bread mixture; PR10-A/B/C, PR10-PDF and Gate2 NOT AUTHORIZED.
