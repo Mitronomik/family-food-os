@@ -1,0 +1,128 @@
+{
+  "schema": "PR10_META_ONION_BLANCH_COMPARATIVE_EVIDENCE_V1",
+  "status": "REVIEW_REQUIRED_SHARED_BLANCH_STAGE_NOT_PROVEN",
+  "gate": "PR10_META_BLOCKED",
+  "base_main_sha": "f30a756476067ca99f66c71610aa80347286be7b",
+  "issue": 207,
+  "fixture_provenance": {
+    "from_pr": 196,
+    "workflow_run_id": 38059374826,
+    "artifact_id": 11672432141,
+    "json_sha256": "6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec",
+    "planner_semantic_sha256": "2d6cb581649863b7edbd3c0efff2bae2934c6a512c99a45d10e92f92f514cb3d",
+    "meal_plan_id": "589ef95a-2158-40a1-af91-0e13087d5744"
+  },
+  "source_document": {
+    "publisher": "ru-school2022",
+    "locator": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+    "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+    "source_count": 1,
+    "distinct_reviewed_recipe_cards": 2,
+    "note": "Both recipe cards originate from one common PDF source document; no independent second source for food-state storage or batch capacity."
+  },
+  "pair": [
+    {
+      "date": "2026-09-16",
+      "role": "LUNCH",
+      "event_id": "a3bd9a18-5ed6-4447-8a13-1b7b9416c45f",
+      "recipe_code": "SCHOOL2022_54_17R_SALMON_TOMATO_VEGETABLES",
+      "recipe_version_id": "155f5283-2f2a-4487-83ac-895877197b45",
+      "recipe_process_hash": "4fb058b03530ab54136e4bdf2d3b233681b10454629f03774aae5f9ba449028c",
+      "reviewed_manifest": "data/curation/r3c-post-r3b-catalogue-gate/frozen-batch.json",
+      "source_card": "ru-school2022:recipe:54-17р",
+      "source_pdf_page": 111,
+      "source_card_canonical_json_sha256": "72bceb85840fd2052941f434096bce1846998802603bcdb03be13b689c686de0",
+      "recipe_step_position": 1,
+      "recipe_step_id": "82a7cf80-6aee-42b0-91bb-b318cbf41e47",
+      "instruction_sha256": "46ca78ea057058c50cb6d76417bdd01d08b05f7a7e6259848a12b98a548b5258",
+      "instruction_ru": "Подготовить корень петрушки, морковь и репчатый лук; лук бланшировать, затем пассеровать вместе с морковью и петрушкой и добавить томатное пюре.",
+      "onion_net_g_per_base_serving": "9.8",
+      "onion_gross_g_per_base_serving": "12.2",
+      "source_onion_cut_before_blanch": "UNKNOWN_NOT_SPECIFIED",
+      "after_blanch": "SAUTE_WITH_CARROT_PARSLEY_AND_TOMATO_PUREE",
+      "source_numeric_step": "NO_NUMBERS_IN_RELEVANT_ONION_STEP",
+      "servings": [
+        {
+          "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+          "portion_servings": "5.916796"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-16",
+      "role": "DINNER",
+      "event_id": "bf60e784-bd3e-4d62-96dd-54318fd5920c",
+      "recipe_code": "SCHOOL2022_54_7R_POLLOCK_IN_MILK",
+      "recipe_version_id": "16a04325-d532-45f6-82ca-2f30630467a6",
+      "recipe_process_hash": "74e02d9c88421665f35e2f07c8cf54adfcad62200fe857de27bda87e0f36be71",
+      "reviewed_manifest": "data/curation/r2b-fish-main-diversity/publication-specs.json",
+      "source_card": "ru-school2022:recipe:54-7р",
+      "source_pdf_page": null,
+      "source_card_sha256": "79d9d346f7dc7cb798899c6ea00b8217cf143a8947c8b97152350d035d158d76",
+      "recipe_step_position": 1,
+      "recipe_step_id": "00dc9916-dc34-44eb-8518-ff7299920149",
+      "instruction_sha256": "b6b9e45dc7afdf48d30247f33bc7fd71b154af29fe4a8075da53edb2e89affde",
+      "instruction_ru": "Репчатый лук подготовить, нашинковать и бланшировать.",
+      "onion_net_g_per_base_serving": "16",
+      "onion_gross_g_per_base_serving": "20",
+      "source_onion_cut_before_blanch": "SHRED",
+      "after_blanch": "PLACE_SEPARATELY_WITH_POLLOCK_BEFORE_HOT_MILK",
+      "source_numeric_step": "NO_NUMBERS_IN_RELEVANT_ONION_STEP",
+      "servings": [
+        {
+          "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+          "portion_servings": "5.631030"
+        },
+        {
+          "member_id": "171cbad3-0b5f-44ba-bba2-ff4fc67537f0",
+          "portion_servings": "5.631030"
+        },
+        {
+          "member_id": "def51f62-65be-4939-8860-70c792ff7731",
+          "portion_servings": "6.546747"
+        }
+      ]
+    }
+  ],
+  "candidate_operation": "BLANCH_ONION_BULB_FRESH",
+  "matching_source_backed_facts": [
+    "both steps explicitly call for onion blanching",
+    "same canonical ONION_BULB_FRESH identity",
+    "both meals belong to same local calendar date",
+    "two different immutable RecipeVersion/MealEvent source pins"
+  ],
+  "blocking_mismatches": [
+    "salmon source step does not specify onion cut shape before blanch; pollock requires shredding",
+    "blanch duration/water/heat/equipment/batch capacity not source-verified for joint batch",
+    "post-blanch salmon saute vs pollock separate hot-milk fish assembly; no common output-state version pin",
+    "actual preparation session and safe time between LUNCH and DINNER unknown",
+    "split/retrieve/cleaning work vs 2 ungrouped blanch operations not evidenced",
+    "recipe-scoped immutable source-stage binding and multi-event reviewed sharing absent"
+  ],
+  "work_comparison": {
+    "unshared_blanch_actions_hypothesis": 2,
+    "shared_blanch_actions_hypothesis": 1,
+    "claimed_net_savings_approved": false,
+    "extra_actions_unresolved": [
+      "source stage sorting/shredding",
+      "batch splitting and handling",
+      "water/heat/equipment capacity",
+      "safe storage and time interval",
+      "cleaning"
+    ],
+    "numeric_time_saving_minutes": null
+  },
+  "allowed_capability": {
+    "mark_as_research_candidate": true,
+    "stage_binding_published": false,
+    "stage_output_equivalence_approved": false,
+    "batch_friendly": null,
+    "freezable": null,
+    "storage_days_fridge": null,
+    "storage_days_freezer": null,
+    "scheduled_reusable_work_allowed": false,
+    "pr10_meta_ready": false,
+    "pr10_a_authorized": false
+  },
+  "next_review": "Check original school2022 recipe process for exact onion cut and blanching form for both cards; require source-reviewed input/output stage and same-session or approved hold, then source publication contract and net real-action measurement. If unavailable, BLOCK this pair; do not infer."
+}
