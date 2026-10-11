@@ -1,3 +1,11 @@
+# PR10-DATA-RECOVERY — bounded proposal for independent review — 2026-10-11
+
+**Accepted main:** `42b76adaed10a3a9b10e8600f71a5d1084b8fbbe` (PR #210 merged). **Current docs-only operation:** Issue #211, branch `docs/pr10-data-recovery-proposal`; see [decision proposal](../docs/family-food/pr10-data-recovery-proposal.md). Await independent review and explicit user approval for D1/D2/D3; do not autonomously merge.
+
+**Facts:** PR10-META-FORM #210 verdict `UNKNOWN_SOURCE_FORM_NOT_INDEPENDENTLY_VERIFIED`; current onion-pair not accepted for sharing. PR10-META remains **BLOCKED**. Proposed target: bounded source-backed process metadata curation + optional Gate2 fixture proposal; no authorized source publication, runtime, migration or roadmap change. **PR10-A/B/C, PR10-PDF and Gate2 remain NOT AUTHORIZED.**
+
+---
+
 # PR10-META-FORM — source/form verification delivered for review — 2026-10-11
 
 **Accepted main:** `0a45188f79cf2eecdbd476715882e0f7cb97e4d6` (#208 merged 2026-10-11T15:39:27Z). Issue #209, docs-only branch `docs/pr10-meta-form-source-check`. **Do not merge autonomously.**
