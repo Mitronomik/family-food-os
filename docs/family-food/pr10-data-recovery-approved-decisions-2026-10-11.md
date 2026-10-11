@@ -1,6 +1,7 @@
 # ADR — PR10 data recovery decisions D1/D2/D3
 
-**Status:** APPROVED by explicit product-owner decision on 2026-10-11; repository publication pending review and merge of this documentation PR.
+**Status:** APPROVED per explicit 2026-10-11 product-owner message in the FamilyFoodOS ChatGPT project conversation; GitHub decision provenance is a [verbatim assistant transcription](https://github.com/Mitronomik/family-food-os/pull/214#issuecomment-6112139382), **not** independent GitHub-authenticated owner approval. Repository publication pending review/merge.
+**Approval evidence:** On 2026-10-11, following PR #212 merge, the user wrote: “Утверждаю решения PR10-DATA-RECOVERY: D1=yes, D2=yes, D3=yes. Зафиксируй согласованные решения и приступай к следующему ограниченному этапу в GitHub без автоматического merge.” Source: private FamilyFoodOS ChatGPT conversation, transcribed verbatim in the linked PR comment. Original chat cannot be independently inspected via GitHub; if GitHub-native owner attestation is required, seek a separate direct confirmation there.
 **Approved reference:** [PR10-DATA-RECOVERY proposal](pr10-data-recovery-proposal.md), merged [PR #212](https://github.com/Mitronomik/family-food-os/pull/212).
 **Base:** `main@700bdea2c9a08e3cb250aa6a9d65e01e76139a12`.
 
