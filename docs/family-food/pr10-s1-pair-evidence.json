@@ -1,0 +1,21 @@
+{
+  "schema": "pr10_s1_pair_review_v1",
+  "issue": 216,
+  "accepted_base": "35d0787709d175fd11b8dece044854aa2a0b56f9",
+  "sources": [
+    "data/curation/r3d-final-dc3-batch-gate/frozen-batch.json",
+    "data/curation/r3c-post-r3b-catalogue-gate/frozen-batch.json",
+    "data/curation/r2b-fish-main-diversity/publication-specs.json",
+    "https://nchfp.uga.edu/how/freeze/vegetable/freezing-onions/"
+  ],
+  "searched_scope": "three accepted publication evidence files, not full live DB",
+  "common_food": "ONION_BULB_FRESH",
+  "exact_identical_diced_raw_onion_output_pair": "NOT_ESTABLISHED",
+  "published_shared_stage_authority": false,
+  "actual_two_event_pair": "NOT_PINNED",
+  "same_session_or_safe_holding": "UNKNOWN",
+  "net_b_less_than_a": "NOT_PROVEN",
+  "decision": "NO_GO_NO_VERIFIED_TWO_RECIPE_DICED_RAW_ONION_STAGE",
+  "pr10_meta": "BLOCKED",
+  "production_changes": false
+}
