@@ -1,3 +1,13 @@
+# PR10-META-ONION — two explicit source-blanch operations, compatibility review — 2026-10-11
+
+**Accepted main:** `f30a756476067ca99f66c71610aa80347286be7b`, merged PR #206 at 2026-10-11T15:13:30Z. PR10-ARCH #192 and PR10-META corpus/evidence sequence through #206 merged; **PR10-META remains BLOCKED** and PR10-A/B/C, PR10-PDF, Gate2 NOT AUTHORIZED.
+
+**CURRENT bounded docs/evidence operation:** Issue #207 / branch `docs/pr10-meta-onion-blanch-evidence`. Accepted synthetic Wed 2026-09-16 MealEvents: salmon in tomato/vegetables at LUNCH and pollock in milk at DINNER. Both independent source-reviewed **recipe cards in the same School2022 PDF** explicitly say **blanch onion**; see [source pair report](../docs/family-food/pr10-meta-onion-blanch-preflight.md) and [version/event/step receipt](../docs/family-food/pr10-meta-onion-blanch-evidence.json). R3-C salmon onion cut before blanch is UNKNOWN; R2-B pollock requires shredded onion before blanch. Their subsequent cooking differs; source-hold session and actual physical work savings unverified.
+
+**Status:** `REVIEW_REQUIRED_SHARED_BLANCH_STAGE_NOT_PROVEN`. No published reusable PrepStage, no shared_work_group_key, no source-backed storage/freezing/temperature, no real work reduction; no new recipes or migration. Next after independent review only: targeted original source-card *form compatibility* YES/NO review and only then decide on any source publication contract. Do not autonomously merge.
+
+---
+
 # PR10-META-PUBLICATION — immutable stage authority feasibility gate — 2026-10-11
 
 **Accepted main:** `506e4c9f6f493bf2c91ce698a2d6c2eee0a413cb` (#204 PR10-META-DATA MERGED 2026-10-11T07:39:19Z). Previous PR10-ARCH #192 and PR10-META #194, fixture #196, source #198/#200, alternative #202, stage contract #204 all merged. **PR10-META remains BLOCKED**; PR10-A/B/C, PR10-PDF and Gate2 not authorized.
