@@ -1,3 +1,11 @@
+# PR10-DATA-RECOVERY — proposal handoff — 2026-10-11
+
+**Base:** `main@42b76adaed10a3a9b10e8600f71a5d1084b8fbbe` (#210 merged). Issue #211, branch `docs/pr10-data-recovery-proposal`. Read [bounded proposal](../docs/family-food/pr10-data-recovery-proposal.md), PR10-ARCH, latest roadmap/addenda and root/scoped AGENTS.
+
+**Outcome proposed, not authorized:** bounded source-backed curation, explicit source/rights/form/safety/Decimal net B<A proof; only after acceptance may user approve a different Gate2 fixture and separate cross-recipe stage-publication/read-path contract. PR10-META stays BLOCKED; no PR10-A/B/C, PR10-PDF or Gate2 execution, migration, Pantry changes or AI/Retail. D1/D2/D3 await independent review and user approval; no autonomous merge.
+
+---
+
 # PR10-META-FORM — independent source review handoff — 2026-10-11
 
 **Base:** `main@0a45188f79cf2eecdbd476715882e0f7cb97e4d6` (#208 merged). Issue #209, branch `docs/pr10-meta-form-source-check`. Read root/scoped AGENTS, current-focus, PR10-ARCH and [new form review](../docs/family-food/pr10-meta-form-source-review.md) with [JSON receipt](../docs/family-food/pr10-meta-form-source-evidence.json).
