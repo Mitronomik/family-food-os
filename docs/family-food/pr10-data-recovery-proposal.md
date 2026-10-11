@@ -1,8 +1,8 @@
 # PR10-DATA-RECOVERY — source-backed prep metadata and Gate 2 strategy proposal
 
-**Status:** PROPOSED / review only; NOT an accepted roadmap or runtime contract  
-**Issue:** [#211](https://github.com/Mitronomik/family-food-os/issues/211)  
-**Accepted baseline:** `main@42b76adaed10a3a9b10e8600f71a5d1084b8fbbe` (PR #210 merged, 2026-10-11)  
+**Status:** PROPOSED / review only; NOT an accepted roadmap or runtime contract
+**Issue:** [#211](https://github.com/Mitronomik/family-food-os/issues/211)
+**Accepted baseline:** `main@42b76adaed10a3a9b10e8600f71a5d1084b8fbbe` (PR #210 merged, 2026-10-11)
 **Current authorization:** docs-only proposal. `PR10-META=BLOCKED`; PR10-A/B/C, PR10-PDF, Gate 2 remain unauthorized.
 
 ## 1. Sources and precedence
