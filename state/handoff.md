@@ -1,3 +1,11 @@
+# PR10-DATA-RECOVERY — D1/D2/D3 decision handoff — 2026-10-11
+
+**Base:** `main@700bdea2c9a08e3cb250aa6a9d65e01e76139a12`, #212 merged. Explicit user approval: D1=yes, D2=yes, D3=yes. See [decision record](../docs/family-food/pr10-data-recovery-approved-decisions-2026-10-11.md) and [proposal](../docs/family-food/pr10-data-recovery-proposal.md). Docs branch `docs/pr10-recovery-approved-decisions` requires independent review and merge, never autonomous merge.
+
+Next authorized bounded source/rights review: at most three candidate prep-stage families, no speculative source authority, no automatic fixture substitution. Return NO-GO when needed. PR10-META remains BLOCKED; no PR10-A/B/C, PDF, migration, runtime or new source publication. Keep root/scoped AGENTS, latest roadmap/addenda and PR10-ARCH invariant.
+
+---
+
 # PR10-DATA-RECOVERY — proposal handoff — 2026-10-11
 
 **Base:** `main@42b76adaed10a3a9b10e8600f71a5d1084b8fbbe` (#210 merged). Issue #211, branch `docs/pr10-data-recovery-proposal`. Read [bounded proposal](../docs/family-food/pr10-data-recovery-proposal.md), PR10-ARCH, latest roadmap/addenda and root/scoped AGENTS.
