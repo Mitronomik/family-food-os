@@ -1,3 +1,13 @@
+# PR10-META-ONION — improved source candidate with explicit blanching — 2026-10-11
+
+- Verified PR #206 MERGED, main `f30a756476067ca99f66c71610aa80347286be7b` (2026-10-11T15:13:30Z). PR10-META BLOCKED, PR10-A/B/C and PR10-PDF unauthorized.
+- Issue #207: recovered final accepted PR #196 JSON artifact SHA256 `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec` for **Wed 2026-09-16** lunch salmon `SCHOOL2022_54_17R_SALMON_TOMATO_VEGETABLES`, dinner pollock `SCHOOL2022_54_7R_POLLOCK_IN_MILK`. Both SOURCE-VERIFIED recipe publication manifests R3-C / R2-B explicitly include **onion blanching**.
+- Pinned two events/RecipeVersion IDs, exact immutable first RecipeStep IDs/hashes, source document/common PDF SHA, source-base gross/net onion amounts and exact per-member Decimal Serving pins in [new evidence JSON](../docs/family-food/pr10-meta-onion-blanch-evidence.json) and [explanatory report](../docs/family-food/pr10-meta-onion-blanch-preflight.md).
+- Source limitation: Salmon step's onion cutting form is not specified; pollock requires shredding first, and downstream uses differ. Same-day not same-session or safe hold, shared blanching capacity/time/water and extra handling unknown. Only hypothetical 2→1 first-stage operations, **no validated net B<A**.
+- Machine result `REVIEW_REQUIRED_SHARED_BLANCH_STAGE_NOT_PROVEN`; no recipe publication, Prep runtime or migration, new storage data or source authority. Next strictly bounded original source/form equivalence investigation before any publication; keep PR10-META BLOCKED. Docs CI and independent review required.
+
+---
+
 # PR10-META-PUBLICATION — stage publication feasibility after #204 — 2026-10-11
 
 - Verified PR #204 MERGED 2026-10-11T07:39:19Z; current accepted main `506e4c9f6f493bf2c91ce698a2d6c2eee0a413cb`. PR10-META still BLOCKED.

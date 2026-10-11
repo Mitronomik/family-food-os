@@ -1,3 +1,13 @@
+# PR10-META-ONION — two source-backed blanch steps, unapproved shared stage — 2026-10-11
+
+**Base:** `f30a756476067ca99f66c71610aa80347286be7b` merged PR #206. Current docs-only Issue #207 branch `docs/pr10-meta-onion-blanch-evidence`. Read root/scoped AGENTS, current focus, accepted PR10-ARCH, [merged publication feasibility](../docs/family-food/pr10-meta-publication-path-feasibility.md), [new onion report](../docs/family-food/pr10-meta-onion-blanch-preflight.md) + [exact JSON receipt](../docs/family-food/pr10-meta-onion-blanch-evidence.json).
+
+Wednesday 2026-09-16 lunch salmon tomato vegetable event `a3bd9a18-5ed6-4447-8a13-1b7b9416c45f`, RecipeVersion `155f5283-2f2a-4487-83ac-895877197b45`; dinner pollock in milk `bf60e784-bd3e-4d62-96dd-54318fd5920c`, RecipeVersion `16a04325-d532-45f6-82ca-2f30630467a6`. Their published R3-C vs R2-B source first steps explicitly blanch `ONION_BULB_FRESH` but text/step hashes differ, salmon onion input cut UNKNOWN while pollock shredding explicit. Two variants of **one** School2022 source PDF. Distinct downstream sauté vs fish-and-milk cooking. Common safe output stage, concurrent prep session/hold and physical operation saving not proven.
+
+Decision CANDIDATE/REVIEW_REQUIRED only, `PR10-META=BLOCKED`. No shared_work_group_key, new stage metadata, recipe publication/migration, pantry writes or Prep/PDF runtime. Docs link/scope/whitespace exact-head CI before re-review. If accepted, target a single original-card exact cut/form compatibility YES/NO decision; if no evidence, return pair BLOCKED and seek separately approved source/fixture strategy. Do not merge autonomously.
+
+---
+
 # PR10-META-PUBLICATION — recipe-stage source authority feasibility handoff — 2026-10-11
 
 **Base:** `main@506e4c9f6f493bf2c91ce698a2d6c2eee0a413cb` (#204 merged). Current docs-only Issue #205 / branch `docs/pr10-meta-publication-path-gate`. Start with `AGENTS.md`, `state/current-focus.md`, accepted PR10-ARCH, [publication feasibility](../docs/family-food/pr10-meta-publication-path-feasibility.md), [machine matrix](../docs/family-food/pr10-meta-publication-path-feasibility.json), [accepted stage preflight](../docs/family-food/pr10-meta-reviewed-stage-authority.md), `backend/app/services/food_recipes.py` append version and `backend/app/domain/food_recipes.py` RecipeStep contracts, R3-D frozen original source cards.
