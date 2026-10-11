@@ -1,0 +1,52 @@
+{
+  "schema": "pr10_source_shortlist_v1",
+  "date": "2026-10-11",
+  "base": "1b928b6583688e73f5933e702a30ebf6ffb12824",
+  "issue": 213,
+  "scope_limit": 3,
+  "outcome": "NO_GO_FOR_PR10_META",
+  "candidate_families": [
+    {
+      "id": "S1",
+      "name": "diced_onion",
+      "url": "https://nchfp.uga.edu/how/freeze/vegetable/freezing-onions/",
+      "input_form": "raw_cleaned_bulb_onion",
+      "output_form": "diced_raw_onion_freezer_ready",
+      "source_process_evidence": true,
+      "verified_recipe_version_pair": false,
+      "rights_to_republish": "UNKNOWN",
+      "net_action_reduction": "UNKNOWN",
+      "priority": "research_candidate_only"
+    },
+    {
+      "id": "S2",
+      "name": "blanched_carrot",
+      "url": "https://nchfp.uga.edu/how/freeze/vegetables/freezing-carrots/",
+      "input_form": "peeled_cut_carrot",
+      "output_form": "blanched_cooled_carrot_freezer_ready",
+      "source_process_evidence": true,
+      "verified_recipe_version_pair": false,
+      "rights_to_republish": "UNKNOWN",
+      "net_action_reduction": "UNKNOWN",
+      "priority": "control"
+    },
+    {
+      "id": "S3",
+      "name": "sweet_pepper_heated_unheated",
+      "url": "https://nchfp.uga.edu/how/freeze/vegetable/freezing-bell-or-sweet-peppers/",
+      "input_form": "cleaned_sliced_sweet_pepper",
+      "output_form": "heated_or_raw_distinct",
+      "source_process_evidence": true,
+      "verified_recipe_version_pair": false,
+      "rights_to_republish": "UNKNOWN",
+      "net_action_reduction": "UNKNOWN",
+      "priority": "negative_control"
+    }
+  ],
+  "authoritative_version_pins": "NOT_ESTABLISHED",
+  "actual_two_meal_event_reuse": "NOT_ESTABLISHED",
+  "recipe_publication_authorized": false,
+  "gate2_fixture_change_authorized": false,
+  "pr10_meta": "BLOCKED",
+  "next": "Separate exact two-RecipeVersion onion candidate review, if justified by available sources"
+}
