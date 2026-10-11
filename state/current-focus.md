@@ -1,3 +1,11 @@
+# PR10-S1-PAIR — exact onion form pair check — 2026-10-11
+
+**Accepted main:** `35d0787709d175fd11b8dece044854aa2a0b56f9` (#215 merged). Issue #216, branch `research/pr10-s1-onion-pair-gate`, [source comparison](../docs/family-food/pr10-s1-pair-review.md) and [evidence](../docs/family-food/pr10-s1-pair-evidence.json) awaiting independent review.
+
+**Decision:** `NO_GO_NO_VERIFIED_TWO_RECIPE_DICED_RAW_ONION_STAGE`. Bounded R3-D/R3-C/R2-B manifest review did not prove two source-identical unheated diced onion stages; no actual pair or B<A established. **PR10-META BLOCKED; PR10-A/B/C, PR10-PDF, Gate2 NOT AUTHORIZED**. Next needs an independently approved specific source/rights acquisition task, not unbounded matching. No autonomous merge.
+
+---
+
 # PR10-SOURCE-SHORTLIST — bounded three-source review — 2026-10-11
 
 **Base:** `main@1b928b6583688e73f5933e702a30ebf6ffb12824` (#214 merged). **Current:** Issue #213, branch `research/pr10-source-shortlist`, [source review](../docs/family-food/pr10-source-shortlist.md) pending PR review. Three process families assessed; none contains the two verified FamilyFoodOS RecipeVersions needed for a shared stage. **NO-GO for PR10-META readiness**; S1 diced onions is only a possible next focused recipe-source check.
