@@ -1,3 +1,13 @@
+# PR10-META-PUBLICATION — stage publication feasibility after #204 — 2026-10-11
+
+- Verified PR #204 MERGED 2026-10-11T07:39:19Z; current accepted main `506e4c9f6f493bf2c91ce698a2d6c2eee0a413cb`. PR10-META still BLOCKED.
+- Issue #205 docs-only preflight compared existing `append_trusted_version` immutable RecipeVersion publication vs `RecipeStep` (instruction + optional stage_code) and R3-D `consumer_steps_ru` publisher. Current platform can append corrected source-backed recipe steps but has **no accepted authoritative cross-recipe shared-stage data reader/fingerprint/hold contract**.
+- Original soup MR 1.16 technology explicitly includes sort/peel/wash vegetable preamble; published steps do not isolate it. Original ragout MR 2.11 refers to *prepared onion/carrot*, then fine chopping, not independently verified equivalent raw clean/peel stage. Same canonical FoodIngredient is insufficient. Re-publishing soup alone cannot prove reusable operation for two events.
+- New [publication decision](../docs/family-food/pr10-meta-publication-path-feasibility.md) + [machine receipt](../docs/family-food/pr10-meta-publication-path-feasibility.json): A sidecar evidence-only, B immutable per-recipe version append conditionally possible where source-backed, C shared-stage authority requires separate reviewed implementation contract. Proposed **BLOCKED_RECIPE_STAGE_PUBLICATION_AND_SHARED_COMPONENT_AUTHORITY**, no recipe/data/runtime/schema writes.
+- No net physical action reduction, household prep clock or storage transition verified. PR10-A/B/C, PR10-PDF, Gate2 NOT AUTHORIZED. Next evidence must close explicit two-source stage completeness or select different accepted pair before any publication work. Docs-only CI and independent review required.
+
+---
+
 # PR10-META-DATA — source-level vegetable process authority preflight — 2026-10-10
 
 - Verified PR #202 merged on `main@577bbeab86ba77f1d05ae8c6a4cabd042e98d05d`; accepted weekly fixture has 3 members/21 MealEvents, 21 within-day pairs with 0 equal RecipeStep text hashes. PR10-META gate remains BLOCKED.
