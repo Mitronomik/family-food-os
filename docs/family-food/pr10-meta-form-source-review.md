@@ -1,9 +1,9 @@
 # PR10-META-FORM — exact School2022 onion cut/form verification
 
-**Date:** 2026-10-11  
-**Issue:** [#209](https://github.com/Mitronomik/family-food-os/issues/209)  
-**Accepted base:** `main@0a45188f79cf2eecdbd476715882e0f7cb97e4d6` (#208 merged)  
-**Verdict:** **UNKNOWN — SOURCE_FORM_NOT_INDEPENDENTLY_VERIFIED**  
+**Date:** 2026-10-11
+**Issue:** [#209](https://github.com/Mitronomik/family-food-os/issues/209)
+**Accepted base:** `main@0a45188f79cf2eecdbd476715882e0f7cb97e4d6` (#208 merged)
+**Verdict:** **UNKNOWN — SOURCE_FORM_NOT_INDEPENDENTLY_VERIFIED**
 **PR10-META:** **BLOCKED**. Neither PR10-A/B/C nor PR10-PDF/Gate2 is authorized.
 
 ## FACT — exact accepted evidence
