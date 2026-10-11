@@ -1,3 +1,11 @@
+# PR10-DATA-RECOVERY — explicit D1/D2/D3 approval — 2026-10-11
+
+- Verified PR #212 merged into `main@700bdea2c9a08e3cb250aa6a9d65e01e76139a12`. Product owner explicitly approved D1 (bounded source-first curation), D2 (possibility of separately approving a new Gate2 fixture after evidence) and D3 (mandatory separate authoritative stage publication contract).
+- Added [durable decision record](../docs/family-food/pr10-data-recovery-approved-decisions-2026-10-11.md). These approvals authorize only supporting research, not a changed Gate2 fixture, new production stage contract, PR10 runtime or altered architecture.
+- Next scoped source-shortlist review capped at three stage families; negative evidence is acceptable. PR10-META remains BLOCKED.
+
+---
+
 # PR10-DATA-RECOVERY — proposal delivered for review — 2026-10-11
 
 - Confirmed #210 merged at `main@42b76adaed10a3a9b10e8600f71a5d1084b8fbbe`; original School2022 form equivalence remains UNKNOWN, PR10-META BLOCKED.
