@@ -1,3 +1,11 @@
+# PR10-SOURCE-SHORTLIST — docs/evidence handoff — 2026-10-11
+
+**Base:** `main@1b928b6583688e73f5933e702a30ebf6ffb12824` (#214 merged). Issue #213, branch `research/pr10-source-shortlist`. Read [review](../docs/family-food/pr10-source-shortlist.md), [approved decisions](../docs/family-food/pr10-data-recovery-approved-decisions-2026-10-11.md), PR10-ARCH and root/scoped AGENTS.
+
+Exactly three NCHFP vegetable form/process families scoped. Public source methods are usable as research citations, not authoritative published recipe-stage bindings or implicit reproduction rights. No independently verified paired RecipeVersions, actual household prep session, provenance chain, or B<A; PR10-META BLOCKED. S1 diced onions suggested only for a separately bounded exact recipe-pair check after this PR's independent review. No autonomous merge, schema, fixture substitution, Prep runtime or PDF.
+
+---
+
 # PR10-DATA-RECOVERY — D1/D2/D3 decision handoff — 2026-10-11
 
 **Base:** `main@700bdea2c9a08e3cb250aa6a9d65e01e76139a12`, #212 merged. Explicit user approval: D1=yes, D2=yes, D3=yes. See [decision record](../docs/family-food/pr10-data-recovery-approved-decisions-2026-10-11.md) and [proposal](../docs/family-food/pr10-data-recovery-proposal.md). Docs branch `docs/pr10-recovery-approved-decisions` requires independent review and merge, never autonomous merge.
