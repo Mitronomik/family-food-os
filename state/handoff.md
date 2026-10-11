@@ -1,3 +1,13 @@
+# PR10-META-FORM — independent source review handoff — 2026-10-11
+
+**Base:** `main@0a45188f79cf2eecdbd476715882e0f7cb97e4d6` (#208 merged). Issue #209, branch `docs/pr10-meta-form-source-check`. Read root/scoped AGENTS, current-focus, PR10-ARCH and [new form review](../docs/family-food/pr10-meta-form-source-review.md) with [JSON receipt](../docs/family-food/pr10-meta-form-source-evidence.json).
+
+Exact School2022 SHA256 `c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d` is pinned in R3-C/R2-B; the accepted salmon first step omits pre-blanch cut, pollock explicitly shreds. An external 2021 PDF candidate was found, but its bytes/source identity were not validated. Verdict `UNKNOWN_SOURCE_FORM_NOT_INDEPENDENTLY_VERIFIED`; PR10-META stays BLOCKED. Do NOT append recipe steps, publish shared stage, permit holding/freezing, or start PR10-A/B/C/PDF/Gate2.
+
+Next after review: obtain byte-identical School2022 source/card and decide YES/NO/UNKNOWN. If not available, stop and request explicit approved alternative source/fixture strategy. No autonomous merge.
+
+---
+
 # PR10-META-ONION — two source-backed blanch steps, unapproved shared stage — 2026-10-11
 
 **Base:** `f30a756476067ca99f66c71610aa80347286be7b` merged PR #206. Current docs-only Issue #207 branch `docs/pr10-meta-onion-blanch-evidence`. Read root/scoped AGENTS, current focus, accepted PR10-ARCH, [merged publication feasibility](../docs/family-food/pr10-meta-publication-path-feasibility.md), [new onion report](../docs/family-food/pr10-meta-onion-blanch-preflight.md) + [exact JSON receipt](../docs/family-food/pr10-meta-onion-blanch-evidence.json).

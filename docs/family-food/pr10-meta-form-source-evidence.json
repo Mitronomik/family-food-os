@@ -1,0 +1,49 @@
+{
+  "schema": "pr10_meta_form_source_check_v1",
+  "as_of": "2026-10-11",
+  "issue": 209,
+  "base_main": "0a45188f79cf2eecdbd476715882e0f7cb97e4d6",
+  "source": {
+    "name": "School2022",
+    "expected_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+    "byte_verified_this_review": false
+  },
+  "cards": [
+    {
+      "id": "ru-school2022:recipe:54-17р",
+      "recipe": "salmon in tomato and vegetables",
+      "ingredient": "ONION_BULB_FRESH",
+      "blanch_explicit_in_accepted_publication": true,
+      "preblanch_cut": "UNKNOWN"
+    },
+    {
+      "id": "ru-school2022:recipe:54-7р",
+      "recipe": "pollock in milk",
+      "ingredient": "ONION_BULB_FRESH",
+      "blanch_explicit_in_accepted_publication": true,
+      "preblanch_cut": "SHREDDED"
+    }
+  ],
+  "external_candidate": {
+    "url": "https://nsergi16.profiedu.ru/file/download?id=2695",
+    "identity_to_school2022": "UNVERIFIED",
+    "byte_hash": "UNKNOWN",
+    "usable_as_source_publication_authority": false
+  },
+  "decision": "UNKNOWN_SOURCE_FORM_NOT_INDEPENDENTLY_VERIFIED",
+  "pr10_meta": "BLOCKED",
+  "runtime_authorized": false,
+  "blocking_requirements": [
+    "identical original card provenance",
+    "cut/form equivalence",
+    "shared output/batch compatibility",
+    "same-session or safe storage",
+    "net physical action B<A",
+    "approved stage publication authority"
+  ],
+  "references": [
+    "docs/family-food/pr10-meta-onion-blanch-preflight.md",
+    "docs/family-food/pr10-meta-onion-blanch-evidence.json",
+    "docs/family-food/pr10-meta-publication-path-feasibility.md"
+  ]
+}

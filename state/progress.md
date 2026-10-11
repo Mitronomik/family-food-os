@@ -1,3 +1,11 @@
+# PR10-META-FORM — source identity not yet established — 2026-10-11
+
+- PR #208 confirmed MERGED at `main@0a45188f79cf2eecdbd476715882e0f7cb97e4d6`. Issue #209 docs-only review captured in [report](../docs/family-food/pr10-meta-form-source-review.md) and [receipt](../docs/family-food/pr10-meta-form-source-evidence.json).
+- Two pinned School2022 publication manifests match source document SHA256 and onion blanch, but salmon's accepted cut is UNKNOWN; the external 2021 candidate has no verified byte-equivalence to pinned School2022. Verdict `UNKNOWN`, not YES.
+- No new source authority, runtime, DB, RecipeVersion/RecipeStep or migration, and no safe shared operation or net work reduction claim. PR10-META remains BLOCKED, PR10-A/B/C, PR10-PDF and Gate2 unauthorized. Await independent review and exact original-card evidence.
+
+---
+
 # PR10-META-ONION — improved source candidate with explicit blanching — 2026-10-11
 
 - Verified PR #206 MERGED, main `f30a756476067ca99f66c71610aa80347286be7b` (2026-10-11T15:13:30Z). PR10-META BLOCKED, PR10-A/B/C and PR10-PDF unauthorized.
