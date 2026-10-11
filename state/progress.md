@@ -1,3 +1,11 @@
+# PR10-SOURCE-SHORTLIST — source-family scouting — 2026-10-11
+
+- Confirmed PR #214 merged `main@1b928b6583688e73f5933e702a30ebf6ffb12824`; D1/D2/D3 are repository-recorded decisions.
+- Issue #213: independently located three public NCHFP process guides (diced onion, blanched carrot, sliced sweet pepper) and captured [source/rights/compatibility limitations](../docs/family-food/pr10-source-shortlist.md). Source page availability does not establish redistribution licenses or version-pinned recipe pairs.
+- Verdict **NO-GO for PR10-META** on these findings: no pair of published FamilyFoodOS RecipeVersions/MealEvents and no net B<A. Next proposed bounded review only: verify a real S1 diced-onion recipe pair; stop if unsupported. No runtime or fixture change.
+
+---
+
 # PR10-DATA-RECOVERY — explicit D1/D2/D3 approval — 2026-10-11
 
 - Verified PR #212 merged into `main@700bdea2c9a08e3cb250aa6a9d65e01e76139a12`. Product owner explicitly approved D1 (bounded source-first curation), D2 (possibility of separately approving a new Gate2 fixture after evidence) and D3 (mandatory separate authoritative stage publication contract).
