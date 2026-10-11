@@ -1,3 +1,13 @@
+# PR10-META-FORM — source/form verification delivered for review — 2026-10-11
+
+**Accepted main:** `0a45188f79cf2eecdbd476715882e0f7cb97e4d6` (#208 merged 2026-10-11T15:39:27Z). Issue #209, docs-only branch `docs/pr10-meta-form-source-check`. **Do not merge autonomously.**
+
+**Finding:** `UNKNOWN_SOURCE_FORM_NOT_INDEPENDENTLY_VERIFIED`. Salmon `54-17р` and pollock `54-7р` both require onion blanch in accepted manifests; salmon's precise pre-blanch cut remains UNKNOWN. External 2021 PDF is NOT proved byte-identical to accepted School2022 SHA256. See [form review](../docs/family-food/pr10-meta-form-source-review.md) and [evidence JSON](../docs/family-food/pr10-meta-form-source-evidence.json).
+
+**Gate:** `PR10-META=BLOCKED`; PR10-A/B/C, PR10-PDF and Gate2 NOT AUTHORIZED. Next: independent review of this receipt; exact pinned School2022 original bytes/card proof needed for further verdict. If unavailable, request separate user approval to change source/fixture/data strategy, not another open-ended scan.
+
+---
+
 # PR10-META-ONION — two explicit source-blanch operations, compatibility review — 2026-10-11
 
 **Accepted main:** `f30a756476067ca99f66c71610aa80347286be7b`, merged PR #206 at 2026-10-11T15:13:30Z. PR10-ARCH #192 and PR10-META corpus/evidence sequence through #206 merged; **PR10-META remains BLOCKED** and PR10-A/B/C, PR10-PDF, Gate2 NOT AUTHORIZED.
