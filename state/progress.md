@@ -1,3 +1,11 @@
+# PR10-DATA-RECOVERY — proposal delivered for review — 2026-10-11
+
+- Confirmed #210 merged at `main@42b76adaed10a3a9b10e8600f71a5d1084b8fbbe`; original School2022 form equivalence remains UNKNOWN, PR10-META BLOCKED.
+- Issue #211 proposes bounded existing-source review and a fallback curated source-backed batch-prep data strategy, with net B<A and rights/safety tests: [proposal](../docs/family-food/pr10-data-recovery-proposal.md).
+- No roadmap, fixture, publication authority, migration, code or acceptance changes approved by this proposal. D1/D2/D3 await independent review and explicit user decision. PR10-A/B/C, PR10-PDF and Gate2 unauthorized.
+
+---
+
 # PR10-META-FORM — source identity not yet established — 2026-10-11
 
 - PR #208 confirmed MERGED at `main@0a45188f79cf2eecdbd476715882e0f7cb97e4d6`. Issue #209 docs-only review captured in [report](../docs/family-food/pr10-meta-form-source-review.md) and [receipt](../docs/family-food/pr10-meta-form-source-evidence.json).
