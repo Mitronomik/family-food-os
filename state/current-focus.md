@@ -1,3 +1,11 @@
+# PR10-SOURCE-SHORTLIST — bounded three-source review — 2026-10-11
+
+**Base:** `main@1b928b6583688e73f5933e702a30ebf6ffb12824` (#214 merged). **Current:** Issue #213, branch `research/pr10-source-shortlist`, [source review](../docs/family-food/pr10-source-shortlist.md) pending PR review. Three process families assessed; none contains the two verified FamilyFoodOS RecipeVersions needed for a shared stage. **NO-GO for PR10-META readiness**; S1 diced onions is only a possible next focused recipe-source check.
+
+No changed Gate2 fixture, source publication, metadata reader, migration or runtime. PR10-META BLOCKED; PR10-A/B/C, PR10-PDF and Gate2 NOT AUTHORIZED. No autonomous merge.
+
+---
+
 # PR10-DATA-RECOVERY — D1/D2/D3 approved; documentation delivery — 2026-10-11
 
 **Accepted main:** `700bdea2c9a08e3cb250aa6a9d65e01e76139a12` (#212 merged). Product owner explicitly approved D1, D2 and D3. Current docs-only branch: `docs/pr10-recovery-approved-decisions`. Durable [decision record](../docs/family-food/pr10-data-recovery-approved-decisions-2026-10-11.md) awaits independent PR review/merge.
