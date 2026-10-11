@@ -1,0 +1,116 @@
+{
+  "schema": "PR10_META_STAGE_PUBLICATION_FEASIBILITY_V1",
+  "status": "BLOCKED_RECIPE_STAGE_PUBLICATION_AND_SHARED_COMPONENT_AUTHORITY",
+  "review_state": "PROPOSED_DOCS_ONLY_NOT_ACCEPTED_DATA_AUTHORITY",
+  "accepted_main_sha": "506e4c9f6f493bf2c91ce698a2d6c2eee0a413cb",
+  "issue": 205,
+  "upstream_authority": {
+    "source": "RU_MR_2_4_0162_19",
+    "source_version": "2019-12-30",
+    "source_document_sha256": "973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+    "source_publication": "data/curation/r3d-final-dc3-batch-gate/frozen-batch.json",
+    "rights_review_status": "REVIEWED",
+    "fixture": "docs/family-food/pr10-meta-same-day-pair-evidence.json",
+    "fixture_receipt_sha256": "6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec",
+    "candidate_date": "2026-09-15"
+  },
+  "current_platform_facts": {
+    "recipe_service_append_method": "backend/app/services/food_recipes.py::FoodRecipeCatalogueService.append_trusted_version",
+    "recipe_version_immutable_lineage": "created_from_version_id and monotonic version_number; no in-place update required",
+    "published_step_model": "backend/app/domain/food_recipes.py::RecipeStep(id,recipe_version_id,position,instruction,stage_code,created_at)",
+    "r3d_publisher": "backend/app/seed/r3d_final_dc3_batch.py::_recipe_seed with steps=tuple(row['consumer_steps_ru'])",
+    "no_current_structured_stage_bindings": true,
+    "cross_recipe_stage_registry_not_acceptably_supported_by_recipe_model": true,
+    "accepted_prep_tables": [
+      "prep_plans",
+      "prep_tasks",
+      "prep_unresolved_obligations"
+    ],
+    "new_persistence_approved": false
+  },
+  "recipes": [
+    {
+      "event_id": "cf0e3fe3-4c59-4447-9fbd-7a9e19c6ff49",
+      "role": "LUNCH",
+      "recipe_code": "MR2019_2_11_BEEF_VEGETABLE_RAGOUT",
+      "recipe_version_id": "063694fb-92cf-4731-adf6-041d36a532e4",
+      "source_card": "2.11",
+      "source_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/miasnye-bliuda/tekhnologicheskaia-karta-n-2.11/",
+      "source_card_sha256": "89ef921166ece243277dc3f1106e340769f3a99a89195ff10028bd78f529a295",
+      "recipe_process_sha256": "4171ef5b08d51cb1775f1bd8244042f20c016718a587f7440f954cd5db571177",
+      "pinned_recipe_step_2_sha256": "55519c2f9e26fbb12ea8abd237547f58d94361f17deff6005919d7a86c7ad128",
+      "supported_source_stage": "PREPARED_ONION_CARROT_FINE_CHOP_THEN_POACH",
+      "raw_wash_peel_explicit": false,
+      "canonical_food_codes": [
+        "CARROT",
+        "ONION_BULB_FRESH"
+      ],
+      "review_status": "RAW_WASH_PEEL_STAGE_NOT_SOURCE_IDENTIFIED",
+      "can_append_new_source_verified_stage_from_this_card_only": false
+    },
+    {
+      "event_id": "d000a213-d169-4f10-a2ad-08180f40aea6",
+      "role": "DINNER",
+      "recipe_code": "MR2019_1_16_POTATO_SPLIT_PEA_SOUP",
+      "recipe_version_id": "116e25fa-12f3-4926-8a2a-7aa2cf99bb9c",
+      "source_card": "1.16",
+      "source_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/supy/tekhnologicheskaia-karta-n-1.16/",
+      "source_card_sha256": "f4d70b7eb24de3fc10fd239ad6dcb2d7047c8e458541a0a1f8d6e15256ee8731",
+      "recipe_process_sha256": "d4248bc8b7b013353362ca44314bd50e4b98ee546603affdefb575d624c3a9cd",
+      "pinned_recipe_step_2_sha256": "a75d7d9fa0b0a77ab6eefd8a7b357c522dfc750662db99126efe89ea4447d850",
+      "supported_source_stage": "VEGETABLE_SORT_PEEL_WASH_IN_SOURCE_PREAMBLE",
+      "raw_wash_peel_explicit": true,
+      "canonical_food_codes": [
+        "CARROT",
+        "ONION_BULB_FRESH"
+      ],
+      "review_status": "UPSTREAM_SOURCE_PROCESS_EXPLICIT_BUT_PUBLISHED_STEPS_NOT_SEPARATED",
+      "can_append_new_source_verified_stage_from_this_card_only": "CONDITIONAL_REVIEW_AND_OWN_IMMUTABLE_VERSION"
+    }
+  ],
+  "publication_options": [
+    {
+      "option": "A_SIDE_CAR_IMMUTABLE_REVIEW_RECEIPT",
+      "capability": "can retain review/provenance in repository docs or data curation",
+      "current_runtime_retrieval_authority": "NOT_PRESENT",
+      "proposed_status": "NOT_SUITABLE_AS_PRODUCTION_CALCULATION_AUTHORITY_YET",
+      "required_future_gate": "SEPARATE_SOURCE_STAGE_RETRIEVAL_AND_VERSION_FINGERPRINT_CONTRACT_IF_CHOSEN",
+      "may_publish_runtime_shared_stage_now": false
+    },
+    {
+      "option": "B_APPEND_TRUSTED_RECIPEVERSION_STEPS",
+      "capability": "SUPPORTED_IMMUTABLE_RECIPE_VERSION_APPEND_BY_SERVICE",
+      "source_specific_scope": "ONLY_VERIFIED_SOURCE_BACKED_PER_RECIPE_STEP_CORRECTIONS",
+      "proposed_status": "CONDITIONALLY_VIABLE_FOR_SOUP_ONLY_WITH_SOURCE_REVIEW; RAGOUT_NOT_PROVEN",
+      "consequences": [
+        "NEW_RECIPEVERSION_ID",
+        "NEW_RECIPESTEP_IDS_AND_PROCESS_HASH",
+        "PRESERVE_EXISTING_RECIPEVERSION_AND_LINKED_MEALPLANS",
+        "VERIFY_PREPARED_OUTPUT_NUTRITION_AND_SHOPPING",
+        "REPIN_OR_REGENERATE_GATE2_FIXTURE_BEFORE_REUSING_EVIDENCE"
+      ],
+      "may_publish_runtime_shared_stage_now": false
+    },
+    {
+      "option": "C_STRUCTURED_CROSS_RECIPE_STAGE_AUTHORITY",
+      "capability": "NOT_IN_ACCEPTED_RECIPESTEP_OR_RECIPEVERSIONDETAIL",
+      "proposed_status": "REQUIRES_FRESH_PRE_IMPLEMENTATION_SOURCE_AUTHORITY_GATE",
+      "required_future_gate": "IMPLICIT_PROCESS_EXPLICIT_SOURCE_REVIEW_AND_API_REPO_VERSIONED_PUBLICATION_DECISION",
+      "may_publish_runtime_shared_stage_now": false
+    }
+  ],
+  "approval_required": {
+    "source_explicit_both_recipes": false,
+    "stage_input_output_form_accepted": false,
+    "recipe_step_reviewed_numeric_ru": false,
+    "stage_quantity_from_decimal_servings_reviewed": false,
+    "same_session_clock_and_holding_source_evidenced": false,
+    "independently_verified_net_physical_action_reduction": false,
+    "catalogue_stage_runtime_authority_approved": false,
+    "publishing_or_runtime_authorized": false
+  },
+  "decision": "DO_NOT_PUBLISH_REVIEWED_SHARED_STAGE_OR_NEW_RECIPEVERSION_IN_THIS_TASK",
+  "next_recommended_work": "SOURCE_COMPLETENESS_GATE_FOR_RAGOUT_OR_SELECT_ANOTHER_EXPLICIT_TWO_RECIPE_STAGE_PAIR_THEN_CHOOSE_PUBLICATION_BOUNDARY",
+  "pr10_meta_status": "BLOCKED",
+  "pr10_runtime_status": "NOT_AUTHORIZED"
+}
