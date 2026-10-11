@@ -1,3 +1,11 @@
+# PR10-DATA-RECOVERY — D1/D2/D3 approved; documentation delivery — 2026-10-11
+
+**Accepted main:** `700bdea2c9a08e3cb250aa6a9d65e01e76139a12` (#212 merged). Product owner explicitly approved D1, D2 and D3. Current docs-only branch: `docs/pr10-recovery-approved-decisions`. Durable [decision record](../docs/family-food/pr10-data-recovery-approved-decisions-2026-10-11.md) awaits independent PR review/merge.
+
+**Next authorized operation after decision record acceptance:** a bounded source-backed shortlist of no more than three stage families with original provenance/rights/form/safety unknowns and explicit NO-GO if evidence fails. This approval does not replace Gate2 fixture or authorize stage publication/runtime. **PR10-META BLOCKED; PR10-A/B/C, PR10-PDF, Gate2 NOT AUTHORIZED.**
+
+---
+
 # PR10-DATA-RECOVERY — bounded proposal for independent review — 2026-10-11
 
 **Accepted main:** `42b76adaed10a3a9b10e8600f71a5d1084b8fbbe` (PR #210 merged). **Current docs-only operation:** Issue #211, branch `docs/pr10-data-recovery-proposal`; see [decision proposal](../docs/family-food/pr10-data-recovery-proposal.md). Await independent review and explicit user approval for D1/D2/D3; do not autonomously merge.
