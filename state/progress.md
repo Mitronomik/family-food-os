@@ -1,3 +1,10 @@
+# PR10-EXT-PAIR — bounded external acquisition pilot — 2026-10-12
+
+- Confirmed [#217](https://github.com/Mitronomik/family-food-os/pull/217) merged (`162ce34e1b4e96099c51f6e547531d414b5414cf`). Issue #218 checked two pinned ForkRecipe cards and the UniTools sample for source rights, process state and usable quantities; [review](../docs/family-food/pr10-ext-pair-source-review.md), [receipt](../docs/family-food/pr10-ext-pair-source-evidence.json).
+- **NO-GO:** external recipe cards share an onion ingredient description but not an independently verified reusable raw-diced output/holding rule or action graph. No canonical recipe publication or data change; PR10-META still BLOCKED. Await PR review then owner decision rather than another phrase-match sweep.
+
+---
+
 # PR10-S1-PAIR — bounded negative evidence — 2026-10-11
 
 - Confirmed #215 merged `main@35d0787709d175fd11b8dece044854aa2a0b56f9`; Issue #216 compared published R3-D/R3-C/R2-B process evidence with external NCHFP raw diced-onion guide.
