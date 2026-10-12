@@ -1,0 +1,196 @@
+{
+  "schema": "pr10_external_pair_source_pilot_v1",
+  "issue": 218,
+  "accepted_main": "162ce34e1b4e96099c51f6e547531d414b5414cf",
+  "study_date": "2026-10-12",
+  "scope": "Two pinned ForkRecipe records; UniTools pinned sample inspected only as a comparator; no full catalogue census and no accepted FamilyFoodOS RecipeVersion/MealEvent claim.",
+  "source_repository": {
+    "repo": "futurechef/forkrecipe-recipes",
+    "immutable_commit": "934319313379201f91ddccdd29abd054039a3ad6",
+    "readme_git_blob_sha": "5b35a7c2a3030ef7556fb4f1f1ca04c7dfcbc646",
+    "notice_git_blob_sha": "bcc613b75464c75fdad9a323ae89f93aa8f6ec53",
+    "license_git_blob_sha": "2d58298e6eda10e7204abb52722efbc840db2390",
+    "license_declared": "CC-BY-SA-4.0",
+    "licensor_assertion": "Content originally authored for ForkRecipe or adapted from public-domain sources; per-card independent original source provenance not exposed by these two records.",
+    "rights_for_product_publication": "REVIEW_REQUIRED",
+    "translating_and_redistributing_derivatives": "CC_BY_SA_4_0_ATTRIBUTION_SHAREALIKE_APPLICABILITY_REQUIRES_REVIEW"
+  },
+  "source_records": [
+    {
+      "source_file": "recipes/chicken-tortilla-soup.js",
+      "source_git_blob_sha": "3e62c2802229701d7744e93696b289f73c99c469",
+      "record_identity": {
+        "repoId": "master_mexican_chickentortillasoup_001",
+        "slug": "chicken-tortilla-soup",
+        "author": "ForkRecipe Kitchen",
+        "servings": 6,
+        "ratio_system": "weight",
+        "license_declared_at_record": "CC-BY-SA",
+        "parentRepoId": null
+      },
+      "raw_onion_ingredient": {
+        "id": "ing_03",
+        "source_label": "Yellow onion, diced",
+        "source_line": 28,
+        "amount_g_at_source_servings": 250,
+        "default_unit": "g",
+        "cut_dimension": "NOT_SPECIFIED",
+        "gross_net_basis": "NOT_SPECIFIED",
+        "canonical_food_identity": "NOT_VERIFIED_IN_FAMILYFOODOS"
+      },
+      "relevant_downstream_node": {
+        "node_id": "step_2",
+        "line": 62,
+        "action": "Sweat aromatics",
+        "inputs_includes_raw_onion": true,
+        "output_state": "chile_base",
+        "stage_is_mixed_with_other_ingredients": true
+      },
+      "independent_per_card_original_source_reference": "NOT_PRESENT_IN_REVIEWED_RECORD",
+      "raw_diced_onion_standalone_output_stage": "NOT_PRESENT",
+      "specific_safe_holding_for_raw_chopped_onion": "NOT_PRESENT",
+      "finished_dish_freezing_text_present": true,
+      "rights_for_familyfoodos_publication": "NOT_APPROVED"
+    },
+    {
+      "source_file": "recipes/beef-and-barley-stew.js",
+      "source_git_blob_sha": "b36222f6c29e462f2bab024ab64c150a4f873a0e",
+      "record_identity": {
+        "repoId": "master_american_beefandbarleystew_001",
+        "slug": "beef-and-barley-stew",
+        "author": "ForkRecipe Kitchen",
+        "servings": 6,
+        "ratio_system": "weight",
+        "license_declared_at_record": "CC-BY-SA",
+        "parentRepoId": null
+      },
+      "raw_onion_ingredient": {
+        "id": "ing_05",
+        "source_label": "Yellow onion, diced",
+        "source_line": 30,
+        "amount_g_at_source_servings": 300,
+        "default_unit": "g",
+        "cut_dimension": "NOT_SPECIFIED",
+        "gross_net_basis": "NOT_SPECIFIED",
+        "canonical_food_identity": "NOT_VERIFIED_IN_FAMILYFOODOS"
+      },
+      "relevant_downstream_node": {
+        "node_id": "step_2",
+        "line": 61,
+        "action": "Build the stew base",
+        "inputs_includes_raw_onion": true,
+        "output_state": "stew_base",
+        "stage_is_mixed_with_other_ingredients": true
+      },
+      "independent_per_card_original_source_reference": "NOT_PRESENT_IN_REVIEWED_RECORD",
+      "raw_diced_onion_standalone_output_stage": "NOT_PRESENT",
+      "specific_safe_holding_for_raw_chopped_onion": "NOT_PRESENT",
+      "finished_dish_freezing_text_present": true,
+      "rights_for_familyfoodos_publication": "NOT_APPROVED"
+    }
+  ],
+  "unitoools_comparator": {
+    "repo": "farcrak/unitools-recipes",
+    "immutable_commit": "2f554073f7e730b18d707fe1164d18308f6ec16c",
+    "readme_git_blob_sha": "b0c4b714c84b5f649e22722b3dd04159c38cf0ad",
+    "sample_git_blob_sha": "2d665107ddac2eec93d649d46129a2824dec187d",
+    "sample_version": "2.0.0",
+    "sample_size": 2,
+    "sample_slugs": [
+      "spaghetti-carbonara",
+      "tom-yum-goong"
+    ],
+    "sample_has_per_recipe_original_source_references": false,
+    "sample_has_explicit_process_dependency_graph": false,
+    "published_dataset_claim_count": 501,
+    "license_declared": "CC-BY-SA-4.0",
+    "limits": "Only sample.json inspected at record level; no assertion that full catalogue lacks per-record provenance or safe prep metadata."
+  },
+  "candidate_shared_stage": {
+    "ingredient_source_label": "Yellow onion, diced",
+    "source_weight_g_sum_arithmetic_only": 550,
+    "source_input_servings": [
+      6,
+      6
+    ],
+    "same_named_form": "YES_DICED_YELLOW_ONION",
+    "exact_cut_size": "UNKNOWN",
+    "canonical_food_identity_and_edible_net_mass": "UNVERIFIED",
+    "common_standalone_stage": "NO_SOURCE_PUBLISHED_STAGE",
+    "downstream_processes": [
+      "chile_base",
+      "stew_base"
+    ],
+    "downstream_stage_equivalence": "NO_DIFFERENT_MIXED_COOKED_STATES",
+    "two_actual_familyfoodos_recipeversion_mealevent_serving_pins": "NOT_AVAILABLE",
+    "source_specific_raw_stage_holding": "UNKNOWN",
+    "source_rights_for_replication": "UNAPPROVED"
+  },
+  "physical_work_comparison": {
+    "baseline_A": "UNKNOWN",
+    "combined_B": "UNKNOWN",
+    "must_account_for": [
+      "independent initial washing/peeling/cutting",
+      "combined production batch capacity",
+      "ingredient split/portion accounting",
+      "setup and knife/board cleaning",
+      "packing and separate storage/retrieval if events differ",
+      "source-specific safe hold and recovery for every interval"
+    ],
+    "comparison_B_less_than_A": "NOT_PROVEN",
+    "minutes_saved": "NOT_CLAIMED"
+  },
+  "matrix": [
+    {
+      "criterion": "exact two immutable external recipe records",
+      "result": "YES_RESEARCH_ONLY",
+      "release_gate": false
+    },
+    {
+      "criterion": "matching declared raw yellow diced onion label",
+      "result": "YES_BUT_CUT_SIZE_AND_NET_BASIS_UNKNOWN",
+      "release_gate": false
+    },
+    {
+      "criterion": "usable source amounts and base servings",
+      "result": "YES_250G_AND_300G_AT_SIX_SERVINGS_EACH_SOURCE_ONLY",
+      "release_gate": false
+    },
+    {
+      "criterion": "independently reviewable original recipe-card provenance",
+      "result": "UNKNOWN",
+      "release_gate": false
+    },
+    {
+      "criterion": "accepted source rights for FamilyFoodOS publication/translation",
+      "result": "NOT_APPROVED",
+      "release_gate": false
+    },
+    {
+      "criterion": "identical typed reusable standalone stage with output form",
+      "result": "NOT_IN_SOURCE_RECORDS",
+      "release_gate": false
+    },
+    {
+      "criterion": "safe cross-event holding/reheat/defrost for that intermediate form",
+      "result": "UNKNOWN",
+      "release_gate": false
+    },
+    {
+      "criterion": "actual two version-pinned MealEvents and Decimal servings",
+      "result": "NOT_AVAILABLE",
+      "release_gate": false
+    },
+    {
+      "criterion": "net physical operation proof B<A",
+      "result": "NOT_PROVEN",
+      "release_gate": false
+    }
+  ],
+  "decision": "NO_GO_FOR_PR10_META_THIS_EXACT_EXTERNAL_PAIR",
+  "pr10_meta": "BLOCKED",
+  "publication_authorized": false,
+  "fixture_change_authorized": false,
+  "runtime_authorized": false,
+  "handoff": "Stop pair search after this bounded exact check; take explicit product-owner decision whether to commission reviewed source/cooking evidence or propose a change to PR10 usefulness gate. No automatic additional random source-search PR."
+}
