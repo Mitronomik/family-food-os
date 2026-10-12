@@ -1,3 +1,10 @@
+# PR10-FD-ARCH — Finished-Dish-First contract review — 2026-10-12
+
+**Accepted main:** `09e9f3fd670aa40e1f0efdfb9d1173538503640c` (#219 merged). Owner approved the Finished-Dish-First direction: cooked complete meal batches and confirmed frozen portions are the primary Prep objective; cross-recipe raw-ingredient work is a later optimization.
+**Current authorized task:** Issue [#221](https://github.com/Mitronomik/family-food-os/issues/221), docs-only branch `docs/pr10-finished-dish-first-contract`; [proposed PR10-FD-ARCH amendment](../docs/family-food/pr10-finished-dish-first-amendment-2026-10-12.md) awaiting independent review. Proposes new PR10 / Gate 2 value criterion and a distinct later confirmed-PreparedBatch execution contract. **Existing accepted PR10-META remains BLOCKED and PR10-A/B/C, PR10-PDF, Gate 2 runtime NOT AUTHORIZED until amendment accepted and separate evidence/publication gates.** Do not create storage safety truth, migrations, stock or merge autonomously. After contract acceptance the next **single** bounded operation is PR10-FD-META source/policy evidence.
+
+---
+
 # PR10-EXT-PAIR — one external two-recipe evidence gate — 2026-10-12
 
 **Accepted main:** `162ce34e1b4e96099c51f6e547531d414b5414cf` (#217 merged). Issue [#218](https://github.com/Mitronomik/family-food-os/issues/218), branch `research/pr10-ext-pair-pilot`; docs-only [source pair review](../docs/family-food/pr10-ext-pair-source-review.md) and [machine evidence](../docs/family-food/pr10-ext-pair-source-evidence.json) awaiting independent PR review.
