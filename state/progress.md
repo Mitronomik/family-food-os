@@ -1,3 +1,11 @@
+# PR10-FD-ARCH — product direction approved, docs-only contract drafted — 2026-10-12
+
+- [#219](https://github.com/Mitronomik/family-food-os/pull/219) merged as `09e9f3fd670aa40e1f0efdfb9d1173538503640c`. Owner explicitly approved finished cooked dishes → portion → safe cold/frozen storage → thaw/reheat → use as the primary Prep feature; existing raw-ingredient candidate NO-GOs stand.
+- Issue #221 and [docs-only amendment](../docs/family-food/pr10-finished-dish-first-amendment-2026-10-12.md) propose exact boundaries: source-reviewed cooked final-state pair, source/rights/jurisdiction/quality gates, planned vs confirmed prepared food, Shopping single-demand, explicit B<A/PR10/Gate2 criterion change, and independently reviewed execution/inventory later. No architecture/schema/runtime changes or auto merge.
+- PR10-META still BLOCKED on accepted main. Await independent review/merge of contract; only then one bounded PR10-FD-META source/policy evidence task.
+
+---
+
 # PR10-EXT-PAIR — bounded external acquisition pilot — 2026-10-12
 
 - Confirmed [#217](https://github.com/Mitronomik/family-food-os/pull/217) merged (`162ce34e1b4e96099c51f6e547531d414b5414cf`). Issue #218 checked two pinned ForkRecipe cards and the UniTools sample for source rights, process state and usable quantities; [review](../docs/family-food/pr10-ext-pair-source-review.md), [receipt](../docs/family-food/pr10-ext-pair-source-evidence.json).
