@@ -1,3 +1,10 @@
+# PR10-FD-ARCH — source-safe cooked-dish-first amendment handoff — 2026-10-12
+
+Main `09e9f3fd670aa40e1f0efdfb9d1173538503640c`; #219 merged. Issue #221; proposed docs-only [Finished-Dish-First amendment](../docs/family-food/pr10-finished-dish-first-amendment-2026-10-12.md). Read root/scoped AGENTS, [PR10-ARCH](../docs/family-food/pr10-prep-freezer-implementation-contract.md), [roadmap](../docs/family-food/master-roadmap.md), approved [D1-D3](../docs/family-food/pr10-data-recovery-approved-decisions-2026-10-11.md) and new amendment. Product direction approved; detailed release/contract changes not accepted until independent review + merge.
+Proposed plan: source-reviewed **fully cooked dish** once for >=2 MealEvents, Decimal member portion accounting, safe cool/store/thaw/reheat, no invented freezer eligibility; PrepPlan is an immutable proposal, **not PreparedBatch inventory**. Confirmed stored stock + consumption need another reviewed cross-context/migration contract; no legacy ProductionBatch reuse. Existing B<A changes are explicit proposal, not a silent waiver. **Next only after merge:** bounded PR10-FD-META source/policy case. No runtime, production data changes, migration, Gate2 switch or autonomous merge.
+
+---
+
 # PR10-EXT-PAIR — external pair gate handoff — 2026-10-12
 
 **Main after #217:** `162ce34e1b4e96099c51f6e547531d414b5414cf`. Current Issue #218 / `research/pr10-ext-pair-pilot`. Read [exact source card review](../docs/family-food/pr10-ext-pair-source-review.md), [machine pins](../docs/family-food/pr10-ext-pair-source-evidence.json), approved D1-D3 and PR10-ARCH. Two ForkRecipe records + UniTools sample checked; no production write.
