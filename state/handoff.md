@@ -1,3 +1,10 @@
+# PR10-EXT-PAIR — external pair gate handoff — 2026-10-12
+
+**Main after #217:** `162ce34e1b4e96099c51f6e547531d414b5414cf`. Current Issue #218 / `research/pr10-ext-pair-pilot`. Read [exact source card review](../docs/family-food/pr10-ext-pair-source-review.md), [machine pins](../docs/family-food/pr10-ext-pair-source-evidence.json), approved D1-D3 and PR10-ARCH. Two ForkRecipe records + UniTools sample checked; no production write.
+**Outcome:** `NO_GO_FOR_PR10_META_THIS_EXACT_EXTERNAL_PAIR`; still no verified jointly executable raw-onion stage or valid `B<A`. Next: independent review of this docs-only receipt, then explicit owner direction (curated evidence package vs formal scope change proposal). **Do not** start another pair search, Prep runtime/PDF, Gate2, migrations or autonomous merge.
+
+---
+
 # PR10-S1-PAIR — documentation handoff — 2026-10-11
 
 **Accepted main:** `35d0787709d175fd11b8dece044854aa2a0b56f9`, #215 merged. Issue #216, `research/pr10-s1-onion-pair-gate`. Read [S1 review](../docs/family-food/pr10-s1-pair-review.md), [evidence](../docs/family-food/pr10-s1-pair-evidence.json), approved D1-D3 and PR10-ARCH.
