@@ -1,3 +1,10 @@
+# PR10-EXT-PAIR — one external two-recipe evidence gate — 2026-10-12
+
+**Accepted main:** `162ce34e1b4e96099c51f6e547531d414b5414cf` (#217 merged). Issue [#218](https://github.com/Mitronomik/family-food-os/issues/218), branch `research/pr10-ext-pair-pilot`; docs-only [source pair review](../docs/family-food/pr10-ext-pair-source-review.md) and [machine evidence](../docs/family-food/pr10-ext-pair-source-evidence.json) awaiting independent PR review.
+**Decision:** `NO_GO_FOR_PR10_META_THIS_EXACT_EXTERNAL_PAIR`. Two pinned ForkRecipe records list diced onions (250 g, 300 g) but no common separately authorized stage, source-level safe hold, exact accepted RecipeVersion/MealEvent/Serving binding or `B<A`. UniTools sample is a comparator only. **PR10-META BLOCKED; PR10-A/B/C, PR10-PDF, Gate2 NOT AUTHORIZED.** After review request explicit owner choice of bounded reviewed-source procurement vs formal milestone scope amendment; do not repeat arbitrary pair hunting or merge autonomously.
+
+---
+
 # PR10-S1-PAIR — exact onion form pair check — 2026-10-11
 
 **Accepted main:** `35d0787709d175fd11b8dece044854aa2a0b56f9` (#215 merged). Issue #216, branch `research/pr10-s1-onion-pair-gate`, [source comparison](../docs/family-food/pr10-s1-pair-review.md) and [evidence](../docs/family-food/pr10-s1-pair-evidence.json) awaiting independent review.
