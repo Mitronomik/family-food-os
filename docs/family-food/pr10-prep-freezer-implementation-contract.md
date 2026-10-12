@@ -1,5 +1,7 @@
 # PR10-ARCH — Prep / Freezer implementation contract gate
 
+**Later owner-directed amendment (2026-10-12):** [Finished-Dish-First PR10 contract](pr10-finished-dish-first-amendment-2026-10-12.md) is under independent review. Once merged, its explicitly identified finished-dish priority, PR10-META acceptance and Gate 2 changes supersede the earlier raw/shared-component-first usefulness sequence. The accepted three-table proposal, safety/immutability and numeric-step rules are NOT implicitly rewritten; their fit requires reviewed implementation preflight. Historic negative findings remain valid. **Until amendment merge, current PR10-META remains BLOCKED.**
+
 **Status:** PROPOSED, docs-only; independent review and merge required before PR10 runtime.
 **Issue:** #191.
 **Accepted base:** main@545c86b4dd39ba3b14e0c36fcbc4733da1137d14 (PR #190 merged 2026-10-10).
