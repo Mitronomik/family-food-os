@@ -89,23 +89,6 @@
       "rights_for_familyfoodos_publication": "NOT_APPROVED"
     }
   ],
-  "unitoools_comparator": {
-    "repo": "farcrak/unitools-recipes",
-    "immutable_commit": "2f554073f7e730b18d707fe1164d18308f6ec16c",
-    "readme_git_blob_sha": "b0c4b714c84b5f649e22722b3dd04159c38cf0ad",
-    "sample_git_blob_sha": "2d665107ddac2eec93d649d46129a2824dec187d",
-    "sample_version": "2.0.0",
-    "sample_size": 2,
-    "sample_slugs": [
-      "spaghetti-carbonara",
-      "tom-yum-goong"
-    ],
-    "sample_has_per_recipe_original_source_references": false,
-    "sample_has_explicit_process_dependency_graph": false,
-    "published_dataset_claim_count": 501,
-    "license_declared": "CC-BY-SA-4.0",
-    "limits": "Only sample.json inspected at record level; no assertion that full catalogue lacks per-record provenance or safe prep metadata."
-  },
   "candidate_shared_stage": {
     "ingredient_source_label": "Yellow onion, diced",
     "source_weight_g_sum_arithmetic_only": 550,
@@ -192,5 +175,22 @@
   "publication_authorized": false,
   "fixture_change_authorized": false,
   "runtime_authorized": false,
-  "handoff": "Stop pair search after this bounded exact check; take explicit product-owner decision whether to commission reviewed source/cooking evidence or propose a change to PR10 usefulness gate. No automatic additional random source-search PR."
+  "handoff": "Stop pair search after this bounded exact check; take explicit product-owner decision whether to commission reviewed source/cooking evidence or propose a change to PR10 usefulness gate. No automatic additional random source-search PR.",
+  "unitools_comparator": {
+    "repo": "farcrak/unitools-recipes",
+    "immutable_commit": "2f554073f7e730b18d707fe1164d18308f6ec16c",
+    "readme_git_blob_sha": "b0c4b714c84b5f649e22722b3dd04159c38cf0ad",
+    "sample_git_blob_sha": "2d665107ddac2eec93d649d46129a2824dec187d",
+    "sample_version": "2.0.0",
+    "sample_size": 2,
+    "sample_slugs": [
+      "spaghetti-carbonara",
+      "tom-yum-goong"
+    ],
+    "sample_has_per_recipe_original_source_references": false,
+    "sample_has_explicit_process_dependency_graph": false,
+    "published_dataset_claim_count": 501,
+    "license_declared": "CC-BY-SA-4.0",
+    "limits": "Only sample.json inspected at record level; no assertion that full catalogue lacks per-record provenance or safe prep metadata."
+  }
 }
