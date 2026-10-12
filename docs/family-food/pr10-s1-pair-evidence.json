@@ -1,0 +1,515 @@
+{
+  "schema": "pr10_s1_pair_review_v1",
+  "issue": 216,
+  "accepted_base": "35d0787709d175fd11b8dece044854aa2a0b56f9",
+  "sources": [
+    "data/curation/r3d-final-dc3-batch-gate/frozen-batch.json",
+    "data/curation/r3c-post-r3b-catalogue-gate/frozen-batch.json",
+    "data/curation/r2b-fish-main-diversity/publication-specs.json",
+    "https://nchfp.uga.edu/how/freeze/vegetable/freezing-onions/"
+  ],
+  "searched_scope": "three accepted publication evidence files, not full live DB",
+  "common_food": "ONION_BULB_FRESH",
+  "exact_identical_diced_raw_onion_output_pair": "NOT_ESTABLISHED",
+  "published_shared_stage_authority": false,
+  "actual_two_event_pair": "NOT_PINNED",
+  "same_session_or_safe_holding": "UNKNOWN",
+  "net_b_less_than_a": "NOT_PROVEN",
+  "decision": "NO_GO_NO_VERIFIED_TWO_RECIPE_DICED_RAW_ONION_STAGE",
+  "pr10_meta": "BLOCKED",
+  "production_changes": false,
+  "source_snapshot_policy": "Accepted main publication JSON files, pinned by Git blob SHA. JSON pointers and step positions below refer to the immutable publication manifests. Curated consumer step text is not represented as a new independently verified raw source-card transcription.",
+  "source_receipts": [
+    {
+      "tag": "R3-D",
+      "path": "data/curation/r3d-final-dc3-batch-gate/frozen-batch.json",
+      "publication_git_blob_sha": "5668323fe8027dcd2cb94c75db8b551cfb525cde",
+      "source_name": "RU_MR_2_4_0162_19",
+      "source_document_sha256": "973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "source_rights_review_status": "REVIEWED",
+      "matched_onion_recipe_records": 5
+    },
+    {
+      "tag": "R3-C",
+      "path": "data/curation/r3c-post-r3b-catalogue-gate/frozen-batch.json",
+      "publication_git_blob_sha": "c11fd55695c655fee5add14a3416a27527771e75",
+      "source_name": "ru-school2022",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_rights_review_status": "REVIEWED",
+      "matched_onion_recipe_records": 6
+    },
+    {
+      "tag": "R2-B",
+      "path": "data/curation/r2b-fish-main-diversity/publication-specs.json",
+      "publication_git_blob_sha": "b4ad353c4c9e955b64fb8b155cc98a1530aeb3a8",
+      "source_name": "ru-school2022",
+      "source_document_sha256": null,
+      "source_rights_review_status": null,
+      "matched_onion_recipe_records": 2
+    }
+  ],
+  "matched_onion_record_count": 13,
+  "source_card_step_registry": [
+    {
+      "publication_file": "data/curation/r3d-final-dc3-batch-gate/frozen-batch.json",
+      "publication_git_blob_sha": "5668323fe8027dcd2cb94c75db8b551cfb525cde",
+      "recipe_record_json_pointer": "/selected/0",
+      "recipe_code": "MR2019_1_2A_VEGETARIAN_CABBAGE_SOUP",
+      "source_recipe_id": null,
+      "source_card_code": "1.2а",
+      "source_page": null,
+      "source_locator": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/supy/tekhnologicheskaia-karta-n-1.2a/",
+      "source_document_sha256": "973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "source_card_hash_kind": "source_card_raw_sha256",
+      "source_card_sha256": "b209172357918043f9f92d485a8967a71d41dbcfaf69609ecb3781af983b45a9",
+      "source_process_hash_kind": null,
+      "source_process_sha256": null,
+      "onion_ingredient_json_pointer": "/selected/0/ingredients/4",
+      "onion_ingredient_record": {
+        "source_label": "Лук репчатый",
+        "quantity_g": "7",
+        "food_code": "ONION_BULB_FRESH"
+      },
+      "step_pins": [
+        {
+          "position": 1,
+          "source_json_pointer": "/selected/0/consumer_steps_ru/0",
+          "text_ru": "Подготовить капусту, картофель, морковь, помидоры и репчатый лук."
+        },
+        {
+          "position": 2,
+          "source_json_pointer": "/selected/0/consumer_steps_ru/1",
+          "text_ru": "Морковь и лук мелко нарезать и припустить в небольшом количестве воды с рафинированным растительным маслом."
+        }
+      ],
+      "classification": "NOT_VERIFIED_S1_RAW_DICED_STAGE",
+      "negative_reason": "Fine cutting and poaching together; source does not specify a separately verified raw 1/4-inch diced output."
+    },
+    {
+      "publication_file": "data/curation/r3d-final-dc3-batch-gate/frozen-batch.json",
+      "publication_git_blob_sha": "5668323fe8027dcd2cb94c75db8b551cfb525cde",
+      "recipe_record_json_pointer": "/selected/1",
+      "recipe_code": "MR2019_1_3_LENINGRAD_RASSOLNIK_SOUR_CREAM",
+      "source_recipe_id": null,
+      "source_card_code": "1.3",
+      "source_page": null,
+      "source_locator": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/supy/tekhnologicheskaia-karta-n-1.3/",
+      "source_document_sha256": "973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "source_card_hash_kind": "source_card_raw_sha256",
+      "source_card_sha256": "7ec1683c88891f405ce57390c944ef3f8a79f90fc6c97787ddcf406f5a8b89b2",
+      "source_process_hash_kind": null,
+      "source_process_sha256": null,
+      "onion_ingredient_json_pointer": "/selected/1/ingredients/4",
+      "onion_ingredient_record": {
+        "source_label": "Лук репчатый",
+        "quantity_g": "3.5",
+        "food_code": "ONION_BULB_FRESH"
+      },
+      "step_pins": [
+        {
+          "position": 2,
+          "source_json_pointer": "/selected/1/consumer_steps_ru/1",
+          "text_ru": "Залить крупу водой из выбранной водной ветви и варить 10–15 минут; добавить нарезанный картофель, лук и морковь, приготовленные с использованием сливочного масла."
+        }
+      ],
+      "classification": "NOT_VERIFIED_S1_RAW_DICED_STAGE",
+      "negative_reason": "Onion appears among cooked vegetables; specific raw cut/output is not source-pinned."
+    },
+    {
+      "publication_file": "data/curation/r3d-final-dc3-batch-gate/frozen-batch.json",
+      "publication_git_blob_sha": "5668323fe8027dcd2cb94c75db8b551cfb525cde",
+      "recipe_record_json_pointer": "/selected/2",
+      "recipe_code": "MR2019_1_4_OAT_VEGETABLE_SOUP_SOUR_CREAM",
+      "source_recipe_id": null,
+      "source_card_code": "1.4",
+      "source_page": null,
+      "source_locator": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/supy/tekhnologicheskaia-karta-n-1.4/",
+      "source_document_sha256": "973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "source_card_hash_kind": "source_card_raw_sha256",
+      "source_card_sha256": "40606e0739c6be7473058c50adff2ab7ba3da95ddc62d0547473a61b22da0e30",
+      "source_process_hash_kind": null,
+      "source_process_sha256": null,
+      "onion_ingredient_json_pointer": "/selected/2/ingredients/3",
+      "onion_ingredient_record": {
+        "source_label": "Лук репчатый",
+        "quantity_g": "7",
+        "food_code": "ONION_BULB_FRESH"
+      },
+      "step_pins": [
+        {
+          "position": 1,
+          "source_json_pointer": "/selected/2/consumer_steps_ru/0",
+          "text_ru": "Подготовить картофель, морковь, помидоры и репчатый лук; морковь, помидоры и лук припустить со сливочным маслом."
+        }
+      ],
+      "classification": "NOT_VERIFIED_S1_RAW_DICED_STAGE",
+      "negative_reason": "Prepared/poached onion, with no source-pinned raw diced cut or separate stage."
+    },
+    {
+      "publication_file": "data/curation/r3d-final-dc3-batch-gate/frozen-batch.json",
+      "publication_git_blob_sha": "5668323fe8027dcd2cb94c75db8b551cfb525cde",
+      "recipe_record_json_pointer": "/selected/3",
+      "recipe_code": "MR2019_1_16_POTATO_SPLIT_PEA_SOUP",
+      "source_recipe_id": null,
+      "source_card_code": "1.16",
+      "source_page": null,
+      "source_locator": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/supy/tekhnologicheskaia-karta-n-1.16/",
+      "source_document_sha256": "973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "source_card_hash_kind": "source_card_raw_sha256",
+      "source_card_sha256": "f4d70b7eb24de3fc10fd239ad6dcb2d7047c8e458541a0a1f8d6e15256ee8731",
+      "source_process_hash_kind": null,
+      "source_process_sha256": null,
+      "onion_ingredient_json_pointer": "/selected/3/ingredients/1",
+      "onion_ingredient_record": {
+        "source_label": "Лук репчатый",
+        "quantity_g": "5",
+        "food_code": "ONION_BULB_FRESH"
+      },
+      "step_pins": [
+        {
+          "position": 2,
+          "source_json_pointer": "/selected/3/consumer_steps_ru/1",
+          "text_ru": "Морковь и лук подготовить и припустить в небольшом количестве воды со сливочным маслом."
+        }
+      ],
+      "classification": "NOT_VERIFIED_S1_RAW_DICED_STAGE",
+      "negative_reason": "Prepared/poached onion, with no source-pinned raw diced cut or separate stage."
+    },
+    {
+      "publication_file": "data/curation/r3d-final-dc3-batch-gate/frozen-batch.json",
+      "publication_git_blob_sha": "5668323fe8027dcd2cb94c75db8b551cfb525cde",
+      "recipe_record_json_pointer": "/selected/8",
+      "recipe_code": "MR2019_2_11_BEEF_VEGETABLE_RAGOUT",
+      "source_recipe_id": null,
+      "source_card_code": "2.11",
+      "source_page": null,
+      "source_locator": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/miasnye-bliuda/tekhnologicheskaia-karta-n-2.11/",
+      "source_document_sha256": "973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "source_card_hash_kind": "source_card_raw_sha256",
+      "source_card_sha256": "89ef921166ece243277dc3f1106e340769f3a99a89195ff10028bd78f529a295",
+      "source_process_hash_kind": null,
+      "source_process_sha256": null,
+      "onion_ingredient_json_pointer": "/selected/8/ingredients/1",
+      "onion_ingredient_record": {
+        "source_label": "Лук репчатый",
+        "quantity_g": "9",
+        "food_code": "ONION_BULB_FRESH"
+      },
+      "step_pins": [
+        {
+          "position": 2,
+          "source_json_pointer": "/selected/8/consumer_steps_ru/1",
+          "text_ru": "Лук и морковь мелко нарезать и припустить в небольшом количестве воды со сливочным маслом."
+        },
+        {
+          "position": 4,
+          "source_json_pointer": "/selected/8/consumer_steps_ru/3",
+          "text_ru": "Соединить картофель, зелёный горошек, помидоры, мясо, лук и морковь; добавить соус из подсушенной муки и воды и тушить до готовности."
+        }
+      ],
+      "classification": "NOT_VERIFIED_S1_RAW_DICED_STAGE",
+      "negative_reason": "Fine cutting and poaching together; matching words in cabbage soup do not prove an identical standalone diced-raw stage."
+    },
+    {
+      "publication_file": "data/curation/r3c-post-r3b-catalogue-gate/frozen-batch.json",
+      "publication_git_blob_sha": "c11fd55695c655fee5add14a3416a27527771e75",
+      "recipe_record_json_pointer": "/selected/0",
+      "recipe_code": "SCHOOL2022_54_21M_BOILED_CHICKEN",
+      "source_recipe_id": "ru-school2022:recipe:54-21м",
+      "source_card_code": null,
+      "source_page": 131,
+      "source_locator": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_card_hash_kind": "source_card_canonical_json_sha256",
+      "source_card_sha256": "576eb87d0edb4f95ee6fdae1e6ecbd6efdaa00474c3819d9dfdf2e81ae9ec4b7",
+      "source_process_hash_kind": "source_process_text_sha256",
+      "source_process_sha256": "ebb18982aa55d887c55fbbf460f54b3b9f2ba13b60b6f6ff7201383177b776ea",
+      "onion_ingredient_json_pointer": "/selected/0/ingredients/1",
+      "onion_ingredient_record": {
+        "source_label": "лук репчатый",
+        "gross_g": "3.6",
+        "net_g": "3.2",
+        "food_code": "ONION_BULB_FRESH"
+      },
+      "step_pins": [
+        {
+          "position": 1,
+          "source_json_pointer": "/selected/0/consumer_steps_ru/0",
+          "text_ru": "Подготовить репчатый лук и зелень петрушки: промыть и нашинковать."
+        },
+        {
+          "position": 2,
+          "source_json_pointer": "/selected/0/consumer_steps_ru/1",
+          "text_ru": "Подготовленное куриное филе нарезать кусками, положить в горячую воду и довести до кипения; снять пену, добавить лук, петрушку и йодированную соль и варить под крышкой при слабом кипении до готовности."
+        }
+      ],
+      "classification": "NOT_VERIFIED_S1_RAW_DICED_STAGE",
+      "negative_reason": "Onion is shredded and used in broth, not an explicitly diced freezer-stage output."
+    },
+    {
+      "publication_file": "data/curation/r3c-post-r3b-catalogue-gate/frozen-batch.json",
+      "publication_git_blob_sha": "c11fd55695c655fee5add14a3416a27527771e75",
+      "recipe_record_json_pointer": "/selected/1",
+      "recipe_code": "SCHOOL2022_54_3M_LAZY_CABBAGE_ROLLS",
+      "source_recipe_id": "ru-school2022:recipe:54-3м",
+      "source_card_code": null,
+      "source_page": 116,
+      "source_locator": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_card_hash_kind": "source_card_canonical_json_sha256",
+      "source_card_sha256": "a474209834d4ebc58c6db12694e55b027b214196307213509d35f72b73ccd13f",
+      "source_process_hash_kind": "source_process_text_sha256",
+      "source_process_sha256": "06cbb425d87640f648fc8c8d43adcb325f08552f9ef3ad18fc89f3174d149fd2",
+      "onion_ingredient_json_pointer": "/selected/1/ingredients/3",
+      "onion_ingredient_record": {
+        "source_label": "лук репчатый",
+        "gross_g": "7.5",
+        "net_g": "6",
+        "food_code": "ONION_BULB_FRESH"
+      },
+      "step_pins": [
+        {
+          "position": 2,
+          "source_json_pointer": "/selected/1/consumer_steps_ru/1",
+          "text_ru": "Подготовить и нашинковать лук; бланшировать и пассеровать его в половине общего количества сливочного масла."
+        },
+        {
+          "position": 3,
+          "source_json_pointer": "/selected/1/consumer_steps_ru/2",
+          "text_ru": "Подготовить белокочанную капусту, тонко нашинковать, припустить в подсоленной кипящей воде до полуготовности и слить воду."
+        },
+        {
+          "position": 4,
+          "source_json_pointer": "/selected/1/consumer_steps_ru/3",
+          "text_ru": "Измельчить подготовленную говядину, смешать с рисом, луком и капустой и хорошо вымешать."
+        }
+      ],
+      "classification": "NOT_VERIFIED_S1_RAW_DICED_STAGE",
+      "negative_reason": "Onion is shredded, blanched and sautéed; cooked form differs from unheated diced onion."
+    },
+    {
+      "publication_file": "data/curation/r3c-post-r3b-catalogue-gate/frozen-batch.json",
+      "publication_git_blob_sha": "c11fd55695c655fee5add14a3416a27527771e75",
+      "recipe_record_json_pointer": "/selected/3",
+      "recipe_code": "SCHOOL2022_54_1M_BOILED_BEEF_STROGANOFF",
+      "source_recipe_id": "ru-school2022:recipe:54-1м",
+      "source_card_code": null,
+      "source_page": 114,
+      "source_locator": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_card_hash_kind": "source_card_canonical_json_sha256",
+      "source_card_sha256": "ec8b76061f704ef6bf20a7a978b121804621b1814f4bd84c063f55bc27f152ff",
+      "source_process_hash_kind": "source_process_text_sha256",
+      "source_process_sha256": "2621432edb03768e4f50ce99d67d3bd400fa7580e6c5ca4c195c12f156c0eb3d",
+      "onion_ingredient_json_pointer": "/selected/3/ingredients/2",
+      "onion_ingredient_record": {
+        "source_label": "лук репчатый",
+        "gross_g": "2",
+        "net_g": "1.6",
+        "food_code": "ONION_BULB_FRESH"
+      },
+      "step_pins": [
+        {
+          "position": 1,
+          "source_json_pointer": "/selected/3/consumer_steps_ru/0",
+          "text_ru": "Подготовить морковь и корень петрушки, отварить и протереть; лук подготовить, нашинковать, бланшировать и пассеровать."
+        },
+        {
+          "position": 5,
+          "source_json_pointer": "/selected/3/consumer_steps_ru/4",
+          "text_ru": "Соединить мясо, протёртые овощи и пассерованный лук со сметанным соусом, добавить йодированную соль в пределах общего количества рецептуры и тушить 5–10 минут."
+        }
+      ],
+      "classification": "NOT_VERIFIED_S1_RAW_DICED_STAGE",
+      "negative_reason": "Onion is shredded, blanched and sautéed; cooked form differs from unheated diced onion."
+    },
+    {
+      "publication_file": "data/curation/r3c-post-r3b-catalogue-gate/frozen-batch.json",
+      "publication_git_blob_sha": "c11fd55695c655fee5add14a3416a27527771e75",
+      "recipe_record_json_pointer": "/selected/5",
+      "recipe_code": "SCHOOL2022_54_20M_BOILED_BEEF",
+      "source_recipe_id": "ru-school2022:recipe:54-20м",
+      "source_card_code": null,
+      "source_page": 130,
+      "source_locator": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_card_hash_kind": "source_card_canonical_json_sha256",
+      "source_card_sha256": "e4b7a3846b342992148a4d93ad717ebf9e4a509d205f939ba2951d343f04b2d2",
+      "source_process_hash_kind": "source_process_text_sha256",
+      "source_process_sha256": "75c5ef24ac0577dd951d5a0814d331b589662222db42812644452ad0a94805b5",
+      "onion_ingredient_json_pointer": "/selected/5/ingredients/1",
+      "onion_ingredient_record": {
+        "source_label": "лук репчатый",
+        "gross_g": "3.6",
+        "net_g": "3.2",
+        "food_code": "ONION_BULB_FRESH"
+      },
+      "step_pins": [
+        {
+          "position": 1,
+          "source_json_pointer": "/selected/5/consumer_steps_ru/0",
+          "text_ru": "Подготовить морковь и репчатый лук."
+        },
+        {
+          "position": 2,
+          "source_json_pointer": "/selected/5/consumer_steps_ru/1",
+          "text_ru": "Подготовленную говядину нарезать кусками, положить в горячую воду и варить при слабом кипении; добавить лук и морковь."
+        }
+      ],
+      "classification": "NOT_VERIFIED_S1_RAW_DICED_STAGE",
+      "negative_reason": "Onion is only prepared; the source does not pin a raw diced form."
+    },
+    {
+      "publication_file": "data/curation/r3c-post-r3b-catalogue-gate/frozen-batch.json",
+      "publication_git_blob_sha": "c11fd55695c655fee5add14a3416a27527771e75",
+      "recipe_record_json_pointer": "/selected/6",
+      "recipe_code": "SCHOOL2022_54_15R_SALMON_IN_MILK",
+      "source_recipe_id": "ru-school2022:recipe:54-15р",
+      "source_card_code": null,
+      "source_page": 110,
+      "source_locator": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_card_hash_kind": "source_card_canonical_json_sha256",
+      "source_card_sha256": "8aecc6f4b811213b114ddaf321f2cae4a0c13d8ac9eca0b29a8efd6b45aa5590",
+      "source_process_hash_kind": "source_process_text_sha256",
+      "source_process_sha256": "3e5a6d6e13721dc014a01d88d6c78c2a77575b509c92825dddea28a972a7aff1",
+      "onion_ingredient_json_pointer": "/selected/6/ingredients/2",
+      "onion_ingredient_record": {
+        "source_label": "лук репчатый",
+        "gross_g": "20",
+        "net_g": "16",
+        "food_code": "ONION_BULB_FRESH"
+      },
+      "step_pins": [
+        {
+          "position": 1,
+          "source_json_pointer": "/selected/6/consumer_steps_ru/0",
+          "text_ru": "Подготовить репчатый лук, нашинковать и бланшировать."
+        },
+        {
+          "position": 2,
+          "source_json_pointer": "/selected/6/consumer_steps_ru/1",
+          "text_ru": "Подготовленное филе сёмги нарезать порционными кусками и уложить на бланшированный лук в форму, смазанную подсолнечным маслом."
+        }
+      ],
+      "classification": "NOT_VERIFIED_S1_RAW_DICED_STAGE",
+      "negative_reason": "Onion is shredded and blanched; not a raw diced output."
+    },
+    {
+      "publication_file": "data/curation/r3c-post-r3b-catalogue-gate/frozen-batch.json",
+      "publication_git_blob_sha": "c11fd55695c655fee5add14a3416a27527771e75",
+      "recipe_record_json_pointer": "/selected/7",
+      "recipe_code": "SCHOOL2022_54_17R_SALMON_TOMATO_VEGETABLES",
+      "source_recipe_id": "ru-school2022:recipe:54-17р",
+      "source_card_code": null,
+      "source_page": 111,
+      "source_locator": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_card_hash_kind": "source_card_canonical_json_sha256",
+      "source_card_sha256": "72bceb85840fd2052941f434096bce1846998802603bcdb03be13b689c686de0",
+      "source_process_hash_kind": "source_process_text_sha256",
+      "source_process_sha256": "93865a179d77c25a0f43cd23c2953ed74c4afb2189bbcfc069d5b5c3620bec21",
+      "onion_ingredient_json_pointer": "/selected/7/ingredients/2",
+      "onion_ingredient_record": {
+        "source_label": "лук репчатый",
+        "gross_g": "12.2",
+        "net_g": "9.8",
+        "food_code": "ONION_BULB_FRESH"
+      },
+      "step_pins": [
+        {
+          "position": 1,
+          "source_json_pointer": "/selected/7/consumer_steps_ru/0",
+          "text_ru": "Подготовить корень петрушки, морковь и репчатый лук; лук бланшировать, затем пассеровать вместе с морковью и петрушкой и добавить томатное пюре."
+        },
+        {
+          "position": 3,
+          "source_json_pointer": "/selected/7/consumer_steps_ru/2",
+          "text_ru": "Выложить на рыбу пассерованные овощи, добавить воду, сахар и йодированную соль."
+        }
+      ],
+      "classification": "NOT_VERIFIED_S1_RAW_DICED_STAGE",
+      "negative_reason": "Onion is blanched and sautéed, and its pre-blanch cut is not independently pinned."
+    },
+    {
+      "publication_file": "data/curation/r2b-fish-main-diversity/publication-specs.json",
+      "publication_git_blob_sha": "b4ad353c4c9e955b64fb8b155cc98a1530aeb3a8",
+      "recipe_record_json_pointer": "/recipes/SCHOOL2022_54_6R_PINK_SALMON_IN_MILK",
+      "recipe_code": "SCHOOL2022_54_6R_PINK_SALMON_IN_MILK",
+      "source_recipe_id": "ru-school2022:recipe:54-6р",
+      "source_card_code": null,
+      "source_page": null,
+      "source_locator": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_card_hash_kind": "exact_source_card_sha256",
+      "source_card_sha256": "507b25f2bb485cb9e151773b06feb82b948df46c1cb2be53298ad41c50ce95ab",
+      "source_process_hash_kind": "exact_source_process_sha256",
+      "source_process_sha256": "e34e093f616c37cf6f3eb8c9b04c891a1fa299d12a9bbaf851427f7bcec2a6f2",
+      "onion_ingredient_json_pointer": "/recipes/SCHOOL2022_54_6R_PINK_SALMON_IN_MILK/trusted_recipe_seed/version/ingredients/2",
+      "onion_ingredient_record": {
+        "food_ingredient_code": "ONION_BULB_FRESH",
+        "quantity": "16",
+        "unit": "g",
+        "source_amount_text": "лук репчатый: брутто 20 г; нетто 16 г",
+        "normalization_note": "exact School2022 net amount; accepted fresh bulb-onion identity",
+        "prep_note": null,
+        "optional": false
+      },
+      "step_pins": [
+        {
+          "position": 1,
+          "source_json_pointer": "/recipes/SCHOOL2022_54_6R_PINK_SALMON_IN_MILK/trusted_recipe_seed/version/steps/0",
+          "text_ru": "Репчатый лук подготовить, нашинковать и бланшировать."
+        },
+        {
+          "position": 3,
+          "source_json_pointer": "/recipes/SCHOOL2022_54_6R_PINK_SALMON_IN_MILK/trusted_recipe_seed/version/steps/2",
+          "text_ru": "Смазать форму подсолнечным маслом, выложить бланшированный лук и сверху рыбу."
+        }
+      ],
+      "classification": "NOT_VERIFIED_S1_RAW_DICED_STAGE",
+      "negative_reason": "Onion is shredded and blanched; not a raw diced output."
+    },
+    {
+      "publication_file": "data/curation/r2b-fish-main-diversity/publication-specs.json",
+      "publication_git_blob_sha": "b4ad353c4c9e955b64fb8b155cc98a1530aeb3a8",
+      "recipe_record_json_pointer": "/recipes/SCHOOL2022_54_7R_POLLOCK_IN_MILK",
+      "recipe_code": "SCHOOL2022_54_7R_POLLOCK_IN_MILK",
+      "source_recipe_id": "ru-school2022:recipe:54-7р",
+      "source_card_code": null,
+      "source_page": null,
+      "source_locator": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_card_hash_kind": "exact_source_card_sha256",
+      "source_card_sha256": "79d9d346f7dc7cb798899c6ea00b8217cf143a8947c8b97152350d035d158d76",
+      "source_process_hash_kind": "exact_source_process_sha256",
+      "source_process_sha256": "4bf8f08e2ee5a6212e3b38b27981d373ae8bce66157e2f2ab7295d405a7e71a0",
+      "onion_ingredient_json_pointer": "/recipes/SCHOOL2022_54_7R_POLLOCK_IN_MILK/trusted_recipe_seed/version/ingredients/2",
+      "onion_ingredient_record": {
+        "food_ingredient_code": "ONION_BULB_FRESH",
+        "quantity": "16",
+        "unit": "g",
+        "source_amount_text": "лук репчатый: брутто 20 г; нетто 16 г",
+        "normalization_note": "exact School2022 net amount; accepted fresh bulb-onion identity",
+        "prep_note": null,
+        "optional": false
+      },
+      "step_pins": [
+        {
+          "position": 1,
+          "source_json_pointer": "/recipes/SCHOOL2022_54_7R_POLLOCK_IN_MILK/trusted_recipe_seed/version/steps/0",
+          "text_ru": "Репчатый лук подготовить, нашинковать и бланшировать."
+        },
+        {
+          "position": 3,
+          "source_json_pointer": "/recipes/SCHOOL2022_54_7R_POLLOCK_IN_MILK/trusted_recipe_seed/version/steps/2",
+          "text_ru": "Смазать форму подсолнечным маслом, выложить бланшированный лук и сверху рыбу."
+        }
+      ],
+      "classification": "NOT_VERIFIED_S1_RAW_DICED_STAGE",
+      "negative_reason": "Onion is shredded and blanched; not a raw diced output."
+    }
+  ],
+  "registry_limitation": "Complete for onion-ingredient rows in these three source publication records only; not a full live DB/MealPlan/RecipeVersion census. R3-C uses source card canonical JSON and process-text hashes; R3-D uses raw source card hashes; R2-B uses exact source card/process hashes. They are different hash objects and must not be conflated.",
+  "no_verified_s1_pair_reason": "No two exact published raw 1/4-inch diced-onion output stages bound to two version-pinned actual MealEvents, with independently approved state/hold/safety and B<A physical-operation proof. Repeated fine-cut words do not satisfy this."
+}

@@ -1,3 +1,11 @@
+# PR10-S1-PAIR — documentation handoff — 2026-10-11
+
+**Accepted main:** `35d0787709d175fd11b8dece044854aa2a0b56f9`, #215 merged. Issue #216, `research/pr10-s1-onion-pair-gate`. Read [S1 review](../docs/family-food/pr10-s1-pair-review.md), [evidence](../docs/family-food/pr10-s1-pair-evidence.json), approved D1-D3 and PR10-ARCH.
+
+Result: `NO_GO_NO_VERIFIED_TWO_RECIPE_DICED_RAW_ONION_STAGE`. Bounded manifest review did not prove same source-backed unheated diced intermediate output for two published recipe versions; NCHFP process guidance not an approved RecipeVersion pair. Stop recurring word-matching. Future specific curated recipe source/rights publication scope needs separate decision/review. PR10-META BLOCKED and PR10 runtime/PDF/Gate2 unauthorized. No autonomous merge.
+
+---
+
 # PR10-SOURCE-SHORTLIST — docs/evidence handoff — 2026-10-11
 
 **Base:** `main@1b928b6583688e73f5933e702a30ebf6ffb12824` (#214 merged). Issue #213, branch `research/pr10-source-shortlist`. Read [review](../docs/family-food/pr10-source-shortlist.md), [approved decisions](../docs/family-food/pr10-data-recovery-approved-decisions-2026-10-11.md), PR10-ARCH and root/scoped AGENTS.

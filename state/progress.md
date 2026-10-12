@@ -1,3 +1,11 @@
+# PR10-S1-PAIR — bounded negative evidence — 2026-10-11
+
+- Confirmed #215 merged `main@35d0787709d175fd11b8dece044854aa2a0b56f9`; Issue #216 compared published R3-D/R3-C/R2-B process evidence with external NCHFP raw diced-onion guide.
+- Some recipe steps finely cut, shred, poach, sauté or blanch onion, but a common exact unheated diced output stage across two verified RecipeVersions has not been established. [Report](../docs/family-food/pr10-s1-pair-review.md), [receipt](../docs/family-food/pr10-s1-pair-evidence.json): NO-GO. Not a full live-DB census.
+- No changed fixtures or production stage publication; PR10-META remains BLOCKED. Next: separate approved bounded source/rights curation direction, not another similarity sweep.
+
+---
+
 # PR10-SOURCE-SHORTLIST — source-family scouting — 2026-10-11
 
 - Confirmed PR #214 merged `main@1b928b6583688e73f5933e702a30ebf6ffb12824`; D1/D2/D3 are repository-recorded decisions.
