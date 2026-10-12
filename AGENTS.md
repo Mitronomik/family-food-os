@@ -57,6 +57,15 @@ leaving the generalized ingestion platform later. The detailed
 [Git/PR reference](docs/family-food/agent-git-pr-workflow.md) is for unusual
 workflow questions and human review, not mandatory reading for every task.
 
+For PR10 Prep/Freezer, confirmed cooked-dish batches, storage and the Gate 2
+value decision, also read the later owner-directed
+[Finished-Dish-First amendment](docs/family-food/pr10-finished-dish-first-amendment-2026-10-12.md)
+with PR10-ARCH. It distinguishes planned PrepPlan from confirmed prepared-food
+stock and explicitly identifies which earlier PR10 exit terms are superseded
+**only when the docs-only amendment is independently reviewed and merged**.
+Do not invent safe hold/freezer/reheat authority or start runtime merely because
+the product direction is approved.
+
 For product/Planner/MealPlan/Serving work that touches meal frequency, member
 schedules, household reconciliation, meal source or replan, also read:
 
