@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
+from decimal import Decimal
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -51,6 +52,10 @@ def test_persisted_research_plan_and_one_recipe_two_events(receipt: dict) -> Non
     assert {
         event["recipe_version_id"] for event in receipt["candidate_pair"]
     } == {receipt["recipe"]["recipe_version_id"]}
+    assert {
+        row["servings"][0]["portion_servings"]
+        for row in receipt["candidate_pair"]
+    } == {"2.000000", "2.500000"}
     assert receipt["planned_cook_sessions_baseline"] == 2
     assert receipt["planned_cook_sessions_candidate"] == 1
     assert receipt["minutes_or_net_actions_saved"] == "NOT_PROVEN"
@@ -102,6 +107,9 @@ def test_persisted_research_plan_and_one_recipe_two_events(receipt: dict) -> Non
             per_event_sum_quantity="999"
         ),
         lambda r: r["recipe"].update(steps=[]),
+        lambda r: r["recipe"]["steps"][0].update(
+            instruction_sha256="a" * 64
+        ),
     ],
 )
 def test_forgery_and_unsupported_policy_fail_closed(receipt: dict, alter) -> None:
@@ -123,8 +131,7 @@ def test_research_quantities_reconcile_exact_decimal(receipt: dict) -> None:
     quantities = receipt["combined_ingredient_demand"]
     assert len(quantities) == 7
     for ingredient in quantities:
-        assert (
-            ingredient["planned_combined_quantity"]
-            == ingredient["per_event_sum_quantity"]
+        assert Decimal(ingredient["planned_combined_quantity"]) == Decimal(
+            ingredient["per_event_sum_quantity"]
         )
         assert ingredient["unit"] == "g"
