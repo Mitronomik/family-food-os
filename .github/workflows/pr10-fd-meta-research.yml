@@ -54,6 +54,7 @@ jobs:
       - name: Focused Ruff check and format
         run: |
           python -m ruff check scripts/audit_pr10_fd_meta_goulash.py backend/app/tests/test_pr10_fd_meta_goulash.py
+          python -m ruff format --diff scripts/audit_pr10_fd_meta_goulash.py backend/app/tests/test_pr10_fd_meta_goulash.py
           python -m ruff format --check scripts/audit_pr10_fd_meta_goulash.py backend/app/tests/test_pr10_fd_meta_goulash.py
       - name: PR whitespace check
         env:
