@@ -21,7 +21,6 @@ from app.domain.food_recipes import (
     VerificationStatus,
     scale_recipe,
 )
-from app.domain.meal_plans import MealSourceKind
 from app.domain.planner import PlannerSuccess
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.seed.dc4_a3_russian_step_corrections import (
