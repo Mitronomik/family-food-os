@@ -50,9 +50,9 @@ RESEARCH_EVENT_INDICES = frozenset({0, 3})
 
 def _sha(value: object) -> str:
     return hashlib.sha256(
-        json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode(
-            "utf-8"
-        )
+        json.dumps(
+            value, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+        ).encode("utf-8")
     ).hexdigest()
 
 
@@ -182,7 +182,10 @@ def validate_research_receipt(
         raise ValueError("Candidate pair disagrees on combined servings")
 
     quantities = receipt["combined_ingredient_demand"]
-    if len(quantities) != 7 or len({x["recipe_ingredient_id"] for x in quantities}) != 7:
+    if (
+        len(quantities) != 7
+        or len({x["recipe_ingredient_id"] for x in quantities}) != 7
+    ):
         raise ValueError("Ingredient source rows missing")
     base = _finite_decimal(receipt["recipe"]["base_servings"])
     for ingredient in quantities:
@@ -213,7 +216,9 @@ def _intended_event(
         if len(exact) != 1:
             raise ValueError("This bounded proof supports one synthetic member")
         exact[next(iter(exact))] = fixed_research_servings
-    recipe_id = target_version_id if target_version_id is not None else event.recipe_version_id
+    recipe_id = (
+        target_version_id if target_version_id is not None else event.recipe_version_id
+    )
     draft = MealEventDraft(
         local_date=event.local_date,
         position=event.position,
@@ -262,7 +267,11 @@ def build_research_receipt(config: DatabaseConfig) -> dict[str, Any]:
             raise ValueError("Baseline Planner failed in isolated research database")
 
         recipe = next(
-            (x for x in recipes.list_all() if x.canonical_code == GOULASH_CODE and x.is_active),
+            (
+                x
+                for x in recipes.list_all()
+                if x.canonical_code == GOULASH_CODE and x.is_active
+            ),
             None,
         )
         if recipe is None:
@@ -299,7 +308,9 @@ def build_research_receipt(config: DatabaseConfig) -> dict[str, Any]:
             draft, semantic = _intended_event(
                 event,
                 baseline_servings[event.id],
-                target_version_id=version.id if index in RESEARCH_EVENT_INDICES else None,
+                target_version_id=version.id
+                if index in RESEARCH_EVENT_INDICES
+                else None,
                 fixed_research_servings=fixed_portions.get(index),
             )
             drafts.append(draft)
@@ -426,7 +437,9 @@ def build_research_receipt(config: DatabaseConfig) -> dict[str, Any]:
                 "source_card_sha256": source["exact_source_card_sha256"],
                 "rights_review_status": version.rights_review_status.value,
                 "verification_status": version.verification_status.value,
-                "source_output_g": str(version.source_output_g) if version.source_output_g else None,
+                "source_output_g": str(version.source_output_g)
+                if version.source_output_g
+                else None,
                 "freezable": version.freezable,
                 "batch_friendly": version.batch_friendly,
                 "storage_days_fridge": version.storage_days_fridge,
@@ -439,14 +452,16 @@ def build_research_receipt(config: DatabaseConfig) -> dict[str, Any]:
                     }
                     for step in current.steps
                 ],
-                "process_sha256": _sha([
-                    {
-                        "recipe_step_id": str(step.id),
-                        "position": step.position,
-                        "instruction_sha256": _sha(step.instruction),
-                    }
-                    for step in current.steps
-                ]),
+                "process_sha256": _sha(
+                    [
+                        {
+                            "recipe_step_id": str(step.id),
+                            "position": step.position,
+                            "instruction_sha256": _sha(step.instruction),
+                        }
+                        for step in current.steps
+                    ]
+                ),
             },
             "candidate_pair": pair,
             "combined_ingredient_demand": demand,
@@ -479,7 +494,9 @@ def main() -> int:
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     with tempfile.TemporaryDirectory(prefix="pr10-fd-meta-") as tmp:
-        receipt = build_research_receipt(DatabaseConfig(path=Path(tmp) / "research.sqlite"))
+        receipt = build_research_receipt(
+            DatabaseConfig(path=Path(tmp) / "research.sqlite")
+        )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     encoded = (
         json.dumps(receipt, ensure_ascii=False, sort_keys=True, indent=2) + "\n"
