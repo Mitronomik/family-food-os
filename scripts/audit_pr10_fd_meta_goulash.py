@@ -198,12 +198,22 @@ def validate_research_receipt(
         for step in receipt["recipe"]["steps"]
     ):
         raise ValueError("Immutable recipe step references missing")
+    if _sha(receipt["recipe"]["steps"]) != receipt["recipe"]["process_sha256"]:
+        raise ValueError("Immutable process hash differs from pinned steps")
 
 
 def _intended_event(
-    event: Any, servings: list[Any], *, target_version_id: Any
+    event: Any,
+    servings: list[Any],
+    *,
+    target_version_id: Any,
+    fixed_research_servings: Decimal | None = None,
 ) -> tuple[MealEventDraft, dict[str, Any]]:
     exact = {row.member_id: row.portion_servings for row in servings}
+    if fixed_research_servings is not None:
+        if len(exact) != 1:
+            raise ValueError("This bounded proof supports one synthetic member")
+        exact[next(iter(exact))] = fixed_research_servings
     recipe_id = target_version_id if target_version_id is not None else event.recipe_version_id
     draft = MealEventDraft(
         local_date=event.local_date,
@@ -282,11 +292,16 @@ def build_research_receipt(config: DatabaseConfig) -> dict[str, Any]:
         if len(originals) != 7:
             raise ValueError("Expected validated one-member seven-event baseline")
         drafts, intended = [], []
+        # Fixed fractional Decimal portions avoid conflating per-event quantized
+        # rounding residuals with double-counting in this one bounded proof.
+        # These are explicit synthetic manual-plan inputs, NOT Planner predictions.
+        fixed_portions = {0: Decimal("2.000000"), 3: Decimal("2.500000")}
         for index, event in enumerate(originals):
             draft, semantic = _intended_event(
                 event,
                 baseline_servings[event.id],
                 target_version_id=version.id if index in RESEARCH_EVENT_INDICES else None,
+                fixed_research_servings=fixed_portions.get(index),
             )
             drafts.append(draft)
             intended.append(semantic)
@@ -425,6 +440,14 @@ def build_research_receipt(config: DatabaseConfig) -> dict[str, Any]:
                     }
                     for step in current.steps
                 ],
+                "process_sha256": _sha([
+                    {
+                        "recipe_step_id": str(step.id),
+                        "position": step.position,
+                        "instruction_sha256": _sha(step.instruction),
+                    }
+                    for step in current.steps
+                ]),
             },
             "candidate_pair": pair,
             "combined_ingredient_demand": demand,
