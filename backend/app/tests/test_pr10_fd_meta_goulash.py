@@ -21,9 +21,7 @@ from scripts.audit_pr10_fd_meta_goulash import (
 def receipt() -> dict:
     """Never access a user database or production environment."""
     with TemporaryDirectory(prefix="pr10-fd-meta-test-") as tmp:
-        yield build_research_receipt(
-            DatabaseConfig(path=Path(tmp) / "research.sqlite")
-        )
+        yield build_research_receipt(DatabaseConfig(path=Path(tmp) / "research.sqlite"))
 
 
 def _validate(receipt: dict) -> None:
@@ -45,15 +43,12 @@ def test_persisted_research_plan_and_one_recipe_two_events(receipt: dict) -> Non
     assert receipt["research_plan"]["revision_number"] == 2
     assert len(receipt["research_plan"]["events"]) == 7
     assert len(receipt["candidate_pair"]) == 2
-    assert len({
-        event["event_id"] for event in receipt["candidate_pair"]
-    }) == 2
+    assert len({event["event_id"] for event in receipt["candidate_pair"]}) == 2
+    assert {event["recipe_version_id"] for event in receipt["candidate_pair"]} == {
+        receipt["recipe"]["recipe_version_id"]
+    }
     assert {
-        event["recipe_version_id"] for event in receipt["candidate_pair"]
-    } == {receipt["recipe"]["recipe_version_id"]}
-    assert {
-        row["servings"][0]["portion_servings"]
-        for row in receipt["candidate_pair"]
+        row["servings"][0]["portion_servings"] for row in receipt["candidate_pair"]
     } == {"2.000000", "2.500000"}
     assert receipt["planned_cook_sessions_baseline"] == 2
     assert receipt["planned_cook_sessions_candidate"] == 1
@@ -75,15 +70,11 @@ def test_persisted_research_plan_and_one_recipe_two_events(receipt: dict) -> Non
         ),
         lambda r: r["candidate_pair"][0].update(combined_servings="999"),
         lambda r: r["candidate_pair"][1].update(recipe_version_id="forged"),
-        lambda r: r["candidate_pair"][0]["servings"][0].update(
-            portion_servings="NaN"
-        ),
+        lambda r: r["candidate_pair"][0]["servings"][0].update(portion_servings="NaN"),
         lambda r: r["candidate_pair"][0]["servings"][0].update(
             portion_servings="Infinity"
         ),
-        lambda r: r["research_plan"]["events"][0].update(
-            recipe_version_id="wrong"
-        ),
+        lambda r: r["research_plan"]["events"][0].update(recipe_version_id="wrong"),
         lambda r: r["research_plan"]["events"][0].update(role="BREAKFAST"),
         lambda r: r["research_plan"]["events"][0]["servings"][0].update(
             member_id="foreign-member"
@@ -91,12 +82,8 @@ def test_persisted_research_plan_and_one_recipe_two_events(receipt: dict) -> Non
         lambda r: r["research_plan"]["events"][0].update(
             event_id=r["research_plan"]["events"][1]["event_id"]
         ),
-        lambda r: r["research_plan"]["events"][0].update(
-            local_date="2026-09-20"
-        ),
-        lambda r: r["recipe"].update(
-            source_document_sha256="a" * 64
-        ),
+        lambda r: r["research_plan"]["events"][0].update(local_date="2026-09-20"),
+        lambda r: r["recipe"].update(source_document_sha256="a" * 64),
         lambda r: r["recipe"].update(verification_status="UNVERIFIED"),
         lambda r: r["recipe"].update(rights_review_status="UNKNOWN"),
         lambda r: r["combined_ingredient_demand"][0].update(
@@ -106,9 +93,7 @@ def test_persisted_research_plan_and_one_recipe_two_events(receipt: dict) -> Non
             per_event_sum_quantity="999"
         ),
         lambda r: r["recipe"].update(steps=[]),
-        lambda r: r["recipe"]["steps"][0].update(
-            instruction_sha256="a" * 64
-        ),
+        lambda r: r["recipe"]["steps"][0].update(instruction_sha256="a" * 64),
     ],
 )
 def test_forgery_and_unsupported_policy_fail_closed(receipt: dict, alter) -> None:
