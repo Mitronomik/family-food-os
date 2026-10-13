@@ -1,3 +1,11 @@
+# PR10-FD-META — finished goulash source + two-event research handoff — 2026-10-13
+
+`main@89b13a61fbfb8bb6246b7fb39ad8b3a1a3acf352` (#222 merged). Issue #223 / `research/pr10-fd-meta-goulash`. Read [FD-ARCH](../docs/family-food/pr10-finished-dish-first-amendment-2026-10-12.md), [source review](../docs/family-food/pr10-fd-meta-goulash-source-review.md), [source evidence](../docs/family-food/pr10-fd-meta-goulash-source-evidence.json). Target = already source-verified `SCHOOL2022_54_2M_BEEF_GOULASH`, not a new catalogue import.
+Research-only `scripts/audit_pr10_fd_meta_goulash.py` uses accepted temporary SQLite seed and `MealPlanService.create_plan_revision` to pin two different MealEvents to the same current RecipeVersion while preserving 7-day schedule, exact Decimal Servings and source step hashes; focused tamper tests / workflow must pass. External US stew/leftover and regional RU category advice is **unapproved research only**; no cooking/freezing/source rights assumptions promoted. **FD-META=BLOCKED, TIME_UNRESOLVED**, D2 fixture untouched and D3 reader/PR10 runtime unauthorized.
+Next after review: explicit owner/data-policy decision resolving source-specific batch capacity, cooling/storage/thaw/reheat, jurisdiction and time authority, not another arbitrary scan. Do not merge autonomously.
+
+---
+
 # PR10-FD-ARCH — source-safe cooked-dish-first amendment handoff — 2026-10-12
 
 Main `09e9f3fd670aa40e1f0efdfb9d1173538503640c`; #219 merged. Issue #221; proposed docs-only [Finished-Dish-First amendment](../docs/family-food/pr10-finished-dish-first-amendment-2026-10-12.md). Read root/scoped AGENTS, [PR10-ARCH](../docs/family-food/pr10-prep-freezer-implementation-contract.md), [roadmap](../docs/family-food/master-roadmap.md), approved [D1-D3](../docs/family-food/pr10-data-recovery-approved-decisions-2026-10-11.md) and new amendment. Product direction approved; detailed release/contract changes not accepted until independent review + merge.
