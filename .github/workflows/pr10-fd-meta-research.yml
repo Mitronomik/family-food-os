@@ -1,0 +1,67 @@
+name: PR10-FD-META cooked-dish research proof
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/audit_pr10_fd_meta_goulash.py'
+      - 'backend/app/tests/test_pr10_fd_meta_goulash.py'
+      - 'docs/family-food/pr10-fd-meta-goulash-*'
+      - '.github/workflows/pr10-fd-meta-research.yml'
+      - 'state/current-focus.md'
+      - 'state/progress.md'
+      - 'state/handoff.md'
+
+permissions:
+  contents: read
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      AI_ENABLED: 'false'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install backend tests and lint tools
+        run: python -m pip install -e './backend[test]' 'ruff==0.16.10'
+      - name: Test research-only full-week MealPlan and adversarial receipt
+        run: python -m pytest -q backend/app/tests/test_pr10_fd_meta_goulash.py --tb=short
+      - name: Capture isolated persisted research receipt
+        run: |
+          python -m scripts.audit_pr10_fd_meta_goulash --output /tmp/pr10-fd-meta-goulash-receipt.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          from scripts.audit_pr10_fd_meta_goulash import validate_research_receipt
+
+          p = Path("/tmp/pr10-fd-meta-goulash-receipt.json")
+          receipt = json.loads(p.read_text(encoding="utf-8"))
+          assert receipt["scope"] == "ISOLATED_SYNTHETIC_MEALPLAN_ONLY"
+          assert receipt["gate_decision"] == "BLOCKED"
+          assert receipt["safety"]["time_authority"] == "TIME_UNRESOLVED"
+          assert len(receipt["candidate_pair"]) == 2
+          validate_research_receipt(
+              receipt, trusted_semantic_sha256=receipt["expected_semantic_sha256"]
+          )
+          PY
+          sha256sum /tmp/pr10-fd-meta-goulash-receipt.json
+      - name: Focused Ruff check and format
+        run: |
+          python -m ruff check scripts/audit_pr10_fd_meta_goulash.py backend/app/tests/test_pr10_fd_meta_goulash.py
+          python -m ruff format --check scripts/audit_pr10_fd_meta_goulash.py backend/app/tests/test_pr10_fd_meta_goulash.py
+      - name: PR whitespace check
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: git diff --check "$BASE_SHA"...HEAD
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pr10-fd-meta-goulash-synthetic-receipt
+          path: /tmp/pr10-fd-meta-goulash-receipt.json
+          if-no-files-found: error
+          retention-days: 30
