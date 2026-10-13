@@ -18,6 +18,15 @@
 > and recipe corpus is now built before Gate1-CLOSE, while the generalized Data
 > Ingestion Platform remains later.
 
+> **Later owner-directed PR10 amendment — 2026-10-12:**
+> [Finished-Dish-First PR10 / Gate 2 contract](pr10-finished-dish-first-amendment-2026-10-12.md)
+> is to be read with this roadmap after independent review and merge. It makes
+> safely stored **fully cooked meal batches** the first Prep proof; repeated raw
+> ingredient operations are later optimization, not the initial data-search gate.
+> The amendment explicitly states proposed acceptance changes, confirmed-food
+> execution scope and preservation of D2/D3. Historical PR10 text below remains
+> useful context but does not silently override that later accepted amendment.
+
 ## 1. Authority
 
 This document is the repository-local source of truth for FamilyFoodOS product
