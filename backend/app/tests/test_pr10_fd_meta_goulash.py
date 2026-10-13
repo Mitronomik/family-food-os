@@ -10,7 +10,6 @@ from tempfile import TemporaryDirectory
 import pytest
 
 from app.db.config import DatabaseConfig
-
 from scripts.audit_pr10_fd_meta_goulash import (
     GOULASH_CODE,
     build_research_receipt,
