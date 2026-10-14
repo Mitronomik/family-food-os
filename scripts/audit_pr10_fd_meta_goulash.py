@@ -79,7 +79,6 @@ SOURCE_INGREDIENT_KEYS = (
 )
 
 
-
 def _sha(value: object) -> str:
     return hashlib.sha256(
         json.dumps(
@@ -128,7 +127,9 @@ def _semantic_rows(events: list[dict[str, Any]]) -> list[dict[str, Any]]:
     )
 
 
-def _source_pins(recipe: dict[str, Any], ingredients: list[dict[str, Any]]) -> dict[str, Any]:
+def _source_pins(
+    recipe: dict[str, Any], ingredients: list[dict[str, Any]]
+) -> dict[str, Any]:
     """Canonical allowlist: do not accept untrusted extra source fields."""
     return {
         "recipe": {key: recipe[key] for key in SOURCE_RECIPE_KEYS},
@@ -193,8 +194,7 @@ def _trusted_source_pins(
             food_row is None
             or food_row.canonical_code != frozen_row["food_ingredient_code"]
             or actual.unit.value != frozen_row["unit"]
-            or actual.quantity
-            != _finite_decimal(frozen_row["quantity"])
+            or actual.quantity != _finite_decimal(frozen_row["quantity"])
         ):
             raise ValueError("Source ingredient identity/unit/quantity mismatch")
         ingredient_rows.append(
@@ -233,7 +233,9 @@ def _trusted_source_pins(
         "rights_review_status": source["rights_review_status"],
         "verification_status": "SOURCE_VERIFIED",
         "source_output_g": (
-            str(version.source_output_g) if version.source_output_g is not None else None
+            str(version.source_output_g)
+            if version.source_output_g is not None
+            else None
         ),
         "batch_friendly": version.batch_friendly,
         "freezable": version.freezable,
@@ -365,14 +367,10 @@ def validate_research_receipt(
         or receipt["minutes_or_net_actions_saved"] != "NOT_PROVEN"
     ):
         raise ValueError("Cook-session claim not supported by two event contributions")
-    if (
-        {row["local_date"] for row in pair}
-        != {
-            WEEK_START.isoformat(),
-            (WEEK_START + timedelta(days=3)).isoformat(),
-        }
-        or sum(row["recipe_version_id"] == version for row in events) != 2
-    ):
+    if {row["local_date"] for row in pair} != {
+        WEEK_START.isoformat(),
+        (WEEK_START + timedelta(days=3)).isoformat(),
+    } or sum(row["recipe_version_id"] == version for row in events) != 2:
         raise ValueError("Research pair event schedule or count changed")
 
 
@@ -438,7 +436,9 @@ def build_research_receipt() -> tuple[dict[str, Any], str, str]:
             )
             plan_result, baseline = planner.generate_authoritative(generation)
             if not isinstance(plan_result, PlannerSuccess) or baseline is None:
-                raise ValueError("Baseline Planner failed in isolated research database")
+                raise ValueError(
+                    "Baseline Planner failed in isolated research database"
+                )
 
             recipe = next(
                 (
@@ -458,7 +458,12 @@ def build_research_receipt() -> tuple[dict[str, Any], str, str]:
             ):
                 raise ValueError("Source/rights gate not met")
             manifest_bytes = SOURCE_MANIFEST.read_bytes()
-            git_blob_bytes = b"blob " + str(len(manifest_bytes)).encode("ascii") + b"\x00" + manifest_bytes
+            git_blob_bytes = (
+                b"blob "
+                + str(len(manifest_bytes)).encode("ascii")
+                + b"\x00"
+                + manifest_bytes
+            )
             if hashlib.sha1(git_blob_bytes).hexdigest() != SOURCE_MANIFEST_GIT_BLOB_SHA:
                 raise ValueError("Pinned manifest Git blob identity changed")
             manifest = json.loads(manifest_bytes)
@@ -483,7 +488,9 @@ def build_research_receipt() -> tuple[dict[str, Any], str, str]:
                 event.id: [row for row in baseline.servings if row.event_id == event.id]
                 for event in baseline.events
             }
-            originals = sorted(baseline.events, key=lambda e: (e.local_date, e.position))
+            originals = sorted(
+                baseline.events, key=lambda e: (e.local_date, e.position)
+            )
             if len(originals) != 7:
                 raise ValueError("Expected validated one-member seven-event baseline")
             drafts, intended = [], []
@@ -520,7 +527,9 @@ def build_research_receipt() -> tuple[dict[str, Any], str, str]:
                 raise ValueError("Research plan did not preserve revision history")
 
             events = []
-            for event in sorted(persisted.events, key=lambda e: (e.local_date, e.position)):
+            for event in sorted(
+                persisted.events, key=lambda e: (e.local_date, e.position)
+            ):
                 rows = sorted(
                     (x for x in persisted.servings if x.event_id == event.id),
                     key=lambda x: x.member_id.hex,
