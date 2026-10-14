@@ -193,7 +193,12 @@ def test_source_and_cook_count_forgery_rejected(
     forged = deepcopy(receipt)
     if target == "card":
         forged["recipe"]["source_card_sha256"] = value
-    elif target in {"recipe_ingredient_id", "food_ingredient_id", "unit", "source_quantity"}:
+    elif target in {
+        "recipe_ingredient_id",
+        "food_ingredient_id",
+        "unit",
+        "source_quantity",
+    }:
         forged["combined_ingredient_demand"][0][target] = value
     elif target == "process_sha256":
         forged["recipe"]["process_sha256"] = value
