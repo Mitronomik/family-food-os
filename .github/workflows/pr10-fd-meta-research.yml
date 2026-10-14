@@ -33,21 +33,28 @@ jobs:
         run: python -m pytest -q backend/app/tests/test_pr10_fd_meta_goulash.py --tb=short
       - name: Capture isolated persisted research receipt
         run: |
-          python -m scripts.audit_pr10_fd_meta_goulash --output /tmp/pr10-fd-meta-goulash-receipt.json
+          set -o pipefail
+          python -m scripts.audit_pr10_fd_meta_goulash --output /tmp/pr10-fd-meta-goulash-receipt.json | tee /tmp/pr10-fd-meta-trusted-anchors.json
           python - <<'PY'
+          import hashlib
           import json
           from pathlib import Path
 
           from scripts.audit_pr10_fd_meta_goulash import validate_research_receipt
 
           p = Path("/tmp/pr10-fd-meta-goulash-receipt.json")
-          receipt = json.loads(p.read_text(encoding="utf-8"))
+          anchors = json.loads(Path("/tmp/pr10-fd-meta-trusted-anchors.json").read_text(encoding="utf-8"))
+          raw = p.read_bytes()
+          receipt = json.loads(raw)
           assert receipt["scope"] == "ISOLATED_SYNTHETIC_MEALPLAN_ONLY"
           assert receipt["gate_decision"] == "BLOCKED"
           assert receipt["safety"]["time_authority"] == "TIME_UNRESOLVED"
           assert len(receipt["candidate_pair"]) == 2
+          assert hashlib.sha256(raw).hexdigest() == anchors["artifact_sha256"]
           validate_research_receipt(
-              receipt, trusted_semantic_sha256=receipt["expected_semantic_sha256"]
+              receipt,
+              trusted_semantic_sha256=anchors["trusted_semantic_sha256"],
+              trusted_source_sha256=anchors["trusted_source_sha256"],
           )
           PY
           sha256sum /tmp/pr10-fd-meta-goulash-receipt.json
