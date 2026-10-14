@@ -416,259 +416,278 @@ def _intended_event(
     }
 
 
-def build_research_receipt(config: DatabaseConfig) -> dict[str, Any]:
-    """Persist and read back separate synthetic versions, never production data."""
-    seed_dc4_a3_russian_step_corrections(config)
-    engine = create_sqlite_engine(config)
-    try:
-        planner, meal_plans, households, recipes, _ = _services(engine)
-        household = households.create_household(
-            name="FD-META синтетическая семья",
-            timezone_name="Europe/Moscow",
-            city="Санкт-Петербург",
-        )
-        member = _add_member(households, household.id, 1)
-        selection = _accept_custom_pattern(
-            meal_plans, household.id, member.id, GATE1_ROLE_SHAPES[0][0]
-        )
-        generation = AuthoritativeGenerationRequest(
-            household.id, WEEK_START, (GenerationMemberConstraints(member.id),)
-        )
-        plan_result, baseline = planner.generate_authoritative(generation)
-        if not isinstance(plan_result, PlannerSuccess) or baseline is None:
-            raise ValueError("Baseline Planner failed in isolated research database")
-
-        recipe = next(
-            (
-                x
-                for x in recipes.list_all()
-                if x.canonical_code == GOULASH_CODE and x.is_active
-            ),
-            None,
-        )
-        if recipe is None:
-            raise ValueError("Reviewed cooked-goulash Recipe is not active")
-        current = recipes.get_current_verified(recipe.id)
-        version = current.version
-        if (
-            version.verification_status is not VerificationStatus.SOURCE_VERIFIED
-            or version.rights_review_status is not RightsReviewStatus.REVIEWED
-        ):
-            raise ValueError("Source/rights gate not met")
-        manifest = json.loads(SOURCE_MANIFEST.read_text(encoding="utf-8"))
-        source = manifest["recipes"][GOULASH_CODE]["source_receipt"]
-        if (
-            version.source_recipe_id != source["source_recipe_id"]
-            or version.source_document_sha256 != source["source_document_sha256"]
-            or version.source_version != source["source_version"]
-        ):
-            raise ValueError("Actual RecipeVersion diverges from frozen source")
-
-        baseline_servings: dict[Any, list[Any]] = {
-            event.id: [row for row in baseline.servings if row.event_id == event.id]
-            for event in baseline.events
-        }
-        originals = sorted(baseline.events, key=lambda e: (e.local_date, e.position))
-        if len(originals) != 7:
-            raise ValueError("Expected validated one-member seven-event baseline")
-        drafts, intended = [], []
-        # Fixed fractional Decimal portions avoid conflating per-event quantized
-        # rounding residuals with double-counting in this one bounded proof.
-        # These are explicit synthetic manual-plan inputs, NOT Planner predictions.
-        fixed_portions = {0: Decimal("2.000000"), 3: Decimal("2.500000")}
-        for index, event in enumerate(originals):
-            draft, semantic = _intended_event(
-                event,
-                baseline_servings[event.id],
-                target_version_id=version.id
-                if index in RESEARCH_EVENT_INDICES
-                else None,
-                fixed_research_servings=fixed_portions.get(index),
+def build_research_receipt() -> tuple[dict[str, Any], str, str]:
+    """Own fresh disposable SQLite; never accept a caller-supplied database path."""
+    with tempfile.TemporaryDirectory(prefix="pr10-fd-meta-") as owned_dir:
+        config = DatabaseConfig(path=Path(owned_dir) / "research.sqlite")
+        seed_dc4_a3_russian_step_corrections(config)
+        engine = create_sqlite_engine(config)
+        try:
+            planner, meal_plans, households, recipes, _ = _services(engine)
+            household = households.create_household(
+                name="FD-META синтетическая семья",
+                timezone_name="Europe/Moscow",
+                city="Санкт-Петербург",
             )
-            drafts.append(draft)
-            intended.append(semantic)
-        trusted_digest = _sha(_semantic_rows(intended))
-        revised = meal_plans.create_plan_revision(
-            household_id=household.id,
-            week_start=WEEK_START,
-            member_selection_ids={member.id: selection.selection.id},
-            events=drafts,
-            status=baseline.plan.status,
-            config_version="PR10_FD_META_RESEARCH_ONLY_V1",
-        )
-        persisted = meal_plans.get_current_plan(household.id, WEEK_START)
-        if persisted != revised:
-            raise ValueError("Revised plan is not the persisted current revision")
-        if revised.plan.revision_number != baseline.plan.revision_number + 1:
-            raise ValueError("Unexpected revision lineage")
-        if revised.plan.supersedes_plan_id != baseline.plan.id:
-            raise ValueError("Research plan did not preserve revision history")
+            member = _add_member(households, household.id, 1)
+            selection = _accept_custom_pattern(
+                meal_plans, household.id, member.id, GATE1_ROLE_SHAPES[0][0]
+            )
+            generation = AuthoritativeGenerationRequest(
+                household.id, WEEK_START, (GenerationMemberConstraints(member.id),)
+            )
+            plan_result, baseline = planner.generate_authoritative(generation)
+            if not isinstance(plan_result, PlannerSuccess) or baseline is None:
+                raise ValueError("Baseline Planner failed in isolated research database")
 
-        events = []
-        for event in sorted(persisted.events, key=lambda e: (e.local_date, e.position)):
-            rows = sorted(
-                (x for x in persisted.servings if x.event_id == event.id),
-                key=lambda x: x.member_id.hex,
+            recipe = next(
+                (
+                    x
+                    for x in recipes.list_all()
+                    if x.canonical_code == GOULASH_CODE and x.is_active
+                ),
+                None,
             )
-            events.append(
-                {
-                    "event_id": str(event.id),
-                    "local_date": event.local_date.isoformat(),
-                    "position": event.position,
-                    "role": event.role.value,
-                    "source_kind": event.source_kind.value,
-                    "recipe_version_id": str(event.recipe_version_id),
-                    "servings": [
-                        {
-                            "member_id": str(row.member_id),
-                            "portion_servings": str(row.portion_servings),
-                        }
-                        for row in rows
-                    ],
-                }
+            if recipe is None:
+                raise ValueError("Reviewed cooked-goulash Recipe is not active")
+            current = recipes.get_current_verified(recipe.id)
+            version = current.version
+            if (
+                version.verification_status is not VerificationStatus.SOURCE_VERIFIED
+                or version.rights_review_status is not RightsReviewStatus.REVIEWED
+            ):
+                raise ValueError("Source/rights gate not met")
+            manifest_bytes = SOURCE_MANIFEST.read_bytes()
+            git_blob_bytes = b"blob " + str(len(manifest_bytes)).encode("ascii") + b"\x00" + manifest_bytes
+            if hashlib.sha1(git_blob_bytes).hexdigest() != SOURCE_MANIFEST_GIT_BLOB_SHA:
+                raise ValueError("Pinned manifest Git blob identity changed")
+            manifest = json.loads(manifest_bytes)
+            source = manifest["recipes"][GOULASH_CODE]["source_receipt"]
+            if (
+                version.source_recipe_id != source["source_recipe_id"]
+                or version.source_document_sha256 != source["source_document_sha256"]
+                or version.source_version != source["source_version"]
+            ):
+                raise ValueError("Actual RecipeVersion diverges from frozen source")
+
+            trusted_source_sha = _sha(
+                _trusted_source_pins(
+                    recipe=recipe,
+                    current=current,
+                    manifest=manifest,
+                    food=create_food_catalogue_service(engine),
+                )
             )
-        if _sha(_semantic_rows(events)) != trusted_digest:
-            raise ValueError("Persisted research plan differs from intended inputs")
-        pair = [
-            {
-                "event_id": row["event_id"],
-                "local_date": row["local_date"],
-                "recipe_version_id": row["recipe_version_id"],
-                "servings": row["servings"],
+
+            baseline_servings: dict[Any, list[Any]] = {
+                event.id: [row for row in baseline.servings if row.event_id == event.id]
+                for event in baseline.events
             }
-            for index, row in enumerate(events)
-            if index in RESEARCH_EVENT_INDICES
-        ]
-        if len(pair) != 2 or len({row["event_id"] for row in pair}) != 2:
-            raise ValueError("Cannot pin two distinct MealEvents")
-        total = sum(
-            (
-                _finite_decimal(row["portion_servings"])
-                for event in pair
-                for row in event["servings"]
-            ),
-            Decimal(0),
-        )
-        for item in pair:
-            item["combined_servings"] = _canonical_decimal(total)
-
-        scaled = scale_recipe(current, total)
-        contribution = [
-            scale_recipe(
-                current, _finite_decimal(event["servings"][0]["portion_servings"])
+            originals = sorted(baseline.events, key=lambda e: (e.local_date, e.position))
+            if len(originals) != 7:
+                raise ValueError("Expected validated one-member seven-event baseline")
+            drafts, intended = [], []
+            # Fixed fractional Decimal portions avoid conflating per-event quantized
+            # rounding residuals with double-counting in this one bounded proof.
+            # These are explicit synthetic manual-plan inputs, NOT Planner predictions.
+            fixed_portions = {0: Decimal("2.000000"), 3: Decimal("2.500000")}
+            for index, event in enumerate(originals):
+                draft, semantic = _intended_event(
+                    event,
+                    baseline_servings[event.id],
+                    target_version_id=version.id
+                    if index in RESEARCH_EVENT_INDICES
+                    else None,
+                    fixed_research_servings=fixed_portions.get(index),
+                )
+                drafts.append(draft)
+                intended.append(semantic)
+            trusted_digest = _sha(_semantic_rows(intended))
+            revised = meal_plans.create_plan_revision(
+                household_id=household.id,
+                week_start=WEEK_START,
+                member_selection_ids={member.id: selection.selection.id},
+                events=drafts,
+                status=baseline.plan.status,
+                config_version="PR10_FD_META_RESEARCH_ONLY_V1",
             )
-            for event in pair
-        ]
-        demand = []
-        for index, (source_row, combined) in enumerate(
-            zip(current.ingredients, scaled.ingredients, strict=True)
-        ):
-            independently_summed = sum(
-                (details.ingredients[index].quantity for details in contribution),
+            persisted = meal_plans.get_current_plan(household.id, WEEK_START)
+            if persisted != revised:
+                raise ValueError("Revised plan is not the persisted current revision")
+            if revised.plan.revision_number != baseline.plan.revision_number + 1:
+                raise ValueError("Unexpected revision lineage")
+            if revised.plan.supersedes_plan_id != baseline.plan.id:
+                raise ValueError("Research plan did not preserve revision history")
+
+            events = []
+            for event in sorted(persisted.events, key=lambda e: (e.local_date, e.position)):
+                rows = sorted(
+                    (x for x in persisted.servings if x.event_id == event.id),
+                    key=lambda x: x.member_id.hex,
+                )
+                events.append(
+                    {
+                        "event_id": str(event.id),
+                        "local_date": event.local_date.isoformat(),
+                        "position": event.position,
+                        "role": event.role.value,
+                        "source_kind": event.source_kind.value,
+                        "recipe_version_id": str(event.recipe_version_id),
+                        "servings": [
+                            {
+                                "member_id": str(row.member_id),
+                                "portion_servings": str(row.portion_servings),
+                            }
+                            for row in rows
+                        ],
+                    }
+                )
+            if _sha(_semantic_rows(events)) != trusted_digest:
+                raise ValueError("Persisted research plan differs from intended inputs")
+            pair = [
+                {
+                    "event_id": row["event_id"],
+                    "local_date": row["local_date"],
+                    "recipe_version_id": row["recipe_version_id"],
+                    "servings": row["servings"],
+                }
+                for index, row in enumerate(events)
+                if index in RESEARCH_EVENT_INDICES
+            ]
+            if len(pair) != 2 or len({row["event_id"] for row in pair}) != 2:
+                raise ValueError("Cannot pin two distinct MealEvents")
+            total = sum(
+                (
+                    _finite_decimal(row["portion_servings"])
+                    for event in pair
+                    for row in event["servings"]
+                ),
                 Decimal(0),
             )
-            if combined.quantity != independently_summed:
-                raise ValueError("Double count / Decimal scaling disagreement")
-            demand.append(
-                {
-                    "recipe_ingredient_id": str(source_row.id),
-                    "food_ingredient_id": str(source_row.food_ingredient_id),
-                    "unit": source_row.unit.value,
-                    "source_quantity": str(source_row.quantity),
-                    "planned_combined_quantity": str(combined.quantity),
-                    "per_event_sum_quantity": str(independently_summed),
-                }
-            )
-        receipt = {
-            "schema": "PR10_FD_META_RESEARCH_GOULASH_V1",
-            "scope": "ISOLATED_SYNTHETIC_MEALPLAN_ONLY",
-            "gate_decision": "BLOCKED",
-            "accepted_code_base": "89b13a61fbfb8bb6246b7fb39ad8b3a1a3acf352",
-            "research_plan": {
-                "household_id": str(household.id),
-                "member_id": str(member.id),
-                "selection_id": str(selection.selection.id),
-                "timezone": household.timezone,
-                "plan_id": str(persisted.plan.id),
-                "supersedes_research_plan_id": str(baseline.plan.id),
-                "revision_number": persisted.plan.revision_number,
-                "week_start": WEEK_START.isoformat(),
-                "events": events,
-            },
-            "expected_semantic_sha256": trusted_digest,
-            "recipe": {
-                "canonical_code": recipe.canonical_code,
-                "recipe_version_id": str(version.id),
-                "version_number": version.version_number,
-                "base_servings": str(version.base_servings),
-                "source_name": version.source_name,
-                "source_recipe_id": version.source_recipe_id,
-                "source_url": version.source_url,
-                "source_version": version.source_version,
-                "source_document_sha256": version.source_document_sha256,
-                "source_card_sha256": source["exact_source_card_sha256"],
-                "rights_review_status": version.rights_review_status.value,
-                "verification_status": version.verification_status.value,
-                "source_output_g": str(version.source_output_g)
-                if version.source_output_g
-                else None,
-                "freezable": version.freezable,
-                "batch_friendly": version.batch_friendly,
-                "storage_days_fridge": version.storage_days_fridge,
-                "storage_days_freezer": version.storage_days_freezer,
-                "steps": [
+            for item in pair:
+                item["combined_servings"] = _canonical_decimal(total)
+
+            scaled = scale_recipe(current, total)
+            contribution = [
+                scale_recipe(
+                    current, _finite_decimal(event["servings"][0]["portion_servings"])
+                )
+                for event in pair
+            ]
+            demand = []
+            for index, (source_row, combined) in enumerate(
+                zip(current.ingredients, scaled.ingredients, strict=True)
+            ):
+                independently_summed = sum(
+                    (details.ingredients[index].quantity for details in contribution),
+                    Decimal(0),
+                )
+                if combined.quantity != independently_summed:
+                    raise ValueError("Double count / Decimal scaling disagreement")
+                demand.append(
                     {
-                        "recipe_step_id": str(step.id),
-                        "position": step.position,
-                        "instruction_sha256": _sha(step.instruction),
+                        "recipe_ingredient_id": str(source_row.id),
+                        "food_ingredient_id": str(source_row.food_ingredient_id),
+                        "unit": source_row.unit.value,
+                        "source_quantity": str(source_row.quantity),
+                        "planned_combined_quantity": str(combined.quantity),
+                        "per_event_sum_quantity": str(independently_summed),
                     }
-                    for step in current.steps
-                ],
-                "process_sha256": _sha(
-                    [
+                )
+            receipt = {
+                "schema": "PR10_FD_META_RESEARCH_GOULASH_V1",
+                "scope": "ISOLATED_SYNTHETIC_MEALPLAN_ONLY",
+                "gate_decision": "BLOCKED",
+                "accepted_code_base": "89b13a61fbfb8bb6246b7fb39ad8b3a1a3acf352",
+                "research_plan": {
+                    "household_id": str(household.id),
+                    "member_id": str(member.id),
+                    "selection_id": str(selection.selection.id),
+                    "timezone": household.timezone,
+                    "plan_id": str(persisted.plan.id),
+                    "supersedes_research_plan_id": str(baseline.plan.id),
+                    "revision_number": persisted.plan.revision_number,
+                    "week_start": WEEK_START.isoformat(),
+                    "events": events,
+                },
+                "expected_semantic_sha256": trusted_digest,
+                "recipe": {
+                    "canonical_code": recipe.canonical_code,
+                    "recipe_version_id": str(version.id),
+                    "version_number": version.version_number,
+                    "base_servings": str(version.base_servings),
+                    "source_name": version.source_name,
+                    "source_recipe_id": version.source_recipe_id,
+                    "source_url": version.source_url,
+                    "source_version": version.source_version,
+                    "source_document_sha256": version.source_document_sha256,
+                    "source_card_sha256": source["exact_source_card_sha256"],
+                    "rights_review_status": version.rights_review_status.value,
+                    "verification_status": version.verification_status.value,
+                    "source_output_g": str(version.source_output_g)
+                    if version.source_output_g
+                    else None,
+                    "freezable": version.freezable,
+                    "batch_friendly": version.batch_friendly,
+                    "storage_days_fridge": version.storage_days_fridge,
+                    "storage_days_freezer": version.storage_days_freezer,
+                    "steps": [
                         {
                             "recipe_step_id": str(step.id),
                             "position": step.position,
                             "instruction_sha256": _sha(step.instruction),
                         }
                         for step in current.steps
-                    ]
-                ),
-            },
-            "candidate_pair": pair,
-            "combined_ingredient_demand": demand,
-            "safety": {
-                "time_authority": "TIME_UNRESOLVED",
-                "storage_policy_status": "UNAPPROVED_RESEARCH_ONLY",
-                "executable_freezer_task": False,
-                "confirmed_stock": False,
-                "source_evidence_reference": "docs/family-food/pr10-fd-meta-goulash-source-review.md",
-                "blockers": [
-                    "RECIPE_SPECIFIC_FINISHED_DISH_STORAGE_NOT_ACCEPTED",
-                    "BATCH_EQUIPMENT_CAPACITY_NOT_REVIEWED",
-                    "COOLING_AND_STORAGE_ENTRY_TIME_UNVERIFIED",
-                    "APPLICABLE_JURISDICTION_POLICY_NOT_APPROVED",
-                    "SCALED_NUMERIC_PROCESS_STEPS_NOT_REVIEWED",
-                ],
-            },
-            "planned_cook_sessions_baseline": 2,
-            "planned_cook_sessions_candidate": 1,
-            "minutes_or_net_actions_saved": "NOT_PROVEN",
-        }
-        validate_research_receipt(receipt, trusted_semantic_sha256=trusted_digest)
-        return receipt
-    finally:
-        engine.dispose()
+                    ],
+                    "process_sha256": _sha(
+                        [
+                            {
+                                "recipe_step_id": str(step.id),
+                                "position": step.position,
+                                "instruction_sha256": _sha(step.instruction),
+                            }
+                            for step in current.steps
+                        ]
+                    ),
+                },
+                "candidate_pair": pair,
+                "combined_ingredient_demand": demand,
+                "safety": {
+                    "time_authority": "TIME_UNRESOLVED",
+                    "storage_policy_status": "UNAPPROVED_RESEARCH_ONLY",
+                    "executable_freezer_task": False,
+                    "confirmed_stock": False,
+                    "source_evidence_reference": "docs/family-food/pr10-fd-meta-goulash-source-review.md",
+                    "blockers": [
+                        "RECIPE_SPECIFIC_FINISHED_DISH_STORAGE_NOT_ACCEPTED",
+                        "BATCH_EQUIPMENT_CAPACITY_NOT_REVIEWED",
+                        "COOLING_AND_STORAGE_ENTRY_TIME_UNVERIFIED",
+                        "APPLICABLE_JURISDICTION_POLICY_NOT_APPROVED",
+                        "SCALED_NUMERIC_PROCESS_STEPS_NOT_REVIEWED",
+                    ],
+                },
+                "planned_cook_sessions_baseline": 2,
+                "planned_cook_sessions_candidate": 1,
+                "minutes_or_net_actions_saved": "NOT_PROVEN",
+            }
+            receipt["source_fingerprint_sha256"] = _sha(
+                _source_pins(receipt["recipe"], receipt["combined_ingredient_demand"])
+            )
+            validate_research_receipt(
+                receipt,
+                trusted_semantic_sha256=trusted_digest,
+                trusted_source_sha256=trusted_source_sha,
+            )
+            return receipt, trusted_digest, trusted_source_sha
+        finally:
+            engine.dispose()
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
-    with tempfile.TemporaryDirectory(prefix="pr10-fd-meta-") as tmp:
-        receipt = build_research_receipt(
-            DatabaseConfig(path=Path(tmp) / "research.sqlite")
-        )
+    receipt, trusted_semantic, trusted_source = build_research_receipt()
     args.output.parent.mkdir(parents=True, exist_ok=True)
     encoded = (
         json.dumps(receipt, ensure_ascii=False, sort_keys=True, indent=2) + "\n"
@@ -680,7 +699,8 @@ def main() -> int:
                 "gate": receipt["gate_decision"],
                 "scope": receipt["scope"],
                 "pair_events": len(receipt["candidate_pair"]),
-                "trusted_semantic_sha256": receipt["expected_semantic_sha256"],
+                "trusted_semantic_sha256": trusted_semantic,
+                "trusted_source_sha256": trusted_source,
                 "artifact_sha256": hashlib.sha256(encoded).hexdigest(),
             },
             sort_keys=True,
