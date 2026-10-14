@@ -8,8 +8,8 @@ from pathlib import Path
 
 import pytest
 from app.db.config import DatabaseConfig
-from scripts import audit_pr10_fd_meta_goulash
 
+from scripts import audit_pr10_fd_meta_goulash
 from scripts.audit_pr10_fd_meta_goulash import (
     GOULASH_CODE,
     build_research_receipt,
