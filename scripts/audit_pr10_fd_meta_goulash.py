@@ -23,6 +23,9 @@ from app.domain.food_recipes import (
 )
 from app.domain.planner import PlannerSuccess
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
+from app.persistence.sqlalchemy_core.food_ingredient_composition import (
+    create_food_catalogue_service,
+)
 from app.seed.dc4_a3_russian_step_corrections import (
     seed_dc4_a3_russian_step_corrections,
 )
@@ -46,6 +49,35 @@ SOURCE_MANIFEST = (
     / "data/curation/r1g-catalogue-capacity-expansion/prepared-publication-specs.json"
 )
 RESEARCH_EVENT_INDICES = frozenset({0, 3})
+SOURCE_MANIFEST_GIT_BLOB_SHA = "394b35d3d02c0498a681584a37d36b1d98faf40d"
+SOURCE_RECIPE_KEYS = (
+    "canonical_code",
+    "recipe_version_id",
+    "version_number",
+    "base_servings",
+    "source_name",
+    "source_recipe_id",
+    "source_url",
+    "source_version",
+    "source_document_sha256",
+    "source_card_sha256",
+    "rights_review_status",
+    "verification_status",
+    "source_output_g",
+    "batch_friendly",
+    "freezable",
+    "storage_days_fridge",
+    "storage_days_freezer",
+    "steps",
+    "process_sha256",
+)
+SOURCE_INGREDIENT_KEYS = (
+    "recipe_ingredient_id",
+    "food_ingredient_id",
+    "unit",
+    "source_quantity",
+)
+
 
 
 def _sha(value: object) -> str:
@@ -96,8 +128,125 @@ def _semantic_rows(events: list[dict[str, Any]]) -> list[dict[str, Any]]:
     )
 
 
+def _source_pins(recipe: dict[str, Any], ingredients: list[dict[str, Any]]) -> dict[str, Any]:
+    """Canonical allowlist: do not accept untrusted extra source fields."""
+    return {
+        "recipe": {key: recipe[key] for key in SOURCE_RECIPE_KEYS},
+        "ingredients": [
+            {
+                key: (
+                    _canonical_decimal(_finite_decimal(row[key]))
+                    if key == "source_quantity"
+                    else row[key]
+                )
+                for key in SOURCE_INGREDIENT_KEYS
+            }
+            for row in ingredients
+        ],
+    }
+
+
+def _trusted_source_pins(
+    *, recipe: Any, current: Any, manifest: dict[str, Any], food: Any
+) -> dict[str, Any]:
+    """Derive independent source truth from the accepted manifest and live seeded domain.
+
+    Do not read receipt fields to build the trusted digest. Rights and process
+    text are checked against the exact manifest before any digest is produced.
+    """
+    source_row = manifest["recipes"][GOULASH_CODE]
+    source = source_row["source_receipt"]
+    frozen = source_row["trusted_recipe_seed"]
+    seed_version = frozen["version"]
+    version = current.version
+    if frozen["canonical_code"] != recipe.canonical_code:
+        raise ValueError("Frozen recipe canonical identity changed")
+    if source["rights_review_status"] != "REVIEWED":
+        raise ValueError("Frozen source rights are not reviewed")
+    for key, actual in (
+        ("source_name", version.source_name),
+        ("source_recipe_id", version.source_recipe_id),
+        ("source_version", version.source_version),
+        ("source_document_sha256", version.source_document_sha256),
+    ):
+        if source[key] != actual:
+            raise ValueError(f"Frozen recipe source {key} differs from runtime")
+    if version.source_url != source["source_locator"]:
+        raise ValueError("Runtime original URL differs from frozen source")
+    if (
+        version.rights_review_status is not RightsReviewStatus.REVIEWED
+        or version.verification_status is not VerificationStatus.SOURCE_VERIFIED
+        or _canonical_decimal(version.base_servings)
+        != _canonical_decimal(_finite_decimal(seed_version["base_servings"]))
+    ):
+        raise ValueError("Current RecipeVersion is not accepted source truth")
+
+    manifest_ingredients = seed_version["ingredients"]
+    if len(current.ingredients) != len(manifest_ingredients):
+        raise ValueError("Current source ingredient count differs from manifest")
+    ingredient_rows = []
+    for actual, frozen_row in zip(
+        current.ingredients, manifest_ingredients, strict=True
+    ):
+        food_row = food.get(actual.food_ingredient_id)
+        if (
+            food_row is None
+            or food_row.canonical_code != frozen_row["food_ingredient_code"]
+            or actual.unit.value != frozen_row["unit"]
+            or actual.quantity
+            != _finite_decimal(frozen_row["quantity"])
+        ):
+            raise ValueError("Source ingredient identity/unit/quantity mismatch")
+        ingredient_rows.append(
+            {
+                "recipe_ingredient_id": str(actual.id),
+                "food_ingredient_id": str(actual.food_ingredient_id),
+                "unit": actual.unit.value,
+                "source_quantity": _canonical_decimal(actual.quantity),
+            }
+        )
+
+    if len(current.steps) != len(seed_version["steps"]):
+        raise ValueError("Source process step count differs from manifest")
+    steps = []
+    for actual, frozen_text in zip(current.steps, seed_version["steps"], strict=True):
+        if actual.instruction != frozen_text:
+            raise ValueError("Source process step text differs from manifest")
+        steps.append(
+            {
+                "recipe_step_id": str(actual.id),
+                "position": actual.position,
+                "instruction_sha256": _sha(frozen_text),
+            }
+        )
+    version_fields = {
+        "canonical_code": frozen["canonical_code"],
+        "recipe_version_id": str(version.id),
+        "version_number": version.version_number,
+        "base_servings": str(version.base_servings),
+        "source_name": source["source_name"],
+        "source_recipe_id": source["source_recipe_id"],
+        "source_url": source["source_locator"],
+        "source_version": source["source_version"],
+        "source_document_sha256": source["source_document_sha256"],
+        "source_card_sha256": source["exact_source_card_sha256"],
+        "rights_review_status": source["rights_review_status"],
+        "verification_status": "SOURCE_VERIFIED",
+        "source_output_g": (
+            str(version.source_output_g) if version.source_output_g is not None else None
+        ),
+        "batch_friendly": version.batch_friendly,
+        "freezable": version.freezable,
+        "storage_days_fridge": version.storage_days_fridge,
+        "storage_days_freezer": version.storage_days_freezer,
+        "steps": steps,
+        "process_sha256": _sha(steps),
+    }
+    return _source_pins(version_fields, ingredient_rows)
+
+
 def validate_research_receipt(
-    receipt: dict[str, Any], *, trusted_semantic_sha256: str
+    receipt: dict[str, Any], *, trusted_semantic_sha256: str, trusted_source_sha256: str
 ) -> None:
     """Fail closed if a read-back receipt is modified or claims safety approval.
 
@@ -202,6 +351,29 @@ def validate_research_receipt(
         raise ValueError("Immutable recipe step references missing")
     if _sha(receipt["recipe"]["steps"]) != receipt["recipe"]["process_sha256"]:
         raise ValueError("Immutable process hash differs from pinned steps")
+    receipt_source_sha = _sha(
+        _source_pins(receipt["recipe"], receipt["combined_ingredient_demand"])
+    )
+    if (
+        receipt_source_sha != trusted_source_sha256
+        or receipt_source_sha != receipt["source_fingerprint_sha256"]
+    ):
+        raise ValueError("Receipt source pins differ from independent trusted source")
+    if (
+        receipt["planned_cook_sessions_baseline"] != len(pair)
+        or receipt["planned_cook_sessions_candidate"] != 1
+        or receipt["minutes_or_net_actions_saved"] != "NOT_PROVEN"
+    ):
+        raise ValueError("Cook-session claim not supported by two event contributions")
+    if (
+        {row["local_date"] for row in pair}
+        != {
+            WEEK_START.isoformat(),
+            (WEEK_START + timedelta(days=3)).isoformat(),
+        }
+        or sum(row["recipe_version_id"] == version for row in events) != 2
+    ):
+        raise ValueError("Research pair event schedule or count changed")
 
 
 def _intended_event(
