@@ -367,11 +367,14 @@ def validate_research_receipt(
         or receipt["minutes_or_net_actions_saved"] != "NOT_PROVEN"
     ):
         raise ValueError("Cook-session claim not supported by two event contributions")
+    # The research experiment is exactly the two pinned event IDs. Other
+    # baseline Planner events may legitimately select this same RecipeVersion;
+    # those are not silently merged into the proposed two-event cooking batch.
     if {row["local_date"] for row in pair} != {
         WEEK_START.isoformat(),
         (WEEK_START + timedelta(days=3)).isoformat(),
-    } or sum(row["recipe_version_id"] == version for row in events) != 2:
-        raise ValueError("Research pair event schedule or count changed")
+    }:
+        raise ValueError("Research pair event dates changed")
 
 
 def _intended_event(
