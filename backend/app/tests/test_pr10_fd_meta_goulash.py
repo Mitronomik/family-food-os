@@ -5,10 +5,10 @@ from __future__ import annotations
 from copy import deepcopy
 from decimal import Decimal
 from pathlib import Path
-from tempfile import TemporaryDirectory
 
 import pytest
 from app.db.config import DatabaseConfig
+from scripts import audit_pr10_fd_meta_goulash
 
 from scripts.audit_pr10_fd_meta_goulash import (
     GOULASH_CODE,
@@ -18,21 +18,28 @@ from scripts.audit_pr10_fd_meta_goulash import (
 
 
 @pytest.fixture(scope="module")
-def receipt() -> dict:
-    """Never access a user database or production environment."""
-    with TemporaryDirectory(prefix="pr10-fd-meta-test-") as tmp:
-        yield build_research_receipt(DatabaseConfig(path=Path(tmp) / "research.sqlite"))
+def proof() -> tuple[dict, str, str]:
+    """Trusted source and intended semantic hashes are separate from receipt data."""
+    return build_research_receipt()
 
 
-def _validate(receipt: dict) -> None:
+@pytest.fixture(scope="module")
+def receipt(proof: tuple[dict, str, str]) -> dict:
+    return proof[0]
+
+
+def _validate(receipt: dict, proof: tuple[dict, str, str]) -> None:
     validate_research_receipt(
         receipt,
-        trusted_semantic_sha256=receipt["expected_semantic_sha256"],
+        trusted_semantic_sha256=proof[1],
+        trusted_source_sha256=proof[2],
     )
 
 
-def test_persisted_research_plan_and_one_recipe_two_events(receipt: dict) -> None:
-    _validate(receipt)
+def test_persisted_research_plan_and_one_recipe_two_events(
+    receipt: dict, proof: tuple[dict, str, str]
+) -> None:
+    _validate(receipt, proof)
     assert receipt["gate_decision"] == "BLOCKED"
     assert receipt["scope"] == "ISOLATED_SYNTHETIC_MEALPLAN_ONLY"
     assert receipt["recipe"]["canonical_code"] == GOULASH_CODE
@@ -96,18 +103,34 @@ def test_persisted_research_plan_and_one_recipe_two_events(receipt: dict) -> Non
         lambda r: r["recipe"]["steps"][0].update(instruction_sha256="a" * 64),
     ],
 )
-def test_forgery_and_unsupported_policy_fail_closed(receipt: dict, alter) -> None:
+def test_forgery_and_unsupported_policy_fail_closed(
+    receipt: dict, proof: tuple[dict, str, str], alter
+) -> None:
     tampered = deepcopy(receipt)
     alter(tampered)
     with pytest.raises((ValueError, KeyError, TypeError)):
-        _validate(tampered)
+        _validate(tampered, proof)
 
 
-def test_outside_semantic_anchor_is_required(receipt: dict) -> None:
+def test_outside_semantic_anchor_is_required(
+    receipt: dict, proof: tuple[dict, str, str]
+) -> None:
     with pytest.raises(ValueError, match="trusted intended"):
         validate_research_receipt(
             receipt,
             trusted_semantic_sha256="f" * 64,
+            trusted_source_sha256=proof[2],
+        )
+
+
+def test_outside_source_anchor_is_required(
+    receipt: dict, proof: tuple[dict, str, str]
+) -> None:
+    with pytest.raises(ValueError, match="independent trusted source"):
+        validate_research_receipt(
+            receipt,
+            trusted_semantic_sha256=proof[1],
+            trusted_source_sha256="f" * 64,
         )
 
 
@@ -119,3 +142,82 @@ def test_research_quantities_reconcile_exact_decimal(receipt: dict) -> None:
             ingredient["per_event_sum_quantity"]
         )
         assert ingredient["unit"] == "g"
+
+
+@pytest.mark.parametrize("use_keyword", [False, True])
+def test_arbitrary_user_sqlite_rejected_before_seeding(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, use_keyword: bool
+) -> None:
+    """The public generator owns its SQLite file; an external path is impossible."""
+    user_db = tmp_path / "user.sqlite"
+    original_bytes = b"existing-user-database-must-not-change"
+    user_db.write_bytes(original_bytes)
+    attempted_seed = []
+
+    def forbidden_seed(*args, **kwargs) -> None:
+        attempted_seed.append((args, kwargs))
+        raise AssertionError("Seed must not run for rejected caller config")
+
+    monkeypatch.setattr(
+        audit_pr10_fd_meta_goulash,
+        "seed_dc4_a3_russian_step_corrections",
+        forbidden_seed,
+    )
+    config = DatabaseConfig(path=user_db)
+    with pytest.raises(TypeError):
+        if use_keyword:
+            build_research_receipt(config=config)
+        else:
+            build_research_receipt(config)
+    assert attempted_seed == []
+    assert user_db.read_bytes() == original_bytes
+
+
+@pytest.mark.parametrize(
+    ("target", "value"),
+    [
+        ("card", "a" * 64),
+        ("recipe_ingredient_id", "forged-recipe-ingredient"),
+        ("food_ingredient_id", "forged-food-ingredient"),
+        ("unit", "ml"),
+        ("source_quantity", "900"),
+        ("process_sha256", "f" * 64),
+        ("baseline_count", 1),
+        ("candidate_count", 2),
+        ("claimed_savings", "ONE_ACTION_SAVED"),
+    ],
+)
+def test_source_and_cook_count_forgery_rejected(
+    receipt: dict, proof: tuple[dict, str, str], target: str, value: object
+) -> None:
+    forged = deepcopy(receipt)
+    if target == "card":
+        forged["recipe"]["source_card_sha256"] = value
+    elif target in {"recipe_ingredient_id", "food_ingredient_id", "unit", "source_quantity"}:
+        forged["combined_ingredient_demand"][0][target] = value
+    elif target == "process_sha256":
+        forged["recipe"]["process_sha256"] = value
+    elif target == "baseline_count":
+        forged["planned_cook_sessions_baseline"] = value
+    elif target == "candidate_count":
+        forged["planned_cook_sessions_candidate"] = value
+    else:
+        forged["minutes_or_net_actions_saved"] = value
+    with pytest.raises((ValueError, TypeError, KeyError)):
+        _validate(forged, proof)
+
+
+def test_recomputed_self_fingerprint_cannot_override_independent_source(
+    receipt: dict, proof: tuple[dict, str, str]
+) -> None:
+    """A forged source snapshot with an updated internal hash still fails."""
+    forged = deepcopy(receipt)
+    forged["recipe"]["source_card_sha256"] = "a" * 64
+    forged["combined_ingredient_demand"][0]["food_ingredient_id"] = "forged"
+    forged["source_fingerprint_sha256"] = audit_pr10_fd_meta_goulash._sha(
+        audit_pr10_fd_meta_goulash._source_pins(
+            forged["recipe"], forged["combined_ingredient_demand"]
+        )
+    )
+    with pytest.raises(ValueError, match="independent trusted source"):
+        _validate(forged, proof)
