@@ -43,6 +43,13 @@ Added [`scripts/audit_pr10_fd_meta_goulash.py`](../../scripts/audit_pr10_fd_meta
 
 This is a constrained manual `MealPlan` revision validated by the accepted **domain/application service**, **not** an assertion that deterministic Planner would have selected the same repeat by default or that the repeated meals satisfy a full personalized nutrition target. That requires a distinct product gate. It also does not change the accepted historic three-member Gate 2 fixture, whose 21 selected recipe codes remain different.
 
+### Review corrections — receipt trust and disposable SQLite (2026-10-14)
+
+- **P2 — external source anchor:** research CI pins the R1-G manifest to its exact Git blob, rechecks the active `RecipeVersion` against the source recipe card, Russian step text, ingredient codes, unit/quantity mapping and immutable recipe/food/step IDs. The independently derived trusted source fingerprint is logged **outside** the emitted receipt and compared with the receipt's canonical allowlisted source projection, including card SHA-256 and process SHA-256. A receipt that rewrites IDs or its own fingerprint is not an independent signature and must fail against the external source anchor.
+- **P2 — no arbitrary SQLite seed target:** `build_research_receipt()` has **no database-path argument**; it owns a newly created disposable SQLite inside `TemporaryDirectory`. Negative tests pass an existing external database path both positionally and by keyword, proving rejection **before** seed is invoked and no change to the existing file.
+- **Precise two-event scope:** only the **two pinned candidate MealEvents** are included in this hypothetical cooking batch (two separate planned cooking sessions vs one conditional combined session). The five other baseline Planner events are preserved and may independently happen to use the same recipe; they are **not** silently grouped or included in the session-count claim. No net physical-action or minute-saving evidence is asserted.
+- The exact research CI and source/semantic/artifact hash receipt must be reverified on the corrected PR head. All storage/time metadata and `PR10-FD-META=BLOCKED` are unchanged.
+
 ## 4. FD-META GO/NO-GO against approved Finished-Dish-First contract
 
 | Required assertion | Present proof / pending requirement | Verdict |
