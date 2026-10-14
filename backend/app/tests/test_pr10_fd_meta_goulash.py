@@ -123,6 +123,31 @@ def test_outside_semantic_anchor_is_required(
         )
 
 
+def test_unbatched_event_may_independently_select_same_recipe(
+    receipt: dict, proof: tuple[dict, str, str]
+) -> None:
+    """Only two selected MealEvents are in this proposed batch, not all repeats."""
+    alternate = deepcopy(receipt)
+    pair_ids = {item["event_id"] for item in alternate["candidate_pair"]}
+    other = next(
+        event
+        for event in alternate["research_plan"]["events"]
+        if event["event_id"] not in pair_ids
+    )
+    other["recipe_version_id"] = alternate["recipe"]["recipe_version_id"]
+    # This separate hypothetical intended input has a freshly checked semantic
+    # anchor; do not treat its digest as independent proof of production state.
+    intended_sha = audit_pr10_fd_meta_goulash._sha(
+        audit_pr10_fd_meta_goulash._semantic_rows(alternate["research_plan"]["events"])
+    )
+    alternate["expected_semantic_sha256"] = intended_sha
+    validate_research_receipt(
+        alternate,
+        trusted_semantic_sha256=intended_sha,
+        trusted_source_sha256=proof[2],
+    )
+
+
 def test_outside_source_anchor_is_required(
     receipt: dict, proof: tuple[dict, str, str]
 ) -> None:
