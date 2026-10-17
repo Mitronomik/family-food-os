@@ -1,3 +1,11 @@
+# P1-PLANNER-SERVING-CONTRACT — next audit P1 scoped — 2026-10-17
+
+- Confirmed [#227](https://github.com/Mitronomik/family-food-os/pull/227) merged `65c3aaeee8376a14a80af29c1a0fc6d0b5145c5b` after #226. Planner catalogue admission/Step10B regressions accepted; prior state saying #227 pending was stale.
+- Selected audit [#225](https://github.com/Mitronomik/family-food-os/issues/225) next P1: energy-normalized but implausible portions. Started only [#228](https://github.com/Mitronomik/family-food-os/issues/228) docs-only serving feasibility source/policy contract and supporting source references; no invented max grams, no changes to historical Planner/MealPattern/Nutrition.
+- Distinct missing-profile/under-3, PantryAvailability and snapshot-consistency proposals remain OPEN. **PR10-FD-META=BLOCKED; TIME_UNRESOLVED**; no authorization for Prep runtime/PDF/Gate2.
+
+---
+
 # AUDIT-PLANNER — correction to expanded V2 CI, #226 merged — 2026-10-17
 
 - Confirmed [#226](https://github.com/Mitronomik/family-food-os/pull/226) merged at `2e2707349b1c677468e33aadd1a4d8cc411ce5ec`; its scripts no longer falsely signal successful unsupported backup/restore/startup.
