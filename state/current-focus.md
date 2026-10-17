@@ -1,3 +1,10 @@
+# AUDIT-PLANNER — candidate admission review after merged #226 — 2026-10-17
+
+**Accepted `main`:** `2e2707349b1c677468e33aadd1a4d8cc411ce5ec` ([PR #226](https://github.com/Mitronomik/family-food-os/pull/226) merged). **Current bounded review:** [PR #227](https://github.com/Mitronomik/family-food-os/pull/227), `fix/audit-planner-admission-exhaustive`, addresses exhaustive verified Planner candidates and updates the legacy `step10b` V2 nutrition test adapter to `list_all()`. PR #227 is **OPEN / not merged**; independent review and exact-head CI required.
+**Do not expand** to serving limits, missing-target nutrition fallback, Pantry availability, cross-context snapshots or Gate2/Prep runtime; these remain separately scoped in [Issue #225](https://github.com/Mitronomik/family-food-os/issues/225). **`PR10-FD-META=BLOCKED`, `TIME_UNRESOLVED`**, D3 policy/publication and finished-dish safety gates remain unmet. No auto merge.
+
+---
+
 # AUDIT-OPS-SAFETY — post-#224 state reconciliation and no-op scripts — 2026-10-17
 
 **Accepted main:** `2de47a9bc5df78824a7596ac1614d4e33d556daa` ([PR #224](https://github.com/Mitronomik/family-food-os/pull/224) merged 2026-10-17T05:56:48Z). [October audit triage Issue #225](https://github.com/Mitronomik/family-food-os/issues/225) separates confirmed defects from approved Planner/Pantry contract decisions.
