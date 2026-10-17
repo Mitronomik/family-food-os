@@ -1,3 +1,12 @@
+# P1-PLANNER-SERVING-RESEARCH — #229 merged, bounded evidence NO-GO proposal — 2026-10-17
+
+- Confirmed [PR #229](https://github.com/Mitronomik/family-food-os/pull/229) merged at `3c5663b3b87f6f9f83b511d8a9e465a9bc85e60d`. It introduced distinct `RESEARCH_READY` / `RUNTIME_READY` proof requirements, **not** a production portion policy or approved Option A/B.
+- Opened [Issue #230](https://github.com/Mitronomik/family-food-os/issues/230) and a small research-only branch. Audited historical DC4 `planner-v0.5` three-member receipt (21 events/42 Servings) and three reviewed School2022 recipe publication source manifests. Preserved exact historical version pins, original/base servings, declared prepared-output g, expected energy and missing physical policy/scaling applicability.
+- Proposed scoped `NO_GO` for these **three** recipe identities; no member/event positive physical PASS can be claimed. `RUNTIME_READY` not run, not a global catalogue claim, no source authority or Planner code changed. [Report](../docs/family-food/planner-serving-research-readiness-2026-10-17.md); [JSON](../docs/family-food/planner-serving-research-evidence-2026-10-17.json).
+- Pending exact-head Docs verification and independent PR review. `PR10-FD-META=BLOCKED`, `TIME_UNRESOLVED`, Gate2 remain unchanged.
+
+---
+
 # PR #229 — two P2 review-contract corrections — 2026-10-17
 
 - On the **existing** `docs/planner-serving-plausibility-gate` branch, clarified that a user-confirmed portion preference is an independent signal and **cannot** upgrade missing physical-policy evidence to `PASS_REVIEWED_FEASIBILITY`.
