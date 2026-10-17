@@ -1,3 +1,12 @@
+# PR10-OPTION-B-STAGED-GATES — owner authorized docs proposal — 2026-10-17
+
+- Verified PR #233 merged to `main@1c78bf033fecacf87ce62adc35a8bd34a33f4d11`. Existing serving-policy research does not establish a production physiologic bound, and `PR10-FD-META` remains `BLOCKED / TIME_UNRESOLVED`.
+- Owner approved **Option B in Issue #220** to prepare one docs-only PR. Drafted [canonical staged-gate proposal](../docs/family-food/pr10-option-b-staged-delivery-gates-2026-10-17.md): technical PR10-CORE/Gate2 must prove real positive same-day source-reviewed Prep work, exact Servings/Russian steps, explicitly unresolved work and an all-UNKNOWN negative gate; safe finished-dish batch/reuse is deferred only to a **mandatory release gate before real households**, not silently waived.
+- Reconciled PR10-ARCH/FD-ARCH/D1-D3 and Master Roadmap (including Gate2, Gate3, acceptance fixture and real-family conditions), plus 2026-09-13 addendum. Three Prep tables, Decimal, source locks, Household, Shopping, Pantry non-mutation, D2/D2-FD and D3 boundaries preserved.
+- No runtime/schema/migrations/data, Planner semantics or accepted historical fixture changed. Docs-only PR awaiting exact-head verification and independent review. Next *possible* task after review/merge: bounded PR10-CORE data/schema preflight, **not automatic PR10 runtime**.
+
+---
+
 # P1-PLANNER-SERVING-POLICY-SOURCES — effective 2026 norms assessed — 2026-10-17
 
 - Verified [#231](https://github.com/Mitronomik/family-food-os/pull/231) merged as `main@702064b85e8f8d8decbd519a04b8d4204246dd5d`. Research NO-GO for exactly three School2022 source/form/member scenarios persists; it is **not** a catalogue-wide claim.
