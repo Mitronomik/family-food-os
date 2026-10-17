@@ -10,7 +10,6 @@ from uuid import UUID
 
 from app.domain.meal_patterns import MealPatternTagKind
 from app.domain.meal_plans import MealPlanDetail
-from app.domain.recipe_nutrition_v2 import RecipeNutritionConsumptionProjection
 from app.domain.planner import (
     ROLE_COMPATIBILITY_V1,
     FixedPlannerEvent,
@@ -24,6 +23,7 @@ from app.domain.planner import (
     generate_week,
     with_duration,
 )
+from app.domain.recipe_nutrition_v2 import RecipeNutritionConsumptionProjection
 from app.services.food_recipes import FoodRecipeCatalogueService, RecipeNotFoundError
 from app.services.households import HouseholdService
 from app.services.meal_patterns import MealPatternCatalogueService
