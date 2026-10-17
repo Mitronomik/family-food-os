@@ -10,7 +10,6 @@ from uuid import UUID
 
 from app.domain.meal_patterns import MealPatternTagKind
 from app.domain.meal_plans import MealPlanDetail
-from app.domain.recipe_nutrition_v2 import RecipeNutritionConsumptionProjection
 from app.domain.planner import (
     ROLE_COMPATIBILITY_V1,
     FixedPlannerEvent,
@@ -24,6 +23,7 @@ from app.domain.planner import (
     generate_week,
     with_duration,
 )
+from app.domain.recipe_nutrition_v2 import RecipeNutritionConsumptionProjection
 from app.services.food_recipes import FoodRecipeCatalogueService, RecipeNotFoundError
 from app.services.households import HouseholdService
 from app.services.meal_patterns import MealPatternCatalogueService
@@ -310,11 +310,21 @@ class PlannerService:
                 )
             )
         candidates = []
-        for recipe in self._recipes.list_active(limit=200):
-            detail = self._recipes.get_current_verified(recipe.id)
-            calculated = self._recipe_nutrition.neutral_consumption_projection(
-                detail.version.id
-            )
+        # list_active(limit=200) silently drops valid recipes beyond the first
+        # page. list_all has the same deterministic catalogue ordering but is
+        # exhaustive; unsupported/incomplete recipe rows cannot poison a week.
+        # compose_candidate_admission() remains the detailed reviewer-facing
+        # source of per-recipe rejection reasons.
+        for recipe in self._recipes.list_all():
+            if not recipe.is_active:
+                continue
+            try:
+                detail = self._recipes.get_current_verified(recipe.id)
+                calculated = self._recipe_nutrition.neutral_consumption_projection(
+                    detail.version.id
+                )
+            except (RecipeNotFoundError, RecipeNutritionV2UnavailableError):
+                continue
             candidates.append(
                 PlannerCandidate(
                     detail.version.id,

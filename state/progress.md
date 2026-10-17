@@ -1,3 +1,11 @@
+# AUDIT-PLANNER — correction to expanded V2 CI, #226 merged — 2026-10-17
+
+- Confirmed [#226](https://github.com/Mitronomik/family-food-os/pull/226) merged at `2e2707349b1c677468e33aadd1a4d8cc411ce5ec`; its scripts no longer falsely signal successful unsupported backup/restore/startup.
+- PR [#227](https://github.com/Mitronomik/family-food-os/pull/227) still open. Full Planner catalogue now uses `list_all()`, filters only inactive/unverified/unprojectable source cases; fixed pre-existing Step10B integration test adapter and included test in focused CI after two broad V2 workflow failures on prior HEAD. Branch incorporates #226 main and state is reconciled.
+- No new portion thresholds, calorie targets, Pantry FEFO safety claims, schema or Gate2 work. `PR10-FD-META=BLOCKED`, `TIME_UNRESOLVED` remain. Exact-head review/CI needed before PR #227 merge.
+
+---
+
 # AUDIT-OPS-SAFETY — post-#224 remediation scope — 2026-10-17
 
 - PR #224 merged (`2de47a9bc5df78824a7596ac1614d4e33d556daa`), fixed prior source-pin/temporary SQLite/CLI overwrite defects. **PR10-FD-META still BLOCKED**, `TIME_UNRESOLVED`, no safe storage/use authority or Prep runtime.

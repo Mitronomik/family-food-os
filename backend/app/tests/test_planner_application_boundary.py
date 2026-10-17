@@ -4,14 +4,13 @@ from decimal import Decimal
 from types import SimpleNamespace
 
 import pytest
-
 from app.domain.food_recipes import MealTypeCode
 from app.domain.households import HouseholdState
 from app.domain.meal_patterns import MealRole
 from app.domain.nutrition import NutritionStatus, NutritionValues
-from app.domain.planner import PlannerConfig
+from app.domain.planner import PlannerConfig, PlannerFailureCode
+from app.services.food_recipes import RecipeNotFoundError
 from app.services.meal_plans import MealPlanNotFoundError
-from app.services.recipe_nutrition_v2 import RecipeNutritionV2UnavailableError
 from app.services.planner import (
     AuthoritativeGenerationRequest,
     GenerationMemberConstraints,
@@ -21,6 +20,7 @@ from app.services.planner import (
     PlannerService,
     RecommenderRequest,
 )
+from app.services.recipe_nutrition_v2 import RecipeNutritionV2UnavailableError
 from app.tests.test_planner import selection, uid
 
 
@@ -135,7 +135,6 @@ def service():
     return planner, command, meals, pantry, recipes, nutrition
 
 
-
 class AdmissionRecipes:
     def __init__(self):
         self.rows = (
@@ -192,7 +191,6 @@ class AdmissionNutrition:
         return SimpleNamespace(exact_energy_ready=True)
 
 
-
 class LargeAdmissionRecipes:
     def __init__(self, count: int = 250):
         self.rows = tuple(
@@ -244,7 +242,6 @@ def test_candidate_admission_is_exhaustive_beyond_200_rows() -> None:
     assert admissions[-1].canonical_code == "READY_MAIN_249"
 
 
-
 def test_candidate_admission_sees_blocked_catalogue_without_selecting_it() -> None:
     household_id, member_id = uid(1), uid(2)
     planner = PlannerService(
@@ -262,9 +259,7 @@ def test_candidate_admission_sees_blocked_catalogue_without_selecting_it() -> No
     by_code = {item.canonical_code: item for item in admissions}
     assert by_code["READY_MAIN"].eligible is True
     assert by_code["READY_MAIN"].blockers == ()
-    assert by_code["INACTIVE_BREAKFAST"].blockers == (
-        PlannerAdmissionBlocker.INACTIVE,
-    )
+    assert by_code["INACTIVE_BREAKFAST"].blockers == (PlannerAdmissionBlocker.INACTIVE,)
     assert by_code["ACTIVE_OTHER"].blockers == (
         PlannerAdmissionBlocker.ROLE_UNSUPPORTED,
     )
@@ -272,7 +267,6 @@ def test_candidate_admission_sees_blocked_catalogue_without_selecting_it() -> No
         PlannerAdmissionBlocker.NUTRITION_UNAVAILABLE,
     )
     assert all(item.recipe_version_id is not None for item in admissions)
-
 
 
 def test_authoritative_composition_owns_selection_recipe_nutrition_and_pantry() -> None:
@@ -328,7 +322,9 @@ def test_previous_week_history_is_scoped_and_exact_revision_is_traced() -> None:
         planner.compose_authoritative_request(command)
 
 
-def test_authoritative_generation_accepts_v2_exact_energy_without_legacy_complete() -> None:
+def test_authoritative_generation_accepts_v2_exact_energy_without_legacy_complete() -> (
+    None
+):
     planner, command, meals, _, _, nutrition = service()
     nutrition.status = NutritionStatus.INCOMPLETE
     nutrition.exact_energy_ready = True
@@ -415,11 +411,9 @@ def test_v04_authoritative_generation_persists_v04_config_after_success() -> Non
     assert result.trace.config_version == "planner-v0.4"
     assert detail is not None
     assert meals.writes[-1]["config_version"] == "planner-v0.4"
-    assert {
-        portion
-        for event in result.events
-        for _, portion in event.portions
-    } == {Decimal("1.000000")}
+    assert {portion for event in result.events for _, portion in event.portions} == {
+        Decimal("1.000000")
+    }
 
 
 def test_authoritative_generation_does_not_enable_reference_pins_by_default() -> None:
@@ -463,3 +457,119 @@ def test_catalogue_backed_recommender_has_stable_evidence_and_never_accepts_obje
         RecommenderRequest(age_years=35, medical_or_therapeutic_request=True)
     )
     assert medical.unsupported_reason == "MEDICAL_OR_THERAPEUTIC_REQUEST_UNSUPPORTED"
+
+
+class FaultyGenerationRecipes(Recipes):
+    """Some active catalogue rows are not ready, and order is still exhaustive."""
+
+    def list_all(self):
+        return [
+            SimpleNamespace(id=uid(10), canonical_code="GOOD", is_active=True),
+            SimpleNamespace(id=uid(11), canonical_code="INACTIVE", is_active=False),
+            SimpleNamespace(id=uid(12), canonical_code="NO_VERSION", is_active=True),
+            SimpleNamespace(id=uid(13), canonical_code="NO_NUTRITION", is_active=True),
+        ]
+
+    def list_active(self, *, limit):
+        raise AssertionError("Planner must not use a bounded list_active")
+
+    def get_current_verified(self, recipe_id):
+        if recipe_id == uid(12):
+            raise RecipeNotFoundError(recipe_id)
+        detail = super().get_current_verified(recipe_id)
+        return SimpleNamespace(
+            version=SimpleNamespace(
+                id=uid(600 + int(str(recipe_id)[-3:])),
+                meal_type_code=detail.version.meal_type_code,
+                total_time_minutes=detail.version.total_time_minutes,
+                batch_friendly=detail.version.batch_friendly,
+            ),
+            ingredients=detail.ingredients,
+        )
+
+
+class FaultyGenerationNutrition(Nutrition):
+    def neutral_consumption_projection(self, version_id):
+        if version_id == uid(613):
+            raise RecipeNutritionV2UnavailableError("Unreviewed nutrition")
+        return super().neutral_consumption_projection(version_id)
+
+
+def _planner_with_catalogue(recipes, nutrition):
+    household_id, member_id = uid(1), uid(2)
+    plans = MealPlans(household_id, member_id)
+    planner = PlannerService(
+        plans,
+        Households(household_id, member_id),
+        recipes,
+        nutrition,
+        Pantry(),
+        PlannerConfig(max_recipe_repetitions=10),
+        recipe_nutrition=nutrition,
+    )
+    command = AuthoritativeGenerationRequest(
+        household_id, date(2026, 9, 14), (GenerationMemberConstraints(member_id),)
+    )
+    return planner, command, plans
+
+
+def test_composition_skips_only_unavailable_candidate_authority() -> None:
+    planner, command, _ = _planner_with_catalogue(
+        FaultyGenerationRecipes(), FaultyGenerationNutrition()
+    )
+    request = planner.compose_authoritative_request(command)
+    assert tuple(x.recipe_version_id for x in request.candidates) == (uid(610),)
+    assert request.candidates[0].exact_energy_ready is False
+
+
+def test_absent_candidate_data_yields_bounded_planner_failure_no_write() -> None:
+    class NoCurrentVersions(FaultyGenerationRecipes):
+        def get_current_verified(self, recipe_id):
+            raise RecipeNotFoundError(recipe_id)
+
+    planner, command, plans = _planner_with_catalogue(
+        NoCurrentVersions(), FaultyGenerationNutrition()
+    )
+    result, detail = planner.generate_authoritative(command)
+    assert detail is None
+    assert result.trace.failure_code is PlannerFailureCode.NO_ELIGIBLE_CANDIDATE
+    assert plans.writes == []
+
+
+class LargeGenerationRecipes(Recipes):
+    def list_all(self):
+        return [
+            SimpleNamespace(
+                id=uid(10000 + index),
+                canonical_code=f"ACTIVE_{index:03d}",
+                is_active=True,
+            )
+            for index in range(235)
+        ]
+
+    def list_active(self, *, limit):
+        raise AssertionError("The 200-item API cap is not a Planner candidate cap")
+
+    def get_current_verified(self, recipe_id):
+        original = super().get_current_verified(recipe_id)
+        return SimpleNamespace(
+            version=SimpleNamespace(
+                id=recipe_id,
+                meal_type_code=original.version.meal_type_code,
+                total_time_minutes=original.version.total_time_minutes,
+                batch_friendly=original.version.batch_friendly,
+            ),
+            ingredients=original.ingredients,
+        )
+
+
+def test_authoritative_pool_includes_all_235_active_versions() -> None:
+    planner, command, _ = _planner_with_catalogue(LargeGenerationRecipes(), Nutrition())
+    request = planner.compose_authoritative_request(command)
+    assert len(request.candidates) == 235
+    assert request.candidates[0].recipe_version_id == uid(10000)
+    assert request.candidates[-1].recipe_version_id == uid(10234)
+    assert all(item.is_verified for item in request.candidates)
+    assert (
+        request.candidates == planner.compose_authoritative_request(command).candidates
+    )

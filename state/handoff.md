@@ -1,3 +1,10 @@
+# AUDIT-PLANNER — post-#226 test contract reconciliation — 2026-10-17
+
+`main@2e2707349b1c677468e33aadd1a4d8cc411ce5ec` includes merged #226 operational placeholder fail-closed fix. PR [#227](https://github.com/Mitronomik/family-food-os/pull/227) implements exhaustive, source-backed candidate enumeration; original `_Recipes` test adapter in `test_step10b_planner_mealplan_v2.py` used only `list_active(limit=200)`, causing Nutrient registry V2 and Partial nutrition profiles CI failures. Updated adapter to `list_all()` returning active recipe, extended focused CI to execute the integration test. Branch reconciled with accepted main; no production Planner revert to bounded list.
+Await exact-head focused + both V2 workflows, independent review, then owner merge. Source-specific cooked-food freezing remains **BLOCKED/TIME_UNRESOLVED**. Further audit tracks tracked separately in [Issue #225](https://github.com/Mitronomik/family-food-os/issues/225); no source/safety/Planner serving or Pantry contract changed.
+
+---
+
 # AUDIT-OPS-SAFETY — post-#224 safe operational scripts handoff — 2026-10-17
 
 Confirmed #224 merged to `main@2de47a9bc5df78824a7596ac1614d4e33d556daa`; its exact-head research proof remains `FD-META=BLOCKED`/`TIME_UNRESOLVED` and **does not enable cooked-food freezing runtime**. Audit Issue [#225](https://github.com/Mitronomik/family-food-os/issues/225) tracks Planner/Pantry/source-snapshot/release follow-up. This branch changes only five unsupported TODO operational scripts to fail explicitly with exit 78, focused safety tests/CI, and these state headers. Do not conflate this with functional startup or backup/restore support.
