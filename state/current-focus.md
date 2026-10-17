@@ -1,3 +1,11 @@
+# P1-PLANNER-SERVING-CONTRACT — portion feasibility decision gate — 2026-10-17
+
+**Accepted main:** `65c3aaeee8376a14a80af29c1a0fc6d0b5145c5b` ([PR #227](https://github.com/Mitronomik/family-food-os/pull/227) merged 2026-10-17T07:19:23Z). Full active candidate admission, legacy Step10B integration and state update are accepted.
+**Current bounded task:** [Issue #228](https://github.com/Mitronomik/family-food-os/issues/228), branch `docs/planner-serving-plausibility-gate`; docs-only [serving-feasibility proposal](../docs/family-food/planner-serving-plausibility-contract-2026-10-17.md). Define source-specific edible output/portion evidence, per-member preselection review and fail-closed unknowns, without implementing a new numeric policy.
+**Not authorized:** Planner portion cap, arbitrary grams or kcal defaults, partial-profile/under-3 target fallback, Pantry availability, schema/API/Shopping/PWA changes or Prep runtime. Any algorithmic version or accepted data change requires separate reviewed approval. [Audit #225](https://github.com/Mitronomik/family-food-os/issues/225) tracks remaining work. **`PR10-FD-META=BLOCKED` and `TIME_UNRESOLVED`**, D3 source/safety and Gate2 remain blocked. No autonomous merge.
+
+---
+
 # AUDIT-PLANNER — candidate admission review after merged #226 — 2026-10-17
 
 **Accepted `main`:** `2e2707349b1c677468e33aadd1a4d8cc411ce5ec` ([PR #226](https://github.com/Mitronomik/family-food-os/pull/226) merged). **Current bounded review:** [PR #227](https://github.com/Mitronomik/family-food-os/pull/227), `fix/audit-planner-admission-exhaustive`, addresses exhaustive verified Planner candidates and updates the legacy `step10b` V2 nutrition test adapter to `list_all()`. PR #227 is **OPEN / not merged**; independent review and exact-head CI required.
