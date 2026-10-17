@@ -5,6 +5,7 @@ on:
     paths:
       - 'backend/app/services/planner.py'
       - 'backend/app/tests/test_planner_application_boundary.py'
+      - 'backend/app/tests/test_step10b_planner_mealplan_v2.py'
       - '.github/workflows/planner-admission-current-head.yml'
 
 permissions:
@@ -30,14 +31,15 @@ jobs:
           python -m pytest -q \
             backend/app/tests/test_planner_application_boundary.py \
             backend/app/tests/test_planner.py \
-            backend/app/tests/test_planner_gate1_fixtures.py --tb=short
+            backend/app/tests/test_planner_gate1_fixtures.py \
+            backend/app/tests/test_step10b_planner_mealplan_v2.py --tb=short
       - name: Focused Ruff check and format
         run: |
           # The pre-existing files have unrelated B008/C409/FURB157 debt;
           # this added workflow checks syntax, undefined names, imports and format.
-          python -m ruff format --diff backend/app/services/planner.py backend/app/tests/test_planner_application_boundary.py
-          python -m ruff check --select E4,E7,E9,F,I backend/app/services/planner.py backend/app/tests/test_planner_application_boundary.py
-          python -m ruff format --check backend/app/services/planner.py backend/app/tests/test_planner_application_boundary.py
+          python -m ruff format --diff backend/app/services/planner.py backend/app/tests/test_planner_application_boundary.py backend/app/tests/test_step10b_planner_mealplan_v2.py
+          python -m ruff check --select E4,E7,E9,F,I backend/app/services/planner.py backend/app/tests/test_planner_application_boundary.py backend/app/tests/test_step10b_planner_mealplan_v2.py
+          python -m ruff format --check backend/app/services/planner.py backend/app/tests/test_planner_application_boundary.py backend/app/tests/test_step10b_planner_mealplan_v2.py
       - name: PR whitespace
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
