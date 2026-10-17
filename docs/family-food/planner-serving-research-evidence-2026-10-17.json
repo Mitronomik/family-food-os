@@ -1,0 +1,145 @@
+{
+  "schema": "P1_PLANNER_SERVING_RESEARCH_RECEIPT_V1",
+  "issue": 230,
+  "source_pr": 229,
+  "accepted_base_main_sha": "3c5663b3b87f6f9f83b511d8a9e465a9bc85e60d",
+  "scope": "BOUNDED_EXISTING_SCHOOL2022_3_RECIPE_HISTORICAL_DC4_MANIFEST_REVIEW",
+  "method": "DOCUMENT_AND_PINNED_MANIFEST_AUDIT_NO_CURRENT_LIVE_DB_NO_NEW_EXTERNAL_SOURCE_REVIEW",
+  "references": {
+    "contract": "docs/family-food/planner-serving-plausibility-contract-2026-10-17.md",
+    "historical_dc4_fixture": "data/curation/dc4-corpus-readiness/rerun-summary.json",
+    "fixture_git_blob_sha": "fb9c7be7914765a14622c012666077e5f3dc0d79"
+  },
+  "historical_catalogue_snapshot": {
+    "active_recipes": 51,
+    "source": "DC4 ACCEPTED HISTORICAL RECEIPT ONLY",
+    "fresh_current_main_catalogue_asserted": false
+  },
+  "historical_three_member_fixture": {
+    "members": 3,
+    "days": 7,
+    "meal_events": 21,
+    "servings": 42,
+    "planner_version": "planner-v0.5",
+    "role_patterns": [
+      [
+        "BREAKFAST",
+        "LUNCH",
+        "DINNER"
+      ],
+      [
+        "BREAKFAST",
+        "DINNER"
+      ],
+      [
+        "DINNER"
+      ]
+    ],
+    "trace_fingerprint": "7ba01854925d2598ab54dab2a78b87a41db57e5f8e2f8cd6a6a93d67d32fede2",
+    "individual_member_event_pins_for_this_receipt": "NOT_CAPTURED_NOT_INFERRED",
+    "accepted_member_reference_kcal_for_this_receipt": "NOT_CAPTURED_NOT_INFERRED"
+  },
+  "cohort": [
+    {
+      "canonical_code": "SCHOOL2022_54_2M_BEEF_GOULASH",
+      "canonical_name_ru": "Гуляш из говядины",
+      "historical_dc4_recipe_version_id": "4e6eac51-384e-40d5-8f89-24943cbfc38e",
+      "historical_dc4_catalogue_disposition": "PASS",
+      "historical_dc4_exact_energy_ready": true,
+      "manifest_path": "data/curation/r1g-catalogue-capacity-expansion/prepared-publication-specs.json",
+      "manifest_git_blob_sha": "394b35d3d02c0498a681584a37d36b1d98faf40d",
+      "source_recipe_id": "ru-school2022:recipe:54-2м",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_card_sha256": "d48a9461e98d4d2df0056c379722dc9e6ed248dc74ce65a4a118a1165565209d",
+      "source_variant_sha256": "7ffd4745e935e92e142d7dd4cdb11d9878cd0901bc599bed1d439eb452bb9610",
+      "rights_review_status": "REVIEWED",
+      "meal_type_code": "main",
+      "source_original_servings": "1",
+      "base_servings": "1",
+      "source_output_g": "80",
+      "manifest_expected_energy_kcal_per_base_serving": "185.6",
+      "source_output_semantics": "SOURCE_DECLARED_PREPARED_OUTPUT_AT_ORIGINAL_BASE_NOT_VALIDATED_ANY_TARGET_SCALE",
+      "physical_portion_policy_status": "NO_APPLICABLE_ACCEPTED_POLICY_IDENTIFIED_IN_REVIEWED_INPUTS",
+      "scale_applicability_status": "NOT_INDEPENDENTLY_ESTABLISHED_FOR_ARBITRARY_PLANNER_SERVING",
+      "individually_plausible_member_portion": "UNKNOWN"
+    },
+    {
+      "canonical_code": "SCHOOL2022_54_6R_PINK_SALMON_IN_MILK",
+      "canonical_name_ru": "Рыба, припущенная в молоке (горбуша)",
+      "historical_dc4_recipe_version_id": "ab8d55dc-ce6f-4072-a6bf-e4f68f1f3977",
+      "historical_dc4_catalogue_disposition": "PASS",
+      "historical_dc4_exact_energy_ready": true,
+      "manifest_path": "data/curation/r2b-fish-main-diversity/publication-specs.json",
+      "manifest_git_blob_sha": "b4ad353c4c9e955b64fb8b155cc98a1530aeb3a8",
+      "source_recipe_id": "ru-school2022:recipe:54-6р",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_card_sha256": "507b25f2bb485cb9e151773b06feb82b948df46c1cb2be53298ad41c50ce95ab",
+      "source_variant_sha256": "7be0d91dcdcfd49197e58758249ce667fd6af7434f617a074c1ffab14534b8f5",
+      "rights_review_status": "REVIEWED",
+      "meal_type_code": "main",
+      "source_original_servings": "1",
+      "base_servings": "1",
+      "source_output_g": "80",
+      "manifest_expected_energy_kcal_per_base_serving": "144.8",
+      "source_output_semantics": "SOURCE_DECLARED_PREPARED_OUTPUT_AT_ORIGINAL_BASE_NOT_VALIDATED_ANY_TARGET_SCALE",
+      "physical_portion_policy_status": "NO_APPLICABLE_ACCEPTED_POLICY_IDENTIFIED_IN_REVIEWED_INPUTS",
+      "scale_applicability_status": "NOT_INDEPENDENTLY_ESTABLISHED_FOR_ARBITRARY_PLANNER_SERVING",
+      "individually_plausible_member_portion": "UNKNOWN"
+    },
+    {
+      "canonical_code": "SCHOOL2022_54_2O_GREEN_PEA_OMELET",
+      "canonical_name_ru": "Омлет с зеленым горошком",
+      "historical_dc4_recipe_version_id": "43e34739-aff2-4954-a5e4-2e476f54d614",
+      "historical_dc4_catalogue_disposition": "PASS",
+      "historical_dc4_exact_energy_ready": true,
+      "manifest_path": "data/curation/r3b-school2022-breakfast-batch/publication-specs.json",
+      "manifest_git_blob_sha": "96d134265a8c256e34ad985670feed8ca56c295d",
+      "source_recipe_id": "ru-school2022:recipe:54-2о",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_card_sha256": null,
+      "source_variant_sha256": null,
+      "rights_review_status": "REVIEWED",
+      "meal_type_code": "breakfast",
+      "source_original_servings": "1",
+      "base_servings": "1",
+      "source_output_g": "150",
+      "manifest_expected_energy_kcal_per_base_serving": "153.5",
+      "source_output_semantics": "SOURCE_DECLARED_PREPARED_OUTPUT_AT_ORIGINAL_BASE_NOT_VALIDATED_ANY_TARGET_SCALE",
+      "physical_portion_policy_status": "NO_APPLICABLE_ACCEPTED_POLICY_IDENTIFIED_IN_REVIEWED_INPUTS",
+      "scale_applicability_status": "NOT_INDEPENDENTLY_ESTABLISHED_FOR_ARBITRARY_PLANNER_SERVING",
+      "individually_plausible_member_portion": "UNKNOWN"
+    }
+  ],
+  "physical_feasibility_policy": {
+    "platform_reviewed_applicable_profile_in_audited_inputs": null,
+    "source_scope": "Merged #229 contract states no accepted PortionFeasibilityProfile, and reviewed manifests provide recipe output, not member-specific physical bounds",
+    "not_global_nonexistence_claim": true,
+    "allowed_preference_as_alternative_authority": false
+  },
+  "research_gate": {
+    "RESEARCH_READY": false,
+    "positive_pinned_member_event_case": "NOT_DEMONSTRATED",
+    "negative_control": {
+      "synthetic": true,
+      "description": "Even when hypothetical user-confirmed preferred grams equal source output grams, absent reviewed physical portion policy leaves physical outcome UNKNOWN, not PASS.",
+      "expected_physical_outcome": "UNKNOWN_OUTPUT_OR_PORTION_POLICY",
+      "preference_outcome": "MATCHES_USER_PORTION_PREFERENCE",
+      "not_nutrition_or_safety_proof": true
+    },
+    "missing_evidence": [
+      "NO_ACCEPTED_REVIEWED_PHYSICAL_PORTION_PROFILE_FOR_SPECIFIC_MEMBER_CONTEXT",
+      "NO_VALIDATED_FINAL_COOKED_OUTPUT_SCALE_APPLICABILITY_TO_HYPOTHETICAL_SERVING",
+      "NO_PINNED_REAL_MEMBER_MEAL_EVENT_ACCEPTED_ENERGY_ALLOCATION_FOR_THIS_RECEIPT"
+    ]
+  },
+  "runtime_gate": {
+    "RUNTIME_READY": "NOT_EVALUATED",
+    "seven_day_three_member_strict_fixture_run": false,
+    "reason": "Research prerequisite not satisfied; historical Planner success is not strict physical feasibility proof"
+  },
+  "decision": "NO_GO_FOR_THIS_BOUNDED_RESEARCH_COHORT_ON_CURRENT_EVIDENCE",
+  "production_algorithm_or_data_changes": false,
+  "planner_option_A_or_B_selected": false,
+  "gate2_or_prep_unblocked": false,
+  "next_owner_decision": "Choose an explicit independently reviewable physical portion-policy source/publisher and context/form applicability, then authorize one narrow one-member/event source-scale audit; no universal limit or automatic runtime."
+}

@@ -1,3 +1,13 @@
+# P1-PLANNER-SERVING-RESEARCH — bounded RESEARCH_READY/NO_GO receipt — 2026-10-17
+
+**Accepted main:** `3c5663b3b87f6f9f83b511d8a9e465a9bc85e60d` ([PR #229](https://github.com/Mitronomik/family-food-os/pull/229) merged 2026-10-17T09:11:56Z). #229 is merged documentation/decision proposal; **Option A/B remains unselected**.
+
+**Current bounded task:** [Issue #230](https://github.com/Mitronomik/family-food-os/issues/230), `research/planner-serving-readiness-after-229`. [Three-recipe source/policy receipt](../docs/family-food/planner-serving-research-readiness-2026-10-17.md) and [machine evidence](../docs/family-food/planner-serving-research-evidence-2026-10-17.json) record scoped `NO_GO`: source output/kcal have historical pins, but no accepted physical portion-policy authority and no verified target-scale/member-event positive proof. This is **not** a global catalogue conclusion; `RUNTIME_READY` is not evaluated. Await exact-head Docs CI and independent review; no autonomous merge.
+
+**Not authorized:** arbitrary portion caps, Planner runtime/algorithm version, accepted nutrition/profile defaults, RecipeVersion publication, API/migrations/Shopping/Prep/PDF/Gate2 or strict Option A activation. `PR10-FD-META=BLOCKED`, `TIME_UNRESOLVED` remain. Next policy-source ownership/authority decision belongs to product owner.
+
+---
+
 # P1-PLANNER-SERVING-CONTRACT — portion feasibility decision gate — 2026-10-17
 
 **PR #229 independent-review corrections (same docs-only branch; NOT owner approval):** P2-1 now makes reviewed physical feasibility independent of the optional Household portion preference: `MATCHES_USER_PORTION_PREFERENCE` never yields `PASS_REVIEWED_FEASIBILITY`. P2-2 separates single-event `RESEARCH_READY` from mandatory three-member, complete-seven-day `RUNTIME_READY` evidence; missing proof or an infeasible week is explicit `NO_GO`. This PR establishes requirements **only**, not either evidence receipt, source policy approval, Option A/B selection or Planner runtime activation. After exact-head Docs CI, independent review and owner decision remain required. Gate2/Prep remains blocked.
