@@ -4,7 +4,6 @@ from decimal import Decimal
 from types import SimpleNamespace
 
 import pytest
-
 from app.domain.food_recipes import MealTypeCode
 from app.domain.households import HouseholdState
 from app.domain.meal_patterns import MealRole
@@ -12,7 +11,6 @@ from app.domain.nutrition import NutritionStatus, NutritionValues
 from app.domain.planner import PlannerConfig, PlannerFailureCode
 from app.services.food_recipes import RecipeNotFoundError
 from app.services.meal_plans import MealPlanNotFoundError
-from app.services.recipe_nutrition_v2 import RecipeNutritionV2UnavailableError
 from app.services.planner import (
     AuthoritativeGenerationRequest,
     GenerationMemberConstraints,
@@ -22,6 +20,7 @@ from app.services.planner import (
     PlannerService,
     RecommenderRequest,
 )
+from app.services.recipe_nutrition_v2 import RecipeNutritionV2UnavailableError
 from app.tests.test_planner import selection, uid
 
 
