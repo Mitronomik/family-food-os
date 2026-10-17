@@ -1,3 +1,11 @@
+# P1-PLANNER-SERVING-POLICY-SOURCES — research-only source decision handoff — 2026-10-17
+
+**Base:** merged #231 `main@702064b85e8f8d8decbd519a04b8d4204246dd5d`. **Current Issue #232**, branch `research/planner-serving-policy-sources-2026-10-17`; source applicability [Markdown](../docs/family-food/planner-serving-portion-policy-sources-2026-10-17.md) / [JSON](../docs/family-food/planner-serving-portion-policy-source-assessment-2026-10-17.json). External source research found enacted `СанПиН 2.3/2.4.4282-26` (2026-09-01) replacing `3590-20` and institutional child age/dish portion tables; adult regional Rospotrebnadzor material describes conditional food-group portions, **not a maximum completed recipe serving**. School MR 2.4.0179-20 (2026 revision) has different category endpoints; sources must not be reconciled by guessed averages. Source bytes/version/policy owner and actual member+form+scale mapping are **not** independently accepted. Any child's school-egg-breakfast contextual pilot is a **proposal for owner choice**, not an automatic task or published policy.
+
+Next: verify exact-head Docs CI and independent PR review; human owner must separately approve/reject a single scoped source-ownership/applicability pilot. `RESEARCH_READY=false`, `RUNTIME_READY=NOT_EVALUATED`, Option A/B unapproved; no Planner/Pantry/Prep/Recipe/Catalogue runtime, new numbers or Gate2 work. `PR10-FD-META=BLOCKED / TIME_UNRESOLVED`; no autonomous merge.
+
+---
+
 # P1-PLANNER-SERVING-RESEARCH — handoff after merged #229 — 2026-10-17
 
 **Accepted base:** `main@3c5663b3b87f6f9f83b511d8a9e465a9bc85e60d` (#229 merged). **In-progress independent evidence review:** [Issue #230](https://github.com/Mitronomik/family-food-os/issues/230), branch `research/planner-serving-readiness-after-229`, [readiness report](../docs/family-food/planner-serving-research-readiness-2026-10-17.md) and [JSON pins](../docs/family-food/planner-serving-research-evidence-2026-10-17.json). Three historical DC4-eligible School2022 recipes have pinned original output/manifest energy, but **not** accepted person/context physical portion policy or proved arbitrary serving-scale applicability; hence bounded `NO_GO`, not `RESEARCH_READY`. Historical DC4 three-member 21-event/42-serving Planner proof is **not** full-week strict `RUNTIME_READY`; no new fixture executed.

@@ -1,3 +1,11 @@
+# P1-PLANNER-SERVING-POLICY-SOURCES — effective 2026 norms assessed — 2026-10-17
+
+- Verified [#231](https://github.com/Mitronomik/family-food-os/pull/231) merged as `main@702064b85e8f8d8decbd519a04b8d4204246dd5d`. Research NO-GO for exactly three School2022 source/form/member scenarios persists; it is **not** a catalogue-wide claim.
+- Opened [Issue #232](https://github.com/Mitronomik/family-food-os/issues/232) for source-applicability decision proposal: confirmed current `СанПиН 2.3/2.4.4282-26` effective 2026-09-01 superseding `3590-20`; distinguished Appendix 9 child *institutional* portions from school recommendations and adult food-group conditional quantities. No physical physiological safety cap, policy source bytes/hash publication or recipe-scale claim.
+- Recorded [human-readable report](../docs/family-food/planner-serving-portion-policy-sources-2026-10-17.md) and [source matrix JSON](../docs/family-food/planner-serving-portion-policy-source-assessment-2026-10-17.json). Pending docs/CI review. No Option A/B choice, no `RESEARCH_READY` or `RUNTIME_READY` advancement, no production changes; PR10-FD-META / Gate2 still blocked.
+
+---
+
 # P1-PLANNER-SERVING-RESEARCH — #229 merged, bounded evidence NO-GO proposal — 2026-10-17
 
 - Confirmed [PR #229](https://github.com/Mitronomik/family-food-os/pull/229) merged at `3c5663b3b87f6f9f83b511d8a9e465a9bc85e60d`. It introduced distinct `RESEARCH_READY` / `RUNTIME_READY` proof requirements, **not** a production portion policy or approved Option A/B.

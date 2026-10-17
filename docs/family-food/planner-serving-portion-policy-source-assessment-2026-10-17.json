@@ -1,0 +1,124 @@
+{
+  "schema": "P1_PLANNER_SERVING_POLICY_SOURCE_ASSESSMENT_V1",
+  "issue": 232,
+  "review_date": "2026-10-17",
+  "accepted_main_sha": "702064b85e8f8d8decbd519a04b8d4204246dd5d",
+  "previous_pr": 231,
+  "purpose": "DOCUMENT_ONLY_SOURCE_APPLICABILITY_NO_PRODUCTION_POLICY",
+  "source_review": {
+    "RU_SANPIN_4282_26": {
+      "publisher": "Chief State Sanitary Physician of the Russian Federation / Rospotrebnadzor",
+      "document": "SanPiN 2.3/2.4.4282-26",
+      "enacted": "2026-06-02",
+      "effective": "2026-09-01",
+      "ends": "2032-09-01",
+      "replaced": "SanPiN 2.3/2.4.3590-20",
+      "official_publication_id": "0001202606020084",
+      "official_publication_url": "https://publication.pravo.gov.ru/document/0001202606020084",
+      "accessible_document_text_url": "https://www.garant.ru/products/ipo/prime/doc/414229257/",
+      "government_confirmation_url": "https://mru31.fmba.gov.ru/press-tsentr/detail/?ELEMENT_ID=87901",
+      "section": "Appendix 9 Table 1, children's dish portion masses by age",
+      "exemplars_context_only": [
+        {
+          "age": "7-11 years",
+          "category": "second meat/fish/poultry course",
+          "min_g": "90",
+          "max_g": "120"
+        },
+        {
+          "age": "7-11 years",
+          "category": "breakfast porridge/vegetable/egg/curd/meat dish",
+          "min_g": "150",
+          "max_g": "200"
+        },
+        {
+          "age": "12 years and older (children's institutional category)",
+          "category": "second meat/fish/poultry course",
+          "min_g": "100",
+          "max_g": "120"
+        }
+      ],
+      "context": "organized catering and children's group meals; does not purport to set universal household/physiological serving upper limits",
+      "official_document_direct_read_confirmed": false,
+      "source_bytes_sha256": null,
+      "legal_text_mirror_read": true,
+      "policy_status": "RESEARCH_ONLY_NOT_EXECUTABLE"
+    },
+    "RU_SCHOOL_MR_0179_20_2026": {
+      "document": "MR 2.4.0179-20",
+      "revision": "2026-02-25",
+      "url": "https://sudact.ru/law/mr-240179-20-24-gigiena-detei-i-podrostkov/mr-2.4.0179-20/ii/tablitsa-2/",
+      "section": "Table 2 recommended mass of servings for pupils",
+      "sample_7_11_meat_cutlet_g": "80-120",
+      "comparison": "Not identical to 2026 SanPiN 7-11 second course 90-120 g; don't mechanically harmonize school categories or assert hierarchy beyond source text",
+      "official_original_bytes_verified": false,
+      "source_bytes_sha256": null,
+      "policy_status": "RESEARCH_ONLY_NOT_EXECUTABLE"
+    },
+    "RU_ADULT_FOOD_GROUP_GUIDANCE": {
+      "publisher": "Rospotrebnadzor regional administration (Jewish Autonomous Oblast)",
+      "url": "https://79.rospotrebnadzor.ru/novosti/18558/",
+      "context": "adult diet self-planning food-group conditional serving sizes",
+      "example": "85-90 g cooked meat/fish as one conditional portion; different activities may imply multiple food-group portions",
+      "caveat": "not universal safe maximum for a finished multi-ingredient recipe or a meal",
+      "source_bytes_sha256": null,
+      "policy_status": "RESEARCH_ONLY_NOT_EXECUTABLE"
+    },
+    "NIDDK_PORTION_VS_LABEL": {
+      "url": "https://www.niddk.nih.gov/health-information/weight-management/just-enough-food-portions",
+      "distinction": "person-chosen portion is distinct from product label serving; no universal weight range",
+      "source_bytes_sha256": null,
+      "policy_status": "CONTEXT_ONLY"
+    },
+    "USDA_FBG": {
+      "url": "https://foodbuyingguide.fns.usda.gov/Home/About",
+      "scope": "US child-nutrition program yield, purchased/edible forms, planned portions and meal-component credit; not Russian household physical maximum",
+      "source_bytes_sha256": null,
+      "policy_status": "CONTEXT_ONLY"
+    }
+  },
+  "historical_three_recipe_application": [
+    {
+      "code": "SCHOOL2022_54_2M_BEEF_GOULASH",
+      "source_output_g": "80",
+      "disputed_mapping": "main meat-with-sauce output not proven identical to SanPiN second-course meat-only/whole plate unit",
+      "member_context": "NOT_PINNED",
+      "scale_applicability": "UNVERIFIED",
+      "physical_result": "UNKNOWN_OUTPUT_OR_PORTION_POLICY"
+    },
+    {
+      "code": "SCHOOL2022_54_6R_PINK_SALMON_IN_MILK",
+      "source_output_g": "80",
+      "disputed_mapping": "fish plus sauce/milk output; category-specific portion bound not automatically applicable to this recipe",
+      "member_context": "NOT_PINNED",
+      "scale_applicability": "UNVERIFIED",
+      "physical_result": "UNKNOWN_OUTPUT_OR_PORTION_POLICY"
+    },
+    {
+      "code": "SCHOOL2022_54_2O_GREEN_PEA_OMELET",
+      "source_output_g": "150",
+      "disputed_mapping": "school breakfast egg dish is a possible contextual category, but member age, exact occasion and scale mapping are unverified",
+      "member_context": "NOT_PINNED",
+      "scale_applicability": "UNVERIFIED",
+      "physical_result": "UNKNOWN_OUTPUT_OR_PORTION_POLICY"
+    }
+  ],
+  "gates": {
+    "research_ready": false,
+    "runtime_ready": "NOT_EVALUATED",
+    "option_A_approved": false,
+    "option_B_approved": false,
+    "production_portion_policy_published": false
+  },
+  "research_decision": "CANDIDATE_REFERENCES_FOUND_NO_EXECUTABLE_PERSON_SPECIFIC_POLICY",
+  "next_decision_owner_required": "Explicitly approve or reject one bounded age/dish source-curation pilot, identify policy curator and review authority; independent source snapshot, rights and actual member-event/scale validity must be proven before PASS",
+  "not_authorized": [
+    "HARD_MAX_PORTION_G",
+    "ANY_ADULT_CHILD_FALLBACK",
+    "USE_OLD_3590_20_AS_CURRENT_RULE",
+    "ASSUME_MR_AND_SANPIN_BOUNDS_IDENTICAL",
+    "RUNTIME_PLANNER_VERSION",
+    "POLICY_PROFILE_PUBLICATION",
+    "GATE2_OR_PREP"
+  ]
+}
