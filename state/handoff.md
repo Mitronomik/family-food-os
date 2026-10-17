@@ -1,3 +1,10 @@
+# AUDIT-OPS-SAFETY — post-#224 safe operational scripts handoff — 2026-10-17
+
+Confirmed #224 merged to `main@2de47a9bc5df78824a7596ac1614d4e33d556daa`; its exact-head research proof remains `FD-META=BLOCKED`/`TIME_UNRESOLVED` and **does not enable cooked-food freezing runtime**. Audit Issue [#225](https://github.com/Mitronomik/family-food-os/issues/225) tracks Planner/Pantry/source-snapshot/release follow-up. This branch changes only five unsupported TODO operational scripts to fail explicitly with exit 78, focused safety tests/CI, and these state headers. Do not conflate this with functional startup or backup/restore support.
+After independent review/merge, prioritize a separately scoped Planner candidate-admission reliability investigation, then require owner-approved source-backed serving/missing-profile rules before modifying the Planner optimizer. Pantry `consume` is actual-use accounting, **not a food safety recommendation**. No unapproved contract/gate move, no auto merge.
+
+---
+
 # PR10-FD-META — finished goulash source + two-event research handoff — 2026-10-13
 
 `main@89b13a61fbfb8bb6246b7fb39ad8b3a1a3acf352` (#222 merged). Issue #223 / `research/pr10-fd-meta-goulash`. Read [FD-ARCH](../docs/family-food/pr10-finished-dish-first-amendment-2026-10-12.md), [source review](../docs/family-food/pr10-fd-meta-goulash-source-review.md), [source evidence](../docs/family-food/pr10-fd-meta-goulash-source-evidence.json). Target = already source-verified `SCHOOL2022_54_2M_BEEF_GOULASH`, not a new catalogue import.
