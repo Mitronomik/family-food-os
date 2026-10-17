@@ -1,3 +1,10 @@
+# P1-PLANNER-SERVING-CONTRACT — post-#227 product-quality policy review — 2026-10-17
+
+`main@65c3aaeee8376a14a80af29c1a0fc6d0b5145c5b` includes merged #227 (exhaustive source-verified Planner candidate composition and corrected V2 test adapter). Current Issue [#228](https://github.com/Mitronomik/family-food-os/issues/228), branch `docs/planner-serving-plausibility-gate`, [draft contract](../docs/family-food/planner-serving-plausibility-contract-2026-10-17.md).
+Planner v0.4/v0.5 selects recipes by score **before** computing individual `allocated_kcal/kcal_per_base_serving`, potentially physically enormous portions. Docs proposal requires reviewed final cooked output form and member-context bounds, per-member feasibility before selection, explicit UNKNOWN, no calorie clipping or fake kcal, and separate source-read/policy gates. **No runtime, no source/policy publication, no schema or Gate1/Gate2 switch.** Missing Household profile/under-3 fallback stays separate in Issue #225. After owner review, authorize one bounded data-readiness receipt only if specific evidence/acceptance prerequisites are agreed; no automatic merge or feature implementation. FD-META remains BLOCKED/TIME_UNRESOLVED.
+
+---
+
 # AUDIT-PLANNER — post-#226 test contract reconciliation — 2026-10-17
 
 `main@2e2707349b1c677468e33aadd1a4d8cc411ce5ec` includes merged #226 operational placeholder fail-closed fix. PR [#227](https://github.com/Mitronomik/family-food-os/pull/227) implements exhaustive, source-backed candidate enumeration; original `_Recipes` test adapter in `test_step10b_planner_mealplan_v2.py` used only `list_active(limit=200)`, causing Nutrient registry V2 and Partial nutrition profiles CI failures. Updated adapter to `list_all()` returning active recipe, extended focused CI to execute the integration test. Branch reconciled with accepted main; no production Planner revert to bounded list.
