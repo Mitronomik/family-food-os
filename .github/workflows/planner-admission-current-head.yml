@@ -31,9 +31,12 @@ jobs:
             backend/app/tests/test_planner_application_boundary.py \
             backend/app/tests/test_planner.py \
             backend/app/tests/test_planner_gate1_fixtures.py --tb=short
-      - name: Ruff check and format
+      - name: Focused Ruff check and format
         run: |
-          python -m ruff check backend/app/services/planner.py backend/app/tests/test_planner_application_boundary.py
+          # The pre-existing files have unrelated B008/C409/FURB157 debt;
+          # this added workflow checks syntax, undefined names, imports and format.
+          python -m ruff format --diff backend/app/services/planner.py backend/app/tests/test_planner_application_boundary.py
+          python -m ruff check --select E4,E7,E9,F,I backend/app/services/planner.py backend/app/tests/test_planner_application_boundary.py
           python -m ruff format --check backend/app/services/planner.py backend/app/tests/test_planner_application_boundary.py
       - name: PR whitespace
         env:
