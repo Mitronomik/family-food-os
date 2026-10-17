@@ -1,3 +1,11 @@
+# AUDIT-OPS-SAFETY — post-#224 state reconciliation and no-op scripts — 2026-10-17
+
+**Accepted main:** `2de47a9bc5df78824a7596ac1614d4e33d556daa` ([PR #224](https://github.com/Mitronomik/family-food-os/pull/224) merged 2026-10-17T05:56:48Z). [October audit triage Issue #225](https://github.com/Mitronomik/family-food-os/issues/225) separates confirmed defects from approved Planner/Pantry contract decisions.
+**Current bounded authorized operation:** branch `fix/audit-operational-placeholders-state` — make five unsupported dev/start/backup/restore shell entrypoints return nonzero, add focused tests/CI, reconcile state. **No actual launcher, backup or restore is implemented by these scripts.** Existing supported launcher/backup paths are untouched.
+**PR10-FD-META=BLOCKED**, `TIME_UNRESOLVED`: merged #224 proved research-only two-event MealPlan and source-pin integrity but did NOT approve safe cooked-goulash cold storage, batch capacity or RU policy. D3 publication reader, Gate2 fixture change, Prep runtime/PDF remain gated. Planner serving plausibility, incomplete-member targets, candidate admission, Pantry availability and snapshot consistency are **separate audit tracks needing reviewed bounded contracts/PRs**, not changes authorized by this operational fix. No autonomous merge.
+
+---
+
 # PR10-FD-META — one finished cooked goulash research proof — 2026-10-13
 
 **Accepted main:** `89b13a61fbfb8bb6246b7fb39ad8b3a1a3acf352` (PR #222 merged). [FD-ARCH](../docs/family-food/pr10-finished-dish-first-amendment-2026-10-12.md) accepted Finished-Dish-First direction and narrow D2-FD approach; **PR10-FD-META source and policy proof** is the only current supporting research stage.
