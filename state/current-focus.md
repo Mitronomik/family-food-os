@@ -1,3 +1,13 @@
+# P1-PLANNER-SERVING-POLICY-SOURCES — current RU portion evidence proposal — 2026-10-17
+
+**Accepted `main`:** `702064b85e8f8d8decbd519a04b8d4204246dd5d`; [PR #231](https://github.com/Mitronomik/family-food-os/pull/231) merged 2026-10-17T09:41:33Z. Its scoped three-recipe `NO_GO` is accepted as evidence only; `RESEARCH_READY=false`, `RUNTIME_READY=NOT_EVALUATED`.
+
+**Current bounded docs-only task:** [Issue #232](https://github.com/Mitronomik/family-food-os/issues/232), branch `research/planner-serving-policy-sources-2026-10-17`. [Research assessment](../docs/family-food/planner-serving-portion-policy-sources-2026-10-17.md) and [machine source matrix](../docs/family-food/planner-serving-portion-policy-source-assessment-2026-10-17.json) distinguish effective **2026** RU SanPiN 2.3/2.4.4282-26 child catering dish portions from non-binding adult food-group guidance, school MR and international examples. All are **research only**, no Platform PortionFeasibilityProfile or Option A/B decision. Await independent review/exact-head Docs CI; no autonomous merge.
+
+**Not authorized:** adopting numeric adult/child bounds, source profile publication, member-age fallback, strict Planner runtime, recipe/nutrition/API/migrations, Shopping/Pantry/Prep/PDF/Gate2. Policy source applicability/owner remains **product-owner decision**. `PR10-FD-META=BLOCKED`, `TIME_UNRESOLVED` unchanged.
+
+---
+
 # P1-PLANNER-SERVING-RESEARCH — bounded RESEARCH_READY/NO_GO receipt — 2026-10-17
 
 **Accepted main:** `3c5663b3b87f6f9f83b511d8a9e465a9bc85e60d` ([PR #229](https://github.com/Mitronomik/family-food-os/pull/229) merged 2026-10-17T09:11:56Z). #229 is merged documentation/decision proposal; **Option A/B remains unselected**.
