@@ -1,3 +1,9 @@
+# PR #229 — P2 findings addressed in documentation — 2026-10-17
+
+PR #229 on `docs/planner-serving-plausibility-gate` now distinguishes **independent physical feasibility** (`PASS_REVIEWED_FEASIBILITY` only with applicable reviewed policy and verified final edible yield) from optional **Household user preference** (`MATCHES_USER_PORTION_PREFERENCE` never promotes unknown to PASS). Two readiness levels are specified: `RESEARCH_READY` for at least one source-backed positive member/event scenario plus negative control, and `RUNTIME_READY` for a **complete deterministic seven-day three-member fixture** whose every planned recipe-based Serving passes reviewed physical feasibility. Missing proof/unsatisfiable week => `NO_GO`, no partial writes or strict activation. **No fixture proof has been run**, no runtime or accepted policy version was changed; Option A/B, source/policy owner and full-week evidence remain pending explicit approval. Keep PR10-FD-META/TIME_UNRESOLVED and Gate2 blocked. Reverify exact HEAD and request independent review, no autonomous merge.
+
+---
+
 # P1-PLANNER-SERVING-CONTRACT — post-#227 product-quality policy review — 2026-10-17
 
 `main@65c3aaeee8376a14a80af29c1a0fc6d0b5145c5b` includes merged #227 (exhaustive source-verified Planner candidate composition and corrected V2 test adapter). Current Issue [#228](https://github.com/Mitronomik/family-food-os/issues/228), branch `docs/planner-serving-plausibility-gate`, [draft contract](../docs/family-food/planner-serving-plausibility-contract-2026-10-17.md).
