@@ -1,7 +1,7 @@
 """Unsupported operational placeholders must never report successful execution."""
 
-from pathlib import Path
 import subprocess
+from pathlib import Path
 
 import pytest
 
