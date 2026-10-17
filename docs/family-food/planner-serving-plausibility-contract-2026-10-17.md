@@ -23,7 +23,7 @@ A generated week must be **physically believable and usable**, not only mathemat
 
 **FACT — current product authority:** the [Operating Manual](project-operating-manual.md) requires reasonable portions; the [Product Strategy](product-strategy.md) requires individualized Servings; [Planner Energy Allocation](planner-energy-allocation-contract.md) forbids inventing or redistributing a person's allocated kcal to compensate for partial-at-home coverage.
 
-**ASSUMPTION to test:** a source-reviewed combination of final dish mass/form, context-relevant portion bounds or user-confirmed portion preferences, and exact member MealPattern energy allocation can reject clearly implausible single-dish candidates *before* selection without arbitrary universal serving multipliers. This is not proven for the entire current catalogue.
+**ASSUMPTION to test:** a source-reviewed combination of final dish mass/form, **applicable reviewed portion-feasibility policy**, and exact member MealPattern energy allocation can reject clearly implausible single-dish candidates *before* selection without arbitrary universal serving multipliers. A user-confirmed portion preference is a separate Household signal, not substitute feasibility evidence. This is not proven for the entire current catalogue.
 
 ## 2. External research: serving label != recommended meal
 
@@ -46,11 +46,12 @@ RecipeVersion verified nutrition kcal/base serving
      ↓  hypothetical Decimal portion_servings
 RecipeVersion source-reviewed final edible dish output / source base
 + reviewed applicability of batch scale, resulting form and capacity
-+ applicable reviewed individual/context portion policy OR explicit
-  Household-owned, user-confirmed portion-size preference (not medical advice)
++ applicable reviewed individual/context portion-feasibility policy
      ↓
-PASS / OUT_OF_BOUNDS / UNKNOWN_SOURCE_OR_POLICY / UNSUPPORTED_PERSON
-     ↓  only PASS can substantiate a claim of plausible portion
+physical feasibility: PASS / OUT_OF_BOUNDS / UNKNOWN / UNSUPPORTED
+     ↓  only reviewed physical PASS supports feasibility
+Household-owned, explicitly confirmed portion-size preference (optional)
+     ↓  separate preference match/mismatch/unknown signal, NEVER physical PASS
 candidate subset/group selection and trace
 ```
 
@@ -59,7 +60,7 @@ candidate subset/group selection and trace
 - Recipe identity: immutable `RecipeVersion.id`, `base_servings`, `source_original_servings`, `source_output_g` (optional), source document/card hash, source output *form* and state (cooked final dish vs raw/net input vs individual component).
 - Nutrition: existing authoritative `kcal_per_base_serving`, `exact_energy_ready`, nutrient provenance and original food form. Never reconstruct cooked yield or calories from macros/ingredient names.
 - Portion-policy input (future **conceptual** `PortionFeasibilityProfile`): versioned authority for applicable member age/context (if relevant), meal role, dish/output form/category, explicit valid edible-mass or number-of-portions interval, original external reference, review rationale, curator, revision and expiry/review status. **No such profile is currently accepted by this proposal.**
-- A Household-owned explicit typical portion preference, where available, is a **user preference** (may be upper/lower bound on wanted quantity), not a claimed nutrition/medical suitability norm; it cannot override hard exclusions or safety data and must be versioned if used by automatic Planner generation.
+- A Household-owned explicit typical portion preference, where available, is a **user preference** (may be upper/lower bound on wanted quantity), not a claimed nutrition/medical suitability norm; it cannot override hard exclusions or safety data and must be versioned if used by automatic Planner generation. Preference matching is **independent of** reviewed physical feasibility, and never supplies missing `PortionFeasibilityProfile`, final-yield or applicability evidence.
 - Batch scale feasibility, cooking vessel, food handling/hold safety and storage are **separate source-/policy-reviewed constraints**, owned by the recipe/prep policy. A feasible *individual amount* does not automatically prove that a combined 4-person batch can be executed safely.
 - `UNKNOWN` is distinct from explicit, reviewed *out of bounds*. A missing final cooked yield or missing valid person-specific profile must never be replaced by `0 g`, a universal maximum, gross-to-net ratio, cooking-loss guess or a numeric warning labeled `SAFE`.
 
@@ -80,10 +81,12 @@ The word **planned** matters: this is a **source-validated projection** if permi
 
 | Code (proposed) | Meaning | Allowed consequence |
 | --- | --- | --- |
-| `PASS_REVIEWED_FEASIBILITY` | All required versioned sources and relevant bounds apply, computed Serving within bounds | Candidate is physically admissible for that member; still subject to existing exclusions, energy, cost and repeat filters |
+| `PASS_REVIEWED_FEASIBILITY` | **Applicable reviewed physical portion policy**, verified final edible output/source relation and scale applicability all exist; the computed Serving is within reviewed bounds | Physically admissible for this member under the pinned policy; still subject to all other hard constraints and scoring. **User preference alone never qualifies.** |
 | `REJECT_REVIEWED_PORTION_BOUNDS` | Applicable reviewed bound proves proposed Serving too small/large | Member excluded from candidate **before candidate selection**; trace identifies exact pinned policy and reason |
-| `UNKNOWN_OUTPUT_OR_PORTION_POLICY` | Final edible output, actual source relation, candidate batch applicability or reviewed bounds missing/stale | Not a PASS; never claim physical realism. Next runtime must have a specifically accepted fail-closed or diagnostic-only handling mode |
+| `UNKNOWN_OUTPUT_OR_PORTION_POLICY` | Final edible output, actual source relation, candidate batch applicability or reviewed **physical** bounds missing/stale | Not a PASS, even when the user explicitly wants this portion; never claim physical realism. Next runtime must have a specifically accepted fail-closed or diagnostic-only handling mode |
 | `UNSUPPORTED_MEMBER_CONTEXT` | Age/physiology/meal-role needed by a reviewed policy is unavailable/unsupported | No default adult bound, no inferred child bound, no medical substitution; early explicit unsupported evidence |
+
+**Independent Household preference outcome (not a feasibility status):** when the pinned user-confirmed preference and comparable portion quantity are available, record `MATCHES_USER_PORTION_PREFERENCE` or `DOES_NOT_MATCH_USER_PORTION_PREFERENCE`; otherwise record `PREFERENCE_NOT_EVALUABLE_OR_NOT_SET`. Preference matches may inform *preference/scoring* decisions only where separately authorized. They **cannot promote** `UNKNOWN_OUTPUT_OR_PORTION_POLICY` or `UNSUPPORTED_MEMBER_CONTEXT` to `PASS_REVIEWED_FEASIBILITY`, override a reviewed rejection, or satisfy Option A. A preference comparison itself does not establish nutrition, physiological suitability or food safety.
 
 The current `MISSING_REFERENCE_ENERGY` failure is **not** changed by these codes. Incomplete Household profiles and age-under-3 cases need their own separately approved [Issue #225](https://github.com/Mitronomik/family-food-os/issues/225) decision. No `reference_energy_kcal` or `energy_share` fallback is authorized.
 
@@ -93,7 +96,7 @@ The current `MISSING_REFERENCE_ENERGY` failure is **not** changed by these codes
 
 1. Evaluate feasibility **for each member's actual opportunity** *before* committing an event choice, not after the shared recipe has been selected. Sharedness never overrides member exclusions or reviewed bounds.
 2. It is possible for the same recipe to be feasible for one member but not another. Reconcile subsets by existing deterministic group/split logic; validate every chosen member's amount. An infeasible member must not be silently given the shared recipe or removed from the household plan.
-3. A candidate with missing output/policy evidence cannot be promoted to `PASS` by high preference score or Pantry overlap. Preserve the reason in explainable generation evidence without misrepresenting the exact source as failed if **only** the policy is unknown.
+3. A candidate with missing output/policy evidence cannot be promoted to physical `PASS` by high preference score, matching user-confirmed portion preference or Pantry overlap. Preserve independent physical and preference evidence in the trace without misrepresenting the exact source as failed if **only** the policy is unknown.
 4. When no physically supported recipe can satisfy all planned opportunities, return an explicit **bounded failure** identifying missing accepted source proof or checked infeasible cases. **No partial MealPlan write**, no opaque retry/LLM substitution and no auto-lowered calories.
 5. Preserve the pinned opportunity's `allocated_kcal`. Never truncate an oversized portion to the upper bound while retaining the original kcal claim, never redistribute unfilled energy to other events or invent a second side dish/ready meal merely to make this single-recipe Planner succeed.
 6. Changes to Planner scoring/selectability or new trace/failure values require a **new `planner-vX`** and persistence/trace compatibility review. Historical `planner-v0.3/v0.4/v0.5` traces/plans must be reproducible and unmodified.
@@ -101,23 +104,38 @@ The current `MISSING_REFERENCE_ENERGY` failure is **not** changed by these codes
 
 ### Pending owner choice — no silent policy shortcut
 
-**Option A (recommended for a future consumer-ready plan):** strict source-backed `PASS` is required for every recipe-based member Serving; `UNKNOWN` produces bounded `INSUFFICIENT_PORTION_EVIDENCE` / incomplete generation until the relevant policy data are reviewed.
+**Option A (recommended for a future consumer-ready plan; NOT owner-approved):** strict `PASS_REVIEWED_FEASIBILITY`, grounded in an **applicable reviewed physical portion policy and valid source/scale evidence**, is required for every recipe-based member Serving. A matching user preference is never an alternative admission path. `UNKNOWN` produces bounded `INSUFFICIENT_PORTION_EVIDENCE` / incomplete generation until relevant policy data are reviewed. This option may only be enabled after the separate full-week `RUNTIME_READY` evidence gate below and an explicit owner/runtime authorization.
 
 **Option B (only if separately approved):** permit a *diagnostic-only provisional plan* showing `UNKNOWN` or `OUT_OF_BOUNDS` and explaining why it is not release-ready; do **not** allow that provisional result to masquerade as an accepted MealPlan revision or to become authoritative Shopping/Prep demand.
 
 Both options require a revised accepted contract, a data readiness demonstration and versioning. This document **recommends A** but does not decide the consumer UX or switch current Planner behavior.
 
-## 5. Source and policy data readiness gate **before** runtime
+## 5. Source and policy data readiness gates **before** strict runtime
 
-Before introducing any new `PlannerCandidate` field, hard mass limit or acceptance gate, audit an **explicit bounded cohort**:
+The **one-event research proof** and the **full-week runtime feasibility proof** are different acceptance levels. Neither level changes current Planner behavior, authorizes production policy publication or selects Option A/B automatically.
+
+| Gate outcome | Required evidence | Consequence |
+| --- | --- | --- |
+| `RESEARCH_READY` | At least **one** realistic pinned `Household/RecipeVersion/MealEvent/member` positive case demonstrates exact Decimal energy → individual Serving → independently source-validated final edible output → applicable **reviewed physical policy** → `PASS_REVIEWED_FEASIBILITY`, plus a safe negative control and bounded candidate-corpus audit | Establishes a *research proof only*. **Not** evidence that Planner can generate seven days; **does not** authorize strict runtime |
+| `RUNTIME_READY` | After `RESEARCH_READY`, an independently reviewed, deterministic **complete seven-day MealPlan** for the **approved three-member household fixture**, using eligible source-pinned RecipeVersions and the proposed strict policy. Every actual planned recipe-based `(event, member)` Serving must earn reviewed physical PASS, while accepted meal-pattern coverage, member exclusions, non-recipe opportunities, shared/split semantics, repetition and completeness remain intact | Necessary evidence gate **before any strict Option A production activation**; still requires a separate versioned implementation contract, explicit owner approval and implementation review |
+| `NO_GO` | Missing/inapplicable physical policy or final-output proof; no valid positive research case; **or** no complete seven-day solution for the approved fixture under the proposed strict rules | Stop; report explicit evidence/coverage gaps to owner. **No fallback PASS**, silent calorie reduction, provisional authoritative plan, or strict production activation |
+
+### Evidence audit for RESEARCH_READY
 
 - Pin the **current verified RecipeVersions** actually candidate-eligible for an accepted multi-member Gate1-like week (selected source/version/nutrition/review/rights, with output form/basis).
-- For each, record: `source_output_g` known/unknown, source original vs current base servings relation, source output final cooked vs other form, validated linearity/batch applicability vs unknown, meal role, published rights and policy applicability. Distinguish **catalogue presence** from evidence sufficient to make an executable bound.
-- For each intended household member/context and opportunity, record available authoritative or user-confirmed **applicable portion evidence**, not simply a number in a demo script. Identify any unsupported child/age/sex/activity combinations honestly.
-- For at least **one** realistic pinned household/recipe/event scenario, show exact Decimal energy → Serving → supported cooked-output mass → bounds evaluation and a safe negative control. If no source-approved feasibility policy exists, classify the gate **NO_GO**, not `PASS` or a fallback.
-- Keep the historical Gate1/Gate2 accepted test corpus and past MealPlans byte-identical. Research-only synthetic inputs are allowed **only** as clearly marked negative/probe fixtures and never establish production authority.
+- For each, record: `source_output_g` known/unknown, source original vs current base servings relation, source output final cooked vs other form, validated linearity/batch applicability vs unknown, meal role, published rights and **reviewed physical policy applicability**. Catalogue presence or preference matching does not prove executable bounds.
+- For each intended household member/context and opportunity, distinguish **source-reviewed physical portion policy** from an independently recorded **Household-owned preference**. Identify unsupported child/age/sex/activity combinations honestly.
+- Evaluate at least one realistic pinned member/event positive case with exact Decimal calculations and a negative control. A preference-only positive case remains physical `UNKNOWN`, **never RESEARCH_READY**.
+- Keep historical Gate1/Gate2 accepted corpus and past MealPlans byte-identical. Synthetic research/test inputs must be explicitly labelled and never establish production authority.
 
-**Stop rule:** if no verified form/bounds combination exists, return a compact evidence gap to the owner. **Do not** open an indefinite sequence of arbitrary portion-threshold PRs or silently mark catalogue as consumer-ready. Source acquisition/curation and policy publication ownership must be separately approved before implementation.
+### Additional gate for RUNTIME_READY
+
+- Run a **separately reviewed future end-to-end fixture** with the actual approved three-member Household (two adults and one child), accepted `MemberMealPatternSelection`s, their **seven household-local calendar days**, eligible recipes, and pinned source/policy versions. Do not replace real member-context applicability with a convenient adult-only or single-event example.
+- Prove **complete coverage of all planned opportunities for each member** under their accepted MealPattern. Evaluate physical PASS for **every recipe-based Serving** before selection; handle supported non-recipe sources such as `EAT_OUT` according to their **existing** authority (they are not required to pass a recipe-only test). No skipped opportunity, silent removal of a member, invented side dish or redistribution of energy.
+- Verify all hard exclusions, shared/split group selection, serving scaling, deterministic repeatability, explainable candidate rejection and atomic persistence; show evidence that the candidate set can form a **whole week**, not merely isolated passing dishes. If any required event lacks supported candidates, record a bounded incomplete-week `NO_GO` with precise missing source/policy or checked-bound reasons and **no partial MealPlan write**.
+- Preserve the accepted historical PlannerVersions and MealPlans without replay mutation. This gate is about *future* strict runtime feasibility, not a retroactive change to Gate1/Gate2 acceptance.
+
+**Stop rule:** if the reviewed evidence cannot establish `RESEARCH_READY` or subsequently `RUNTIME_READY`, report `NO_GO` with the smallest actionable evidence gap to the owner. **Do not** open an indefinite sequence of arbitrary portion-threshold PRs or silently declare the catalogue consumer-ready. Source acquisition/curation, policy publication, future strict Planner version and Option A/B activation each require their own review/authorization. **This docs-only PR does not perform either fixture test.**
 
 ## 6. Proposed later implementation boundaries (NOT authorized now)
 
@@ -131,15 +149,15 @@ Before introducing any new `PlannerCandidate` field, hard mass limit or acceptan
 | API/consumer | Event/member-specific Russian message showing `невозможно подтвердить размер порции`, user confirmation where genuinely allowed | No product-facing false `норма` or medical claim; PWA after Gate2 |
 | Shopping/Prep | Scale from **accepted exact Serving** once; aggregate without duplicate shopping, no Pantry mutation, batch execution still separately gated | Do not accept an UNKNOWN/diagnostic plan as authoritative demand; preserve staleness and FD-ARCH |
 
-**Tests for later implementation:** one fixed-pinned low-energy recipe requiring implausibly large output (using **synthetic, explicitly reviewed test-only policy bounds**); high-energy tiny serving; correct under-bound case; raw vs cooked mismatch; source output unknown; source base mismatch; stale policy/version; mass conversion not source-authorized; member A fits/member B does not; hard allergen exclusion; high Pantry score cannot override rejection; heterogeneous meal patterns and duplicate meal roles; fixed `EAT_OUT` remains outside the recipe energy allocation; all candidates unsupported -> bounded failure/no write; repeated deterministic trace/fingerprint; old Planner version replay; source/MealPlan change marks derived Shopping stale; no inferred freezer safety.
+**Tests for later implementation:** user preference matches while physical policy missing → `UNKNOWN`, **never** `PASS`; user preference conflicts with reviewed bound → reviewed rejection still wins; user preference absent while physical reviewed policy passes → PASS independent of preference; one fixed-pinned low-energy recipe requiring implausibly large output (using **synthetic, explicitly reviewed test-only policy bounds**); high-energy tiny serving; correct under-bound case; raw vs cooked mismatch; source output unknown; source base mismatch; stale policy/version; mass conversion not source-authorized; member A fits/member B does not; hard allergen exclusion; high Pantry score cannot override rejection; heterogeneous meal patterns and duplicate meal roles; fixed `EAT_OUT` remains outside the recipe energy allocation; all candidates unsupported -> bounded failure/no write; repeated deterministic trace/fingerprint; old Planner version replay; source/MealPlan change marks derived Shopping stale; no inferred freezer safety; separately pinned full seven-day/three-member fixture with all recipe-based Servings physically PASS, and insufficient-corpus full-week `NO_GO` without partial writes.
 
 ## 7. Acceptance matrix and risks
 
 **FACT:** accepted reference energy is Nutrition-owned; MealPattern share is policy/Household accepted state; source output mass may be incomplete.
 **ASSUMPTION:** a bounded curated cohort can produce an executable, truthful member-context portion policy.
 **DECISION PROPOSED:** choose Option A first; require per-member preselection feasibility, independent source and policy provenance, no hidden calorie clipping, explicit unsupported states.
-**OPEN:** source owner, final-edible form coverage, age/context applicability, whether a user-confirmed range alone is sufficient for a UX preference (but never physiological validation), data storage and policy revision identity, how to represent diagnostic-only results, and the separate incomplete-member profile P1 decision.
+**OPEN:** source owner, final-edible form coverage, age/context applicability, precise UX treatment of a confirmed preference **without** independent physical feasibility (never a physical PASS), data storage and policy revision identity, how to represent diagnostic-only results, and the separate incomplete-member profile P1 decision.
 
-**This PR's acceptance:** docs-only diff; accurate current references; no hardcoded universal grams/kcal/recipe multiplier, no acceptance/roadmap switch, no source-data or runtime change; reviews must challenge data sparsity, multi-member sharedness, Planner trace and MealPattern compatibility, history preservation and the distinction between *food preference* and *medical/physiological norm*. Source URLs are research context, not automatic regulatory claims. Run Docs CI on exact PR HEAD and stop for independent owner review.
+**This PR's acceptance:** docs-only diff; explicit independence of user preference from reviewed physical feasibility; distinct `RESEARCH_READY`, `RUNTIME_READY` and `NO_GO` gates with complete seven-day three-member proof mandatory **before strict production activation**; accurate current references; no hardcoded universal grams/kcal/recipe multiplier, no acceptance/roadmap switch, no source-data or runtime change; reviews must challenge data sparsity, multi-member sharedness, Planner trace and MealPattern compatibility, history preservation and the distinction between *food preference* and *medical/physiological norm*. Source URLs are research context, not automatic regulatory claims. Run Docs CI on exact PR HEAD and stop for independent owner review.
 
-**Next authorized only after owner acceptance:** one **bounded data-readiness receipt** for selected MealPlan/RecipeVersion/Household evidence. This docs-only proposal does **not** authorize Planner runtime, new tables or nutrition defaults. Incomplete profiles and under-3 support remain tracked separately in [#225](https://github.com/Mitronomik/family-food-os/issues/225). Finished-dish storage metadata remain `PR10-FD-META=BLOCKED / TIME_UNRESOLVED`.
+**Next authorized only after owner acceptance:** one **bounded RESEARCH_READY/NO_GO evidence receipt** for selected MealPlan/RecipeVersion/Household evidence. A separate full-week `RUNTIME_READY/NO_GO` proof is required before any proposed strict runtime activation; neither proof is performed or pre-authorized as production implementation here. This docs-only proposal does **not** authorize Planner runtime, new tables or nutrition defaults. Incomplete profiles and under-3 support remain tracked separately in [#225](https://github.com/Mitronomik/family-food-os/issues/225). Finished-dish storage metadata remain `PR10-FD-META=BLOCKED / TIME_UNRESOLVED`.
