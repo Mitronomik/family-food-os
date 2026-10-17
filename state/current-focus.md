@@ -1,3 +1,15 @@
+# PR10-OPTION-B-STAGED-GATES — authorized docs-only amendment — 2026-10-17
+
+**Accepted `main`:** `1c78bf033fecacf87ce62adc35a8bd34a33f4d11` ([PR #233](https://github.com/Mitronomik/family-food-os/pull/233) merged 2026-10-17T10:00:07Z). This does not authorize a PortionFeasibilityProfile, Planner serving runtime, PR10-META or Gate2 closure.
+
+**Explicit owner decision:** Option **B** approved on 2026-10-17 under [Issue #220](https://github.com/Mitronomik/family-food-os/issues/220) **for one docs-only PR**, not as immediate authorization to revise runtime, migration or canonical acceptance without independent review/merge.
+
+**Current bounded task:** branch `docs/pr10-option-b-staged-delivery-gates-2026-10-17`, [proposed Option B staged implementation/release contract](../docs/family-food/pr10-option-b-staged-delivery-gates-2026-10-17.md), consistency changes in PR10-ARCH, FD-ARCH, D1/D2/D3, Master Roadmap and PR10 addendum, plus state. Technical Gate2 would require **positive same-day Russian source-backed Prep tasks for >=2 accepted COOK_RECIPE MealEvents plus honest unresolved/negative coverage**; no empty/all-UNKNOWN success. **Mandatory separate safe cooked-dish batch/reuse product gate before any real-family/consumer/paid release.** Existing three Prep tables and D2/D2-FD/D3 safety remain as applicable. Await exact-head docs CI and independent review; **do not merge autonomously**.
+
+**Still blocked:** `PR10-FD-META=BLOCKED / TIME_UNRESOLVED` for storage/freezer/reheat/batch authority; PR10-A/B/C, PR10-PDF, Gate2, PWA runtime, confirmed PreparedBatch and shared family testing. Serving P1 `RESEARCH_READY=false` (audited cohort), `RUNTIME_READY=NOT_EVALUATED`; Option A/B of **serving** feasibility remains undecided.
+
+---
+
 # P1-PLANNER-SERVING-POLICY-SOURCES — current RU portion evidence proposal — 2026-10-17
 
 **Accepted `main`:** `702064b85e8f8d8decbd519a04b8d4204246dd5d`; [PR #231](https://github.com/Mitronomik/family-food-os/pull/231) merged 2026-10-17T09:41:33Z. Its scoped three-recipe `NO_GO` is accepted as evidence only; `RESEARCH_READY=false`, `RUNTIME_READY=NOT_EVALUATED`.
