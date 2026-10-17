@@ -71,9 +71,7 @@ def selection(member_id: UUID) -> MemberMealPatternSelectionDetail:
         NOW,
     )
     opportunities = tuple(
-        MemberMealPatternOpportunitySnapshot(
-            selection_id, weekday, 1, MealRole.DINNER
-        )
+        MemberMealPatternOpportunitySnapshot(selection_id, weekday, 1, MealRole.DINNER)
         for weekday in range(1, 8)
     )
     return MemberMealPatternSelectionDetail(selected, opportunities)
@@ -333,9 +331,7 @@ class _MealPlans:
     ) -> MealPlanDetail:
         del kwargs
         assert household_id == self.household_id
-        assert member_selection_ids == {
-            self.member_id: self.selection.selection.id
-        }
+        assert member_selection_ids == {self.member_id: self.selection.selection.id}
         plan_id = uid(200)
         plan = MealPlan(
             plan_id,
@@ -418,9 +414,7 @@ def test_application_service_full_v2_chain_uses_neutral_projection() -> None:
     assert detail is not None
     assert detail.plan.config_version == "planner-v0.3"
     assert result.trace.compatibility_version == "meal-role-recipe-v2"
-    assert all(
-        event.recipe_version_id == recipe_version_id for event in detail.events
-    )
+    assert all(event.recipe_version_id == recipe_version_id for event in detail.events)
 
     nutrition = calculate_meal_plan_nutrition(
         detail,
