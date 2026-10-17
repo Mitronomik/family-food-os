@@ -1,3 +1,11 @@
+# PR10-FD-META — one cooked goulash pilot candidate — 2026-10-13
+
+- Confirmed #222 merged to `main@89b13a61fbfb8bb6246b7fb39ad8b3a1a3acf352`; accepted Finished-Dish-First and research-only two-event preflight with time-authority fail-closed.
+- Opened Issue #223; pinned accepted School2022 goulash source/card SHA, R1-G manifest rights, five source steps, seven source ingredient quantities and null freezer/batch/storage fields. Evaluated official NCHFP/USDA/FoodSafety category guidance and RU Rospotrebnadzor category context, **no accepted dish- or jurisdiction-specific storage rule**.
+- Authored disposable research-only 7-day MealPlan revision via real service (2 planned goulash MealEvents, exact Decimal `scale_recipe` demand parity), focused tamper tests and CI artifact proof. Actual persisted result is subject to exact-head CI, not asserted before execution. **FD-META=BLOCKED** pending batch/time/quality/policy authority; no real stock, source publication, schema or Gate2 changes.
+
+---
+
 # PR10-FD-ARCH — product direction approved, docs-only contract drafted — 2026-10-12
 
 - [#219](https://github.com/Mitronomik/family-food-os/pull/219) merged as `09e9f3fd670aa40e1f0efdfb9d1173538503640c`. Owner explicitly approved finished cooked dishes → portion → safe cold/frozen storage → thaw/reheat → use as the primary Prep feature; existing raw-ingredient candidate NO-GOs stand.

@@ -1,3 +1,11 @@
+# PR10-FD-META — one finished cooked goulash research proof — 2026-10-13
+
+**Accepted main:** `89b13a61fbfb8bb6246b7fb39ad8b3a1a3acf352` (PR #222 merged). [FD-ARCH](../docs/family-food/pr10-finished-dish-first-amendment-2026-10-12.md) accepted Finished-Dish-First direction and narrow D2-FD approach; **PR10-FD-META source and policy proof** is the only current supporting research stage.
+**Current:** [Issue #223](https://github.com/Mitronomik/family-food-os/issues/223), `research/pr10-fd-meta-goulash`. [Source/policy review](../docs/family-food/pr10-fd-meta-goulash-source-review.md), [machine source receipt](../docs/family-food/pr10-fd-meta-goulash-source-evidence.json), ephemeral persisted two-MealEvent fixture script/test/CI. One accepted School2022 beef goulash, not a new raw-ingredient or external recipe pair.
+**Gate:** recipe source reviewed but cooked-dish freezer applicability, batch capacity, jurisdiction policy, cooling/storage clock and numeric step permissions are NOT approved. **FD-META=BLOCKED**, `TIME_UNRESOLVED`, no executable freezer task/PreparedBatch/stock. Exact source pins and synthetic current-plan/event proof must pass new CI before claiming research result. D3 reader, Gate2 fixture proposal, PR10 runtime/PDF **not authorized**. Await independent PR review, no autonomous merge or additional candidate hunt.
+
+---
+
 # PR10-FD-ARCH — Finished-Dish-First contract review — 2026-10-12
 
 **Accepted main:** `09e9f3fd670aa40e1f0efdfb9d1173538503640c` (#219 merged). Owner approved the Finished-Dish-First direction: cooked complete meal batches and confirmed frozen portions are the primary Prep objective; cross-recipe raw-ingredient work is a later optimization.
