@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-from copy import deepcopy
-from decimal import Decimal
 import hashlib
 import json
-from pathlib import Path
 import sys
+from copy import deepcopy
+from decimal import Decimal
+from pathlib import Path
 
 import pytest
 from app.db.config import DatabaseConfig
