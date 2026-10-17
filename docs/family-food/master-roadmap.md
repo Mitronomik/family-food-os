@@ -1027,9 +1027,12 @@ confirmed stock or claim advance-prep savings without proof.
 Passing Gate 3 is **technical consumer-loop proof**, not proof of finished-food
 batch/freezer product value or authorization to enroll real households. In
 addition to Data Readiness and Gate 4 for shared deployment, the separately
-reviewed `PR10-BATCH/SAFE-REUSE` product-value gate and an explicit unresolved
-Planner serving/unsupported-member quality disposition must precede real-family
-or commercial release.
+reviewed `PR10-BATCH/SAFE-REUSE` product-value gate **and a separate
+`PORTION_RELEASE_READY=PASS` based on a versioned, independently reviewed
+measurable seven-day/per-member portion-feasibility and unsupported-member
+acceptance contract** must precede real-family or commercial release. Simply
+acknowledging the serving P1 risk does not satisfy this gate; unresolved or
+unsupported member contexts must fail closed for actual enrollment.
 
 ## 8. Data Readiness Gate
 
@@ -1118,9 +1121,12 @@ adversarial tenant isolation, deployability, monitoring and backup/restore.
 
 After Consumer Core, Data Readiness and Shared Deployment gates **AND**, under
 the proposed Option B amendment, the independently accepted
-`PR10-BATCH/SAFE-REUSE` product-value gate and explicitly reviewed
-Planner Serving/unsupported-member release-risk disposition, test with
-`10–30 households` through the full repeated loop. **A partial technical
+`PR10-BATCH/SAFE-REUSE` product-value gate and measured
+`PORTION_RELEASE_READY=PASS` (full real-service seven-day member coverage,
+reviewed source-backed individual portion evaluation and explicit
+unsupported-member `NO-GO` tests; see [Option B §6.1](pr10-option-b-staged-delivery-gates-2026-10-17.md)), test with
+`10–30 households` through the full repeated loop. An owner risk acknowledgement
+without independently accepted PASS evidence cannot unlock enrollment. **A partial technical
 PrepPlan is not sufficient** to admit real families or claim freezer value:
 
 ```text
@@ -1274,8 +1280,14 @@ loop.
 **Option B adds a release-level conjunctive requirement (proposed):** before
 real-family/paid use, independently accepted source-, time- and policy-backed
 finished cooked-dish batch reuse across >=2 MealEvents (with execution/stock
-confirmation contract before showing ready inventory) plus an explicit
-Planner serving P1/member-profile quality-risk disposition. These are **not**
+confirmation contract before showing ready inventory) **plus
+`PORTION_RELEASE_READY=PASS`** as a separate, versioned and independently
+reviewed measurable quality gate. The serving gate requires 100% of recipe-based
+member Servings in an accepted complete seven-day/three-member real-service
+fixture to pass an applicable reviewed feasibility policy, plus negative
+unsupported/missing-member-target and partial-write tests; see
+[Option B §6.1](pr10-option-b-staged-delivery-gates-2026-10-17.md). Risk
+recognition alone is **NO-GO**. These are **not**
 technical Gate2 or Gate3 exit checks. Unsafe/UNKNOWN batch claims cannot be
 waived by a green partial Prep CI; see [Option B §6](pr10-option-b-staged-delivery-gates-2026-10-17.md).
 
