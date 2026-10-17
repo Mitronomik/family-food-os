@@ -2,8 +2,8 @@
 
 **Status:** **PROPOSED / docs-only / awaiting owner decision and independent review**. No change to accepted Planner/Nutrition/Gate1/Gate2 runtime, schema, catalogue or release criteria takes effect from drafting this document. Merge of the proposal records a review decision **only if the owner explicitly accepts the proposed option and evidence prerequisites**. Until then, Planner behavior remains governed by its existing accepted versions and historical plans.
 
-**Issue:** [#228](https://github.com/Mitronomik/family-food-os/issues/228). **Parent audit:** [#225](https://github.com/Mitronomik/family-food-os/issues/225).  
-**Accepted base:** `main@65c3aaeee8376a14a80af29c1a0fc6d0b5145c5b` ([#227](https://github.com/Mitronomik/family-food-os/pull/227) merged 2026-10-17).  
+**Issue:** [#228](https://github.com/Mitronomik/family-food-os/issues/228). **Parent audit:** [#225](https://github.com/Mitronomik/family-food-os/issues/225).
+**Accepted base:** `main@65c3aaeee8376a14a80af29c1a0fc6d0b5145c5b` ([#227](https://github.com/Mitronomik/family-food-os/pull/227) merged 2026-10-17).
 **Read with:** [Operating Manual](project-operating-manual.md) §23, [Product Strategy](product-strategy.md), [Planner v0](planner-v0.md), [Planner Energy Allocation](planner-energy-allocation-contract.md), [Nutrition Core](nutrition-core.md), [MealPlan / Serving](pr7-mealplan-serving.md), [Recipe Nutrition V2 integration](recipe-v2-nutrition-planner-integration-contract.md), [Master Roadmap](master-roadmap.md) and [Finished-Dish-First](pr10-finished-dish-first-amendment-2026-10-12.md). The root `AGENTS.md` and state gates still apply.
 
 ## 1. Product goal and observed defect
@@ -135,9 +135,9 @@ Before introducing any new `PlannerCandidate` field, hard mass limit or acceptan
 
 ## 7. Acceptance matrix and risks
 
-**FACT:** accepted reference energy is Nutrition-owned; MealPattern share is policy/Household accepted state; source output mass may be incomplete.  
-**ASSUMPTION:** a bounded curated cohort can produce an executable, truthful member-context portion policy.  
-**DECISION PROPOSED:** choose Option A first; require per-member preselection feasibility, independent source and policy provenance, no hidden calorie clipping, explicit unsupported states.  
+**FACT:** accepted reference energy is Nutrition-owned; MealPattern share is policy/Household accepted state; source output mass may be incomplete.
+**ASSUMPTION:** a bounded curated cohort can produce an executable, truthful member-context portion policy.
+**DECISION PROPOSED:** choose Option A first; require per-member preselection feasibility, independent source and policy provenance, no hidden calorie clipping, explicit unsupported states.
 **OPEN:** source owner, final-edible form coverage, age/context applicability, whether a user-confirmed range alone is sufficient for a UX preference (but never physiological validation), data storage and policy revision identity, how to represent diagnostic-only results, and the separate incomplete-member profile P1 decision.
 
 **This PR's acceptance:** docs-only diff; accurate current references; no hardcoded universal grams/kcal/recipe multiplier, no acceptance/roadmap switch, no source-data or runtime change; reviews must challenge data sparsity, multi-member sharedness, Planner trace and MealPattern compatibility, history preservation and the distinction between *food preference* and *medical/physiological norm*. Source URLs are research context, not automatic regulatory claims. Run Docs CI on exact PR HEAD and stop for independent owner review.
