@@ -4,7 +4,10 @@ from __future__ import annotations
 
 from copy import deepcopy
 from decimal import Decimal
+import hashlib
+import json
 from pathlib import Path
+import sys
 
 import pytest
 from app.db.config import DatabaseConfig
@@ -251,3 +254,79 @@ def test_recomputed_self_fingerprint_cannot_override_independent_source(
     )
     with pytest.raises(ValueError, match="independent trusted source"):
         _validate(forged, proof)
+
+
+def _prepare_cli_receipt(monkeypatch: pytest.MonkeyPatch, path: Path) -> dict:
+    """Test the real CLI writer without seeding an unrelated test database."""
+    stub = {
+        "scope": "ISOLATED_SYNTHETIC_MEALPLAN_ONLY",
+        "gate_decision": "BLOCKED",
+        "candidate_pair": [{"event_id": "synthetic-a"}, {"event_id": "synthetic-b"}],
+    }
+    monkeypatch.setattr(
+        audit_pr10_fd_meta_goulash,
+        "build_research_receipt",
+        lambda: (stub, "a" * 64, "b" * 64),
+    )
+    monkeypatch.setattr(
+        sys, "argv", ["audit_pr10_fd_meta_goulash", "--output", str(path)]
+    )
+    return stub
+
+
+@pytest.mark.parametrize(
+    "existing_path_kind", ["sqlite", "existing_receipt", "symlink", "dangling_symlink"]
+)
+def test_cli_refuses_existing_output_without_overwriting(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    existing_path_kind: str,
+) -> None:
+    """Refuse all pre-existing names, including symlinked or dangling targets."""
+    user_sqlite = tmp_path / "family.sqlite"
+    original_bytes = b"SQLite format 3\x00protected user DB content"
+    user_sqlite.write_bytes(original_bytes)
+
+    output = tmp_path / "receipt.json"
+    if existing_path_kind == "sqlite":
+        output = user_sqlite
+    elif existing_path_kind == "existing_receipt":
+        output.write_bytes(b"previous receipt must remain intact")
+    elif existing_path_kind == "symlink":
+        output.symlink_to(user_sqlite)
+    else:
+        output.symlink_to(tmp_path / "missing-database.sqlite")
+
+    before = output.read_bytes() if existing_path_kind == "existing_receipt" else None
+    _prepare_cli_receipt(monkeypatch, output)
+
+    with pytest.raises(SystemExit) as exc:
+        audit_pr10_fd_meta_goulash.main()
+    assert exc.value.code == 2
+    assert "Refusing to overwrite existing output path" in capsys.readouterr().err
+    assert user_sqlite.read_bytes() == original_bytes
+    if before is not None:
+        assert output.read_bytes() == before
+    if existing_path_kind in {"symlink", "dangling_symlink"}:
+        assert output.is_symlink()
+    if existing_path_kind == "dangling_symlink":
+        assert not (tmp_path / "missing-database.sqlite").exists()
+
+
+def test_cli_creates_new_receipt_once_with_exact_digest(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    output = tmp_path / "nested" / "receipt.json"
+    expected = _prepare_cli_receipt(monkeypatch, output)
+    assert audit_pr10_fd_meta_goulash.main() == 0
+    first_content = output.read_bytes()
+    assert json.loads(first_content) == expected
+    anchors = json.loads(capsys.readouterr().out)
+    assert anchors["artifact_sha256"] == hashlib.sha256(first_content).hexdigest()
+    with pytest.raises(SystemExit) as exc:
+        audit_pr10_fd_meta_goulash.main()
+    assert exc.value.code == 2
+    assert output.read_bytes() == first_content
