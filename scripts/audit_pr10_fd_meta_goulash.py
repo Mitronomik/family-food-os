@@ -704,7 +704,13 @@ def main() -> int:
     encoded = (
         json.dumps(receipt, ensure_ascii=False, sort_keys=True, indent=2) + "\n"
     ).encode("utf-8")
-    args.output.write_bytes(encoded)
+    # Exclusive creation is atomic: no TOCTOU exists() check, and even a
+    # dangling or valid final-component symlink is rejected rather than followed.
+    try:
+        with args.output.open("xb") as output_file:
+            output_file.write(encoded)
+    except FileExistsError:
+        parser.error(f"Refusing to overwrite existing output path: {args.output}")
     print(
         json.dumps(
             {
