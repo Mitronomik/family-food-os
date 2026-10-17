@@ -264,9 +264,9 @@ class _Recipes:
         self.recipe_id = uid(4)
         self.food_id = uid(5)
 
-    def list_active(self, *, limit: int):
-        assert limit == 200
-        return (type("Recipe", (), {"id": self.recipe_id})(),)
+    def list_all(self):
+        """Expose the real exhaustive catalogue contract to PlannerService."""
+        return (type("Recipe", (), {"id": self.recipe_id, "is_active": True})(),)
 
     def get_current_verified(self, recipe_id: UUID):
         assert recipe_id == self.recipe_id
