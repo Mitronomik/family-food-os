@@ -486,7 +486,7 @@ class FaultyGenerationRecipes(Recipes):
         detail = super().get_current_verified(recipe_id)
         return SimpleNamespace(
             version=SimpleNamespace(
-                id=uid(600 + int(recipe_id.hex[-2:], 16)),
+                id=uid(600 + int(str(recipe_id)[-3:])),
                 meal_type_code=detail.version.meal_type_code,
                 total_time_minutes=detail.version.total_time_minutes,
                 batch_friendly=detail.version.batch_friendly,
