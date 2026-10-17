@@ -1,0 +1,43 @@
+name: Unsupported operational script safety
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/dev_start.sh'
+      - 'scripts/start_local.sh'
+      - 'scripts/dev_setup.sh'
+      - 'scripts/create_backup.sh'
+      - 'scripts/restore_backup.sh'
+      - 'backend/app/tests/test_operational_placeholder_scripts.py'
+      - '.github/workflows/operational-placeholder-safety.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  fail-closed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pytest 'ruff==0.16.10'
+      - name: Unsupported commands never signal success
+        run: python -m pytest -q backend/app/tests/test_operational_placeholder_scripts.py
+      - name: Focused Ruff and formatting
+        run: |
+          python -m ruff check backend/app/tests/test_operational_placeholder_scripts.py
+          python -m ruff format --check backend/app/tests/test_operational_placeholder_scripts.py
+      - name: Shell syntax
+        run: |
+          for script in scripts/dev_start.sh scripts/start_local.sh scripts/dev_setup.sh scripts/create_backup.sh scripts/restore_backup.sh; do
+            bash -n "$script"
+          done
+      - name: PR diff whitespace
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: git diff --check "$BASE_SHA"...HEAD

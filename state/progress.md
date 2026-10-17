@@ -1,3 +1,11 @@
+# AUDIT-OPS-SAFETY — post-#224 remediation scope — 2026-10-17
+
+- PR #224 merged (`2de47a9bc5df78824a7596ac1614d4e33d556daa`), fixed prior source-pin/temporary SQLite/CLI overwrite defects. **PR10-FD-META still BLOCKED**, `TIME_UNRESOLVED`, no safe storage/use authority or Prep runtime.
+- Reviewed external 2026-10 audit against latest repository contracts. Filed [Issue #225](https://github.com/Mitronomik/family-food-os/issues/225) separating Planner realism/optional targets, candidate admission (>200 cap), dated Pantry availability, snapshot consistency and incremental current-head smoke into bounded follow-ups.
+- Current branch `fix/audit-operational-placeholders-state` makes five nonfunctional developer/backup/restore commands fail closed rather than falsely exit 0, with focused regression tests and an isolated workflow. No product Planner/Nutrition/Pantry/Shopping code or historical Gate2 data changed.
+
+---
+
 # PR10-FD-META — one cooked goulash pilot candidate — 2026-10-13
 
 - Confirmed #222 merged to `main@89b13a61fbfb8bb6246b7fb39ad8b3a1a3acf352`; accepted Finished-Dish-First and research-only two-event preflight with time-authority fail-closed.
