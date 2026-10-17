@@ -310,11 +310,21 @@ class PlannerService:
                 )
             )
         candidates = []
-        for recipe in self._recipes.list_active(limit=200):
-            detail = self._recipes.get_current_verified(recipe.id)
-            calculated = self._recipe_nutrition.neutral_consumption_projection(
-                detail.version.id
-            )
+        # list_active(limit=200) silently drops valid recipes beyond the first
+        # page. list_all has the same deterministic catalogue ordering but is
+        # exhaustive; unsupported/incomplete recipe rows cannot poison a week.
+        # compose_candidate_admission() remains the detailed reviewer-facing
+        # source of per-recipe rejection reasons.
+        for recipe in self._recipes.list_all():
+            if not recipe.is_active:
+                continue
+            try:
+                detail = self._recipes.get_current_verified(recipe.id)
+                calculated = self._recipe_nutrition.neutral_consumption_projection(
+                    detail.version.id
+                )
+            except (RecipeNotFoundError, RecipeNutritionV2UnavailableError):
+                continue
             candidates.append(
                 PlannerCandidate(
                     detail.version.id,
