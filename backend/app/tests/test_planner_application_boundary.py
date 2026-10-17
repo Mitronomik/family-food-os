@@ -135,7 +135,6 @@ def service():
     return planner, command, meals, pantry, recipes, nutrition
 
 
-
 class AdmissionRecipes:
     def __init__(self):
         self.rows = (
@@ -192,7 +191,6 @@ class AdmissionNutrition:
         return SimpleNamespace(exact_energy_ready=True)
 
 
-
 class LargeAdmissionRecipes:
     def __init__(self, count: int = 250):
         self.rows = tuple(
@@ -244,7 +242,6 @@ def test_candidate_admission_is_exhaustive_beyond_200_rows() -> None:
     assert admissions[-1].canonical_code == "READY_MAIN_249"
 
 
-
 def test_candidate_admission_sees_blocked_catalogue_without_selecting_it() -> None:
     household_id, member_id = uid(1), uid(2)
     planner = PlannerService(
@@ -262,9 +259,7 @@ def test_candidate_admission_sees_blocked_catalogue_without_selecting_it() -> No
     by_code = {item.canonical_code: item for item in admissions}
     assert by_code["READY_MAIN"].eligible is True
     assert by_code["READY_MAIN"].blockers == ()
-    assert by_code["INACTIVE_BREAKFAST"].blockers == (
-        PlannerAdmissionBlocker.INACTIVE,
-    )
+    assert by_code["INACTIVE_BREAKFAST"].blockers == (PlannerAdmissionBlocker.INACTIVE,)
     assert by_code["ACTIVE_OTHER"].blockers == (
         PlannerAdmissionBlocker.ROLE_UNSUPPORTED,
     )
@@ -272,7 +267,6 @@ def test_candidate_admission_sees_blocked_catalogue_without_selecting_it() -> No
         PlannerAdmissionBlocker.NUTRITION_UNAVAILABLE,
     )
     assert all(item.recipe_version_id is not None for item in admissions)
-
 
 
 def test_authoritative_composition_owns_selection_recipe_nutrition_and_pantry() -> None:
@@ -328,7 +322,9 @@ def test_previous_week_history_is_scoped_and_exact_revision_is_traced() -> None:
         planner.compose_authoritative_request(command)
 
 
-def test_authoritative_generation_accepts_v2_exact_energy_without_legacy_complete() -> None:
+def test_authoritative_generation_accepts_v2_exact_energy_without_legacy_complete() -> (
+    None
+):
     planner, command, meals, _, _, nutrition = service()
     nutrition.status = NutritionStatus.INCOMPLETE
     nutrition.exact_energy_ready = True
@@ -415,11 +411,9 @@ def test_v04_authoritative_generation_persists_v04_config_after_success() -> Non
     assert result.trace.config_version == "planner-v0.4"
     assert detail is not None
     assert meals.writes[-1]["config_version"] == "planner-v0.4"
-    assert {
-        portion
-        for event in result.events
-        for _, portion in event.portions
-    } == {Decimal("1.000000")}
+    assert {portion for event in result.events for _, portion in event.portions} == {
+        Decimal("1.000000")
+    }
 
 
 def test_authoritative_generation_does_not_enable_reference_pins_by_default() -> None:
@@ -570,12 +564,12 @@ class LargeGenerationRecipes(Recipes):
 
 
 def test_authoritative_pool_includes_all_235_active_versions() -> None:
-    planner, command, _ = _planner_with_catalogue(
-        LargeGenerationRecipes(), Nutrition()
-    )
+    planner, command, _ = _planner_with_catalogue(LargeGenerationRecipes(), Nutrition())
     request = planner.compose_authoritative_request(command)
     assert len(request.candidates) == 235
     assert request.candidates[0].recipe_version_id == uid(10000)
     assert request.candidates[-1].recipe_version_id == uid(10234)
     assert all(item.is_verified for item in request.candidates)
-    assert request.candidates == planner.compose_authoritative_request(command).candidates
+    assert (
+        request.candidates == planner.compose_authoritative_request(command).candidates
+    )
