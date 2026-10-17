@@ -1,6 +1,8 @@
 # FamilyFoodOS — Master Roadmap
 
 **Status:** canonical repository sequencing and delivery-gate contract
+
+> **Option B PR10 / Gate2 / release-gates proposal — 2026-10-17:** [Staged PR10-CORE technical Gate2 and separate PR10-BATCH/SAFE-REUSE release gate](pr10-option-b-staged-delivery-gates-2026-10-17.md) is **owner-authorized for ONE docs-only PR, not yet accepted**. After independent review and merge it controls PR10 and downstream acceptance exactly where identified below, superseding only the previous batch-before-Gate2 predicate. This does **not** close Gate2, permit runtime, provide freezer safety, or authorize shared family release. Older sections describing completed milestones are historical, not the current focus; consult `state/current-focus.md`.
 **Updated:** `2026-09-12`
 
 > **Later canonical addendum — 2026-09-13:**
@@ -300,7 +302,7 @@ changes them:
 ──────── GATE 1 — PLANNING CORE ────────
 
 → PR9   Shopping Engine
-→ PR10  Prep / Freezer
+→ PR10-CORE  truthful safe-now Prep (Option B; pending docs gate)
 → PR10-PDF Backend Weekly PDF
 
 ──────── GATE 2 — MVP0 BACKEND ────────
@@ -313,6 +315,8 @@ changes them:
 
 ──────── GATE 3 — CONSUMER CORE ────────
 
+→ PR10-BATCH/SAFE-REUSE (mandatory separate product value/release gate;
+   may develop independently after technical Gate2, NOT a Gate3/PWA precondition)
 → DATA READINESS GATE
 
 → SHARED-1 PostgreSQL Cutover
@@ -836,23 +840,15 @@ quantities are reproducible, Pantry-aware and useful without any retailer.
 
 ### PR10 — Prep / Freezer
 
-**Goal:** turn the selected week into a feasible preparation/freezer plan using
-recipe batch, storage, freezer, equipment and timing metadata.
+**Option B proposed acceptance amendment:** [Staged PR10 gates](pr10-option-b-staged-delivery-gates-2026-10-17.md) §§3–5 replace the old requirement that **source-approved batch/advance-storage reuse for two MealEvents** is demonstrated *before* the first PR10 calculator or technical Gate2. Once this amendment merges, **PR10-CORE** creates an immutable Household-owned, source-pinned **same-day**, partially supported but positively useful PrepPlan with nontrivial executable Russian preparatory tasks, exact Decimal recipe quantities, reviewed numeric-step classifications and explicit unresolved obligations. It cannot claim safe fridge/freezer storage, planned batch savings, invented equipment/time estimates or confirmed stock.
 
-**Capabilities/services:** group reusable prep work, suggest batch quantities,
-sequence preparation tasks, surface storage/freezer instructions and warnings,
-and create a revisioned PrepPlan linked to its authoritative inputs.
+**Capabilities/services:** deterministic step/task eligibility from accepted RecipeVersion and MealEvent/Serving; per-event task order and scaled ingredient blocks; conservative unknown/unsupported cases, three immutable Prep tables, revision/staleness, Household scope, UoW atomicity and Russian HTTP status. No duplicate-work grouping without accepted shared-stage authority. No Pantry mutation, Retail, AI or confirmed execution.
 
-**Tests:** deterministic grouping and order, batch scaling, storage/freezer
-metadata, Household isolation, source-revision staleness and no side effects
-during generation.
+**Tests/exit:** independently reviewed source/data preflight then bounded PR10-A calculator → PR10-B persistence/UoW → PR10-C API. Source-pinned **two-event** positive same-day preparatory task proof and all-UNKNOWN negative proof are **mandatory** for technical Gate2; step-copy/empty plans alone fail. Frozen three-table Prep model, `COMPLETE` (step coverage only), strict numeric-step and staleness semantics stay in force. See §4 of Option B for exact criteria.
 
-Plan generation does not consume Pantry, create prepared stock or claim work
-was completed. Confirmed execution remains a separate state-changing workflow.
-Retail, industrial production scheduling and AI optimization are non-goals.
+**Future product value:** safely stored completed-dish batching for two future MealEvents, allowed time/holding/reheat/freezer transitions, batch capacity and confirmed inventory are **not waived**; they move to mandatory **PR10-BATCH/SAFE-REUSE**, before *any real-family/consumer/paid release*. `PR10-FD-META=BLOCKED/TIME_UNRESOLVED` remains an unmet evidence gate for that work.
 
-**Exit criteria:** the Gate 2 household receives a coherent PrepPlan that can be
-regenerated from the same authoritative inputs without hidden state changes.
+**Important:** this wording is **a proposal until the Option B docs-only PR is merged**; it neither approves a Prep migration nor starts runtime.
 
 ### PR10-PDF — Backend Weekly PDF
 
@@ -906,6 +902,25 @@ The fixture must produce a complete seven-day plan, individualized servings,
 nutrition, Pantry-aware ShoppingList, PrepPlan and backend PDF through the real
 repository/application-service path. No PWA, Auth, Retail connector or AI call
 may be necessary to pass Gate 2.
+
+**Proposed Option B technical Gate2 positive minimum (after amendment merge):**
+the exact accepted three-member seven-day fixture has **at least two distinct
+`COOK_RECIPE` MealEvents**, each with **at least one nontrivial, independently
+reviewed, Russian, immediately executable same-day preparatory action** pinned
+to the RecipeVersion/RecipeStep hash and exact structured Decimal scaled
+ingredient and member Serving demand. Add an independently checked unresolved
+case where unsupported/numeric/safety-dependent steps are withheld, plus an
+all-UNKNOWN/zero-actionable-recipe **negative Gate2 failure**. The immutable
+partial PrepPlan may be `INCOMPLETE` (unresolved required steps) while satisfying
+the **separate** usefulness minimum; `COMPLETE` is process coverage, not freezer
+readiness. Backend PDF must surface truthful tasks, unknowns and source revisions
+without invented storage, time or stock. No direct Pantry writes or partial
+transaction success. Existing family/recipe/food counts, Gate2 fixture identity
+and full backend path do **not** change.
+
+**Gate2 does NOT establish** safe two-event stored-food reuse or readiness for
+real-family testing. That distinct **mandatory release gate** is described in
+[Option B §6](pr10-option-b-staged-delivery-gates-2026-10-17.md).
 
 ### PR11 — Consumer PWA Shell
 
@@ -1004,8 +1019,17 @@ Household onboarding
 ```
 
 The loop must be understandable and operable without platform-admin forms,
-Retail or AI. Passing Gate 3 does not authorize shared real-family testing:
-Data Readiness and Gate 4 still follow.
+Retail or AI. **After the proposed Option B amendment merges**, consumer Prep
+may accurately display partial same-day tasks, unresolved obligations and
+unsupported freezer/batch operations; it must **not** show planned work as
+confirmed stock or claim advance-prep savings without proof.
+
+Passing Gate 3 is **technical consumer-loop proof**, not proof of finished-food
+batch/freezer product value or authorization to enroll real households. In
+addition to Data Readiness and Gate 4 for shared deployment, the separately
+reviewed `PR10-BATCH/SAFE-REUSE` product-value gate and an explicit unresolved
+Planner serving/unsupported-member quality disposition must precede real-family
+or commercial release.
 
 ## 8. Data Readiness Gate
 
@@ -1092,8 +1116,12 @@ adversarial tenant isolation, deployability, monitoring and backup/restore.
 
 ### Real Family Testing
 
-After Consumer Core, Data Readiness and Shared Deployment gates, test with
-`10–30 households` through the full repeated loop:
+After Consumer Core, Data Readiness and Shared Deployment gates **AND**, under
+the proposed Option B amendment, the independently accepted
+`PR10-BATCH/SAFE-REUSE` product-value gate and explicitly reviewed
+Planner Serving/unsupported-member release-risk disposition, test with
+`10–30 households` through the full repeated loop. **A partial technical
+PrepPlan is not sufficient** to admit real families or claim freezer value:
 
 ```text
 week → use → feedback → next week
@@ -1196,6 +1224,16 @@ Household → Members → Planner → 7-day MealPlan → Serving calculation
 → ingredient aggregation → Pantry subtraction → ShoppingList → PrepPlan → PDF
 ```
 
+**Option B additional fixture proofs proposed:** two distinct source-verified
+recipe MealEvents with genuinely actionable same-day preparation tasks and
+reviewed Russian numeric directions; independently pinned exact member/Serving
+and structured ingredient quantities; at least one correctly withheld unknown
+step/event; zero executable/all-UNKNOWN negative fixture explicitly **fails
+Gate2**; no freezer/time/stock claim; PDF preserves partial/unresolved status
+and current source revisions. The accepted historical fixture is **not**
+replaced. Release-safe repeated cooked batches require **a later separate
+fixture** under D2/D2-FD and the safe-batch gate.
+
 ### Fixture set C — Consumer repeat loop
 
 The Gate 3 fixture onboards a Household, generates a week, uses Today/Week,
@@ -1232,6 +1270,14 @@ otherwise, Definition of Done includes:
 Gate completion additionally requires its full end-to-end fixture, not an
 assumption that independently passing component tests compose into the product
 loop.
+
+**Option B adds a release-level conjunctive requirement (proposed):** before
+real-family/paid use, independently accepted source-, time- and policy-backed
+finished cooked-dish batch reuse across >=2 MealEvents (with execution/stock
+confirmation contract before showing ready inventory) plus an explicit
+Planner serving P1/member-profile quality-risk disposition. These are **not**
+technical Gate2 or Gate3 exit checks. Unsafe/UNKNOWN batch claims cannot be
+waived by a green partial Prep CI; see [Option B §6](pr10-option-b-staged-delivery-gates-2026-10-17.md).
 
 ## 13. Sequencing safeguards
 
