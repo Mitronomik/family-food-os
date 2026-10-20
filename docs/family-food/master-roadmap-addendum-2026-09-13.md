@@ -1,5 +1,7 @@
 # FamilyFoodOS — Master Roadmap Addendum, 2026-09-13
 
+> **Later Option B proposal (2026-10-17):** [PR10 staged technical/value gates](pr10-option-b-staged-delivery-gates-2026-10-17.md) proposes an internal PR10 acceptance split after merged FD-ARCH. Once independently reviewed and merged, this refines §9's PR10 scope **without reordering PR10 → PR10-PDF → Gate2 → PR11–15/Gate3**. The meaningful safe finished-dish batch proof is mandatory **after technical Gate2 and before real-family/consumer/paid release**, not automatically granted by a partially supported PrepPlan. §9's dependency-graph direction remains future-oriented; time/equipment/storage authority is still source-gated. No immediate runtime permission or gate pass.
+
 **Status:** canonical addendum to `master-roadmap.md`
 **Authority:** later explicit user-approved product/security decisions
 **Sequence effect:** no reboot and no reordering of the existing numbered product milestones
