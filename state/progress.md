@@ -1,3 +1,20 @@
+# PR #238 — P2 anti-rollback docs correction — 2026-10-22
+
+- Applied independent-review P2 correction to [PR10-CORE-D3](../docs/family-food/pr10-core-step-eligibility-d3-contract-2026-10-22.md) §4.1/§5/§6: an independent, durable and monotonically advancing current-status / minimum-policy-revision authority outside the rollback unit must affirmatively authorize the exact eligibility record before every executable task. Old release-local hashes, cached prior PASS and rolled-back readers cannot bypass a later revocation. Missing/stale/unavailable authority or a reader unable to check it => **no executable task**, never a positive fallback.
+- Frozen negative test `approved A → revoked B → rollback to A → no executable task`, also no current stale Prep/PDF and no Pantry mutations. Specific durable store/service is **not** chosen; requires separately reviewed implementation/deployment/backup/rollback contract.
+- Docs-only review correction, no source publication, PR10 runtime, schema/API, approved positive steps or Gate2 advancement. `NO_GO_TO_PR10_CORE_RUNTIME` and `PR10-FD-META=BLOCKED/TIME_UNRESOLVED` unchanged. Recheck exact-head Docs CI and independent review before owner merge.
+
+---
+
+# PR10-CORE-D3 — exact two-step eligibility governance proposed — 2026-10-22
+
+- Verified PR #236 merged at `main@04da57bd02df493336036ec1f52b9df626c721ab`; prior `NO_GO_TO_PR10_CORE_RUNTIME` remains valid with two candidate-only same-day first steps and no authoritative eligibility.
+- Opened [Issue #237](https://github.com/Mitronomik/family-food-os/issues/237) for one docs-only [source/read contract](../docs/family-food/pr10-core-step-eligibility-d3-contract-2026-10-22.md) and [machine review queue](../docs/family-food/pr10-core-step-eligibility-review-queue-2026-10-22.json). Producer/independent reviewer separation, exact RecipeVersion/Step/source hash, rights, suggested numeric classification vs reviewed immediate-action eligibility, trusted immutable local reader/publisher, revocation, source fingerprint, conflict and fail-closed tests specified.
+- No classification `APPROVED`, no new executable PrepTask, no new source/publication or mutation; queue status `PENDING_INDEPENDENT_REVIEW`, approved count 0. Subsequent bounded publication/test task only after independent docs review/owner decision; no arbitrary catalog search, PR10-A runtime, migration, source rights change, Gate2/PDF/PWA.
+- Existing three-table model, `AI_ENABLED=false`, Decimal, Household/Shopping/Pantry and release restrictions unchanged; `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`.
+
+---
+
 # PR10-CORE-PREFLIGHT — two pinned candidates, NO_GO to runtime pending step review — 2026-10-20
 
 - Verified [PR #234](https://github.com/Mitronomik/family-food-os/pull/234) **merged** into `main@094ded5edfa13874bf63f1bc3b83e18c9218dc67`. Option B stage split is approved in canonical docs: technical Gate2 positively useful same-day Prep, separate mandatory `SAFE_BATCH_READY` and measured `PORTION_RELEASE_READY=PASS` before enrolling any real family.

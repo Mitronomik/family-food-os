@@ -1,0 +1,120 @@
+{
+  "schema": "PR10_CORE_STEP_ELIGIBILITY_REVIEW_QUEUE_V1",
+  "status": "RESEARCH_REVIEW_QUEUE_ONLY_NOT_AUTHORITATIVE",
+  "issue": 237,
+  "accepted_main_sha": "04da57bd02df493336036ec1f52b9df626c721ab",
+  "source_preflight_ref": "docs/family-food/pr10-core-positive-preflight-evidence-2026-10-20.json",
+  "source_preflight_git_blob_sha": "e0892d54b66b283d65a3a33935f1f1f55c617575",
+  "entry_count": 2,
+  "entries": [
+    {
+      "source_recipe_code": "SCHOOL2022_54_17R_SALMON_TOMATO_VEGETABLES",
+      "historical_fixture_event_id": "a3bd9a18-5ed6-4447-8a13-1b7b9416c45f",
+      "historical_event_date": "2026-09-16",
+      "meal_role": "LUNCH",
+      "historical_recipe_version_id": "155f5283-2f2a-4487-83ac-895877197b45",
+      "historical_recipe_process_hash": "4fb058b03530ab54136e4bdf2d3b233681b10454629f03774aae5f9ba449028c",
+      "historical_recipe_step_id": "82a7cf80-6aee-42b0-91bb-b318cbf41e47",
+      "step_position": 1,
+      "historical_step_sha256": "46ca78ea057058c50cb6d76417bdd01d08b05f7a7e6259848a12b98a548b5258",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_manifest_path": "data/curation/r3c-post-r3b-catalogue-gate/frozen-batch.json",
+      "source_manifest_git_blob_sha": "c11fd55695c655fee5add14a3416a27527771e75",
+      "source_rights_scope": "REVIEWED_BOUNDED_FACTUAL_RECIPE_SOURCE",
+      "published_step_text_ru": "Подготовить корень петрушки, морковь и репчатый лук; лук бланшировать, затем пассеровать вместе с морковью и петрушкой и добавить томатное пюре.",
+      "source_recipe_ingredient_example": {
+        "food_ingredient_code": "ONION_BULB_FRESH",
+        "source_base_net_g": "9.8"
+      },
+      "historical_member_portion_servings": [
+        {
+          "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+          "portion_servings": "5.916796"
+        }
+      ],
+      "text_candidate_number_free": true,
+      "suggested_numeric_classification": "NO_NUMERIC_DIRECTION",
+      "numeric_classification_status": "PENDING_INDEPENDENT_REVIEW",
+      "immediate_execution_eligibility_status": "PENDING_INDEPENDENT_REVIEW",
+      "publication_status": "NOT_PUBLISHED",
+      "currently_authoritative": false,
+      "requires_review": [
+        "Confirm current actual fixture RecipeVersion/RecipeStep source/rights hash pins; historical UUID must not be assumed current",
+        "Review entire instruction and surrounding process with actual scaled structured ingredient totals, form/unit and kitchen context",
+        "Decide whether blanch/saute/mixing execution is adequately source-specified for same-day immediate use; no invented time/temperature/equipment or batch capacity",
+        "Approve independent reviewer identity, reference, scoped applicability, revision, expiry/revocation, no group/hold/freeze"
+      ],
+      "specific_ambiguity": "Compound prepare/blanch/saute/add tomato-puree step: no independently approved home process/equipment/time or intermediate split; cannot isolate one substep as a new task automatically",
+      "rejected_automatic_implications": [
+        "NOT_AUTOMATICALLY_EXECUTABLE",
+        "NO_FREEZER_STORAGE",
+        "NO_SHARED_STAGE",
+        "NO_EXTRA_QUANTITY_FROM_PROSE"
+      ]
+    },
+    {
+      "source_recipe_code": "SCHOOL2022_54_7R_POLLOCK_IN_MILK",
+      "historical_fixture_event_id": "bf60e784-bd3e-4d62-96dd-54318fd5920c",
+      "historical_event_date": "2026-09-16",
+      "meal_role": "DINNER",
+      "historical_recipe_version_id": "16a04325-d532-45f6-82ca-2f30630467a6",
+      "historical_recipe_process_hash": "74e02d9c88421665f35e2f07c8cf54adfcad62200fe857de27bda87e0f36be71",
+      "historical_recipe_step_id": "00dc9916-dc34-44eb-8518-ff7299920149",
+      "step_position": 1,
+      "historical_step_sha256": "b6b9e45dc7afdf48d30247f33bc7fd71b154af29fe4a8075da53edb2e89affde",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_manifest_path": "data/curation/r2b-fish-main-diversity/publication-specs.json",
+      "source_manifest_git_blob_sha": "b4ad353c4c9e955b64fb8b155cc98a1530aeb3a8",
+      "source_rights_scope": "REVIEWED_BOUNDED_FACTUAL_RECIPE_SOURCE",
+      "published_step_text_ru": "Репчатый лук подготовить, нашинковать и бланшировать.",
+      "source_recipe_ingredient_example": {
+        "food_ingredient_code": "ONION_BULB_FRESH",
+        "source_base_net_g": "16"
+      },
+      "historical_member_portion_servings": [
+        {
+          "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+          "portion_servings": "5.631030"
+        },
+        {
+          "member_id": "171cbad3-0b5f-44ba-bba2-ff4fc67537f0",
+          "portion_servings": "5.631030"
+        },
+        {
+          "member_id": "def51f62-65be-4939-8860-70c792ff7731",
+          "portion_servings": "6.546747"
+        }
+      ],
+      "text_candidate_number_free": true,
+      "suggested_numeric_classification": "NO_NUMERIC_DIRECTION",
+      "numeric_classification_status": "PENDING_INDEPENDENT_REVIEW",
+      "immediate_execution_eligibility_status": "PENDING_INDEPENDENT_REVIEW",
+      "publication_status": "NOT_PUBLISHED",
+      "currently_authoritative": false,
+      "requires_review": [
+        "Confirm current actual fixture RecipeVersion/RecipeStep source/rights hash pins; historical UUID must not be assumed current",
+        "Review entire instruction and surrounding process with actual scaled structured ingredient totals, form/unit and kitchen context",
+        "Decide whether blanch/saute/mixing execution is adequately source-specified for same-day immediate use; no invented time/temperature/equipment or batch capacity",
+        "Approve independent reviewer identity, reference, scoped applicability, revision, expiry/revocation, no group/hold/freeze"
+      ],
+      "specific_ambiguity": "Prepare/shred/blanch onion: no source-pinned home blanch timing/temperature/equipment and source-context scale review; not automatically safe or sufficient as executable instruction",
+      "rejected_automatic_implications": [
+        "NOT_AUTOMATICALLY_EXECUTABLE",
+        "NO_FREEZER_STORAGE",
+        "NO_SHARED_STAGE",
+        "NO_EXTRA_QUANTITY_FROM_PROSE"
+      ]
+    }
+  ],
+  "independent_reviewer_approval_count": 0,
+  "approved_immediate_executable_count": 0,
+  "future_publisher_and_reader_implementation_authorized": false,
+  "baseline_gate": "NO_GO_TO_PR10_CORE_RUNTIME",
+  "required_next_gate": "INDEPENDENT_DOMAIN_DATA_REVIEW_AND_D3_PUBLISHER_READ_PATH_ACCEPTANCE_BEFORE_PR10_A",
+  "candidate_bounded_scope_only": true,
+  "no_new_nutrition_storage_or_safety_values": true,
+  "no_pantry_write": true,
+  "no_db_or_api_change": true,
+  "no_schema_migration": true,
+  "no_accepted_gate2_fixture_change": true
+}

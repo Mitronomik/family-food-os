@@ -1,3 +1,13 @@
+# PR10-CORE-D3 — eligibility source/publisher/read contract proposal — 2026-10-22
+
+**Accepted main:** `04da57bd02df493336036ec1f52b9df626c721ab` ([PR #236](https://github.com/Mitronomik/family-food-os/pull/236) merged 2026-10-22T14:11:33Z). Option B technical Gate2 and separate safe-batch/serving-quality release gates remain controlling.
+
+**Current bounded docs-only task:** [Issue #237](https://github.com/Mitronomik/family-food-os/issues/237), `docs/pr10-core-step-eligibility-d3-gate`, [D3-style trusted step classification publisher/read contract](../docs/family-food/pr10-core-step-eligibility-d3-contract-2026-10-22.md) plus [two-entry NONAUTHORITATIVE review queue](../docs/family-food/pr10-core-step-eligibility-review-queue-2026-10-22.json). The exact two historical salmon lunch and pollock dinner first steps have source manifest/Step hash/text alignment, but **zero approved executable PrepTasks**: `NO_NUMERIC_DIRECTION` is only a *proposed* numeric category; independent immediate-action reviewer/source rights/scale validation and a trusted versioned reader remain absent. This contract changes **no production code, recipe/catalogue, database, schema or source rights**; exact-head docs CI and independent review required, **no autonomous merge**.
+
+**Runtime gate remains:** `NO_GO_TO_PR10_CORE_RUNTIME` until a later separately reviewed current-fixture re-pin and exactly two positive step eligibility publication proofs (or bounded negative), then explicit PR10-A authorization. Three-table Prep model and UoW unchanged; `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, `SAFE_BATCH_READY` and `PORTION_RELEASE_READY` remain unmet; no PDF/Gate2/PWA/real-family advancement.
+
+---
+
 # PR10-CORE-PREFLIGHT — two same-day task candidates, source-read GO/NO-GO — 2026-10-20
 
 **Accepted main:** `094ded5edfa13874bf63f1bc3b83e18c9218dc67` ([PR #234](https://github.com/Mitronomik/family-food-os/pull/234) merged 2026-10-20T16:33:14Z). Owner-approved Option B staged technical Gate2 and separate mandatory safe-batch/portion-quality real-family release gates now govern.
