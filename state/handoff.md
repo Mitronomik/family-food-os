@@ -1,3 +1,13 @@
+# PR10-CORE-D3 — reviewed RecipeStep source/read policy handoff — 2026-10-22
+
+**Accepted base:** `main@04da57bd02df493336036ec1f52b9df626c721ab` (#236 merged). **Current Issue #237** branch `docs/pr10-core-step-eligibility-d3-gate`: [proposed D3-style publisher/read contract](../docs/family-food/pr10-core-step-eligibility-d3-contract-2026-10-22.md), [two-entry evidence queue](../docs/family-food/pr10-core-step-eligibility-review-queue-2026-10-22.json).
+
+Both historic 2026-09-16 LUNCH salmon and DINNER pollock Russian first steps are source-matched but **unapproved** as executable; entire instructions include blanch/saute processes whose scale/operational adequacy must receive independent review. New proposed trusted read path delivers separately reviewed immutable `NO_NUMERIC_DIRECTION` and **independent same-day actionable applicability**; missing/revoked/mismatched authority => unresolved, NEVER automatic task. No accepted payload/reader/runtime currently exists. Historical MealEvent/Step UUIDs are disposable fixtures; next curation task must independently re-pin actual current Gate2 fixture, not trust code-only matching.
+
+**Next ONLY:** static docs/scope/links/CI, independent review and owner merge decision. If this gate is accepted, request **one bounded exact-two-step curation/publication proof** with independent reviewer, D3 reader and actual source/Serving/scale pins before PR10-A. A failure returns a scoped `NO_GO`; do not start source hunting. `NO_GO_TO_PR10_CORE_RUNTIME`, `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, separate SAFE_BATCH / PORTION_RELEASE gates unchanged; no auto runtime, data/schema/migration, PDF, Gate2 or merge.
+
+---
+
 # PR10-CORE-PREFLIGHT — bounded source/three-table handoff — 2026-10-20
 
 **Base:** `main@094ded5edfa13874bf63f1bc3b83e18c9218dc67`, merged PR #234. **Current Issue #235**, branch `research/pr10-core-positive-preflight-2026-10-20`, [preflight report](../docs/family-food/pr10-core-positive-preflight-2026-10-20.md) and [receipt JSON](../docs/family-food/pr10-core-positive-preflight-evidence-2026-10-20.json).
