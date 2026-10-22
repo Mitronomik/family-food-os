@@ -1,3 +1,11 @@
+# PR #238 — anti-rollback reviewer correction handoff — 2026-10-22
+
+[PR10-CORE-D3 contract](../docs/family-food/pr10-core-step-eligibility-d3-contract-2026-10-22.md) now requires rollback-resistant **current eligibility status** outside any locally revertible release/package. Every step admission must affirmatively check revocation status and a monotonic policy floor, even after deploy rollback. Authority unavailable/stale, record revoked or reader too old to check => fail closed, **zero executable tasks**; historical Prep snapshots remain auditable but not current. Adversarial acceptance: `approved A → revoked B → rollback to A → no executable task`; old reader must be blocked/disabled by deployment guard if it cannot enforce this. No database/network service was chosen in this docs correction; a later bounded publisher/reader contract must prove its trust/deploy/rollback semantics.
+
+**Next:** exact-head docs/static review and independent PR #238 review; owner merge decision only. Two review-queue candidates remain `PENDING_INDEPENDENT_REVIEW` with **zero approvals**. `NO_GO_TO_PR10_CORE_RUNTIME`, `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, safe-batch/portion-release gates unchanged. Do not initiate source publication, runtime, migrations, Gate2 or automatic merge.
+
+---
+
 # PR10-CORE-D3 — reviewed RecipeStep source/read policy handoff — 2026-10-22
 
 **Accepted base:** `main@04da57bd02df493336036ec1f52b9df626c721ab` (#236 merged). **Current Issue #237** branch `docs/pr10-core-step-eligibility-d3-gate`: [proposed D3-style publisher/read contract](../docs/family-food/pr10-core-step-eligibility-d3-contract-2026-10-22.md), [two-entry evidence queue](../docs/family-food/pr10-core-step-eligibility-review-queue-2026-10-22.json).
