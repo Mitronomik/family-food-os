@@ -1,3 +1,11 @@
+# PR #238 — P2 anti-rollback docs correction — 2026-10-22
+
+- Applied independent-review P2 correction to [PR10-CORE-D3](../docs/family-food/pr10-core-step-eligibility-d3-contract-2026-10-22.md) §4.1/§5/§6: an independent, durable and monotonically advancing current-status / minimum-policy-revision authority outside the rollback unit must affirmatively authorize the exact eligibility record before every executable task. Old release-local hashes, cached prior PASS and rolled-back readers cannot bypass a later revocation. Missing/stale/unavailable authority or a reader unable to check it => **no executable task**, never a positive fallback.
+- Frozen negative test `approved A → revoked B → rollback to A → no executable task`, also no current stale Prep/PDF and no Pantry mutations. Specific durable store/service is **not** chosen; requires separately reviewed implementation/deployment/backup/rollback contract.
+- Docs-only review correction, no source publication, PR10 runtime, schema/API, approved positive steps or Gate2 advancement. `NO_GO_TO_PR10_CORE_RUNTIME` and `PR10-FD-META=BLOCKED/TIME_UNRESOLVED` unchanged. Recheck exact-head Docs CI and independent review before owner merge.
+
+---
+
 # PR10-CORE-D3 — exact two-step eligibility governance proposed — 2026-10-22
 
 - Verified PR #236 merged at `main@04da57bd02df493336036ec1f52b9df626c721ab`; prior `NO_GO_TO_PR10_CORE_RUNTIME` remains valid with two candidate-only same-day first steps and no authoritative eligibility.
