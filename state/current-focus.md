@@ -1,3 +1,13 @@
+# PR10-CORE-PREFLIGHT — two same-day task candidates, source-read GO/NO-GO — 2026-10-20
+
+**Accepted main:** `094ded5edfa13874bf63f1bc3b83e18c9218dc67` ([PR #234](https://github.com/Mitronomik/family-food-os/pull/234) merged 2026-10-20T16:33:14Z). Owner-approved Option B staged technical Gate2 and separate mandatory safe-batch/portion-quality real-family release gates now govern.
+
+**Current bounded task:** [Issue #235](https://github.com/Mitronomik/family-food-os/issues/235), branch `research/pr10-core-positive-preflight-2026-10-20`, [source/schema evidence preflight](../docs/family-food/pr10-core-positive-preflight-2026-10-20.md) + [machine receipt](../docs/family-food/pr10-core-positive-preflight-evidence-2026-10-20.json). Historic accepted 3-member PR #196 fixture gives two separate 2026-09-16 COOK_RECIPE events (salmon lunch, pollock dinner) with exact pinned Russian preparatory first-step texts matching reviewed manifests and member Decimal Servings. **Candidate-only; no published independent step classification or approved executable PrepTask, hence `NO_GO_TO_PR10_CORE_RUNTIME`.** The frozen three-table design is conceptually compatible for same-day ungrouped tasks; migration head is `0043`, no new Prep table. Await exact-head docs CI/review, no autonomous merge.
+
+**Next only after evidence review and explicit authorization:** independently approve/reject these **two exact** step/scale/process eligibilities and D3-style publisher/read contract **if a new authoritative classification reader is required**; avoid another unbounded catalogue search. No PR10-A/B/C, PDF/PWA runtime or Gate2 pass. `PR10-FD-META=BLOCKED / TIME_UNRESOLVED`, `SAFE_BATCH_READY=false` and `PORTION_RELEASE_READY` still unmet before real-family release.
+
+---
+
 # PR10-OPTION-B-STAGED-GATES — authorized docs-only amendment — 2026-10-17
 
 **Accepted `main`:** `1c78bf033fecacf87ce62adc35a8bd34a33f4d11` ([PR #233](https://github.com/Mitronomik/family-food-os/pull/233) merged 2026-10-17T10:00:07Z). This does not authorize a PortionFeasibilityProfile, Planner serving runtime, PR10-META or Gate2 closure.

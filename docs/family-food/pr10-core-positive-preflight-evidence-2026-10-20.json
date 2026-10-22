@@ -1,0 +1,164 @@
+{
+  "schema": "PR10_CORE_POSITIVE_PREFLIGHT_RESEARCH_V1",
+  "issue": 235,
+  "contract_pr": 234,
+  "accepted_main_sha": "094ded5edfa13874bf63f1bc3b83e18c9218dc67",
+  "scope": "ONE_HISTORICAL_3_MEMBER_FIXTURE_TWO_DISTINCT_SAME_DAY_STEP_CANDIDATES",
+  "evidence_provenance": {
+    "source_receipt": "docs/family-food/pr10-meta-onion-blanch-evidence.json",
+    "source_receipt_git_blob_sha": "c052638ab9eb0654e27960462e5c9dfafc404707",
+    "historical_pr": 196,
+    "historical_workflow_run_id": 38059374826,
+    "historical_artifact_id": 11672432141,
+    "historical_artifact_json_sha256": "6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec",
+    "historical_semantic_sha256": "2d6cb581649863b7edbd3c0efff2bae2934c6a512c99a45d10e92f92f514cb3d",
+    "original_three_member_fixture": "data/curation/dc4-corpus-readiness/rerun-summary.json",
+    "original_three_member_fixture_git_blob_sha": "fb9c7be7914765a14622c012666077e5f3dc0d79",
+    "original_three_member_fixture_count": {
+      "members": 3,
+      "days": 7,
+      "events": 21,
+      "servings": 42
+    },
+    "fresh_main_runtime_or_actual_production_fixture_read": false
+  },
+  "positive_task_candidates": [
+    {
+      "historical_event_date": "2026-09-16",
+      "historical_meal_role": "LUNCH",
+      "historical_event_id": "a3bd9a18-5ed6-4447-8a13-1b7b9416c45f",
+      "source_kind": "COOK_RECIPE",
+      "recipe_code": "SCHOOL2022_54_17R_SALMON_TOMATO_VEGETABLES",
+      "historical_recipe_version_id": "155f5283-2f2a-4487-83ac-895877197b45",
+      "historical_recipe_process_hash": "4fb058b03530ab54136e4bdf2d3b233681b10454629f03774aae5f9ba449028c",
+      "recipe_step_id": "82a7cf80-6aee-42b0-91bb-b318cbf41e47",
+      "step_position": 1,
+      "historical_step_instruction_sha256": "46ca78ea057058c50cb6d76417bdd01d08b05f7a7e6259848a12b98a548b5258",
+      "step_text_ru": "Подготовить корень петрушки, морковь и репчатый лук; лук бланшировать, затем пассеровать вместе с морковью и петрушкой и добавить томатное пюре.",
+      "text_matches_published_source_receipt": true,
+      "source_step_count": 4,
+      "source_manifest_path": "data/curation/r3c-post-r3b-catalogue-gate/frozen-batch.json",
+      "source_manifest_blob_sha": "c11fd55695c655fee5add14a3416a27527771e75",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_reviewed_rights": "REVIEWED_BOUNDED_FACTUAL_RECIPE_SOURCE",
+      "structured_onion_net_g_at_source_base": "9.8",
+      "historical_member_servings": [
+        {
+          "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+          "portion_servings": "5.916796"
+        }
+      ],
+      "candidate_direction_has_digit": false,
+      "step_classification": "CANDIDATE_NO_NUMERIC_DIRECTION_NOT_INDEPENDENTLY_REVIEWED",
+      "same_day_execution_proof": "NOT_EXECUTED; NO CLOCK/TRAVEL_OR_EQUIPMENT_STATE_INFERRED",
+      "planned_safety_state": "NO_STORAGE_OR_ADVANCE_PREP_CLAIM",
+      "production_executable_task_authorized": false,
+      "blocking_review": "REQUIRES_VERSION_PINNED_HUMAN_STEP_ELIGIBILITY_AND_D3_PUBLICATION_READ_CONTRACT_IF_NEW_CLASSIFICATION_AUTHORITY"
+    },
+    {
+      "historical_event_date": "2026-09-16",
+      "historical_meal_role": "DINNER",
+      "historical_event_id": "bf60e784-bd3e-4d62-96dd-54318fd5920c",
+      "source_kind": "COOK_RECIPE",
+      "recipe_code": "SCHOOL2022_54_7R_POLLOCK_IN_MILK",
+      "historical_recipe_version_id": "16a04325-d532-45f6-82ca-2f30630467a6",
+      "historical_recipe_process_hash": "74e02d9c88421665f35e2f07c8cf54adfcad62200fe857de27bda87e0f36be71",
+      "recipe_step_id": "00dc9916-dc34-44eb-8518-ff7299920149",
+      "step_position": 1,
+      "historical_step_instruction_sha256": "b6b9e45dc7afdf48d30247f33bc7fd71b154af29fe4a8075da53edb2e89affde",
+      "step_text_ru": "Репчатый лук подготовить, нашинковать и бланшировать.",
+      "text_matches_published_source_receipt": true,
+      "source_step_count": 5,
+      "source_manifest_path": "data/curation/r2b-fish-main-diversity/publication-specs.json",
+      "source_manifest_blob_sha": "b4ad353c4c9e955b64fb8b155cc98a1530aeb3a8",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_reviewed_rights": "REVIEWED_BOUNDED_FACTUAL_RECIPE_SOURCE",
+      "structured_onion_net_g_at_source_base": "16",
+      "historical_member_servings": [
+        {
+          "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+          "portion_servings": "5.631030"
+        },
+        {
+          "member_id": "171cbad3-0b5f-44ba-bba2-ff4fc67537f0",
+          "portion_servings": "5.631030"
+        },
+        {
+          "member_id": "def51f62-65be-4939-8860-70c792ff7731",
+          "portion_servings": "6.546747"
+        }
+      ],
+      "candidate_direction_has_digit": false,
+      "step_classification": "CANDIDATE_NO_NUMERIC_DIRECTION_NOT_INDEPENDENTLY_REVIEWED",
+      "same_day_execution_proof": "NOT_EXECUTED; NO CLOCK/TRAVEL_OR_EQUIPMENT_STATE_INFERRED",
+      "planned_safety_state": "NO_STORAGE_OR_ADVANCE_PREP_CLAIM",
+      "production_executable_task_authorized": false,
+      "blocking_review": "REQUIRES_VERSION_PINNED_HUMAN_STEP_ELIGIBILITY_AND_D3_PUBLICATION_READ_CONTRACT_IF_NEW_CLASSIFICATION_AUTHORITY"
+    }
+  ],
+  "candidate_count": 2,
+  "distinct_historical_event_count": 2,
+  "all_candidates_have_original_ru_text": true,
+  "independently_reviewed_step_policy_count": 0,
+  "new_source_policy_or_reader_published": false,
+  "approved_executable_task_count": 0,
+  "three_table_compatibility": {
+    "scope": "DOCS_AND_MIGRATION_REGISTRY_ONLY_NOT_TESTED_SCHEMA",
+    "intended_tables": [
+      "prep_plans",
+      "prep_tasks",
+      "prep_unresolved_obligations"
+    ],
+    "current_food_prep_tables_found": false,
+    "latest_registered_migration": "0043_shopping_engine",
+    "candidate_next_migration": "0044_UNRESERVED_AND_NOT_APPLIED",
+    "reuse_existing_statuses": [
+      "COMPLETE",
+      "INCOMPLETE"
+    ],
+    "reuse_unresolved_codes": [
+      "PROCESS_STEPS_UNVERIFIED",
+      "STEP_QUANTITY_REVIEW_REQUIRED",
+      "SAFE_BATCH_METADATA_MISSING",
+      "STORAGE_TRANSITION_UNVERIFIED"
+    ],
+    "no_batch_grouping_required": true,
+    "nullable_shared_work_group_key": true,
+    "scheduled_equals_required_local_date_only_after_eligibility_review": true,
+    "three_table_design_fit": "CONCEPTUALLY_COMPATIBLE_REQUIRES_IMPLEMENTATION_CONTRACT_PREFLIGHT_NO_SCHEMA_CHANGE_AUTHORIZED"
+  },
+  "negative_controls": [
+    {
+      "scenario": "BOTH_STEPS_UNREVIEWED_OR_MISSING_SOURCE_PIN",
+      "expected": "ZERO_AUTHORITATIVE_EXECUTABLE_TASKS; TECHNICAL_GATE2_NO_GO; EXPLICIT_UNRESOLVED"
+    },
+    {
+      "scenario": "ONE_EVENT_VALID_SECOND_EVENT_UNSUPPORTED",
+      "expected": "LESS_THAN_TWO_POSITIVE_EVENTS; TECHNICAL_GATE2_NO_GO"
+    },
+    {
+      "scenario": "MISSING_STRUCTURED_ONION_OR_SERVING_OR_CROSS_HOUSEHOLD_JOIN",
+      "expected": "BLOCKING_NO_PARTIAL_PREP_PLAN_WRITE"
+    },
+    {
+      "scenario": "STORAGE_HOLD_FREEZE_FOR_LUNCH_TO_DINNER",
+      "expected": "BLOCKED_TIME_UNRESOLVED_NO_SHARED_ACTION_OR_SAFE_STOCK_CLAIM"
+    },
+    {
+      "scenario": "CHANGED_RECIPEVERSION_STEP_HASH",
+      "expected": "REVOKE_ELIGIBILITY_STALE_FINGERPRINT_REVIEW_AGAIN"
+    }
+  ],
+  "gate_decision": "NO_GO_TO_PR10_CORE_RUNTIME_ON_CURRENT_EVIDENCE",
+  "not_global_catalogue_no_go": true,
+  "positive_source_candidates_exist": true,
+  "next_bounded_task": "Independent two-step per-version numeric/process review plus D3-style source classification publication/read contract; preserve original MealPlan 3-member fixture and three-table schema. No runtime until separately accepted.",
+  "invariants": {
+    "ai_disabled": true,
+    "no_pantry_mutation": true,
+    "no_recipe_republication": true,
+    "no_freezer_authority": true,
+    "portion_release_ready": "NOT_EVALUATED",
+    "safe_batch_ready": false
+  }
+}

@@ -1,3 +1,13 @@
+# PR10-CORE-PREFLIGHT — bounded source/three-table handoff — 2026-10-20
+
+**Base:** `main@094ded5edfa13874bf63f1bc3b83e18c9218dc67`, merged PR #234. **Current Issue #235**, branch `research/pr10-core-positive-preflight-2026-10-20`, [preflight report](../docs/family-food/pr10-core-positive-preflight-2026-10-20.md) and [receipt JSON](../docs/family-food/pr10-core-positive-preflight-evidence-2026-10-20.json).
+
+The accepted historical PR #196 three-member MealPlan evidence (21 events, 42 Servings) and subsequent source review pin **two** distinct `COOK_RECIPE` events on 2026-09-16: salmon/tomato lunch and pollock/milk dinner. Their first Russian source steps exactly match currently read accepted manifests; historical step IDs/hashes and member Decimal amounts are in receipt. **These are NOT executable authorized tasks.** Independent versioned step classification + process/scale suitability and (if new policy data/read) D3 publisher/reader contract are missing, and current accepted Gate2 fixture must be independently re-pinned for future execution. Therefore `NO_GO_TO_PR10_CORE_RUNTIME`, not global NO_GO. Existing three-table concept supports ungrouped same-day per-event tasks without new enum; no schema implemented, migration head 0043.
+
+**Next only:** exact-head docs and links/format verification, independent review, owner merge decision. Any follow-on source-classification review is separately authorized; **no automatic PR10-A/B/C, new table, PDF, Gate2, PWA or safe freezer operation**. `PR10-FD-META=BLOCKED / TIME_UNRESOLVED`, release batch/serving gates unchanged.
+
+---
+
 # PR10-OPTION-B-STAGED-GATES — independent review handoff — 2026-10-17
 
 **Accepted base:** `main@1c78bf033fecacf87ce62adc35a8bd34a33f4d11` (merged #233). **Owner approved PR10 Option B later in project chat on 2026-10-17**; the exact quoted instruction and its limited authorization are transcribed in [Issue #220 comment #6233466777](https://github.com/Mitronomik/family-food-os/issues/220#issuecomment-6233466777), **not** originally typed on GitHub. It authorizes one docs-only amendment PR, not immediate runtime or merge.

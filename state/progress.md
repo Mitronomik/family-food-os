@@ -1,3 +1,12 @@
+# PR10-CORE-PREFLIGHT — two pinned candidates, NO_GO to runtime pending step review — 2026-10-20
+
+- Verified [PR #234](https://github.com/Mitronomik/family-food-os/pull/234) **merged** into `main@094ded5edfa13874bf63f1bc3b83e18c9218dc67`. Option B stage split is approved in canonical docs: technical Gate2 positively useful same-day Prep, separate mandatory `SAFE_BATCH_READY` and measured `PORTION_RELEASE_READY=PASS` before enrolling any real family.
+- Opened [Issue #235](https://github.com/Mitronomik/family-food-os/issues/235) for one **evidence/docs-only** PR10-CORE positive data/schema preflight. Reviewed historical PR #196 3-member fixture (21 events, 42 Servings) and source manifests for 2026-09-16 salmon lunch + pollock dinner; exact step Russian texts match accepted publication specs and member Decimal strings/RecipeVersion/Step pins are retained.
+- Positive **leads only**: both source first-step texts have concrete same-day prep operations, no numeric literals, **no independently published eligibility policy**. Result `NO_GO_TO_PR10_CORE_RUNTIME`; zero authorized executable tasks. Three-table design conceptually fits ungrouped same-day tasks; repository latest registered migration `0043`; no new schema, source publication or runtime.
+- Next bounded dependency after independent review: two specific step/scale/source-safety reviews and D3-style publisher/read contract if needed; no more open-ended source hunt. PR10-FD-META remains BLOCKED/TIME_UNRESOLVED, Gate2/PDF/PWA and real-family release unchanged.
+
+---
+
 # PR10-OPTION-B-STAGED-GATES — owner authorized docs proposal — 2026-10-17
 
 - Verified PR #233 merged to `main@1c78bf033fecacf87ce62adc35a8bd34a33f4d11`. Existing serving-policy research does not establish a production physiologic bound, and `PR10-FD-META` remains `BLOCKED / TIME_UNRESOLVED`.
