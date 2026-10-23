@@ -1,3 +1,12 @@
+# PR10-CORE — two-step comparable recipe evidence review — 2026-10-23
+
+- Confirmed [PR #240](https://github.com/Mitronomik/family-food-os/pull/240) merged to `main@5e5ee82f90a5f0f3103f96b09ac7a6d166565e3b`. Owner requested additional similar-recipe verification and decision for two known steps, not new source publication.
+- Opened [Issue #241](https://github.com/Mitronomik/family-food-os/issues/241). [Research decision](../docs/family-food/pr10-two-step-recipe-analogue-review-2026-10-23.md) / [JSON matrix](../docs/family-food/pr10-two-step-recipe-analogue-comparison-2026-10-23.json) compare 2022 primary cards R3-C salmon 54-17р and R2-B pollock 54-7р with 2022 fish species variants (54-10р,54-11р,54-6р,54-15р), plus independently published **2020** institutional four similar cards. Original PDF web text verified, screenshot/byte-hash verification failed/unavailable. Same institutional lineage is NOT an independent home-process test.
+- Both culinary sequences corroborated; **pollock original 2022 milk level 1/3 of tray height ≠ FamilyFoodOS R2-B 1/3 fish height**; the 2020 and salmon variants omit reference noun and differ in fish piece mass 85g vs 65g. Salmon oil split remains UNKNOWN. **Research verdict GO for technique provenance; NO_GO for production `APPROVED_IMMEDIATE` for both, NO_GO PR10-A**, requires qualified data owner/Domain/QA source, scale and process adjudication. No existing recipe/version change, accepted source data or runtime.
+- Docs-only PR for independent review, no merge. `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, safe-batch and portion release gates remain blocked.
+
+---
+
 # PR10-CORE two-step R3-C/R2-B exact evidence and publication handoff — 2026-10-23
 
 - Confirmed [PR #238](https://github.com/Mitronomik/family-food-os/pull/238) merged, `main@22a7f2ab9d94fe395739f0691e5fff3ba3928594`. Owner approved **exactly two first-step source/process/scale reviews**, with no `APPROVED_IMMEDIATE` without independent evidence and no runtime/migrations.
