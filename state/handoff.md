@@ -1,3 +1,13 @@
+# PR10-CORE — scalable source-step triage handoff — 2026-10-23
+
+**Accepted base:** `main@5e5ee82f90a5f0f3103f96b09ac7a6d166565e3b`, #240 merged. **Current Issue #243**, branch `research/pr10-fixture21-action-class-triage-2026-10-23`. [21-event report](../docs/family-food/pr10-fixture21-action-class-review-2026-10-23.md); [87-step machine evidence](../docs/family-food/pr10-fixture21-action-class-triage-2026-10-23.json). PR #242 is an **unmerged concurrent** research PR; do not import it as main. This task is the owner's approved one-time research-strategy shift, *not* changed Gate2 criteria.
+
+**FACT:** historical synthetic 2026-09-14..20 week has 21 distinct `COOK_RECIPE` recipe codes; all resolved to accepted source publication manifests and DC4 historical version IDs. 87 ordered steps inventoried: triage 31 literal numerals, 34 heat/hot-state, 17 ambiguous/compound, 5 other source texts. Regex/heuristics do not grant eligibility. Selected 2 lower-complexity nonthermal first steps in different historical meal events: 2026-09-18 cottage cheese 54-1т rubbing `TVOROG_5`; 2026-09-19 corn groats porridge 54-1к sorting/rinsing `CORN_GROATS`. Actual fixture current MealEvent ID, Step IDs/hashes and member Decimal Servings not proven by summary; no physical capacity or source-process review. `APPROVED_IMMEDIATE=0`, `NO_GO_TO_PR10_CORE_RUNTIME`.
+
+**NEXT ONLY:** exact-head Docs CI and independent review of this five-file proposal; no self merge. If accepted, separately authorize **one named independent Domain/QA two-step process/scale review** and exact current fixture re-pin, then D3 trusted publisher/read implementation with rollback-proof status, then PR10-A authorization (separate bounded task). Reject absent evidence; no new arbitrary recipe hunt, invented heat/water quantities, storage/freezer, Pantry writes, runtime/migrations, API/PDF/PWA/Gate2. Prior R3-C/R2-B NO-GO and safe-batch/portion-release gates unchanged.
+
+---
+
 # PR10-CORE exact two-step applicability NO-GO — source and publication handoff — 2026-10-23
 
 **Accepted main:** `22a7f2ab9d94fe395739f0691e5fff3ba3928594`, merged #238. **Current:** Issue [#239](https://github.com/Mitronomik/family-food-os/issues/239), branch `research/pr10-core-two-steps-go-no-go-2026-10-23`. Files: [source/process/scale review](../docs/family-food/pr10-core-two-step-source-process-scale-review-2026-10-23.md), [JSON evidence](../docs/family-food/pr10-core-two-step-source-process-scale-decision-2026-10-23.json), [bounded publisher/reader acceptance](../docs/family-food/pr10-core-two-step-publisher-reader-acceptance-2026-10-23.md).
