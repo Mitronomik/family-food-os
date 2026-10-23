@@ -1,0 +1,319 @@
+{
+  "schema": "PR10_CORE_TWO_STEP_SOURCE_PROCESS_SCALE_DECISION_V1",
+  "issue": 239,
+  "accepted_base_main": "22a7f2ab9d94fe395739f0691e5fff3ba3928594",
+  "owner_authorization": "2026-10-23 one bounded two-step source/process/scale review only; never automatically approve executable steps",
+  "source_queue_path": "docs/family-food/pr10-core-step-eligibility-review-queue-2026-10-22.json",
+  "source_queue_git_blob_sha": "85ce9703f0f21dd4b67801e16dffb170db1dfeec",
+  "prior_preflight_path": "docs/family-food/pr10-core-positive-preflight-evidence-2026-10-20.json",
+  "prior_preflight_git_blob_sha": "e0892d54b66b283d65a3a33935f1f1f55c617575",
+  "source_pdf_url": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+  "web_source_validation": {
+    "extracted_pdf_text_checked": true,
+    "web_pdf_screenshot_tool_result": "CACHE_MISS",
+    "original_source_binary_hash_reverification": "NOT_DONE; TRUST_PREVIOUS_ACCEPTED_REPO_SOURCE_PIN_ONLY",
+    "original_pub_scope": "2022 school institutional 1-4 class dishes, not independent household safety authority"
+  },
+  "scope": "EXACTLY_TWO_SOURCE_STEPS_ONLY_NO_EXPANSION",
+  "entries": [
+    {
+      "code": "SCHOOL2022_54_17R_SALMON_TOMATO_VEGETABLES",
+      "historical_fixture": {
+        "meal_event_id": "a3bd9a18-5ed6-4447-8a13-1b7b9416c45f",
+        "meal_date": "2026-09-16",
+        "role": "LUNCH",
+        "recipe_version_id": "155f5283-2f2a-4487-83ac-895877197b45",
+        "recipe_step_id": "82a7cf80-6aee-42b0-91bb-b318cbf41e47",
+        "step_position": 1,
+        "step_instruction_sha256": "46ca78ea057058c50cb6d76417bdd01d08b05f7a7e6259848a12b98a548b5258",
+        "recipe_process_sha256": "4fb058b03530ab54136e4bdf2d3b233681b10454629f03774aae5f9ba449028c",
+        "member_servings": [
+          {
+            "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+            "portion_servings": "5.916796"
+          }
+        ],
+        "sum_base_servings": "5.916796",
+        "fixture_status": "HISTORICAL_SYNTHETIC_ONLY_REPIN_CURRENT_REQUIRED"
+      },
+      "source": {
+        "publication_manifest": "data/curation/r3c-post-r3b-catalogue-gate/frozen-batch.json",
+        "git_blob_sha": "c11fd55695c655fee5add14a3416a27527771e75",
+        "original_school2022_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "source_rights_review": "REVIEWED_BOUNDED_FACTUAL_RECIPE_SOURCE",
+        "source_output_per_original_serving_g": "70",
+        "source_base_servings": "1",
+        "source_category": "SCHOOL_MEALS_AGE_7_TO_11_NOT_HOUSEHOLD_SAFETY_BOUNDS",
+        "original_pdf_printed_page": 112,
+        "original_pdf_index_zero_based": 111,
+        "primary_pdf_text_crosschecked": true,
+        "primary_pdf_byte_sha256_verified_in_current_task": false,
+        "web_screenshot_verified": false
+      },
+      "process_context": {
+        "published_full_recipe_steps": [
+          "Подготовить корень петрушки, морковь и репчатый лук; лук бланшировать, затем пассеровать вместе с морковью и петрушкой и добавить томатное пюре.",
+          "Подготовленное филе сёмги нарезать порционными кусками и уложить в форму, смазанную подсолнечным маслом.",
+          "Выложить на рыбу пассерованные овощи, добавить воду, сахар и йодированную соль.",
+          "Готовить в духовке 40–45 минут до готовности."
+        ],
+        "published_target_step_text": "Подготовить корень петрушки, морковь и репчатый лук; лук бланшировать, затем пассеровать вместе с морковью и петрушкой и добавить томатное пюре.",
+        "manifests_exact_target_text_match": true,
+        "embedded_numeric_tokens_in_target_step": false,
+        "syntactic_numeric_review": "NO_DIGITS_OBSERVED_REVIEWED_CLASSIFICATION_NOT_APPROVED",
+        "source_original_process_context_evidence": "Original 2022 school card includes washing parsley root under running water at least 5 min, carrot/onion wash-peel/wash, fine shredding with industrial vegetable cutter, onion blanch/saute; institutional context not automatically copied into consumer RecipeStep.",
+        "process_gaps": [
+          "COMPOUND_STEP_HAS_MULTIPLE_OPERATIONS_NOT_SEPARATELY_VERSIONED",
+          "SUNFLOWER_OIL_TOTAL_SPLIT_SAUTE_VS_BAKING_TRAY_UNKNOWN",
+          "HOUSEHOLD_SCALE_BLANCHE_SAUTE_EQUIPMENT_CAPACITY_UNREVIEWED",
+          "ORIGINAL_INSTITUTIONAL_WASH_MACHINE_CONTEXT_NOT_FULLY_PRESENT_IN_ACCEPTED_PUBLISHED_STEP",
+          "NO_INDEPENDENT_QA_SOURCE_FORM_PROCESS_ELIGIBILITY_SIGNATURE"
+        ],
+        "immediate_action_eligibility": "NO_GO_TO_APPROVED_IMMEDIATE_ON_CURRENT_EVIDENCE",
+        "numeric_classification": "CANDIDATE_NO_NUMERIC_DIRECTION_NOT_INDEPENDENTLY_APPROVED",
+        "independent_domain_qa_reviewer_id": null,
+        "independent_review_accepted_at": null,
+        "reviewed_source_approved_for_target_family_scale": false,
+        "safe_same_day_execution_confirmed": false,
+        "safe_intermeal_holding_confirmed": false,
+        "allowed_task_publication": false
+      },
+      "structured_scale_research": {
+        "basis": "SOURCE_BASE_SERVINGS_1_EXACT_HISTORICAL_FACTORS; NOT AN EXECUTION QUANTITY OR SAFE_BATCH_YIELD",
+        "total_historical_portion_servings": "5.916796",
+        "all_ingredient_net_projection": [
+          {
+            "food_ingredient_code": "ATLANTIC_SALMON_FILLET_RAW",
+            "net_source_g": "56",
+            "net_historical_projected_g": "331.340576",
+            "net_authority": "STRUCTURED_RECIPE_SOURCE_X_HISTORICAL_DECIMAL_FACTOR_RESEARCH_ONLY",
+            "gross_source_g": "63.3"
+          },
+          {
+            "food_ingredient_code": "CARROT",
+            "net_source_g": "17.5",
+            "net_historical_projected_g": "103.5439300",
+            "net_authority": "STRUCTURED_RECIPE_SOURCE_X_HISTORICAL_DECIMAL_FACTOR_RESEARCH_ONLY",
+            "gross_source_g": "21.9"
+          },
+          {
+            "food_ingredient_code": "ONION_BULB_FRESH",
+            "net_source_g": "9.8",
+            "net_historical_projected_g": "57.9846008",
+            "net_authority": "STRUCTURED_RECIPE_SOURCE_X_HISTORICAL_DECIMAL_FACTOR_RESEARCH_ONLY",
+            "gross_source_g": "12.2"
+          },
+          {
+            "food_ingredient_code": "TOMATO_PUREE_PASTE",
+            "net_source_g": "6.3",
+            "net_historical_projected_g": "37.2758148",
+            "net_authority": "STRUCTURED_RECIPE_SOURCE_X_HISTORICAL_DECIMAL_FACTOR_RESEARCH_ONLY",
+            "gross_source_g": "6.3"
+          },
+          {
+            "food_ingredient_code": "PARSLEY_ROOT_RAW",
+            "net_source_g": "2.8",
+            "net_historical_projected_g": "16.5670288",
+            "net_authority": "STRUCTURED_RECIPE_SOURCE_X_HISTORICAL_DECIMAL_FACTOR_RESEARCH_ONLY",
+            "gross_source_g": "3.5"
+          },
+          {
+            "food_ingredient_code": "SUGAR",
+            "net_source_g": "1.8",
+            "net_historical_projected_g": "10.6502328",
+            "net_authority": "STRUCTURED_RECIPE_SOURCE_X_HISTORICAL_DECIMAL_FACTOR_RESEARCH_ONLY",
+            "gross_source_g": "1.8"
+          },
+          {
+            "food_ingredient_code": "SUNFLOWER_OIL",
+            "net_source_g": "5.3",
+            "net_historical_projected_g": "31.3590188",
+            "net_authority": "STRUCTURED_RECIPE_SOURCE_X_HISTORICAL_DECIMAL_FACTOR_RESEARCH_ONLY",
+            "gross_source_g": "5.3"
+          },
+          {
+            "food_ingredient_code": "SALT_IODIZED",
+            "net_source_g": "0.2",
+            "net_historical_projected_g": "1.1833592",
+            "net_authority": "STRUCTURED_RECIPE_SOURCE_X_HISTORICAL_DECIMAL_FACTOR_RESEARCH_ONLY",
+            "gross_source_g": "0.2"
+          },
+          {
+            "food_ingredient_code": "WATER",
+            "net_source_g": "17.5",
+            "net_historical_projected_g": "103.5439300",
+            "net_authority": "STRUCTURED_RECIPE_SOURCE_X_HISTORICAL_DECIMAL_FACTOR_RESEARCH_ONLY",
+            "gross_source_g": "17.5"
+          }
+        ],
+        "onion_net_projection_g": "57.9846008",
+        "cooked_output_scaled_mass_claim": "NOT_ESTABLISHED",
+        "food_safety_capacity_claim": "NOT_ESTABLISHED",
+        "versioned_quantity_method": "INTEGER_DECIMAL_MULTIPLICATION_OF_SOURCE_NET_GRAMS_BY_HISTORIC_PORTION_DECIMALS; NOT_BACKEND_QUANTIZATION",
+        "whole_meal_nutrition_or_portion_feasibility": "NOT_EVALUATED"
+      },
+      "review_decision": {
+        "provenance": "SOURCE_MANIFEST_MATCH",
+        "numeric": "OBSERVATION_ONLY",
+        "physical_process": "NO_GO_TO_EXECUTABLE_APPROVAL",
+        "family_scale": "NO_GO_TO_EXECUTABLE_APPROVAL",
+        "role_applicability": "HISTORICAL_ONLY",
+        "publisher_reader_ready": false,
+        "reviewer_signoff": "MISSING_INDEPENDENT_QA_REVIEW",
+        "reason": "SOURCE_AND_DECIMAL_EVIDENCE_INSUFFICIENT_FOR_INDEPENDENT_SCALED_HOME_PROCESS_APPROVAL"
+      }
+    },
+    {
+      "code": "SCHOOL2022_54_7R_POLLOCK_IN_MILK",
+      "historical_fixture": {
+        "meal_event_id": "bf60e784-bd3e-4d62-96dd-54318fd5920c",
+        "meal_date": "2026-09-16",
+        "role": "DINNER",
+        "recipe_version_id": "16a04325-d532-45f6-82ca-2f30630467a6",
+        "recipe_step_id": "00dc9916-dc34-44eb-8518-ff7299920149",
+        "step_position": 1,
+        "step_instruction_sha256": "b6b9e45dc7afdf48d30247f33bc7fd71b154af29fe4a8075da53edb2e89affde",
+        "recipe_process_sha256": "74e02d9c88421665f35e2f07c8cf54adfcad62200fe857de27bda87e0f36be71",
+        "member_servings": [
+          {
+            "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+            "portion_servings": "5.631030"
+          },
+          {
+            "member_id": "171cbad3-0b5f-44ba-bba2-ff4fc67537f0",
+            "portion_servings": "5.631030"
+          },
+          {
+            "member_id": "def51f62-65be-4939-8860-70c792ff7731",
+            "portion_servings": "6.546747"
+          }
+        ],
+        "sum_base_servings": "17.808807",
+        "fixture_status": "HISTORICAL_SYNTHETIC_ONLY_REPIN_CURRENT_REQUIRED"
+      },
+      "source": {
+        "publication_manifest": "data/curation/r2b-fish-main-diversity/publication-specs.json",
+        "git_blob_sha": "b4ad353c4c9e955b64fb8b155cc98a1530aeb3a8",
+        "original_school2022_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "source_rights_review": "REVIEWED_BOUNDED_FACTUAL_RECIPE_SOURCE",
+        "source_output_per_original_serving_g": "80",
+        "source_base_servings": "1",
+        "source_category": "SCHOOL_MEALS_AGE_7_TO_11_NOT_HOUSEHOLD_SAFETY_BOUNDS",
+        "original_pdf_printed_page": 103,
+        "original_pdf_index_zero_based": 102,
+        "primary_pdf_text_crosschecked": true,
+        "primary_pdf_byte_sha256_verified_in_current_task": false,
+        "web_screenshot_verified": false
+      },
+      "process_context": {
+        "published_full_recipe_steps": [
+          "Репчатый лук подготовить, нашинковать и бланшировать.",
+          "Уже размороженное филе минтая промыть и нарезать порционными кусками массой 65 г.",
+          "Смазать форму подсолнечным маслом, выложить бланшированный лук и сверху рыбу.",
+          "Залить горячим молоком примерно на одну треть высоты рыбы и добавить йодированную соль.",
+          "Готовить в духовке 20–25 минут до готовности."
+        ],
+        "published_target_step_text": "Репчатый лук подготовить, нашинковать и бланшировать.",
+        "manifests_exact_target_text_match": true,
+        "embedded_numeric_tokens_in_target_step": false,
+        "syntactic_numeric_review": "NO_DIGITS_OBSERVED_REVIEWED_CLASSIFICATION_NOT_APPROVED",
+        "source_original_process_context_evidence": "Original 2022 school card includes onion sort/wash/peel/re-wash/shred/blanch and institutional fish filets, thawing, piece mass 65 g, hot milk and oven process; not a source-approved at-home scaled batch.",
+        "process_gaps": [
+          "BLANCHING_PROCESS_WATER_TEMPERATURE_TIME_METHOD_UNVERIFIED_IN_CONSUMER_STEP",
+          "ORIGINAL_INSTITUTIONAL_PREPARATION_NOT_REVIEWED_FOR_HOUSEHOLD_SCALE",
+          "OTHER_NUMERIC_PROSE_FISH_65G_PIECES_MILK_LEVEL_AND_OVEN_REQUIRES_SEPARATE_WHOLE_RECIPE_REVIEW",
+          "SOURCE_STAGE_CANNOT_BE_PROMOTED_BY_NO_DIGIT_OBSERVATION",
+          "NO_INDEPENDENT_QA_SOURCE_FORM_PROCESS_ELIGIBILITY_SIGNATURE"
+        ],
+        "immediate_action_eligibility": "NO_GO_TO_APPROVED_IMMEDIATE_ON_CURRENT_EVIDENCE",
+        "numeric_classification": "CANDIDATE_NO_NUMERIC_DIRECTION_NOT_INDEPENDENTLY_APPROVED",
+        "independent_domain_qa_reviewer_id": null,
+        "independent_review_accepted_at": null,
+        "reviewed_source_approved_for_target_family_scale": false,
+        "safe_same_day_execution_confirmed": false,
+        "safe_intermeal_holding_confirmed": false,
+        "allowed_task_publication": false
+      },
+      "structured_scale_research": {
+        "basis": "SOURCE_BASE_SERVINGS_1_EXACT_HISTORICAL_FACTORS; NOT AN EXECUTION QUANTITY OR SAFE_BATCH_YIELD",
+        "total_historical_portion_servings": "17.808807",
+        "all_ingredient_net_projection": [
+          {
+            "food_ingredient_code": "POLLOCK_FILLET_RAW",
+            "net_source_g": "64",
+            "net_historical_projected_g": "1139.763648",
+            "net_authority": "STRUCTURED_RECIPE_SOURCE_X_HISTORICAL_DECIMAL_FACTOR_RESEARCH_ONLY",
+            "gross_source_g": null
+          },
+          {
+            "food_ingredient_code": "MILK_2_5",
+            "net_source_g": "25.6",
+            "net_historical_projected_g": "455.9054592",
+            "net_authority": "STRUCTURED_RECIPE_SOURCE_X_HISTORICAL_DECIMAL_FACTOR_RESEARCH_ONLY",
+            "gross_source_g": null
+          },
+          {
+            "food_ingredient_code": "ONION_BULB_FRESH",
+            "net_source_g": "16",
+            "net_historical_projected_g": "284.940912",
+            "net_authority": "STRUCTURED_RECIPE_SOURCE_X_HISTORICAL_DECIMAL_FACTOR_RESEARCH_ONLY",
+            "gross_source_g": null
+          },
+          {
+            "food_ingredient_code": "SUNFLOWER_OIL",
+            "net_source_g": "5.6",
+            "net_historical_projected_g": "99.7293192",
+            "net_authority": "STRUCTURED_RECIPE_SOURCE_X_HISTORICAL_DECIMAL_FACTOR_RESEARCH_ONLY",
+            "gross_source_g": null
+          },
+          {
+            "food_ingredient_code": "SALT_IODIZED",
+            "net_source_g": "0.2",
+            "net_historical_projected_g": "3.5617614",
+            "net_authority": "STRUCTURED_RECIPE_SOURCE_X_HISTORICAL_DECIMAL_FACTOR_RESEARCH_ONLY",
+            "gross_source_g": null
+          }
+        ],
+        "onion_net_projection_g": "284.940912",
+        "cooked_output_scaled_mass_claim": "NOT_ESTABLISHED",
+        "food_safety_capacity_claim": "NOT_ESTABLISHED",
+        "versioned_quantity_method": "INTEGER_DECIMAL_MULTIPLICATION_OF_SOURCE_NET_GRAMS_BY_HISTORIC_PORTION_DECIMALS; NOT_BACKEND_QUANTIZATION",
+        "whole_meal_nutrition_or_portion_feasibility": "NOT_EVALUATED"
+      },
+      "review_decision": {
+        "provenance": "SOURCE_MANIFEST_MATCH",
+        "numeric": "OBSERVATION_ONLY",
+        "physical_process": "NO_GO_TO_EXECUTABLE_APPROVAL",
+        "family_scale": "NO_GO_TO_EXECUTABLE_APPROVAL",
+        "role_applicability": "HISTORICAL_ONLY",
+        "publisher_reader_ready": false,
+        "reviewer_signoff": "MISSING_INDEPENDENT_QA_REVIEW",
+        "reason": "SOURCE_AND_DECIMAL_EVIDENCE_INSUFFICIENT_FOR_INDEPENDENT_SCALED_HOME_PROCESS_APPROVAL"
+      }
+    }
+  ],
+  "aggregate": {
+    "source_text_matches": 2,
+    "observed_no_numeric_tokens": 2,
+    "independent_review_passed": 0,
+    "approved_immediate": 0,
+    "real_runtime_reader_exists": false,
+    "fresh_approved_gate2_fixture_repin": false,
+    "source_go_no_go": "GO_FOR_SOURCE_PROVENANCE_AND_RESEARCH_DECIMAL_RECONCILIATION_ONLY",
+    "step_eligibility_decision": "NO_GO_TO_APPROVED_IMMEDIATE_FOR_BOTH_ON_CURRENT_EVIDENCE",
+    "publication_decision": "NO_GO_TO_AUTHORITATIVE_PUBLISHER_READER_ACTIVATION",
+    "pr10_a_runtime_decision": "NO_GO",
+    "required_minimum": "TWO_CURRENT_FIXTURE_STEPS_EACH_INDEPENDENT_REVIEWED_POSITIVE_AND_TRUSTED_ANTI_ROLLBACK_POLICY_READ; ELSE_NO_GO"
+  },
+  "rejected_actions": [
+    "NO_SELF_APPROVED_QA",
+    "NO_INGESTION_OF_ORIGINAL_SOURCE_TEXT_AS_NEW_PRODUCTION_STEP",
+    "NO_CROSS_EVENT_GROUPING",
+    "NO_INVENTED_BLANCHE_TIME_TEMPERATURE",
+    "NO_INFERRED_OIL_SPLIT",
+    "NO_SOURCE_MASS_TO_SAFE_COOKED_OUTPUT",
+    "NO_PANTRY_OR_PREP_RUNTIME_WRITE",
+    "NO_GATEG2_CLOSURE"
+  ],
+  "next_owner_and_reviewer_dependency": "A separately authorized independent qualified process/recipe applicability review can supply two documented, source- and scale-backed approvals OR reject; only then a separately reviewed publisher/reader implementation with immutable trusted policy and rollback-independent live status can be built; no further recipe-pair hunt under this issue"
+}
