@@ -1,3 +1,13 @@
+# PR10-CORE — 2020/2022 comparable recipe source decision — 2026-10-23
+
+**Accepted main:** `5e5ee82f90a5f0f3103f96b09ac7a6d166565e3b`, merged [PR #240](https://github.com/Mitronomik/family-food-os/pull/240) on 2026-10-23. This established **two steps remain `NO_GO_APPROVED_IMMEDIATE`** and no PR10-A permission.
+
+**Current bounded research:** [Issue #241](https://github.com/Mitronomik/family-food-os/issues/241), branch `research/pr10-recipe-analogues-source-comparison`; [2020/2022 analogue/source-procedure comparison](../docs/family-food/pr10-two-step-recipe-analogue-review-2026-10-23.md) + [machine source matrix](../docs/family-food/pr10-two-step-recipe-analogue-comparison-2026-10-23.json). Found **four close School2022 variants** and **four related 2020 institutional variants**. Core salmon tomato-vegetable and pollock milk/onion cooking methods corroborated; **not independently approved household process/scale instructions**. Original 2022 pollock target milk height references **tray**, published R2-B references **fish**; earlier ambiguous `height` variants do NOT override exact source. 2020 uses fish pieces 85g versus School2022 65g. Research decision **GO culinary method corroboration only; NO_GO for both executable step approvals and pollock RecipeVersion whole-process source equivalence**. Both `APPROVED_IMMEDIATE` count 0; no data/RecipeVersion modification or runtime.
+
+**Next bounded dependency:** qualified Recipe/Data owner adjudication for pollock Step4 source discrepancy, independent Domain/QA review at actual fixture scale; then separately authorized immutable source correction and/or trusted anti-rollback publisher/read path. **Do not open another arbitrary source-pair search; no automatic merge.** `NO_GO_TO_PR10_CORE_RUNTIME`, `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, `SAFE_BATCH_READY` and `PORTION_RELEASE_READY` remain unmet, Gate2/PDF/PWA unaffected.
+
+---
+
 # PR10-CORE R3-C/R2-B — two-step process/scale GO-NO-GO — 2026-10-23
 
 **Accepted main:** `22a7f2ab9d94fe395739f0691e5fff3ba3928594`, merged [PR #238](https://github.com/Mitronomik/family-food-os/pull/238) 2026-10-22T17:40:53Z. PR10-CORE-D3 contract and Option B remain governing; 2 historical source steps still have **zero independently approved `APPROVED_IMMEDIATE`** authorizations.
