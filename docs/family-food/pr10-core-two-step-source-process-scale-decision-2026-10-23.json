@@ -223,7 +223,8 @@
           "ORIGINAL_INSTITUTIONAL_PREPARATION_NOT_REVIEWED_FOR_HOUSEHOLD_SCALE",
           "OTHER_NUMERIC_PROSE_FISH_65G_PIECES_MILK_LEVEL_AND_OVEN_REQUIRES_SEPARATE_WHOLE_RECIPE_REVIEW",
           "SOURCE_STAGE_CANNOT_BE_PROMOTED_BY_NO_DIGIT_OBSERVATION",
-          "NO_INDEPENDENT_QA_SOURCE_FORM_PROCESS_ELIGIBILITY_SIGNATURE"
+          "NO_INDEPENDENT_QA_SOURCE_FORM_PROCESS_ELIGIBILITY_SIGNATURE",
+          "ORIGINAL_PDF_VS_PUBLISHED_STEP_4_MILK_HEIGHT_TRAY_VS_FISH_REFERENCE_DIVERGENCE_REQUIRES_DATA_OWNER_ADJUDICATION"
         ],
         "immediate_action_eligibility": "NO_GO_TO_APPROVED_IMMEDIATE_ON_CURRENT_EVIDENCE",
         "numeric_classification": "CANDIDATE_NO_NUMERIC_DIRECTION_NOT_INDEPENDENTLY_APPROVED",
@@ -232,7 +233,15 @@
         "reviewed_source_approved_for_target_family_scale": false,
         "safe_same_day_execution_confirmed": false,
         "safe_intermeal_holding_confirmed": false,
-        "allowed_task_publication": false
+        "allowed_task_publication": false,
+        "detected_whole_recipe_publication_divergence": {
+          "source_original_context": "залить горячим молоком так, чтобы жидкость покрыла рыбу на 1/3 часть высоты противня",
+          "published_recipe_step_4": "Залить горячим молоком примерно на одну треть высоты рыбы и добавить йодированную соль.",
+          "disposition": "SOURCE_TO_PUBLISHED_PROCESS_POTENTIAL_MISMATCH_REQUIRES_SEPARATE_RECIPE_DATA_OWNER_REVIEW; DO_NOT_SILENTLY_CORRECT_OR_AUTO_PUBLISH",
+          "evidence_kind": "PUBLIC_PDF_TEXT_EXTRACT_VERSUS_ACCEPTED_REPO_MANIFEST",
+          "source_pdf_index_zero_based": 102,
+          "category": "QUANTITY_DIRECTIONS_WITH_DIFFERENT_REFERENCE_DIMENSION_TRAY_VS_FISH"
+        }
       },
       "structured_scale_research": {
         "basis": "SOURCE_BASE_SERVINGS_1_EXACT_HISTORICAL_FACTORS; NOT AN EXECUTION QUANTITY OR SAFE_BATCH_YIELD",
@@ -303,7 +312,8 @@
     "step_eligibility_decision": "NO_GO_TO_APPROVED_IMMEDIATE_FOR_BOTH_ON_CURRENT_EVIDENCE",
     "publication_decision": "NO_GO_TO_AUTHORITATIVE_PUBLISHER_READER_ACTIVATION",
     "pr10_a_runtime_decision": "NO_GO",
-    "required_minimum": "TWO_CURRENT_FIXTURE_STEPS_EACH_INDEPENDENT_REVIEWED_POSITIVE_AND_TRUSTED_ANTI_ROLLBACK_POLICY_READ; ELSE_NO_GO"
+    "required_minimum": "TWO_CURRENT_FIXTURE_STEPS_EACH_INDEPENDENT_REVIEWED_POSITIVE_AND_TRUSTED_ANTI_ROLLBACK_POLICY_READ; ELSE_NO_GO",
+    "additional_source_integrity_concern": "R2B_POLLOCK_ORIGINAL_VS_PUBLISHED_MILK_LEVEL_REFERENCE_DIFFERS_TRAY_VS_FISH; NO_AUTOMATIC_RECIPE_REPUBLICATION"
   },
   "rejected_actions": [
     "NO_SELF_APPROVED_QA",
