@@ -1,3 +1,13 @@
+# PR10-CORE analogue source comparison — bounded handoff — 2026-10-23
+
+**Base:** merged PR #240 `main@5e5ee82f90a5f0f3103f96b09ac7a6d166565e3b`. **Current Issue #241** and branch `research/pr10-recipe-analogues-source-comparison`. [Detailed research and decision](../docs/family-food/pr10-two-step-recipe-analogue-review-2026-10-23.md), [machine matrix](../docs/family-food/pr10-two-step-recipe-analogue-comparison-2026-10-23.json).
+
+8 **related** recipe cards across two Rospotrebnadzor editions (4 same School2022 family variants, 4 related School2020 recipes) support onion-blanch then milk-bake and onion-blanch/vegetable sauté then tomato technique, **not** recipe/intermediate substitution, validated 5.916796/17.808807 household execution or a named independent approval. **Material conflict:** original School2022 pollock 54-7р specifies milk to a fraction of **tray height**; current R2-B Step4 states **fish height**. Original 2022 salmon milk and 2020 variants use ambiguous unspecified 'height'; they don't prove source equivalence. The 2020 fish piece mass differs (85g vs School2022 65g). Salmon total source oil split still unknown. `NO_GO_APPROVED_IMMEDIATE` on current evidence, 0 approved steps, `NO_GO_TO_PR10_CORE_RUNTIME`.
+
+**NEXT only:** exact-head docs/links/CI, independent review and owner merge decision. Then named Recipe/Data owner must resolve original→published pollock discrepancy, and qualified independent Domain/QA must review entire two first steps + actual fixture scale. If a corrected immutable RecipeVersion or trusted eligibility publisher/read is needed, each requires a separate approved bounded contract/PR with anti-rollback status. No accidental recipe substitution, source fact invention, generated `APPROVED_IMMEDIATE`, prep runtime/migrations, PDF, Gate2, PWA or autonomous merge. Gate2 positive and separate SAFE_BATCH/PORTION_RELEASE gates unchanged.
+
+---
+
 # PR10-CORE exact two-step applicability NO-GO — source and publication handoff — 2026-10-23
 
 **Accepted main:** `22a7f2ab9d94fe395739f0691e5fff3ba3928594`, merged #238. **Current:** Issue [#239](https://github.com/Mitronomik/family-food-os/issues/239), branch `research/pr10-core-two-steps-go-no-go-2026-10-23`. Files: [source/process/scale review](../docs/family-food/pr10-core-two-step-source-process-scale-review-2026-10-23.md), [JSON evidence](../docs/family-food/pr10-core-two-step-source-process-scale-decision-2026-10-23.json), [bounded publisher/reader acceptance](../docs/family-food/pr10-core-two-step-publisher-reader-acceptance-2026-10-23.md).
