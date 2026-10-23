@@ -1,0 +1,213 @@
+{
+  "schema": "PR10_RECIPE_ANALOGUE_SOURCE_COMPARISON_RESEARCH_V1",
+  "issue": 241,
+  "base_main_sha": "5e5ee82f90a5f0f3103f96b09ac7a6d166565e3b",
+  "scope": "EXACTLY_TWO_EXISTING_R3C_AND_R2B_STEPS_SIMILAR_RECIPES_RESEARCH",
+  "sources": [
+    {
+      "id": "RPN_SCHOOL2022",
+      "url": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+      "publisher": "Rospotrebnadzor / FBUZ Federal Centre for Hygiene and Epidemiology",
+      "year": 2022,
+      "genre": "school grades 1-4 institutional recipe guide",
+      "accepted_repo_pdf_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "current_public_pdf_binary_sha256": null,
+      "pdf_web_text_read": true,
+      "pdf_web_screenshot_status": "TOOL_INTERNAL_ERROR",
+      "authority_limit": "Institutional culinary source not family-batch hardware/safety approval"
+    },
+    {
+      "id": "RPN_SCHOOL2020",
+      "url": "https://pervomayskaya-shkola.ru/wp-content/uploads/2020/07/Sbornik_receptur_blyud_i_kulinarnyh_izdelij_dlya_organizacii_goryachih_zavtrakov_i_obedov_obuchayushchimsya.pdf",
+      "publisher": "Rospotrebnadzor / Novosibirsk Research Institute of Hygiene",
+      "year": 2020,
+      "genre": "school grades 1-4 institutional recipe guide",
+      "accepted_repo_pdf_sha256": null,
+      "current_public_pdf_binary_sha256": null,
+      "pdf_web_text_read": true,
+      "pdf_web_screenshot_status": "TOOL_UNAVAILABLE",
+      "authority_limit": "Earlier related institutional compilation, independent publication edition but overlapping institution and recipe family, not independent home-process/scale certification"
+    },
+    {
+      "id": "FOODSAFETY_US",
+      "url": "https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures",
+      "publisher": "US FoodSafety.gov",
+      "year": 2024,
+      "context_only": "Fish whole/fillet safe minimum 145 F / 63 C or flesh opaque/flakes; US contextual food safety, not accepted Russian recipe-specific process or authorization"
+    },
+    {
+      "id": "NCHFP_ONION",
+      "url": "https://nchfp.uga.edu/how/freeze/vegetable/freezing-onions/",
+      "publisher": "NCHFP / University of Georgia",
+      "context_only": "Blanching methods vary by onion form and freezing purpose; not a validation of immediate cooked dish onion blanche or holding"
+    }
+  ],
+  "target_recipes": [
+    {
+      "recipe_code": "SCHOOL2022_54_17R_SALMON_TOMATO_VEGETABLES",
+      "publication": "R3-C",
+      "source_recipe": "54-17р",
+      "source_id": "RPN_SCHOOL2022",
+      "source_pdf_zero_page": 111,
+      "printed_page": 112,
+      "historical_base_servings": "5.916796",
+      "onion_net_source_g": "9.8",
+      "historical_onion_projection_g": "57.9846008",
+      "source_sunflower_oil_total_g": "5.3",
+      "historical_oil_total_projection_g": "31.3590188",
+      "original_published_source_process": "wash/peel/shred vegetables incl industrial vegetable cutter; blanch onion then saute with carrot and parsley, add tomato puree; fish laid in oiled tray, vegetables/water/sugar/salt, cook 40-45 min",
+      "original_step_text_ru": "Подготовить корень петрушки, морковь и репчатый лук; лук бланшировать, затем пассеровать вместе с морковью и петрушкой и добавить томатное пюре.",
+      "accepted_source_variant_analogues": [
+        {
+          "source_id": "RPN_SCHOOL2022",
+          "recipe": "54-10р",
+          "species": "pink salmon",
+          "pdf_zero_page": 104,
+          "printed_page": 105,
+          "process_similarity": "SAME_VEGETABLE_PROCESS_ON_2022_RECIPE_FAMILY",
+          "ingredients_same_nonfish": true,
+          "process_substitutability": "NO_ONLY_SPECIES_VARIANT_WITH_ITS_OWN_SOURCE_CARD"
+        },
+        {
+          "source_id": "RPN_SCHOOL2022",
+          "recipe": "54-11р",
+          "species": "pollock",
+          "pdf_zero_page": 105,
+          "printed_page": 106,
+          "process_similarity": "SAME_VEGETABLE_PROCESS_ON_2022_RECIPE_FAMILY",
+          "ingredients_same_nonfish": true,
+          "process_substitutability": "NO_SOURCE_CARD_DIFFERS"
+        },
+        {
+          "source_id": "RPN_SCHOOL2020",
+          "recipe": "54-10р-2020",
+          "species": "pink salmon",
+          "pdf_zero_page": 77,
+          "process_similarity": "SAME_BLANCHE_SAUTE_TOMATO_CORE",
+          "process_difference": "2020 parsley scalding and carrot scalding steps not identical to 2022 / published salmon first step",
+          "process_substitutability": "NO_DISTINCT_EDITION"
+        },
+        {
+          "source_id": "RPN_SCHOOL2020",
+          "recipe": "54-11р-2020",
+          "species": "pollock",
+          "pdf_zero_page": 78,
+          "process_similarity": "SAME_BLANCHE_SAUTE_TOMATO_CORE",
+          "process_difference": "additional 2020 parsley/carrot scald operations",
+          "process_substitutability": "NO_DISTINCT_EDITION"
+        }
+      ],
+      "checks": {
+        "source_dish_identity": "MATCHES_REPO_SOURCE",
+        "core_process_corroborated_by_multiple_cards": true,
+        "independent_publisher_process_validation": false,
+        "source_total_oil_has_step_split": false,
+        "family_scale_equipment_and_safe_execution_review": false,
+        "full_step_independently_approved": false,
+        "decision": "NO_GO_APPROVED_IMMEDIATE",
+        "rationale": "Compound step + absent source oil allocation between saute and tray + household batch scale/equipment and process completeness unreviewed; analogue confirms culinary template only"
+      }
+    },
+    {
+      "recipe_code": "SCHOOL2022_54_7R_POLLOCK_IN_MILK",
+      "publication": "R2-B",
+      "source_recipe": "54-7р",
+      "source_id": "RPN_SCHOOL2022",
+      "source_pdf_zero_page": 102,
+      "printed_page": 103,
+      "historical_base_servings": "17.808807",
+      "onion_net_source_g": "16",
+      "historical_onion_projection_g": "284.940912",
+      "fish_net_source_g": "64",
+      "historical_fish_projection_g": "1139.763648",
+      "milk_source_g": "25.6",
+      "historical_milk_projection_g": "455.9054592",
+      "accepted_source_variant_analogues": [
+        {
+          "source_id": "RPN_SCHOOL2022",
+          "recipe": "54-6р",
+          "species": "pink salmon",
+          "pdf_zero_page": 101,
+          "printed_page": 102,
+          "process_similarity": "SAME_ONION_PREP_SHRED_BLANCHE_AND_MILK_BAKE",
+          "fish_net_g": "64",
+          "onion_net_g": "16",
+          "milk_g": "25.6",
+          "milk_level_wording": "ONE_THIRD_OF_BAKING_TRAY_HEIGHT"
+        },
+        {
+          "source_id": "RPN_SCHOOL2022",
+          "recipe": "54-15р",
+          "species": "salmon",
+          "pdf_zero_page": 109,
+          "printed_page": 110,
+          "process_similarity": "SAME_ONION_PREP_SHRED_BLANCHE_AND_MILK_BAKE",
+          "fish_net_g": "64",
+          "onion_net_g": "16",
+          "milk_g": "25.6",
+          "milk_level_wording": "ONE_THIRD_OF_HEIGHT_NO_NOUN_IN_TEXT",
+          "ambiguity": "not equivalent to explicit tray height; noun omitted"
+        },
+        {
+          "source_id": "RPN_SCHOOL2020",
+          "recipe": "54-6р-2020",
+          "species": "pink salmon",
+          "pdf_zero_page": 73,
+          "process_similarity": "SAME_ONION_PREP_SHRED_BLANCHE_AND_MILK_BAKE",
+          "milk_level_wording": "ONE_THIRD_OF_HEIGHT_NO_NOUN_IN_TEXT",
+          "portion_fish_piece_g": "85",
+          "difference": "2022 fish piece 65g vs 2020 fish piece 85g; no automatic source merge"
+        },
+        {
+          "source_id": "RPN_SCHOOL2020",
+          "recipe": "54-7р-2020",
+          "species": "pollock",
+          "pdf_zero_page": 74,
+          "process_similarity": "SAME_ONION_PREP_SHRED_BLANCHE_AND_MILK_BAKE",
+          "milk_level_wording": "ONE_THIRD_OF_HEIGHT_NO_NOUN_IN_TEXT",
+          "portion_fish_piece_g": "85",
+          "difference": "2022 fish piece 65g vs 2020 fish piece 85g; 2020 ambiguity does not override explicit 2022 text"
+        }
+      ],
+      "checks": {
+        "source_dish_identity": "MATCHES_REPO_SOURCE",
+        "source_step_1_core_process_corroborated": true,
+        "source_2022_step4_milk_level": "ONE_THIRD_OF_BAKING_TRAY_HEIGHT",
+        "repo_r2b_published_step4_milk_level": "ONE_THIRD_OF_FISH_HEIGHT",
+        "source_equivalence_at_step4": false,
+        "source_2020_same_named_recipe_milk_level": "ONE_THIRD_OF_HEIGHT_NO_NOUN",
+        "source_variant_does_not_authorize_equivalence": true,
+        "independent_family_scale_blanch_time_water_temperature_equipment_review": false,
+        "full_step_independently_approved": false,
+        "decision": "NO_GO_APPROVED_IMMEDIATE_AND_RECIPE_DATA_DISCREPANCY_REVIEW",
+        "rationale": "Step1 match supported but same-day consumer technique/capacity missing; Step4 changed dimension tray versus fish must be separately adjudicated as immutable recipe data, do not silently rewrite"
+      }
+    }
+  ],
+  "aggregate": {
+    "same_source_2022_analogue_count": 4,
+    "related_2020_collection_analogue_count": 4,
+    "evidence_go": "YES_FOR_CULINARY_SEQUENCE_CORROBORATION_ONLY",
+    "source_exactness_go": "YES_FOR_TARGET_FIRST_STEP_TEXT_ONLY",
+    "target_recipe_full_process_equivalence_go": "NO_DUE_POLLOCK_STEP4",
+    "independent_household_scale_evidence": "ABSENT",
+    "independent_qualified_QA_signoff": "ABSENT",
+    "approved_immediate_count": 0,
+    "data_owner_review_required": true,
+    "executable_steps_decision": "NO_GO_BOTH_FOR_PRODUCTION_APPROVAL_ON_CURRENT_EVIDENCE",
+    "PR10_A_RUNTIME": "BLOCKED",
+    "Gate2": "NOT_EVALUATED",
+    "owner_followup": "R2-B immutable RecipeVersion source-step-4 discrepancy adjudication + independent Domain/QA approval at actual family fixture scale, no automatic approval from analogues"
+  },
+  "non_goals": [
+    "NO_NEW_PRODUCTION_RECIPES",
+    "NO_AUTO_APPROVED_IMMEDIATE",
+    "NO_RECIPEVERSION_EDIT",
+    "NO_PREP_RUNTIME_OR_API",
+    "NO_FREEZER_STORAGE_PERMISSIONS",
+    "NO_PANTRY_MUTATION",
+    "NO_NEW_NORMATIVE_FOOD_SAFETY_DEFAULT",
+    "NO_GATE2_RELAXATION",
+    "NO_MERGE"
+  ]
+}
