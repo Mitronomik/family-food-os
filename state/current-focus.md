@@ -1,3 +1,13 @@
+# PR10-CORE R3-C/R2-B — two-step process/scale GO-NO-GO — 2026-10-23
+
+**Accepted main:** `22a7f2ab9d94fe395739f0691e5fff3ba3928594`, merged [PR #238](https://github.com/Mitronomik/family-food-os/pull/238) 2026-10-22T17:40:53Z. PR10-CORE-D3 contract and Option B remain governing; 2 historical source steps still have **zero independently approved `APPROVED_IMMEDIATE`** authorizations.
+
+**Current bounded owner-authorized research/docs-only task:** [Issue #239](https://github.com/Mitronomik/family-food-os/issues/239), branch `research/pr10-core-two-steps-go-no-go-2026-10-23`; [exact R3-C/R2-B source/process/Decimal assessment](../docs/family-food/pr10-core-two-step-source-process-scale-review-2026-10-23.md), [machine receipt](../docs/family-food/pr10-core-two-step-source-process-scale-decision-2026-10-23.json), [bounded publisher/reader and anti-rollback acceptance](../docs/family-food/pr10-core-two-step-publisher-reader-acceptance-2026-10-23.md). Verified first steps against accepted manifest blobs, source PDF **web text** (not independently rehashed binary), exact historic Decimal input scaling, full recipe process. Found **potential pollock Step 4 original-vs-publication milk-level reference difference (tray height vs fish height)**; do not silently rewrite published recipe. Salmon oil sauté/tray split UNKNOWN; institutional/home-scale process not independently approved. **Both: `NO_GO_TO_APPROVED_IMMEDIATE_ON_CURRENT_EVIDENCE`**, not a food-safety ban or global catalogue NO-GO.
+
+**Next ONLY:** exact-head docs CI + independent Product/Data/Domain/QA review + owner merge decision; source/process discrepancy and scaled home applicability require named independent reviewer evidence and separate approved trust/status reader implementation before publication. `NO_GO_TO_PR10_CORE_RUNTIME`, `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, `SAFE_BATCH_READY` and `PORTION_RELEASE_READY` remain unmet. No runtime, migration, data/RecipeVersion publication, PR10-A/B/C, PDF, Gate2 or autonomous merge.
+
+---
+
 # PR10-CORE-D3 — eligibility source/publisher/read contract proposal — 2026-10-22
 
 **Accepted main:** `04da57bd02df493336036ec1f52b9df626c721ab` ([PR #236](https://github.com/Mitronomik/family-food-os/pull/236) merged 2026-10-22T14:11:33Z). Option B technical Gate2 and separate safe-batch/serving-quality release gates remain controlling.
