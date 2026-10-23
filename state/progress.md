@@ -1,3 +1,12 @@
+# PR10-CORE two-step R3-C/R2-B exact evidence and publication handoff — 2026-10-23
+
+- Confirmed [PR #238](https://github.com/Mitronomik/family-food-os/pull/238) merged, `main@22a7f2ab9d94fe395739f0691e5fff3ba3928594`. Owner approved **exactly two first-step source/process/scale reviews**, with no `APPROVED_IMMEDIATE` without independent evidence and no runtime/migrations.
+- Created [Issue #239](https://github.com/Mitronomik/family-food-os/issues/239) and one docs/evidence-only task. [Narrative review](../docs/family-food/pr10-core-two-step-source-process-scale-review-2026-10-23.md) + [machine Decimal receipt](../docs/family-food/pr10-core-two-step-source-process-scale-decision-2026-10-23.json) reconcile R3-C salmon and R2-B pollock source/base amounts with the **historical synthetic** three-member Serving factors; PDF **web text** corroboration recorded with original byte/screenshot verification caveat.
+- R3-C salmon: first instruction compound prepare/blanch/saute with **unknown oil split** and unreviewed home-scale process. R2-B pollock: onion shred/blanch lacks independent home-scale technique; potential **original PDF tray-height vs published fish-height milk level** later Step4 difference requires Data/Recipe-owner review. Two syntax candidates but **0 independently approved** executable steps; `NO_GO_TO_APPROVED_IMMEDIATE` for both, no arbitrary third source.
+- [Publisher/reader handoff](../docs/family-food/pr10-core-two-step-publisher-reader-acceptance-2026-10-23.md) pins exact independent review, trusted immutable eligibility source/status/anti-rollback and negative tests for later review. Not an implemented source publisher or deployed policy. `NO_GO_TO_PR10_CORE_RUNTIME`, PR10-FD-META/TIME_UNRESOLVED and Gate2/release blockers unchanged; docs PR pending CI/review.
+
+---
+
 # PR #238 — P2 anti-rollback docs correction — 2026-10-22
 
 - Applied independent-review P2 correction to [PR10-CORE-D3](../docs/family-food/pr10-core-step-eligibility-d3-contract-2026-10-22.md) §4.1/§5/§6: an independent, durable and monotonically advancing current-status / minimum-policy-revision authority outside the rollback unit must affirmatively authorize the exact eligibility record before every executable task. Old release-local hashes, cached prior PASS and rolled-back readers cannot bypass a later revocation. Missing/stale/unavailable authority or a reader unable to check it => **no executable task**, never a positive fallback.
