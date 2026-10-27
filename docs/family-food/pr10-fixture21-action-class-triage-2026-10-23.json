@@ -20,7 +20,102 @@
       "OTHER -> NON_HEAT_TEXT_CANDIDATE"
     ],
     "no_status_granted": "NO_NUMERIC_DIRECTION_CLASSIFICATION_NOT_APPROVED_BY_SYNTAX",
-    "only_positive_source": "INDEPENDENT_SOURCE_PLUS_WHOLE_STEP_PROCESS_SCALE_REVIEW_AND_ACCEPTED_D3_READER_STATUS"
+    "only_positive_source": "INDEPENDENT_SOURCE_PLUS_WHOLE_STEP_PROCESS_SCALE_REVIEW_AND_ACCEPTED_D3_READER_STATUS",
+    "regex_literals_for_reproduction": {
+      "numeric_digit": "/[0-9０-９]/",
+      "heat_or_hot_state": "/(варить|сварить|отварить|разогр|припуст|пассер|бланшир|кипя|горяч|тёпл|тепл|ошпар|запек|духов|тушить|подогр|пара\\b|паром|растоп|нагрев|довести(?:\\s+[^.;!?]{1,80}?)?\\s+до\\s+кипения|готовить)/i",
+      "context_complexity": "/(подготовить|подготовлен|полуготов|немног|небольш|добавить|замочить|до готовности|филе|мяс|куриц|треск|рыб|говядин|порци|смазать)/i"
+    },
+    "thermal_phrase_rule": "Additionally recognise inflected 'довести [up to 80 chars without sentence punctuation] до кипения', including intervening words (e.g. 'довести смесь до кипения'), as HEAT_PROCESS_REVIEW unless numeric digits take precedence. Regex is a research-only prefilter, not safety classification.",
+    "classification_order": "digit.test(text) ? NUMERIC_TEXT_REVIEW : heat.test(text) ? HEAT_PROCESS_REVIEW : context.test(text) ? CONTEXT_OR_COMPOUND_REVIEW : NON_HEAT_TEXT_CANDIDATE",
+    "complete_recalculation_receipt": {
+      "review_correction_date": "2026-10-27",
+      "original_category_counts": {
+        "NUMERIC_TEXT_REVIEW": 31,
+        "CONTEXT_OR_COMPOUND_REVIEW": 17,
+        "HEAT_PROCESS_REVIEW": 34,
+        "NON_HEAT_TEXT_CANDIDATE": 5
+      },
+      "corrected_category_counts": {
+        "NUMERIC_TEXT_REVIEW": 31,
+        "HEAT_PROCESS_REVIEW": 35,
+        "CONTEXT_OR_COMPOUND_REVIEW": 17,
+        "NON_HEAT_TEXT_CANDIDATE": 4
+      },
+      "steps_recomputed": 87,
+      "changed_records": [
+        {
+          "recipe": "SCHOOL2022_54_13K_WHEAT_MILK_PORRIDGE",
+          "position": 2,
+          "previous_label": "NON_HEAT_TEXT_CANDIDATE",
+          "corrected_label": "HEAT_PROCESS_REVIEW",
+          "previous_mentions_heat_or_hot_state": false,
+          "corrected_mentions_heat_or_hot_state": true,
+          "source_instruction_ru": "В воде с молоком растворить йодированную соль и сахар и довести смесь до кипения."
+        }
+      ],
+      "remaining_non_heat_source_steps": [
+        {
+          "canonical_recipe_code": "SCHOOL2022_54_2T_COTTAGE_CHEESE_CARROT_CASSEROLE",
+          "position": 1,
+          "instruction_ru": "Протереть творог."
+        },
+        {
+          "canonical_recipe_code": "SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE",
+          "position": 1,
+          "instruction_ru": "Творог протереть."
+        },
+        {
+          "canonical_recipe_code": "SCHOOL2022_54_1K_LIQUID_CORN_MILK_PORRIDGE",
+          "position": 1,
+          "instruction_ru": "Перебрать и промыть кукурузную крупу, несколько раз меняя воду."
+        },
+        {
+          "canonical_recipe_code": "MR2019_6_19_BAKED_MACARONI_HARD_CHEESE",
+          "position": 3,
+          "instruction_ru": "Твёрдый сыр натереть, соединить с макаронами и тщательно перемешать."
+        }
+      ],
+      "target_unchanged": true
+    },
+    "regression_vectors": [
+      {
+        "text": "В воде с молоком растворить йодированную соль и сахар и довести смесь до кипения.",
+        "expected_label": "HEAT_PROCESS_REVIEW",
+        "calculated_label": "HEAT_PROCESS_REVIEW",
+        "matches": true
+      },
+      {
+        "text": "Довести до кипения.",
+        "expected_label": "HEAT_PROCESS_REVIEW",
+        "calculated_label": "HEAT_PROCESS_REVIEW",
+        "matches": true
+      },
+      {
+        "text": "Довести воду с молоком до кипения.",
+        "expected_label": "HEAT_PROCESS_REVIEW",
+        "calculated_label": "HEAT_PROCESS_REVIEW",
+        "matches": true
+      },
+      {
+        "text": "Творог протереть.",
+        "expected_label": "NON_HEAT_TEXT_CANDIDATE",
+        "calculated_label": "NON_HEAT_TEXT_CANDIDATE",
+        "matches": true
+      },
+      {
+        "text": "Перебрать и промыть кукурузную крупу, несколько раз меняя воду.",
+        "expected_label": "NON_HEAT_TEXT_CANDIDATE",
+        "calculated_label": "NON_HEAT_TEXT_CANDIDATE",
+        "matches": true
+      },
+      {
+        "text": "Нарезать кубиками и варить 10 минут.",
+        "expected_label": "NUMERIC_TEXT_REVIEW",
+        "calculated_label": "NUMERIC_TEXT_REVIEW",
+        "matches": true
+      }
+    ]
   },
   "summary": {
     "event_count": 21,
@@ -29,9 +124,9 @@
     "source_step_count": 87,
     "category_counts": {
       "NUMERIC_TEXT_REVIEW": 31,
+      "HEAT_PROCESS_REVIEW": 35,
       "CONTEXT_OR_COMPOUND_REVIEW": 17,
-      "HEAT_PROCESS_REVIEW": 34,
-      "NON_HEAT_TEXT_CANDIDATE": 5
+      "NON_HEAT_TEXT_CANDIDATE": 4
     },
     "manifest_resolution_count": 21,
     "candidate_count": 2,
@@ -796,10 +891,10 @@
         {
           "position": 2,
           "instruction_ru": "В воде с молоком растворить йодированную соль и сахар и довести смесь до кипения.",
-          "triage_label": "NON_HEAT_TEXT_CANDIDATE",
+          "triage_label": "HEAT_PROCESS_REVIEW",
           "triage_only": true,
           "contains_decimal_or_number": false,
-          "mentions_heat_or_hot_state": false,
+          "mentions_heat_or_hot_state": true,
           "reviewed_numeric_classification": null,
           "approved_immediate": false,
           "source_step_uuid_from_exact_historical_receipt": null,
