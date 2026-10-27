@@ -1,52 +1,57 @@
-# PR10-CORE — exact two-step persisted fixture read-back gate (Issue #245)
+# PR10-CORE Issue #245 — actual fresh fixture drift decision
 
-**Status:** DIAGNOSTIC EVIDENCE ONLY; `APPROVED_IMMEDIATE=0`; `NO_GO_TO_PR10_CORE_RUNTIME`. New exact-head CI receipt required and external qualified Domain/QA approval not provided by this PR.
-**Accepted main:** `3c4645a27d675bb4464c913785aef3cd88de8681` ([PR #244 merged](https://github.com/Mitronomik/family-food-os/pull/244), 2026-10-27T10:47:49Z); [PR #242](https://github.com/Mitronomik/family-food-os/pull/242) was closed without merge.
-**Task:** [Issue #245](https://github.com/Mitronomik/family-food-os/issues/245). Only the R2-E cottage-cheese casserole first step and R3-B corn-milk porridge first step from the accepted historical 21-event synthetic week. No new candidate search, source publication, planner change, migrations or Prep runtime.
-**Sources:** [21-event/87-step source triage](pr10-fixture21-action-class-review-2026-10-23.md), [historical PR #196 fixture contract](pr10-meta-gate2-fixture-evidence.md), [D3 eligibility/anti-rollback](pr10-core-step-eligibility-d3-contract-2026-10-22.md), [Option B positive/negative technical Gate2](pr10-option-b-staged-delivery-gates-2026-10-17.md).
+**Status:** **`NO_GO_EXACT_TWO_STEP_FIXTURE_REPRODUCIBILITY`** on newly obtained persisted CI evidence. The accepted historical recipe week was **not reproduced** on `main`, so the two source steps selected by [PR #244](https://github.com/Mitronomik/family-food-os/pull/244) cannot be validated as the accepted two **current** MealEvents. This docs/evidence-only outcome **does not approve `APPROVED_IMMEDIATE` or PR10-A**.
 
-## 1. Why a new persisted fixture is needed
+**Accepted base:** `main@3c4645a27d675bb4464c913785aef3cd88de8681` (PR #244 merged 2026-10-27). [PR #242](https://github.com/Mitronomik/family-food-os/pull/242) was closed without merge.
+**Task:** [Issue #245](https://github.com/Mitronomik/family-food-os/issues/245). Compare exact 2026-09-14..20 **historical** synthetic three-member fixture against newly generated current real-application persisted evidence before qualified process/scale eligibility review.
+**Machine evidence:** [pinned old/new source/fixture/receipt comparison](pr10-core-two-step-fresh-fixture-drift-2026-10-27.json).
 
-The merged [#244 source receipt](pr10-fixture21-action-class-triage-2026-10-23.json) includes 21 recipe codes, 87 ordered steps, a minimal candidate pair and manifest blob pins, but **does not include fresh current MealEvent IDs, member Decimal `Serving.portion_servings` or freshly read RecipeStep UUID/hash**. Historical generated IDs cannot be copied into a present production database.
+## 1. FACT — two independently retained workflow artefacts compared
 
-An independent previous [PR #196 GitHub Actions run](https://github.com/Mitronomik/family-food-os/actions/runs/38059374826) yielded a **retained, downloadable** short-lived persisted three-member synthetic fixture artifact `pr10-meta-synthetic-fixture-receipt` (artifact 11672432141; JSON SHA-256 `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec`). Its independent **Planner semantic SHA-256** is `2d6cb581649863b7edbd3c0efff2bae2934c6a512c99a45d10e92f92f514cb3d`, tied to the historical approved synthetic Planner selection (3 members / 21 events / 42 Servings / 7 days). That digest is an **independent baseline** used to reject a changed fixture, NOT a reusable identity for current MealEvent/Step UUIDs.
-
-Reading that retained **historical** artifact now provides two pinned sample events, under no circumstances asserted to be the new CI run:
-
-| Historic MealEvent only | Historic member Decimal factors | Source base quantity | Derived historic net input |
-| --- | --- | --- | --- |
-| 2026-09-18 `SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE` (BREAKFAST) | `2.362341 + 2.746504 = 5.108845` | `TVOROG_5` `139.5 g` / 1 source serving | **`712.6838775 g`** research projection |
-| 2026-09-19 `SCHOOL2022_54_1K_LIQUID_CORN_MILK_PORRIDGE` (BREAKFAST) | `3.422496 + 3.979062 = 7.401558` | `CORN_GROATS` `40 g` / 1 source serving | **`296.062320 g`** research projection |
-
-These are *input-ingredient Decimal multiplications*, **not** validated physical kitchen capacity, individual portion adequacy, energy suitability or a safe prepared yield. Different fixtures may mint different UUIDs; the workflow is designed to **fail** if independently pinned Planner semantics change unexpectedly.
-
-## 2. New evidence tooling (no production code)
-
-**Reused unchanged:** `scripts.audit_pr10_meta_gate2_fixture.build_fixture_receipt` creates a fresh temporary SQLite DB, seeds accepted source recipes, constructs three heterogeneous member patterns, calls actual `PlannerService.generate_authoritative`, reads back 21 persisted MealEvents and 42 individualized Servings with `AI_ENABLED=false` and checks independent Planner semantics and source catalogue pins. No live user database is used.
-
-**Added:** [`scripts/audit_pr10_core_two_step_fixture.py`](../../scripts/audit_pr10_core_two_step_fixture.py) selects the exact current MealEvents by independently verified `RecipeVersion.canonical_code`, date and breakfast role, then joins their **current** immutable `recipe_version_id` and first ordered `recipe_step_id` / instruction SHA-256 / full process hash to member Serving rows. It resolves precise source-based `TVOROG_5` (139.5 g) and `CORN_GROATS` (40 g) from R2-E/R3-B **trusted Git-blob-pinned** manifests with the expected School2022 original PDF SHA/rights/version, and calculates source grams × each `Decimal` member factor and total. No LLM, regex promotion, rounding or prose-based ingredient quantity.
-
-**Adversarial / reproducible tests:** [focused pytest](../../backend/app/tests/test_pr10_core_two_step_fixture.py) checks exact 3/21/42 counts, independently accepted Planner baseline, true two-event source/Step/Serving joins, all per-member amounts, current hashes, source manifest tampering, forged approvals, out-of-fixture IDs, `NaN`/infinite/invalid source amounts, and no possible `APPROVED_IMMEDIATE` promotion. Existing full PR #196 fixture tamper tests also run.
-
-**CI:** [`pr10-core-two-step-fixture-evidence.yml`](../../.github/workflows/pr10-core-two-step-fixture-evidence.yml) installs only the accepted backend[test]/Ruff environment, runs focused existing and new tests, regenerates an **ephemeral fresh fixture and per-event review receipt on the exact PR HEAD**, checks that the gate remains NO_GO and uploads **both** JSON files as one time-limited evidence artifact. The output's full SHA-256 and independently printed Planner semantic SHA must be compared to the CI run; a self-contained JSON hash alone is not a signature. This document does **not** claim the new artifact exists until successful CI is inspected.
-
-## 3. The exact independent two-step reviewer packet
-
-| Event/Step requiring review | Independent process and input scope | What is withheld |
+| Evidence | Accepted historical PR #196 | Current `main` on PR #246 |
 | --- | --- | --- |
-| R2-E `SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE` Step 1, «Творог протереть.» | Check current immutable `TVOROG_5` form, exact source quantity/real member scaling, whether *rubbing the whole step* is useful and feasible same-day without inventing equipment, time, intermediate form/output or holding | `numeric_direction_classification` and `immediate_same_day_eligibility` remain **PENDING / UNAPPROVED**; no accepted rendering or mass rounding |
-| R3-B `SCHOOL2022_54_1K_LIQUID_CORN_MILK_PORRIDGE` Step 1, «Перебрать и промыть кукурузную крупу, несколько раз меняя воду.» | Confirm `CORN_GROATS` source grain form and exact member scale, practical relevance and source-valid immediate prep; **rinsing water is not the recipe's measured 68 g cooking water** | No inferred rinse water grams, soak time, safe advance preparation, equipment/humidity/storage instruction or saved operation |
+| GitHub Actions job | [run 38059374826](https://github.com/Mitronomik/family-food-os/actions/runs/38059374826) | [PR10-META run 40495153021](https://github.com/Mitronomik/family-food-os/actions/runs/40495153021), **success** |
+| Artifact ID | `11672432141` | `12730572293` |
+| JSON SHA256 (bytes extracted from uploaded ZIP) | `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec` | `2caa45e1e50639eef2b6f9023496cbce9fc35a88bd4c71f86e2b8a9daee0c78d` |
+| Planner `expected_semantic_pins_sha256` | `2d6cb581649863b7edbd3c0efff2bae2934c6a512c99a45d10e92f92f514cb3d` | `1720db1d309a8a346af81cba37e27b07044c205112d6fdd711b938803567bcf2` |
+| Persisted Household/MealPlan | **3 members, 21 MealEvents, 42 Servings, 7 days** | **3 members, 21 MealEvents, 42 Servings, 7 days** |
+| Event `(local_date,position)` recipe-code matches between runs | — | **0 of 21**, i.e. all 21 recipes in scheduled slots differ |
+| E2E source safety and Prep eligibility | NOT EVALUATED | NOT EVALUATED |
 
-**Independent Domain/QA reviewer** (different from the original curator/evidence author) must issue separate version/source/hashes and **numeric class** vs **same-day actionable eligibility** verdicts for both **entire** instructions, with reviewer identity, evidence, timestamp, context and revocation. This is not automatically achieved by a CI-success receipt or a class keyword. A negative unsupported whole step remains unresolved. The status reader must later authenticate an immutable trusted eligibility publication and check rollback-resistant **current** permission before every executable admission, per D3 §4.1. No production eligibility payload exists yet.
+**No freshness substitution:** the newly extracted JSON is produced by the existing [`PR10-META persisted fixture evidence`](../../.github/workflows/pr10-meta-fixture-evidence.yml) using real accepted PlannerService and read-back via a **fresh ephemeral SQLite** database under PR #246 HEAD `4dc7b3d5291c22252f5d752a28fba3699f836481`; the entire prior PR #196 artifact is a separately verified historical source. The new CI counts passed, yet its semantic Planner selection did not match PR #196. **Passing 3/21/42 counts or within-run pure Planner replay is not a proof of cross-run historical week identity.** The underlying cause (e.g. seed/IDs/tie-breaking) has **not** been independently proven and cannot be asserted here.
 
-## 4. Acceptance / negative controls / next explicit gate
+The newly attempted **strict** diagnostic test `PR10-CORE two-step persisted fixture evidence` [run 40495153015](https://github.com/Mitronomik/family-food-os/actions/runs/40495153015) correctly rejected that independently pinned baseline mismatch and **failed**: 26 existing PR10-META tests passed; **13 newly added cases failed at shared fixture setup**, before the candidate negative tests could run. This is **not** a successful two-step validation receipt. The experimental script/test/workflow was **removed from this PR** instead of weakening the baseline or treating the changed current week as the accepted historical fixture.
 
-**Current evidence publication result:** `TWO_SOURCE_STEPS_PINN_NOT_APPROVED` *only after successful exact-head CI readback*. Until the CI run passes, treat the new current fixture proof as **PENDING_EXECUTION**; the historical artifact remains independently attested but dated.
+## 2. Actual two-candidate read-back comparison
 
-**Positive research acceptance:** two real current MealEvent IDs on distinct dates; correct RecipeVersion/Step hashes, source/rights, actual member IDs/factors and exact ingredient projections; zero semantic deviations from independent Planner expected pin. This **does not** assert two executable PrepTasks.
+| Candidate source first-step | PR #196 accepted historical week | Newly generated current week from CI | Verdict |
+| --- | --- | --- | --- |
+| `SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE` — «Творог протереть.» | 2026-09-18 **BREAKFAST**, member Serving factors `2.362341 + 2.746504 = 5.108845` | **Present once but on 2026-09-20 BREAKFAST**, with source-linked factors `2.362341 + 2.746504 = 5.108845`; new ephemeral MealEvent / RecipeVersion / Step UUIDs | **Not the accepted MealEvent/date**, cannot reuse the historically selected event identity as current |
+| `SCHOOL2022_54_1K_LIQUID_CORN_MILK_PORRIDGE` — «Перебрать и промыть кукурузную крупу, несколько раз меняя воду.» | 2026-09-19 **BREAKFAST**, member Serving factors `3.422496 + 3.979062 = 7.401558` | **Not selected in any of the 21 current MealEvents**, although its RecipeVersion/Step is present in the current active catalogue | **NO_GO** for the second positive MealEvent |
 
-**Negative adversarial acceptance:** tampered member or out-of-Household Serving, wrong RecipeVersion/Step/hash or source manifest blob, one missing event, no independent reviewer, forged `APPROVED_IMMEDIATE`, numeric/UNKNOWN source and unavailable/revoked policy remain NO_GO. `ALL_UNKNOWN` and `ONLY_ONE_APPROVED_EVENT` technical Gate2 negative branches must be evaluated when trusted Prep runtime exists; this evidence script cannot truthfully execute those absent services.
+Historical input-only Decimal projections: `TVOROG_5 139.5 × 5.108845 = 712.6838775 g`; `CORN_GROATS 40 × 7.401558 = 296.062320 g`. The present run independently calculates the **same** cottage-cheese ingredient projection at a **different MealEvent date**, but this does not repair source pin drift. **No current corn-milk MealEvent Serving** exists to project or authorize.
 
-**Next after independent review and owner approval:** a qualified reviewer accepts/rejects these two full source processes for actual family-scale same-day use. If **both** pass and publisher/read trust implementation contract is approved, deliver the separate D3 eligibility source/reader (including rollback-independent revocation and fail-closed) **before** PR10-A. If one fails, report a bounded NO_GO and request an explicit new product decision; no third recipe hunt or silently weaker Gate2.
+Source steps' literal `instruction_sha256` values remain matching their immutable accepted recipe text when inspected in the current catalogue (cottage `19abb21302cb8b614997da664eeb8afaf2d53e1be0aab3f3821d5aebec34096d`; corn `31805fc2c8e19d61be569f92a54ee91af6c0d703fa00ab9742cf7f9dcf262590`), but the **persisted RecipeVersion/Step UUIDs and full process hashes** belong to this fresh database, not the historical one. This is source identity integrity, **not** a positive same-day action approval.
 
-**Preservation:** original RecipeVersion/Step texts/ingredients unchanged, source/rights immutable, no Planner/Nutrition/Shopping/Pantry/Prep production runtime, no schema/migration, no Household user data, no safe storage/freezer/reheat or cooking-time claims, no new current-stock assertion. `NO_GO_TO_PR10_CORE_RUNTIME`, `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=PASS` still unproven, and full technical Gate2 remains untested.
+## 3. Decision — don't relax or silently replace the frozen Gate2 fixture
+
+**FACT:** a fresh current Planner/SQLite receipt with 3 members, 21 events, 42 Servings exists and its source/serving relationship is structurally valid, but it is **not semantically identical** to the week used for the #244 two-candidate discovery. The second target dish is absent. PR #244's valid historical lexical/source inventory was not disproved; it was **never a guarantee of fresh cross-run Planner selection**.
+
+**DECISION (evidence only):**
+- `SOURCE_RECIPE_INSTRUCTIONS = HISTORICALLY_VERIFIED`.
+- `CURRENT_PLANNER_3_21_42_STRUCTURE = PASS`.
+- `HISTORICAL_EXACT_WEEK_REPRODUCTION = NO_GO`.
+- `CURRENT_TWO_DISTINCT_TARGET_EVENTS = NO_GO`.
+- `INDEPENDENT_APPROVED_IMMEDIATE = 0`.
+- `PR10_A_RUNTIME = NO_GO`; `Gate2 = NOT_PASSED`.
+- `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=PASS` not established.
+
+**OPEN / one necessary owner decision:** define the accepted **cross-run semantic fixture identity and stabilization strategy** before repeating an eligibility review: either preserve precisely the #244/PR #196 21-event recipe-code/member/Serving semantic snapshot through a deterministic, **versioned synthetic fixture setup**, or formally propose/approve a **new** canonical Gate2 fixture with updated source IDs, both qualified target steps and all negative coverage. This is not authorized merely by the phrase “идем дальше”; requires an explicit Product/Architecture acceptance and independent QA challenge. Changes to Planner tie-breaks, source recipe selection, acceptance fixture, schema or gate must **not** be made silently.
+
+After accepting one tested, independently reviewable fixture identity, run current precise Step/Serving/Household source pin verification, then obtain **named independent Domain/QA process and scaled-home applicability approval** for two genuine same-day actions. Only then proceed with separately accepted D3 trusted publisher/read and rollback-independent revocation, followed by PR10-A. Do not keep hunting recipe pairs or bypass Gate2.
+
+## 4. Verification and preservation
+
+- Downloaded and byte-hashed **both retained GitHub Actions JSON artifacts** through official workflow-artifact downloads, compared all 21 positions by actual source RecipeVersion→canonical code mapping, and validated 3/21/42/51 catalogue counts and both target occurrence joins. No historical generated UUIDs were copied as new current ones.
+- Current existing PR10-META workflow **SUCCESS**; experimental strict newer candidate workflow **FAIL** due expected independent fixture semantic mismatch; its transient evidence script/tests/workflow **not retained in this docs-only PR**. Static receipt JSON and relative links remain for independent docs review; exact-head Docs verification after final changes required.
+- No mutation of source or user data, no production code, no new data-authority reader, source eligibility package, Prep runtime, schema/migrations, APIs, Shopping/Pantry/PDF/PWA, storage/freezer rule or medical/nutrition assumption. `AI_ENABLED=false` invariant remains.
