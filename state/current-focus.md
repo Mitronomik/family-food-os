@@ -1,3 +1,13 @@
+# PR10-CORE — single-pass 21-event prep action-class preflight — 2026-10-23
+
+**Accepted `main`:** `5e5ee82f90a5f0f3103f96b09ac7a6d166565e3b` ([PR #240](https://github.com/Mitronomik/family-food-os/pull/240) merged); [PR #242](https://github.com/Mitronomik/family-food-os/pull/242) is OPEN/UNMERGED and is **not accepted** as source truth. Explicit 2026-10-23 owner decision: one bounded 21-event existing synthetic week source-step audit instead of exclusively pursuing the unsuccessful R3-C/R2-B pair. **No change to Gate2/D3/Prep runtime acceptance.**
+
+**Current authorized task:** [Issue #243](https://github.com/Mitronomik/family-food-os/issues/243), branch `research/pr10-fixture21-action-class-triage-2026-10-23`; [complete source/action review](../docs/family-food/pr10-fixture21-action-class-review-2026-10-23.md) and [21-event/87-step machine receipt](../docs/family-food/pr10-fixture21-action-class-triage-2026-10-23.json). Source manifests and historic DC4 version pins resolved for 21/21 recipes. Heuristic groups recomputed on **all 87 instructions** after PR #244 P2 correction (2026-10-27): numeric **31**, heat **35**, ambiguous/compound **17**, nonthermal candidate **4**. Wheat-milk porridge Step 2 «довести смесь до кипения» is thermal, not nonthermal; no new executable approvals. **Minimal two-event review candidates**: 2026-09-18 cottage cheese casserole step 1 `Творог протереть` and 2026-09-19 corn milk porridge step 1 `Перебрать и промыть кукурузную крупу…`. Both source-backed in R2-E/R3-B and *unapproved*; current event/step UUID, member Decimal Servings and safe family-scale execution still need independent review. Await exact-head Docs CI and independent review; **no autonomous merge**.
+
+**Next ONLY after accepted review and explicit authorization:** qualified independent Domain/QA review of exactly two chosen complete source steps and actual frozen current Gate2 source/Serving pins; then D3 approved publisher/read anti-rollback implementation and only then explicit PR10-A go decision. **0 `APPROVED_IMMEDIATE`**; `NO_GO_TO_PR10_CORE_RUNTIME`, `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, `SAFE_BATCH_READY` and `PORTION_RELEASE_READY` unmet. No source data, recipes, schema, runtime, Pantry, PDF/PWA or Gate2 advancement.
+
+---
+
 # PR10-CORE R3-C/R2-B — two-step process/scale GO-NO-GO — 2026-10-23
 
 **Accepted main:** `22a7f2ab9d94fe395739f0691e5fff3ba3928594`, merged [PR #238](https://github.com/Mitronomik/family-food-os/pull/238) 2026-10-22T17:40:53Z. PR10-CORE-D3 contract and Option B remain governing; 2 historical source steps still have **zero independently approved `APPROVED_IMMEDIATE`** authorizations.

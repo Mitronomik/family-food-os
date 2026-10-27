@@ -1,0 +1,1803 @@
+{
+  "schema": "PR10_FIXTURE21_PREP_SOURCE_STEP_TRIAGE_V1",
+  "decision_date": "2026-10-23",
+  "issue": 243,
+  "base_main_sha": "5e5ee82f90a5f0f3103f96b09ac7a6d166565e3b",
+  "owner_approval": "2026-10-23 approve ONE bounded action-class audit of existing Gate2-like historical fixture, replacing earlier two-step-only candidate research strategy; no criteria waived",
+  "fixture_reference": "docs/family-food/pr10-meta-same-day-pair-evidence.json",
+  "fixture_reference_blob_sha": "70c96af4e8cc958cddb65d9e2d097f3784919a17",
+  "original_planner_receipt_reference": "docs/family-food/pr10-meta-gate2-fixture-evidence.md",
+  "dc4_catalogue_reference": "data/curation/dc4-corpus-readiness/rerun-summary.json",
+  "dc4_catalogue_blob_sha": "fb9c7be7914765a14622c012666077e5f3dc0d79",
+  "fixture_type": "HISTORICAL_SYNTHETIC_3_MEMBER_7_DAY_21_EVENT_SOURCE_CODE_MAPPING_NO_FRESH_DATABASE_EXECUTION",
+  "source_verification_basis": "ACCEPTED_REPO_MANIFEST_BLOBS_AND_HISTORICAL_VERIFIED_DC4_CODE_TO_VERSION_PINS",
+  "source_step_algorithm": {
+    "policy": "NONAUTHORITATIVE_HEURISTIC_TRIAGE_ONLY",
+    "precedence": [
+      "HAS_DIGITS -> NUMERIC_TEXT_REVIEW",
+      "NO_DIGITS_AND_HEAT_WORD -> HEAT_PROCESS_REVIEW",
+      "NO_DIGITS_NO_HEAT_AND_CONTEXT_COMPLEXITY -> CONTEXT_OR_COMPOUND_REVIEW",
+      "OTHER -> NON_HEAT_TEXT_CANDIDATE"
+    ],
+    "no_status_granted": "NO_NUMERIC_DIRECTION_CLASSIFICATION_NOT_APPROVED_BY_SYNTAX",
+    "only_positive_source": "INDEPENDENT_SOURCE_PLUS_WHOLE_STEP_PROCESS_SCALE_REVIEW_AND_ACCEPTED_D3_READER_STATUS",
+    "regex_literals_for_reproduction": {
+      "numeric_digit": "/[0-9０-９]/",
+      "heat_or_hot_state": "/(варить|сварить|отварить|разогр|припуст|пассер|бланшир|кипя|горяч|тёпл|тепл|ошпар|запек|духов|тушить|подогр|пара\\b|паром|растоп|нагрев|довести(?:\\s+[^.;!?]{1,80}?)?\\s+до\\s+кипения|готовить)/i",
+      "context_complexity": "/(подготовить|подготовлен|полуготов|немног|небольш|добавить|замочить|до готовности|филе|мяс|куриц|треск|рыб|говядин|порци|смазать)/i"
+    },
+    "thermal_phrase_rule": "Additionally recognise inflected 'довести [up to 80 chars without sentence punctuation] до кипения', including intervening words (e.g. 'довести смесь до кипения'), as HEAT_PROCESS_REVIEW unless numeric digits take precedence. Regex is a research-only prefilter, not safety classification.",
+    "classification_order": "digit.test(text) ? NUMERIC_TEXT_REVIEW : heat.test(text) ? HEAT_PROCESS_REVIEW : context.test(text) ? CONTEXT_OR_COMPOUND_REVIEW : NON_HEAT_TEXT_CANDIDATE",
+    "complete_recalculation_receipt": {
+      "review_correction_date": "2026-10-27",
+      "original_category_counts": {
+        "NUMERIC_TEXT_REVIEW": 31,
+        "CONTEXT_OR_COMPOUND_REVIEW": 17,
+        "HEAT_PROCESS_REVIEW": 34,
+        "NON_HEAT_TEXT_CANDIDATE": 5
+      },
+      "corrected_category_counts": {
+        "NUMERIC_TEXT_REVIEW": 31,
+        "HEAT_PROCESS_REVIEW": 35,
+        "CONTEXT_OR_COMPOUND_REVIEW": 17,
+        "NON_HEAT_TEXT_CANDIDATE": 4
+      },
+      "steps_recomputed": 87,
+      "changed_records": [
+        {
+          "recipe": "SCHOOL2022_54_13K_WHEAT_MILK_PORRIDGE",
+          "position": 2,
+          "previous_label": "NON_HEAT_TEXT_CANDIDATE",
+          "corrected_label": "HEAT_PROCESS_REVIEW",
+          "previous_mentions_heat_or_hot_state": false,
+          "corrected_mentions_heat_or_hot_state": true,
+          "source_instruction_ru": "В воде с молоком растворить йодированную соль и сахар и довести смесь до кипения."
+        }
+      ],
+      "remaining_non_heat_source_steps": [
+        {
+          "canonical_recipe_code": "SCHOOL2022_54_2T_COTTAGE_CHEESE_CARROT_CASSEROLE",
+          "position": 1,
+          "instruction_ru": "Протереть творог."
+        },
+        {
+          "canonical_recipe_code": "SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE",
+          "position": 1,
+          "instruction_ru": "Творог протереть."
+        },
+        {
+          "canonical_recipe_code": "SCHOOL2022_54_1K_LIQUID_CORN_MILK_PORRIDGE",
+          "position": 1,
+          "instruction_ru": "Перебрать и промыть кукурузную крупу, несколько раз меняя воду."
+        },
+        {
+          "canonical_recipe_code": "MR2019_6_19_BAKED_MACARONI_HARD_CHEESE",
+          "position": 3,
+          "instruction_ru": "Твёрдый сыр натереть, соединить с макаронами и тщательно перемешать."
+        }
+      ],
+      "target_unchanged": true
+    },
+    "regression_vectors": [
+      {
+        "text": "В воде с молоком растворить йодированную соль и сахар и довести смесь до кипения.",
+        "expected_label": "HEAT_PROCESS_REVIEW",
+        "calculated_label": "HEAT_PROCESS_REVIEW",
+        "matches": true
+      },
+      {
+        "text": "Довести до кипения.",
+        "expected_label": "HEAT_PROCESS_REVIEW",
+        "calculated_label": "HEAT_PROCESS_REVIEW",
+        "matches": true
+      },
+      {
+        "text": "Довести воду с молоком до кипения.",
+        "expected_label": "HEAT_PROCESS_REVIEW",
+        "calculated_label": "HEAT_PROCESS_REVIEW",
+        "matches": true
+      },
+      {
+        "text": "Творог протереть.",
+        "expected_label": "NON_HEAT_TEXT_CANDIDATE",
+        "calculated_label": "NON_HEAT_TEXT_CANDIDATE",
+        "matches": true
+      },
+      {
+        "text": "Перебрать и промыть кукурузную крупу, несколько раз меняя воду.",
+        "expected_label": "NON_HEAT_TEXT_CANDIDATE",
+        "calculated_label": "NON_HEAT_TEXT_CANDIDATE",
+        "matches": true
+      },
+      {
+        "text": "Нарезать кубиками и варить 10 минут.",
+        "expected_label": "NUMERIC_TEXT_REVIEW",
+        "calculated_label": "NUMERIC_TEXT_REVIEW",
+        "matches": true
+      }
+    ]
+  },
+  "summary": {
+    "event_count": 21,
+    "distinct_recipe_count": 21,
+    "seven_day_count": 7,
+    "source_step_count": 87,
+    "category_counts": {
+      "NUMERIC_TEXT_REVIEW": 31,
+      "HEAT_PROCESS_REVIEW": 35,
+      "CONTEXT_OR_COMPOUND_REVIEW": 17,
+      "NON_HEAT_TEXT_CANDIDATE": 4
+    },
+    "manifest_resolution_count": 21,
+    "candidate_count": 2,
+    "candidate_distinct_event_count": 2,
+    "approved_immediate_count": 0,
+    "independently_reviewed_count": 0,
+    "full_current_mealplan_and_exact_serving_pins_verified": false,
+    "PR10_A_RUNTIME_READY": false,
+    "GATE2_PASS": false,
+    "old_R3C_R2B_decision": "UNCHANGED_NO_GO_FOR_EXECUTABLE_PROMOTION",
+    "live_eligibility_reader": "NOT_IMPLEMENTED",
+    "simultaneous_prep_batch_claim": false
+  },
+  "events": [
+    {
+      "historical_local_date": "2026-09-14",
+      "historical_event_position": 1,
+      "source_kind": "COOK_RECIPE",
+      "canonical_recipe_code": "SCHOOL2022_54_1O_NATURAL_OMELET",
+      "historical_verified_recipe_version_id": "02670c15-e221-4e52-8766-bcb5e3c3b1c5",
+      "historical_catalogue_disposition": "PASS",
+      "manifest_path": "data/curation/r2-breakfast-capacity/publication-specs.json",
+      "manifest_git_blob_sha": "9951b8105d6cabdf22e173ab1315f8f2418d5bf9",
+      "source_version_name": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_original_servings": "1",
+      "source_ingredient_codes": [
+        "EGG",
+        "MILK_2_5",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SALT_IODIZED"
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "instruction_ru": "Яйца разбить в отдельную посуду по 2–3 штуки, затем соединить в общей ёмкости.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 2,
+          "instruction_ru": "Добавить молоко и йодированную соль, перемешать и взбить до образования пены.",
+          "triage_label": "CONTEXT_OR_COMPOUND_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 3,
+          "instruction_ru": "Смазать противень половиной сливочного масла и вылить яичную массу слоем 2,5–3,0 см.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 4,
+          "instruction_ru": "Запекать в духовке при 180–200 °C 8–10 минут до образования румяной корочки.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 5,
+          "instruction_ru": "Разделить омлет на порции и полить оставшейся половиной растопленного сливочного масла.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        }
+      ],
+      "historical_exact_event_uuid_available_in_repository_summary": false,
+      "household_member_decimal_servings_available_from_summary": false,
+      "source_bound_eligibility": "RESEARCH_TRIAGE_ONLY_NO_EXECUTABLE_APPROVAL"
+    },
+    {
+      "historical_local_date": "2026-09-14",
+      "historical_event_position": 2,
+      "source_kind": "COOK_RECIPE",
+      "canonical_recipe_code": "SCHOOL2022_54_3M_LAZY_CABBAGE_ROLLS",
+      "historical_verified_recipe_version_id": "701d5e67-833d-4006-a7b9-89d28edfda29",
+      "historical_catalogue_disposition": "PASS",
+      "manifest_path": "data/curation/r3c-post-r3b-catalogue-gate/frozen-batch.json",
+      "manifest_git_blob_sha": "c11fd55695c655fee5add14a3416a27527771e75",
+      "source_version_name": null,
+      "source_original_servings": "1",
+      "source_ingredient_codes": [
+        "CABBAGE_GREEN",
+        "BEEF_CATEGORY_1_RAW",
+        "RICE_GROATS",
+        "ONION_BULB_FRESH",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SALT_IODIZED",
+        "WATER"
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "instruction_ru": "Промыть рис и сварить рассыпчатым.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 2,
+          "instruction_ru": "Подготовить и нашинковать лук; бланшировать и пассеровать его в половине общего количества сливочного масла.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 3,
+          "instruction_ru": "Подготовить белокочанную капусту, тонко нашинковать, припустить в подсоленной кипящей воде до полуготовности и слить воду.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 4,
+          "instruction_ru": "Измельчить подготовленную говядину, смешать с рисом, луком и капустой и хорошо вымешать.",
+          "triage_label": "CONTEXT_OR_COMPOUND_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 5,
+          "instruction_ru": "Сформовать порции, уложить в форму, добавить воду и оставшуюся часть сливочного масла и готовить в духовке 30 минут при 250 °C.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        }
+      ],
+      "historical_exact_event_uuid_available_in_repository_summary": false,
+      "household_member_decimal_servings_available_from_summary": false,
+      "source_bound_eligibility": "RESEARCH_TRIAGE_ONLY_NO_EXECUTABLE_APPROVAL"
+    },
+    {
+      "historical_local_date": "2026-09-14",
+      "historical_event_position": 3,
+      "source_kind": "COOK_RECIPE",
+      "canonical_recipe_code": "MR2019_6_9_VERMICELLI_HARD_CHEESE",
+      "historical_verified_recipe_version_id": "827cf2e2-87f3-4c6d-a28b-6baf7b597909",
+      "historical_catalogue_disposition": "PASS",
+      "manifest_path": "data/curation/r3d-final-dc3-batch-gate/frozen-batch.json",
+      "manifest_git_blob_sha": "5668323fe8027dcd2cb94c75db8b551cfb525cde",
+      "source_version_name": null,
+      "source_original_servings": "1",
+      "source_ingredient_codes": [
+        "PASTA_DRY",
+        "WATER",
+        "SALT_IODIZED",
+        "CHEESE_DUTCH_HARD",
+        "BUTTER_PEASANT_72_5_UNSALTED"
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "instruction_ru": "Вермишель засыпать в кипящую подсоленную воду и варить 10–12 минут до готовности.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 2,
+          "instruction_ru": "Откинуть на сито, дать воде стечь, добавить сливочное масло и перемешать.",
+          "triage_label": "CONTEXT_OR_COMPOUND_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 3,
+          "instruction_ru": "Выложить в форму, посыпать тёртым твёрдым сыром и прогреть 5–10 минут при 200–220 °C.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        }
+      ],
+      "historical_exact_event_uuid_available_in_repository_summary": false,
+      "household_member_decimal_servings_available_from_summary": false,
+      "source_bound_eligibility": "RESEARCH_TRIAGE_ONLY_NO_EXECUTABLE_APPROVAL"
+    },
+    {
+      "historical_local_date": "2026-09-15",
+      "historical_event_position": 1,
+      "source_kind": "COOK_RECIPE",
+      "canonical_recipe_code": "SCHOOL2022_54_2T_COTTAGE_CHEESE_CARROT_CASSEROLE",
+      "historical_verified_recipe_version_id": "daff0e59-d5cb-4295-b048-15ae2e103fe3",
+      "historical_catalogue_disposition": "PASS",
+      "manifest_path": "data/curation/r3b-school2022-breakfast-batch/publication-specs.json",
+      "manifest_git_blob_sha": "96d134265a8c256e34ad985670feed8ca56c295d",
+      "source_version_name": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_original_servings": "1",
+      "source_ingredient_codes": [
+        "TVOROG_5",
+        "CARROT",
+        "MILK_2_5",
+        "SEMOLINA_GROATS",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "EGG",
+        "BREADCRUMBS",
+        "SOUR_CREAM_15",
+        "SUGAR",
+        "SALT_IODIZED"
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "instruction_ru": "Протереть творог.",
+          "triage_label": "NON_HEAT_TEXT_CANDIDATE",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 2,
+          "instruction_ru": "Морковь нарезать соломкой и припустить в молоке с 1/3 общего количества сливочного масла.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 3,
+          "instruction_ru": "Постепенно всыпать манную крупу и варить при помешивании 10–15 минут; охладить до 40–50 °C.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 4,
+          "instruction_ru": "Соединить с творогом, сырыми яйцами, сахаром и йодированной солью; выложить слоем 3 см в смазанную сливочным маслом и посыпанную сухарями форму.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 5,
+          "instruction_ru": "Разровнять, смазать сметаной и запекать при 250 °C до лёгкой корочки, затем при 160–180 °C; суммарно не менее 15 минут.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        }
+      ],
+      "historical_exact_event_uuid_available_in_repository_summary": false,
+      "household_member_decimal_servings_available_from_summary": false,
+      "source_bound_eligibility": "RESEARCH_TRIAGE_ONLY_NO_EXECUTABLE_APPROVAL"
+    },
+    {
+      "historical_local_date": "2026-09-15",
+      "historical_event_position": 2,
+      "source_kind": "COOK_RECIPE",
+      "canonical_recipe_code": "MR2019_2_11_BEEF_VEGETABLE_RAGOUT",
+      "historical_verified_recipe_version_id": "1a5d6d8e-b261-4327-adb2-f963fa681fe8",
+      "historical_catalogue_disposition": "PASS",
+      "manifest_path": "data/curation/r3d-final-dc3-batch-gate/frozen-batch.json",
+      "manifest_git_blob_sha": "5668323fe8027dcd2cb94c75db8b551cfb525cde",
+      "source_version_name": null,
+      "source_original_servings": "1",
+      "source_ingredient_codes": [
+        "BEEF_CATEGORY_1_RAW",
+        "ONION_BULB_FRESH",
+        "CARROT",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "POTATO",
+        "GREEN_PEAS_CANNED",
+        "TOMATO",
+        "SALT_IODIZED",
+        "FLOUR_WHEAT_FIRST_GRADE",
+        "WATER"
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "instruction_ru": "Говядину отварить до готовности и нарезать по 3–4 кусочка на порцию.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 2,
+          "instruction_ru": "Лук и морковь мелко нарезать и припустить в небольшом количестве воды со сливочным маслом.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 3,
+          "instruction_ru": "Картофель нарезать кубиками и отварить до полуготовности, отвар слить.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 4,
+          "instruction_ru": "Соединить картофель, зелёный горошек, помидоры, мясо, лук и морковь; добавить соус из подсушенной муки и воды и тушить до готовности.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 5,
+          "instruction_ru": "За несколько минут до готовности добавить йодированную соль.",
+          "triage_label": "CONTEXT_OR_COMPOUND_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        }
+      ],
+      "historical_exact_event_uuid_available_in_repository_summary": false,
+      "household_member_decimal_servings_available_from_summary": false,
+      "source_bound_eligibility": "RESEARCH_TRIAGE_ONLY_NO_EXECUTABLE_APPROVAL"
+    },
+    {
+      "historical_local_date": "2026-09-15",
+      "historical_event_position": 3,
+      "source_kind": "COOK_RECIPE",
+      "canonical_recipe_code": "MR2019_1_16_POTATO_SPLIT_PEA_SOUP",
+      "historical_verified_recipe_version_id": "ede0b7e9-30a0-4fc3-9c0c-4aacd3c94ad8",
+      "historical_catalogue_disposition": "PASS",
+      "manifest_path": "data/curation/r3d-final-dc3-batch-gate/frozen-batch.json",
+      "manifest_git_blob_sha": "5668323fe8027dcd2cb94c75db8b551cfb525cde",
+      "source_version_name": null,
+      "source_original_servings": "1",
+      "source_ingredient_codes": [
+        "CARROT",
+        "ONION_BULB_FRESH",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "POTATO",
+        "SPLIT_PEAS_DRY",
+        "WATER",
+        "SALT_IODIZED"
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "instruction_ru": "Горох перебрать, промыть и замочить в холодной воде на 3–4 часа; затем варить в этой же воде до размягчения.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 2,
+          "instruction_ru": "Морковь и лук подготовить и припустить в небольшом количестве воды со сливочным маслом.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 3,
+          "instruction_ru": "Добавить нарезанный картофель и припущенные овощи и варить до готовности.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 4,
+          "instruction_ru": "Добавить кипячёную воду в пределах общего количества рецептуры, йодированную соль и довести до кипения.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        }
+      ],
+      "historical_exact_event_uuid_available_in_repository_summary": false,
+      "household_member_decimal_servings_available_from_summary": false,
+      "source_bound_eligibility": "RESEARCH_TRIAGE_ONLY_NO_EXECUTABLE_APPROVAL"
+    },
+    {
+      "historical_local_date": "2026-09-16",
+      "historical_event_position": 1,
+      "source_kind": "COOK_RECIPE",
+      "canonical_recipe_code": "SCHOOL2022_54_16K_DRUZHBA_PORRIDGE",
+      "historical_verified_recipe_version_id": "64862f6b-2372-4c95-a138-47f40a861ba8",
+      "historical_catalogue_disposition": "PASS",
+      "manifest_path": "data/curation/r3b-school2022-breakfast-batch/publication-specs.json",
+      "manifest_git_blob_sha": "96d134265a8c256e34ad985670feed8ca56c295d",
+      "source_version_name": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_original_servings": "1",
+      "source_ingredient_codes": [
+        "RICE_GROATS",
+        "MILLET_GROATS",
+        "MILK_2_5",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SUGAR",
+        "SALT_IODIZED",
+        "WATER"
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "instruction_ru": "Пшенную крупу перебрать, промыть тёплой и горячей водой и ошпарить; рисовую крупу перебрать и промыть.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 2,
+          "instruction_ru": "Обе крупы варить отдельно в кипящей воде до полуготовности. Источник фиксирует общий расход воды 70 г, но не делит его между крупами.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 3,
+          "instruction_ru": "Соединить крупы, добавить тёплое молоко, сахар и йодированную соль; довести до кипения и варить при слабом кипении до поглощения жидкости над крупой.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 4,
+          "instruction_ru": "За 10 минут до готовности добавить растопленное сливочное масло, перемешать и упарить под закрытой крышкой.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        }
+      ],
+      "historical_exact_event_uuid_available_in_repository_summary": false,
+      "household_member_decimal_servings_available_from_summary": false,
+      "source_bound_eligibility": "RESEARCH_TRIAGE_ONLY_NO_EXECUTABLE_APPROVAL"
+    },
+    {
+      "historical_local_date": "2026-09-16",
+      "historical_event_position": 2,
+      "source_kind": "COOK_RECIPE",
+      "canonical_recipe_code": "SCHOOL2022_54_17R_SALMON_TOMATO_VEGETABLES",
+      "historical_verified_recipe_version_id": "729376fd-230b-4aef-b446-3b7464b996d2",
+      "historical_catalogue_disposition": "PASS",
+      "manifest_path": "data/curation/r3c-post-r3b-catalogue-gate/frozen-batch.json",
+      "manifest_git_blob_sha": "c11fd55695c655fee5add14a3416a27527771e75",
+      "source_version_name": null,
+      "source_original_servings": "1",
+      "source_ingredient_codes": [
+        "ATLANTIC_SALMON_FILLET_RAW",
+        "CARROT",
+        "ONION_BULB_FRESH",
+        "TOMATO_PUREE_PASTE",
+        "PARSLEY_ROOT_RAW",
+        "SUGAR",
+        "SUNFLOWER_OIL",
+        "SALT_IODIZED",
+        "WATER"
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "instruction_ru": "Подготовить корень петрушки, морковь и репчатый лук; лук бланшировать, затем пассеровать вместе с морковью и петрушкой и добавить томатное пюре.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 2,
+          "instruction_ru": "Подготовленное филе сёмги нарезать порционными кусками и уложить в форму, смазанную подсолнечным маслом.",
+          "triage_label": "CONTEXT_OR_COMPOUND_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 3,
+          "instruction_ru": "Выложить на рыбу пассерованные овощи, добавить воду, сахар и йодированную соль.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 4,
+          "instruction_ru": "Готовить в духовке 40–45 минут до готовности.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        }
+      ],
+      "historical_exact_event_uuid_available_in_repository_summary": false,
+      "household_member_decimal_servings_available_from_summary": false,
+      "source_bound_eligibility": "RESEARCH_TRIAGE_ONLY_NO_EXECUTABLE_APPROVAL"
+    },
+    {
+      "historical_local_date": "2026-09-16",
+      "historical_event_position": 3,
+      "source_kind": "COOK_RECIPE",
+      "canonical_recipe_code": "SCHOOL2022_54_7R_POLLOCK_IN_MILK",
+      "historical_verified_recipe_version_id": "9ce23ece-9daf-4c9a-9aca-e608bf178a16",
+      "historical_catalogue_disposition": "PASS",
+      "manifest_path": "data/curation/r2b-fish-main-diversity/publication-specs.json",
+      "manifest_git_blob_sha": "b4ad353c4c9e955b64fb8b155cc98a1530aeb3a8",
+      "source_version_name": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_original_servings": "1",
+      "source_ingredient_codes": [
+        "POLLOCK_FILLET_RAW",
+        "MILK_2_5",
+        "ONION_BULB_FRESH",
+        "SUNFLOWER_OIL",
+        "SALT_IODIZED"
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "instruction_ru": "Репчатый лук подготовить, нашинковать и бланшировать.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 2,
+          "instruction_ru": "Уже размороженное филе минтая промыть и нарезать порционными кусками массой 65 г.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 3,
+          "instruction_ru": "Смазать форму подсолнечным маслом, выложить бланшированный лук и сверху рыбу.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 4,
+          "instruction_ru": "Залить горячим молоком примерно на одну треть высоты рыбы и добавить йодированную соль.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 5,
+          "instruction_ru": "Готовить в духовке 20–25 минут до готовности.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        }
+      ],
+      "historical_exact_event_uuid_available_in_repository_summary": false,
+      "household_member_decimal_servings_available_from_summary": false,
+      "source_bound_eligibility": "RESEARCH_TRIAGE_ONLY_NO_EXECUTABLE_APPROVAL"
+    },
+    {
+      "historical_local_date": "2026-09-17",
+      "historical_event_position": 1,
+      "source_kind": "COOK_RECIPE",
+      "canonical_recipe_code": "SCHOOL2022_54_13K_WHEAT_MILK_PORRIDGE",
+      "historical_verified_recipe_version_id": "f4624e1e-e3ac-45df-a250-697f12682318",
+      "historical_catalogue_disposition": "PASS",
+      "manifest_path": "data/curation/r2c-breakfast-grain-diversity/publication-specs.json",
+      "manifest_git_blob_sha": "ff8cf2da19e63a13901ce572171ba5b2a7451765",
+      "source_version_name": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_original_servings": "1",
+      "source_ingredient_codes": [
+        "WHEAT_GROATS",
+        "MILK_2_5",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SUGAR",
+        "SALT_IODIZED",
+        "WATER"
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "instruction_ru": "Пшеничную крупу перебрать, промыть сначала тёплой водой 40–50 °C, затем горячей водой 60–70 °C и ошпарить.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 2,
+          "instruction_ru": "В воде с молоком растворить йодированную соль и сахар и довести смесь до кипения.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 3,
+          "instruction_ru": "Всыпать подготовленную крупу и варить при слабом кипении до готовности.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 4,
+          "instruction_ru": "Заправить готовую кашу растопленным сливочным маслом.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        }
+      ],
+      "historical_exact_event_uuid_available_in_repository_summary": false,
+      "household_member_decimal_servings_available_from_summary": false,
+      "source_bound_eligibility": "RESEARCH_TRIAGE_ONLY_NO_EXECUTABLE_APPROVAL"
+    },
+    {
+      "historical_local_date": "2026-09-17",
+      "historical_event_position": 2,
+      "source_kind": "COOK_RECIPE",
+      "canonical_recipe_code": "MR2019_2_15_STEAMED_CHICKEN_SOUFFLE",
+      "historical_verified_recipe_version_id": "e54596e7-c458-4247-b8fd-a20d72f3c14d",
+      "historical_catalogue_disposition": "PASS",
+      "manifest_path": "data/curation/r3d-final-dc3-batch-gate/frozen-batch.json",
+      "manifest_git_blob_sha": "5668323fe8027dcd2cb94c75db8b551cfb525cde",
+      "source_version_name": null,
+      "source_original_servings": "1",
+      "source_ingredient_codes": [
+        "CHICKEN_CATEGORY_1_WHOLE_RAW",
+        "EGG",
+        "MILK_3_2",
+        "SALT_IODIZED",
+        "FLOUR_WHEAT_FIRST_GRADE",
+        "BUTTER_PEASANT_72_5_UNSALTED"
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "instruction_ru": "Курицу отварить до готовности; отделить мякоть и дважды измельчить.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 2,
+          "instruction_ru": "Из молока и пшеничной муки приготовить молочный соус и постепенно ввести его в куриную массу.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 3,
+          "instruction_ru": "Добавить желтки и йодированную соль, перемешать; затем осторожно вмешать взбитые белки.",
+          "triage_label": "CONTEXT_OR_COMPOUND_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 4,
+          "instruction_ru": "Выложить массу в форму, смазанную сливочным маслом, и готовить на пару до готовности.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        }
+      ],
+      "historical_exact_event_uuid_available_in_repository_summary": false,
+      "household_member_decimal_servings_available_from_summary": false,
+      "source_bound_eligibility": "RESEARCH_TRIAGE_ONLY_NO_EXECUTABLE_APPROVAL"
+    },
+    {
+      "historical_local_date": "2026-09-17",
+      "historical_event_position": 3,
+      "source_kind": "COOK_RECIPE",
+      "canonical_recipe_code": "SCHOOL2022_54_21M_BOILED_CHICKEN",
+      "historical_verified_recipe_version_id": "9a5c67ba-5dfb-4e59-a35a-64c342344999",
+      "historical_catalogue_disposition": "PASS",
+      "manifest_path": "data/curation/r3c-post-r3b-catalogue-gate/frozen-batch.json",
+      "manifest_git_blob_sha": "c11fd55695c655fee5add14a3416a27527771e75",
+      "source_version_name": null,
+      "source_original_servings": "1",
+      "source_ingredient_codes": [
+        "CHICKEN_BREAST",
+        "ONION_BULB_FRESH",
+        "PARSLEY",
+        "SALT_IODIZED",
+        "WATER"
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "instruction_ru": "Подготовить репчатый лук и зелень петрушки: промыть и нашинковать.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 2,
+          "instruction_ru": "Подготовленное куриное филе нарезать кусками, положить в горячую воду и довести до кипения; снять пену, добавить лук, петрушку и йодированную соль и варить под крышкой при слабом кипении до готовности.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 3,
+          "instruction_ru": "Готовое филе вынуть из бульона, немного остудить и разделить на порции.",
+          "triage_label": "CONTEXT_OR_COMPOUND_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 4,
+          "instruction_ru": "Залить порции горячим бульоном, довести до кипения и кипятить 5–7 минут.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        }
+      ],
+      "historical_exact_event_uuid_available_in_repository_summary": false,
+      "household_member_decimal_servings_available_from_summary": false,
+      "source_bound_eligibility": "RESEARCH_TRIAGE_ONLY_NO_EXECUTABLE_APPROVAL"
+    },
+    {
+      "historical_local_date": "2026-09-18",
+      "historical_event_position": 1,
+      "source_kind": "COOK_RECIPE",
+      "canonical_recipe_code": "SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE",
+      "historical_verified_recipe_version_id": "d89ad7ad-1aa7-4aa1-9f58-81dd7c7b6df3",
+      "historical_catalogue_disposition": "PASS",
+      "manifest_path": "data/curation/r2e-cottage-casserole/publication-specs.json",
+      "manifest_git_blob_sha": "52f966d60226aec852d06790fe912e36f168cbdc",
+      "source_version_name": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_original_servings": "1",
+      "source_ingredient_codes": [
+        "TVOROG_5",
+        "SEMOLINA_GROATS",
+        "SUGAR",
+        "SOUR_CREAM_15",
+        "BREADCRUMBS",
+        "EGG",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SALT_IODIZED",
+        "VANILLIN",
+        "WATER"
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "instruction_ru": "Творог протереть.",
+          "triage_label": "NON_HEAT_TEXT_CANDIDATE",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 2,
+          "instruction_ru": "В горячей воде растворить ванилин, всыпать манную крупу, помешивая, проварить 10 минут и охладить.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 3,
+          "instruction_ru": "Смешать протёртый творог с заваренной и охлаждённой вязкой манной кашей; добавить сырое яйцо, сахар и йодированную соль.",
+          "triage_label": "CONTEXT_OR_COMPOUND_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 4,
+          "instruction_ru": "Выложить массу слоем 3–4 см в форму, смазанную сливочным маслом и посыпанную панировочными сухарями.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 5,
+          "instruction_ru": "Разровнять поверхность, смазать сметаной и запекать в духовке при 250 °C до образования корочки, затем при 180–200 °C довести до готовности; суммарно не менее 15 минут.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 6,
+          "instruction_ru": "Готовую запеканку нарезать на порции.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        }
+      ],
+      "historical_exact_event_uuid_available_in_repository_summary": false,
+      "household_member_decimal_servings_available_from_summary": false,
+      "source_bound_eligibility": "RESEARCH_TRIAGE_ONLY_NO_EXECUTABLE_APPROVAL"
+    },
+    {
+      "historical_local_date": "2026-09-18",
+      "historical_event_position": 2,
+      "source_kind": "COOK_RECIPE",
+      "canonical_recipe_code": "SCHOOL2022_54_7M_BEEF_SCHNITZEL",
+      "historical_verified_recipe_version_id": "e46ae21e-8cb0-4873-9786-410ca59c2b55",
+      "historical_catalogue_disposition": "PASS",
+      "manifest_path": "data/curation/r3a-school2022-main-batch/publication-specs.json",
+      "manifest_git_blob_sha": "ab40c2b8c6a646a60d72922faea451225e875697",
+      "source_version_name": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_original_servings": "1",
+      "source_ingredient_codes": [
+        "BEEF_CATEGORY_1_RAW",
+        "MILK_2_5",
+        "WHEAT_BREAD_STALE_UNSPECIFIED_GRADE",
+        "BREADCRUMBS",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SALT_IODIZED"
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "instruction_ru": "Измельчить подготовленную говядину и соединить с черствым пшеничным хлебом без корок, замоченным в молоке.",
+          "triage_label": "CONTEXT_OR_COMPOUND_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 2,
+          "instruction_ru": "Добавить йодированную соль, повторно измельчить, перемешать и сформовать шницели.",
+          "triage_label": "CONTEXT_OR_COMPOUND_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 3,
+          "instruction_ru": "Запанировать в сухарях, выложить на противень, смазанный сливочным маслом, и запекать 25–30 минут при 250–280 °C до готовности.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        }
+      ],
+      "historical_exact_event_uuid_available_in_repository_summary": false,
+      "household_member_decimal_servings_available_from_summary": false,
+      "source_bound_eligibility": "RESEARCH_TRIAGE_ONLY_NO_EXECUTABLE_APPROVAL"
+    },
+    {
+      "historical_local_date": "2026-09-18",
+      "historical_event_position": 3,
+      "source_kind": "COOK_RECIPE",
+      "canonical_recipe_code": "SCHOOL2022_54_1R_COD_CUTLET",
+      "historical_verified_recipe_version_id": "5022b81f-0535-4faa-a6b8-5069c1aa94b7",
+      "historical_catalogue_disposition": "PASS",
+      "manifest_path": "data/curation/r3a-school2022-main-batch/publication-specs.json",
+      "manifest_git_blob_sha": "ab40c2b8c6a646a60d72922faea451225e875697",
+      "source_version_name": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_original_servings": "1",
+      "source_ingredient_codes": [
+        "COD_FILLET_RAW",
+        "WHEAT_BREAD_PLAIN",
+        "EGG",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SALT_IODIZED",
+        "WATER"
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "instruction_ru": "Измельчить подготовленное филе трески.",
+          "triage_label": "CONTEXT_OR_COMPOUND_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 2,
+          "instruction_ru": "Замочить пшеничный хлеб в воде, отжать и повторно измельчить вместе с рыбой; добавить йодированную соль, сливочное масло, сырое яйцо и оставшуюся воду. Источник фиксирует общий расход воды и масла, но не делит его по операциям.",
+          "triage_label": "CONTEXT_OR_COMPOUND_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 3,
+          "instruction_ru": "Сформовать котлеты, выложить на противень, смазанный маслом, выбрать предусмотренную картой ветвь с водой вместо рыбного бульона и запекать 20–25 минут до готовности. Не назначать отдельные граммы масла/воды шагам сверх общего source total.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        }
+      ],
+      "historical_exact_event_uuid_available_in_repository_summary": false,
+      "household_member_decimal_servings_available_from_summary": false,
+      "source_bound_eligibility": "RESEARCH_TRIAGE_ONLY_NO_EXECUTABLE_APPROVAL"
+    },
+    {
+      "historical_local_date": "2026-09-19",
+      "historical_event_position": 1,
+      "source_kind": "COOK_RECIPE",
+      "canonical_recipe_code": "SCHOOL2022_54_1K_LIQUID_CORN_MILK_PORRIDGE",
+      "historical_verified_recipe_version_id": "5c680c36-fd7c-4e6a-b4ed-a080bb697b62",
+      "historical_catalogue_disposition": "PASS",
+      "manifest_path": "data/curation/r3b-school2022-breakfast-batch/publication-specs.json",
+      "manifest_git_blob_sha": "96d134265a8c256e34ad985670feed8ca56c295d",
+      "source_version_name": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_original_servings": "1",
+      "source_ingredient_codes": [
+        "CORN_GROATS",
+        "MILK_2_5",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SUGAR",
+        "SALT_IODIZED",
+        "WATER"
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "instruction_ru": "Перебрать и промыть кукурузную крупу, несколько раз меняя воду.",
+          "triage_label": "NON_HEAT_TEXT_CANDIDATE",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 2,
+          "instruction_ru": "Засыпать крупу в кипящую воду и варить при слабом кипении 20–30 минут, помешивая; добавить горячее молоко, йодированную соль и сахар.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 3,
+          "instruction_ru": "За 2–3 минуты до готовности добавить растопленное сливочное масло, перемешать и упарить под закрытой крышкой.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        }
+      ],
+      "historical_exact_event_uuid_available_in_repository_summary": false,
+      "household_member_decimal_servings_available_from_summary": false,
+      "source_bound_eligibility": "RESEARCH_TRIAGE_ONLY_NO_EXECUTABLE_APPROVAL"
+    },
+    {
+      "historical_local_date": "2026-09-19",
+      "historical_event_position": 2,
+      "source_kind": "COOK_RECIPE",
+      "canonical_recipe_code": "SCHOOL2022_54_6M_BEEF_BITOCHEK",
+      "historical_verified_recipe_version_id": "62a867d2-5691-4f53-bd98-7add597a5808",
+      "historical_catalogue_disposition": "PASS",
+      "manifest_path": "data/curation/r3a-school2022-main-batch/publication-specs.json",
+      "manifest_git_blob_sha": "ab40c2b8c6a646a60d72922faea451225e875697",
+      "source_version_name": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_original_servings": "1",
+      "source_ingredient_codes": [
+        "BEEF_CATEGORY_1_RAW",
+        "MILK_2_5",
+        "WHEAT_BREAD_STALE_UNSPECIFIED_GRADE",
+        "BREADCRUMBS",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SALT_IODIZED"
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "instruction_ru": "Измельчить подготовленную говядину и соединить с черствым пшеничным хлебом без корок, замоченным в молоке.",
+          "triage_label": "CONTEXT_OR_COMPOUND_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 2,
+          "instruction_ru": "Добавить йодированную соль, повторно измельчить, перемешать и сформовать биточки.",
+          "triage_label": "CONTEXT_OR_COMPOUND_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 3,
+          "instruction_ru": "Запанировать в сухарях, выложить на противень, смазанный сливочным маслом, и запекать 25–30 минут при 250–280 °C до готовности.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        }
+      ],
+      "historical_exact_event_uuid_available_in_repository_summary": false,
+      "household_member_decimal_servings_available_from_summary": false,
+      "source_bound_eligibility": "RESEARCH_TRIAGE_ONLY_NO_EXECUTABLE_APPROVAL"
+    },
+    {
+      "historical_local_date": "2026-09-19",
+      "historical_event_position": 3,
+      "source_kind": "COOK_RECIPE",
+      "canonical_recipe_code": "MR2019_1_2A_VEGETARIAN_CABBAGE_SOUP",
+      "historical_verified_recipe_version_id": "a01c116a-73bc-428b-8ebf-06ddaf92c192",
+      "historical_catalogue_disposition": "PASS",
+      "manifest_path": "data/curation/r3d-final-dc3-batch-gate/frozen-batch.json",
+      "manifest_git_blob_sha": "5668323fe8027dcd2cb94c75db8b551cfb525cde",
+      "source_version_name": null,
+      "source_original_servings": "1",
+      "source_ingredient_codes": [
+        "CABBAGE_GREEN",
+        "POTATO",
+        "CARROT",
+        "TOMATO",
+        "ONION_BULB_FRESH",
+        "VEGETABLE_OIL_REFINED_UNSPECIFIED",
+        "WATER"
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "instruction_ru": "Подготовить капусту, картофель, морковь, помидоры и репчатый лук.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 2,
+          "instruction_ru": "Морковь и лук мелко нарезать и припустить в небольшом количестве воды с рафинированным растительным маслом.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 3,
+          "instruction_ru": "Капусту тонко нарезать, залить горячей водой и довести до кипения; добавить картофель, припущенные овощи и помидоры.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 4,
+          "instruction_ru": "Варить при слабом кипении до готовности овощей.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        }
+      ],
+      "historical_exact_event_uuid_available_in_repository_summary": false,
+      "household_member_decimal_servings_available_from_summary": false,
+      "source_bound_eligibility": "RESEARCH_TRIAGE_ONLY_NO_EXECUTABLE_APPROVAL"
+    },
+    {
+      "historical_local_date": "2026-09-20",
+      "historical_event_position": 1,
+      "source_kind": "COOK_RECIPE",
+      "canonical_recipe_code": "SCHOOL2022_54_3O_CARROT_OMELET",
+      "historical_verified_recipe_version_id": "05a67ef7-8ccc-4000-9c90-b687af1883bb",
+      "historical_catalogue_disposition": "PASS",
+      "manifest_path": "data/curation/r3b-school2022-breakfast-batch/publication-specs.json",
+      "manifest_git_blob_sha": "96d134265a8c256e34ad985670feed8ca56c295d",
+      "source_version_name": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_original_servings": "1",
+      "source_ingredient_codes": [
+        "EGG",
+        "MILK_2_5",
+        "CARROT",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SALT_IODIZED"
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "instruction_ru": "Отварить подготовленную морковь и протереть.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 2,
+          "instruction_ru": "Смешать яйца с молоком и солью, взбить, добавить морковь.",
+          "triage_label": "CONTEXT_OR_COMPOUND_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 3,
+          "instruction_ru": "Запекать массу в смазанной частью масла форме при 180–200 °C 8–10 минут.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 4,
+          "instruction_ru": "Перед подачей полить оставшимся растопленным сливочным маслом.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        }
+      ],
+      "historical_exact_event_uuid_available_in_repository_summary": false,
+      "household_member_decimal_servings_available_from_summary": false,
+      "source_bound_eligibility": "RESEARCH_TRIAGE_ONLY_NO_EXECUTABLE_APPROVAL"
+    },
+    {
+      "historical_local_date": "2026-09-20",
+      "historical_event_position": 2,
+      "source_kind": "COOK_RECIPE",
+      "canonical_recipe_code": "SCHOOL2022_54_26M_POTATO_BEEF_CASSEROLE",
+      "historical_verified_recipe_version_id": "e9b93dc3-ca73-448f-be15-40912ea6aab5",
+      "historical_catalogue_disposition": "PASS",
+      "manifest_path": "data/curation/r3c-post-r3b-catalogue-gate/frozen-batch.json",
+      "manifest_git_blob_sha": "c11fd55695c655fee5add14a3416a27527771e75",
+      "source_version_name": null,
+      "source_original_servings": "1",
+      "source_ingredient_codes": [
+        "POTATO",
+        "BEEF_CATEGORY_1_RAW",
+        "BREADCRUMBS",
+        "EGG",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SALT_IODIZED"
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "instruction_ru": "Подготовить яйца.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 2,
+          "instruction_ru": "Измельчить подготовленную говядину, соединить со сливочным маслом и йодированной солью и прогреть слоем 2–3 см при 160–180 °C 8–10 минут, помешивая.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 3,
+          "instruction_ru": "Картофель очистить, отварить до готовности, слить отвар, подсушить и размять; разделить на две равные части.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 4,
+          "instruction_ru": "Выложить в форму половину картофеля, затем мясо и оставшийся картофель; смазать яйцом, посыпать панировочными сухарями и использовать сливочное масло в пределах общего количества рецептуры.",
+          "triage_label": "CONTEXT_OR_COMPOUND_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 5,
+          "instruction_ru": "Запекать 25–30 минут при 250–280 °C и нарезать на порции.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        }
+      ],
+      "historical_exact_event_uuid_available_in_repository_summary": false,
+      "household_member_decimal_servings_available_from_summary": false,
+      "source_bound_eligibility": "RESEARCH_TRIAGE_ONLY_NO_EXECUTABLE_APPROVAL"
+    },
+    {
+      "historical_local_date": "2026-09-20",
+      "historical_event_position": 3,
+      "source_kind": "COOK_RECIPE",
+      "canonical_recipe_code": "MR2019_6_19_BAKED_MACARONI_HARD_CHEESE",
+      "historical_verified_recipe_version_id": "77f55c23-223b-4608-8c63-4135c27c5f6e",
+      "historical_catalogue_disposition": "PASS",
+      "manifest_path": "data/curation/r3d-final-dc3-batch-gate/frozen-batch.json",
+      "manifest_git_blob_sha": "5668323fe8027dcd2cb94c75db8b551cfb525cde",
+      "source_version_name": null,
+      "source_original_servings": "1",
+      "source_ingredient_codes": [
+        "PASTA_DRY",
+        "WATER",
+        "SALT_IODIZED",
+        "BUTTER_PEASANT_72",
+        "CHEESE_HARD_UNSPECIFIED"
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "instruction_ru": "Макароны засыпать в кипящую подсоленную воду и варить при слабом кипении до готовности.",
+          "triage_label": "HEAT_PROCESS_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 2,
+          "instruction_ru": "Откинуть на сито, дать воде стечь, добавить сливочное масло и перемешать.",
+          "triage_label": "CONTEXT_OR_COMPOUND_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 3,
+          "instruction_ru": "Твёрдый сыр натереть, соединить с макаронами и тщательно перемешать.",
+          "triage_label": "NON_HEAT_TEXT_CANDIDATE",
+          "triage_only": true,
+          "contains_decimal_or_number": false,
+          "mentions_heat_or_hot_state": false,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        },
+        {
+          "position": 4,
+          "instruction_ru": "Запекать при 200–250 °C до образования румяной корочки.",
+          "triage_label": "NUMERIC_TEXT_REVIEW",
+          "triage_only": true,
+          "contains_decimal_or_number": true,
+          "mentions_heat_or_hot_state": true,
+          "reviewed_numeric_classification": null,
+          "approved_immediate": false,
+          "source_step_uuid_from_exact_historical_receipt": null,
+          "source_step_hash_from_live_recipe": null
+        }
+      ],
+      "historical_exact_event_uuid_available_in_repository_summary": false,
+      "household_member_decimal_servings_available_from_summary": false,
+      "source_bound_eligibility": "RESEARCH_TRIAGE_ONLY_NO_EXECUTABLE_APPROVAL"
+    }
+  ],
+  "priority_candidates": [
+    {
+      "source_recipe_code": "SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE",
+      "historical_event_date": "2026-09-18",
+      "historical_event_position": 1,
+      "historical_recipe_version_id": "d89ad7ad-1aa7-4aa1-9f58-81dd7c7b6df3",
+      "manifest_path": "data/curation/r2e-cottage-casserole/publication-specs.json",
+      "manifest_git_blob_sha": "52f966d60226aec852d06790fe912e36f168cbdc",
+      "recipe_step_position": 1,
+      "original_instruction_ru": "Творог протереть.",
+      "suggested_action_family": "MECHANICAL_FOOD_PREP_NONHEAT",
+      "semantic_action_hint": "COTTAGE_CHEESE_RUB_STRAIGHT_AWAY",
+      "structured_ingredient_code": "TVOROG_5",
+      "structured_amount_g_per_source_base": "139.5",
+      "source_original_servings": "1",
+      "source_rights_review": "MUST_RECHECK_CURRENT_EXACT_SOURCE",
+      "historical_event_id": "NOT_AVAILABLE_IN_REPO_SUMMARY_REPIN_FROM_ACCEPTED_FIXTURE",
+      "exact_member_portion_servings": "NOT_IN_SUMMARY_REPIN_REQUIRED",
+      "persisted_step_uuid_hash": "NOT_REPINNED_FOR_THIS_CANDIDATE",
+      "numeric_syntax_observation": "NO_DIGITS_NOT_APPROVAL",
+      "independent_domain_qa_approval": false,
+      "process_scale_applicability_status": "PENDING_INDEPENDENT_REVIEW",
+      "household_safe_execution_status": "UNPROVEN",
+      "published_policy_ready": false,
+      "reviewer_open_questions": [
+        "Confirm rubbing TVOROG_5 5% source form is suitable in entire unchanged step at actual household-scaled amount",
+        "Check acceptable means/equipment at planned scale and not assume an unverified sieve/tool or physical labor/time",
+        "Current persisted RecipeVersion/Step hashes and real MealEvent/Serving re-pin",
+        "No claims about storage, batch savings, or future use"
+      ],
+      "eligible_for_independent_review": true,
+      "eligible_for_production_runtime": false
+    },
+    {
+      "source_recipe_code": "SCHOOL2022_54_1K_LIQUID_CORN_MILK_PORRIDGE",
+      "historical_event_date": "2026-09-19",
+      "historical_event_position": 1,
+      "historical_recipe_version_id": "5c680c36-fd7c-4e6a-b4ed-a080bb697b62",
+      "manifest_path": "data/curation/r3b-school2022-breakfast-batch/publication-specs.json",
+      "manifest_git_blob_sha": "96d134265a8c256e34ad985670feed8ca56c295d",
+      "recipe_step_position": 1,
+      "original_instruction_ru": "Перебрать и промыть кукурузную крупу, несколько раз меняя воду.",
+      "suggested_action_family": "RAW_GROATS_SORT_RINSE_NONHEAT",
+      "semantic_action_hint": "CORN_GROATS_SORT_RINSE_STRAIGHT_AWAY",
+      "structured_ingredient_code": "CORN_GROATS",
+      "structured_amount_g_per_source_base": "40",
+      "source_original_servings": "1",
+      "source_rights_review": "MUST_RECHECK_CURRENT_EXACT_SOURCE",
+      "historical_event_id": "NOT_AVAILABLE_IN_REPO_SUMMARY_REPIN_FROM_ACCEPTED_FIXTURE",
+      "exact_member_portion_servings": "NOT_IN_SUMMARY_REPIN_REQUIRED",
+      "persisted_step_uuid_hash": "NOT_REPINNED_FOR_THIS_CANDIDATE",
+      "numeric_syntax_observation": "NO_DIGITS_NOT_APPROVAL",
+      "independent_domain_qa_approval": false,
+      "process_scale_applicability_status": "PENDING_INDEPENDENT_REVIEW",
+      "household_safe_execution_status": "UNPROVEN",
+      "published_policy_ready": false,
+      "reviewer_open_questions": [
+        "Whole unchanged grain sorting/rinsing source step applicability to currently accepted source form and actual family-scaled amount",
+        "Rinse water is not the same as measured recipe cooking water; do not subtract rinsing water from 68g cooking water",
+        "Current persisted RecipeVersion/Step hashes and real MealEvent/Serving re-pin",
+        "No advance holding or claims of cooking duration"
+      ],
+      "eligible_for_independent_review": true,
+      "eligible_for_production_runtime": false
+    }
+  ],
+  "separate_negative_proofs": [
+    "ALL_UNREVIEWED_ZERO_EXECUTABLE_POSITIVES_FAIL_GATE2",
+    "ONLY_ONE_SOURCE_EVENT_APPROVED_FAIL_TWO_EVENT_GATE2",
+    "MISMATCHED_VERSION_OR_STEP_HASH_DENY",
+    "REVOKED_POLICY_OR_OLD_READER_ROLLBACK_DENY",
+    "AMBIGUOUS_AMOUNT_OR_MISSING_RECIPE_JOIN_BLOCK_WRITE",
+    "CORN_RINSE_WATER_NOT_ASSUMED_EQUALS_COOKING_WATER",
+    "COTTAGE_CHEESE_RUB_NOT_LICENSE_TO_INFER_EQUIPMENT_TIME_STORAGE",
+    "UNKNOWN_FREEZER_HOLD_DONT_EMIT_INSTRUCTIONS"
+  ],
+  "next_explicit_boundary": "One independent Domain/QA review of exactly two selected full steps with current accepted 3-member MealPlan/RecipeVersion/RecipeStep/Decimal Serving repin, then separate approved publisher/reader with live revocation authority. No production runtime before both and explicit permission."
+}
