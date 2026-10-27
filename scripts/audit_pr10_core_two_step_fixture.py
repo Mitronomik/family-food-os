@@ -34,6 +34,7 @@ TARGETS = (
         "code": "SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE",
         "date": "2026-09-18",
         "manifest": "data/curation/r2e-cottage-casserole/publication-specs.json",
+        "manifest_git_blob_sha": "52f966d60226aec852d06790fe912e36f168cbdc",
         "source_recipe_id": "ru-school2022:recipe:54-1т",
         "ingredient": "TVOROG_5",
         "step": "Творог протереть.",
@@ -42,6 +43,7 @@ TARGETS = (
         "code": "SCHOOL2022_54_1K_LIQUID_CORN_MILK_PORRIDGE",
         "date": "2026-09-19",
         "manifest": "data/curation/r3b-school2022-breakfast-batch/publication-specs.json",
+        "manifest_git_blob_sha": "96d134265a8c256e34ad985670feed8ca56c295d",
         "source_recipe_id": "ru-school2022:recipe:54-1к",
         "ingredient": "CORN_GROATS",
         "step": "Перебрать и промыть кукурузную крупу, несколько раз меняя воду.",
@@ -64,6 +66,10 @@ def _finite_positive(value: object) -> Decimal:
 def _source_version(target: dict[str, str], root: Path) -> tuple[dict, str]:
     path = root / target["manifest"]
     data = path.read_bytes()
+    # Exact trusted Git blob bytes pinned in the merged #244 source inventory.
+    blob_sha1 = hashlib.sha1(b"blob " + str(len(data)).encode() + b"\\0" + data).hexdigest()
+    if blob_sha1 != target["manifest_git_blob_sha"]:
+        raise ValueError("Source publication manifest Git blob changed")
     manifest = json.loads(data.decode("utf-8"))
     if target["code"] == TARGETS[0]["code"]:
         row = manifest["recipe"]
@@ -175,6 +181,7 @@ def extract_two_step_evidence(
                 "source_document_sha256": SOURCE_DOC_SHA256,
                 "source_manifest_path": target["manifest"],
                 "source_manifest_sha256": manifest_sha256,
+                "source_manifest_git_blob_sha": target["manifest_git_blob_sha"],
                 "source_recipe_id": target["source_recipe_id"],
                 "source_base_servings": str(version["base_servings"]),
                 "ingredient_code": target["ingredient"],
@@ -210,7 +217,7 @@ def extract_two_step_evidence(
         "policy_publisher_reader": "NOT_IMPLEMENTED",
         "gate": "NO_GO_TO_PR10_CORE_RUNTIME",
         "safety": {
-            "no_pantri_mutation": True,
+            "no_pantry_mutation": True,
             "no_scheduled_holding_or_freezing": True,
             "rinse_water_not_assigned_from_recipe_cooking_water": True,
             "portion_feasibility_not_evaluated": True,
