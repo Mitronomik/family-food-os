@@ -1,3 +1,12 @@
+# PR10-CORE-A — owner selected stable exact synthetic fixture reference — 2026-10-27
+
+- Verified accepted `main@3c4645a27d675bb4464c913785aef3cd88de8681`, #244 merged; #242 closed without merge; [PR #246](https://github.com/Mitronomik/family-food-os/pull/246) still OPEN with source-pinned evidence of cross-run 3/21/42 structural PASS but 0/21 recipe-code slot matches. User explicitly approved **Option A**, not a new source/MealPlan/Planner architecture.
+- Created [Issue #247](https://github.com/Mitronomik/family-food-os/issues/247), [Implementation Contract Gate](../docs/family-food/pr10-core-option-a-stable-fixture-implementation-contract-2026-10-27.md) and [portable 21-event 42-serving fixture reference proposal](../docs/family-food/pr10-core-option-a-frozen-semantic-reference-proposal-2026-10-27.json). Transcribed all historic source-code/role/date/member ordinal/Decimal values from independently pinned PR #196 source (raw JSON sha `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec`) and independently recalculated SHA256 of the ID-free normalized reference, matching external `731ef32e7137740ed5b46a6044a85d8b2f818a847fdc039842460d442df5aeb6`.
+- Analyzed current Planner source: equal-score candidate selection uses `RecipeVersion UUID.hex` tie-break; original semantic digest incorporates generated RecipeVersion/Member UUIDs and is **not** portable. Snapshot-only rehydration would not prove actual Planner→MealPlan Gate2 path. Proposed test-only ID factories/seed binding with **unchanged production Planner**, two independent persisted runs against exact 21-slot 42-Serving digest, explicit no-go if infeasible. No source eligibility approval or production implementation.
+- PR is docs-only and requires independent review/owner merge before fixture-only implementation; `NO_GO_TO_PR10_CORE_RUNTIME`, `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, SAFE_BATCH/PORTION_RELEASE gates intact.
+
+---
+
 # PR10-CORE — one-pass 21-event source-step triage for scalable review — 2026-10-23
 
 - Owner approved changing bounded **research strategy** from repeated pair-focused review to a **single complete action-class triage of the existing accepted historical three-member, 7-day 21-event fixture**; accepted Gate2 two-event positivity and D3 source/reader independent approval remain unmodified. Base `main@5e5ee82f90a5f0f3103f96b09ac7a6d166565e3b`; concurrent [PR #242](https://github.com/Mitronomik/family-food-os/pull/242) remains unmerged and out of scope.
