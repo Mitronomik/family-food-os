@@ -67,7 +67,7 @@ def _source_version(target: dict[str, str], root: Path) -> tuple[dict, str]:
     path = root / target["manifest"]
     data = path.read_bytes()
     # Exact trusted Git blob bytes pinned in the merged #244 source inventory.
-    blob_sha1 = hashlib.sha1(b"blob " + str(len(data)).encode() + b"\\0" + data).hexdigest()
+    blob_sha1 = hashlib.sha1(b"blob " + str(len(data)).encode() + bytes([0]) + data).hexdigest()
     if blob_sha1 != target["manifest_git_blob_sha"]:
         raise ValueError("Source publication manifest Git blob changed")
     manifest = json.loads(data.decode("utf-8"))
