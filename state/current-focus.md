@@ -1,3 +1,13 @@
+# Issue #245 — fresh two-step PR10-CORE fixture readback — 2026-10-27
+
+**Accepted main:** `3c4645a27d675bb4464c913785aef3cd88de8681` ([PR #244](https://github.com/Mitronomik/family-food-os/pull/244) merged). [PR #242](https://github.com/Mitronomik/family-food-os/pull/242) closed without merge. The 21-event/87-step triage is accepted as **research**; the two R2-E/R3-B Prep candidates are **not** approved production instructions.
+
+**Current bounded evidence task:** [Issue #245](https://github.com/Mitronomik/family-food-os/issues/245), `evidence/pr10-core-two-step-fresh-readback-2026-10-27`. [Evidence contract](../docs/family-food/pr10-core-two-step-current-fixture-evidence-2026-10-27.md), new diagnostic script, focused tamper tests and CI capture build fresh ephemeral SQLite Planner receipt, pin exact two different MealEvents, first RecipeStep hash and every Member Serving, compare independent Planner semantic baseline `2d6cb581…` and source manifest Git blobs, derive exact Decimal research inputs. Historical PR #196 artifact is accepted reference, **not current UUID**. New CI artifact/status must be independently inspected before current fixture success can be claimed; no qualified process reviewer signoff is supplied.
+
+**Next ONLY:** exact-head focused CI/artifact and independent review, then owner merge decision. After acceptance, qualified independent Recipe/Data + Domain/QA decisions on exact whole steps and actual family-scale applicability; any D3 trusted eligibility publisher/reader including rollback-proof revocation and PR10-A require separate owner decision. **`APPROVED_IMMEDIATE=0`, `NO_GO_TO_PR10_CORE_RUNTIME`, `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY` unmet**. No production runtime, migration, new recipe, PDF/PWA, Pantry writes or automatic merge.
+
+---
+
 # PR10-CORE — single-pass 21-event prep action-class preflight — 2026-10-23
 
 **Accepted `main`:** `5e5ee82f90a5f0f3103f96b09ac7a6d166565e3b` ([PR #240](https://github.com/Mitronomik/family-food-os/pull/240) merged); [PR #242](https://github.com/Mitronomik/family-food-os/pull/242) is OPEN/UNMERGED and is **not accepted** as source truth. Explicit 2026-10-23 owner decision: one bounded 21-event existing synthetic week source-step audit instead of exclusively pursuing the unsuccessful R3-C/R2-B pair. **No change to Gate2/D3/Prep runtime acceptance.**
