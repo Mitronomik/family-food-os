@@ -1,3 +1,13 @@
+# Issue #245 — exact 2-source-step fresh Planner fixture handoff — 2026-10-27
+
+**Base:** `main@3c4645a27d675bb4464c913785aef3cd88de8681`; #244 merged, #242 closed without merge. **Branch** `evidence/pr10-core-two-step-fresh-readback-2026-10-27`; [Issue #245](https://github.com/Mitronomik/family-food-os/issues/245). [Contract/readme](../docs/family-food/pr10-core-two-step-current-fixture-evidence-2026-10-27.md); `scripts/audit_pr10_core_two_step_fixture.py`, `backend/app/tests/test_pr10_core_two_step_fixture.py`, `.github/workflows/pr10-core-two-step-fixture-evidence.yml`.
+
+**FACT:** historic PR #196 artifact downloaded and checked; baseline Planner semantic digest `2d6cb581649863b7edbd3c0efff2bae2934c6a512c99a45d10e92f92f514cb3d`. Derived historical input-only source totals 712.6838775g TVOROG_5 and 296.062320g CORN_GROATS for their distinct MealEvents. Source manifest exact Git blobs pinned and two full source texts known. Script is designed to build a **fresh** ephemeral 3/21/42 real persisted Planner fixture and read Step UUID/hash + actual member factors, with fail-closed source drift/Planner semantic mismatch and independent evidence artifact, not to grant `APPROVED_IMMEDIATE`.
+
+**NEXT ONLY:** inspect exact-head focused workflow, retain full independent CI SHA + new JSON artifact IDs and review discrepancies; correct task-local test formatting/failures. Then independent review and owner merge, and only then **named independent qualified Domain/QA** review of actual source/mass/process for the two steps. Never assert safe Home Prep or runtime GO from a passing fixture. `NO_GO_TO_PR10_CORE_RUNTIME`, `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, batch/portion gates unchanged. No automatic merge/PR10-A/Prep tables/AI/Pantry.
+
+---
+
 # PR10-CORE — scalable source-step triage handoff — 2026-10-23
 
 **Accepted base:** `main@5e5ee82f90a5f0f3103f96b09ac7a6d166565e3b`, #240 merged. **Current Issue #243**, branch `research/pr10-fixture21-action-class-triage-2026-10-23`. [21-event report](../docs/family-food/pr10-fixture21-action-class-review-2026-10-23.md); [87-step machine evidence](../docs/family-food/pr10-fixture21-action-class-triage-2026-10-23.json). PR #242 is an **unmerged concurrent** research PR; do not import it as main. This task is the owner's approved one-time research-strategy shift, *not* changed Gate2 criteria.
