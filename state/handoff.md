@@ -1,3 +1,13 @@
+# PR10-CORE-A — stable synthetic fixture Implementation Contract Gate handoff — 2026-10-27
+
+**Accepted base:** `main@3c4645a27d675bb4464c913785aef3cd88de8681`, merged PR #244; PR #246 still OPEN with fixture drift, PR #242 closed. **Current Issue #247**, branch `docs/pr10-core-option-a-stable-fixture-gate`. Owner explicitly approved **Option A**, not changing production Planner or Gate2 criteria. [Docs-only gate](../docs/family-food/pr10-core-option-a-stable-fixture-implementation-contract-2026-10-27.md) + [portable reference proposal (21 events/42 Decimal Servings)](../docs/family-food/pr10-core-option-a-frozen-semantic-reference-proposal-2026-10-27.json).
+
+**Anchors:** original accepted PR #196 artifact SHA256 `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec`, old generated-ID semantic `2d6cb581…`, **portable ID-free historic digest `731ef32e7137740ed5b46a6044a85d8b2f818a847fdc039842460d442df5aeb6` (recomputed)**; current PR #246 reconstructed portable digest `1db25794…`, real 0/21 matching schedule slots. The Planner score tie-break depends on `RecipeVersion UUID.hex`; solely blaming it is **unproven**. Test-only fixture source/ID seam must NOT mutate Planner or fake/rehydrate persisted MealEvents as if generated. Requires real PlannerService + persisted readback twice with identical original 21 source/roles and exact member Ordinal Decimals.
+
+**Next ONLY:** exact-head Docs CI, independent review of source fixture/reference trust and dependency/rollback/tamper matrix, owner merge decision. **AFTER contract merged**, separately authorize test-only fixture implementation; if service/seed cannot preserve original semantics, STOP and request explicit owner decision, never swap to Option B silently. After proven fixture, independent QA reviews two R2-E/R3-B source actions and D3 publishing/read/anti-rollback. `APPROVED_IMMEDIATE=0`, PR10-A/Gate2 blocked, real-family batch/portion gates unmet. No migrations, source mutability, new Planner algorithm or automatic merge.
+
+---
+
 # PR10-CORE — scalable source-step triage handoff — 2026-10-23
 
 **Accepted base:** `main@5e5ee82f90a5f0f3103f96b09ac7a6d166565e3b`, #240 merged. **Current Issue #243**, branch `research/pr10-fixture21-action-class-triage-2026-10-23`. [21-event report](../docs/family-food/pr10-fixture21-action-class-review-2026-10-23.md); [87-step machine evidence](../docs/family-food/pr10-fixture21-action-class-triage-2026-10-23.json). PR #242 is an **unmerged concurrent** research PR; do not import it as main. This task is the owner's approved one-time research-strategy shift, *not* changed Gate2 criteria.
