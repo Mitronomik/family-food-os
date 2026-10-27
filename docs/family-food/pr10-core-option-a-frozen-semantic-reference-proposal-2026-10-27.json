@@ -436,5 +436,7 @@
     "safe_batch_ready": false,
     "portion_release_ready": "NOT_PROVEN"
   },
-  "disclaimer": "Synthetic research QA reference only; no Household production identifiers, no source data replacement, no accepted GO to PR10-A, no approval based on a snapshot without normal Planner service provenance."
+  "disclaimer": "Synthetic research QA reference only; no Household production identifiers, no source data replacement, no accepted GO to PR10-A, no approval based on a snapshot without normal Planner service provenance.",
+  "fixture_id": "PR10_CORE_OPTION_A_196_7D_3M_V1",
+  "snapshot_schema_version": 1
 }
