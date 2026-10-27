@@ -21,10 +21,20 @@ Applied a reproducible **text prefilter** to the immutable published instruction
 | Research-only group | Count of the 87 published steps | Handling |
 | --- | ---: | --- |
 | `NUMERIC_TEXT_REVIEW` | **31** | Full source/process/mass/time/temperature context review; **never** scale or suppress numeric prose via regex |
-| `HEAT_PROCESS_REVIEW` | **34** | Source/food-form/process/equipment/time applicability required regardless of literal digits |
+| `HEAT_PROCESS_REVIEW` | **35** | Source/food-form/process/equipment/time applicability required regardless of literal digits |
 | `CONTEXT_OR_COMPOUND_REVIEW` | **17** | Object/action identity, missing substep and input/output conditions require reviewer |
-| `NON_HEAT_TEXT_CANDIDATE` | **5** | **Still unreviewed**; no positive task until source, process, actual scale and eligibility reviewer approves |
+| `NON_HEAT_TEXT_CANDIDATE` | **4** | **Still unreviewed**; no positive task until source, process, actual scale and eligibility reviewer approves |
 | **Total** | **87** | Exactly 21 code/event inputs accounted for |
+
+### Review correction P2 — complete reclassification on 2026-10-27
+
+The original heat-word prefilter recognised the exact phrase `довести до кипения` but **missed intervening words**. Therefore `SCHOOL2022_54_13K_WHEAT_MILK_PORRIDGE` step 2, «В воде с молоком растворить йодированную соль и сахар и **довести смесь до кипения**», had incorrectly received `NON_HEAT_TEXT_CANDIDATE` / `mentions_heat_or_hot_state=false`.
+
+**Rule frozen for reproducible text-only research triage:** after testing a digit, detect the existing heat verb alternatives **plus** the case-insensitive Unicode Cyrillic phrase `довести(?:\\s+[^.;!?]{1,80}?)?\\s+до\\s+кипения`. This detects both `довести до кипения` and `довести смесь до кипения`; numeric tokens still take priority. The full numeric, heat and context regular-expression literals and six regression vectors are preserved in [the machine evidence](pr10-fixture21-action-class-triage-2026-10-23.json) under `source_step_algorithm`. Apply the precedence to **every** published Step text, rather than editing a count.
+
+A full recomputation of **all 87 instructions** on the unchanged 21-event fixture found **exactly one** changed record: wheat-milk-porridge step 2 changed from `NON_HEAT_TEXT_CANDIDATE` to `HEAT_PROCESS_REVIEW`; its `mentions_heat_or_hot_state` is now `true`. Revised counts are **31 numeric / 35 heat / 17 context / 4 non-heat**, total 87. The four remaining non-heat flags are the first steps of cottage-cheese/carrot casserole, cottage-cheese casserole and corn-milk porridge, plus baked-macaroni/hard-cheese step 3. They are **not automatically approved**; both selected two-event source candidates remain unchanged and under independent review.
+
+**Limit:** regex classification is a conservative **heuristic**. Recognising a boiling verb in the corrected step does not prove a time/temperature or any other kitchen-safety policy, and no `NO_NUMERIC_DIRECTION` or `APPROVED_IMMEDIATE` result is granted by this correction.
 
 A group count is **not** a count of usable PrepTasks. A non-heat instruction may still omit equipment, implicitly depend on unsafe conditions, or merely repeat a recipe. An unclassified numeric instruction must be withheld as executable source guidance. `SAFE_BATCH_READY`, storage and nutrition/portion quality remain **separate**.
 
