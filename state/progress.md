@@ -1,3 +1,12 @@
+# Issue #245 — evidence-only current fixture re-pin — 2026-10-27
+
+- Verified #244 merged and #242 closed unmerged, current main `3c4645a27d675bb4464c913785aef3cd88de8681`. Scoped next task to **exactly two** selected source-backed first steps (R2-E cottage cheese and R3-B corn groats), not another catalogue search.
+- Retrieved **actual historical PR #196 GitHub Actions artifact**, JSON SHA256 `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec`, independent planner semantic SHA256 `2d6cb581649863b7edbd3c0efff2bae2934c6a512c99a45d10e92f92f514cb3d`. Historical event member portions: cottage `2.362341+2.746504` → 712.6838775 g source net; corn `3.422496+3.979062` → 296.062320 g source net. **Not current/present production UUIDs, not safe home batch capacity**.
+- Added [fresh two-step readback script, workflow, adversarial tests and evidence contract](../docs/family-food/pr10-core-two-step-current-fixture-evidence-2026-10-27.md) to verify ephemeral backend Planner source/Serving readback at exact HEAD with independently pinned semantic digest, source Git blobs and exact Decimal. Evidence CI status/receipt pending independent inspection; no executable Prep authority issued.
+- `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, SAFE_BATCH and PORTION_RELEASE real-family blockers unchanged. Docs/tests/workflow evidence only, no recipe/Planner/Prep production changes.
+
+---
+
 # PR10-CORE — one-pass 21-event source-step triage for scalable review — 2026-10-23
 
 - Owner approved changing bounded **research strategy** from repeated pair-focused review to a **single complete action-class triage of the existing accepted historical three-member, 7-day 21-event fixture**; accepted Gate2 two-event positivity and D3 source/reader independent approval remain unmodified. Base `main@5e5ee82f90a5f0f3103f96b09ac7a6d166565e3b`; concurrent [PR #242](https://github.com/Mitronomik/family-food-os/pull/242) remains unmerged and out of scope.
