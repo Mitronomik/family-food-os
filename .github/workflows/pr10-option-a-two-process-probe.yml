@@ -6,11 +6,9 @@ on:
       - 'scripts/pr10_option_a_probe.py'
       - 'backend/app/tests/test_pr10_option_a_probe.py'
       - '.github/workflows/pr10-option-a-two-process-probe.yml'
+      - 'docs/family-food/evidence/pr196-original-synthetic-fixture-receipt.json'
       - 'docs/family-food/evidence/pr10-option-a-issue252-*.json'
       - 'docs/family-food/pr10-option-a-issue252-*.md'
-      - 'state/current-focus.md'
-      - 'state/handoff.md'
-      - 'state/progress.md'
   workflow_dispatch:
 
 permissions:
