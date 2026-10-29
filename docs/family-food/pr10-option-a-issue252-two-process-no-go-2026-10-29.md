@@ -1,8 +1,8 @@
 # Issue #252 — two fresh real-Planner executions, source-pinned NO-GO (2026-10-29)
 
-**Status:** **`NO_GO_CURRENT_UNSTABILIZED_SEED`**. This is **not** `NO_GO_OPTION_A_UNACHIEVABLE_AS_SCOPED`: the approved test-only ID binding was **not** implemented or demonstrated by this bounded first diagnostic. It is also **not** a Gate2/Prep pass.
+**Status:** **`NO_GO_CURRENT_UNSTABILIZED_SEED`**. This is **not** `NO_GO_OPTION_A_UNACHIEVABLE_AS_SCOPED`: the approved test-only ID binding was **not** implemented or demonstrated by this bounded first diagnostic. It is also **not** a Gate2/Prep pass. **PR #254 is explicitly a negative-evidence PR**; its CI is only allowed to report that the observed NO_GO is independently and truthfully reproduced, never that the original Option A 21×42 week has been regenerated.
 
-**Task:** [#252](https://github.com/Mitronomik/family-food-os/issues/252); [DRAFT PR #254](https://github.com/Mitronomik/family-food-os/pull/254).
+**Task:** [#252](https://github.com/Mitronomik/family-food-os/issues/252) remains OPEN for the original positive fixture goal; [PR #254](https://github.com/Mitronomik/family-food-os/pull/254) contains only the negative-evidence checkpoint.
 **Accepted initial base:** `main@794302534a9f02a8452892aef62375daf0a13de2`.
 **Runner/workflow:** [GitHub Actions run 40897666121](https://github.com/Mitronomik/family-food-os/actions/runs/40897666121) at code HEAD `900c353fa33ab31f5a221f4c252d797af8e5bfb8`, [artifact 12907507093](https://github.com/Mitronomik/family-food-os/actions/runs/40897666121/artifacts/12907507093) (expires 2026-11-28). The CI job **FAILED intentionally at semantic reproduction** (exit 3), after **14/14 independent adversarial tests, Ruff and Ruff format PASS**; no missing dependencies or test syntax errors.
 
@@ -38,6 +38,9 @@ Only **1/21** scheduled recipe slot matches between the two *new* runs themselve
 
 ## FACT / ASSUMPTION / OPEN
 
+**Independent feasibility inventory:** [test-only ID propagation and historical PlannerRequest review](pr10-option-a-issue252-test-only-id-feasibility-review-2026-10-29.md) documents the complete nested seed/composition dependency, role-sensitive UUID creation and original-input gaps. The missing end-to-end safe factory seam is not repaired by changing normal Planner defaults; a separate reviewed implementation gate and explicit owner approval is necessary if that seam changes production-facing service composition.
+
+
 **FACT:** historical and current `backend/app/domain/planner.py` blobs are identical (`7793e6d55f475b06b15e01e902e3144e3f5d1944`), as are the historical/current fixture builder script `scripts/audit_pr10_meta_gate2_fixture.py` and DC4-A3/R3A/R3B/R3C/R3D seed implementation blobs. `FoodRecipeCatalogueService` accepts `id_factory`, but `create_food_recipe_catalogue_service(engine)` and nested seed entrypoints do not pass an ID factory through. No end-to-end historical identity binding seam is proven.
 
 **FACT:** historical versus current `backend/app/services/planner.py` differs: original `list_active(limit=200) + get_current_verified` candidate read was replaced with `list_all() + active filtering + skip unavailable nutrition`. The final 51-member source catalogue matches by source identity/steps; **candidate scoring and original input-level parity are not independently proven equal**. There is no standalone archived original `PlannerRequest` containing exact target energies, memberships, source UUID ordering, nutrition projections and exclusions.
@@ -51,5 +54,5 @@ Only **1/21** scheduled recipe slot matches between the two *new* runs themselve
 ## Verification / review / follow-up
 
 - Test-only [probe](../../scripts/pr10_option_a_probe.py) + [14 offline adversarial checks](../../backend/app/tests/test_pr10_option_a_probe.py) + [dedicated workflow](../../.github/workflows/pr10-option-a-two-process-probe.yml).
-- CI probe intentionally exits 3 when semantic week mismatches: the workflow failure is **expected negative evidence** and should remain red until a later **separate authorized** stable-ID implementation actually reproduces the old week.
-- Current DRAFT PR #254 is **NO_GO evidence and engineering diagnostic**, not a merge-ready Option A fixture implementation. Independent technical review should challenge inputs/normalization/source rights and identify the smallest permitted test-only seam before an owner decides how to proceed; no automatic merge or milestone transition.
+- The real probe **intentionally exits 3** on semantic NO_GO. The **negative-evidence CI wrapper** checks for that exact return code, two independently generated persisted receipts, raw SHA, source+Step parity, unchanged external reference and `NO_GO_CURRENT_UNSTABILIZED_SEED`. Only when these verifications all pass does this **evidence-only** job succeed. This is *not* weakening the positive Option A PASS condition: if the test unexpectedly returns a positive fixture or infrastructure failure, the negative-evidence job itself fails. The historical red CI run remains an immutable artifact of the first experiment.
+- PR #254 may become **review-ready solely as NO_GO evidence** after exact-head green CI and independent review; it is **never** a merge-ready positive Option A fixture implementation. The original Issue #252 remains OPEN and its acceptance unmet. Reviewers must challenge inputs/normalization/source rights and the missing factory seam; no automatic merge or milestone transition.
