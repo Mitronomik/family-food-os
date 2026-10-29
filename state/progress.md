@@ -1,3 +1,12 @@
+# 2026-10-29 — Issue #252 first true two-process diagnostic NO_GO
+
+- On accepted `main@794302534a9f02a8452892aef62375daf0a13de2`, owner explicitly authorized starting [Issue #252](https://github.com/Mitronomik/family-food-os/issues/252); opened [PR #254](https://github.com/Mitronomik/family-food-os/pull/254), explicitly narrowed for independent **NO_GO research evidence**. New test-only real Planner two-process harness, 14 adversarial guards, dedicated CI; no production modifications.
+- Exact source-code HEAD `900c353fa33ab31f5a221f4c252d797af8e5bfb8` [CI 40897666121](https://github.com/Mitronomik/family-food-os/actions/runs/40897666121): test/lint/format **PASS (14/14)**; two independent actual fresh SQLite PlannerService→persisted readbacks structurally **3/21/42 PASS**, semantically **NO_GO** (0/21 and 1/21 same historical slots). Correct UUID-free run digests `4c1c574c26b5262edd64687cde292f16ecfc262111233bf60ad003cfbd47fb0f` and `a7948dcc11e36131b11cd4397436ba30b9257a5b344d928d6430023258d36f04`, original `731ef32e…` unchanged.
+- Complete independently downloaded two run raw JSONs and machine report archived in [versioned evidence](../docs/family-food/pr10-option-a-issue252-two-process-no-go-2026-10-29.md), independently checked against original artifact and GitHub published blobs. Source/Step parity **51/51**, active RecipeVersion UUID parity **0/51**; no sole-cause attribution. Standalone Planner probe exits 3 on negative result, while the later **negative-evidence CI wrapper** independently checks that exit, two full persisted receipts, original external anchor and 51/51 Step content before success; any green result certifies **NO_GO only**, never Option A implementation PASS.
+- **Next:** independent QA/Architecture review and owner approval of the smallest *test-only* full seed ID-factory seam and historical input reconstruction if feasible; otherwise explicit `NO_GO_OPTION_A_UNACHIEVABLE_AS_SCOPED`. PR #254 may be offered for independent evidence-only review after full CI; **positive Issue #252 remains OPEN**, and no automatic merge/Gate2/D3/Prep advancement is authorized.
+
+---
+
 # PR #248 integration after PR #246 merge — 2026-10-29
 
 - [PR #246](https://github.com/Mitronomik/family-food-os/pull/246) evidence-only negative fixture drift **MERGED** to `main@36ab339302557aafc2187f9d8a70b035869c8487` after its reviewer P2 state correction and **23/23 successful** exact-head workflows. Historical source comparison remains 3/21/42 structural PASS but zero of 21 matching recipe/date/position slots.

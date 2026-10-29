@@ -1,0 +1,46 @@
+{
+  "approved_immediate": 0,
+  "expected_uuid_free_week_sha256": "731ef32e7137740ed5b46a6044a85d8b2f818a847fdc039842460d442df5aeb6",
+  "independent_processes": 2,
+  "planner_execution": "existing_build_fixture_receipt_real_PlannerService_and_persisted_readback",
+  "portion_release_ready": "NOT_PROVEN",
+  "production_planner_modified": false,
+  "runs": [
+    {
+      "catalogue_source_versions": 51,
+      "counts": {
+        "current_verified_catalogue_versions": 51,
+        "meal_events": 21,
+        "members": 3,
+        "servings": 42,
+        "unique_selected_versions": 21
+      },
+      "matches_original": false,
+      "matching_original_slot_recipes": 0,
+      "ordinal": 1,
+      "portable_week_sha256": "4c1c574c26b5262edd64687cde292f16ecfc262111233bf60ad003cfbd47fb0f",
+      "real_plan_readback": true,
+      "receipt_raw_sha256": "87789288aadfeca6f2a3bd4ec63cb1c69d19630df0d8dce933928224979a53b5"
+    },
+    {
+      "catalogue_source_versions": 51,
+      "counts": {
+        "current_verified_catalogue_versions": 51,
+        "meal_events": 21,
+        "members": 3,
+        "servings": 42,
+        "unique_selected_versions": 21
+      },
+      "matches_original": false,
+      "matching_original_slot_recipes": 1,
+      "ordinal": 2,
+      "portable_week_sha256": "a7948dcc11e36131b11cd4397436ba30b9257a5b344d928d6430023258d36f04",
+      "real_plan_readback": true,
+      "receipt_raw_sha256": "b8c90d753447e4781b97f6e3207ca29d8809919c1e1b546ac1813ca3a0d7c4c5"
+    }
+  ],
+  "safe_batch_ready": false,
+  "schema": "PR10_OPTION_A_TWO_RUN_DIAGNOSTIC_V1",
+  "source_raw_sha256": "6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec",
+  "status": "NO_GO_OPTION_A_UNACHIEVABLE_WITH_CURRENT_UNSTABILIZED_SEED"
+}
