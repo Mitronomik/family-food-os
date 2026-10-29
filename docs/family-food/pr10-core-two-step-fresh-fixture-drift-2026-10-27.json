@@ -1,0 +1,113 @@
+{
+  "schema": "PR10_CORE_TWO_STEP_FRESH_FIXTURE_DRIFT_V1",
+  "task_issue": 245,
+  "accepted_main_sha": "3c4645a27d675bb4464c913785aef3cd88de8681",
+  "source_old": {
+    "pr": 196,
+    "workflow_run_id": 38059374826,
+    "artifact_id": 11672432141,
+    "artifact_raw_json_sha256": "6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec",
+    "independent_planner_semantic_sha256": "2d6cb581649863b7edbd3c0efff2bae2934c6a512c99a45d10e92f92f514cb3d",
+    "fixture_counts": {
+      "members": 3,
+      "meal_events": 21,
+      "servings": 42,
+      "selected_versions": 21
+    },
+    "historical_candidate_events": [
+      {
+        "code": "SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE",
+        "date": "2026-09-18",
+        "position": 1,
+        "role": "BREAKFAST",
+        "member_servings": [
+          "2.362341",
+          "2.746504"
+        ],
+        "sum_portion_servings": "5.108845",
+        "source_ingredient_code": "TVOROG_5",
+        "source_net_g": "139.5",
+        "projected_net_g": "712.6838775"
+      },
+      {
+        "code": "SCHOOL2022_54_1K_LIQUID_CORN_MILK_PORRIDGE",
+        "date": "2026-09-19",
+        "position": 1,
+        "role": "BREAKFAST",
+        "member_servings": [
+          "3.422496",
+          "3.979062"
+        ],
+        "sum_portion_servings": "7.401558",
+        "source_ingredient_code": "CORN_GROATS",
+        "source_net_g": "40",
+        "projected_net_g": "296.062320"
+      }
+    ]
+  },
+  "source_fresh": {
+    "pr": 246,
+    "run_id": 40495153021,
+    "run_name": "PR10-META persisted fixture evidence",
+    "build_head_sha": "4dc7b3d5291c22252f5d752a28fba3699f836481",
+    "workflow_conclusion": "success",
+    "artifact_id": 12730572293,
+    "artifact_raw_json_sha256": "2caa45e1e50639eef2b6f9023496cbce9fc35a88bd4c71f86e2b8a9daee0c78d",
+    "independent_planner_semantic_sha256": "1720db1d309a8a346af81cba37e27b07044c205112d6fdd711b938803567bcf2",
+    "fixture_counts": {
+      "members": 3,
+      "meal_events": 21,
+      "servings": 42,
+      "selected_versions": 21
+    },
+    "catalogue_versions": 51,
+    "historical_week_date_range": "2026-09-14..2026-09-20",
+    "historical_event_slot_recipe_code_match_count": 0,
+    "changed_event_slots_out_of": 21,
+    "current_relevant_candidates": [
+      {
+        "code": "SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE",
+        "found": 1,
+        "date": "2026-09-20",
+        "position": 1,
+        "role": "BREAKFAST",
+        "event_id_ephemeral": "25d80c8b-0469-4802-9b0c-4543944f213a",
+        "recipe_version_id_ephemeral": "49bd9385-5dd9-42b6-b81a-765e36d1f6c7",
+        "recipe_step_id_ephemeral": "1152b17e-364a-48f8-af07-2949a18d4925",
+        "step_instruction_sha256": "19abb21302cb8b614997da664eeb8afaf2d53e1be0aab3f3821d5aebec34096d",
+        "member_servings": [
+          "2.362341",
+          "2.746504"
+        ],
+        "source_ingredient_code": "TVOROG_5",
+        "source_net_g": "139.5",
+        "projected_net_g": "712.6838775",
+        "eligible_as_exact_historical_slot": false
+      },
+      {
+        "code": "SCHOOL2022_54_1K_LIQUID_CORN_MILK_PORRIDGE",
+        "found": 0,
+        "eligible_as_exact_historical_slot": false
+      }
+    ]
+  },
+  "focused_evidence_CI": {
+    "workflow_run_id": 40495153015,
+    "conclusion": "failure",
+    "passed_existing_pr10_meta_tests": 26,
+    "failed_new_setup_cases": 13,
+    "failure_reason": "INDEPENDENT_BASELINE_HASH_DIFFERS_FROM_2026_10_10_ACCEPTED_FIXTURE",
+    "not_a_new_Planner_or_Prep_runtime_defect_proven": true,
+    "no_exact_two_event_current_positive_evidence": true
+  },
+  "decision": {
+    "fixture_structure": "PASS_3_21_42",
+    "accepted_historical_semantics_reproducible_on_fresh_build": "NO_GO",
+    "selected_two_current_MealEvents_present": "NO_GO",
+    "independent_qa_approved_immediate_count": 0,
+    "pr10_a_runtime": "NO_GO",
+    "gate2": "NOT_PASSED",
+    "work_boundary": "DOCS_ONLY_DRIFT_EVIDENCE_NO_FIXTURE_OR_PLANNER_POLICY_SILENT_CHANGE"
+  },
+  "next_proposal": "Owner and independent Planner/QA must approve a bounded fixture-stabilization strategy (stable semantic recipe codes, deterministic seed/selection or explicit snapshot re-pin) and test cross-run reproducibility before repeating two-step live scale review. Do not modify Planner acceptance or replace candidate recipes silently."
+}
