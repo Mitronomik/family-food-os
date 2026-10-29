@@ -1,3 +1,11 @@
+# 2026-10-29 — PR10-CORE-A docs review fixes (not yet merge-ready)
+
+- Implemented same-branch docs-only response to [independent review](https://github.com/Mitronomik/family-food-os/pull/248#issuecomment-6491422149): archival stop rule, verified 51/51 UUID-free process-content parity vs 0/51 ephemeral `process_hash`, QA-only canonical digest `2e04ea180cfcad031bad763aedec16be802fcbdcad2e9d1763c43d4c0b4edac9`, seed constructor/composition limitations and full historical PlannerRequest input-parity requirements. Canonical 21/42 JSON semantics, source hashes and production code unchanged.
+- Downloaded original PR #196 ZIP, checked the only raw JSON member is exactly 110,511 bytes / SHA `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec`. Retained a compressed reversible backup in owner's private Library under `/FamilyFoodOS/QA-Evidence/pr196-original-synthetic-fixture-receipt.json.xz.b64`. Repository publication **blocked**; this is not independently accessible evidence and must be resolved before merge. Original Actions artifact expires 2026-11-09 UTC.
+- No runtime/DB/Planner/RecipeVersion/Prep/Shopping/PDF changes or gate promotion. `NO_GO_EVIDENCE_NOT_DURABLY_PINNED`; `NO_GO_TO_PR10_CORE_RUNTIME` remains. Exact-head Docs CI must be checked on the latest branch commit; do not claim green before it runs.
+
+---
+
 # PR10-CORE-A — owner selected stable exact synthetic fixture reference — 2026-10-27
 
 - Verified accepted `main@3c4645a27d675bb4464c913785aef3cd88de8681`, #244 merged; #242 closed without merge; [PR #246](https://github.com/Mitronomik/family-food-os/pull/246) still OPEN with source-pinned evidence of cross-run 3/21/42 structural PASS but 0/21 recipe-code slot matches. User explicitly approved **Option A**, not a new source/MealPlan/Planner architecture.
