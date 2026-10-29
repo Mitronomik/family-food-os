@@ -1,3 +1,13 @@
+# PR10-CORE-A — independent review correction pass, 2026-10-29
+
+**Current authorization:** [PR #248](https://github.com/Mitronomik/family-food-os/pull/248) docs-only Option A gate; no production runtime, no merge and no next milestone. Independent review [comment #6491422149](https://github.com/Mitronomik/family-food-os/pull/248#issuecomment-6491422149). The [revised Implementation Contract Gate](../docs/family-food/pr10-core-option-a-stable-fixture-implementation-contract-2026-10-27.md) now distinguishes run-local `process_hash` from UUID-free process-content QA digest (51/51 source-step content matches; 0/51 prior run-local process hashes match), explicitly inventories incomplete seed ID injection and historical Planner inputs, and freezes NO_GO on archival/input gaps. The [frozen 21×42 JSON](../docs/family-food/pr10-core-option-a-frozen-semantic-reference-proposal-2026-10-27.json) remains QA-only and marks evidence retention and input parity **unproven**.
+
+**Archive blocker:** independently verified full synthetic PR #196 receipt 110,511 JSON bytes, SHA `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec` (GitHub artifact expires **2026-11-09T14:24:01Z**). Reversible compressed full-byte backup exists in the project owner's private Library `/FamilyFoodOS/QA-Evidence/pr196-original-synthetic-fixture-receipt.json.xz.b64`, but **not in reviewer-accessible versioned evidence**. Publication into the repository did not succeed. **`NO_GO_EVIDENCE_NOT_DURABLY_PINNED` blocks contract merge** until independent access is proven. Do not treat the private Library copy as an accepted GitHub reviewer archive.
+
+**Next only:** publish and independently verify reviewer-accessible complete raw receipt before expiry; verify SHA, portable process digest and historical input snapshot/seed seams; exact-head Docs CI and independent review; explicit owner merge decision. Production Planner unchanged; `APPROVED_IMMEDIATE=0`; `NO_GO_TO_PR10_CORE_RUNTIME`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`. PR #246 remains open/unmerged unless independently verified otherwise.
+
+---
+
 # PR10-CORE-A — owner-approved stable 21-event synthetic fixture, docs gate — 2026-10-27
 
 **Accepted main:** `3c4645a27d675bb4464c913785aef3cd88de8681` (merged PR #244; #242 closed unmerged). [PR #246](https://github.com/Mitronomik/family-food-os/pull/246) still OPEN with independently validated cross-run week drift, **not yet accepted by merge**.
