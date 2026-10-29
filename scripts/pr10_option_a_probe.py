@@ -208,9 +208,7 @@ def _probe(output: Path) -> int:
         ):
             report["status"] = "CANDIDATE_TWO_RUN_PASS_AWAIT_INDEPENDENT_REVIEW"
         elif report["status"] == "NO_GO_UNVERIFIED":
-            report["status"] = (
-                "NO_GO_CURRENT_UNSTABILIZED_SEED"
-            )
+            report["status"] = "NO_GO_CURRENT_UNSTABILIZED_SEED"
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(
         json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
