@@ -24,7 +24,9 @@ from scripts.audit_pr10_meta_gate2_fixture import (
 )
 
 ROOT = Path(__file__).resolve().parents[1]
-ORIGINAL = ROOT / "docs/family-food/evidence/pr196-original-synthetic-fixture-receipt.json"
+ORIGINAL = (
+    ROOT / "docs/family-food/evidence/pr196-original-synthetic-fixture-receipt.json"
+)
 ORIGINAL_SHA = "6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec"
 ORIGINAL_WEEK_SHA = "731ef32e7137740ed5b46a6044a85d8b2f818a847fdc039842460d442df5aeb6"
 CANONICAL_DECIMAL = re.compile(r"[0-9]+\.[0-9]{6}\Z")
@@ -49,11 +51,16 @@ def normalize_receipt(receipt: dict) -> list[dict]:
         for key, expected in (("members", 3), ("meal_events", 21), ("servings", 42))
     ):
         raise ValueError("3/21/42 structure missing")
-    member_ordinal = {row["member_id"]: row["fixture_ordinal"] for row in receipt["members"]}
+    member_ordinal = {
+        row["member_id"]: row["fixture_ordinal"] for row in receipt["members"]
+    }
     if len(member_ordinal) != 3 or set(member_ordinal.values()) != {1, 2, 3}:
         raise ValueError("invalid unique synthetic member ordinals")
     by_version = {row["recipe_version_id"]: row for row in receipt["catalogue"]}
-    if len(by_version) != 51 or len({r["canonical_code"] for r in by_version.values()}) != 51:
+    if (
+        len(by_version) != 51
+        or len({r["canonical_code"] for r in by_version.values()}) != 51
+    ):
         raise ValueError("unverified or ambiguous source catalogue")
     events = receipt["plan"]["events"]
     if len({e["event_id"] for e in events}) != 21:
@@ -83,11 +90,18 @@ def normalize_receipt(receipt: dict) -> list[dict]:
         raise ValueError("Serving count differs from immutable 3/21/42 claim")
     normalized = []
     for e in events:
-        if e["source_kind"] != "COOK_RECIPE" or e["recipe_version_id"] not in by_version:
+        if (
+            e["source_kind"] != "COOK_RECIPE"
+            or e["recipe_version_id"] not in by_version
+        ):
             raise ValueError("non-canonical selected recipe")
         r = by_version[e["recipe_version_id"]]
-        serving_rows = sorted(by_event[e["event_id"]], key=lambda x: x["member_ordinal"])
-        if not serving_rows or len({s["member_ordinal"] for s in serving_rows}) != len(serving_rows):
+        serving_rows = sorted(
+            by_event[e["event_id"]], key=lambda x: x["member_ordinal"]
+        )
+        if not serving_rows or len({s["member_ordinal"] for s in serving_rows}) != len(
+            serving_rows
+        ):
             raise ValueError("missing or duplicated participant Serving")
         normalized.append(
             {
@@ -119,10 +133,14 @@ def _original_week() -> tuple[list[dict], str]:
 def _run_one(path: Path) -> None:
     """Use the unmodified existing real PlannerService → persisted-readback path."""
     with tempfile.TemporaryDirectory(prefix="pr10-option-a-sqlite-") as tmp:
-        receipt = build_fixture_receipt(DatabaseConfig(path=Path(tmp) / "fixture.sqlite"))
+        receipt = build_fixture_receipt(
+            DatabaseConfig(path=Path(tmp) / "fixture.sqlite")
+        )
         validate_fixture_receipt(receipt)
         normalize_receipt(receipt)
-        path.write_text(json.dumps(receipt, sort_keys=True, ensure_ascii=False), encoding="utf-8")
+        path.write_text(
+            json.dumps(receipt, sort_keys=True, ensure_ascii=False), encoding="utf-8"
+        )
 
 
 def _probe(output: Path) -> int:
@@ -144,14 +162,22 @@ def _probe(output: Path) -> int:
         for n in range(2):
             path = Path(temp) / f"run-{n + 1}.json"
             step = subprocess.run(
-                [sys.executable, "-m", "scripts.pr10_option_a_probe", "--run-one", str(path)],
+                [
+                    sys.executable,
+                    "-m",
+                    "scripts.pr10_option_a_probe",
+                    "--run-one",
+                    str(path),
+                ],
                 cwd=ROOT,
                 capture_output=True,
                 text=True,
                 check=False,
             )
             if step.returncode:
-                report["runs"].append({"ordinal": n + 1, "result": "FAILED_REAL_PIPELINE"})
+                report["runs"].append(
+                    {"ordinal": n + 1, "result": "FAILED_REAL_PIPELINE"}
+                )
                 report["status"] = "NO_GO_REAL_PIPELINE_FAILURE"
                 break
             raw = path.read_bytes()
@@ -175,13 +201,24 @@ def _probe(output: Path) -> int:
                     "counts": receipt["counts"],
                 }
             )
-        if len(report["runs"]) == 2 and all(r["matches_original"] for r in report["runs"]):
+        if len(report["runs"]) == 2 and all(
+            r["matches_original"] for r in report["runs"]
+        ):
             report["status"] = "CANDIDATE_TWO_RUN_PASS_AWAIT_INDEPENDENT_REVIEW"
         elif report["status"] == "NO_GO_UNVERIFIED":
-            report["status"] = "NO_GO_OPTION_A_UNACHIEVABLE_WITH_CURRENT_UNSTABILIZED_SEED"
+            report["status"] = (
+                "NO_GO_OPTION_A_UNACHIEVABLE_WITH_CURRENT_UNSTABILIZED_SEED"
+            )
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    print(json.dumps({"status": report["status"], "runs": report["runs"]}, ensure_ascii=False))
+    output.write_text(
+        json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    print(
+        json.dumps(
+            {"status": report["status"], "runs": report["runs"]}, ensure_ascii=False
+        )
+    )
     return 0 if report["status"].startswith("CANDIDATE_TWO_RUN_PASS") else 3
 
 
