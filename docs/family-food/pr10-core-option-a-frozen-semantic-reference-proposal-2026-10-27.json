@@ -10,7 +10,10 @@
     "raw_json_sha256": "6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec",
     "raw_json_uncompressed_bytes": 110511,
     "github_actions_expires_at_utc": "2026-11-09T14:24:01Z",
-    "repo_archive_status": "BLOCKED_NOT_REVIEWER_ACCESSIBLE",
+    "repo_archive_status": "PUBLISHED_AND_BYTE_VERIFIED_ON_PR_BRANCH",
+    "repo_archive_path": "docs/family-food/evidence/pr196-original-synthetic-fixture-receipt.json",
+    "repo_archive_git_blob_sha1": "e82f147be4f7d1c67fe298ce973a968223910d03",
+    "repo_archive_byte_verified": true,
     "repo_archive_required_before_contract_merge": true,
     "old_nonportable_id_based_planner_semantic_sha256": "2d6cb581649863b7edbd3c0efff2bae2934c6a512c99a45d10e92f92f514cb3d"
   },
