@@ -1,3 +1,9 @@
+# 2026-10-29 — PR10-CORE-A evidence archive delivered
+
+PR #248 now includes the **complete original PR #196 synthetic JSON** at [docs/family-food/evidence/pr196-original-synthetic-fixture-receipt.json](../docs/family-food/evidence/pr196-original-synthetic-fixture-receipt.json), verified after publication: SHA-256 `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec`, 110511 bytes; [README](../docs/family-food/evidence/README-pr196-original-synthetic-fixture.md). The prior archive-blocked entry below is historical. Source retention on PR branch is complete, but historical Planner inputs/ID seeding, independent review, owner merge and Gate2 remain unresolved. Production Planner unchanged; `NO_GO_TO_PR10_CORE_RUNTIME` continues. Next: independent docs-only review and explicit owner merge decision.
+
+---
+
 # 2026-10-29 — PR10-CORE-A evidence retention + Planner input reproducibility handoff
 
 **Task/branch:** PR #248, `docs/pr10-core-option-a-stable-fixture-gate`; [independent review](https://github.com/Mitronomik/family-food-os/pull/248#issuecomment-6491422149); [updated docs gate](../docs/family-food/pr10-core-option-a-stable-fixture-implementation-contract-2026-10-27.md). Original 21 MealEvents / 42 exact Decimal Servings from PR #196 remain untouched. No runtime changes or merge authorization.
