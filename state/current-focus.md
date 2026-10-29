@@ -1,3 +1,13 @@
+# Issue #252 — real two-process Option A preflight NO_GO; separate test-only identity seam still OPEN — 2026-10-29
+
+**Accepted main at test start:** `794302534a9f02a8452892aef62375daf0a13de2`; [PR #253](https://github.com/Mitronomik/family-food-os/pull/253) is a concurrent separate docs/state handoff update, not included in this branch. Current owner-authorized [Issue #252](https://github.com/Mitronomik/family-food-os/issues/252) is under test-only execution in [DRAFT PR #254](https://github.com/Mitronomik/family-food-os/pull/254). This does **not** authorize any production Planner/seed/schema change.
+
+**FACT:** Real [CI run 40897666121](https://github.com/Mitronomik/family-food-os/actions/runs/40897666121) used two independent fresh SQLite/Python processes through unchanged existing `build_fixture_receipt` → `PlannerService.generate_authoritative` → persisted readback. **14/14 guards and Ruff PASS**; **both 3/21/42 structural PASS**, but original PR #196's accepted 21×42 UUID-free `731ef32e…` is **not** reproduced: run1 `4c1c574c…` (0/21 original source-code slots), run2 `a7948dcc…` (1/21); both **51/51 source+ordered Step-content parity** with original. Full receipts and pinned raw SHA are in [this negative report](../docs/family-food/pr10-option-a-issue252-two-process-no-go-2026-10-29.md).
+
+**Status:** `NO_GO_CURRENT_UNSTABILIZED_SEED` only. Not proven that Option A is impossible after an allowed test-only identity seam; historical PlannerRequest input parity and `id_factory` end-to-end propagation remain OPEN. Current workflow is intentionally red at semantic gate, not a failed setup. **Next only:** independent Domain/Architecture review of minimal permitted test-only seed/ID factory seam and input reconstruction, then an explicit owner decision if changing the accepted contract becomes necessary. Do not merge DRAFT #254 as a real fixture PASS. `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, D3, SAFE_BATCH and PORTION_RELEASE constraints continue.
+
+---
+
 # PR #248 — integration after merged PR #246 / Option A docs-only gate — 2026-10-29
 
 **Accepted `main`:** `36ab339302557aafc2187f9d8a70b035869c8487` — [PR #246](https://github.com/Mitronomik/family-food-os/pull/246) **MERGED after its 23/23 green exact-head CI**. Its source-pinned negative fact is retained: current 3-member/21-event/42-Serving week matches structurally but **0/21** historic schedule recipe slots; the two historical proposed Prep steps are not current approved tasks. This PR #248 **does not erase or reinterpret that failure**.
