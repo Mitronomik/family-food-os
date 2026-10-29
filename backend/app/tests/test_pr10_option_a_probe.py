@@ -67,7 +67,9 @@ def test_generated_ids_may_change_without_affecting_portable_week_digest():
         lambda r: r["plan"]["servings"][0].update(portion_servings=1.0),
         lambda r: r["plan"]["servings"][0].update(member_id="foreign-household"),
         lambda r: r["plan"]["events"][0].update(source_kind="OTHER"),
-        lambda r: r["plan"]["events"][0].update(position=r["plan"]["events"][1]["position"]),
+        lambda r: r["plan"]["events"][0].update(
+            position=r["plan"]["events"][1]["position"]
+        ),
         lambda r: r.update(gate_decision="READY"),
     ],
 )
