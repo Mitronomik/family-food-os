@@ -1,0 +1,2726 @@
+{
+  "catalogue": [
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "BOILED_CHICKEN_MAIN_PRODUCT",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "4fdafaff45d355e12c3575c24f8a699fb9aaedb5a20605b1034333f428f1b1e8",
+      "recipe_version_id": "fb2fb615-76da-4369-abb9-9fe45ea81e72",
+      "source_document_sha256": "1c7ee5c0d09e8dd5872bcee7bd6a7fa2c7d414fa96738a22971cb71c28efd72d",
+      "source_name": "DIETETIC_RECIPES_1988",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "303_VARIANT_III",
+      "source_version": "sha256:1c7ee5c0d09e8dd5872bcee7bd6a7fa2c7d414fa96738a22971cb71c28efd72d",
+      "steps": [
+        {
+          "instruction_sha256": "5a80dd4628c49965cde01976a5dfe5a10fa42e7b7c8846816312781de75a15b6",
+          "position": 1,
+          "recipe_step_id": "31c4606a-9afa-4980-8bbc-0ce05c5b1fc1",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": false,
+      "canonical_code": "HARD_BOILED_EGG",
+      "cook_time_minutes": 10,
+      "freezable": false,
+      "prep_time_minutes": null,
+      "process_hash": "f4c0dec2569d29dcf09a0d13c42156a88b588e4a7dc4b0dc84f15c85c3d2f369",
+      "recipe_version_id": "83258c70-648e-4122-a7a4-cc7149dbd28d",
+      "source_document_sha256": "973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "source_name": "RU_MR_2_4_0162_19",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "APPENDIX_5_CARD_4_1",
+      "source_version": "sha256:973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "steps": [
+        {
+          "instruction_sha256": "6e2b06d9bd74488a0cbc42b6a0b9be2cf9fc1d7b10d97a0c28317f71a857b944",
+          "position": 1,
+          "recipe_step_id": "1403adf9-2b6d-4192-8226-55f0874dd944",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "34163d9b14934562cc9b57a2024f06dc4cc76fe5034a2feb4f4e3cca2aeed552",
+          "position": 2,
+          "recipe_step_id": "faf2c755-e754-4138-bbc7-5cb4bfd51f80",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": 10,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "MR2019_1_16_POTATO_SPLIT_PEA_SOUP",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "d4248bc8b7b013353362ca44314bd50e4b98ee546603affdefb575d624c3a9cd",
+      "recipe_version_id": "116e25fa-12f3-4926-8a2a-7aa2cf99bb9c",
+      "source_document_sha256": "973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "source_name": "RU_MR_2_4_0162_19",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "APPENDIX_5_CARD_1.16",
+      "source_version": "sha256:973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "steps": [
+        {
+          "instruction_sha256": "6b344e08e8b159f2d4c7d67efe554578a52d4364bc81a1f4c7a60fb052cfa72e",
+          "position": 1,
+          "recipe_step_id": "bfabf6c5-4ecb-47d1-8e60-655a1e4af3f3",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "a75d7d9fa0b0a77ab6eefd8a7b357c522dfc750662db99126efe89ea4447d850",
+          "position": 2,
+          "recipe_step_id": "b1d4c656-d5ae-4996-88d7-29d2f3cab4a7",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "23303fa39df955e279b4608d21920a94e2ccc444b43cf309de895279b6bf9e7b",
+          "position": 3,
+          "recipe_step_id": "fd1fe97f-c0a4-4435-8315-ef9273b4cc5e",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "2f19bc13a4d0cf7149f496d02f8b3569486b2421faf9abce831bc6dca73819fb",
+          "position": 4,
+          "recipe_step_id": "ba71bf80-1f8b-4f5b-b27e-e4179d7735b7",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "MR2019_1_2A_VEGETARIAN_CABBAGE_SOUP",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "b3e986a919e25885ffd8e70faaf82324e7445e3d456064a49fcb5136b7475af2",
+      "recipe_version_id": "817a573f-168a-4856-870c-63aebfb73534",
+      "source_document_sha256": "973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "source_name": "RU_MR_2_4_0162_19",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "APPENDIX_5_CARD_1.2а",
+      "source_version": "sha256:973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "steps": [
+        {
+          "instruction_sha256": "a6b1b872f4460c17d336fbc1ed4579ed4100a0fbac51fbe87dbe45e9d64b9348",
+          "position": 1,
+          "recipe_step_id": "044386c5-6e15-4acd-a383-6cd81cda0a56",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "18950fa103e0c7be3be5bb9897e7d593fe955af2a218635bc1b90b099304e3a8",
+          "position": 2,
+          "recipe_step_id": "145e16c4-fb79-4d59-a159-75113c0cbe29",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "f934d3b3a8a2dbc9b0e297cb1120bd4797ecb60f15c7f8d853b7aba2dca9dea5",
+          "position": 3,
+          "recipe_step_id": "e4aed3fe-04bb-4a4b-9992-32d6d7785ba3",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "630241884b5538c92d0b3ad8c6151f7a20b5c6475bae60284c9b748f2d40c13b",
+          "position": 4,
+          "recipe_step_id": "22535a28-044f-4d2a-8253-3428786c3308",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "MR2019_1_3_LENINGRAD_RASSOLNIK_SOUR_CREAM",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "538081a68c9547e56d1b79aa10641b62231a345cb448783b1bf2ad520efaf9a3",
+      "recipe_version_id": "f97517db-2d3e-4ac1-9261-5087a0bee5fb",
+      "source_document_sha256": "973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "source_name": "RU_MR_2_4_0162_19",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "APPENDIX_5_CARD_1.3",
+      "source_version": "sha256:973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "steps": [
+        {
+          "instruction_sha256": "2f0844b921d33af33699251533a9aedfea92951cd73c57cc9ed5f21b5e5e8761",
+          "position": 1,
+          "recipe_step_id": "ee2b359d-2eff-4f7c-8246-20f80cb25f5e",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "540b6ae8ebf91773a1bd5cba93b63b70def4fb92ca333bb72e99201fd41797cc",
+          "position": 2,
+          "recipe_step_id": "230abf30-a8b6-4686-8960-d90d92302633",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "c1b4853c1262cfc60383361311ff8b1c0d43ca4b73e628219c949609d2c7ae3b",
+          "position": 3,
+          "recipe_step_id": "7e636b6b-5825-41fb-a537-5159984bb068",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "db27fa9fcad37bd4f62f140eba738c6dc727d37c78b10fd0363ac1b754ba3ee1",
+          "position": 4,
+          "recipe_step_id": "1bd83857-cc22-45f8-b854-1f44d42d2245",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "MR2019_1_4_OAT_VEGETABLE_SOUP_SOUR_CREAM",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "7cb073b09f68f9ed97c923e8ab7bb78a63bc3b2af7d0d4cdc9c80b7dc7fba75e",
+      "recipe_version_id": "b29e12ab-4bb9-4420-bb6e-c722d39e0931",
+      "source_document_sha256": "973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "source_name": "RU_MR_2_4_0162_19",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "APPENDIX_5_CARD_1.4",
+      "source_version": "sha256:973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "steps": [
+        {
+          "instruction_sha256": "8e49e38c49ba588d495faa33e645ccd7ef8ceb3789c88b60822b23e8becb0300",
+          "position": 1,
+          "recipe_step_id": "c4166d72-38ca-4bc8-9094-89b6a74998ec",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "b08d9e927d680f2d704e6ae72ae38758de666fadf940cb1a34a18743be36d5e0",
+          "position": 2,
+          "recipe_step_id": "13694168-f871-4b5e-8247-c20ca41b60ed",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "c8ed82d21c8503e11f14554fb0c0571c98bc83404fb47719182525fd461a1226",
+          "position": 3,
+          "recipe_step_id": "a508dd15-59b5-40c3-88e4-da5e09cd6819",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "3e209750e74728805b96057d3bd3b69f7cdda6b8a913983158c2ff32c70505e3",
+          "position": 4,
+          "recipe_step_id": "83d1cca8-edb2-4359-aa59-3cfa220095ae",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "MR2019_2_11_BEEF_VEGETABLE_RAGOUT",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "4171ef5b08d51cb1775f1bd8244042f20c016718a587f7440f954cd5db571177",
+      "recipe_version_id": "063694fb-92cf-4731-adf6-041d36a532e4",
+      "source_document_sha256": "973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "source_name": "RU_MR_2_4_0162_19",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "APPENDIX_5_CARD_2.11",
+      "source_version": "sha256:973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "steps": [
+        {
+          "instruction_sha256": "211dbef9b1b186522e1b99c4ff121a0a2e74daa1ece007088d9cae1c62efec51",
+          "position": 1,
+          "recipe_step_id": "1ca840ec-d7dc-438f-a00c-d3d8fda4cdc6",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "55519c2f9e26fbb12ea8abd237547f58d94361f17deff6005919d7a86c7ad128",
+          "position": 2,
+          "recipe_step_id": "044e83cd-2ca6-4d33-a092-6575e55ef931",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "130b824900be29880752c1479ecc6d233458da30b04ecc710316c743987ac97b",
+          "position": 3,
+          "recipe_step_id": "e24eb6bd-23ca-44e9-b61b-681b0d223028",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "b07ecd65c2e82c4c4e02fc8c2a62d43ececeefab7b69006e3392aad4171db3a8",
+          "position": 4,
+          "recipe_step_id": "1ba5196b-9e28-4b51-ae9f-802f9193bdee",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "3378cc9aa99b5d191eae1b186f10daae96da29ce1f698f73a5da96e66f72ce30",
+          "position": 5,
+          "recipe_step_id": "b6cfd273-9a51-436c-965f-203efd3ce1e1",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "MR2019_2_14_BOILED_CHICKEN_CATEGORY_1",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "8504c7892938075c349b2ef2b04287ec24a9b2ec9f3666af3e0f96fb0d6ee0e0",
+      "recipe_version_id": "ee6a6e7a-90c9-4f90-b39b-d8f556d0cd4f",
+      "source_document_sha256": "973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "source_name": "RU_MR_2_4_0162_19",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "APPENDIX_5_CARD_2.14",
+      "source_version": "sha256:973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "steps": [
+        {
+          "instruction_sha256": "9be5414d8d1f0167e81a77e03e77d3cea1f55ffc5ff018c6a12cf89062c0d43a",
+          "position": 1,
+          "recipe_step_id": "a6addfa6-3185-40d8-9a00-58e0ac79af1e",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "e34df4700346e881212e1adbe82d756acd574a0a3c1839f4272c688c8bb7fe14",
+          "position": 2,
+          "recipe_step_id": "2df2bbf0-9ffd-49ed-b409-2de820c69a70",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "0273bc65fa3f5c5820d1699659c9fa87d437a6e944eae6e71d0c414614b7325e",
+          "position": 3,
+          "recipe_step_id": "f151c856-bad4-4932-9a24-7605c674916d",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "MR2019_2_15_STEAMED_CHICKEN_SOUFFLE",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "1c6030bc9533eeb3363de32c8a468d91a6d912ca2c74b657966c70cb1acf167f",
+      "recipe_version_id": "27771c3c-2eb4-4f90-a297-ac41366534e0",
+      "source_document_sha256": "973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "source_name": "RU_MR_2_4_0162_19",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "APPENDIX_5_CARD_2.15",
+      "source_version": "sha256:973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "steps": [
+        {
+          "instruction_sha256": "4e6eb7ec85b19ba08dd7ee8c649f5642b609452b548d7ae80005cc6fe93ff221",
+          "position": 1,
+          "recipe_step_id": "7249a07b-24e9-4b81-8b66-7e7408d15ff9",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "6209e03f94b8b99c60f7b236226a15a1f0a4d996322adc2625977d07fa7e5826",
+          "position": 2,
+          "recipe_step_id": "84a34290-ef2e-4819-9f62-9ec1f3d01e6a",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "faaace1a10193df556211248d72006f2b1955de57818ddd3f34b8c9adf2be130",
+          "position": 3,
+          "recipe_step_id": "12237bc8-1652-4294-a89a-1208fc2d41b2",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "1027285d21276385d21fd65e5a9baf7943fc3c963ee0274d79290dfce2566b13",
+          "position": 4,
+          "recipe_step_id": "111d9915-f6fc-40ab-acfe-36e3fa583c85",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "MR2019_2_9_STEAMED_BEEF_ROLL_OMELET",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "28e387f8394ca706a0f2531901e12e30117e8b6845b6f1ea3fa2df5c0abc3bea",
+      "recipe_version_id": "86be64b5-44f8-405a-889a-3b1592619606",
+      "source_document_sha256": "973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "source_name": "RU_MR_2_4_0162_19",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "APPENDIX_5_CARD_2.9",
+      "source_version": "sha256:973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "steps": [
+        {
+          "instruction_sha256": "1657c56827ff54081d001e46bbe56728c473da0249147c12bc97ffe64672cd6a",
+          "position": 1,
+          "recipe_step_id": "476079b5-df2b-484d-8a2b-0375d06cf2db",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "830e76e153460f04f64ad197a55d52784c3e48d5238a20c5e585c9c542740f4b",
+          "position": 2,
+          "recipe_step_id": "1f33a5e1-d031-4e5d-8803-0d4e05b375a8",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "1b839f53c12d326067e95323d24cfd124509e0f3b8ad4d6d6facf1479032d73f",
+          "position": 3,
+          "recipe_step_id": "41c8abf9-1f33-41c9-8d73-5745b3db7371",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "9cec22a57870767b770d741f99388749e6831d1f6950a4037f850ecb9f6d1a2e",
+          "position": 4,
+          "recipe_step_id": "af5c3b04-722d-469e-b6b3-85cf621f6004",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "MR2019_6_19_BAKED_MACARONI_HARD_CHEESE",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "e62ae569f647c5a4fad09118b74e6f76061d900dd015f455a64383b17acad803",
+      "recipe_version_id": "9104ede5-9529-4f7f-a965-94d1d7b01b4f",
+      "source_document_sha256": "973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "source_name": "RU_MR_2_4_0162_19",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "APPENDIX_5_CARD_6.19",
+      "source_version": "sha256:973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "steps": [
+        {
+          "instruction_sha256": "b35f2cfaa66403658dc30b141c462729a66cbc5ca12f9b2adbca99bf21953d3b",
+          "position": 1,
+          "recipe_step_id": "ba224bda-1283-4566-862c-63fa01cfbabc",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "40a656825f2267adc03c0538af3eca7964c2fb77d6518c88cb91a87f1bd8c703",
+          "position": 2,
+          "recipe_step_id": "82dc6675-ae6e-481b-ab76-a03bb9513c02",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "7aa39af0f97ce73b8abb5963dbbd18b21bfaa3f2168ad3710d914b5fa35f82e1",
+          "position": 3,
+          "recipe_step_id": "3fa0da52-7850-4eca-b96c-098b74a19319",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "516a7a6a8ef1c045321e8d9954a12e97fd60048537e3302b054d33881a4a9e8f",
+          "position": 4,
+          "recipe_step_id": "bcb7584e-84bf-45fe-9cd0-ff6bfbf53595",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "MR2019_6_9_VERMICELLI_HARD_CHEESE",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "c4ee0283f9b85f2958bebb09048827dac093c4e1e4a248044292b0aab6b892cc",
+      "recipe_version_id": "05057905-1ad5-4693-9016-94df494c4d95",
+      "source_document_sha256": "973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "source_name": "RU_MR_2_4_0162_19",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "APPENDIX_5_CARD_6.9",
+      "source_version": "sha256:973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "steps": [
+        {
+          "instruction_sha256": "14874564f89fc2a6c80c7a198ba012d7df3ec3538be6f54321b7a1d652187ec2",
+          "position": 1,
+          "recipe_step_id": "5053f6c6-6548-42b7-911b-cc54b76dd434",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "40a656825f2267adc03c0538af3eca7964c2fb77d6518c88cb91a87f1bd8c703",
+          "position": 2,
+          "recipe_step_id": "e9cf7b47-a6ca-43ad-baac-80484101cef5",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "1c863b8b1a43026a4129c2d7b8fcb4b823eb33685e012cdcb7e85428be10bd77",
+          "position": 3,
+          "recipe_step_id": "cb2c8a05-0908-48f0-b5f2-fe201f31909b",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SAD28_SANDWICH_CHEESE_20_10",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "28b53b7702be31660d046ca328b60bbe64550f1a19ca38e2682f8f42892c6cc5",
+      "recipe_version_id": "cfcbe349-9194-4dcc-8cba-134126b23a2d",
+      "source_document_sha256": "77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c",
+      "source_name": "sad28-hosted-kutkina2008-card3-cheese",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "sad28-hosted:techcard:3:cheese-sandwich:20-10",
+      "source_version": "sha256:77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c",
+      "steps": [
+        {
+          "instruction_sha256": "ae105673317a9b0c0d8225e33fc5c1f724cb96e86872f5b7aaa406f666eeb461",
+          "position": 1,
+          "recipe_step_id": "e54aa5a2-5d9b-4213-8174-e801ab6c3d88",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_10R_PINK_SALMON_TOMATO_VEGETABLES",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "3345527e5de6079f77b7a6b3acd1d69e9aa2b83ff0793473f613905cb6b40bf6",
+      "recipe_version_id": "b5c00f73-1cc8-4650-9cef-1b6d46a4dbc0",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-10р",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "7653f45cc236c6c9c1683a60028caa0f8e3299921a06be9d0effcf3205089aad",
+          "position": 1,
+          "recipe_step_id": "d2cff33b-b2fc-4010-b7ab-7e32052231ea",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "4262b28c5c5997c5a19bef9ced0d7846a42913ed7f5f0fc82e66d4a5b8149bc0",
+          "position": 2,
+          "recipe_step_id": "82aa2efe-c1e8-4f16-9ed3-e6fcce5f8495",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "6e4c8d4af8ec9eb2ab88a443edc2bbca544cae0b1754e683dd382a39bfc8ebd1",
+          "position": 3,
+          "recipe_step_id": "b0c504fc-4e9d-4826-a87e-740fbf856b43",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 2
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_11M_BEEF_PILAF",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "2884f5f5d292e0929ff5f1a6b366cf99d8e79dbe6cfee5dee3e8720b1819b121",
+      "recipe_version_id": "e3198a3e-25f4-401d-9364-086d9cfc3dee",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-11м",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "8ad0c4547cba10053cfa2801db90d0661ad07e8542cafc0ce1c95219ebf45528",
+          "position": 1,
+          "recipe_step_id": "861f0d90-b1a2-49c3-aec5-6004ce89f4fb",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "e2557f2a77bf8b4a7edc98b9212b22840d1cd8fa4cc335b14fcfb5cb1f0c525a",
+          "position": 2,
+          "recipe_step_id": "24ff1d46-8515-4c87-83f1-08efbfbdfbaa",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "119a681a849893a6dfcb5354cf2c5dc179b034ce6f3f54b41f2ebf20ec6e7d01",
+          "position": 3,
+          "recipe_step_id": "57f5c988-f347-48cf-b05a-c8fc8f582fe5",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "0945e2bc61bdeac430d98d482ad4b5d532fb5b1d24fd5c5470f47312c1b9c943",
+          "position": 4,
+          "recipe_step_id": "32f6faea-cf51-4516-971a-b206153c038e",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 2
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_11R_POLLOCK_TOMATO_VEGETABLES",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "59a569cea50d3c4220cf4ca15b215dcfcf6c349768503cfa06ebecb5b191ea4e",
+      "recipe_version_id": "d968358b-3b27-4007-8946-91f7672cfcff",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-11р",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "7653f45cc236c6c9c1683a60028caa0f8e3299921a06be9d0effcf3205089aad",
+          "position": 1,
+          "recipe_step_id": "a6e03ce0-7c22-488b-b1c3-07f0af03f924",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "2671ad5e57c282556e74ee3e6ce8b2cdf5cd1e509feb50253a0154839e19ec5c",
+          "position": 2,
+          "recipe_step_id": "7622a800-291c-466a-b98b-ed0779678fc4",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "6e4c8d4af8ec9eb2ab88a443edc2bbca544cae0b1754e683dd382a39bfc8ebd1",
+          "position": 3,
+          "recipe_step_id": "93dfc66d-c42a-4ee9-867f-eb76ec634349",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 2
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_13K_WHEAT_MILK_PORRIDGE",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "3117bba2c296846ca3f774186bc0212cb62e3bf30e21eb0feeef7fd7b94038a8",
+      "recipe_version_id": "2be3df57-61c6-4339-93c9-cfda1a28d5f1",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-13к",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "cf1334de9748a13a747283ad78307fac9dd16049fe0c31b04bdf91fe778a996f",
+          "position": 1,
+          "recipe_step_id": "88dfd000-e45b-4891-ab3f-df0d29b34276",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "91e02dc39cc2f597f42ed0587ad0c6350c3addd117f32b3d2297b7c10f855f86",
+          "position": 2,
+          "recipe_step_id": "8090beee-0b6b-4df2-958b-c5919df47fa3",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "a10b8340946c5a77a3cecfde62f63fe16fbf0a10b2091cdcae31dcc012b1961e",
+          "position": 3,
+          "recipe_step_id": "b76fe351-0ba6-435c-9454-e6360189a99b",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "a3794abb56401b7171eb27d6134c15a00afe8ff0c1e3b34f84b557e130422cb1",
+          "position": 4,
+          "recipe_step_id": "6bd281e9-4cc9-4306-a4c4-dbffd4d8c0c7",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_15R_SALMON_IN_MILK",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "fa4a59700aa77b35f8b6ecf4d20ce3422c23aed89e58da598b8a3afbd739cf9b",
+      "recipe_version_id": "a18c37cd-5bd1-4f72-9fc3-1d17ac328608",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-15р",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "68c5bf042eb17b32e83d1e0d1b3ad088ffc66630766d735750a00841bd4939d0",
+          "position": 1,
+          "recipe_step_id": "b2fb373d-988d-40b9-9b72-827552a2bf95",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "8889798007e29125b0aa025122fdb3bb843f2026f1a823a4dcb9f6267a789159",
+          "position": 2,
+          "recipe_step_id": "9b8d36e0-f941-45e5-acef-d1cbd8f1facc",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "06ac5599e33aba12b836858e8727bac86ff045d939b628b87e9f4f651dea7eca",
+          "position": 3,
+          "recipe_step_id": "87c92af8-30b6-4573-9a57-cf272b2b2146",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_16K_DRUZHBA_PORRIDGE",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "0303b19ccdc551244502a7651f1df9b11646c24fac3fd6a4599225b014c7052f",
+      "recipe_version_id": "14bff957-0297-4afb-a074-14539c1a4815",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-16к",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "b074382469cd030985480a206063e9993c521d7edc6aca0651b051b19b423450",
+          "position": 1,
+          "recipe_step_id": "a0f71058-c673-4e14-9fe1-fd639cba1f2c",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "e37caeae2e57f2b78edc3b080bb5ac550b33ac726f3c3afc35eb414d79aadf3d",
+          "position": 2,
+          "recipe_step_id": "d7f04d1c-4ac2-4932-bc7c-d53e3f8648ce",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "273a513179f777f535e2cf6092b012b199f4b42e3f211aed09bbf60549103d78",
+          "position": 3,
+          "recipe_step_id": "a5fc2e5c-26c6-4b44-af77-c7e3e0a84185",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "9832817badfc97ea40117835a458f1874e27af65d911b14fba4d22de5b32b675",
+          "position": 4,
+          "recipe_step_id": "e398fd9a-382d-433c-8777-5150d01ff497",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_17R_SALMON_TOMATO_VEGETABLES",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "4fb058b03530ab54136e4bdf2d3b233681b10454629f03774aae5f9ba449028c",
+      "recipe_version_id": "155f5283-2f2a-4487-83ac-895877197b45",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-17р",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "46ca78ea057058c50cb6d76417bdd01d08b05f7a7e6259848a12b98a548b5258",
+          "position": 1,
+          "recipe_step_id": "82a7cf80-6aee-42b0-91bb-b318cbf41e47",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "d38cce72d90aa4b128ba4a12383b1ba64aa6fc97436401d781213e3c3cd3e80b",
+          "position": 2,
+          "recipe_step_id": "e5112a3c-d2f9-483e-b293-e89aa364a4a9",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "f9cf7e2bf554423b330806ff1ee8078e67ce5a4bd0bc59fe12b7f5b4e701cbc1",
+          "position": 3,
+          "recipe_step_id": "d5a90532-431d-4875-8877-b0b95a0d9d93",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "4f92ee59a4a8c98c238a0d10294373c9c1f7e253fa8fc46db47315e0535ea010",
+          "position": 4,
+          "recipe_step_id": "6db47fe5-0d1a-437f-bef3-e548b3beb2de",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_1K_LIQUID_CORN_MILK_PORRIDGE",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "60e2f11dc01c75886b7d84b525f08766c3609cc90a39cb7845f37071724f63d5",
+      "recipe_version_id": "3ae58298-a556-4b67-978f-5caace5eae97",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-1к",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "31805fc2c8e19d61be569f92a54ee91af6c0d703fa00ab9742cf7f9dcf262590",
+          "position": 1,
+          "recipe_step_id": "3272825a-bb65-4283-b51b-1e2c20d902a5",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "3ddcc41862d8b799eb017d9d0298ffb9138aa448ec0e62d703a41daa57339816",
+          "position": 2,
+          "recipe_step_id": "7d54b8a0-0afa-4132-b434-cda5c4926e4c",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "7d4cf45a3d05a5645a9362dd25b1a921d81582638e5afa75ed0126291fbf411d",
+          "position": 3,
+          "recipe_step_id": "ebf4fcea-65fc-4cc6-b7bf-eba81366e5f8",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_1M_BOILED_BEEF_STROGANOFF",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "9d4fd1179bed03af8d4e5191dffbfbc6f98ab95f04dd43dc28358ccbf66f9ded",
+      "recipe_version_id": "757e23c4-e6c4-4c05-b9fc-5e5c69a9faf9",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-1м",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "609237f4aa3b48656d83f2ddc10a0c648305b7c3f55726195eca94fd626c5536",
+          "position": 1,
+          "recipe_step_id": "e32136b2-5723-4a1b-867b-2e840591e7ec",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "759dafabdbf9b2991b688898eedf15b8ea30604b576f71d0398d655106d86533",
+          "position": 2,
+          "recipe_step_id": "b7a826de-7ed3-477a-98f1-bae5f806ce8f",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "80d54779ccf0787186f7890c95dfc3cddab755d3b3c8a5a3ad6278698fc13212",
+          "position": 3,
+          "recipe_step_id": "844f0577-f273-4133-8801-f4e8fa821a5e",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "f38d3f35a293d52be5706e2d16a2dc9bf97a165c6b752e469f55e773b24625ab",
+          "position": 4,
+          "recipe_step_id": "7216ee72-f23f-4673-9552-2b3666b87ae8",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "2fd7b26819075f911ea3835fbbeae24ac1bde44d99df53d1816b25be17e12c0c",
+          "position": 5,
+          "recipe_step_id": "0890781d-01a3-466d-9608-2556b6f45f31",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_1O_NATURAL_OMELET",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "f47c6040b6b710846fd738fcbc240d72981b352fc093444dd4f7fcf460ece2e0",
+      "recipe_version_id": "089a7b08-99f7-4c42-87a5-05cb5b75fb0e",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-1о",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "01a2cb7198f6f5b2e5f4b0edc709fee47a60b56c3f6b7aed3e16902e24954478",
+          "position": 1,
+          "recipe_step_id": "f46bb8da-f50f-4a74-872e-7de72a41b8cc",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "8dfcfa2913755777bf0b6728fdbb82d427d0996eaa5be1c76ad7d280babedb8b",
+          "position": 2,
+          "recipe_step_id": "2329cf8c-eda2-4e49-abdd-e9bf09f446f6",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "d3587ed109fc72cdd2d9b1df2b17102afa1984a99853a33677aac8c68bcd2a2b",
+          "position": 3,
+          "recipe_step_id": "220234cf-5d92-4f89-ab35-9aff961beda4",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "4295a7ce21cc30ea9a33fb1c7f9c4af169008a8fa2058e4808372d2a3081f80c",
+          "position": 4,
+          "recipe_step_id": "e1a58630-f474-4c88-aa6d-646eed73f4dc",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "5e2c200bb9d1fd45936c11b08fc876b0d0dd0fdce4905ae5c265dab30114801c",
+          "position": 5,
+          "recipe_step_id": "b0d93bf1-5d1f-4632-a178-a8ed5e55aa0e",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_1R_COD_CUTLET",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "26adb1c64d468714d499ca325454ce1bbf8951a63a0e2fc5bd69b224619790db",
+      "recipe_version_id": "7473674d-8bd4-47c6-84b6-20273f54cbdc",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-1р",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "002a1fb69ce6b4fdc5439996c29c64d0a59ca90b51c3cf0398ba3f0cf2812853",
+          "position": 1,
+          "recipe_step_id": "5574e19a-0031-4b68-8083-a0cf68eb3f9d",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "eb34370d90edfcd52b70119613d0d9fc2139d6f2b758dbc307e24304fcc04408",
+          "position": 2,
+          "recipe_step_id": "02d0a734-5f68-4d4b-a996-32f461a4c638",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "abf4d55c6c30739047b7943eda240bb13b9650a7c4a635fad26f7b92ef907fc5",
+          "position": 3,
+          "recipe_step_id": "cdbaf7f9-1bc3-4fed-bd09-632de8e5f526",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 2
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "bb91af364e9ae6c334dc74d655f998f8b89fe1cfb678029ddf995d8063d714b5",
+      "recipe_version_id": "305032fd-2570-4630-8975-ca730cb47a72",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-1т",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "19abb21302cb8b614997da664eeb8afaf2d53e1be0aab3f3821d5aebec34096d",
+          "position": 1,
+          "recipe_step_id": "c0366f96-5120-41f0-a4df-237a779904f8",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "6b0ce02131b111db605f89d9e123511d5240bb9aafae6d300eb7b54d15e6f41d",
+          "position": 2,
+          "recipe_step_id": "fe019732-8049-43b0-9f57-1eae57feda62",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "dcc147d9eb535de674f6f9e9f99a728a12defc838cf02090616e0f2f141a647f",
+          "position": 3,
+          "recipe_step_id": "e7c548b3-b39d-498d-abb8-bd385edd1e46",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "59b5f0eba3aa53d5e7e84c32fcbcbf590bd51457213ecc5a2df4c6bfcaade10a",
+          "position": 4,
+          "recipe_step_id": "fb3a7f2b-91fa-45de-a7eb-58a22e52ffe5",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "53ae2fb0c1d850b16c2a703d81de2de771326e0efb0bdb78c9e94ed00f1c6f7d",
+          "position": 5,
+          "recipe_step_id": "aff2c77d-8cc2-4aa9-bc9d-2bab0bfc2e04",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "7c32ef67f4d912c1fe0aa7a2fd3b2ed4f2ecebe85edbef1494a6b03dee3727eb",
+          "position": 6,
+          "recipe_step_id": "ba3358d1-1ee5-4f20-a3fa-2485ad9650e6",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_20K_BUCKWHEAT_MILK_PORRIDGE",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "893d9b23f25afd633979489eedb6483b392fa8e170459c5d7ad3689f10be81c6",
+      "recipe_version_id": "6dd9f98d-3d23-4380-8c8d-251d8dbb9155",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-20к",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "24492d2eace5d2dcac4a0dc6061894020a83896e88f881b18ca0ae8ea8d82239",
+          "position": 1,
+          "recipe_step_id": "f225bb77-9c2b-4fe2-a7c7-549216924880",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "9e6fe3dabc79b3bdc83392eae95b2042f30e3abf4fa53fbb4a075336c68f502a",
+          "position": 2,
+          "recipe_step_id": "2cd9e855-163c-44f1-ab0a-c7316aed9533",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "9f2963ca33bb3682ae3be36b87b1f0e90b67a21c3b441b989a2de359c8df9a89",
+          "position": 3,
+          "recipe_step_id": "29754a59-a728-4013-bcb5-65156c41a9a7",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "dac7d46d1048a660b3474f4a94e61a202332274d1316bd5bc5c2a35e6214148a",
+          "position": 4,
+          "recipe_step_id": "a4975c60-9c22-4096-9849-55e52a804c6a",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_20M_BOILED_BEEF",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "87390b583875c4856d346645ec1c149b526c7084155e64791352ff2046d60ef4",
+      "recipe_version_id": "43a85f98-7885-4a31-919d-45b0aa71f687",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-20м",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "46a0c62894896228e7ff2333c7530c6041d936fe4ca80c44e379bc29fa45d87f",
+          "position": 1,
+          "recipe_step_id": "aa65c626-2429-40e3-bbed-104dcbcfa7e3",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "6f0fafb212328f0dfa455ddaac8dd0472247dcca9c9a8f3bef045121155421c8",
+          "position": 2,
+          "recipe_step_id": "a09fd303-8763-4957-9471-cf04bf7c4cbd",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "248cdcdcef92c8a6f963db8cd722507f0cb462bce9ff6143fe9f5c7814ecc7b8",
+          "position": 3,
+          "recipe_step_id": "c154009a-39c1-47ba-83c1-124859955d3c",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "b9906b6d69e1766bb2156e8a2c14503eb633c6720cb0a87fe590e91f072f050c",
+          "position": 4,
+          "recipe_step_id": "8d795501-330f-440b-b2a0-ceffccf74532",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_21M_BOILED_CHICKEN",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "c3bf041eb6b131e4cffcfbfc65df96996603d8b0448ecb7912b89445508bebce",
+      "recipe_version_id": "57ab4819-3b85-4ace-8fdc-a8391850942c",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-21м",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "f544cf7836f9100b8e2bdcdc019d907810ad40252f8b9170a6b22ec0c2780354",
+          "position": 1,
+          "recipe_step_id": "9744ae19-256e-41bf-a0e4-2f29927928bb",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "38372d103a8917036454963cb92af86b0aaeb5168f668c650d50e66f381f6cd7",
+          "position": 2,
+          "recipe_step_id": "6e58aa2b-e167-497f-8e8b-e4ecd6c77bfd",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "93588987f156e4cfdfc1064b0db2fdea0fad91af8fc1664efde90c74767062fc",
+          "position": 3,
+          "recipe_step_id": "a81cac55-9599-4c53-925e-eda8474b1049",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "dc05c5fa29f41f1a4820ea45fc20fc64797f3b2ebb31e02ffa9ab70e2b47b9f1",
+          "position": 4,
+          "recipe_step_id": "9ddc45b1-9b2e-4103-a84d-2b44b28660c6",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_23K_LIQUID_WHEAT_MILK_PORRIDGE",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "637b6829abb6b8a96e52ea22939749f2206d2f2d31318e3d4b7f4d3619a04ede",
+      "recipe_version_id": "fe6b54fc-f79d-4113-8654-1b5864755c86",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-23к",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "29288a3e23d2a400fc0ba6f094d46f725b681225a5cdefa95eae143ea61525e2",
+          "position": 1,
+          "recipe_step_id": "b545453e-3c07-4317-9e33-5ce424cacc11",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "f6368744445f617d6a5fdd0ceab0ce293e37f89dd8594818633031b279e26bb2",
+          "position": 2,
+          "recipe_step_id": "dee104e3-0191-4733-86f1-4afb075b996f",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "0b44234948c1e198ec1dd3fcae508c03d26bca38d912c8a4e27f7adbe337a63d",
+          "position": 3,
+          "recipe_step_id": "ea39f1d8-ec36-4f19-ac93-6ebb83fdcf94",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_24K_LIQUID_MILLET_MILK_PORRIDGE",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "c531520a1328cbd48195807cd244a492e7c1d52d6a3b00adb571e5b9ad7bd3c1",
+      "recipe_version_id": "c9ef7911-40ed-4168-a02a-17448ade4c2d",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-24к",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "983a67e9b9c138a7f95cadd50a44e719e8ba9d249422b2771ea18845a3b105b4",
+          "position": 1,
+          "recipe_step_id": "281fabd5-9a6b-48d5-8544-ce758ed46cb8",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "61d7f346425bc38561f2e3cd8ef43046d1ef6ba550ad0041255a2585ad93ff62",
+          "position": 2,
+          "recipe_step_id": "01bf585a-d4f8-4ac3-96d7-d6d032d8ac5b",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "e9ae624b3a95ab92248dc609030fa740e12bec5375903ec79b92101a6157ac54",
+          "position": 3,
+          "recipe_step_id": "cdcc3274-0321-4bd5-adab-8a4b6481efc9",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "896d02585eeea09b8233ab236d7e8c9d48c67d24793f099631f3411ac6fd4945",
+          "position": 4,
+          "recipe_step_id": "c4894d0c-1768-4472-8277-bf2efb9e421e",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_25_1K_RICE_MILK_PORRIDGE",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "4a0082e2d8101b7013af52bdd04ab51e2e571329918a501a86cc674196670efe",
+      "recipe_version_id": "5a21f6c5-03ce-49e3-abc7-00e566acd022",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-25.1к",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "ef244b8c7bcdf69476b27fda62092e6e3db637016e7310f5b212dba4472b8d24",
+          "position": 1,
+          "recipe_step_id": "01b190d8-4d11-49f3-b4c3-acc5ebb2f287",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "a52171a005edab87403f1e16402b8383d272209e9cddeb090231b0ad92421493",
+          "position": 2,
+          "recipe_step_id": "1d6fa4d4-4174-471f-abe9-e2c5a5e0ea1c",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "665c7f3939d68b8215b886c59033fb967f26732e4b8774571f9b85f8a2590dd1",
+          "position": 3,
+          "recipe_step_id": "1a756ce7-7b96-4129-a6e8-6db5b64e75a3",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "0c5b129eae24e1040260959e33c6d1b96f68b601b7eef32a7b5aaf879f92f571",
+          "position": 4,
+          "recipe_step_id": "39661762-2971-4a17-8135-8081b85abd63",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_26M_POTATO_BEEF_CASSEROLE",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "d2bf2eefe60ca5d1a6e4ebc844b684ea4439dd9099e4d51091bf5b50e5e2f51a",
+      "recipe_version_id": "39efb060-783c-4e6e-acbe-a0572a25a8d8",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-26м",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "fded81f7ff5c1c00e4a5a11610ddd6d6ab416931e3c30022f45713e7091420c0",
+          "position": 1,
+          "recipe_step_id": "b6f1571d-b35d-4562-8409-a8759e764747",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "c037441ab3513c46eb66b1864c07eb69515439977ae9529cd3902e1c6d7019b9",
+          "position": 2,
+          "recipe_step_id": "b15cde08-4346-426b-b74f-5baed52f331b",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "d1843809d296cdcca59d41b8f8ed35e31e0923fc831bf3ab39a65f92dc91f4b5",
+          "position": 3,
+          "recipe_step_id": "c3bb3b34-248f-4584-8180-bd4008cfbab5",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "c4416c921244d637e669e3b9d5927f595edab947c3af8f4f6601a53f01f6e520",
+          "position": 4,
+          "recipe_step_id": "4ddbba50-7cc7-4bb0-95c2-2481eee19161",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "60340db70e3363f317e9d6c6392fcc382894bc320617777bc4d68b7960f2d08f",
+          "position": 5,
+          "recipe_step_id": "5dc7ae1c-0c82-46d1-9261-516b262a715f",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_29M_BEEF_MEATBALLS",
+      "cook_time_minutes": 20,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "bfb59a9b45be94e0148e0758f1a518531062a01cf85a58aa0a0371d25aabba97",
+      "recipe_version_id": "ab716228-f855-4531-8abb-ac64e73818cf",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-29м",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "6ffd7c860a913eeabbf365299176f9ccadad880252b0ebfb7380d666795299d3",
+          "position": 1,
+          "recipe_step_id": "6017da47-dbc1-4263-82da-ea76c2af8b55",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "4bdfd4a35fa3d7e0505b08829b741b1cafb30de57a00ad0eb3778d8b7a840fb9",
+          "position": 2,
+          "recipe_step_id": "480a051e-0756-496e-bbc2-cc8263949980",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "8b8029a2b255ee5310f2d86499e2f97d43ea200c9e39c31caca9075c0c7d40aa",
+          "position": 3,
+          "recipe_step_id": "2c4692dc-fe3a-4ddc-952e-f6b0f7a9d334",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "be155f423a781366c5c62c8ab7fe67d52ff1af1c14a1cbb01ae3643533cd7b85",
+          "position": 4,
+          "recipe_step_id": "9b8a5fe3-26c5-42ab-a7b8-ae2e6dfcac72",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_2K_VISCOUS_CORN_MILK_PORRIDGE",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "954ea18f2bbc9e78cfc0ee8c9c616a6d60788ba6746066d32a1ea689b58c4411",
+      "recipe_version_id": "b5bde875-28fa-4525-8cea-f4093c855a91",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-2к",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "31805fc2c8e19d61be569f92a54ee91af6c0d703fa00ab9742cf7f9dcf262590",
+          "position": 1,
+          "recipe_step_id": "a01c8bcc-d554-4bb6-b991-30f879e9b672",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "06a7c89c7fbe2eb85a8aab7f22599b02b76bd385f874fbb277d762ef12d83c8f",
+          "position": 2,
+          "recipe_step_id": "b02d7165-fd90-408f-8c0c-f8da5a65ce90",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "7d4cf45a3d05a5645a9362dd25b1a921d81582638e5afa75ed0126291fbf411d",
+          "position": 3,
+          "recipe_step_id": "acf3e40a-e365-41bf-ba98-ab8cc210e0d5",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_2M_BEEF_GOULASH",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "52822d1229653985c3561c6bf05369084575696400ec0576e0780de043f196b5",
+      "recipe_version_id": "65fda642-cc99-43ec-8408-2c71c081e619",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-2м",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "d80ffcac0a670604ba6462815c5768c685dd7f2ebbf56c7746fed65d0190c9aa",
+          "position": 1,
+          "recipe_step_id": "25515401-eba4-43bb-9da3-cb66622ee447",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "505864d0f0ad0fb83b25ac5e757bd4457fa3ffbef765c736f3cebaaffa5c74c2",
+          "position": 2,
+          "recipe_step_id": "1485d21c-8b0e-4b11-97f0-10b359fbfd67",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "c38974d2602d36f2a24a57c2459891e060d4efa19d06b95dc8fb675a98a55117",
+          "position": 3,
+          "recipe_step_id": "85ae1570-b74c-4fd7-8dd2-5fd3503d9daa",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "920ce05a4407d2cc1afc04ec07e4c483bd1f9425e902dc2df15ea747a2ff8b53",
+          "position": 4,
+          "recipe_step_id": "9c5f5584-ea2e-4813-a5b4-15512a5ceea3",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "74ad94b1e5a3ac970859507bfd958a2ea93cf6a29fab12260fa749d308f32973",
+          "position": 5,
+          "recipe_step_id": "d20fb173-1915-4791-9c6e-a58d869420da",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_2O_GREEN_PEA_OMELET",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "e14041afe95d078e515318e99db2504c7ad79b7b1ebc385b300b9f1327fd4e49",
+      "recipe_version_id": "5b0bb672-b8c9-4a1e-88a3-56377e14c949",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-2о",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "ecfc99b8cf580bbdf723bbe4a1c70ad0183b7fa4a5191f27d12212f7d99682e3",
+          "position": 1,
+          "recipe_step_id": "73fcc9e4-14af-4824-ba78-e8c19548740f",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "6b7d3e899b245524ee0a18212494ef350de4567e88d0f9162fa3c153c8a2c278",
+          "position": 2,
+          "recipe_step_id": "da7465dc-b7f0-4f03-a604-04a828913c59",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "a69d68d0c96d61de4cd71243c7aa679e9f5c7f02b9d23e59de9dc2cf50478846",
+          "position": 3,
+          "recipe_step_id": "e13378bb-2f68-42d5-b1e4-004613fe45ed",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "af15e49e4d8f2e6b7e5e126dbaa3e2b4ca7cc7de912b5d9d82ecb77572816ad1",
+          "position": 4,
+          "recipe_step_id": "54b9b82e-b343-48e0-a54a-ecdf19a9b514",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_2R_PINK_SALMON_CUTLET",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "45cdcadf99656359bb827d762396d79e7b76e43d549219528391462314ed6c42",
+      "recipe_version_id": "c1096d78-d726-4708-aea5-73b86bf01cde",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-2р",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "7e3494c64541a49be16b31109e56b511aee78cdf516e213cc76e88772ba0e231",
+          "position": 1,
+          "recipe_step_id": "a6acf529-72a4-4c6f-97a0-9b65ad2ec1a5",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "eb34370d90edfcd52b70119613d0d9fc2139d6f2b758dbc307e24304fcc04408",
+          "position": 2,
+          "recipe_step_id": "1aba3c3c-c6a7-45b4-8050-f6de4454f43e",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "abf4d55c6c30739047b7943eda240bb13b9650a7c4a635fad26f7b92ef907fc5",
+          "position": 3,
+          "recipe_step_id": "8ca00301-f21c-41c4-92f3-e86a6483bd3c",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 2
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_2T_COTTAGE_CHEESE_CARROT_CASSEROLE",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "0affef710bf1b9fb1b26d9075754e4a63f16413d3367be5d0e03188af126fb20",
+      "recipe_version_id": "0d97a8c1-eb8e-41d4-bd74-f922c7c2efcc",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-2т",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "c79f1d3e56d338d007a442c8bb2cc539a6d5f8589db6124cdb6752424b0d010e",
+          "position": 1,
+          "recipe_step_id": "f78f790d-4987-40fb-8608-755e90fde5a5",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "7e23a3cb3c015f8ead2c8a8260d332a1500c98501b22970afee670772afe4d24",
+          "position": 2,
+          "recipe_step_id": "32963c8d-f316-4d31-8385-bb57cb6bd891",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "2967e28aa0c31bcefbe1d35c8fc08f6b6aab78ece80dd11fdcab19fa26c1a330",
+          "position": 3,
+          "recipe_step_id": "d71e5a61-03a9-4609-a7f2-55b0f3aa7177",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "7df4e0735e4c7f666ba987ec405d0a96be848d646008774de07a98f04dbd779f",
+          "position": 4,
+          "recipe_step_id": "9ce199a2-af38-422e-807b-13dda5bc6a48",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "9a3bd514a3685582d6dc48e742e27b5e656a8eb91bb2a3e9af755e84005c7e01",
+          "position": 5,
+          "recipe_step_id": "ddcef0b8-edae-4371-a043-4f88efc2ff0e",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_30M_BEEF_RICE_QUENELLES",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "72ba23e08746f5fd11b2021d172aaadae4b820f190116038e3dc28054bd9e2d5",
+      "recipe_version_id": "e1eb353b-17f3-4340-9ca8-e5b28f3999b4",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-30м",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "599ad9035d84b8d067e835a48a8a36bccfa34537e79f927b7b9eaeb160cc167f",
+          "position": 1,
+          "recipe_step_id": "9fae5a61-389e-45c3-8e61-9fca09d0062f",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "bd38d2fea3a0d04036212e0426af4eaf6b1a1dccf3c07204bec942800b93eccb",
+          "position": 2,
+          "recipe_step_id": "38f01804-7956-452c-ba02-f075aa8e6fc0",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "952e415a084d47d2ec05d0c8527b47ecedececf853b955939d5a3f4254c6e3ed",
+          "position": 3,
+          "recipe_step_id": "a923ac0e-bac5-40b6-9ba7-dd157a938c57",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "06b7d8d404597e5326b439473d5e5d90a88b6093407b65308cb7fbaf3d74cace",
+          "position": 4,
+          "recipe_step_id": "07646546-5f8c-4cc8-9e31-ca2c1dc904fc",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_3M_LAZY_CABBAGE_ROLLS",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "0d68ed65e49b08a93651717c9ca5875905aec62ee533040298fbdc6db863be12",
+      "recipe_version_id": "029a7eca-6876-467a-a127-667c11ea2e68",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-3м",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "4b1958adce000b594d279fc50244ba19f51563d31b7ca495e74377f4d4431275",
+          "position": 1,
+          "recipe_step_id": "b543c79b-37df-4b22-bc12-e418923d0b65",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "63935b5b7ea5cc2f67be9233180188474acb2e4dbbe0c93311001c975d127edc",
+          "position": 2,
+          "recipe_step_id": "c5357be8-5fbe-4695-b1d9-0bc6df1cc2db",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "60b1c445167dcb43a925f1fd44bbdddfa65fbc1c00000771e016e233eeb20d4a",
+          "position": 3,
+          "recipe_step_id": "6daa0e95-217c-4689-a5a0-99d93eb7d0c6",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "1ad46c1dbb86d755d7ef295156048679f29535899823aca071f3f7c4f6c138b8",
+          "position": 4,
+          "recipe_step_id": "7702f553-a1a8-42dc-909a-f6f347ed746b",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "6eabe55ba06afda67074d5353e3d65b715d095194794f1b20efc1480f6c802f5",
+          "position": 5,
+          "recipe_step_id": "fd18d46e-4fc5-46d2-8800-96006c5ad27b",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_3O_CARROT_OMELET",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "e1fbfea8af57fb3edd8e3e5b2e78fcdeeed22a49ee3be5021eea45cba632ac20",
+      "recipe_version_id": "47f775c5-5085-47fa-b2dc-736e0f465620",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-3о",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "090e6d5b218a3ed2b0be20bdbd66fa7cd2374756f5c146f941eb6f7e09ced677",
+          "position": 1,
+          "recipe_step_id": "c281ad87-689c-4a9d-ab18-11f5dd742695",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "af5ea9cac778eadb3a3b978d90a7388017abc8b2e71ee30841460c096ee95923",
+          "position": 2,
+          "recipe_step_id": "34ed1355-7f42-4fc6-823b-56ceca24e58a",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "ae155ab1e1c045c01edaa084b29d2ab02b6fba1163ede7a3ace9b61ae2682f35",
+          "position": 3,
+          "recipe_step_id": "99d3bb68-0068-4b8f-9a82-7eeabfcea170",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "af15e49e4d8f2e6b7e5e126dbaa3e2b4ca7cc7de912b5d9d82ecb77572816ad1",
+          "position": 4,
+          "recipe_step_id": "42ee12b4-c5dc-4c9f-9b7c-a9c0390f62b6",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_3R_POLLOCK_CUTLET",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "7f83ed6bee33e56a72e2acc73007afca990ac54d31c4063d270a85096a9fbddf",
+      "recipe_version_id": "b06dddbe-986e-49a2-babc-f6e4bfbaec5a",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-3р",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "381d9a829c4a6416feac8535794147ffb8a60c4d2f49324507106c0ba3fcb725",
+          "position": 1,
+          "recipe_step_id": "2d3c4b7b-f6ca-4eb0-b31d-e40aaa1d0ff6",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "eb34370d90edfcd52b70119613d0d9fc2139d6f2b758dbc307e24304fcc04408",
+          "position": 2,
+          "recipe_step_id": "3c02344a-32d4-40b4-9616-519539a05197",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "abf4d55c6c30739047b7943eda240bb13b9650a7c4a635fad26f7b92ef907fc5",
+          "position": 3,
+          "recipe_step_id": "95d8b336-9ba7-4435-860e-b92cfb63a44a",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 2
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_4M_BEEF_CUTLET",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "d1964c1af9c20db5c9d574fb6011b1cb6211f1482a640a48e1521425edf100ef",
+      "recipe_version_id": "648da307-6cda-4223-ba62-98af099f7a4e",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-4м",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "2d5b8a370947b64df0b0526ab55caa970be93ee062438c066024d26ab8a689da",
+          "position": 1,
+          "recipe_step_id": "e9625ba1-0b14-4a9a-b211-9c1b9ff6537f",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "0d89fb69d790e6f34c399f9f53670a199cd98b27cb2b29f8f57c9afe65b5d270",
+          "position": 2,
+          "recipe_step_id": "9c4a5a81-384e-4815-acfd-c5062b237d27",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "11bf546fb904bf8955a21d1f8ad2ec437aee81d39ad1a03f2ab2c2086505ac56",
+          "position": 3,
+          "recipe_step_id": "8451bb2f-03a6-4585-a596-4154d374559c",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_4O_SEMI_HARD_CHEESE_OMELET",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "536496024141fb0ee2eae21654365e80c634a1d67815021f16ecd96abe977d55",
+      "recipe_version_id": "daa591ab-eaf7-4f6a-a35b-62c88141dba2",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-4о",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "258a6b260b462cd8f30ebf78b77aba4ef4f90cc8dd453c2da18c67c724df694f",
+          "position": 1,
+          "recipe_step_id": "569ed82b-d9d0-4f93-8bcc-03917038ad1c",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "5307358c9297bbc2e445e43989e01072fb71710687eebff5e2d6f0d81e715ed3",
+          "position": 2,
+          "recipe_step_id": "68edffd1-77ff-41dc-9f7c-930c491a346f",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "b924a428011c785dcdab818959269d852df65dc345125d7186e7c2c95dcf375b",
+          "position": 3,
+          "recipe_step_id": "b5b76a61-951c-43d5-9d81-fbcb442dc45b",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "af15e49e4d8f2e6b7e5e126dbaa3e2b4ca7cc7de912b5d9d82ecb77572816ad1",
+          "position": 4,
+          "recipe_step_id": "04edafc0-d302-41d8-baf9-318944d4a9b2",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_6K_MILLET_MILK_PORRIDGE",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "774e006a9fc91a066ea09f2d16c2b62f366c2967f885b1051bde2adbf6eda3d8",
+      "recipe_version_id": "8d1a614c-00be-4180-9038-780891cb9b82",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-6к",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "045a0a289cd8a540c49cb30c7f991b6c322828dad41203888c43e5179718f0d2",
+          "position": 1,
+          "recipe_step_id": "5073e88d-c4bb-4c67-bbe0-b82a4b5ebaec",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "864eb302bb1cb23498728a29b33e424dd8bcd597e2874a13e0a885dd691a306e",
+          "position": 2,
+          "recipe_step_id": "3d69979d-9648-4e84-87c2-1d2b0e688c56",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "7d4cf45a3d05a5645a9362dd25b1a921d81582638e5afa75ed0126291fbf411d",
+          "position": 3,
+          "recipe_step_id": "974b01a7-37cd-4414-b6fd-97218d85a067",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_6M_BEEF_BITOCHEK",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "fb6cd597cc1511d048fe2d7396fcdd956a5522138a5120a6df6a395421903993",
+      "recipe_version_id": "34ec0fa8-c724-424c-819f-fa6823264d04",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-6м",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "2d5b8a370947b64df0b0526ab55caa970be93ee062438c066024d26ab8a689da",
+          "position": 1,
+          "recipe_step_id": "a8d94d4a-848d-4023-9405-d90d65397194",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "745694ec57eade3de59124e77bfac0600b3a86e1f7437f9837d9116aea260b16",
+          "position": 2,
+          "recipe_step_id": "42ee4daf-98b7-4771-a4da-91c106a77380",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "11bf546fb904bf8955a21d1f8ad2ec437aee81d39ad1a03f2ab2c2086505ac56",
+          "position": 3,
+          "recipe_step_id": "8d20c10e-f2c2-45dd-8b43-e7ec209efaab",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_6R_PINK_SALMON_IN_MILK",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "8712bba4f5563bfd8db99f4205c38d9c43a4f99664546b79ba4ed3b55e4006d7",
+      "recipe_version_id": "c81783ad-e800-46c7-a905-70654903524e",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-6р",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "b6b9e45dc7afdf48d30247f33bc7fd71b154af29fe4a8075da53edb2e89affde",
+          "position": 1,
+          "recipe_step_id": "824a88d2-3ac7-4a66-89be-f243db8dbb92",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "b843449b2b6c71cb266562c67ec2f13d8bdc6c2f6af6fa57affc0ee70b786e1a",
+          "position": 2,
+          "recipe_step_id": "389a2f99-fafa-4ca8-b1ac-7bb32586fb96",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "217f9f0d397140ef2c3bb3e68421179f99b71df322d11fdecbf73a64c7d414e7",
+          "position": 3,
+          "recipe_step_id": "5a1bbd81-468e-48a4-b71e-5909d34f8bc1",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "71014fbb1c604b545fe917e9861a41eb3619af8c72e579903f3b0f56f8c192e2",
+          "position": 4,
+          "recipe_step_id": "dcb4a67b-36e2-45a5-8b54-f6a8d90fc529",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "51e1fd2f9ceb44a9fe4a6d341ef4151675c85e65219e0b07533ada47cfac6033",
+          "position": 5,
+          "recipe_step_id": "f675b7c0-3df9-4c8b-a7e8-d2e78bb4148a",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_7M_BEEF_SCHNITZEL",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "df66b058337957720f8e0d88a3094fe439a2db29a363cf9ff7a61cb900a9299c",
+      "recipe_version_id": "343a786b-3338-4d30-825e-486ce70dae54",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-7м",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "2d5b8a370947b64df0b0526ab55caa970be93ee062438c066024d26ab8a689da",
+          "position": 1,
+          "recipe_step_id": "6b70713e-e300-4f64-a656-dca680a725eb",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "3d365768f234fe48a3401e5e41e64e975a4503a0a2e642f4ad0d15c7a5fdb915",
+          "position": 2,
+          "recipe_step_id": "694856ba-6f7f-4bcb-ab02-a7fcab09ecae",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "11bf546fb904bf8955a21d1f8ad2ec437aee81d39ad1a03f2ab2c2086505ac56",
+          "position": 3,
+          "recipe_step_id": "3961c0fb-5158-490f-9f9a-76a72e3f3e4a",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_7R_POLLOCK_IN_MILK",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "74e02d9c88421665f35e2f07c8cf54adfcad62200fe857de27bda87e0f36be71",
+      "recipe_version_id": "16a04325-d532-45f6-82ca-2f30630467a6",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-7р",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "b6b9e45dc7afdf48d30247f33bc7fd71b154af29fe4a8075da53edb2e89affde",
+          "position": 1,
+          "recipe_step_id": "00dc9916-dc34-44eb-8518-ff7299920149",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "befde2f2acca48d72e4775d31c7d1e67827bb5462309e79d099fd55c5156e291",
+          "position": 2,
+          "recipe_step_id": "5da955b2-d94e-43fd-a7a5-3991a55ae425",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "217f9f0d397140ef2c3bb3e68421179f99b71df322d11fdecbf73a64c7d414e7",
+          "position": 3,
+          "recipe_step_id": "b477bf04-e05a-4763-a8a1-39ffcad21e42",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "71014fbb1c604b545fe917e9861a41eb3619af8c72e579903f3b0f56f8c192e2",
+          "position": 4,
+          "recipe_step_id": "a4ebff74-b4b6-47f0-aaf0-68918efb16bb",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "51e1fd2f9ceb44a9fe4a6d341ef4151675c85e65219e0b07533ada47cfac6033",
+          "position": 5,
+          "recipe_step_id": "aa01924f-a534-4368-a597-62c04591cf60",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_8M_STEAMED_BEEF_MEATBALLS",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "e0382ea1641df460a6ecca407ed7ced33c23da823de045f3065d802e39b7e7ec",
+      "recipe_version_id": "a7e25c32-10e7-4582-be33-57bcc4914f06",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-8м",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "8546e1af35dcdc2be1c04421fa9088aec41000f55b2238ec7056f45d258de554",
+          "position": 1,
+          "recipe_step_id": "2bcb1281-64bf-4019-b969-e964865fc796",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "fa3ad033da3e2a17ede2259ac3af822f019a0cb8c76e798cee14d041168a165f",
+          "position": 2,
+          "recipe_step_id": "a5cfa95c-ccc9-454f-aa67-92198167c515",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "43bc4c44296e28948cfb519907ebf51969c89b1d483d93c38392a094b709b03e",
+          "position": 3,
+          "recipe_step_id": "b0ef3000-c430-4726-9264-190f29ef1a29",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 2
+    },
+    {
+      "base_servings": "1.000000",
+      "batch_friendly": null,
+      "canonical_code": "SCHOOL2022_54_9K_MILK_OAT_PORRIDGE",
+      "cook_time_minutes": null,
+      "freezable": null,
+      "prep_time_minutes": null,
+      "process_hash": "cf74a85dcb2e60c682dbc50d5ca3efe8fd286c07b412679930536d2dbfb6c80c",
+      "recipe_version_id": "52a19059-096a-4799-bde3-8c1a7a05c31c",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1.000000",
+      "source_recipe_id": "ru-school2022:recipe:54-9к",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        {
+          "instruction_sha256": "80e94851387c70501273cb25e4f5759ad99a1bf0e7c2395070ea72ae5fe861e1",
+          "position": 1,
+          "recipe_step_id": "186c0e49-7dfb-49d5-8d81-9e1003af5d3c",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "1d0a270943cc9501d85b0826cf11049878d8b61bd71168661b90d291ee363651",
+          "position": 2,
+          "recipe_step_id": "a60c7496-57e6-41ee-b94c-075eccc9b6a8",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "e4712a131c0d79823c173ec666b4705af642cf59347e7df70655c72c5b6e767e",
+          "position": 3,
+          "recipe_step_id": "52ced507-a4a4-4f83-8488-fc622bf0544d",
+          "stage_code": null
+        },
+        {
+          "instruction_sha256": "309f30ff6ba3ed90867967213fb491ca1620ec40c3c337c17f2e9fda174d67a4",
+          "position": 4,
+          "recipe_step_id": "07a3998c-1baf-4011-b81f-6272efe98962",
+          "stage_code": null
+        }
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "version_number": 1
+    }
+  ],
+  "counts": {
+    "current_verified_catalogue_versions": 51,
+    "meal_events": 21,
+    "members": 3,
+    "servings": 42,
+    "unique_selected_versions": 21
+  },
+  "gate_blockers_remaining": [
+    "SOURCE_REVIEWED_SHARED_PREP_NOT_PROVEN",
+    "FOOD_STORAGE_TRANSITION_UNVERIFIED",
+    "NUMERIC_STEP_CLASSIFICATION_UNVERIFIED"
+  ],
+  "gate_decision": "BLOCKED",
+  "members": [
+    {
+      "fixture_ordinal": 1,
+      "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16"
+    },
+    {
+      "fixture_ordinal": 2,
+      "member_id": "def51f62-65be-4939-8860-70c792ff7731"
+    },
+    {
+      "fixture_ordinal": 3,
+      "member_id": "171cbad3-0b5f-44ba-bba2-ff4fc67537f0"
+    }
+  ],
+  "plan": {
+    "config_version": "planner-v0.5",
+    "events": [
+      {
+        "event_id": "d88c147f-783b-4137-a62b-0a3710807458",
+        "local_date": "2026-09-14",
+        "plan_id": "589ef95a-2158-40a1-af91-0e13087d5744",
+        "position": 1,
+        "recipe_version_id": "089a7b08-99f7-4c42-87a5-05cb5b75fb0e",
+        "role": "BREAKFAST",
+        "source_kind": "COOK_RECIPE"
+      },
+      {
+        "event_id": "7b95f051-c1c4-4ab6-877e-db9c8d8051a1",
+        "local_date": "2026-09-14",
+        "plan_id": "589ef95a-2158-40a1-af91-0e13087d5744",
+        "position": 2,
+        "recipe_version_id": "029a7eca-6876-467a-a127-667c11ea2e68",
+        "role": "LUNCH",
+        "source_kind": "COOK_RECIPE"
+      },
+      {
+        "event_id": "45fed8fa-b642-4871-9544-05a00bbf33d5",
+        "local_date": "2026-09-14",
+        "plan_id": "589ef95a-2158-40a1-af91-0e13087d5744",
+        "position": 3,
+        "recipe_version_id": "05057905-1ad5-4693-9016-94df494c4d95",
+        "role": "DINNER",
+        "source_kind": "COOK_RECIPE"
+      },
+      {
+        "event_id": "6efa26f5-4bab-4537-b4ff-78229d61473a",
+        "local_date": "2026-09-15",
+        "plan_id": "589ef95a-2158-40a1-af91-0e13087d5744",
+        "position": 1,
+        "recipe_version_id": "0d97a8c1-eb8e-41d4-bd74-f922c7c2efcc",
+        "role": "BREAKFAST",
+        "source_kind": "COOK_RECIPE"
+      },
+      {
+        "event_id": "cf0e3fe3-4c59-4447-9fbd-7a9e19c6ff49",
+        "local_date": "2026-09-15",
+        "plan_id": "589ef95a-2158-40a1-af91-0e13087d5744",
+        "position": 2,
+        "recipe_version_id": "063694fb-92cf-4731-adf6-041d36a532e4",
+        "role": "LUNCH",
+        "source_kind": "COOK_RECIPE"
+      },
+      {
+        "event_id": "d000a213-d169-4f10-a2ad-08180f40aea6",
+        "local_date": "2026-09-15",
+        "plan_id": "589ef95a-2158-40a1-af91-0e13087d5744",
+        "position": 3,
+        "recipe_version_id": "116e25fa-12f3-4926-8a2a-7aa2cf99bb9c",
+        "role": "DINNER",
+        "source_kind": "COOK_RECIPE"
+      },
+      {
+        "event_id": "d64243bc-720d-455c-a37e-80da8ddac617",
+        "local_date": "2026-09-16",
+        "plan_id": "589ef95a-2158-40a1-af91-0e13087d5744",
+        "position": 1,
+        "recipe_version_id": "14bff957-0297-4afb-a074-14539c1a4815",
+        "role": "BREAKFAST",
+        "source_kind": "COOK_RECIPE"
+      },
+      {
+        "event_id": "a3bd9a18-5ed6-4447-8a13-1b7b9416c45f",
+        "local_date": "2026-09-16",
+        "plan_id": "589ef95a-2158-40a1-af91-0e13087d5744",
+        "position": 2,
+        "recipe_version_id": "155f5283-2f2a-4487-83ac-895877197b45",
+        "role": "LUNCH",
+        "source_kind": "COOK_RECIPE"
+      },
+      {
+        "event_id": "bf60e784-bd3e-4d62-96dd-54318fd5920c",
+        "local_date": "2026-09-16",
+        "plan_id": "589ef95a-2158-40a1-af91-0e13087d5744",
+        "position": 3,
+        "recipe_version_id": "16a04325-d532-45f6-82ca-2f30630467a6",
+        "role": "DINNER",
+        "source_kind": "COOK_RECIPE"
+      },
+      {
+        "event_id": "9c1ae57e-6c8e-4426-a6de-20f8bb698499",
+        "local_date": "2026-09-17",
+        "plan_id": "589ef95a-2158-40a1-af91-0e13087d5744",
+        "position": 1,
+        "recipe_version_id": "2be3df57-61c6-4339-93c9-cfda1a28d5f1",
+        "role": "BREAKFAST",
+        "source_kind": "COOK_RECIPE"
+      },
+      {
+        "event_id": "d918575d-6272-4066-b732-d95a4d74c3d6",
+        "local_date": "2026-09-17",
+        "plan_id": "589ef95a-2158-40a1-af91-0e13087d5744",
+        "position": 2,
+        "recipe_version_id": "27771c3c-2eb4-4f90-a297-ac41366534e0",
+        "role": "LUNCH",
+        "source_kind": "COOK_RECIPE"
+      },
+      {
+        "event_id": "b818c4e0-9481-44d8-a227-7a9e4cb914b3",
+        "local_date": "2026-09-17",
+        "plan_id": "589ef95a-2158-40a1-af91-0e13087d5744",
+        "position": 3,
+        "recipe_version_id": "57ab4819-3b85-4ace-8fdc-a8391850942c",
+        "role": "DINNER",
+        "source_kind": "COOK_RECIPE"
+      },
+      {
+        "event_id": "7112cf21-6444-460d-af16-6f2c8ccb5c19",
+        "local_date": "2026-09-18",
+        "plan_id": "589ef95a-2158-40a1-af91-0e13087d5744",
+        "position": 1,
+        "recipe_version_id": "305032fd-2570-4630-8975-ca730cb47a72",
+        "role": "BREAKFAST",
+        "source_kind": "COOK_RECIPE"
+      },
+      {
+        "event_id": "ece787f4-ac81-4390-b57f-211c220b02a9",
+        "local_date": "2026-09-18",
+        "plan_id": "589ef95a-2158-40a1-af91-0e13087d5744",
+        "position": 2,
+        "recipe_version_id": "343a786b-3338-4d30-825e-486ce70dae54",
+        "role": "LUNCH",
+        "source_kind": "COOK_RECIPE"
+      },
+      {
+        "event_id": "2c246222-941c-49ab-8203-72944024cc34",
+        "local_date": "2026-09-18",
+        "plan_id": "589ef95a-2158-40a1-af91-0e13087d5744",
+        "position": 3,
+        "recipe_version_id": "7473674d-8bd4-47c6-84b6-20273f54cbdc",
+        "role": "DINNER",
+        "source_kind": "COOK_RECIPE"
+      },
+      {
+        "event_id": "1972a906-0ebb-4204-875b-59379d038c66",
+        "local_date": "2026-09-19",
+        "plan_id": "589ef95a-2158-40a1-af91-0e13087d5744",
+        "position": 1,
+        "recipe_version_id": "3ae58298-a556-4b67-978f-5caace5eae97",
+        "role": "BREAKFAST",
+        "source_kind": "COOK_RECIPE"
+      },
+      {
+        "event_id": "63c2c701-ce68-4637-8a96-07252d32fde5",
+        "local_date": "2026-09-19",
+        "plan_id": "589ef95a-2158-40a1-af91-0e13087d5744",
+        "position": 2,
+        "recipe_version_id": "34ec0fa8-c724-424c-819f-fa6823264d04",
+        "role": "LUNCH",
+        "source_kind": "COOK_RECIPE"
+      },
+      {
+        "event_id": "87817374-be28-4e52-9607-f6b14cd1b098",
+        "local_date": "2026-09-19",
+        "plan_id": "589ef95a-2158-40a1-af91-0e13087d5744",
+        "position": 3,
+        "recipe_version_id": "817a573f-168a-4856-870c-63aebfb73534",
+        "role": "DINNER",
+        "source_kind": "COOK_RECIPE"
+      },
+      {
+        "event_id": "edcded73-cd8b-461e-a4e0-ca5d327ed6f8",
+        "local_date": "2026-09-20",
+        "plan_id": "589ef95a-2158-40a1-af91-0e13087d5744",
+        "position": 1,
+        "recipe_version_id": "47f775c5-5085-47fa-b2dc-736e0f465620",
+        "role": "BREAKFAST",
+        "source_kind": "COOK_RECIPE"
+      },
+      {
+        "event_id": "15473b98-4af0-4d0e-8908-68b59f68e688",
+        "local_date": "2026-09-20",
+        "plan_id": "589ef95a-2158-40a1-af91-0e13087d5744",
+        "position": 2,
+        "recipe_version_id": "39efb060-783c-4e6e-acbe-a0572a25a8d8",
+        "role": "LUNCH",
+        "source_kind": "COOK_RECIPE"
+      },
+      {
+        "event_id": "2f17a025-7b67-4550-a232-df6f3ca8e84a",
+        "local_date": "2026-09-20",
+        "plan_id": "589ef95a-2158-40a1-af91-0e13087d5744",
+        "position": 3,
+        "recipe_version_id": "9104ede5-9529-4f7f-a965-94d1d7b01b4f",
+        "role": "DINNER",
+        "source_kind": "COOK_RECIPE"
+      }
+    ],
+    "household_id": "bdffe836-df05-4db5-88f6-81e7e5f966f4",
+    "member_selections": [
+      {
+        "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+        "selection_id": "a97d83ac-c3a9-4918-b90c-51858a2e8880"
+      },
+      {
+        "member_id": "171cbad3-0b5f-44ba-bba2-ff4fc67537f0",
+        "selection_id": "5be9a28d-61dd-4744-8789-dec49d0fb9da"
+      },
+      {
+        "member_id": "def51f62-65be-4939-8860-70c792ff7731",
+        "selection_id": "c7eeac0d-231e-4dd5-bbac-1885808754b2"
+      }
+    ],
+    "plan_id": "589ef95a-2158-40a1-af91-0e13087d5744",
+    "revision_number": 1,
+    "servings": [
+      {
+        "event_id": "15473b98-4af0-4d0e-8908-68b59f68e688",
+        "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+        "portion_servings": "2.031139",
+        "serving_id": "a64fbb51-13b5-4e84-9e55-03e60d97edae"
+      },
+      {
+        "event_id": "1972a906-0ebb-4204-875b-59379d038c66",
+        "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+        "portion_servings": "3.422496",
+        "serving_id": "663fb835-a36c-4896-a818-f6d39f56573a"
+      },
+      {
+        "event_id": "1972a906-0ebb-4204-875b-59379d038c66",
+        "member_id": "def51f62-65be-4939-8860-70c792ff7731",
+        "portion_servings": "3.979062",
+        "serving_id": "6b76f364-2cab-4b08-af5f-d4de5c954f84"
+      },
+      {
+        "event_id": "2c246222-941c-49ab-8203-72944024cc34",
+        "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+        "portion_servings": "5.265964",
+        "serving_id": "8ccb95c9-5707-4661-95d4-031522e0d147"
+      },
+      {
+        "event_id": "2c246222-941c-49ab-8203-72944024cc34",
+        "member_id": "171cbad3-0b5f-44ba-bba2-ff4fc67537f0",
+        "portion_servings": "5.265964",
+        "serving_id": "c63c0fe4-62d9-4293-9ace-3086127a9330"
+      },
+      {
+        "event_id": "2c246222-941c-49ab-8203-72944024cc34",
+        "member_id": "def51f62-65be-4939-8860-70c792ff7731",
+        "portion_servings": "6.122313",
+        "serving_id": "72a3f256-e1c4-44eb-8ebb-7d7be9e31d24"
+      },
+      {
+        "event_id": "2f17a025-7b67-4550-a232-df6f3ca8e84a",
+        "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+        "portion_servings": "1.894401",
+        "serving_id": "6d30d923-009a-4780-bda5-4d909cf3d201"
+      },
+      {
+        "event_id": "2f17a025-7b67-4550-a232-df6f3ca8e84a",
+        "member_id": "171cbad3-0b5f-44ba-bba2-ff4fc67537f0",
+        "portion_servings": "1.894401",
+        "serving_id": "cc6c1ad5-b7b8-45f9-bd8f-cd70b1bf82c2"
+      },
+      {
+        "event_id": "2f17a025-7b67-4550-a232-df6f3ca8e84a",
+        "member_id": "def51f62-65be-4939-8860-70c792ff7731",
+        "portion_servings": "2.202468",
+        "serving_id": "8ba4a61a-312e-4d2c-b20e-ddd80599f7db"
+      },
+      {
+        "event_id": "45fed8fa-b642-4871-9544-05a00bbf33d5",
+        "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+        "portion_servings": "3.072267",
+        "serving_id": "29e6d0ee-0534-4430-aa8e-ca7f8772e01e"
+      },
+      {
+        "event_id": "45fed8fa-b642-4871-9544-05a00bbf33d5",
+        "member_id": "171cbad3-0b5f-44ba-bba2-ff4fc67537f0",
+        "portion_servings": "3.072267",
+        "serving_id": "5a6cd950-3f2b-42fb-82f8-02da5eb91d26"
+      },
+      {
+        "event_id": "45fed8fa-b642-4871-9544-05a00bbf33d5",
+        "member_id": "def51f62-65be-4939-8860-70c792ff7731",
+        "portion_servings": "3.571878",
+        "serving_id": "95a96c98-8507-45f6-8a9a-6c25c3ccb169"
+      },
+      {
+        "event_id": "63c2c701-ce68-4637-8a96-07252d32fde5",
+        "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+        "portion_servings": "3.751136",
+        "serving_id": "4abd33e8-8a16-4603-bf54-48b5cd62d6d7"
+      },
+      {
+        "event_id": "6efa26f5-4bab-4537-b4ff-78229d61473a",
+        "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+        "portion_servings": "2.851852",
+        "serving_id": "267ffa24-d36e-4a97-975d-e9dcee39c0af"
+      },
+      {
+        "event_id": "6efa26f5-4bab-4537-b4ff-78229d61473a",
+        "member_id": "def51f62-65be-4939-8860-70c792ff7731",
+        "portion_servings": "3.315619",
+        "serving_id": "b1c44060-1bd3-4421-b49f-8503a74e51f4"
+      },
+      {
+        "event_id": "7112cf21-6444-460d-af16-6f2c8ccb5c19",
+        "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+        "portion_servings": "2.362341",
+        "serving_id": "7610e6f0-f813-494d-aaca-18aabdcf2fec"
+      },
+      {
+        "event_id": "7112cf21-6444-460d-af16-6f2c8ccb5c19",
+        "member_id": "def51f62-65be-4939-8860-70c792ff7731",
+        "portion_servings": "2.746504",
+        "serving_id": "ead469bc-8fff-46d6-ae5c-7432dc3e292e"
+      },
+      {
+        "event_id": "7b95f051-c1c4-4ab6-877e-db9c8d8051a1",
+        "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+        "portion_servings": "6.465160",
+        "serving_id": "b9b492ca-16e8-4b90-8134-7552d74a7a01"
+      },
+      {
+        "event_id": "87817374-be28-4e52-9607-f6b14cd1b098",
+        "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+        "portion_servings": "5.294174",
+        "serving_id": "3bfd7455-9f5e-4f4d-b6c6-e6b37ab7dd5a"
+      },
+      {
+        "event_id": "87817374-be28-4e52-9607-f6b14cd1b098",
+        "member_id": "171cbad3-0b5f-44ba-bba2-ff4fc67537f0",
+        "portion_servings": "5.294174",
+        "serving_id": "25b0989f-67fd-4626-be93-eb4d7ffb1442"
+      },
+      {
+        "event_id": "87817374-be28-4e52-9607-f6b14cd1b098",
+        "member_id": "def51f62-65be-4939-8860-70c792ff7731",
+        "portion_servings": "6.155112",
+        "serving_id": "dc0a880f-bb05-4496-a597-ed479da6d4cc"
+      },
+      {
+        "event_id": "9c1ae57e-6c8e-4426-a6de-20f8bb698499",
+        "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+        "portion_servings": "2.632397",
+        "serving_id": "67d698d0-604b-4aec-86f5-a0ab3bf8b99b"
+      },
+      {
+        "event_id": "9c1ae57e-6c8e-4426-a6de-20f8bb698499",
+        "member_id": "def51f62-65be-4939-8860-70c792ff7731",
+        "portion_servings": "3.060477",
+        "serving_id": "31dcdfae-8ae2-46bc-bd50-ade2e98bc8e2"
+      },
+      {
+        "event_id": "a3bd9a18-5ed6-4447-8a13-1b7b9416c45f",
+        "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+        "portion_servings": "5.916796",
+        "serving_id": "2342ec05-bbc2-4eee-9786-f572996d312b"
+      },
+      {
+        "event_id": "b818c4e0-9481-44d8-a227-7a9e4cb914b3",
+        "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+        "portion_servings": "4.789560",
+        "serving_id": "ad31356d-cfaa-4e75-83df-6990d9560f49"
+      },
+      {
+        "event_id": "b818c4e0-9481-44d8-a227-7a9e4cb914b3",
+        "member_id": "171cbad3-0b5f-44ba-bba2-ff4fc67537f0",
+        "portion_servings": "4.789560",
+        "serving_id": "2478c060-02a2-4b6a-b1b9-7f82942db5b3"
+      },
+      {
+        "event_id": "b818c4e0-9481-44d8-a227-7a9e4cb914b3",
+        "member_id": "def51f62-65be-4939-8860-70c792ff7731",
+        "portion_servings": "5.568437",
+        "serving_id": "d4c5f42d-74c3-4e02-8367-e804415363bf"
+      },
+      {
+        "event_id": "bf60e784-bd3e-4d62-96dd-54318fd5920c",
+        "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+        "portion_servings": "5.631030",
+        "serving_id": "c86ddbb7-ec00-43b2-9103-167afaa5ce07"
+      },
+      {
+        "event_id": "bf60e784-bd3e-4d62-96dd-54318fd5920c",
+        "member_id": "171cbad3-0b5f-44ba-bba2-ff4fc67537f0",
+        "portion_servings": "5.631030",
+        "serving_id": "bf38036c-715f-4e05-9bf1-e8e3e6a6cefc"
+      },
+      {
+        "event_id": "bf60e784-bd3e-4d62-96dd-54318fd5920c",
+        "member_id": "def51f62-65be-4939-8860-70c792ff7731",
+        "portion_servings": "6.546747",
+        "serving_id": "c58d9679-21b3-4d07-9fb7-249fae5fa579"
+      },
+      {
+        "event_id": "cf0e3fe3-4c59-4447-9fbd-7a9e19c6ff49",
+        "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+        "portion_servings": "2.470615",
+        "serving_id": "f488c987-977e-4a1d-b60d-91b41ba26581"
+      },
+      {
+        "event_id": "d000a213-d169-4f10-a2ad-08180f40aea6",
+        "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+        "portion_servings": "2.707523",
+        "serving_id": "bb557fdb-a9dc-4cfa-b702-e543be6d366f"
+      },
+      {
+        "event_id": "d000a213-d169-4f10-a2ad-08180f40aea6",
+        "member_id": "171cbad3-0b5f-44ba-bba2-ff4fc67537f0",
+        "portion_servings": "2.707523",
+        "serving_id": "9db5061b-e829-419f-b070-34b3440487cb"
+      },
+      {
+        "event_id": "d000a213-d169-4f10-a2ad-08180f40aea6",
+        "member_id": "def51f62-65be-4939-8860-70c792ff7731",
+        "portion_servings": "3.147820",
+        "serving_id": "3d730392-3655-4920-8f88-cefbd63af305"
+      },
+      {
+        "event_id": "d64243bc-720d-455c-a37e-80da8ddac617",
+        "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+        "portion_servings": "4.212771",
+        "serving_id": "9489b080-eea0-4931-9280-2762a2d7382d"
+      },
+      {
+        "event_id": "d64243bc-720d-455c-a37e-80da8ddac617",
+        "member_id": "def51f62-65be-4939-8860-70c792ff7731",
+        "portion_servings": "4.897851",
+        "serving_id": "99c33e51-2a0b-4616-a4a7-4bbf413e8264"
+      },
+      {
+        "event_id": "d88c147f-783b-4137-a62b-0a3710807458",
+        "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+        "portion_servings": "3.155375",
+        "serving_id": "cd257ce7-f2f5-4808-8274-249ad543e115"
+      },
+      {
+        "event_id": "d88c147f-783b-4137-a62b-0a3710807458",
+        "member_id": "def51f62-65be-4939-8860-70c792ff7731",
+        "portion_servings": "3.668501",
+        "serving_id": "6def753f-1a88-47f5-9fa1-89897cb3f597"
+      },
+      {
+        "event_id": "d918575d-6272-4066-b732-d95a4d74c3d6",
+        "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+        "portion_servings": "2.852668",
+        "serving_id": "5f0b33b9-b6c6-40ed-887f-affc17b93216"
+      },
+      {
+        "event_id": "ece787f4-ac81-4390-b57f-211c220b02a9",
+        "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+        "portion_servings": "3.751136",
+        "serving_id": "3c475e52-84e0-4fe6-9520-ec4d6c051db5"
+      },
+      {
+        "event_id": "edcded73-cd8b-461e-a4e0-ca5d327ed6f8",
+        "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+        "portion_servings": "3.539985",
+        "serving_id": "a83caf46-deb1-4e02-83eb-d4f939ed6023"
+      },
+      {
+        "event_id": "edcded73-cd8b-461e-a4e0-ca5d327ed6f8",
+        "member_id": "def51f62-65be-4939-8860-70c792ff7731",
+        "portion_servings": "4.115657",
+        "serving_id": "34709c57-c43f-4356-9457-3bd02a72bdf1"
+      }
+    ],
+    "timezone": "Europe/Moscow",
+    "week_end": "2026-09-20",
+    "week_start": "2026-09-14"
+  },
+  "planner": {
+    "deterministic": true,
+    "expected_semantic_pins_sha256": "2d6cb581649863b7edbd3c0efff2bae2934c6a512c99a45d10e92f92f514cb3d",
+    "request_fingerprint": "36dfc26d6c7c90cdb11401c5a410f4c0376aec664ab1ba262dbe4163ba150061",
+    "selected_exclusion_violations": [],
+    "trace_fingerprint": "332c6ae5e7cbde2a2178e183d598903afc86bb2f910f7795462e0943162104d9",
+    "version": "planner-v0.5"
+  },
+  "schema": "PR10_META_GATE2_FIXTURE_PINS_V1",
+  "scope": "SYNTHETIC_FRESH_SQLITE_PERSISTED_DIAGNOSTIC_ONLY"
+}
