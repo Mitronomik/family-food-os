@@ -1,3 +1,11 @@
+# 2026-10-29 — PR10-FIXTURE-FORWARD Issue #257 docs-only proposal
+
+- Verified [PR #256 merged](https://github.com/Mitronomik/family-food-os/pull/256) as `f29f2279fa92d5b9d2854105007fb124460b4466`, including accepted historical request/ID-seam limitations; merged #254 two-process negative receipts and archived original PR #196 raw/hash remain untouched.
+- Under [Issue #257](https://github.com/Mitronomik/family-food-os/issues/257), drafted [forward current-Planner fixture amendment](../docs/family-food/pr10-fixture-forward-contract-amendment-2026-10-29.md): explicit conditional Option A §§2–6, D2 entry condition and Option B §2 historic-fixture default supersession **only for technical reproducibility**. Retains D2/D2-FD safe batch scope, genuine 3/7/21/42 two-process Planner receipts, anti-cherry-pick, source/Step/rights/Decimal checks.
+- Positive action subgate remains **two independently approved current `APPROVED_IMMEDIATE` Russian same-day tasks on two different generated `COOK_RECIPE` MealEvents**; D3 anti-rollback, Gate2 full chain, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN` unmodified. Docs-only, no fixture/week/runtime/output code generated. Await Docs CI and independent review; **no automatic merge**.
+
+---
+
 # 2026-10-29 — separate PR10 Option A historical input parity/ID seam decision
 
 - Verified merged PR #254 as authentic negative 2-run Planner evidence; original positive Issue #252 remains OPEN. Accepted baseline `main@8a096a4f74711d04bcc2abb8ddbf91ce4086ef15`.
