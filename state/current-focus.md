@@ -1,3 +1,11 @@
+# PR #248 reviewer checksum correction — 2026-10-29
+
+**Current task:** docs/evidence Option A contract in [PR #248](https://github.com/Mitronomik/family-food-os/pull/248), separate from the negative evidence of [PR #246](https://github.com/Mitronomik/family-food-os/pull/246). Independently verified corrected UUID-independent QA process-content SHA-256 **`d19f11a0074d095eaac02fc1d414a1f3d6a5088a884c78d27436984a63023d36`** across the original #196 and fresh #246 JSON artifacts. The original 21×42 week digest `731ef32e…` and original 110511-byte archived receipt remain unchanged. Added [focused regression test](../backend/app/tests/test_pr10_option_a_process_content.py) covering raw SHA, ephemeral UUID independence, Step/source tampering (6 local tests passed). **Do not report current exact-head CI as successful before checks finish**.
+
+**Merge order:** correct/review #246 first, then synchronize this branch against accepted `main` and resolve shared `state/*` changes before deciding whether #248 can merge. A passing docs-only contract does **not** prove true historical Planner reproduction, historical PlannerRequest input parity or test-only seed-ID injection. `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, D3, safe-batch and portion-quality gates remain.
+
+---
+
 ## Archive evidence completion — 2026-10-29
 
 **P1 original archive COMPLETE on PR branch:** [complete original PR #196 JSON](../docs/family-food/evidence/pr196-original-synthetic-fixture-receipt.json) and [provenance/verification README](../docs/family-food/evidence/README-pr196-original-synthetic-fixture.md) are now committed to PR #248; independently fetched and hashed GitHub bytes match 110511-byte original SHA-256 `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec` (Git blob `e82f147be4f7d1c67fe298ce973a968223910d03`). Archive availability **on PR branch** eliminates dependency on expiring Actions artifact for reviewer access, but **does not establish** historical Planner input parity, fixture ID seeding feasibility, eligibility, Gate2 success or merge authorization.
