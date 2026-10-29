@@ -93,7 +93,9 @@ def test_original_archive_matches_published_portable_process_digest(original_rec
     )
 
 
-def test_uuid_and_run_local_process_hash_do_not_change_portable_digest(original_receipt):
+def test_uuid_and_run_local_process_hash_do_not_change_portable_digest(
+    original_receipt,
+):
     changed = deepcopy(original_receipt["catalogue"])
     for recipe in changed:
         recipe["process_hash"] = "0" * 64
@@ -104,7 +106,9 @@ def test_uuid_and_run_local_process_hash_do_not_change_portable_digest(original_
 
 
 @pytest.mark.parametrize("tamper", ["step", "order", "source", "duplicate_code"])
-def test_semantic_process_tampering_changes_digest_or_is_rejected(original_receipt, tamper):
+def test_semantic_process_tampering_changes_digest_or_is_rejected(
+    original_receipt, tamper
+):
     changed = deepcopy(original_receipt["catalogue"])
     if tamper == "step":
         changed[0]["steps"][0]["instruction_sha256"] = "a" * 64
