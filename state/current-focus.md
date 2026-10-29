@@ -1,3 +1,13 @@
+# PR #246 reviewer P2 resolution — Option A approved after drift evidence (2026-10-29)
+
+**Current accepted base:** `main@3c4645a27d675bb4464c913785aef3cd88de8681`; this PR's own factual deliverable is **only** the independently verified 3/21/42 structural PASS versus 0/21 cross-run recipe-slot match, `NO_GO_EXACT_TWO_STEP_FIXTURE_REPRODUCIBILITY`. The original experiment did not establish a product Planner bug or permit any Prep step. [Issue #245](https://github.com/Mitronomik/family-food-os/issues/245) and the [source-pinned negative report](../docs/family-food/pr10-core-two-step-current-fixture-evidence-2026-10-27.md) remain unchanged.
+
+**Later owner decision (not implemented in PR #246):** on **2026-10-27** the owner explicitly selected **Option A** in [Issue #247](https://github.com/Mitronomik/family-food-os/issues/247): preserve the original PR #196/#244 21-MealEvent, 42-Serving **synthetic QA week semantics**, keep the production Planner and Gate2 constraints unchanged. [PR #248](https://github.com/Mitronomik/family-food-os/pull/248) is a **separate open/unmerged docs-only Implementation Contract Gate** to review and freeze this decision; do not treat its branch-only contract as accepted `main`.
+
+**Next only:** independent review + owner-authorized merge of this evidence PR first, then synchronize/review PR #248 against resulting `main` (including `state/*` conflicts) before a separate merge decision. No automatic merge or fixture-runtime work. `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN` remain.
+
+---
+
 # Issue #245 — exact Gate2 fixture drift NO-GO from actual CI — 2026-10-27
 
 **Accepted main:** `3c4645a27d675bb4464c913785aef3cd88de8681`, PR #244 merged, PR #242 closed unmerged. Owner authorized one next bounded two-step fixture re-pin, **not** an unreviewed fixture identity change or PR10 runtime.
