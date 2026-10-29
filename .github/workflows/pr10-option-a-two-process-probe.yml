@@ -1,4 +1,4 @@
-name: PR10 Option A real Planner two-process diagnostic
+name: PR10 Option A NO-GO two-process evidence verification
 
 on:
   pull_request:
@@ -6,13 +6,18 @@ on:
       - 'scripts/pr10_option_a_probe.py'
       - 'backend/app/tests/test_pr10_option_a_probe.py'
       - '.github/workflows/pr10-option-a-two-process-probe.yml'
+      - 'docs/family-food/evidence/pr10-option-a-issue252-*.json'
+      - 'docs/family-food/pr10-option-a-issue252-two-process-no-go-*.md'
+      - 'state/current-focus.md'
+      - 'state/handoff.md'
+      - 'state/progress.md'
   workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  two-process-probe:
+  verified-negative-evidence:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     env:
@@ -24,18 +29,96 @@ jobs:
           python-version: '3.12'
       - name: Install supported backend and lint
         run: python -m pip install -e './backend[test]' 'ruff==0.16.10'
-      - name: Show deterministic Ruff formatting changes
-        continue-on-error: true
-        run: python -m ruff format --diff scripts/pr10_option_a_probe.py backend/app/tests/test_pr10_option_a_probe.py
       - name: Guard frozen historical source and adversarial failures
         run: |
           python -m pytest -q backend/app/tests/test_pr10_option_a_probe.py --tb=short
           python -m ruff check scripts/pr10_option_a_probe.py backend/app/tests/test_pr10_option_a_probe.py
           python -m ruff format --check scripts/pr10_option_a_probe.py backend/app/tests/test_pr10_option_a_probe.py
-      - name: Two actual isolated fresh Planner+persisted readbacks
+      - name: Verify two independent real Planner readbacks prove CURRENT NO_GO, not fixture success
         run: |
+          set +e
           python -m scripts.pr10_option_a_probe --output /tmp/pr10-option-a-two-run-diagnostic.json
-      - name: Upload synthetic diagnostic even on NO_GO
+          result=$?
+          set -e
+          if [ "$result" -ne 3 ]; then
+            echo "::error::Expected fail-closed current-seed NO_GO (exit 3), not a Planner fixture PASS or infrastructure failure; actual exit=$result"
+            exit 1
+          fi
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          from scripts.audit_pr10_meta_gate2_fixture import validate_fixture_receipt
+          from scripts.pr10_option_a_probe import _hash, _original_week, normalize_receipt
+
+          base = Path("/tmp")
+          report = json.loads((base / "pr10-option-a-two-run-diagnostic.json").read_bytes())
+          assert report["schema"] == "PR10_OPTION_A_TWO_RUN_DIAGNOSTIC_V1"
+          assert report["status"] == "NO_GO_CURRENT_UNSTABILIZED_SEED"
+          assert report["source_raw_sha256"] == "6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec"
+          assert report["expected_uuid_free_week_sha256"] == "731ef32e7137740ed5b46a6044a85d8b2f818a847fdc039842460d442df5aeb6"
+          assert report["independent_processes"] == 2
+          assert report["production_planner_modified"] is False
+          assert report["approved_immediate"] == 0
+          assert report["safe_batch_ready"] is False
+          assert report["portion_release_ready"] == "NOT_PROVEN"
+
+          historical, expected = _original_week()
+          historical_by_slot = {(e["local_date"], e["position"]): e for e in historical}
+          assert len(historical_by_slot) == 21
+          historical_receipt = json.loads(Path("docs/family-food/evidence/pr196-original-synthetic-fixture-receipt.json").read_bytes())
+
+          def source_content(receipt):
+              return {
+                  row["canonical_code"]: (
+                      row["source_name"],
+                      row["source_recipe_id"],
+                      row["source_version"],
+                      row["source_document_sha256"],
+                      tuple(
+                          (step["position"], step["instruction_sha256"], step["stage_code"])
+                          for step in sorted(row["steps"], key=lambda step: step["position"])
+                      ),
+                  )
+                  for row in receipt["catalogue"]
+              }
+
+          historic_source = source_content(historical_receipt)
+          assert len(historic_source) == 51
+          runs = report["runs"]
+          assert isinstance(runs, list) and len(runs) == 2
+          for index, run in enumerate(runs, 1):
+              path = base / f"pr10-option-a-run-{index}.json"
+              raw = path.read_bytes()
+              assert hashlib.sha256(raw).hexdigest() == run["receipt_raw_sha256"]
+              receipt = json.loads(raw)
+              validate_fixture_receipt(receipt)
+              assert source_content(receipt) == historic_source
+              events = normalize_receipt(receipt)
+              digest = _hash(events)
+              assert run["ordinal"] == index
+              assert run["portable_week_sha256"] == digest
+              assert run["matches_original"] is False
+              assert digest != expected
+              assert run["real_plan_readback"] is True
+              assert run["catalogue_source_versions"] == 51
+              assert len(events) == 21
+              assert sum(len(e["servings"]) for e in events) == 42
+              matches = sum(
+                  (historical_by_slot.get((e["local_date"], e["position"]), {}).get("canonical_recipe_code")
+                   == e["canonical_recipe_code"])
+                  for e in events
+              )
+              assert matches == run["matching_original_slot_recipes"]
+              assert matches < 21
+              for key, n in (("members", 3), ("meal_events", 21), ("servings", 42)):
+                  assert receipt["counts"][key] == run["counts"][key] == n
+
+          print("VERIFIED_NO_GO_CURRENT_UNSTABILIZED_SEED: two real Planner runs, exact source and immutable historical reference; NOT Option A success")
+          PY
+          echo "::warning::Verified two-process negative evidence; Option A runtime reproducibility remains BLOCKED."
+      - name: Preserve both synthetic current-run receipts and negative report
         if: always()
         uses: actions/upload-artifact@v4
         with:
