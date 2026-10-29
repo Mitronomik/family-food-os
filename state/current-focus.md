@@ -30,13 +30,13 @@
 
 **Archive status:** repository branch now has complete original JSON and reviewer-accessible provenance README. The private Library backup is an additional copy, not the canonical verification source. Re-open `NO_GO_EVIDENCE_NOT_DURABLY_PINNED` only if the repository copy becomes missing, inaccessible or byte-inconsistent.
 
-**Next only:** independent full contract review of source proof and unresolved Planner input/seed-seam risks, exact-head Docs CI, and explicit owner merge decision. Production Planner unchanged; `APPROVED_IMMEDIATE=0`; `NO_GO_TO_PR10_CORE_RUNTIME`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`. PR #246 remains open/unmerged unless independently verified otherwise.
+**Next only:** independent full contract review of source proof and unresolved Planner input/seed-seam risks, exact-head Docs CI, and explicit owner merge decision. Production Planner unchanged; `APPROVED_IMMEDIATE=0`; `NO_GO_TO_PR10_CORE_RUNTIME`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`. PR #246 was open when this historical section was written; it **merged on 2026-10-29**, see the authoritative current-focus entry above.
 
 ---
 
 # PR10-CORE-A — owner-approved stable 21-event synthetic fixture, docs gate — 2026-10-27
 
-**Accepted main:** `3c4645a27d675bb4464c913785aef3cd88de8681` (merged PR #244; #242 closed unmerged). [PR #246](https://github.com/Mitronomik/family-food-os/pull/246) still OPEN with independently validated cross-run week drift, **not yet accepted by merge**.
+**Accepted main:** `3c4645a27d675bb4464c913785aef3cd88de8681` (merged PR #244; #242 closed unmerged). [PR #246](https://github.com/Mitronomik/family-food-os/pull/246) was **OPEN/UNMERGED on 2026-10-27** with independently validated cross-run week drift; it was subsequently **merged on 2026-10-29** as negative evidence.
 
 **Owner DECISION:** explicitly approved **Option A**: preserve the original PR #196/#244 seven-day three-member 21-event/42-Serving semantic reference as a reproducible **synthetic test fixture only**, with unchanged production Planner and unchanged Gate2/Prep requirements. **Current bounded task:** [Issue #247](https://github.com/Mitronomik/family-food-os/issues/247), branch `docs/pr10-core-option-a-stable-fixture-gate`, [docs-only Implementation Contract Gate](../docs/family-food/pr10-core-option-a-stable-fixture-implementation-contract-2026-10-27.md), [proposed 21×42 portable semantic reference](../docs/family-food/pr10-core-option-a-frozen-semantic-reference-proposal-2026-10-27.json). Original PR #196 raw artifact SHA256 `6c157dde…`, old UUID-embedded semantic `2d6cb581…`; independently recomputed ID-free canonical SHA256 **`731ef32e7137740ed5b46a6044a85d8b2f818a847fdc039842460d442df5aeb6`**. Current independent run instead `1db25794…` (normalized), **0/21 matching scheduled recipe-code slots**. UUID tie-break exists in Planner, but sole drift cause unproven. Proposed test-only ID factory/seed stabilization must still prove **unchanged real PlannerService → persisted MealPlan** yields exactly the original week; no manually replayed snapshot counts as Gate2.
 
