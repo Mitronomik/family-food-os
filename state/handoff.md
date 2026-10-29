@@ -1,3 +1,13 @@
+# PR #246 handoff correction — accepted owner Option A (2026-10-29)
+
+PR #246 is **docs/state-only negative evidence** from [Issue #245](https://github.com/Mitronomik/family-food-os/issues/245), at `main@3c4645a27d675bb4464c913785aef3cd88de8681`. The historical PR #196 synthetic 3/21/42 selected recipe schedule was **not** reproduced by the current fresh PR #246 persisted receipt: **0/21 slot matches**, 7 recipe codes common ignoring slots; the strict temporary two-step CI failed and was reverted. Keep this `NO_GO` intact.
+
+**Later decision already made:** the owner approved **Option A on 2026-10-27**, recorded by [Issue #247](https://github.com/Mitronomik/family-food-os/issues/247). There is **no longer a pending owner choice** between strategies. The separate [PR #248](https://github.com/Mitronomik/family-food-os/pull/248) proposes a docs-only contract to stabilize the original semantic QA reference. It is **not merged**, and still requires its own independent review, correct checksum, sync with `main` after PR #246, exact-head CI and owner merge decision.
+
+**Only next:** review/merge #246 on explicit authorization, then rebase/merge the docs/state intent of #248 without overwriting this historical evidence. No Planner runtime, source eligibility/D3 approval, Prep release, false Gate2 PASS or autonomous merge.
+
+---
+
 # Issue #245 — accepted historical week not reproduced; NO-GO handoff — 2026-10-27
 
 **Base:** `main@3c4645a27d675bb4464c913785aef3cd88de8681`. **Current:** [Issue #245](https://github.com/Mitronomik/family-food-os/issues/245), docs-only report [current exact fixture mismatch](../docs/family-food/pr10-core-two-step-current-fixture-evidence-2026-10-27.md), [JSON pin comparison](../docs/family-food/pr10-core-two-step-fresh-fixture-drift-2026-10-27.json). #244 merged, #242 closed unmerged.
