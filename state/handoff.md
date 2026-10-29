@@ -1,3 +1,13 @@
+# 2026-10-29 — post-PR248 PR10-CORE-A fixture-only handoff
+
+**Accepted baseline:** `main@794302534a9f02a8452892aef62375daf0a13de2` after merged PR #246 (negative 0/21 drift), PR #248 (docs-only Option A contract, 24/24 CI), PR #249 (non-authoritative FoodTech research) and PR #251 (REUSE-DOC-1, NO-SPIKE). The top older state sections below were written before these merges; use this current entry for task authorization.
+
+**Proposed next issue:** [#252](https://github.com/Mitronomik/family-food-os/issues/252). No execution authorization is inferred from a merged docs gate or issue creation. Once the owner explicitly authorizes a fixture-only task, Codex must: read `AGENTS.md` → `state/current-focus.md` → relevant [Option A contract](../docs/family-food/pr10-core-option-a-stable-fixture-implementation-contract-2026-10-27.md) → historical [PR #196 original raw receipt](../docs/family-food/evidence/pr196-original-synthetic-fixture-receipt.json) and frozen [21×42 synthetic comparator](../docs/family-food/pr10-core-option-a-frozen-semantic-reference-proposal-2026-10-27.json) → archived historical code ref `bd464237e7a3c96fc46558dd6f0efd88beea0414` → current Planner/seed/repository/UoW/tests. Check full historical `PlannerRequest` input parity, rights/source Step identity, test-only ID/seed seam and **unchanged** `PlannerService.generate_authoritative` persisted readback in two independent fresh temp SQLite/process runs. Exact normalized week SHA256 `731ef32e7137740ed5b46a6044a85d8b2f818a847fdc039842460d442df5aeb6`. Reject same counts but different schedule, snapshot masquerade, any changed Decimal factor or rights/Step pin. Test-only process content SHA `d19f11a0074d095eaac02fc1d414a1f3d6a5088a884c78d27436984a63023d36` is a separate diagnostic.
+
+**STOP:** if stable IDs/input parity cannot reproduce historical week without production Planner/seed/schema/authority changes, report `NO_GO_OPTION_A_UNACHIEVABLE_AS_SCOPED` and request a new owner decision. Do not alter ranking/tie-break/weights, candidates or original corpus, or silently refresh historical fixture. `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, D3, qualified same-day process QA and safe-batch/portion-release remain blocked. No automatic merge or next milestone.
+
+---
+
 # PR #248 integration handoff after merged evidence PR #246 — 2026-10-29
 
 **Accepted `main`:** `36ab339302557aafc2187f9d8a70b035869c8487` after independent [PR #246](https://github.com/Mitronomik/family-food-os/pull/246) 23/23 green CI + merge. Its raw negative 3/21/42 structural PASS vs **0/21 recipe-slot matches** remains authoritative *research evidence*, not Planner defect attribution or source/Prep approval.
