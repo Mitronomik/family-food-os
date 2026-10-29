@@ -1,3 +1,21 @@
+# PR #246 review follow-up — 2026-10-29
+
+- Reviewer P2 current-state contradiction corrected: **Option A was explicitly approved by owner 2026-10-27 in [Issue #247](https://github.com/Mitronomik/family-food-os/issues/247)**. The separate PR #248 is open/unmerged and proposes the subsequent fixture-only contract; it is not accepted production/runtime truth.
+- PR #246 remains negative evidence: 3 HouseholdMembers, 21 MealEvents, 42 Servings reproduced structurally, but **0/21 same date/position recipe selections** across original and fresh run; R2-E moved and R3-B absent. No failed experiment code remains in its docs/state diff.
+- Merge order requested by review: independently accept #246 evidence first; **then** synchronize #248 and re-review. No autonomous merge. D3/`APPROVED_IMMEDIATE`/safe-batch/portion-quality gates unchanged.
+
+---
+
+# Issue #245 — new CI proves changed 21-event fixture semantics — 2026-10-27
+
+- Accepted `main@3c4645a27d675bb4464c913785aef3cd88de8681`, #244 merged; #242 closed without merge. #245 attempted a **current persisted exact two-step MealEvent/Serving re-pin**.
+- Obtained and byte-hashed two official artifacts: historical PR #196 `run 38059374826` / `JSON sha256 6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec` / semantic `2d6cb581649863b7edbd3c0efff2bae2934c6a512c99a45d10e92f92f514cb3d`; **current successful run 40495153021** / `JSON sha256 2caa45e1e50639eef2b6f9023496cbce9fc35a88bd4c71f86e2b8a9daee0c78d` / semantic `1720db1d309a8a346af81cba37e27b07044c205112d6fdd711b938803567bcf2`. Both 3/21/42, but 0/21 selected recipe-code schedule slots identical.
+- New current fixture: R2-E cottage cheese 2026-09-20 BREAKFAST (historical 2026-09-18), source factor same 5.108845 / TVOROG_5 net 712.6838775g; R3-B corn milk porridge **absent** (historical 2026-09-19, 7.401558 / CORN_GROATS net 296.062320g). Source catalogue still contains both RecipeVersions/Step text hashes. **No two-event current eligibility review possible.**
+- The attempted strict two-step CI run 40495153015 stopped at independent semantic baseline mismatch: **26 existing passed, 13 new setup errors**. No semantic pin relaxed; no production code changed. Evidence-only script/test/workflow changes subsequently reverted from branch. [Docs report](../docs/family-food/pr10-core-two-step-current-fixture-evidence-2026-10-27.md) and [machine negative receipt](../docs/family-food/pr10-core-two-step-fresh-fixture-drift-2026-10-27.json) remain for review. Current `NO_GO_EXACT_TWO_STEP_FIXTURE_REPRODUCIBILITY`, `APPROVED_IMMEDIATE=0`, PR10-A/Gate2 not passed.
+- Next Product/Architecture gate: **approve cross-run fixture identity/stabilization** and independent QA checks before retrying two-step review or D3 publication. `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, SAFE_BATCH and PORTION_RELEASE gates unchanged.
+
+---
+
 # PR10-CORE — one-pass 21-event source-step triage for scalable review — 2026-10-23
 
 - Owner approved changing bounded **research strategy** from repeated pair-focused review to a **single complete action-class triage of the existing accepted historical three-member, 7-day 21-event fixture**; accepted Gate2 two-event positivity and D3 source/reader independent approval remain unmodified. Base `main@5e5ee82f90a5f0f3103f96b09ac7a6d166565e3b`; concurrent [PR #242](https://github.com/Mitronomik/family-food-os/pull/242) remains unmerged and out of scope.

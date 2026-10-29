@@ -1,3 +1,23 @@
+# PR #246 reviewer P2 resolution — Option A approved after drift evidence (2026-10-29)
+
+**Current accepted base:** `main@3c4645a27d675bb4464c913785aef3cd88de8681`; this PR's own factual deliverable is **only** the independently verified 3/21/42 structural PASS versus 0/21 cross-run recipe-slot match, `NO_GO_EXACT_TWO_STEP_FIXTURE_REPRODUCIBILITY`. The original experiment did not establish a product Planner bug or permit any Prep step. [Issue #245](https://github.com/Mitronomik/family-food-os/issues/245) and the [source-pinned negative report](../docs/family-food/pr10-core-two-step-current-fixture-evidence-2026-10-27.md) remain unchanged.
+
+**Later owner decision (not implemented in PR #246):** on **2026-10-27** the owner explicitly selected **Option A** in [Issue #247](https://github.com/Mitronomik/family-food-os/issues/247): preserve the original PR #196/#244 21-MealEvent, 42-Serving **synthetic QA week semantics**, keep the production Planner and Gate2 constraints unchanged. [PR #248](https://github.com/Mitronomik/family-food-os/pull/248) is a **separate open/unmerged docs-only Implementation Contract Gate** to review and freeze this decision; do not treat its branch-only contract as accepted `main`.
+
+**Next only:** independent review + owner-authorized merge of this evidence PR first, then synchronize/review PR #248 against resulting `main` (including `state/*` conflicts) before a separate merge decision. No automatic merge or fixture-runtime work. `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN` remain.
+
+---
+
+# Issue #245 — exact Gate2 fixture drift NO-GO from actual CI — 2026-10-27
+
+**Accepted main:** `3c4645a27d675bb4464c913785aef3cd88de8681`, PR #244 merged, PR #242 closed unmerged. Owner authorized one next bounded two-step fixture re-pin, **not** an unreviewed fixture identity change or PR10 runtime.
+
+**Current docs-only evidence result:** [Issue #245](https://github.com/Mitronomik/family-food-os/issues/245), [report](../docs/family-food/pr10-core-two-step-current-fixture-evidence-2026-10-27.md), [machine receipt](../docs/family-food/pr10-core-two-step-fresh-fixture-drift-2026-10-27.json), branch `evidence/pr10-core-two-step-fresh-readback-2026-10-27`. Original accepted PR #196 persisted receipt `sha256:6c157dde…` has independent semantic hash `2d6cb581…`, while new **successful PR10-META workflow 40495153021** emitted JSON `sha256:2caa45e1…` and different semantic hash `1720db1d…`. Both have 3/21/42 counts but **0/21 recipe-code matching schedule slots**. R2-E cottage cheese now 2026-09-20 (historically Sep 18), R3-B corn-milk recipe **not selected at all**. New strict two-step CI **failed at independent semantic pin** (26 existing fixture tests passed; 13 new fixture setup errors). No acceptance was weakened. Experimental diagnostic scripts/tests/workflow removed; docs-only receipt retained. Current 2-target positive fixture = **NO_GO**, `APPROVED_IMMEDIATE=0`.
+
+**Next only:** independent review of this source/fixture discrepancy and **explicit Product/Architecture owner choice of accepted reproducible seven-day Gate2 fixture semantics** (versioned deterministic fixture or separately approved changed reference), before new two-step process/Decimal approvals. No silent Planner/fixture changes, no new recipe hunt, no source/Prep runtime, no migrations, no PDF/PWA, no Pantry writes. `NO_GO_TO_PR10_CORE_RUNTIME`, `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=PASS` not met; merge separately reviewed only.
+
+---
+
 # PR10-CORE — single-pass 21-event prep action-class preflight — 2026-10-23
 
 **Accepted `main`:** `5e5ee82f90a5f0f3103f96b09ac7a6d166565e3b` ([PR #240](https://github.com/Mitronomik/family-food-os/pull/240) merged); [PR #242](https://github.com/Mitronomik/family-food-os/pull/242) is OPEN/UNMERGED and is **not accepted** as source truth. Explicit 2026-10-23 owner decision: one bounded 21-event existing synthetic week source-step audit instead of exclusively pursuing the unsuccessful R3-C/R2-B pair. **No change to Gate2/D3/Prep runtime acceptance.**

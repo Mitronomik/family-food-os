@@ -1,3 +1,23 @@
+# PR #246 handoff correction — accepted owner Option A (2026-10-29)
+
+PR #246 is **docs/state-only negative evidence** from [Issue #245](https://github.com/Mitronomik/family-food-os/issues/245), at `main@3c4645a27d675bb4464c913785aef3cd88de8681`. The historical PR #196 synthetic 3/21/42 selected recipe schedule was **not** reproduced by the current fresh PR #246 persisted receipt: **0/21 slot matches**, 7 recipe codes common ignoring slots; the strict temporary two-step CI failed and was reverted. Keep this `NO_GO` intact.
+
+**Later decision already made:** the owner approved **Option A on 2026-10-27**, recorded by [Issue #247](https://github.com/Mitronomik/family-food-os/issues/247). There is **no longer a pending owner choice** between strategies. The separate [PR #248](https://github.com/Mitronomik/family-food-os/pull/248) proposes a docs-only contract to stabilize the original semantic QA reference. It is **not merged**, and still requires its own independent review, correct checksum, sync with `main` after PR #246, exact-head CI and owner merge decision.
+
+**Only next:** review/merge #246 on explicit authorization, then rebase/merge the docs/state intent of #248 without overwriting this historical evidence. No Planner runtime, source eligibility/D3 approval, Prep release, false Gate2 PASS or autonomous merge.
+
+---
+
+# Issue #245 — accepted historical week not reproduced; NO-GO handoff — 2026-10-27
+
+**Base:** `main@3c4645a27d675bb4464c913785aef3cd88de8681`. **Current:** [Issue #245](https://github.com/Mitronomik/family-food-os/issues/245), docs-only report [current exact fixture mismatch](../docs/family-food/pr10-core-two-step-current-fixture-evidence-2026-10-27.md), [JSON pin comparison](../docs/family-food/pr10-core-two-step-fresh-fixture-drift-2026-10-27.json). #244 merged, #242 closed unmerged.
+
+**FACT:** prior PR #196 semantic `2d6cb581…`; current successful PR10-META CI on PR #246 HEAD `4dc7b3d` semantic `1720db1d…`, different JSON SHA256 and **zero of 21** recipe-code positions matching, though both fixture counts 3/21/42. Cottage cheese now Sep20 (old Sep18), corn milk porridge **not selected**. Existing PR10-META tests passed; new strict two-step validator failed on independent semantic mismatch (26 old passed, 13 new setup errors) and therefore produced **no new approved two-event receipt**. Attempted diagnostic code/workflow has been **reverted** from branch; this becomes bounded docs-only NO-GO evidence, not a runtime implementation. No definitive cause of drift proven.
+
+**NEXT ONLY:** verify final docs-only diff, exact-head Docs CI/independent review, then owner choice whether to stabilize a **versioned synthetic fixture** that preserves accepted 21-event semantic selection, or to propose formal change to accepted Gate2 fixture with new source/Serving pins. Do **not** silently change Planner tie-break, replace recipes, weaken Gate2, or use historical transient IDs as current. After formal fixture decision, run exact new source/Serving QA; still no `APPROVED_IMMEDIATE` / trusted D3 permission / PR10-A. `NO_GO_TO_PR10_CORE_RUNTIME`, `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, SAFE_BATCH and PORTION_RELEASE blocked; no automatic merge.
+
+---
+
 # PR10-CORE — scalable source-step triage handoff — 2026-10-23
 
 **Accepted base:** `main@5e5ee82f90a5f0f3103f96b09ac7a6d166565e3b`, #240 merged. **Current Issue #243**, branch `research/pr10-fixture21-action-class-triage-2026-10-23`. [21-event report](../docs/family-food/pr10-fixture21-action-class-review-2026-10-23.md); [87-step machine evidence](../docs/family-food/pr10-fixture21-action-class-triage-2026-10-23.json). PR #242 is an **unmerged concurrent** research PR; do not import it as main. This task is the owner's approved one-time research-strategy shift, *not* changed Gate2 criteria.
