@@ -1,3 +1,15 @@
+# 2026-10-29 — Issue #252 test-only real Planner two-process NO_GO handoff
+
+**Owner-authorized issue:** [#252](https://github.com/Mitronomik/family-food-os/issues/252); [DRAFT PR #254](https://github.com/Mitronomik/family-food-os/pull/254) on `main@794302534a9f02a8452892aef62375daf0a13de2` (separate [PR #253](https://github.com/Mitronomik/family-food-os/pull/253) state/docs remains open, reconcile only before subsequent acceptance). No merge or next milestone authorized.
+
+**Actual evidence:** [GitHub Actions 40897666121](https://github.com/Mitronomik/family-food-os/actions/runs/40897666121) with two isolated real `PlannerService.generate_authoritative` plus persisted MealPlan readbacks. Full raw [run1](../docs/family-food/evidence/pr10-option-a-issue252-2026-10-29-run1.json) SHA256 `87789288aadfeca6f2a3bd4ec63cb1c69d19630df0d8dce933928224979a53b5`, [run2](../docs/family-food/evidence/pr10-option-a-issue252-2026-10-29-run2.json) SHA256 `b8c90d753447e4781b97f6e3207ca29d8809919c1e1b546ac1813ca3a0d7c4c5`, [report](../docs/family-food/pr10-option-a-issue252-two-process-no-go-2026-10-29.md). Two independent portable week digests `4c1c574c…` and `a7948dcc…`; 0/21, 1/21 matching PR #196 slots. 51/51 canonical Step content parity; 0/51 UUID match. Source, tamper, lint **14/14 PASS**. CI intentionally red on semantic reproduction.
+
+**Required reading before follow-up:** `AGENTS.md`; this handoff; [Option A implementation contract](../docs/family-food/pr10-core-option-a-stable-fixture-implementation-contract-2026-10-27.md); original [raw historical source](../docs/family-food/evidence/pr196-original-synthetic-fixture-receipt.json); [frozen 21×42](../docs/family-food/pr10-core-option-a-frozen-semantic-reference-proposal-2026-10-27.json); real scripts `scripts/audit_pr10_meta_gate2_fixture.py`, `scripts/pr10_option_a_probe.py`, seeded catalogue composition, seed stages, `backend/app/domain/planner.py`, `backend/app/services/planner.py` and tests.
+
+**Stop:** `NO_GO_CURRENT_UNSTABILIZED_SEED`. Do not infer an inherent impossibility from randomized-ID failure. `id_factory` exists on `FoodRecipeCatalogueService`, not exposed by `create_food_recipe_catalogue_service(engine)` or nested seed chain; archived full historical PlannerRequest parity not demonstrated. Independent architecture/QA review must judge any permitted strictly test-only injection, and explicitly return `NO_GO_OPTION_A_UNACHIEVABLE_AS_SCOPED` if it needs unapproved product changes. No global UUID patch, score/pool overrides, snapshot rehydration or source manipulation. `APPROVED_IMMEDIATE=0`, Gate2, D3, safe-batch/portion gates unchanged. DRAFT #254 is not merge-ready.
+
+---
+
 # PR #248 integration handoff after merged evidence PR #246 — 2026-10-29
 
 **Accepted `main`:** `36ab339302557aafc2187f9d8a70b035869c8487` after independent [PR #246](https://github.com/Mitronomik/family-food-os/pull/246) 23/23 green CI + merge. Its raw negative 3/21/42 structural PASS vs **0/21 recipe-slot matches** remains authoritative *research evidence*, not Planner defect attribution or source/Prep approval.
