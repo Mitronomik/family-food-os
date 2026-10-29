@@ -1,3 +1,13 @@
+# PR #248 integration handoff after merged evidence PR #246 — 2026-10-29
+
+**Accepted `main`:** `36ab339302557aafc2187f9d8a70b035869c8487` after independent [PR #246](https://github.com/Mitronomik/family-food-os/pull/246) 23/23 green CI + merge. Its raw negative 3/21/42 structural PASS vs **0/21 recipe-slot matches** remains authoritative *research evidence*, not Planner defect attribution or source/Prep approval.
+
+**PR #248 focus:** docs-only Option A implementation contract with a bounded **QA-only regression test**. Correct V1 portable catalogue digest is `d19f11a0074d095eaac02fc1d414a1f3d6a5088a884c78d27436984a63023d36` (two independent archived CI receipts); prior `2e04ea18…` was erroneous. Original synthetic 21-event/42-Serving comparator `731ef32e7137740ed5b46a6044a85d8b2f818a847fdc039842460d442df5aeb6` and 110511-byte raw receipt SHA `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec` unchanged. See [contract](../docs/family-food/pr10-core-option-a-stable-fixture-implementation-contract-2026-10-27.md) and [offline regression test](../backend/app/tests/test_pr10_option_a_process_content.py). Original source archival in PR branch verified by Git blob `e82f147be4f7d1c67fe298ce973a968223910d03`.
+
+**Only next:** inspect integrated ancestry, commit diff and CI; independent contract review + owner #248 merge decision. If historical Planner input parity/ID-factory test-only hook proves impossible, stop and return `NO_GO_OPTION_A_UNACHIEVABLE_AS_SCOPED`. No fixture runtime, eligibility authorization, new recipes or alternate Gate2 PASS.
+
+---
+
 # PR #248 checksum reviewer fix — 2026-10-29
 
 This branch corrects the previously misreported process-content SHA from `2e04ea18…` to **`d19f11a0074d095eaac02fc1d414a1f3d6a5088a884c78d27436984a63023d36`** per the documented canonical two-level hash algorithm. Both independently verified #196/#246 CI receipts give exactly that digest. See [contract](../docs/family-food/pr10-core-option-a-stable-fixture-implementation-contract-2026-10-27.md) and [QA regression test](../backend/app/tests/test_pr10_option_a_process_content.py). Original UUID-free 21-event/42-Serving week SHA `731ef32e7137740ed5b46a6044a85d8b2f818a847fdc039842460d442df5aeb6` is **unchanged**.
