@@ -181,6 +181,8 @@ def _probe(output: Path) -> int:
                 report["status"] = "NO_GO_REAL_PIPELINE_FAILURE"
                 break
             raw = path.read_bytes()
+            output.parent.mkdir(parents=True, exist_ok=True)
+            (output.parent / f"pr10-option-a-run-{n + 1}.json").write_bytes(raw)
             receipt = json.loads(raw)
             actual_rows = normalize_receipt(receipt)
             actual = _hash(actual_rows)
