@@ -1,3 +1,13 @@
+# PR #248 — integration after merged PR #246 / Option A docs-only gate — 2026-10-29
+
+**Accepted `main`:** `36ab339302557aafc2187f9d8a70b035869c8487` — [PR #246](https://github.com/Mitronomik/family-food-os/pull/246) **MERGED after its 23/23 green exact-head CI**. Its source-pinned negative fact is retained: current 3-member/21-event/42-Serving week matches structurally but **0/21** historic schedule recipe slots; the two historical proposed Prep steps are not current approved tasks. This PR #248 **does not erase or reinterpret that failure**.
+
+**Current bounded task:** synchronise PR #248 with the merged `main`; correct original wrong QA portable-process digest to **`d19f11a0074d095eaac02fc1d414a1f3d6a5088a884c78d27436984a63023d36`**, prove it via [6-test regression](../backend/app/tests/test_pr10_option_a_process_content.py) and independent original/current raw artifacts; retain [complete 110511-byte archived original JSON](../docs/family-food/evidence/pr196-original-synthetic-fixture-receipt.json). Historic 21×42 synthetic week digest `731ef32e7137740ed5b46a6044a85d8b2f818a847fdc039842460d442df5aeb6` unchanged.
+
+**Next only:** exact-head CI on integrated branch + independent review and explicit owner merge decision for this docs/test-evidence-only contract. The original PlannerRequest and stable seed-ID path remain unproven and are NOT pre-accepted runtime work. `APPROVED_IMMEDIATE=0`, `NO_GO_TO_PR10_CORE_RUNTIME`, `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`. No AI/Retail/Planner/Prep/migration runtime or automatic next milestone.
+
+---
+
 # PR #248 reviewer checksum correction — 2026-10-29
 
 **Current task:** docs/evidence Option A contract in [PR #248](https://github.com/Mitronomik/family-food-os/pull/248), separate from the negative evidence of [PR #246](https://github.com/Mitronomik/family-food-os/pull/246). Independently verified corrected UUID-independent QA process-content SHA-256 **`d19f11a0074d095eaac02fc1d414a1f3d6a5088a884c78d27436984a63023d36`** across the original #196 and fresh #246 JSON artifacts. The original 21×42 week digest `731ef32e…` and original 110511-byte archived receipt remain unchanged. Added [focused regression test](../backend/app/tests/test_pr10_option_a_process_content.py) covering raw SHA, ephemeral UUID independence, Step/source tampering (6 local tests passed). **Do not report current exact-head CI as successful before checks finish**.
