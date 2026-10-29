@@ -3,6 +3,8 @@
   "status": "DOCS_ONLY_CANDIDATE_REQUIRES_INDEPENDENT_REVIEW_NOT_PLANNER_OUTPUT",
   "issue": 247,
   "accepted_main_sha": "3c4645a27d675bb4464c913785aef3cd88de8681",
+  "post_pr246_merge_main_sha": "36ab339302557aafc2187f9d8a70b035869c8487",
+  "post_pr246_merge_meaning": "PR246 negative evidence integrated; does not change original PR196 21x42 synthetic reference or authorize runtime",
   "original_external_authority": {
     "pr": 196,
     "workflow_run_id": 38059374826,
