@@ -11,7 +11,7 @@
 
 **Код/репозиторий:** в ходе исследования изменения не производились.
 
-**Источник текущего состояния (повторная проверка 2026-10-29):** подключённый GitHub, `Mitronomik/family-food-os`, accepted `main@36ab339302557aafc2187f9d8a70b035869c8487` после merge PR #246 (2026-10-29, 12:40:39 UTC). PR #248 OPEN/UNMERGED; его текущая база — этот accepted `main`, но branch-only contract не является принятой функциональностью.
+**Источник текущего состояния (финальная повторная проверка 2026-10-29):** подключённый GitHub, `Mitronomik/family-food-os`, accepted `main@edba04dcd491ef9663fe82c96f6f0c1c76504a27` после merge PR #248 (2026-10-29, 13:15:56 UTC). PR #246 merged ранее в `36ab339302557aafc2187f9d8a70b035869c8487`. PR #248 принят как contract/evidence/test-only change, **не** как fixture runtime, Prep eligibility или Gate2 PASS.
 
 **Исторический снимок исследования:** `main@3c4645a27d675bb4464c913785aef3cd88de8681` после PR #244 (2026-10-27); при первоначальном анализе PR #246/#248 были OPEN/UNMERGED. Этот SHA остаётся базой исходной ветки RFC, а не обозначением текущего `main`.
 
@@ -37,9 +37,9 @@
 
 ## 2.1 Источники истины и дата
 
-Обязательны: `AGENTS.md`, `state/current-focus.md`, `docs/family-food/architecture.md`, `docs/family-food/master-roadmap.md`, addenda `2026-09-13`, `2026-09-16`, `2026-09-19-data-corpus`, `docs/family-food/data-corpus-v1.md`, `docs/family-food/security-architecture.md`, PR10-ARCH/FD-ARCH/Option B/D3 и самый свежий merged `main`. Исторические Project Sources — только после актуальных repo contracts. В `state/current-focus.md` присутствует история нескольких задач; самая новая открытая работа PR #248 **не** является принятым `main`.
+Обязательны: `AGENTS.md`, `state/current-focus.md`, `docs/family-food/architecture.md`, `docs/family-food/master-roadmap.md`, addenda `2026-09-13`, `2026-09-16`, `2026-09-19-data-corpus`, `docs/family-food/data-corpus-v1.md`, `docs/family-food/security-architecture.md`, PR10-ARCH/FD-ARCH/Option B/D3 и самый свежий merged `main`. Исторические Project Sources — только после актуальных repo contracts. В `state/current-focus.md` присутствует история нескольких задач; формулировки о pending review в исторических разделах сопоставляются с актуальными GitHub merge evidence. Merge PR #248 принимает ограниченный contract/evidence/test-only результат, **не** разрешает следующую runtime-задачу автоматически.
 
-При повторной проверке 2026-10-29 accepted `main` — `36ab339302557aafc2187f9d8a70b035869c8487`: PR #246 merged, его fixture drift NO-GO принят как evidence. PR #248 (Option A fixture identity, docs-only) остаётся OPEN/UNMERGED; текущий проверенный HEAD — `120d997f80e6f0aec0f15002567687a14813e216`. Owner выбрал Option A: сохранить исходную семантику synthetic QA week; это не разрешение на fixture runtime. Долговечное сохранение исходных доказательств и полная parity входов остаются требованиями отдельного contract/evidence review, не доказанным результатом этого RFC. **Не считать PR #248 готовой функциональностью.** `APPROVED_IMMEDIATE=0`, `NO_GO_TO_PR10_CORE_RUNTIME`, `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, safe-batch и portion-release gates остаются без изменений.
+При финальной повторной проверке 2026-10-29 accepted `main` — `edba04dcd491ef9663fe82c96f6f0c1c76504a27`: PR #246 и PR #248 merged. Отрицательное evidence #246 (0/21 совпадающих recipe slots) сохраняется. Принятый HEAD #248 — `120d997f80e6f0aec0f15002567687a14813e216`: Option A contract, полный архив исходного synthetic receipt, portable QA reference и focused process-content regression test теперь находятся в `main`. Наличие архива устраняет прежнее замечание о его недолговечном хранении; **полная историческая Planner input parity, сквозная test-only seed-ID injection и воспроизводимость недели через реальный Planner всё ещё не доказаны**. Contract/evidence merge не является разрешением на runtime. `APPROVED_IMMEDIATE=0`, `NO_GO_TO_PR10_CORE_RUNTIME`, `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, safe-batch и portion-release gates остаются без изменений.
 
 ## 2.2 Реализованные bounded contexts — что нельзя строить заново
 
@@ -53,7 +53,7 @@
 | Member schedules / MealPlan / Serving | PR7 | 1–6 opportunities, mixed sources, revisioned plans | Чужой meal planner с 3 фиксированными приёмами не подходит |
 | Planner | PR8 + дальнейшие доработки; `backend/app/domain/planner.py` | Deterministic, source constraints, source/corpus audit | Нельзя переносить закрытый SaaS-алгоритм и использовать LLM как планировщик |
 | Shopping Engine | merged PR #186/#188/#190; `shopping_calculation.py`, `shopping.py` | Decimal scaling, FEFO, immutable snapshots, incomplete/unknown, no Pantry mutation, API | Уже сильнее типовой простейшей grocery-list логики; не заменять |
-| Prep / freezer | PR10 research/contract; PR #244 | **NO_GO_TO_PR10_CORE_RUNTIME**, 0 approved immediate steps; отдельно safe-batch/portion release gates | Нельзя объявлять хранение/готовые партии реализованными |
+| Prep / freezer | PR10 research/contracts; merged PR #244/#246/#248 | **NO_GO_TO_PR10_CORE_RUNTIME**, 0 approved immediate steps; отдельно safe-batch/portion release gates | Нельзя объявлять хранение/готовые партии реализованными |
 | PDF / PWA / Feedback | в roadmap после PR10 Gate 2 | Не подтверждены как completed | Изучать UX, не перепрыгивать gates |
 | Retail, optional AI | поздние программы | Не реализуются сейчас | Не тащить MCP/retail как обязательные зависимости |
 
@@ -66,7 +66,7 @@
 - Existing FDC seed/import: `backend/app/seed/food_ingredients.py` reads `data/seed/food_ingredients/nutrition.csv`, accepts `USDA_FDC` Foundation/SR Legacy records, validates source identity/type and passes source ID/version/basis/nutrients through `TrustedNutritionSeed` and the existing catalogue/UoW boundary. This is already implemented; these seed rows do **not** automatically represent all current production V2 nutrition authority. Later publications have their own versions and review.
 - Existing controlled RU source-corpus ingestion extracts normative HTML/card text and preserves source hashes separately from canonical FoodIngredient resolution and RecipeVersion publication. Generic multi-site schema.org/JSON-LD extraction is a **candidate gap to verify**, not a reason to rebuild source staging or publication. `RecipeCandidate` below is conceptual wording, not a claim that a runtime DTO with that exact name already exists.
 - Merged PR #246 выявил **0/21 идентичных выбранных `(date, position, recipe code)`** при сравнении исторической и свежей синтетических недель несмотря на одинаковые 3/21/42 counts; это препятствует позитивной проверке двух подготовительных событий.
-- PR #248 — docs-only Option A, фиксация исходной семантики и pending durable evidence/fixture parity; ещё не runtime.
+- Merged PR #248 — Option A contract/evidence/test-only: исходный synthetic receipt сохранён в репозитории; portable process-content checksum исправлен и покрыт focused regression test. Это не доказательство Planner input parity, стабильной генерации 21×42 fixture или готового runtime.
 
 ---
 
@@ -180,7 +180,7 @@ The following integration tasks are **proposals**, not permission to start them.
 
 **Acceptance:** every proposed library mapped to explicit owning bounded context; no invented missing feature; exact main SHA recorded.
 
-**Risk:** PR #246 is now merged into the refreshed baseline; the still-open PR #248 and later accepted PRs may change evidence/current focus. Recheck exact refs before any separately authorized task.
+**Risk:** PR #246 and PR #248 are now merged into the refreshed baseline. Later accepted PRs may change evidence/current focus; recheck exact refs before any separately authorized task. Contract/evidence acceptance must not be confused with implemented fixture runtime.
 
 **Follow-up:** refresh inventory after independently merged PRs only.
 
@@ -460,7 +460,7 @@ Every actual task must contain `Context / Goal / Scope / Non-goals / Architectur
 5. **How to prove physical serving size/output at accepted home scale?** Neither external planner nor USDA FBG automatically passes `PORTION_RELEASE_READY`.
 6. **Does Cooklang transfer any field currently painful to store/export?** If not, no reason to add an early import format.
 7. **What commercial/license posture will FamilyFoodOS adopt?** Any AGPL/ODbL/Commons-Clause integration requires a documented approval before production reuse.
-8. **How will original fixture be durably retained and exact input parity proven?** This is current PR10 #248 task and independent from external library adoption.
+8. **How will full historical Planner input parity and test-only seed identity be proven without changing production Planner?** Merged PR #248 now retains the complete original receipt and freezes the bounded contract; actual fixture reproducibility remains unproven and requires separately authorized work, independent from external library adoption.
 
 **Mandatory stop:** fail any licensing, rights, food-form, provenance, source-text, reproducibility, safety, household isolation or high-coupling gate → **NO_GO** until reviewed alternative is accepted. No amount of interface convenience overrides these checks.
 
@@ -472,8 +472,9 @@ Every actual task must contain `Context / Goal / Scope / Non-goals / Architectur
 
 - Repo: https://github.com/Mitronomik/family-food-os
 - Accepted 2026-10-27 PR #244: https://github.com/Mitronomik/family-food-os/pull/244
-- PR #246 MERGED 2026-10-29; refreshed accepted main `36ab339302557aafc2187f9d8a70b035869c8487`: https://github.com/Mitronomik/family-food-os/pull/246
-- PR #248 OPEN/UNMERGED at the 2026-10-29 refresh, checked HEAD `120d997f80e6f0aec0f15002567687a14813e216`; not accepted main truth: https://github.com/Mitronomik/family-food-os/pull/248
+- PR #246 MERGED 2026-10-29 at `36ab339302557aafc2187f9d8a70b035869c8487` (negative fixture evidence retained): https://github.com/Mitronomik/family-food-os/pull/246
+- PR #248 MERGED 2026-10-29 at refreshed accepted main `edba04dcd491ef9663fe82c96f6f0c1c76504a27`, accepted HEAD `120d997f80e6f0aec0f15002567687a14813e216`; contract/evidence/test-only, no runtime approval: https://github.com/Mitronomik/family-food-os/pull/248
+- Accepted Option A contract and remaining input/seed-seam limits: https://github.com/Mitronomik/family-food-os/blob/edba04dcd491ef9663fe82c96f6f0c1c76504a27/docs/family-food/pr10-core-option-a-stable-fixture-implementation-contract-2026-10-27.md
 - Existing FDC seed/import (pinned accepted main): https://github.com/Mitronomik/family-food-os/blob/36ab339302557aafc2187f9d8a70b035869c8487/backend/app/seed/food_ingredients.py
 - Existing controlled source-corpus extraction (same pin): https://github.com/Mitronomik/family-food-os/blob/36ab339302557aafc2187f9d8a70b035869c8487/backend/app/services/recipe_source_corpus_import.py
 - Implemented Planner PR #59: https://github.com/Mitronomik/family-food-os/pull/59
