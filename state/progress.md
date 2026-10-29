@@ -1,18 +1,42 @@
-# PR #246 review follow-up — 2026-10-29
+# PR #248 integration after PR #246 merge — 2026-10-29
 
-- Reviewer P2 current-state contradiction corrected: **Option A was explicitly approved by owner 2026-10-27 in [Issue #247](https://github.com/Mitronomik/family-food-os/issues/247)**. The separate PR #248 is open/unmerged and proposes the subsequent fixture-only contract; it is not accepted production/runtime truth.
-- PR #246 remains negative evidence: 3 HouseholdMembers, 21 MealEvents, 42 Servings reproduced structurally, but **0/21 same date/position recipe selections** across original and fresh run; R2-E moved and R3-B absent. No failed experiment code remains in its docs/state diff.
-- Merge order requested by review: independently accept #246 evidence first; **then** synchronize #248 and re-review. No autonomous merge. D3/`APPROVED_IMMEDIATE`/safe-batch/portion-quality gates unchanged.
+- [PR #246](https://github.com/Mitronomik/family-food-os/pull/246) evidence-only negative fixture drift **MERGED** to `main@36ab339302557aafc2187f9d8a70b035869c8487` after its reviewer P2 state correction and **23/23 successful** exact-head workflows. Historical source comparison remains 3/21/42 structural PASS but zero of 21 matching recipe/date/position slots.
+- Separate PR #248 retains the 21×42 original QA-only reference; corrected SHA256 of UUID-free portable `{canonical_code: per_recipe_digest}` to `d19f11a0074d095eaac02fc1d414a1f3d6a5088a884c78d27436984a63023d36` computed from two actual #196/#246 archives. Introduced [six QA regression tests](../backend/app/tests/test_pr10_option_a_process_content.py): source raw checksum, UUID independence, step/source/duplicate tamper. Locally **6 passed**, exact-head integrated CI and independent review still required.
+- Archived PR #196 raw original 110511-byte SHA `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec` remains unchanged and reviewer-accessible; #246's merged evidence is not overwritten. No Planner/Recipe/Prep/Shopping/PDF schema/runtime changes. `APPROVED_IMMEDIATE=0`, `NO_GO_TO_PR10_CORE_RUNTIME`, D3 and safe-batch/portion-quality gates preserved.
 
 ---
 
-# Issue #245 — new CI proves changed 21-event fixture semantics — 2026-10-27
+# PR #248 P2 process checksum correction — 2026-10-29
 
-- Accepted `main@3c4645a27d675bb4464c913785aef3cd88de8681`, #244 merged; #242 closed without merge. #245 attempted a **current persisted exact two-step MealEvent/Serving re-pin**.
-- Obtained and byte-hashed two official artifacts: historical PR #196 `run 38059374826` / `JSON sha256 6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec` / semantic `2d6cb581649863b7edbd3c0efff2bae2934c6a512c99a45d10e92f92f514cb3d`; **current successful run 40495153021** / `JSON sha256 2caa45e1e50639eef2b6f9023496cbce9fc35a88bd4c71f86e2b8a9daee0c78d` / semantic `1720db1d309a8a346af81cba37e27b07044c205112d6fdd711b938803567bcf2`. Both 3/21/42, but 0/21 selected recipe-code schedule slots identical.
-- New current fixture: R2-E cottage cheese 2026-09-20 BREAKFAST (historical 2026-09-18), source factor same 5.108845 / TVOROG_5 net 712.6838775g; R3-B corn milk porridge **absent** (historical 2026-09-19, 7.401558 / CORN_GROATS net 296.062320g). Source catalogue still contains both RecipeVersions/Step text hashes. **No two-event current eligibility review possible.**
-- The attempted strict two-step CI run 40495153015 stopped at independent semantic baseline mismatch: **26 existing passed, 13 new setup errors**. No semantic pin relaxed; no production code changed. Evidence-only script/test/workflow changes subsequently reverted from branch. [Docs report](../docs/family-food/pr10-core-two-step-current-fixture-evidence-2026-10-27.md) and [machine negative receipt](../docs/family-food/pr10-core-two-step-fresh-fixture-drift-2026-10-27.json) remain for review. Current `NO_GO_EXACT_TWO_STEP_FIXTURE_REPRODUCIBILITY`, `APPROVED_IMMEDIATE=0`, PR10-A/Gate2 not passed.
-- Next Product/Architecture gate: **approve cross-run fixture identity/stabilization** and independent QA checks before retrying two-step review or D3 publication. `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, SAFE_BATCH and PORTION_RELEASE gates unchanged.
+- Independently recomputed QA-only V1 `{canonical_code: per_recipe_digest}` SHA-256 from both authentic archived PR #196 and CI PR #246 JSON receipts. **Correct expected value: `d19f11a0074d095eaac02fc1d414a1f3d6a5088a884c78d27436984a63023d36`**. The previous `2e04ea18…` value does not correspond to the documented algorithm; historical week digest `731ef32e…` remains unchanged.
+- Updated Option A implementation contract and proposed JSON metadata. Added reproducible `backend/app/tests/test_pr10_option_a_process_content.py` asserting archived raw SHA, 51-source catalogue digest, ignoring transient UUIDs and run-local process hashes, plus four negative tamper cases. **6/6 tests passed locally** on the repo-snapshot synthetic JSON. Exact-head CI must be verified after branch changes.
+- Archive of original synthetic receipt is in this branch and immutable by review. No production Planner/Recipe/Shopping/Prep/PDF/schema changes. `APPROVED_IMMEDIATE=0`, `NO_GO_TO_PR10_CORE_RUNTIME`. Follow review merge order #246 → synchronize this branch → #248; no automatic merge.
+
+---
+
+# 2026-10-29 — complete original PR #196 synthetic artifact archived in PR #248
+
+- Verified original uncompressed JSON from conversation attachment: **110511 bytes**, raw SHA-256 `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec`; synthetic-only scope, original `gate_decision=BLOCKED`.
+- Published [full original receipt](../docs/family-food/evidence/pr196-original-synthetic-fixture-receipt.json) and [provenance/verification README](../docs/family-food/evidence/README-pr196-original-synthetic-fixture.md) directly on PR #248 feature branch. Fetched GitHub copy back; its Git blob SHA `e82f147be4f7d1c67fe298ce973a968223910d03`, byte count and independent raw-content SHA-256 all match. The original GitHub Actions artifact expiry is no longer a blocker for **branch reviewer access**.
+- Updated [Option A docs-only implementation contract](../docs/family-food/pr10-core-option-a-stable-fixture-implementation-contract-2026-10-27.md) and proposed 21-event/42-serving JSON reference archival metadata; semantics unchanged. No Planner, runtime, migration, data-catalogue, eligibility or Gate2 changes; independent review and owner decision still outstanding.
+- `NO_GO_EVIDENCE_NOT_DURABLY_PINNED` applies only if repository copy disappears or hashes fail. Historical PlannerRequest parity and stable seed ID strategy remain **unproven**, `NO_GO_TO_PR10_CORE_RUNTIME` continues.
+
+---
+
+# 2026-10-29 — PR10-CORE-A docs review fixes (not yet merge-ready)
+
+- Implemented same-branch docs-only response to [independent review](https://github.com/Mitronomik/family-food-os/pull/248#issuecomment-6491422149): archival stop rule, verified 51/51 UUID-free process-content parity vs 0/51 ephemeral `process_hash`, QA-only canonical digest `d19f11a0074d095eaac02fc1d414a1f3d6a5088a884c78d27436984a63023d36`, seed constructor/composition limitations and full historical PlannerRequest input-parity requirements. Canonical 21/42 JSON semantics, source hashes and production code unchanged.
+- Downloaded original PR #196 ZIP, checked the only raw JSON member is exactly 110,511 bytes / SHA `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec`. Retained a compressed reversible backup in owner's private Library under `/FamilyFoodOS/QA-Evidence/pr196-original-synthetic-fixture-receipt.json.xz.b64`. Repository publication **blocked**; this is not independently accessible evidence and must be resolved before merge. Original Actions artifact expires 2026-11-09 UTC.
+- No runtime/DB/Planner/RecipeVersion/Prep/Shopping/PDF changes or gate promotion. `NO_GO_EVIDENCE_NOT_DURABLY_PINNED`; `NO_GO_TO_PR10_CORE_RUNTIME` remains. Exact-head Docs CI must be checked on the latest branch commit; do not claim green before it runs.
+
+---
+
+# PR10-CORE-A — owner selected stable exact synthetic fixture reference — 2026-10-27
+
+- Verified accepted `main@3c4645a27d675bb4464c913785aef3cd88de8681`, #244 merged; #242 closed without merge; [PR #246](https://github.com/Mitronomik/family-food-os/pull/246) was still open on 2026-10-27, with source-pinned 3/21/42 structural PASS but 0/21 recipe-code slot matches; **merged on 2026-10-29** as negative research evidence. User explicitly approved **Option A**, not a new source/MealPlan/Planner architecture.
+- Created [Issue #247](https://github.com/Mitronomik/family-food-os/issues/247), [Implementation Contract Gate](../docs/family-food/pr10-core-option-a-stable-fixture-implementation-contract-2026-10-27.md) and [portable 21-event 42-serving fixture reference proposal](../docs/family-food/pr10-core-option-a-frozen-semantic-reference-proposal-2026-10-27.json). Transcribed all historic source-code/role/date/member ordinal/Decimal values from independently pinned PR #196 source (raw JSON sha `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec`) and independently recalculated SHA256 of the ID-free normalized reference, matching external `731ef32e7137740ed5b46a6044a85d8b2f818a847fdc039842460d442df5aeb6`.
+- Analyzed current Planner source: equal-score candidate selection uses `RecipeVersion UUID.hex` tie-break; original semantic digest incorporates generated RecipeVersion/Member UUIDs and is **not** portable. Snapshot-only rehydration would not prove actual Planner→MealPlan Gate2 path. Proposed test-only ID factories/seed binding with **unchanged production Planner**, two independent persisted runs against exact 21-slot 42-Serving digest, explicit no-go if infeasible. No source eligibility approval or production implementation.
+- PR is docs-only and requires independent review/owner merge before fixture-only implementation; `NO_GO_TO_PR10_CORE_RUNTIME`, `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, SAFE_BATCH/PORTION_RELEASE gates intact.
 
 ---
 

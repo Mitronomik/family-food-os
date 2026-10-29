@@ -1,20 +1,46 @@
-# PR #246 handoff correction — accepted owner Option A (2026-10-29)
+# PR #248 integration handoff after merged evidence PR #246 — 2026-10-29
 
-PR #246 is **docs/state-only negative evidence** from [Issue #245](https://github.com/Mitronomik/family-food-os/issues/245), at `main@3c4645a27d675bb4464c913785aef3cd88de8681`. The historical PR #196 synthetic 3/21/42 selected recipe schedule was **not** reproduced by the current fresh PR #246 persisted receipt: **0/21 slot matches**, 7 recipe codes common ignoring slots; the strict temporary two-step CI failed and was reverted. Keep this `NO_GO` intact.
+**Accepted `main`:** `36ab339302557aafc2187f9d8a70b035869c8487` after independent [PR #246](https://github.com/Mitronomik/family-food-os/pull/246) 23/23 green CI + merge. Its raw negative 3/21/42 structural PASS vs **0/21 recipe-slot matches** remains authoritative *research evidence*, not Planner defect attribution or source/Prep approval.
 
-**Later decision already made:** the owner approved **Option A on 2026-10-27**, recorded by [Issue #247](https://github.com/Mitronomik/family-food-os/issues/247). There is **no longer a pending owner choice** between strategies. The separate [PR #248](https://github.com/Mitronomik/family-food-os/pull/248) proposes a docs-only contract to stabilize the original semantic QA reference. It is **not merged**, and still requires its own independent review, correct checksum, sync with `main` after PR #246, exact-head CI and owner merge decision.
+**PR #248 focus:** docs-only Option A implementation contract with a bounded **QA-only regression test**. Correct V1 portable catalogue digest is `d19f11a0074d095eaac02fc1d414a1f3d6a5088a884c78d27436984a63023d36` (two independent archived CI receipts); prior `2e04ea18…` was erroneous. Original synthetic 21-event/42-Serving comparator `731ef32e7137740ed5b46a6044a85d8b2f818a847fdc039842460d442df5aeb6` and 110511-byte raw receipt SHA `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec` unchanged. See [contract](../docs/family-food/pr10-core-option-a-stable-fixture-implementation-contract-2026-10-27.md) and [offline regression test](../backend/app/tests/test_pr10_option_a_process_content.py). Original source archival in PR branch verified by Git blob `e82f147be4f7d1c67fe298ce973a968223910d03`.
 
-**Only next:** review/merge #246 on explicit authorization, then rebase/merge the docs/state intent of #248 without overwriting this historical evidence. No Planner runtime, source eligibility/D3 approval, Prep release, false Gate2 PASS or autonomous merge.
+**Only next:** inspect integrated ancestry, commit diff and CI; independent contract review + owner #248 merge decision. If historical Planner input parity/ID-factory test-only hook proves impossible, stop and return `NO_GO_OPTION_A_UNACHIEVABLE_AS_SCOPED`. No fixture runtime, eligibility authorization, new recipes or alternate Gate2 PASS.
 
 ---
 
-# Issue #245 — accepted historical week not reproduced; NO-GO handoff — 2026-10-27
+# PR #248 checksum reviewer fix — 2026-10-29
 
-**Base:** `main@3c4645a27d675bb4464c913785aef3cd88de8681`. **Current:** [Issue #245](https://github.com/Mitronomik/family-food-os/issues/245), docs-only report [current exact fixture mismatch](../docs/family-food/pr10-core-two-step-current-fixture-evidence-2026-10-27.md), [JSON pin comparison](../docs/family-food/pr10-core-two-step-fresh-fixture-drift-2026-10-27.json). #244 merged, #242 closed unmerged.
+This branch corrects the previously misreported process-content SHA from `2e04ea18…` to **`d19f11a0074d095eaac02fc1d414a1f3d6a5088a884c78d27436984a63023d36`** per the documented canonical two-level hash algorithm. Both independently verified #196/#246 CI receipts give exactly that digest. See [contract](../docs/family-food/pr10-core-option-a-stable-fixture-implementation-contract-2026-10-27.md) and [QA regression test](../backend/app/tests/test_pr10_option_a_process_content.py). Original UUID-free 21-event/42-Serving week SHA `731ef32e7137740ed5b46a6044a85d8b2f818a847fdc039842460d442df5aeb6` is **unchanged**.
 
-**FACT:** prior PR #196 semantic `2d6cb581…`; current successful PR10-META CI on PR #246 HEAD `4dc7b3d` semantic `1720db1d…`, different JSON SHA256 and **zero of 21** recipe-code positions matching, though both fixture counts 3/21/42. Cottage cheese now Sep20 (old Sep18), corn milk porridge **not selected**. Existing PR10-META tests passed; new strict two-step validator failed on independent semantic mismatch (26 old passed, 13 new setup errors) and therefore produced **no new approved two-event receipt**. Attempted diagnostic code/workflow has been **reverted** from branch; this becomes bounded docs-only NO-GO evidence, not a runtime implementation. No definitive cause of drift proven.
+PR #246 has a separate docs/state fix noting owner Option A approval, but remains unmerged until an authorized independent merge. **Next only:** exact-head checks and review #246; then synchronize this PR's `state/*` with the resulting `main`, recheck code/test/diff and obtain explicit owner merge decision. No Planner/Prep runtime or Gate2 advancement.
 
-**NEXT ONLY:** verify final docs-only diff, exact-head Docs CI/independent review, then owner choice whether to stabilize a **versioned synthetic fixture** that preserves accepted 21-event semantic selection, or to propose formal change to accepted Gate2 fixture with new source/Serving pins. Do **not** silently change Planner tie-break, replace recipes, weaken Gate2, or use historical transient IDs as current. After formal fixture decision, run exact new source/Serving QA; still no `APPROVED_IMMEDIATE` / trusted D3 permission / PR10-A. `NO_GO_TO_PR10_CORE_RUNTIME`, `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, SAFE_BATCH and PORTION_RELEASE blocked; no automatic merge.
+---
+
+# 2026-10-29 — PR10-CORE-A evidence archive delivered
+
+PR #248 now includes the **complete original PR #196 synthetic JSON** at [docs/family-food/evidence/pr196-original-synthetic-fixture-receipt.json](../docs/family-food/evidence/pr196-original-synthetic-fixture-receipt.json), verified after publication: SHA-256 `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec`, 110511 bytes; [README](../docs/family-food/evidence/README-pr196-original-synthetic-fixture.md). The prior archive-blocked entry below is historical. Source retention on PR branch is complete, but historical Planner inputs/ID seeding, independent review, owner merge and Gate2 remain unresolved. Production Planner unchanged; `NO_GO_TO_PR10_CORE_RUNTIME` continues. Next: independent docs-only review and explicit owner merge decision.
+
+---
+
+# 2026-10-29 — PR10-CORE-A evidence retention + Planner input reproducibility handoff
+
+**Task/branch:** PR #248, `docs/pr10-core-option-a-stable-fixture-gate`; [independent review](https://github.com/Mitronomik/family-food-os/pull/248#issuecomment-6491422149); [updated docs gate](../docs/family-food/pr10-core-option-a-stable-fixture-implementation-contract-2026-10-27.md). Original 21 MealEvents / 42 exact Decimal Servings from PR #196 remain untouched. No runtime changes or merge authorization.
+
+**Verified source:** full PR #196 synthetic raw JSON 110,511 bytes and raw SHA `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec`. Artifact ID 11672432141 expires 2026-11-09T14:24:01Z. The *private* user Library backup `/FamilyFoodOS/QA-Evidence/pr196-original-synthetic-fixture-receipt.json.xz.b64` is complete and reversible (base64 decode → xz decompress), but lacks independent GitHub reviewer access; publishing it to the PR was blocked. Require a separate permitted repo/reviewer-accessible archive upload and byte-verification before accepting the contract. **`NO_GO_EVIDENCE_NOT_DURABLY_PINNED`.**
+
+**Fingerprint:** original/current receipts both have 51 same source/ordered Step semantic payloads and distinct all 51 run-local `process_hash` values because `recipe_step_id` is hashed; proposed QA-only UUID-free aggregate fingerprint `d19f11a0074d095eaac02fc1d414a1f3d6a5088a884c78d27436984a63023d36` matches both. This is **not** rights approval or D3 publication. Current `create_food_recipe_catalogue_service(engine)` does not pass the `id_factory` accepted by `FoodRecipeCatalogueService`; nested full seed chain and original PlannerRequest parity are unproven. Stop and request owner decision if Option A cannot reproduce same week through the untouched real PlannerService.
+
+**Next only:** finish repository/reviewer-accessible evidence archival, independently pin historical seed/Planner inputs, then Docs CI and independent re-review/owner merge decision. No automatic fixture implementation, production tie-break changes, eligibility upgrades or PR10-A. `APPROVED_IMMEDIATE=0`, `NO_GO_TO_PR10_CORE_RUNTIME` persists.
+
+---
+
+# PR10-CORE-A — stable synthetic fixture Implementation Contract Gate handoff — 2026-10-27
+
+**Accepted base:** `main@3c4645a27d675bb4464c913785aef3cd88de8681`, merged PR #244; PR #246 was still open at the historical 2026-10-27 snapshot (now **merged 2026-10-29** as negative drift evidence); PR #242 closed. **Current Issue #247**, branch `docs/pr10-core-option-a-stable-fixture-gate`. Owner explicitly approved **Option A**, not changing production Planner or Gate2 criteria. [Docs-only gate](../docs/family-food/pr10-core-option-a-stable-fixture-implementation-contract-2026-10-27.md) + [portable reference proposal (21 events/42 Decimal Servings)](../docs/family-food/pr10-core-option-a-frozen-semantic-reference-proposal-2026-10-27.json).
+
+**Anchors:** original accepted PR #196 artifact SHA256 `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec`, old generated-ID semantic `2d6cb581…`, **portable ID-free historic digest `731ef32e7137740ed5b46a6044a85d8b2f818a847fdc039842460d442df5aeb6` (recomputed)**; current PR #246 reconstructed portable digest `1db25794…`, real 0/21 matching schedule slots. The Planner score tie-break depends on `RecipeVersion UUID.hex`; solely blaming it is **unproven**. Test-only fixture source/ID seam must NOT mutate Planner or fake/rehydrate persisted MealEvents as if generated. Requires real PlannerService + persisted readback twice with identical original 21 source/roles and exact member Ordinal Decimals.
+
+**Next ONLY:** exact-head Docs CI, independent review of source fixture/reference trust and dependency/rollback/tamper matrix, owner merge decision. **AFTER contract merged**, separately authorize test-only fixture implementation; if service/seed cannot preserve original semantics, STOP and request explicit owner decision, never swap to Option B silently. After proven fixture, independent QA reviews two R2-E/R3-B source actions and D3 publishing/read/anti-rollback. `APPROVED_IMMEDIATE=0`, PR10-A/Gate2 blocked, real-family batch/portion gates unmet. No migrations, source mutability, new Planner algorithm or automatic merge.
 
 ---
 
