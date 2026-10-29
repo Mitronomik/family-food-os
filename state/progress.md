@@ -1,3 +1,12 @@
+# 2026-10-29 — complete original PR #196 synthetic artifact archived in PR #248
+
+- Verified original uncompressed JSON from conversation attachment: **110511 bytes**, raw SHA-256 `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec`; synthetic-only scope, original `gate_decision=BLOCKED`.
+- Published [full original receipt](../docs/family-food/evidence/pr196-original-synthetic-fixture-receipt.json) and [provenance/verification README](../docs/family-food/evidence/README-pr196-original-synthetic-fixture.md) directly on PR #248 feature branch. Fetched GitHub copy back; its Git blob SHA `e82f147be4f7d1c67fe298ce973a968223910d03`, byte count and independent raw-content SHA-256 all match. The original GitHub Actions artifact expiry is no longer a blocker for **branch reviewer access**.
+- Updated [Option A docs-only implementation contract](../docs/family-food/pr10-core-option-a-stable-fixture-implementation-contract-2026-10-27.md) and proposed 21-event/42-serving JSON reference archival metadata; semantics unchanged. No Planner, runtime, migration, data-catalogue, eligibility or Gate2 changes; independent review and owner decision still outstanding.
+- `NO_GO_EVIDENCE_NOT_DURABLY_PINNED` applies only if repository copy disappears or hashes fail. Historical PlannerRequest parity and stable seed ID strategy remain **unproven**, `NO_GO_TO_PR10_CORE_RUNTIME` continues.
+
+---
+
 # 2026-10-29 — PR10-CORE-A docs review fixes (not yet merge-ready)
 
 - Implemented same-branch docs-only response to [independent review](https://github.com/Mitronomik/family-food-os/pull/248#issuecomment-6491422149): archival stop rule, verified 51/51 UUID-free process-content parity vs 0/51 ephemeral `process_hash`, QA-only canonical digest `2e04ea180cfcad031bad763aedec16be802fcbdcad2e9d1763c43d4c0b4edac9`, seed constructor/composition limitations and full historical PlannerRequest input-parity requirements. Canonical 21/42 JSON semantics, source hashes and production code unchanged.
