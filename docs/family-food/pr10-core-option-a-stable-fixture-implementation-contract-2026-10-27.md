@@ -47,7 +47,7 @@ digest = sha256(json.dumps(
 ).encode("utf-8")).hexdigest()
 ```
 
-Assert unique consecutive positions, nonempty instruction digest and no duplicate canonical code; reject changed source identity/version/document SHA, step text/order/stage. A catalogue-level diagnostic can hash a map `{canonical_code: per_recipe_digest}` with the same JSON canonicalization. On both verified 51-recipe source receipts this **QA-only aggregate** equals `2e04ea180cfcad031bad763aedec16be802fcbdcad2e9d1763c43d4c0b4edac9`. This digest is independently derived diagnostic evidence, **not** a new accepted platform catalogue hash or authoritative eligibility status.
+Assert unique consecutive positions, nonempty instruction digest and no duplicate canonical code; reject changed source identity/version/document SHA, step text/order/stage. A catalogue-level diagnostic can hash a map `{canonical_code: per_recipe_digest}` with the same JSON canonicalization. On both verified 51-recipe source receipts this **QA-only aggregate** equals `d19f11a0074d095eaac02fc1d414a1f3d6a5088a884c78d27436984a63023d36`. This digest is independently derived diagnostic evidence, **not** a new accepted platform catalogue hash or authoritative eligibility status.
 
 The raw receipts **do not expose rights review fields**, current RecipeVersion lineage or complete source-process text. A matching portable content digest alone **does not** approve source rights or a Prep action. Future implementation must separately rebind actual current `RecipeVersion` and ordered `RecipeStep` with verified rights/status and live run-local UUID/process hashes, and fail closed on missing rights or Step changes. Retain current source/Step-version/anti-rollback requirements.
 
