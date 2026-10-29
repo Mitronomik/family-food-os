@@ -11,7 +11,9 @@
 
 **Код/репозиторий:** в ходе исследования изменения не производились.
 
-**Источник текущего состояния:** подключённый GitHub, `Mitronomik/family-food-os`, accepted `main@3c4645a27d675bb4464c913785aef3cd88de8681` после PR #244 (2026-10-27); PR #246 и PR #248 на дату проверки OPEN/UNMERGED.
+**Источник текущего состояния (повторная проверка 2026-10-29):** подключённый GitHub, `Mitronomik/family-food-os`, accepted `main@36ab339302557aafc2187f9d8a70b035869c8487` после merge PR #246 (2026-10-29, 12:40:39 UTC). PR #248 OPEN/UNMERGED; его текущая база — этот accepted `main`, но branch-only contract не является принятой функциональностью.
+
+**Исторический снимок исследования:** `main@3c4645a27d675bb4464c913785aef3cd88de8681` после PR #244 (2026-10-27); при первоначальном анализе PR #246/#248 были OPEN/UNMERGED. Этот SHA остаётся базой исходной ветки RFC, а не обозначением текущего `main`.
 
 **Ограничение исследования:** изучены канонические договоры проекта, ключевые существующие реализации и внешняя документация/публичный исходный код; **не выполнялись** локальные сборки внешних проектов, независимые инсталляции, нагрузочные/точностные эксперименты, юридические заключения или запуск всей тестовой матрицы FamilyFoodOS. По этой причине ROI и совместимость отдельных библиотек — **гипотезы до spike**.
 
@@ -37,7 +39,7 @@
 
 Обязательны: `AGENTS.md`, `state/current-focus.md`, `docs/family-food/architecture.md`, `docs/family-food/master-roadmap.md`, addenda `2026-09-13`, `2026-09-16`, `2026-09-19-data-corpus`, `docs/family-food/data-corpus-v1.md`, `docs/family-food/security-architecture.md`, PR10-ARCH/FD-ARCH/Option B/D3 и самый свежий merged `main`. Исторические Project Sources — только после актуальных repo contracts. В `state/current-focus.md` присутствует история нескольких задач; самая новая открытая работа PR #248 **не** является принятым `main`.
 
-Подтверждённый accepted `main` на дату анализа: `3c4645a...`, PR #244 merged. PR #246 (fixture drift NO-GO) и PR #248 (Option A fixture identity, docs-only) OPEN. Проверка PR #248 показывает, что восстановление исходного fixture всё ещё заблокировано долговечностью архива исходных доказательств и доказательством полной parity входов. **Не считать PR #248 готовой функциональностью.**
+При повторной проверке 2026-10-29 accepted `main` — `36ab339302557aafc2187f9d8a70b035869c8487`: PR #246 merged, его fixture drift NO-GO принят как evidence. PR #248 (Option A fixture identity, docs-only) остаётся OPEN/UNMERGED; текущий проверенный HEAD — `120d997f80e6f0aec0f15002567687a14813e216`. Owner выбрал Option A: сохранить исходную семантику synthetic QA week; это не разрешение на fixture runtime. Долговечное сохранение исходных доказательств и полная parity входов остаются требованиями отдельного contract/evidence review, не доказанным результатом этого RFC. **Не считать PR #248 готовой функциональностью.** `APPROVED_IMMEDIATE=0`, `NO_GO_TO_PR10_CORE_RUNTIME`, `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, safe-batch и portion-release gates остаются без изменений.
 
 ## 2.2 Реализованные bounded contexts — что нельзя строить заново
 
@@ -46,6 +48,7 @@
 | Household / Members | PR2-C, Household API/services | Implemented | Не заимствовать модель пользователей у других сервисов |
 | FoodIngredient, aliases, units, nutrition/composition | PR3, PR6, DATA-CORPUS-V1 | Deterministic, provenance, `unknown != 0` | Не подменять каталог внешним SKU или сырой схемой FDC |
 | Recipe + immutable RecipeVersion + Steps | PR4; `backend/app/domain/food_recipes.py`; `backend/app/services/food_recipes.py` | Source/rights/versioned publication | Внешний импорт только через `RecipeCandidate` / проверяемую публикацию |
+| Controlled source-corpus ingestion | `backend/app/domain/recipe_source_corpus.py`; `backend/app/services/recipe_source_corpus_import.py`; `scripts/import_ru_normative_recipe_corpus.py` | RU normative cards, source versions and raw/text hashes; source staging does not publish RecipeVersion or establish Nutrition truth | Compare generic HTML/JSON-LD extraction against this existing source-specific baseline |
 | Pantry & stock movements | PR5; `backend/app/services/pantry.py` | Household-scoped, transaction/negative-stock, locations, dates | Прямой переход на Grocy означал бы дублирование ledger |
 | Member schedules / MealPlan / Serving | PR7 | 1–6 opportunities, mixed sources, revisioned plans | Чужой meal planner с 3 фиксированными приёмами не подходит |
 | Planner | PR8 + дальнейшие доработки; `backend/app/domain/planner.py` | Deterministic, source constraints, source/corpus audit | Нельзя переносить закрытый SaaS-алгоритм и использовать LLM как планировщик |
@@ -60,7 +63,9 @@
 - `backend/app/services/shopping.py`: Unit of Work, идемпотентное повторение снимка по fingerprint, current MealPlan revision, чтение Pantry без списания.
 - `backend/app/services/pantry.py`: отдельные подтверждённые `add_stock`, consume/adjust, записи движений; `planned != executed`.
 - `backend/app/services/food_recipes.py`: уже есть `TrustedRecipeIngredientSeed` и `TrustedRecipeVersionSeed` с source ID/URL/version, rights status, output g, количествами и steps. Внешний парсер не должен выдавать эту модель как «trusted» напрямую.
-- PR #246 выявил **0/21 идентичных выбранных `(date, position, recipe code)`** при сравнении исторической и свежей синтетических недель несмотря на одинаковые 3/21/42 counts; это препятствует позитивной проверке двух подготовительных событий.
+- Existing FDC seed/import: `backend/app/seed/food_ingredients.py` reads `data/seed/food_ingredients/nutrition.csv`, accepts `USDA_FDC` Foundation/SR Legacy records, validates source identity/type and passes source ID/version/basis/nutrients through `TrustedNutritionSeed` and the existing catalogue/UoW boundary. This is already implemented; these seed rows do **not** automatically represent all current production V2 nutrition authority. Later publications have their own versions and review.
+- Existing controlled RU source-corpus ingestion extracts normative HTML/card text and preserves source hashes separately from canonical FoodIngredient resolution and RecipeVersion publication. Generic multi-site schema.org/JSON-LD extraction is a **candidate gap to verify**, not a reason to rebuild source staging or publication. `RecipeCandidate` below is conceptual wording, not a claim that a runtime DTO with that exact name already exists.
+- Merged PR #246 выявил **0/21 идентичных выбранных `(date, position, recipe code)`** при сравнении исторической и свежей синтетических недель несмотря на одинаковые 3/21/42 counts; это препятствует позитивной проверке двух подготовительных событий.
 - PR #248 — docs-only Option A, фиксация исходной семантики и pending durable evidence/fixture parity; ещё не runtime.
 
 ---
@@ -79,8 +84,8 @@
 | **RecipeSage** | Multiple import formats, ingredient/step scaling, export | ingestion и print UX | **REFERENCE only** | Коммерческое использование требует отдельной лицензии; нельзя брать production код без разрешения |
 | **Cooklang specification / CookCLI** | Переносимое представление рецептов; import/export/CLI | Внутренний RecipeVersion уже существует | **LIBRARY/FORMAT experimental; later** | MIT у CookCLI; не менять canonical model; mapping и fidelity-test, формат может терять provenance/food identity |
 | **`recipe-scrapers` Python** | Извлечение schema.org JSON-LD/HTML title/yield/ingredients/steps | DATA-3/Recipe ingestion | **LIBRARY candidate P1** | MIT; только контролируемые HTML + rights/SSRF policy; не выполняет семантическую валидацию |
-| **`ingredient-parser-nlp`** | Извлечение имени, количества и единицы из строки | source parser/resolver | **LIBRARY candidate P1 only after RU benchmark** | MIT, доказанное качество для русских строк неизвестно; источник выводит candidate, не trusted quantity |
-| **USDA FDC** | Нутриенты, публичные dumps/API, CC0 | Nutrition/Composition/Catalogue | **DATA candidate P1** | Уже допустимый authority candidate по DATA-CORPUS-V1; совместимость `food form`, basis, RU foods обязательна |
+| **`ingredient-parser-nlp`** | Извлечение имени, количества и единицы из английской строки | source parser/resolver | **LIBRARY candidate for English sources; RU adaptation requires separate evidence** | MIT; upstream поддерживает только English, готовой RU-модели нет. RU требует языковой обработки, размеченного корпуса и отдельного обучения; вывод — candidate, не trusted quantity |
+| **USDA FDC** | Нутриенты, публичные dumps/API, CC0 | Nutrition/Composition/Catalogue; controlled FDC seed/import уже реализован | **DATA enrichment/automation candidate P1** | Дополнять конкретные пробелы существующей curation/publication, не подключать USDA заново; совместимость `food form`, basis, RU foods и текущая versioned authority обязательны |
 | **USDA Food Buying Guide** | Таблицы edible yields и procurement per serving | Food form/yield, portion/purchase math | **DATA / methodology candidate P1** | US institutional/child-program context; не подменяет личные порции; требуется проверка прав/применимости конкретной таблицы |
 | **USDA FoodKeeper** | JSON/XLS рекомендации по хранению и качеству | PR10-BATCH/SAFE-REUSE, storage metadata | **DATA + evidence P1, runtime only after safety contract** | Датасет в data.gov обозначен CC0; не все сроки = гарантированные safety limits; category/form/state/temperature match |
 | **AFRS recipes** | Standardized institutional recipe yield, process & large batch scaling | Recipe/Prep educational methodology | **REFERENCE; optional rights-reviewed corpus input** | Рецепты на большие партии, домашняя масштабируемость и rights/provenance — отдельно; военная роботизация не даёт Planner engine |
@@ -175,7 +180,7 @@ The following integration tasks are **proposals**, not permission to start them.
 
 **Acceptance:** every proposed library mapped to explicit owning bounded context; no invented missing feature; exact main SHA recorded.
 
-**Risk:** parallel open PR #246/#248 may later change accepted baseline.
+**Risk:** PR #246 is now merged into the refreshed baseline; the still-open PR #248 and later accepted PRs may change evidence/current focus. Recheck exact refs before any separately authorized task.
 
 **Follow-up:** refresh inventory after independently merged PRs only.
 
@@ -183,7 +188,7 @@ The following integration tasks are **proposals**, not permission to start them.
 
 **Goal:** determine whether `recipe-scrapers` meaningfully reduces manual extraction work on **permitted** recipes.
 
-**Scope:** offline, manually supplied HTML/snapshots only; pin exact package/license/version; map output to existing `Recipe Candidate` / seed staging boundary, never to publish. Compare to in-repository existing parsing scripts. Optional second arm: Cooklang import, `ingredient-parser-nlp` for Russian ingredient lines (separately scored).
+**Scope:** offline, manually supplied HTML/snapshots only; pin exact package/license/version; map output to existing `Recipe Candidate` / seed staging boundary, never to publish. Compare to in-repository existing parsing scripts. Optional second arms: Cooklang import and `ingredient-parser-nlp` on permitted English ingredient lines (separately scored). A bounded RU baseline may document unsupported behavior against dictionary/regex extraction, but a benchmark does not authorize building a Russian model: language-specific processing, corpus labelling, training and maintenance require a separate cost/benefit decision.
 
 **Non-goals:** broad crawlers, arbitrary URLs from users, live background scraping, AI-publishing, recipe activation, new SQL.
 
@@ -197,7 +202,7 @@ The following integration tasks are **proposals**, not permission to start them.
 
 **Acceptance:** measured field-level precision/recall, manual correction time, failure categorization, zero direct trusted publication, explicit licensing decision. Compare baseline time and parser time on same inputs; adopt only if measurable improvement and no safety deterioration. Threshold is set before evaluation, not guessed after results.
 
-**Risks:** model is English-centric; source terms/robots/rights; dependency supply-chain.
+**Risks:** `ingredient-parser-nlp` currently supports English only; Russian adaptation is separate development, not a measured ready-made capability. Source terms/robots/rights and dependency supply-chain remain independent risks.
 
 **Follow-up:** REUSE-2 after authorization or reject candidate with receipt.
 
@@ -225,9 +230,9 @@ The following integration tasks are **proposals**, not permission to start them.
 
 ## REUSE-3 — USDA nutrition/yield source adapters (DATA PROGRAM / existing Nutrition validation)
 
-**Goal:** accelerate corpus enrichment without rewriting Nutrition or Serving.
+**Goal:** accelerate specific corpus enrichment gaps in the already implemented controlled FDC seed/import and reviewed nutrition publication workflows, without rewriting Nutrition or Serving.
 
-**Scope:** evaluate USDA FDC CC0 pinned snapshot/version, FBG yield tables, source records and semantic mapping to canonical FoodIngredient; compare exact edible/source basis, raw/cooked form and units.
+**Scope:** first inventory existing FDC mappings, import validation and current versioned nutrition authority; then evaluate only uncovered or costly-to-maintain mappings using a USDA FDC CC0 pinned snapshot/version, FBG yield tables and canonical FoodIngredient. Compare exact edible/source basis, raw/cooked form and units. Do not equate legacy seed coverage with the whole current V2 catalogue.
 
 **Non-goals:** blanket replacement of approved Russian records; use FBG child-institutional portions as household targets; silent yield inference; adding source-specific IDs as domain identity.
 
@@ -329,7 +334,7 @@ The following integration tasks are **proposals**, not permission to start them.
 
 ## 6.2 Meal planner/Eat This Much
 
-Commercial product proves users value auto-planned meals and leftovers; it does **not** supply an openly reusable algorithm. FamilyFoodOS already has 1–6 meal patterns and individual member Serving; keep own deterministic Planner. Product benchmark should measure weekly meal changes, leftover scheduling, prep time and decision count — without claiming exact parity of serving optimization.
+**FACT:** Eat This Much publicly documents automatic meal planning and leftovers workflows; it does **not** supply an openly reusable algorithm in the reviewed sources. **ASSUMPTION:** these workflows may reduce decision effort for FamilyFoodOS users; their value, retention impact and willingness-to-pay require separate validation. Product existence and feature documentation do not prove that value. FamilyFoodOS already has 1–6 meal patterns and individual member Serving; keep own deterministic Planner. Product benchmark should measure weekly meal changes, leftover scheduling, prep time and decision count — without claiming exact parity of serving optimization.
 
 ## 6.3 Structured recipes/Tandoor/Mealie/RecipeSage
 
@@ -362,7 +367,7 @@ FoodKeeper catalogued storage durations may describe **freshness/quality**, not 
 | Grocy | MIT | Study or adapted small logic with attribution/license notice | Full service replacement without architecture decision |
 | CookCLI | MIT | Offline CLI/helper under pinned version, if proven useful | Treat files as authoritative RecipeVersion |
 | Python recipe-scrapers | MIT | Offline/controlled HTML parsing | Crawl arbitrary websites and copy protected recipe texts |
-| ingredient-parser-nlp | MIT | Optional RU benchmark | Auto-publish guessed grams or name matches |
+| ingredient-parser-nlp | MIT; English-only upstream support | English-source benchmark; separately scoped RU feasibility assessment | Auto-publish guessed grams/name matches or assume an available RU model |
 | USDA FoodData Central | CC0/public domain | Licensed/source-attributed snapshot curation | Blind mass/form or nutrient authority transplant |
 | USDA FoodKeeper | data.gov distribution CC0 | Evidence candidate for reviewed storage policy | Invent generalized safe holds for every dish |
 | USDA Food Buying Guide | Official public tables; **specific rights/retention verify per resource** | Methodology + candidate yield data | Assume any child-institutional value applicable to adult serving |
@@ -396,7 +401,7 @@ No fabricated day/week estimates. Before each spike, record baseline manual-work
 
 | Priority | Work | When | Decision |
 |---|---|---|---|
-| P0 | Inventory and duplicate-implementation audit | read-only, independently authorized now | GO to documentation only |
+| P0 | Inventory and duplicate-implementation audit | may be separately owner-authorized as a bounded read-only task | PROPOSED, NOT AUTHORIZED by this RFC or its merge |
 | P0 | Restore PR10 original fixture reproducibility/provenance | current owner-approved PR10 work | Existing priority; third-party library does not solve it |
 | P1 | `recipe-scrapers` offline benchmark | optional research spike or DATA-3 stage | Candidate, measured GO/NO-GO |
 | P1 | USDA FDC/FBG controlled gap audit | data stage or standalone research | Candidate, no automatic publication |
@@ -450,7 +455,7 @@ Every actual task must contain `Context / Goal / Scope / Non-goals / Architectur
 
 1. **Which current corpus preparation/import tools already solve the same parsing job?** Need repository-wide targeted audit before a dependency is adopted (this research examined key runtime files, not every ingest script).
 2. **Do existing source corpora contain rights-cleared HTML/JSON-LD with representative Russian ingredient strings?** Without that, parser ROI cannot be measured honestly.
-3. **Can `ingredient-parser-nlp` meet RU measurement/quantity extraction criteria?** No assumed answer; likely needs baseline dictionary/regex comparison.
+3. **Would adapting the English-only `ingredient-parser-nlp` to Russian save more work than a bounded dictionary/regex baseline?** No ready-made RU support exists upstream. Labelled RU data, language-specific processing, model training and maintenance costs must be evaluated separately; this RFC does not authorize that development.
 4. **What is an authoritative and applicable storage-safety policy for Russian household finished dishes?** FoodKeeper by itself does not close this gate.
 5. **How to prove physical serving size/output at accepted home scale?** Neither external planner nor USDA FBG automatically passes `PORTION_RELEASE_READY`.
 6. **Does Cooklang transfer any field currently painful to store/export?** If not, no reason to add an early import format.
@@ -463,12 +468,14 @@ Every actual task must contain `Context / Goal / Scope / Non-goals / Architectur
 
 # 12. Evidence register — primary URLs
 
-### FamilyFoodOS repository and merged baseline
+### FamilyFoodOS repository, historical snapshot and refreshed accepted baseline
 
 - Repo: https://github.com/Mitronomik/family-food-os
 - Accepted 2026-10-27 PR #244: https://github.com/Mitronomik/family-food-os/pull/244
-- Current OPEN PR #246: https://github.com/Mitronomik/family-food-os/pull/246
-- Current OPEN PR #248: https://github.com/Mitronomik/family-food-os/pull/248
+- PR #246 MERGED 2026-10-29; refreshed accepted main `36ab339302557aafc2187f9d8a70b035869c8487`: https://github.com/Mitronomik/family-food-os/pull/246
+- PR #248 OPEN/UNMERGED at the 2026-10-29 refresh, checked HEAD `120d997f80e6f0aec0f15002567687a14813e216`; not accepted main truth: https://github.com/Mitronomik/family-food-os/pull/248
+- Existing FDC seed/import (pinned accepted main): https://github.com/Mitronomik/family-food-os/blob/36ab339302557aafc2187f9d8a70b035869c8487/backend/app/seed/food_ingredients.py
+- Existing controlled source-corpus extraction (same pin): https://github.com/Mitronomik/family-food-os/blob/36ab339302557aafc2187f9d8a70b035869c8487/backend/app/services/recipe_source_corpus_import.py
 - Implemented Planner PR #59: https://github.com/Mitronomik/family-food-os/pull/59
 - Implemented Shopping PR #186/#188/#190: https://github.com/Mitronomik/family-food-os/pull/186 , https://github.com/Mitronomik/family-food-os/pull/188 , https://github.com/Mitronomik/family-food-os/pull/190
 - Canonical project docs: `AGENTS.md`, `docs/family-food/architecture.md`, `docs/family-food/master-roadmap.md`, later addenda, `docs/family-food/security-architecture.md`, `docs/family-food/data-corpus-v1.md`, PR10 contracts.
@@ -484,6 +491,7 @@ Every actual task must contain `Context / Goal / Scope / Non-goals / Architectur
 - Cooklang/CookCLI MIT: https://cooklang.org/ , https://github.com/cooklang/cookcli
 - Python recipe-scrapers doc/license: https://docs.recipe-scrapers.com/ , https://github.com/hhursev/recipe-scrapers
 - Ingredient-parser-nlp MIT: https://github.com/strangetom/ingredient-parser
+- Ingredient-parser English-only support and separate-language adaptation requirements (checked 2026-10-29): https://ingredient-parser.readthedocs.io/en/latest/how-to/extending.html
 - USDA FDC CC0/licensing/dumps: https://fdc.nal.usda.gov/api-guide/ , https://fdc.nal.usda.gov/download-datasets/
 - USDA Food Buying Guide tables/RAW: https://foodbuyingguide.fns.usda.gov/Appendix/DownLoadFBG , https://foodbuyingguide.fns.usda.gov/Appendix/ResourceAppendixA
 - USDA FoodKeeper dataset JSON/XLS and CC0 metadata: https://catalog.data.gov/dataset/fsis-foodkeeper-data
