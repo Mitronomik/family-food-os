@@ -1,3 +1,12 @@
+# 2026-10-29 — PR10 Option A contract closure and next task preparation
+
+- **PR #246 MERGED** after 23/23 exact-head CI: authentic historical/current receipt comparison shows 3/21/42 structural PASS but **0/21** matching recipe-code slots, so current fresh Planner fixture did not reproduce accepted historical week. The drift's sole cause is unproven.
+- **PR #248 MERGED** at `edba04dcd491ef9663fe82c96f6f0c1c76504a27`, with **24/24** exact-head CI success. Archived the complete byte-identical synthetic original PR #196 receipt (110511 bytes; SHA256 `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec`), corrected portable process catalogue digest to `d19f11a0074d095eaac02fc1d414a1f3d6a5088a884c78d27436984a63023d36`, and added offline QA-only regression tests. Original UUID-free 21×42 historical week digest remains `731ef32e7137740ed5b46a6044a85d8b2f818a847fdc039842460d442df5aeb6`. **No production Planner, schema, recipe or Prep runtime change.**
+- Parallel docs-only research **PR #249 and PR #251 merged**. REUSE-DOC-1 recommends **NO-SPIKE now**; future generic recipe HTML/JSON-LD parser demand/rights validation is a distinct, unapproved subject. Do not mix it into PR10 or assume external integration.
+- Prepared [Issue #252](https://github.com/Mitronomik/family-food-os/issues/252) as bounded **proposed** fixture-only 2-independent-run Planner reproduction task; requires explicit owner authorization before code and a separate PR/review. Preserves `APPROVED_IMMEDIATE=0`, `NO_GO_TO_PR10_CORE_RUNTIME`, D3, safe-batch and portion-release blocks.
+
+---
+
 # PR #248 integration after PR #246 merge — 2026-10-29
 
 - [PR #246](https://github.com/Mitronomik/family-food-os/pull/246) evidence-only negative fixture drift **MERGED** to `main@36ab339302557aafc2187f9d8a70b035869c8487` after its reviewer P2 state correction and **23/23 successful** exact-head workflows. Historical source comparison remains 3/21/42 structural PASS but zero of 21 matching recipe/date/position slots.
