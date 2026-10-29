@@ -1,0 +1,42 @@
+name: PR10 Option A real Planner two-process diagnostic
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/pr10_option_a_probe.py'
+      - 'backend/app/tests/test_pr10_option_a_probe.py'
+      - '.github/workflows/pr10-option-a-two-process-probe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  two-process-probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      AI_ENABLED: 'false'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install supported backend and lint
+        run: python -m pip install -e './backend[test]' 'ruff==0.16.10'
+      - name: Guard frozen historical source and adversarial failures
+        run: |
+          python -m pytest -q backend/app/tests/test_pr10_option_a_probe.py --tb=short
+          python -m ruff check scripts/pr10_option_a_probe.py backend/app/tests/test_pr10_option_a_probe.py
+          python -m ruff format --check scripts/pr10_option_a_probe.py backend/app/tests/test_pr10_option_a_probe.py
+      - name: Two actual isolated fresh Planner+persisted readbacks
+        run: |
+          python -m scripts.pr10_option_a_probe --output /tmp/pr10-option-a-two-run-diagnostic.json
+      - name: Upload synthetic diagnostic even on NO_GO
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr10-option-a-two-process-diagnostic
+          path: /tmp/pr10-option-a-two-run-diagnostic.json
+          if-no-files-found: warn
+          retention-days: 30
