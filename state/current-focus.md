@@ -1,3 +1,13 @@
+# CURRENT — PR10-CORE-A historical input parity and test-only ID-seam Decision Gate — 2026-10-29
+
+**Accepted baseline at task start:** `main@8a096a4f74711d04bcc2abb8ddbf91ce4086ef15`, including merged [PR #254](https://github.com/Mitronomik/family-food-os/pull/254) as **negative two-run evidence only**. [Issue #252](https://github.com/Mitronomik/family-food-os/issues/252) remains OPEN: the exact historical 21-MealEvent/42-Serving positive Planner fixture has **not** been reproduced. PR #253 closed unmerged; previous entries describing #254 open are historical.
+
+**Owner-authorized next bounded task:** [Issue #255](https://github.com/Mitronomik/family-food-os/issues/255): docs-only [historical input parity and all-seed test-only ID injection decision](../docs/family-food/pr10-option-a-historical-input-parity-id-injection-decision-2026-10-29.md). Original historic PR #196 run SHA `bd464237e7a3c96fc46558dd6f0efd88beea0414`; original 3/21/42 UUID-free digest `731ef32e7137740ed5b46a6044a85d8b2f818a847fdc039842460d442df5aeb6`. Reviewed observed vs source-derived vs unproven PlannerRequest fields, multi-stage seed composer calls and other entity-ID owners. **Proposed decision only:** `NO_GO_TO_POSITIVE_OPTION_A_IMPLEMENTATION_FROM_CURRENT_EVIDENCE` unless historical input parity and a genuinely isolated typed test ID seam receive independent architecture/QA and owner authorization.
+
+**Next only:** exact-head docs/static review and independent owner decision for #255. No production Planner/ranking changes, no seed/composition signature or schema changes and no fixture runtime PR authorized here. `APPROVED_IMMEDIATE=0`, `NO_GO_TO_PR10_CORE_RUNTIME`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`, D3/Gate2/release separately gated.
+
+---
+
 # Issue #252 — real two-process Option A preflight NO_GO; separate test-only identity seam still OPEN — 2026-10-29
 
 **Accepted main at test start:** `794302534a9f02a8452892aef62375daf0a13de2`; [PR #253](https://github.com/Mitronomik/family-food-os/pull/253) is a concurrent separate docs/state handoff update, not included in this branch. Owner-authorized [Issue #252](https://github.com/Mitronomik/family-food-os/issues/252) remains OPEN for its unfulfilled positive fixture goal; [PR #254](https://github.com/Mitronomik/family-food-os/pull/254) now explicitly offers **negative evidence only** for review. This does **not** authorize any production Planner/seed/schema change.
