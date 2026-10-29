@@ -1,3 +1,11 @@
+# PR #246 review follow-up — 2026-10-29
+
+- Reviewer P2 current-state contradiction corrected: **Option A was explicitly approved by owner 2026-10-27 in [Issue #247](https://github.com/Mitronomik/family-food-os/issues/247)**. The separate PR #248 is open/unmerged and proposes the subsequent fixture-only contract; it is not accepted production/runtime truth.
+- PR #246 remains negative evidence: 3 HouseholdMembers, 21 MealEvents, 42 Servings reproduced structurally, but **0/21 same date/position recipe selections** across original and fresh run; R2-E moved and R3-B absent. No failed experiment code remains in its docs/state diff.
+- Merge order requested by review: independently accept #246 evidence first; **then** synchronize #248 and re-review. No autonomous merge. D3/`APPROVED_IMMEDIATE`/safe-batch/portion-quality gates unchanged.
+
+---
+
 # Issue #245 — new CI proves changed 21-event fixture semantics — 2026-10-27
 
 - Accepted `main@3c4645a27d675bb4464c913785aef3cd88de8681`, #244 merged; #242 closed without merge. #245 attempted a **current persisted exact two-step MealEvent/Serving re-pin**.
