@@ -1,10 +1,18 @@
+## Archive evidence completion — 2026-10-29
+
+**P1 original archive COMPLETE on PR branch:** [complete original PR #196 JSON](../docs/family-food/evidence/pr196-original-synthetic-fixture-receipt.json) and [provenance/verification README](../docs/family-food/evidence/README-pr196-original-synthetic-fixture.md) are now committed to PR #248; independently fetched and hashed GitHub bytes match 110511-byte original SHA-256 `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec` (Git blob `e82f147be4f7d1c67fe298ce973a968223910d03`). Archive availability **on PR branch** eliminates dependency on expiring Actions artifact for reviewer access, but **does not establish** historical Planner input parity, fixture ID seeding feasibility, eligibility, Gate2 success or merge authorization.
+
+**Next only:** exact-head docs CI and independent review/owner merge decision of the docs-only implementation contract. `APPROVED_IMMEDIATE=0`, `NO_GO_TO_PR10_CORE_RUNTIME`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN` persist. No production code/migration/next milestone.
+
+---
+
 # PR10-CORE-A — independent review correction pass, 2026-10-29
 
 **Current authorization:** [PR #248](https://github.com/Mitronomik/family-food-os/pull/248) docs-only Option A gate; no production runtime, no merge and no next milestone. Independent review [comment #6491422149](https://github.com/Mitronomik/family-food-os/pull/248#issuecomment-6491422149). The [revised Implementation Contract Gate](../docs/family-food/pr10-core-option-a-stable-fixture-implementation-contract-2026-10-27.md) now distinguishes run-local `process_hash` from UUID-free process-content QA digest (51/51 source-step content matches; 0/51 prior run-local process hashes match), explicitly inventories incomplete seed ID injection and historical Planner inputs, and freezes NO_GO on archival/input gaps. The [frozen 21×42 JSON](../docs/family-food/pr10-core-option-a-frozen-semantic-reference-proposal-2026-10-27.json) remains QA-only and marks evidence retention and input parity **unproven**.
 
-**Archive blocker:** independently verified full synthetic PR #196 receipt 110,511 JSON bytes, SHA `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec` (GitHub artifact expires **2026-11-09T14:24:01Z**). Reversible compressed full-byte backup exists in the project owner's private Library `/FamilyFoodOS/QA-Evidence/pr196-original-synthetic-fixture-receipt.json.xz.b64`, but **not in reviewer-accessible versioned evidence**. Publication into the repository did not succeed. **`NO_GO_EVIDENCE_NOT_DURABLY_PINNED` blocks contract merge** until independent access is proven. Do not treat the private Library copy as an accepted GitHub reviewer archive.
+**Archive status:** repository branch now has complete original JSON and reviewer-accessible provenance README. The private Library backup is an additional copy, not the canonical verification source. Re-open `NO_GO_EVIDENCE_NOT_DURABLY_PINNED` only if the repository copy becomes missing, inaccessible or byte-inconsistent.
 
-**Next only:** publish and independently verify reviewer-accessible complete raw receipt before expiry; verify SHA, portable process digest and historical input snapshot/seed seams; exact-head Docs CI and independent review; explicit owner merge decision. Production Planner unchanged; `APPROVED_IMMEDIATE=0`; `NO_GO_TO_PR10_CORE_RUNTIME`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`. PR #246 remains open/unmerged unless independently verified otherwise.
+**Next only:** independent full contract review of source proof and unresolved Planner input/seed-seam risks, exact-head Docs CI, and explicit owner merge decision. Production Planner unchanged; `APPROVED_IMMEDIATE=0`; `NO_GO_TO_PR10_CORE_RUNTIME`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`. PR #246 remains open/unmerged unless independently verified otherwise.
 
 ---
 
