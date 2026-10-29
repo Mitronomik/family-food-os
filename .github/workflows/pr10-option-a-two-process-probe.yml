@@ -7,7 +7,7 @@ on:
       - 'backend/app/tests/test_pr10_option_a_probe.py'
       - '.github/workflows/pr10-option-a-two-process-probe.yml'
       - 'docs/family-food/evidence/pr10-option-a-issue252-*.json'
-      - 'docs/family-food/pr10-option-a-issue252-two-process-no-go-*.md'
+      - 'docs/family-food/pr10-option-a-issue252-*.md'
       - 'state/current-focus.md'
       - 'state/handoff.md'
       - 'state/progress.md'
