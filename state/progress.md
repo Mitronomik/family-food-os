@@ -1,3 +1,11 @@
+# PR #248 integration after PR #246 merge — 2026-10-29
+
+- [PR #246](https://github.com/Mitronomik/family-food-os/pull/246) evidence-only negative fixture drift **MERGED** to `main@36ab339302557aafc2187f9d8a70b035869c8487` after its reviewer P2 state correction and **23/23 successful** exact-head workflows. Historical source comparison remains 3/21/42 structural PASS but zero of 21 matching recipe/date/position slots.
+- Separate PR #248 retains the 21×42 original QA-only reference; corrected SHA256 of UUID-free portable `{canonical_code: per_recipe_digest}` to `d19f11a0074d095eaac02fc1d414a1f3d6a5088a884c78d27436984a63023d36` computed from two actual #196/#246 archives. Introduced [six QA regression tests](../backend/app/tests/test_pr10_option_a_process_content.py): source raw checksum, UUID independence, step/source/duplicate tamper. Locally **6 passed**, exact-head integrated CI and independent review still required.
+- Archived PR #196 raw original 110511-byte SHA `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec` remains unchanged and reviewer-accessible; #246's merged evidence is not overwritten. No Planner/Recipe/Prep/Shopping/PDF schema/runtime changes. `APPROVED_IMMEDIATE=0`, `NO_GO_TO_PR10_CORE_RUNTIME`, D3 and safe-batch/portion-quality gates preserved.
+
+---
+
 # PR #248 P2 process checksum correction — 2026-10-29
 
 - Independently recomputed QA-only V1 `{canonical_code: per_recipe_digest}` SHA-256 from both authentic archived PR #196 and CI PR #246 JSON receipts. **Correct expected value: `d19f11a0074d095eaac02fc1d414a1f3d6a5088a884c78d27436984a63023d36`**. The previous `2e04ea18…` value does not correspond to the documented algorithm; historical week digest `731ef32e…` remains unchanged.
