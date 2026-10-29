@@ -1,3 +1,11 @@
+# 2026-10-29 — separate PR10 Option A historical input parity/ID seam decision
+
+- Verified merged PR #254 as authentic negative 2-run Planner evidence; original positive Issue #252 remains OPEN. Accepted baseline `main@8a096a4f74711d04bcc2abb8ddbf91ce4086ef15`.
+- [Issue #255](https://github.com/Mitronomik/family-food-os/issues/255) and [docs-only Decision Gate](../docs/family-food/pr10-option-a-historical-input-parity-id-injection-decision-2026-10-29.md) independently enumerate original literal receipt vs historical-source-derived `PlannerRequest` inputs vs UNKNOWNs; pin original Actions SHA `bd464237…`; identify the 44 v1/7 v2 original active RecipeVersion split, 12 nested Recipe seed modules/22 composer call sites, unkeyed shared ID allocation across Recipe/Version/Ingredient/Step and Household/MealPlan ID owners. No full original `PlannerRequest` snapshot or safe end-to-end test-only injection interface has been demonstrated.
+- **Proposed decision only:** `NO_GO_TO_POSITIVE_OPTION_A_IMPLEMENTATION_FROM_CURRENT_EVIDENCE`; require independently reviewed typed fixture ID strategy and historical request parity before authorizing any production-facing composition/seed signature change. No new runtime, schema, data-authority or gate promotion. Draft remains docs-only pending independent review.
+
+---
+
 # 2026-10-29 — Issue #252 first true two-process diagnostic NO_GO
 
 - On accepted `main@794302534a9f02a8452892aef62375daf0a13de2`, owner explicitly authorized starting [Issue #252](https://github.com/Mitronomik/family-food-os/issues/252); opened [PR #254](https://github.com/Mitronomik/family-food-os/pull/254), explicitly narrowed for independent **NO_GO research evidence**. New test-only real Planner two-process harness, 14 adversarial guards, dedicated CI; no production modifications.
