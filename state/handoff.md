@@ -1,3 +1,13 @@
+# 2026-10-29 — PR10 Option A input parity / test-ID architecture decision handoff
+
+**Current accepted starting main:** `8a096a4f74711d04bcc2abb8ddbf91ce4086ef15` after merged PR #254 negative evidence. **Issue #255** [full docs-only audit and proposed decision](../docs/family-food/pr10-option-a-historical-input-parity-id-injection-decision-2026-10-29.md) is the next scope. Historical raw [PR #196 source archive](../docs/family-food/evidence/pr196-original-synthetic-fixture-receipt.json), [Option A contract](../docs/family-food/pr10-core-option-a-stable-fixture-implementation-contract-2026-10-27.md) and merged [PR #254 evidence](../docs/family-food/pr10-option-a-issue252-two-process-no-go-2026-10-29.md) remain controlling. **Positive Issue #252 is not complete**.
+
+**Verified:** original Actions run `38059374826` actual head `bd464237e7a3c96fc46558dd6f0efd88beea0414`; historical/current pure Planner and fixture-builder SHA identical, service compose request has known list_active vs list_all/filter change. 3 member roles are 3/2/1 per day, derived female/male/female reference energy 2371.790000/2757.490000/2371.790000 kcal, beef exclusion only ordinal3; these are **historical-code reconstruction**, not serialized actual request. Original catalogue 51 active (44 v1/7 v2, 191 Step fingerprints); no original candidate kcal/full IDs/candidate scoring trace. 12 seed modules include 22 composer call sites; `id_factory` is zero-argument and used for Recipe/Version/Ingredient/Step, but no end-to-end injection through their normal composition exists. Additional Household/FoodIngredient/MealPlan owner UUIDs matter.
+
+**Proposed stop:** `NO_GO_TO_POSITIVE_OPTION_A_IMPLEMENTATION_FROM_CURRENT_EVIDENCE`. Need independent Architecture + QA review and explicit owner approval **before** any optional test-only ID passing through production-facing seed/composition signatures. No forced Planner selection, global UUID patch, SQL rewrite, forged snapshot or source change. No automatic merge or fixture runtime. All Gate2, D3, PR10 and safe batch/portion release gates persist.
+
+---
+
 # 2026-10-29 — Issue #252 test-only real Planner two-process NO_GO handoff
 
 **Owner-authorized issue:** [#252](https://github.com/Mitronomik/family-food-os/issues/252); [PR #254 — negative evidence only](https://github.com/Mitronomik/family-food-os/pull/254) on `main@794302534a9f02a8452892aef62375daf0a13de2` (separate [PR #253](https://github.com/Mitronomik/family-food-os/pull/253) state/docs remains open, reconcile only before subsequent acceptance). No merge or next milestone authorized.
