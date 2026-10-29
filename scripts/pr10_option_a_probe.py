@@ -78,6 +78,8 @@ def normalize_receipt(receipt: dict) -> list[dict]:
                 "portion_servings": amount,
             }
         )
+    if sum(map(len, by_event.values())) != counts["servings"]:
+        raise ValueError("Serving count differs from immutable 3/21/42 claim")
     normalized = []
     for e in events:
         if e["source_kind"] != "COOK_RECIPE" or e["recipe_version_id"] not in by_version:
