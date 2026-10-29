@@ -45,7 +45,7 @@
     ],
     "canonical_sha256_algorithm": "Expand each row to {local_date,position,role,source_kind,canonical_recipe_code,source_recipe_id,source_version,source_document_sha256,servings:[{member_ordinal,portion_servings}]}; sort member list by ordinal and event list by (local_date,position); encode JSON ensure_ascii=false sort_keys=true separators=(',',':') UTF-8; SHA256 bytes. Preserve original positive finite Decimal strings as emitted; never hash ephemeral UUIDs.",
     "historical_computed_uuid_independent_sha256": "731ef32e7137740ed5b46a6044a85d8b2f818a847fdc039842460d442df5aeb6",
-    "process_content_v1_qa_catalogue_sha256": "2e04ea180cfcad031bad763aedec16be802fcbdcad2e9d1763c43d4c0b4edac9",
+    "process_content_v1_qa_catalogue_sha256": "d19f11a0074d095eaac02fc1d414a1f3d6a5088a884c78d27436984a63023d36",
     "process_content_v1_status": "INDEPENDENT_QA_DIAGNOSTIC_NOT_RIGHTS_OR_ELIGIBILITY_AUTHORITY",
     "historical_planner_request_input_parity": "UNPROVEN",
     "control_current_2026_10_27_uuid_independent_sha256": "1db25794cca0fdf8757143c9bb317a12f4765b296bbab865b36c71054cdcb2f2",
