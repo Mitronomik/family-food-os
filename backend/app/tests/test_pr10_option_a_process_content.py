@@ -24,7 +24,7 @@ ORIGINAL_JSON_SHA256 = (
 PROCESS_CONTENT_V1_SHA256 = (
     "d19f11a0074d095eaac02fc1d414a1f3d6a5088a884c78d27436984a63023d36"
 )
-HEX_SHA256 = re.compile(r"[0-9a-f]{64}\\Z")
+HEX_SHA256 = re.compile(r"[0-9a-f]{64}\Z")
 
 
 def _sha256(value: object) -> str:
