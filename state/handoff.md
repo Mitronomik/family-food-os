@@ -1,3 +1,15 @@
+# 2026-10-29 — PR10-CORE-A evidence retention + Planner input reproducibility handoff
+
+**Task/branch:** PR #248, `docs/pr10-core-option-a-stable-fixture-gate`; [independent review](https://github.com/Mitronomik/family-food-os/pull/248#issuecomment-6491422149); [updated docs gate](../docs/family-food/pr10-core-option-a-stable-fixture-implementation-contract-2026-10-27.md). Original 21 MealEvents / 42 exact Decimal Servings from PR #196 remain untouched. No runtime changes or merge authorization.
+
+**Verified source:** full PR #196 synthetic raw JSON 110,511 bytes and raw SHA `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec`. Artifact ID 11672432141 expires 2026-11-09T14:24:01Z. The *private* user Library backup `/FamilyFoodOS/QA-Evidence/pr196-original-synthetic-fixture-receipt.json.xz.b64` is complete and reversible (base64 decode → xz decompress), but lacks independent GitHub reviewer access; publishing it to the PR was blocked. Require a separate permitted repo/reviewer-accessible archive upload and byte-verification before accepting the contract. **`NO_GO_EVIDENCE_NOT_DURABLY_PINNED`.**
+
+**Fingerprint:** original/current receipts both have 51 same source/ordered Step semantic payloads and distinct all 51 run-local `process_hash` values because `recipe_step_id` is hashed; proposed QA-only UUID-free aggregate fingerprint `2e04ea180cfcad031bad763aedec16be802fcbdcad2e9d1763c43d4c0b4edac9` matches both. This is **not** rights approval or D3 publication. Current `create_food_recipe_catalogue_service(engine)` does not pass the `id_factory` accepted by `FoodRecipeCatalogueService`; nested full seed chain and original PlannerRequest parity are unproven. Stop and request owner decision if Option A cannot reproduce same week through the untouched real PlannerService.
+
+**Next only:** finish repository/reviewer-accessible evidence archival, independently pin historical seed/Planner inputs, then Docs CI and independent re-review/owner merge decision. No automatic fixture implementation, production tie-break changes, eligibility upgrades or PR10-A. `APPROVED_IMMEDIATE=0`, `NO_GO_TO_PR10_CORE_RUNTIME` persists.
+
+---
+
 # PR10-CORE-A — stable synthetic fixture Implementation Contract Gate handoff — 2026-10-27
 
 **Accepted base:** `main@3c4645a27d675bb4464c913785aef3cd88de8681`, merged PR #244; PR #246 still OPEN with fixture drift, PR #242 closed. **Current Issue #247**, branch `docs/pr10-core-option-a-stable-fixture-gate`. Owner explicitly approved **Option A**, not changing production Planner or Gate2 criteria. [Docs-only gate](../docs/family-food/pr10-core-option-a-stable-fixture-implementation-contract-2026-10-27.md) + [portable reference proposal (21 events/42 Decimal Servings)](../docs/family-food/pr10-core-option-a-frozen-semantic-reference-proposal-2026-10-27.json).
