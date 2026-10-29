@@ -7,6 +7,84 @@
 **Proposed machine snapshot:** [all original 21 source-coded events, 42 exact member Decimal factors and independently computed UUID-independent digest](pr10-core-option-a-frozen-semantic-reference-proposal-2026-10-27.json).
 **Authorities:** [Operating Manual](project-operating-manual.md), [Master Roadmap Gate2/PR10](master-roadmap.md), [Option B technical versus safe-release gates](pr10-option-b-staged-delivery-gates-2026-10-17.md), [D3 eligibility/anti-rollback](pr10-core-step-eligibility-d3-contract-2026-10-22.md), [21-event research triage](pr10-fixture21-action-class-review-2026-10-23.md), [PR10 #196 fixture integrity receipt](pr10-meta-gate2-fixture-evidence.md), [Planner member-pattern architecture](architecture-addendum-2026-09-13.md).
 
+## 0. Independent review corrections — 2026-10-29 (docs-only)
+
+These corrections respond to [the independent PR #248 review](https://github.com/Mitronomik/family-food-os/pull/248#issuecomment-6491422149). They **do not** approve a runtime fixture, establish a portable source right, replace production process hashes, or relax Gate2/D3. The 21/42 candidate reference and accepted Option A decision remain unchanged.
+
+### P1: permanent original-source archive — **BLOCKED until repository-reviewable bytes exist**
+
+The real PR #196 ZIP contains exactly one `pr10-meta-fixture-receipt.json` member, **110,511 uncompressed bytes**, raw JSON SHA-256 `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec`. PR #246's equivalent has the same uncompressed length and SHA-256 `2caa45e1e50639eef2b6f9023496cbce9fc35a88bd4c71f86e2b8a9daee0c78d`. Both were independently downloaded and byte-hashed; the original is synthetic QA evidence, **not** a customer record or production seed. GitHub API currently reports artifact #11672432141 expires **2026-11-09T14:24:01Z**, and #12730572293 expires **2026-11-26T11:19:28Z**. These dates describe ephemeral Actions storage, not an archive policy.
+
+The source original has been copied to a user-controlled, reversible compressed backup **outside the repository**, but that private copy is **not independently reviewable by GitHub reviewers** and is **not accepted archive evidence**. The attempted binary transfer into this branch could not be completed; no repository archive is claimed. Before merge, publish the **complete** byte-for-byte receipt to a documented, versioned, reviewer-accessible evidence location (preferred: repository `docs/family-food/evidence/`, or explicitly approved equivalent) without storing live personal/health data, and pin its exact path/object/version, SHA-256, access and retention policy in this contract. Preserve both original ZIP artifact/run identifiers and raw JSON digest as acquisition provenance. A compact 21-event reference or self-declared digest **cannot substitute** for the complete raw source.
+
+Future independent verification MUST: retrieve the archived object, decompress if needed, compute SHA-256 of the uncompressed original JSON **bytes** (do not parse/reformat before hashing), assert `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec`, then independently derive the ID-free `731ef32e…` comparator. If unavailable, mismatched or not reviewer-accessible, emit **`NO_GO_EVIDENCE_NOT_DURABLY_PINNED`** and **do not merge this contract or start implementation**. Do not expose the short-lived signed artifact download URL in versioned docs.
+
+### P1: distinguish run-local RecipeStep IDs from portable process content
+
+Independently comparing the two actual raw receipts at equal canonical codes gives **51/51 matching** source name/recipe ID/version/document SHA and **51/51 matching** ordered `(position, instruction_sha256, stage_code)` tuples, but **0/51 matching** `catalogue[].process_hash` values. Reason: `scripts/audit_pr10_meta_gate2_fixture.py` hashes whole `steps`, including per-run `recipe_step_id`. Therefore the existing `process_hash` remains a **run-local persisted Step-binding pin**; equality of that field across fresh databases is *not* required and cannot safely diagnose source-process drift by itself.
+
+**Proposed QA-only portable process-content V1**, computed independently for each recipe (NOT a production hash/RecipeVersion identity):
+
+```python
+payload = {
+    "canonical_code": recipe["canonical_code"],
+    "source_name": recipe["source_name"],
+    "source_recipe_id": recipe["source_recipe_id"],
+    "source_version": recipe["source_version"],
+    "source_document_sha256": recipe["source_document_sha256"],
+    "ordered_steps": [
+        {
+            "position": step["position"],
+            "instruction_sha256": step["instruction_sha256"],
+            "stage_code": step["stage_code"],
+        }
+        for step in sorted(recipe["steps"], key=lambda s: s["position"])
+    ],
+}
+digest = sha256(json.dumps(
+    payload, sort_keys=True, ensure_ascii=False,
+    separators=(",", ":")
+).encode("utf-8")).hexdigest()
+```
+
+Assert unique consecutive positions, nonempty instruction digest and no duplicate canonical code; reject changed source identity/version/document SHA, step text/order/stage. A catalogue-level diagnostic can hash a map `{canonical_code: per_recipe_digest}` with the same JSON canonicalization. On both verified 51-recipe source receipts this **QA-only aggregate** equals `2e04ea180cfcad031bad763aedec16be802fcbdcad2e9d1763c43d4c0b4edac9`. This digest is independently derived diagnostic evidence, **not** a new accepted platform catalogue hash or authoritative eligibility status.
+
+The raw receipts **do not expose rights review fields**, current RecipeVersion lineage or complete source-process text. A matching portable content digest alone **does not** approve source rights or a Prep action. Future implementation must separately rebind actual current `RecipeVersion` and ordered `RecipeStep` with verified rights/status and live run-local UUID/process hashes, and fail closed on missing rights or Step changes. Retain current source/Step-version/anti-rollback requirements.
+
+### P2: seed/ID dependency inventory — injection **not yet available end to end**
+
+Observed production interfaces:
+- `backend/app/services/food_recipes.py::FoodRecipeCatalogueService(..., id_factory=uuid4)` accepts a constructor ID factory; `_new_detail` obtains RecipeVersion, RecipeIngredient and RecipeStep UUIDs from it.
+- `backend/app/persistence/sqlalchemy_core/food_recipe_composition.py::create_food_recipe_catalogue_service(engine)` **does not expose** an `id_factory` parameter.
+- Existing fixture calls `seed_dc4_a3_russian_step_corrections(config)` → `seed_r3d_final_dc3_batch(config)` → `seed_r3c_school2022_main_batch(config)` (with additional earlier R3/R2 prerequisites); those seed modules construct catalogue services through the normal composition entrypoint. This is a **partial dependency map**, not a claim that the full seed chain accepts stable IDs.
+- `scripts/audit_pr10_meta_gate2_fixture.py` creates Household/Member/MealPattern after source seed; its run-local IDs, exclusions and persisted MealPlan/Serving FKs must be independently resolved. The historic receipt contains UUID-to-canonical RecipeVersion mappings, but reusing them is not yet authorized or proven sufficient.
+
+A later implementation PR must inventory **all** earlier seed constructors and ordering, choose a narrowly scoped test-builder ID factory/identity strategy, document collision and source-history handling, and demonstrate the normal original seeding + `PlannerService.generate_authoritative` + persisted readback. No global UUID monkeypatch, direct SQL mutation, production composition default change, recipe replacement, candidate score/pool/tie-break override or bypass of normal Planner selection. If preserving historical RecipeVersion identity requires a production code change or unavailable rights/source authority, **STOP and reopen the contract**. The existing UUID tie-break is a *plausible* drift mechanism, not a proven sole cause.
+
+### P2: full historical Planner input parity is **not proven by receipts**
+
+The original receipt exposes `planner.version`, a **UUID-bearing** `request_fingerprint`, trace fingerprint, 3 member ordinals, 51 catalogue source rows and the 21×42 output. It **does not contain a serialized original PlannerRequest** or authoritative standalone input manifest. A new fixture needs evidence for:
+
+| Required input | Current evidence / outstanding action |
+| --- | --- |
+| Historical source code revision and seed chain | PR #196 / Actions run #38059374826 known; exact run code SHA and all nested seed builder versions must be independently pinned before a PASS |
+| Algorithm/config | `planner-v0.5` observed in receipt/current `scripts/audit_dc4_corpus_readiness_rerun.py::PLANNER_CONFIG`; weights/repetition/compatibility version must be pinned from historical code, not guessed from today |
+| Candidate pool/nutrition | 51 current eligible RecipeVersions with source IDs and calories derived through catalogue/nutrition services; historical admission scores/exclusion/energy readiness and source versions must be checked against accepted run |
+| Member patterns and ordering | `GATE1_ROLE_SHAPES[2]`, custom accepted selection and fixture ordinal → generated member UUID mapping; original historical builder revision and exact opportunities/allocation shares required |
+| Member reference energies | Derived by the historical fixture member builder and nutrition target service; **not printed in original receipt**; must be reconstructed and reviewed from pinned historical code, not back-solved from output |
+| Exclusions, preferences, Pantry, history, fixed events | Current source constructs `_fixture_exclusions` and default request values; prove historical values and absence/presence explicitly from a pinned historical builder |
+| Cross-run integrity | Same 21 source/date/role/position codes, 42 exact positive Decimal factors, source rights and current Step pins, normalized external SHA `731ef32e…`, two isolated SQLite processes and independent persisted readback |
+
+If input parity cannot be established, record **`NO_GO_OPTION_A_INPUT_PARITY_UNPROVEN`**, not a snapshot-replay PASS. A code change solely to make the historic digest pass is forbidden. Preserve the independent full Planner→MealPlan Gate2 requirement and all separate Prep/portion/safe-batch blockers.
+
+### Required negative checks for the later fixture-only PR
+
+Besides §5's existing tests, prove that a changed Step instruction digest/position/stage, current rights/status, source code/version/document, altered original raw-archive bytes, one scheduled recipe slot, member ordinal, one exact Decimal digit, wrong Household relation, duplicate slot or non-Planner rehydration **fails closed**. Run-local UUID process hashes may differ while portable content matches; missing archive access or original Planner-input parity must never produce a false PASS.
+
+**Review outcome:** revised documentation may establish a better contract, but **Option A runtime is NOT demonstrated, original artifact retention is not yet closed, `APPROVED_IMMEDIATE=0`, `NO_GO_TO_PR10_CORE_RUNTIME` persists**. No automatic merge.
+
+---
+
 ## 1. FACT — why the existing fixture is not cross-run reproducible
 
 Two authentic official GitHub Actions artifacts were independently retrieved and their raw **JSON bytes** SHA-256 checked:
