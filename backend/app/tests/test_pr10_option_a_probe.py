@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 from copy import deepcopy
 from decimal import Decimal
@@ -101,3 +102,92 @@ def test_one_decimal_digit_changes_frozen_semantics_even_if_positive():
     original = first["portion_servings"]
     first["portion_servings"] = original[:-1] + ("7" if original[-1] != "7" else "8")
     assert _hash(normalize_receipt(receipt)) != ORIGINAL_WEEK_SHA
+
+
+@pytest.mark.parametrize(
+    ("filename", "expected_size", "expected_raw_sha", "expected_week_sha", "matches"),
+    [
+        (
+            "pr10-option-a-issue252-2026-10-29-run1.json",
+            89291,
+            "87789288aadfeca6f2a3bd4ec63cb1c69d19630df0d8dce933928224979a53b5",
+            "4c1c574c26b5262edd64687cde292f16ecfc262111233bf60ad003cfbd47fb0f",
+            0,
+        ),
+        (
+            "pr10-option-a-issue252-2026-10-29-run2.json",
+            89290,
+            "b8c90d753447e4781b97f6e3207ca29d8809919c1e1b546ac1813ca3a0d7c4c5",
+            "a7948dcc11e36131b11cd4397436ba30b9257a5b344d928d6430023258d36f04",
+            1,
+        ),
+    ],
+)
+def test_archived_actual_two_process_receipts_are_source_pinned(
+    filename, expected_size, expected_raw_sha, expected_week_sha, matches
+):
+    """An archived NO_GO cannot silently rewrite original/source/process truth."""
+    raw = (ORIGINAL.parent / filename).read_bytes()
+    assert len(raw) == expected_size
+    assert hashlib.sha256(raw).hexdigest() == expected_raw_sha
+    receipt = json.loads(raw)
+    historical_receipt = _original()
+    assert len(receipt["catalogue"]) == 51
+    assert len(receipt["plan"]["events"]) == 21
+    assert len(receipt["plan"]["servings"]) == 42
+    assert receipt["gate_decision"] == "BLOCKED"
+
+    def source_steps(data):
+        return {
+            row["canonical_code"]: (
+                row["source_name"],
+                row["source_recipe_id"],
+                row["source_version"],
+                row["source_document_sha256"],
+                tuple(
+                    (step["position"], step["instruction_sha256"], step["stage_code"])
+                    for step in sorted(row["steps"], key=lambda s: s["position"])
+                ),
+            )
+            for row in data["catalogue"]
+        }
+
+    assert source_steps(receipt) == source_steps(historical_receipt)
+    historical_rows = {
+        (row["local_date"], row["position"]): row
+        for row in normalize_receipt(historical_receipt)
+    }
+    actual_rows = normalize_receipt(receipt)
+    assert _hash(actual_rows) == expected_week_sha
+    assert expected_week_sha != ORIGINAL_WEEK_SHA
+    observed_matches = sum(
+        historical_rows[(row["local_date"], row["position"])]["canonical_recipe_code"]
+        == row["canonical_recipe_code"]
+        for row in actual_rows
+    )
+    assert observed_matches == matches
+
+
+def test_machine_diagnostic_is_immutable_no_go_not_positive_fixture():
+    """The old, pre-sentinel-rename CI receipt is immutable historic evidence."""
+    path = ORIGINAL.parent / "pr10-option-a-issue252-2026-10-29-report.json"
+    raw = path.read_bytes()
+    assert hashlib.sha256(raw).hexdigest() == (
+        "7ef0ba589c09bdb43e2d68b6a938937bedc4f2de21a118fc0f39e3bec8decf79"
+    )
+    report = json.loads(raw)
+    assert report["schema"] == "PR10_OPTION_A_TWO_RUN_DIAGNOSTIC_V1"
+    assert report["status"] == (
+        "NO_GO_OPTION_A_UNACHIEVABLE_WITH_CURRENT_UNSTABILIZED_SEED"
+    )
+    assert report["approved_immediate"] == 0
+    assert report["production_planner_modified"] is False
+    assert report["independent_processes"] == 2
+    assert [run["matching_original_slot_recipes"] for run in report["runs"]] == [
+        0,
+        1,
+    ]
+    assert all(
+        run["matches_original"] is False and run["real_plan_readback"] is True
+        for run in report["runs"]
+    )
