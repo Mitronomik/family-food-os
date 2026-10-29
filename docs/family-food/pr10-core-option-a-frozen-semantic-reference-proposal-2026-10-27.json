@@ -47,6 +47,8 @@
     "historical_computed_uuid_independent_sha256": "731ef32e7137740ed5b46a6044a85d8b2f818a847fdc039842460d442df5aeb6",
     "process_content_v1_qa_catalogue_sha256": "d19f11a0074d095eaac02fc1d414a1f3d6a5088a884c78d27436984a63023d36",
     "process_content_v1_status": "INDEPENDENT_QA_DIAGNOSTIC_NOT_RIGHTS_OR_ELIGIBILITY_AUTHORITY",
+    "process_content_v1_regression_test": "backend/app/tests/test_pr10_option_a_process_content.py",
+    "process_content_v1_aggregation": "SHA256(canonical JSON {canonical_code: per_recipe_sha256}); per_recipe_sha256 is SHA256(canonical JSON {canonical_code, source_name, source_recipe_id, source_version, source_document_sha256, ordered_steps:[{position, instruction_sha256, stage_code}]}); canonical JSON UTF-8 ensure_ascii=false sort_keys=true separators=(',',':')",
     "historical_planner_request_input_parity": "UNPROVEN",
     "control_current_2026_10_27_uuid_independent_sha256": "1db25794cca0fdf8757143c9bb317a12f4765b296bbab865b36c71054cdcb2f2",
     "the_checksum_is_computed_from_prior_downloaded_artifact_not_a_new_independent_reviewer_signature": true
