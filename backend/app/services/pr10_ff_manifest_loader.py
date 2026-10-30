@@ -29,6 +29,7 @@ from app.services.pr10_ff_typed_ids import (
 )
 
 SCHEMA_VERSION = "PR10_FF_PUBLICATION_MANIFEST_V1"
+_LOADER_TOKEN = object()
 
 
 def _reject_duplicate_pairs(items: list[tuple[str, object]]) -> dict[str, object]:
@@ -137,8 +138,15 @@ class PublicationManifestIds(ManifestPinnedFixtureIds, FixtureTypedIdProvider):
         *,
         approved: Sequence[tuple[str, Mapping[str, object]]],
         records: Sequence[Mapping[str, object]],
+        _loader_token: object | None = None,
     ) -> None:
+        if _loader_token is not _LOADER_TOKEN:
+            raise FixtureIdentityError("publication provider requires pinned manifest loader")
         super().__init__(approved)  # type: ignore[arg-type]
+        self._source_path: Path | None = None
+        self._expected_sha256: str | None = None
+        self._correction_path: Path | None = None
+        self._expected_correction_sha256: str | None = None
         self._publication_index: dict[tuple[str, int, bytes], bytes] = {}
         self._predecessors: dict[bytes, UUID | None] = {}
         for entry in records:
@@ -170,6 +178,22 @@ class PublicationManifestIds(ManifestPinnedFixtureIds, FixtureTypedIdProvider):
             self._publication_index[identity] = frozen_key
             self._predecessors[frozen_key] = expected_id
 
+    def _assert_files_unchanged(self) -> None:
+        if self._source_path is not None and (
+            hashlib.sha256(self._source_path.read_bytes()).hexdigest()
+            != self._expected_sha256
+        ):
+            raise FixtureIdentityError("loaded manifest changed after pinning")
+        if self._correction_path is not None and (
+            hashlib.sha256(self._correction_path.read_bytes()).hexdigest()
+            != self._expected_correction_sha256
+        ):
+            raise FixtureIdentityError("correction file changed after pinning")
+
+    def id_for(self, kind: str, key: Mapping[str, object]) -> UUID:
+        self._assert_files_unchanged()
+        return super().id_for(kind, key)  # type: ignore[arg-type]
+
     def recipe_version_key_for(
         self,
         *,
@@ -178,6 +202,7 @@ class PublicationManifestIds(ManifestPinnedFixtureIds, FixtureTypedIdProvider):
         version_number: int,
         predecessor_id: UUID | None,
     ) -> Mapping[str, object]:
+        self._assert_files_unchanged()
         projection = project_trusted_version_seed(seed)
         frozen = self._publication_index.get(
             (canonical_code, version_number, projection)
@@ -344,4 +369,13 @@ def load_pinned_publication_manifest(
         raise FixtureIdentityError("incomplete/extra publication coverage")
     if len(records) != len(expected_members):
         raise FixtureIdentityError("duplicate publication membership")
-    return PublicationManifestIds(approved=approved, records=records)
+    provider = PublicationManifestIds(
+        approved=approved, records=records, _loader_token=_LOADER_TOKEN
+    )
+    provider._source_path = path
+    provider._expected_sha256 = expected_sha256
+    provider._correction_path = correction_path if corrections else None
+    provider._expected_correction_sha256 = (
+        expected_correction_sha256 if corrections else None
+    )
+    return provider
