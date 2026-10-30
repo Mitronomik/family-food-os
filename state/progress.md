@@ -1,8 +1,24 @@
-# 2026-10-30 — PR #267 exact test-only A/B input byte freeze published for review
+# 2026-10-30 — synchronized PR #267 with accepted main after #266 merge
 
-- Following owner `делаем так` acceptance of limited technical input freeze (not Planner/release), [PR #267](https://github.com/Mitronomik/family-food-os/pull/267) preserves the **original unmodified** A/B raw JSON in repository Git history and a separate independently pinned decision record. A: 889601 bytes/SHA256 `d160b995...`/Git blob `27f6ea82...`; B: 67963 bytes/SHA256 `9a9260a4...`/blob `d2dd9398...`. GitHub returned both exact expected blob IDs after persistence.
-- One-time read-only generation + separate privileged byte-only GitHub Action persisted verified files; temporary elevated workflow removed after commit. Existing [PR #266](https://github.com/Mitronomik/family-food-os/pull/266) remains a separate implementation tool review/merge decision; #267 is raw evidence freeze, no code/Planner/schema/data publication change.
-- [Owner scoped decision](../docs/family-food/pr10-ff-forward-input-v1-owner-freeze-decision-2026-10-30.md) preserves 51/51 `nutrition_status=INCOMPLETE`, energy-only technical meaning, UUID input uncertainty and full downstream NO_GO gates. Next: exact-head docs CI, independent PR review and owner merge decision, no positive Planner generation yet.
+- Verified [PR #266 merged](https://github.com/Mitronomik/family-food-os/pull/266) into `main@8368c7bdf74037afaf02b53b561935e29ecb0304`; kept all its source/materializer/test/workflow changes. Integrated [PR #267](https://github.com/Mitronomik/family-food-os/pull/267) as a **two-parent merge commit**, rather than replacing main's implementation or state history.
+- Reconciled three overlapping `state/*` documents by adding this current #267 sync note atop **all** main content; retained exact A (blob `27f6ea82...`) and B (blob `d2dd9398...`) raw JSON, independent freeze pin-record and scoped owner-decision bytes. No source/Planner/runtime changes introduced by #267.
+- Next: exact-head CI / raw SHA verification, independent #267 merge decision. No real 3/7/21/42 Planner generation, Prep or Gate2 permission.
+
+---
+
+# 2026-10-30 — PR #266 follow-up P1/P2 semantic/authority review corrections
+
+- Against prior HEAD `5d7ed1ac`, corrected [PR #266](https://github.com/Mitronomik/family-food-os/pull/266) validator with full PlannerConfig/calendar, member reference-energy truth, all candidate ordered source/rights/nutrition/kcal rows and admissions via **independent fresh SQLite RecipeNutritionV2**; source A fully checked against source stages.
+- Added **actual Git blob SHA verification** for 30 accepted critical seed, Recipe, Planner, nutrition, target-energy, source/identity paths; `SOURCE_COMMIT` text alone cannot pass. Expanded fail-closed tests to **17**, including modified B + newly matching B SHA, source drift, reordering, hidden pantry/history, changing reference energy/roles/weights.
+- [Focused CI #41068645092](https://github.com/Mitronomik/family-food-os/actions/runs/41068645092), runtime HEAD `20de7b412b06`: **17 PASS, Ruff lint and format PASS**; two input-only CLI processes produce unchanged byte-identical raw A/B, [artifact #12984476386](https://github.com/Mitronomik/family-food-os/actions/runs/41068645092/artifacts/12984476386). Observed SHA A/B remain **not independently approved**. No Planner output or gate escalation.
+
+---
+
+# 2026-10-30 — PR #266 repeatable source/input A+B proposals, no Planner week
+
+- [PR #265](https://github.com/Mitronomik/family-food-os/pull/265) merged as `0d390bdf0d620f711916287cf0d656aa9c8a6844`. [PR #266](https://github.com/Mitronomik/family-food-os/pull/266) implements test-only 12-stage 51-v1/7-v2 A and full source-backed B with synthetic 3 members, 42 accepted role opportunities, 51 current eligible candidates, live reference-energy and nutrition/rights/Step truth, separately recorded ephemeral UUID witness.
+- [Independent pre-generation repeated CI 41062669466](https://github.com/Mitronomik/family-food-os/actions/runs/41062669466): two Python processes/fresh SQLite databases, raw A `d160b995b680d11cf9e04f3f97c0d01cd1c65ecd2518e685b8e3cfa783e0a885` and B `9a9260a4a8d849fa4284ff64b861d8c2db74d15777b04ca5d3741d25f1f0089f` exactly equal across runs. 2 focused tests, Ruff lint/format PASS; [artifact #12981151175](https://github.com/Mitronomik/family-food-os/actions/runs/41062669466/artifacts/12981151175) expires 2026-11-29. **Observed SHA, not owner pins; no Planner generation.**
+- See [full acceptance matrix](../docs/family-food/pr10-ff-forward-input-materialization-evidence-2026-10-30.md). No A/B owner acceptance, 21/42 real proof, Gate2 or release authority. NO_GO remains.
 
 ---
 
