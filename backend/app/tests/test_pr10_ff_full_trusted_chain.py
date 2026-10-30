@@ -7,6 +7,7 @@ not the separately owner-approved current Planner input fixture.
 
 import hashlib
 import json
+from dataclasses import replace
 from uuid import uuid4
 
 import pytest
@@ -88,8 +89,6 @@ def _version_key(recipe, *, number=1, predecessor=None, correction_sha=None):
 
 
 def _qa_provider(tmp_path):
-    from dataclasses import replace
-
     stages = _trusted_source_inventory()
     expected_codes = [item.canonical_code for _, recipes in stages for item in recipes]
     assert len(stages) == 11  # DC4-A3 is the separate twelfth correction stage.
