@@ -1,0 +1,52 @@
+name: PR10-FF pre-generation input materialization
+
+on:
+  pull_request:
+    paths:
+      - "scripts/pr10_ff_pre_generation_inputs.py"
+      - "backend/app/tests/test_pr10_ff_pre_generation_inputs.py"
+      - ".github/workflows/pr10-ff-pre-input.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-input-proposals:
+    runs-on: ubuntu-latest
+    env:
+      AI_ENABLED: "false"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install backend test environment and Ruff
+        run: |
+          python -m pip install -e "./backend[test]"
+          python -m pip install "ruff==0.16.8"
+      - name: Pre-generation source and input regression
+        run: >-
+          python -m pytest -q
+          backend/app/tests/test_pr10_ff_pre_generation_inputs.py
+          --tb=short
+      - name: Lint source/input tool and tests
+        run: >-
+          python -m ruff check
+          scripts/pr10_ff_pre_generation_inputs.py
+          backend/app/tests/test_pr10_ff_pre_generation_inputs.py
+      - name: Format source/input tool and tests
+        run: >-
+          python -m ruff format --check
+          scripts/pr10_ff_pre_generation_inputs.py
+          backend/app/tests/test_pr10_ff_pre_generation_inputs.py
+      - name: Export QA-only raw A/B proposal (NOT acceptance)
+        run: >-
+          python -m scripts.pr10_ff_pre_generation_inputs
+          --output-dir "${{ runner.temp }}/pr10-ff-proposed-inputs"
+      - name: Upload raw proposals for independent reviewer
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr10-ff-input-A-B-PROPOSED-NOT-APPROVED
+          path: ${{ runner.temp }}/pr10-ff-proposed-inputs/
+          retention-days: 30
