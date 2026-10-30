@@ -9,12 +9,12 @@ from __future__ import annotations
 import hashlib
 import json
 import unicodedata
+from collections.abc import Mapping, Sequence
 from dataclasses import fields, is_dataclass
 from datetime import datetime, timezone
 from decimal import Decimal
 from enum import Enum
 from pathlib import Path
-from typing import Mapping, Sequence
 from uuid import UUID
 
 from app.services.pr10_ff_typed_ids import (
@@ -172,9 +172,11 @@ class PublicationManifestIds(ManifestPinnedFixtureIds, FixtureTypedIdProvider):
                 None if predecessor is None
                 else derive_fixture_uuid("RECIPE_VERSION", predecessor)
             )
-            if predecessor is not None:
-                if canonical_envelope("RECIPE_VERSION", predecessor) not in self._approved:
-                    raise FixtureIdentityError("unapproved predecessor key")
+            if (
+                predecessor is not None
+                and canonical_envelope("RECIPE_VERSION", predecessor) not in self._approved
+            ):
+                raise FixtureIdentityError("unapproved predecessor key")
             self._publication_index[identity] = frozen_key
             self._predecessors[frozen_key] = expected_id
 
