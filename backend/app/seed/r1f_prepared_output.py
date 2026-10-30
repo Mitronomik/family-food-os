@@ -8,6 +8,8 @@ from decimal import Decimal
 from pathlib import Path
 from uuid import UUID
 
+from app.services.pr10_ff_typed_ids import FixtureTypedIdProvider
+
 from app.db.config import REPOSITORY_ROOT, DatabaseConfig
 from app.db.migrations import apply_migrations
 from app.domain.recipe_nutrition_v2 import NUTRIENT_CODES
@@ -299,6 +301,8 @@ def _assert_replay_not_partial(engine, catalogue, nutrition, seed, spec) -> None
 
 def seed_r1f_prepared_output(
     config: DatabaseConfig | None = None,
+    *,
+    id_provider: FixtureTypedIdProvider | None = None,
 ) -> R1FPreparedPilotResult:
     apply_migrations(config)
     seed_food_ingredients(config)
@@ -316,7 +320,9 @@ def seed_r1f_prepared_output(
                 ),
             )
         )
-        catalogue = create_food_recipe_catalogue_service(engine)
+        catalogue = create_food_recipe_catalogue_service(
+            engine, **({"id_provider": id_provider} if id_provider is not None else {})
+        )
         nutrition = create_recipe_nutrition_v2_service(engine)
         seeds = _recipe_seeds(evidence)
         specs = _prepared_specs(evidence, seeds)
