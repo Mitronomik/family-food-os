@@ -1,3 +1,11 @@
+# CURRENT — PR10-FF typed ID implementation authorized, semantic binding STOP — 2026-10-30
+
+**Owner approval:** after merged [PR #262](https://github.com/Mitronomik/family-food-os/pull/262), authorize **separate bounded test-only seam implementation only**. New branch `feature/pr10-ff-typed-test-id-seam` starts at `main@b1d6f88d55485fd91f9e6f65a8fb535678f44ef1`. Its [preflight blocker](../docs/family-food/pr10-ff-typed-id-seam-runtime-binding-gap-2026-10-30.md) records that accepted `id_for(kind,key)` + existing Recipe write inputs cannot convey DC4-A3 correction artifact SHA and semantic predecessor key. Implemented manifest-pinned typed UUID policy and unit conformance only; API/seed bridge intentionally unwired. **Next ONLY:** independently review proposed small contract amendment and obtain separate owner approval before broadening service/seed signatures. No automatic merge or Planner fixture proof.
+
+**Standing:** `NO_GO_TEST_ONLY_ID_SEAM_UNPROVEN`; `NO_GO_TO_PR10_CORE_RUNTIME`, `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`.
+
+---
+
 # CURRENT — PR #262 review corrections: two P1 and one P2 addressed in docs-only scope — 2026-10-30
 
 **Review basis:** owner's `REQUEST CHANGES` on [PR #262](https://github.com/Mitronomik/family-food-os/pull/262), HEAD `80cc0df816b2178d0e2c0aff33377a75ad373500`, base `main@c631daa523531474a2e1e4a809fb56e81c37e468`. Updated [typed test-ID contract](../docs/family-food/pr10-ff-typed-test-identity-implementation-contract-2026-10-30.md) in the **same PR**: exact SHA256 domain-separated test-only v4-shaped UUID algorithm with two independent conformance vectors (P1); per-function signatures/callers/default path and all 22 composer sites (P1); original SourceRecord vs RecipeVersion vs independently reviewed DC4-A3 correction revision with v2 append/EXACT_REPLAY (P2). These are proposed **for owner approval**, not implemented.
