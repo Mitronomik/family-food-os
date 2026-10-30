@@ -1,3 +1,13 @@
+# 2026-10-30 — PR #266 pre-run source/input A/B evidence handoff
+
+**Base:** `main@0d390bdf0d620f711916287cf0d656aa9c8a6844`, [PR #265 merged](https://github.com/Mitronomik/family-food-os/pull/265). Current [PR #266](https://github.com/Mitronomik/family-food-os/pull/266) is an explicit test-only pre-generation input materializer: source A (closed typed versions + 3 members), logical Planner B (calendar/three Member energy targets and 3/2/1 schedules, 51 source/provenance/energy candidates), run-bound UUID witness, caller-pinned validator and 2 adversarial tests. [CI 41062669466](https://github.com/Mitronomik/family-food-os/actions/runs/41062669466) proves two separate fresh SQLite/Python **A+B byte equality without generating a Planner week**; observed A raw SHA `d160b995...`, B `9a9260a4...`, not externally reviewed acceptance. Raw [artifact 12981151175](https://github.com/Mitronomik/family-food-os/actions/runs/41062669466/artifacts/12981151175) retained until 2026-11-29.
+
+**Next only:** independent [evidence report](../docs/family-food/pr10-ff-forward-input-materialization-evidence-2026-10-30.md) Architecture/Data/QA review of source, rights, reference-energy, candidate completeness, unpinned selection/Food UUID influence; durably pin exact raw A+B with explicit owner decision. **Do not call real `generate_authoritative`** or rename observed hashes to approval before A+B reviewed. Pre-generation A+B PASS does not set `PR10_FF_FIXTURE_REPRODUCIBLE` or authorize PR10 core. No source/Planner/schema/AI/Prep changes.
+
+**Blocked:** `NO_GO_INPUT_MANIFEST_UNVERIFIED`, `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`, `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`.
+
+---
+
 # 2026-10-30 — PR10-FF post-#263 forward input freeze review handoff
 
 **Source of truth:** `main@b734656562bca29cfb877e4e2827ff0adb81598f`; [PR #263 merged](https://github.com/Mitronomik/family-food-os/pull/263). Previous `state/current-focus.md` top describing #263 as Draft is historical only. Current bounded task is one **docs-only** [input freeze review packet](../docs/family-food/pr10-ff-forward-input-freeze-review-packet-2026-10-30.md): propose 2026-11-02..08 Europe/Moscow, current synthetic member/role/energy-share/exclusion and unchanged PlannerConfig, identify exact source SHA and unverified B manifest fields. **Not** an accepted `PR10_FF_INPUT_MANIFEST_V1` or authorization to run Planner.
