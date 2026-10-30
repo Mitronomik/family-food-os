@@ -1,3 +1,18 @@
+# 2026-10-30 — PR #264 P2 manifest loader follow-up recorded
+
+- Independent review P2 acknowledged as **non-blocking for docs-only #264**, but a **mandatory #263 implementation acceptance**. Added [§3.1 loader/completeness requirement](../docs/family-food/pr10-ff-publication-key-binding-amendment-2026-10-30.md): externally pinned test-only manifest; allowlist + complete trusted-seed/publication/lineage evidence; immutable snapshot, closed 12/22/7 coverage and negative tests. Current `ManifestPinnedFixtureIds(approved)` alone is insufficient for `recipe_version_key_for`.
+- No production/provider/seed/runtime change and no authority for #263 resumption or Planner fixture proof. Independent #264 review + owner merge decision still required.
+
+---
+
+# 2026-10-30 — PR10-FF publication-key bridge amendment prepared for review
+
+- After merged [#262](https://github.com/Mitronomik/family-food-os/pull/262) and blocked draft [#263](https://github.com/Mitronomik/family-food-os/pull/263), owner authorized **only docs-only amendment drafting**.
+- Source audit found the trusted correction artifact/old/new Step evidence in `dc4_a3._publish_one`, but absent `correction_revision_sha256` and predecessor semantic key from `TrustedRecipeVersionSeed` passed into `FoodRecipeCatalogueService._new_detail`. Proposed one manifest-backed read-only provider `recipe_version_key_for`, detailed lineage/rights/live UoW/normal-path tests, and exact SHA for accepted seven-correction artifact in [amendment](../docs/family-food/pr10-ff-publication-key-binding-amendment-2026-10-30.md).
+- Docs-only: no API/seed/schema/Planner/runtime changes, no new fixture or acceptance signal; independent review and owner protocol decision remain pending.
+
+---
+
 # 2026-10-30 — PR #262 exact-HEAD contract key-schema clarification
 
 - Follow-up to owner P1/P2 review: independent SHA256→v4-shaped UUID conformance recalculation matched both pinned vectors. Tightened the same docs-only [typed ID contract](../docs/family-food/pr10-ff-typed-test-identity-implementation-contract-2026-10-30.md) to fix complete six-kind semantic key schemas, pre-frozen process evidence and operation-scoped Household/Member ID factories (not invocation-order counters). No code, schema or runtime tests changed. Review/owner decision and all PR10/Gate2 release blocks remain pending.

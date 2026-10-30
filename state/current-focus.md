@@ -1,3 +1,11 @@
+# CURRENT — PR10-FF publication-key binding docs-only amendment review — 2026-10-30
+
+**Latest accepted main:** `b1d6f88d55485fd91f9e6f65a8fb535678f44ef1` (merged PR #262). Owner authorized preparing **one separate docs-only amendment**, not approving its new provider method for runtime. [Proposed narrowly scoped gate](../docs/family-food/pr10-ff-publication-key-binding-amendment-2026-10-30.md): sealed manifest-backed `recipe_version_key_for` to bind verified version/rights/Steps, correction raw artifact SHA256 and live predecessor to existing `id_for` without widening 12 seed signatures beyond #262. [Draft runtime PR #263](https://github.com/Mitronomik/family-food-os/pull/263) remains PARTIAL/BLOCKED, not to be merged. **Next ONLY:** exact-head docs/static and independent Architecture/Domain/QA review → explicit owner decision on amendment; thereafter a separately authorized #263 resumption, never automatic.
+
+**Unchanged blocks:** `NO_GO_TEST_ONLY_ID_SEAM_UNPROVEN`, `NO_GO_TO_PR10_CORE_RUNTIME`, `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`.
+
+---
+
 # CURRENT — PR #262 review corrections: two P1 and one P2 addressed in docs-only scope — 2026-10-30
 
 **Review basis:** owner's `REQUEST CHANGES` on [PR #262](https://github.com/Mitronomik/family-food-os/pull/262), HEAD `80cc0df816b2178d0e2c0aff33377a75ad373500`, base `main@c631daa523531474a2e1e4a809fb56e81c37e468`. Updated [typed test-ID contract](../docs/family-food/pr10-ff-typed-test-identity-implementation-contract-2026-10-30.md) in the **same PR**: exact SHA256 domain-separated test-only v4-shaped UUID algorithm with two independent conformance vectors (P1); per-function signatures/callers/default path and all 22 composer sites (P1); original SourceRecord vs RecipeVersion vs independently reviewed DC4-A3 correction revision with v2 append/EXACT_REPLAY (P2). These are proposed **for owner approval**, not implemented.
