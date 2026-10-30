@@ -1,3 +1,15 @@
+# 2026-10-29 — Issue #257 PR10-FIXTURE-FORWARD docs-only review handoff
+
+**Base:** `main@f29f2279fa92d5b9d2854105007fb124460b4466` after merged PR #256. [Issue #257](https://github.com/Mitronomik/family-food-os/issues/257) authorizes ONLY [the proposed contract amendment](../docs/family-food/pr10-fixture-forward-contract-amendment-2026-10-29.md); owner acceptance and runtime fixture implementation are NOT yet authorized.
+
+**Review this first:** [D2 original decisions](../docs/family-food/pr10-data-recovery-approved-decisions-2026-10-11.md), [Option A](../docs/family-food/pr10-core-option-a-stable-fixture-implementation-contract-2026-10-27.md), [accepted #256 Decision Gate](../docs/family-food/pr10-option-a-historical-input-parity-id-injection-decision-2026-10-29.md), [Option B](../docs/family-food/pr10-option-b-staged-delivery-gates-2026-10-17.md), [D3 anti-rollback](../docs/family-food/pr10-core-step-eligibility-d3-contract-2026-10-22.md), immutable [PR #196 source](../docs/family-food/evidence/pr196-original-synthetic-fixture-receipt.json) and [#254 negative two-run evidence](../docs/family-food/pr10-option-a-issue252-two-process-no-go-2026-10-29.md).
+
+**Proposed narrow contract diff:** replace only historic exact-schedule replay with independently accepted new current-Planner **3-member/7-day/21-event/42-positive-Decimal-Serving** fixture; allow its *technical* D2 replacement proposal without prior `B<A` shared-work proof. Require pre-frozen current input/candidate/seed provenance, then two isolated real Planner/persisted-readback runs with identical exact UUID-free event/role/source/member-Decimal semantics. No seed shopping/forced candidates or fabricated success. Independent selection of two actual eligible `COOK_RECIPE` event tasks still follows, and is *not* presumed; current `APPROVED_IMMEDIATE=0`.
+
+**Stop / decision:** if week unstable or two approved steps absent, no Gate2. Original history and D2 safe-batch scope, D3 current-status/rollback, negative all-UNKNOWN, safe batch and 100% member portion release gates stay; no code/migration/API/Planner change. Independently review docs PR and obtain owner approval/merge before any separate preflight or runtime PR. No automatic merge.
+
+---
+
 # 2026-10-29 — PR10 Option A input parity / test-ID architecture decision handoff
 
 **Current accepted starting main:** `8a096a4f74711d04bcc2abb8ddbf91ce4086ef15` after merged PR #254 negative evidence. **Issue #255** [full docs-only audit and proposed decision](../docs/family-food/pr10-option-a-historical-input-parity-id-injection-decision-2026-10-29.md) is the next scope. Historical raw [PR #196 source archive](../docs/family-food/evidence/pr196-original-synthetic-fixture-receipt.json), [Option A contract](../docs/family-food/pr10-core-option-a-stable-fixture-implementation-contract-2026-10-27.md) and merged [PR #254 evidence](../docs/family-food/pr10-option-a-issue252-two-process-no-go-2026-10-29.md) remain controlling. **Positive Issue #252 is not complete**.

@@ -1,3 +1,13 @@
+# CURRENT — PR10-FIXTURE-FORWARD Issue #257 docs-only amendment for independent review — 2026-10-29
+
+**Accepted main at task start:** `f29f2279fa92d5b9d2854105007fb124460b4466` following [PR #256 merged](https://github.com/Mitronomik/family-food-os/pull/256). Its input-parity/ID-injection Decision Gate is accepted as historical-specific `NO_GO_TO_POSITIVE_OPTION_A_IMPLEMENTATION_FROM_CURRENT_EVIDENCE`; merged PR #254 remains authentic negative two-run Planner evidence, not a fixture PASS. The old [PR #196 archive and reference](../docs/family-food/pr10-core-option-a-frozen-semantic-reference-proposal-2026-10-27.json) are immutable. Older #255/#254 headings below are historical.
+
+**Current authorized work ONLY:** [Issue #257](https://github.com/Mitronomik/family-food-os/issues/257) — draft one [PR10-FIXTURE-FORWARD docs-only amendment](../docs/family-food/pr10-fixture-forward-contract-amendment-2026-10-29.md) for independent review/owner merge decision. **PROPOSE**, do not yet apply, narrow supersession of Option A's *exact old 21×42 week replay* and D2's `B<A` *proposal-entry* rule only for a separately reviewed forward **technical** real-Planner fixture. Keep 3-member/7-day/21-event/42-Serving structure, full source/rights/Decimal provenance, and two independent temp SQLite/Python real Planner→persisted readbacks. No fixture actually generated or accepted in this docs PR.
+
+**Unchanged blocks:** `APPROVED_IMMEDIATE=0`, `NO_GO_TO_PR10_CORE_RUNTIME`, `PR10-FD-META=BLOCKED/TIME_UNRESOLVED`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`. Two independent reviewed Russian same-day Prep actions on **distinct actual COOK_RECIPE MealEvents**, trusted D3 publisher/current reader anti-rollback and full technical Gate2 Planner→Shopping→Prep→PDF remain mandatory. No production Planner/seed/Nutrition/RecipeVersion/schema/API changes, fixture-runtime tests or automatic merge. **Next only:** Docs/static verification → independent Architecture/Domain/QA review → explicit owner amendment decision.
+
+---
+
 # CURRENT — PR10-CORE-A historical input parity and test-only ID-seam Decision Gate — 2026-10-29
 
 **Accepted baseline at task start:** `main@8a096a4f74711d04bcc2abb8ddbf91ce4086ef15`, including merged [PR #254](https://github.com/Mitronomik/family-food-os/pull/254) as **negative two-run evidence only**. [Issue #252](https://github.com/Mitronomik/family-food-os/issues/252) remains OPEN: the exact historical 21-MealEvent/42-Serving positive Planner fixture has **not** been reproduced. PR #253 closed unmerged; previous entries describing #254 open are historical.
