@@ -1,3 +1,13 @@
+# CURRENT — PR #263 typed test-only identity seam resumed after merged #264 — 2026-10-30
+
+**Accepted main:** `dc4f2ff41865ce7721dac90b8bc29e4cdce6a0b1` after merged [#264](https://github.com/Mitronomik/family-food-os/pull/264). The owner authorized **continuing the existing draft implementation [#263](https://github.com/Mitronomik/family-food-os/pull/263)**, not the independent two-process real Planner proof or PR10 Prep core runtime. PR263 branch has an explicit two-parent integration of #264, no history rewrite.
+
+**Implemented proposal (not yet accepted):** test-only manifest loader with independently supplied byte/source/stage pins, sealed publication projections and v1/v2 lineage; `recipe_version_key_for` resolver; optional Recipe service+composer id injection; all 12 trusted seed modules / 22 composer site inventory including R3-C/R3-D conditional callbacks and DC4-A3; fresh/replay/rollback QA focused tests, while production default `uuid4` remains. A targeted GitHub Action was added. **Unit/SQLite-focused run: 28 passed at prior HEAD; latest exact-head lint/CI is pending and must not be inferred green.**
+
+**Next ONLY:** review/fix exact-head focused and relevant seeded runtime regression, confirm all 12/22 propagation and default isolation, reconcile outstanding contract/test issues; independent QA before any merge. No independently approved full current-Planner source manifest or 3/21/42 fixture has been frozen/verified. `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`, `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`.
+
+---
+
 # CURRENT — PR10-FF publication-key binding docs-only amendment review — 2026-10-30
 
 **Latest accepted main:** `b1d6f88d55485fd91f9e6f65a8fb535678f44ef1` (merged PR #262). Owner authorized preparing **one separate docs-only amendment**, not approving its new provider method for runtime. [Proposed narrowly scoped gate](../docs/family-food/pr10-ff-publication-key-binding-amendment-2026-10-30.md): sealed manifest-backed `recipe_version_key_for` to bind verified version/rights/Steps, correction raw artifact SHA256 and live predecessor to existing `id_for` without widening 12 seed signatures beyond #262. [Draft runtime PR #263](https://github.com/Mitronomik/family-food-os/pull/263) remains PARTIAL/BLOCKED, not to be merged. **Next ONLY:** exact-head docs/static and independent Architecture/Domain/QA review → explicit owner decision on amendment; thereafter a separately authorized #263 resumption, never automatic.
