@@ -1,3 +1,11 @@
+# 2026-10-30 — PR #267 test-only A/B raw freeze handoff
+
+**Accepted main:** `0d390bdf0d620f711916287cf0d656aa9c8a6844`. User accepted original exact raw source A SHA `d160b995b680d11cf9e04f3f97c0d01cd1c65ecd2518e685b8e3cfa783e0a885` and logical Planner input B SHA `9a9260a4a8d849fa4284ff64b861d8c2db74d15777b04ca5d3741d25f1f0089f` **for technical synthetic energy-only input** after persistence/independent check. In [PR #267](https://github.com/Mitronomik/family-food-os/pull/267), exact Git raw bytes were committed, actual blob IDs `27f6ea8284b30785fe3c0fd512b3963b1166efb9` and `d2dd93987ec48109a73cbf1c7efe0ac0a56d9bbe` verified, and a separate [owner decision + external pin record](../docs/family-food/pr10-ff-forward-input-v1-owner-freeze-decision-2026-10-30.md) records source commit, stage SHA, risks and downstream NO_GO. Temporary write-permission CI workflow removed.
+
+**Next:** confirm PR #267 final exact-head checks, re-review original A/B source/rights and complete energy/nutrition statuses, approve exact owner decision and merge separately; then merge [PR #266](https://github.com/Mitronomik/family-food-os/pull/266) only after its explicit owner merge approval. Subsequently separately authorize two fresh Python/SQLite **real Planner** runs proving or rejecting 3/7/21/42 full semantic week determinism. No backdating, no chosen recipe output, no overclaiming nutrient/release completeness. Keep `NO_GO_INPUT_MANIFEST_UNVERIFIED` until accepted merge, `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`, `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`.
+
+---
+
 # 2026-10-30 — PR10-FF post-#263 forward input freeze review handoff
 
 **Source of truth:** `main@b734656562bca29cfb877e4e2827ff0adb81598f`; [PR #263 merged](https://github.com/Mitronomik/family-food-os/pull/263). Previous `state/current-focus.md` top describing #263 as Draft is historical only. Current bounded task is one **docs-only** [input freeze review packet](../docs/family-food/pr10-ff-forward-input-freeze-review-packet-2026-10-30.md): propose 2026-11-02..08 Europe/Moscow, current synthetic member/role/energy-share/exclusion and unchanged PlannerConfig, identify exact source SHA and unverified B manifest fields. **Not** an accepted `PR10_FF_INPUT_MANIFEST_V1` or authorization to run Planner.
