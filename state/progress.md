@@ -1,3 +1,10 @@
+# 2026-10-30 — PR #262 two P1 / one P2 docs-only review corrections
+
+- Owner review requested changes for [PR #262](https://github.com/Mitronomik/family-food-os/pull/262). Updated the same [test-ID contract](../docs/family-food/pr10-ff-typed-test-identity-implementation-contract-2026-10-30.md), without production code changes: exact version-4-shaped SHA256 digest derivation and two independently checked vectors; complete seed callsite/signature/default-path matrix; DC4-A3 valid corrected v2 append and replay distinguished from conflict.
+- **Current architecture verdict unchanged:** explicit owner approval required before changing any normal service/composition/seed signature, regardless of compatible defaults. No new forward Planner fixture, two approved Prep actions, D3 or Gate2 proof; no merge. Await exact-head verification and independent re-review.
+
+---
+
 # 2026-10-30 — PR10-FF-ID-CONTRACT owner review gate, no runtime changes
 
 - Verified [PR #260 merged](https://github.com/Mitronomik/family-food-os/pull/260) to `main@c631daa523531474a2e1e4a809fb56e81c37e468`; forward preflight remains `NO_GO_FORWARD_FIXTURE_IMPLEMENTATION_WITH_CURRENT_UNSTABILIZED_SEED`. Historic PR #196 baseline and #246/#254 negative proofs unchanged.
