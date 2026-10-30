@@ -1,3 +1,9 @@
+# 2026-10-30 — PR #262 exact-HEAD contract key-schema clarification
+
+- Follow-up to owner P1/P2 review: independent SHA256→v4-shaped UUID conformance recalculation matched both pinned vectors. Tightened the same docs-only [typed ID contract](../docs/family-food/pr10-ff-typed-test-identity-implementation-contract-2026-10-30.md) to fix complete six-kind semantic key schemas, pre-frozen process evidence and operation-scoped Household/Member ID factories (not invocation-order counters). No code, schema or runtime tests changed. Review/owner decision and all PR10/Gate2 release blocks remain pending.
+
+---
+
 # 2026-10-30 — PR #262 two P1 / one P2 docs-only review corrections
 
 - Owner review requested changes for [PR #262](https://github.com/Mitronomik/family-food-os/pull/262). Updated the same [test-ID contract](../docs/family-food/pr10-ff-typed-test-identity-implementation-contract-2026-10-30.md), without production code changes: exact version-4-shaped SHA256 digest derivation and two independently checked vectors; complete seed callsite/signature/default-path matrix; DC4-A3 valid corrected v2 append and replay distinguished from conflict.
