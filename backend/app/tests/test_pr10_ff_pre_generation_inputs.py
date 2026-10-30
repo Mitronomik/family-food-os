@@ -82,12 +82,26 @@ def grounded_proposals(tmp_path_factory):
     results = inputs.materialize_pre_generation(destination)
     a = json.loads((destination / "publication-A-PROPOSED.json").read_bytes())
     b = json.loads((destination / "planner-B-PROPOSED.json").read_bytes())
-    return destination, results, a, b
+    provider = inputs.load_pinned_publication_manifest(
+        destination / "publication-A-PROPOSED.json",
+        expected_sha256=results["publication_A_sha256_OBSERVED_NOT_PIN"],
+        expected_source_commit=inputs.SOURCE_COMMIT,
+        expected_stage_membership=a["stages"],
+        correction_path=inputs.dc4.CORRECTIONS_PATH,
+        expected_correction_sha256=inputs.CORRECTION_SHA256,
+        expected_correction_blob_sha1=inputs.CORRECTION_GIT_BLOB,
+    )
+    source_candidate_truth, source_admission_truth = (
+        inputs._independent_candidate_truth(provider)
+    )
+    assert b["candidate_inputs"] == source_candidate_truth
+    assert b["candidate_admissions"] == source_admission_truth
+    return destination, results, a, b, (source_candidate_truth, source_admission_truth)
 
 
 def _verify_changed_b(tmp_path, source, changed_b):
     """Simulate a new matching *self-supplied* B SHA; semantics must still fail."""
-    _, _, a, _ = source
+    _, _, a, _, _ = source
     directory = tmp_path / "bad-b"
     directory.mkdir()
     a_bytes = inputs.canonical_bytes(a)
@@ -134,9 +148,16 @@ def test_git_blob_integrity_fails_closed_on_changed_source(monkeypatch):
     ],
 )
 def test_semantic_mutation_is_rejected_even_with_matching_new_sha(
-    tmp_path, grounded_proposals, mutation, message
+    tmp_path, grounded_proposals, mutation, message, monkeypatch
 ):
-    _, _, _, accepted = grounded_proposals
+    _, _, _, accepted, source_truth = grounded_proposals
+    # One independently re-read SQLite nutrition/source snapshot is sufficient
+    # for adversarial comparisons. The production validator still calls the
+    # real independent read; only repeated negative tests reuse that witness.
+    monkeypatch.setattr(
+        inputs, "_independent_candidate_truth",
+        lambda _provider: deepcopy(source_truth),
+    )
     b = deepcopy(accepted)
     if mutation == "planner_config":
         b["planner_config"]["repetition_weight"] = "0"
@@ -171,7 +192,7 @@ def test_semantic_mutation_is_rejected_even_with_matching_new_sha(
 def test_mutated_source_manifest_with_self_pinned_new_a_sha_fails(
     tmp_path, grounded_proposals
 ):
-    _, _, approved_a, approved_b = grounded_proposals
+    _, _, approved_a, approved_b, _ = grounded_proposals
     a = deepcopy(approved_a)
     a["publications"][0]["seed_projection"]["source_name"] = "FABRICATED"
     directory = tmp_path / "bad-a"
