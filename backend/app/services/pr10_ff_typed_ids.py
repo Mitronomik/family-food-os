@@ -23,13 +23,23 @@ _PREFIX = b"FamilyFoodOS/PR10-FF/typed-id/v1\x00"
 _SHA = re.compile(r"[0-9a-f]{64}\Z")
 
 FixtureEntityKind = Literal[
-    "RECIPE", "RECIPE_VERSION", "RECIPE_INGREDIENT", "RECIPE_STEP",
-    "HOUSEHOLD", "HOUSEHOLD_MEMBER",
+    "RECIPE",
+    "RECIPE_VERSION",
+    "RECIPE_INGREDIENT",
+    "RECIPE_STEP",
+    "HOUSEHOLD",
+    "HOUSEHOLD_MEMBER",
 ]
-KINDS = frozenset((
-    "RECIPE", "RECIPE_VERSION", "RECIPE_INGREDIENT", "RECIPE_STEP",
-    "HOUSEHOLD", "HOUSEHOLD_MEMBER",
-))
+KINDS = frozenset(
+    (
+        "RECIPE",
+        "RECIPE_VERSION",
+        "RECIPE_INGREDIENT",
+        "RECIPE_STEP",
+        "HOUSEHOLD",
+        "HOUSEHOLD_MEMBER",
+    )
+)
 
 
 class FixtureIdentityError(ValueError):
@@ -95,10 +105,17 @@ def _decimal(value: object) -> None:
 
 
 def _source_key(value: object) -> Mapping[str, object]:
-    source = _object(value, {
-        "canonical_code", "source_name", "source_recipe_id", "source_version",
-        "source_document_sha256",
-    }, context="source_record_key")
+    source = _object(
+        value,
+        {
+            "canonical_code",
+            "source_name",
+            "source_recipe_id",
+            "source_version",
+            "source_document_sha256",
+        },
+        context="source_record_key",
+    )
     for name in ("canonical_code", "source_name", "source_recipe_id", "source_version"):
         _string(source[name])
     _sha(source["source_document_sha256"])
@@ -108,11 +125,19 @@ def _source_key(value: object) -> Mapping[str, object]:
 def _version_key(value: object, *, depth: int = 0) -> Mapping[str, object]:
     if depth >= 3:
         raise FixtureIdentityError("predecessor lineage too deep for v1 policy")
-    v = _object(value, {
-        "canonical_code", "source_record_key", "version_number",
-        "predecessor_version_key", "publication_kind", "publication_process_sha256",
-        "correction_revision_sha256",
-    }, context="RECIPE_VERSION")
+    v = _object(
+        value,
+        {
+            "canonical_code",
+            "source_record_key",
+            "version_number",
+            "predecessor_version_key",
+            "publication_kind",
+            "publication_process_sha256",
+            "correction_revision_sha256",
+        },
+        context="RECIPE_VERSION",
+    )
     _string(v["canonical_code"])
     source = _source_key(v["source_record_key"])
     if source["canonical_code"] != v["canonical_code"]:
@@ -125,7 +150,9 @@ def _version_key(value: object, *, depth: int = 0) -> Mapping[str, object]:
             or v["predecessor_version_key"] is not None
             or v["correction_revision_sha256"] is not None
         ):
-            raise FixtureIdentityError("original v1 cannot have correction or predecessor")
+            raise FixtureIdentityError(
+                "original v1 cannot have correction or predecessor"
+            )
     elif v["publication_kind"] == "REVIEWED_CORRECTION":
         _sha(v["correction_revision_sha256"])
         predecessor = _version_key(v["predecessor_version_key"], depth=depth + 1)
@@ -157,7 +184,8 @@ def _validate_key(kind: str, key: Mapping[str, object]) -> None:
         _version_key(key)
     elif kind == "RECIPE_STEP":
         obj = _object(
-            key, {"recipe_version_key", "position", "instruction_sha256", "stage_code"},
+            key,
+            {"recipe_version_key", "position", "instruction_sha256", "stage_code"},
             context=kind,
         )
         _version_key(obj["recipe_version_key"])
@@ -166,11 +194,21 @@ def _validate_key(kind: str, key: Mapping[str, object]) -> None:
         if obj["stage_code"] is not None:
             raise FixtureIdentityError("v1 stage_code must be null")
     elif kind == "RECIPE_INGREDIENT":
-        obj = _object(key, {
-            "recipe_version_key", "position", "food_ingredient_code", "quantity", "unit",
-            "source_amount_text_sha256", "normalization_note_sha256",
-            "prep_note_sha256", "optional",
-        }, context=kind)
+        obj = _object(
+            key,
+            {
+                "recipe_version_key",
+                "position",
+                "food_ingredient_code",
+                "quantity",
+                "unit",
+                "source_amount_text_sha256",
+                "normalization_note_sha256",
+                "prep_note_sha256",
+                "optional",
+            },
+            context=kind,
+        )
         _version_key(obj["recipe_version_key"])
         _positive(obj["position"])
         _string(obj["food_ingredient_code"])
@@ -190,12 +228,18 @@ def canonical_envelope(kind: FixtureEntityKind, key: Mapping[str, object]) -> by
         raise FixtureIdentityError("unknown fixture entity kind")
     _validate_key(kind, key)
     envelope = {
-        "policy": POLICY, "namespace": NAMESPACE, "fixture_id": FIXTURE_ID,
-        "kind": kind, "key": key,
+        "policy": POLICY,
+        "namespace": NAMESPACE,
+        "fixture_id": FIXTURE_ID,
+        "kind": kind,
+        "key": key,
     }
     try:
         return json.dumps(
-            envelope, ensure_ascii=False, sort_keys=True, separators=(",", ":"),
+            envelope,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
             allow_nan=False,
         ).encode("utf-8")
     except (TypeError, ValueError, UnicodeError, RecursionError) as exc:
@@ -221,10 +265,14 @@ class ManifestPinnedFixtureIds:
     This class is not a source of rights, provenance, or published-version truth.
     """
 
-    def __init__(self, approved: Sequence[tuple[FixtureEntityKind, Mapping[str, object]]]):
+    def __init__(
+        self, approved: Sequence[tuple[FixtureEntityKind, Mapping[str, object]]]
+    ):
         if not approved:
             raise FixtureIdentityError("empty/unpinned fixture identity manifest")
-        self._approved = frozenset(canonical_envelope(kind, key) for kind, key in approved)
+        self._approved = frozenset(
+            canonical_envelope(kind, key) for kind, key in approved
+        )
         if len(self._approved) != len(approved):
             raise FixtureIdentityError("duplicate approved typed key")
         self._forward: dict[bytes, UUID] = {}
@@ -233,7 +281,9 @@ class ManifestPinnedFixtureIds:
     def id_for(self, kind: FixtureEntityKind, key: Mapping[str, object]) -> UUID:
         frozen = canonical_envelope(kind, key)
         if frozen not in self._approved:
-            raise FixtureIdentityError("key absent from independently frozen fixture manifest")
+            raise FixtureIdentityError(
+                "key absent from independently frozen fixture manifest"
+            )
         result = derive_fixture_uuid(kind, key)
         seen = self._inverse.get(result)
         if seen is not None and seen != frozen:
@@ -245,4 +295,8 @@ class ManifestPinnedFixtureIds:
     @property
     def ledger(self) -> tuple[tuple[str, str], ...]:
         """Readonly QA witness (canonical JSON, UUID), not a persisted authority."""
-        return tuple(sorted((key.decode("utf-8"), str(uid)) for key, uid in self._forward.items()))
+        return tuple(
+            sorted(
+                (key.decode("utf-8"), str(uid)) for key, uid in self._forward.items()
+            )
+        )
