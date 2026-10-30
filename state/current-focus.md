@@ -1,3 +1,29 @@
+# CURRENT — PR #263 latest P1/P2 review corrections verified; independent re-review next — 2026-10-30
+
+**Current draft:** [PR #263](https://github.com/Mitronomik/family-food-os/pull/263), baseline `main@dc4f2ff41865ce7721dac90b8bc29e4cdce6a0b1`. Owner supplied follow-up review with **P1 mixed Recipe UUID in partial DB state** and **P2 extra providerless DC4-A3 successor preflight**. Both corrected in same branch: existing Recipe UUID checked against fixture provider in preflight/reconcile/append/_new_detail; default DC4-A3 skips extra corrected-v2 preflight. Targeted regressions verify genuine partial Recipe/no-Version persistence, no writes, and ordinary default DC4-A3 zero-write replay. [Focused run 41053340733](https://github.com/Mitronomik/family-food-os/actions/runs/41053340733) at runtime SHA `96ccff16fae3d...`: **36 passed, Ruff lint+format PASS**. [Implementation evidence](../docs/family-food/pr10-ff-test-only-manifest-implementation-2026-10-30.md) updated.
+
+**Next ONLY:** docs/static and full exact-final-head CI, independent Architecture/Domain/QA re-review, and explicit owner merge decision. PR stays Draft, no auto-merge. Separately pin full actual Planner manifest before future independently authorized 3-member/7-day/21-event/42-Serving proof. `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`, `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`.
+
+---
+
+# CURRENT — PR #263 reviewer P1/P2 correction pass; independent QA pending — 2026-10-30
+
+**Accepted base:** `main@dc4f2ff41865ce7721dac90b8bc29e4cdce6a0b1` after merged #264. User authorized addressing all four reviewer concerns in existing [PR #263](https://github.com/Mitronomik/family-food-os/pull/263) only. Exact UUID replay (Recipe/Version/Ingredient/Step), complete persisted predecessor metadata and reviewed v1→v2 lineage, closed manifest allowlist, actual real-source trusted seed 51-v1/7-v2 fresh + replay QA are implemented. [Focused QA run 41048238795](https://github.com/Mitronomik/family-food-os/actions/runs/41048238795): 34 passed + lint/format SUCCESS on byte-identical runtime revision `a243287b`. [Evidence matrix](../docs/family-food/pr10-ff-test-only-manifest-implementation-2026-10-30.md) documents source/test/acceptance boundaries.
+
+**Next ONLY:** exact-head docs/scope and broad required CI, independent Architecture/Domain/QA review, explicit owner merge decision. This does **not** authorize generating or selecting a real Planner week. `NO_GO_TO_PR10_CORE_RUNTIME`, `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN` remain.
+
+---
+
+# CURRENT — PR #263 typed test-only identity seam resumed after merged #264 — 2026-10-30
+
+**Accepted main:** `dc4f2ff41865ce7721dac90b8bc29e4cdce6a0b1` after merged [#264](https://github.com/Mitronomik/family-food-os/pull/264). The owner authorized **continuing the existing draft implementation [#263](https://github.com/Mitronomik/family-food-os/pull/263)**, not the independent two-process real Planner proof or PR10 Prep core runtime. PR263 branch has an explicit two-parent integration of #264, no history rewrite.
+
+**Implemented proposal (not yet accepted):** test-only manifest loader with independently supplied byte/source/stage pins, sealed publication projections and v1/v2 lineage; `recipe_version_key_for` resolver; optional Recipe service+composer id injection; all 12 trusted seed modules / 22 composer site inventory including R3-C/R3-D conditional callbacks and DC4-A3; fresh/replay/rollback QA focused tests, while production default `uuid4` remains. A targeted GitHub Action was added. **Unit/SQLite-focused run: 28 passed at prior HEAD; latest exact-head lint/CI is pending and must not be inferred green.**
+
+**Next ONLY:** review/fix exact-head focused and relevant seeded runtime regression, confirm all 12/22 propagation and default isolation, reconcile outstanding contract/test issues; independent QA before any merge. No independently approved full current-Planner source manifest or 3/21/42 fixture has been frozen/verified. `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`, `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`.
+
+---
+
 # CURRENT — PR10-FF publication-key binding docs-only amendment review — 2026-10-30
 
 **Latest accepted main:** `b1d6f88d55485fd91f9e6f65a8fb535678f44ef1` (merged PR #262). Owner authorized preparing **one separate docs-only amendment**, not approving its new provider method for runtime. [Proposed narrowly scoped gate](../docs/family-food/pr10-ff-publication-key-binding-amendment-2026-10-30.md): sealed manifest-backed `recipe_version_key_for` to bind verified version/rights/Steps, correction raw artifact SHA256 and live predecessor to existing `id_for` without widening 12 seed signatures beyond #262. [Draft runtime PR #263](https://github.com/Mitronomik/family-food-os/pull/263) remains PARTIAL/BLOCKED, not to be merged. **Next ONLY:** exact-head docs/static and independent Architecture/Domain/QA review → explicit owner decision on amendment; thereafter a separately authorized #263 resumption, never automatic.

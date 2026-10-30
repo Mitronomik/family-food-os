@@ -1,7 +1,8 @@
 """Application operations for the verified Recipe Catalogue."""
 
-from collections.abc import Callable, Iterable
-from dataclasses import dataclass
+import hashlib
+from collections.abc import Callable, Iterable, Mapping
+from dataclasses import dataclass, replace
 from datetime import datetime, timezone
 from decimal import Decimal
 from enum import StrEnum
@@ -27,6 +28,7 @@ from app.services.food_recipe_contracts import (
     RecipeCatalogueReadScope,
     RecipeCatalogueUnitOfWork,
 )
+from app.services.pr10_ff_typed_ids import FixtureIdentityError, FixtureTypedIdProvider
 
 WriteFactory = Callable[[], RecipeCatalogueUnitOfWork]
 ReadFactory = Callable[[], RecipeCatalogueReadScope]
@@ -114,6 +116,95 @@ class RecipeSeedSummary:
     conflicts: int = 0
 
 
+def _fixture_ingredient_key(
+    version_key: Mapping[str, object],
+    seed: TrustedRecipeIngredientSeed,
+    position: int,
+) -> dict[str, object]:
+    def digest(value: str | None) -> str | None:
+        return (
+            None if value is None else hashlib.sha256(value.encode("utf-8")).hexdigest()
+        )
+
+    return {
+        "recipe_version_key": version_key,
+        "position": position,
+        "food_ingredient_code": seed.food_ingredient_code,
+        "quantity": "0"
+        if seed.quantity.is_zero()
+        else format(seed.quantity.normalize(), "f"),
+        "unit": UnitCode(seed.unit).value,
+        "source_amount_text_sha256": digest(seed.source_amount_text),
+        "normalization_note_sha256": digest(seed.normalization_note),
+        "prep_note_sha256": digest(seed.prep_note),
+        "optional": seed.optional,
+    }
+
+
+def _fixture_step_key(
+    version_key: Mapping[str, object], instruction: str, position: int
+) -> dict[str, object]:
+    return {
+        "recipe_version_key": version_key,
+        "position": position,
+        "instruction_sha256": hashlib.sha256(instruction.encode("utf-8")).hexdigest(),
+        "stage_code": None,
+    }
+
+
+def _fixture_persisted_seed(
+    scope: RecipeCatalogueUnitOfWork | RecipeCatalogueReadScope,
+    detail: RecipeVersionDetail,
+) -> TrustedRecipeVersionSeed:
+    """Reconstruct *every* trusted field from actual stored rows, without UUID keys."""
+    version = detail.version
+    ingredients = []
+    for row in detail.ingredients:
+        resolved = scope.food_ingredients.get(row.food_ingredient_id)
+        if resolved is None:
+            raise FixtureIdentityError("persisted predecessor ingredient missing")
+        ingredients.append(
+            TrustedRecipeIngredientSeed(
+                food_ingredient_code=resolved.canonical_code,
+                quantity=row.quantity,
+                unit=row.unit,
+                source_amount_text=row.source_amount_text,
+                normalization_note=row.normalization_note,
+                prep_note=row.prep_note,
+                optional=row.optional,
+            )
+        )
+    return TrustedRecipeVersionSeed(
+        base_servings=version.base_servings,
+        meal_type_code=version.meal_type_code,
+        prep_time_minutes=version.prep_time_minutes,
+        cook_time_minutes=version.cook_time_minutes,
+        total_time_minutes=version.total_time_minutes,
+        difficulty_code=version.difficulty_code,
+        batch_friendly=version.batch_friendly,
+        freezable=version.freezable,
+        storage_days_fridge=version.storage_days_fridge,
+        storage_days_freezer=version.storage_days_freezer,
+        verification_status=version.verification_status,
+        verified_at=version.verified_at,
+        source_name=version.source_name,
+        source_recipe_id=version.source_recipe_id,
+        source_url=version.source_url,
+        source_version=version.source_version,
+        source_retrieved_at=version.source_retrieved_at,
+        source_document_sha256=version.source_document_sha256,
+        source_original_servings=version.source_original_servings,
+        rights_review_status=version.rights_review_status,
+        rights_basis=version.rights_basis,
+        change_note=version.change_note,
+        ingredients=tuple(ingredients),
+        steps=tuple(row.instruction for row in detail.steps),
+        equipment_codes=tuple(row.equipment_code for row in detail.equipment),
+        source_output_g=version.source_output_g,
+        source_output_text=version.source_output_text,
+    )
+
+
 class FoodRecipeCatalogueService:
     def __init__(
         self,
@@ -122,7 +213,13 @@ class FoodRecipeCatalogueService:
         *,
         id_factory: Callable[[], UUID] = uuid4,
         clock: Callable[[], datetime] | None = None,
+        id_provider: FixtureTypedIdProvider | None = None,
     ) -> None:
+        if id_provider is not None and id_factory is not uuid4:
+            raise FixtureIdentityError(
+                "custom id_factory conflicts with test ID provider"
+            )
+        self._id_provider = id_provider
         self._write = write_scope_factory
         self._read = read_scope_factory
         self._id = id_factory
@@ -332,6 +429,7 @@ class FoodRecipeCatalogueService:
         recipe = scope.recipes.get(recipe_id)
         if recipe is None:
             raise RecipeNotFoundError(recipe_id)
+        self._assert_fixture_recipe_id(recipe)
         versions = scope.versions.list_for_recipe(recipe_id)
         previous = versions[-1] if versions else None
         number = 1 if previous is None else previous.version_number + 1
@@ -397,6 +495,7 @@ class FoodRecipeCatalogueService:
             raise RecipeCatalogueConflictError(
                 "Existing Recipe identity conflicts with trusted seed."
             )
+        self._assert_fixture_recipe_id(by_code)
         candidates = scope.versions.list_by_provenance(
             by_code.id,
             seed.version.source_name,
@@ -417,6 +516,7 @@ class FoodRecipeCatalogueService:
                 "Same-provenance trusted seed must resolve exactly one structurally "
                 "matching RecipeVersion."
             )
+        self._assert_fixture_replay(scope, matches[0], seed)
         return TrustedRecipeSeedDisposition.EXACT_REPLAY
 
     def reconcile_seed(
@@ -488,6 +588,7 @@ class FoodRecipeCatalogueService:
                 raise RecipeCatalogueConflictError(
                     "Existing Recipe differs from trusted seed."
                 )
+            self._assert_fixture_recipe_id(recipe)
             counts["recipes_existing"] += 1
             candidates = scope.versions.list_by_provenance(
                 recipe.id,
@@ -506,6 +607,7 @@ class FoodRecipeCatalogueService:
                         "Same-provenance trusted historical seed must resolve exactly "
                         "one structurally matching RecipeVersion."
                     )
+                self._assert_fixture_replay(scope, matches[0], entry)
                 _increment_detail(counts, matches[0], inserted=False)
                 continue
 
@@ -523,9 +625,126 @@ class FoodRecipeCatalogueService:
             _increment_detail(counts, detail, inserted=True)
         return RecipeSeedSummary(**counts)
 
+    def _assert_fixture_recipe_id(self, recipe: Recipe) -> None:
+        """Never attach a fixture Version to a providerless/random Recipe UUID."""
+        if self._id_provider is None:
+            return
+        expected = self._id_provider.id_for(
+            "RECIPE", {"canonical_code": recipe.canonical_code}
+        )
+        if recipe.id != expected:
+            raise FixtureIdentityError(
+                "persisted Recipe UUID differs from fixture manifest"
+            )
+
+    def _assert_fixture_predecessor(
+        self,
+        scope: RecipeCatalogueReadScope | RecipeCatalogueUnitOfWork,
+        recipe: Recipe,
+        successor: TrustedRecipeVersionSeed,
+        version_number: int,
+        predecessor_id: UUID,
+        successor_key: Mapping[str, object],
+    ) -> None:
+        if self._id_provider is None:
+            return
+        from app.services.pr10_ff_manifest_loader import project_trusted_version_seed
+
+        previous = scope.versions.get_detail(predecessor_id)
+        if (
+            previous is None
+            or previous.version.recipe_id != recipe.id
+            or previous.version.version_number != version_number - 1
+        ):
+            raise FixtureIdentityError("missing, wrong or stale persisted predecessor")
+        pinned = successor_key["predecessor_version_key"]
+        if not isinstance(pinned, dict):
+            raise FixtureIdentityError("missing frozen semantic predecessor")
+        actual_seed = _fixture_persisted_seed(scope, previous)
+        predecessor_key = self._id_provider.recipe_version_key_for(
+            canonical_code=recipe.canonical_code,
+            seed=actual_seed,
+            version_number=previous.version.version_number,
+            predecessor_id=previous.version.created_from_version_id,
+        )
+        if (
+            predecessor_key != pinned
+            or self._id_provider.id_for("RECIPE_VERSION", predecessor_key)
+            != predecessor_id
+        ):
+            raise FixtureIdentityError("persisted predecessor full projection/ID drift")
+        if project_trusted_version_seed(
+            replace(
+                actual_seed, steps=successor.steps, change_note=successor.change_note
+            )
+        ) != project_trusted_version_seed(successor):
+            raise FixtureIdentityError(
+                "correction changed non-Step trusted version data"
+            )
+
+    def _assert_fixture_replay(
+        self,
+        scope: RecipeCatalogueReadScope | RecipeCatalogueUnitOfWork,
+        detail: RecipeVersionDetail,
+        seed: TrustedRecipeSeed,
+    ) -> None:
+        """EXACT_REPLAY must preserve *actual* IDs, not merely equivalent content."""
+        if self._id_provider is None:
+            return
+        version = detail.version
+        key = self._id_provider.recipe_version_key_for(
+            canonical_code=seed.canonical_code,
+            seed=seed.version,
+            version_number=version.version_number,
+            predecessor_id=version.created_from_version_id,
+        )
+        if detail.recipe.id != self._id_provider.id_for(
+            "RECIPE", {"canonical_code": seed.canonical_code}
+        ) or version.id != self._id_provider.id_for("RECIPE_VERSION", key):
+            raise FixtureIdentityError(
+                "persisted Recipe/Version UUID differs from manifest"
+            )
+        if version.created_from_version_id is not None:
+            self._assert_fixture_predecessor(
+                scope,
+                detail.recipe,
+                seed.version,
+                version.version_number,
+                version.created_from_version_id,
+                key,
+            )
+        if len(detail.ingredients) != len(seed.version.ingredients) or len(
+            detail.steps
+        ) != len(seed.version.steps):
+            raise FixtureIdentityError("persisted child count differs from fixture")
+        for position, (row, ingredient) in enumerate(
+            zip(detail.ingredients, seed.version.ingredients, strict=True), start=1
+        ):
+            expected = self._id_provider.id_for(
+                "RECIPE_INGREDIENT", _fixture_ingredient_key(key, ingredient, position)
+            )
+            if row.id != expected or row.position != position:
+                raise FixtureIdentityError(
+                    "persisted RecipeIngredient UUID/position drift"
+                )
+        for position, (row, instruction) in enumerate(
+            zip(detail.steps, seed.version.steps, strict=True), start=1
+        ):
+            expected = self._id_provider.id_for(
+                "RECIPE_STEP", _fixture_step_key(key, instruction, position)
+            )
+            if row.id != expected or row.position != position:
+                raise FixtureIdentityError("persisted RecipeStep UUID/position drift")
+
     def _new_recipe(self, seed: TrustedRecipeSeed, now: datetime) -> Recipe:
         return Recipe(
-            id=self._id(),
+            id=(
+                self._id()
+                if self._id_provider is None
+                else self._id_provider.id_for(
+                    "RECIPE", {"canonical_code": seed.canonical_code}
+                )
+            ),
             canonical_code=seed.canonical_code,
             canonical_name=seed.canonical_name,
             canonical_name_key=normalize_unicode_search_key(
@@ -545,7 +764,24 @@ class FoodRecipeCatalogueService:
         previous_id: UUID | None,
         now: datetime,
     ) -> RecipeVersionDetail:
-        version_id = self._id()
+        self._assert_fixture_recipe_id(recipe)
+        version_key = None
+        if self._id_provider is not None:
+            version_key = self._id_provider.recipe_version_key_for(
+                canonical_code=recipe.canonical_code,
+                seed=seed,
+                version_number=number,
+                predecessor_id=previous_id,
+            )
+            if previous_id is not None:
+                self._assert_fixture_predecessor(
+                    scope, recipe, seed, number, previous_id, version_key
+                )
+        version_id = (
+            self._id()
+            if version_key is None
+            else self._id_provider.id_for("RECIPE_VERSION", version_key)
+        )
         version = RecipeVersion(
             id=version_id,
             recipe_id=recipe.id,
@@ -588,7 +824,16 @@ class FoodRecipeCatalogueService:
                 )
             ingredients.append(
                 RecipeIngredient(
-                    id=self._id(),
+                    id=(
+                        self._id()
+                        if version_key is None
+                        else self._id_provider.id_for(
+                            "RECIPE_INGREDIENT",
+                            _fixture_ingredient_key(
+                                version_key, ingredient_seed, position
+                            ),
+                        )
+                    ),
                     recipe_version_id=version_id,
                     food_ingredient_id=food_ingredient.id,
                     position=position,
@@ -603,7 +848,14 @@ class FoodRecipeCatalogueService:
             )
         steps = tuple(
             RecipeStep(
-                id=self._id(),
+                id=(
+                    self._id()
+                    if version_key is None
+                    else self._id_provider.id_for(
+                        "RECIPE_STEP",
+                        _fixture_step_key(version_key, instruction, position),
+                    )
+                ),
                 recipe_version_id=version_id,
                 position=position,
                 instruction=instruction,

@@ -34,6 +34,7 @@ from app.services.food_recipes import (
     TrustedRecipeVersionSeed,
 )
 from app.services.planner import PlannerService
+from app.services.pr10_ff_typed_ids import FixtureTypedIdProvider
 from app.services.prepared_recipe_activation import activate_prepared_recipe_batch
 from app.services.recipe_nutrition_v2 import (
     PreparedPublicationDisposition,
@@ -524,17 +525,22 @@ def publish_r3a_school2022_main_batch(
     config: DatabaseConfig | None = None,
     *,
     package: Path = PACKAGE,
+    id_provider: FixtureTypedIdProvider | None = None,
 ) -> R3APublicationResult:
     _, _, _, _, specs_payload, _, _ = _load_contract(package)
 
     apply_migrations(config)
-    seed_r2f_cheese_sandwich(config)
+    seed_r2f_cheese_sandwich(
+        config, **({"id_provider": id_provider} if id_provider is not None else {})
+    )
 
     engine = create_sqlite_engine(config)
     try:
         food = create_food_catalogue_service(engine)
         identity_summary = food.reconcile_identity_seed(_identity_seeds(specs_payload))
-        catalogue = create_food_recipe_catalogue_service(engine)
+        catalogue = create_food_recipe_catalogue_service(
+            engine, **({"id_provider": id_provider} if id_provider is not None else {})
+        )
         nutrition = create_recipe_nutrition_v2_service(engine)
         seeds, specs = _recipe_seeds_and_specs(specs_payload)
 
@@ -605,15 +611,20 @@ def activate_r3a_school2022_main_batch(
     config: DatabaseConfig | None = None,
     *,
     package: Path = PACKAGE,
+    id_provider: FixtureTypedIdProvider | None = None,
 ) -> bool:
     _, _, _, _, specs_payload, _, _ = _load_contract(package)
 
     apply_migrations(config)
-    seed_r2f_cheese_sandwich(config)
+    seed_r2f_cheese_sandwich(
+        config, **({"id_provider": id_provider} if id_provider is not None else {})
+    )
 
     engine = create_sqlite_engine(config)
     try:
-        catalogue = create_food_recipe_catalogue_service(engine)
+        catalogue = create_food_recipe_catalogue_service(
+            engine, **({"id_provider": id_provider} if id_provider is not None else {})
+        )
         nutrition = create_recipe_nutrition_v2_service(engine)
         seeds, specs = _recipe_seeds_and_specs(specs_payload)
 
@@ -647,13 +658,24 @@ def seed_r3a_school2022_main_batch(
     config: DatabaseConfig | None = None,
     *,
     package: Path = PACKAGE,
+    id_provider: FixtureTypedIdProvider | None = None,
 ) -> R3AMainBatchResult:
-    publication = publish_r3a_school2022_main_batch(config, package=package)
-    activation_changed = activate_r3a_school2022_main_batch(config, package=package)
+    publication = publish_r3a_school2022_main_batch(
+        config,
+        package=package,
+        **({"id_provider": id_provider} if id_provider is not None else {}),
+    )
+    activation_changed = activate_r3a_school2022_main_batch(
+        config,
+        package=package,
+        **({"id_provider": id_provider} if id_provider is not None else {}),
+    )
 
     engine = create_sqlite_engine(config)
     try:
-        catalogue = create_food_recipe_catalogue_service(engine)
+        catalogue = create_food_recipe_catalogue_service(
+            engine, **({"id_provider": id_provider} if id_provider is not None else {})
+        )
         active_recipe_codes = tuple(
             code for code in RECIPE_CODES if catalogue.get_by_code(code).is_active
         )

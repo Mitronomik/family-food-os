@@ -39,6 +39,7 @@ from app.seed.r3a_school2022_main_batch import (
 from app.seed.r3d_final_dc3_batch import seed_r3d_final_dc3_batch
 from app.services.food_recipes import RecipeCatalogueConflictError
 from app.services.planner import PlannerService
+from app.services.pr10_ff_typed_ids import FixtureTypedIdProvider
 from app.services.recipe_nutrition_v2 import (
     PreparedPublicationDisposition,
     RecipeNutritionV2ConflictError,
@@ -289,6 +290,15 @@ def _publish_one(
                 f"DC4-A3 current RecipeVersion is not the exact successor: "
                 f"{old_seed.canonical_code}."
             )
+        # The extra ID/replay assertion belongs only to explicit fixture mode.
+        # Providerless DC4-A3 must keep its historical replay call path intact.
+        if (
+            getattr(catalogue, "_id_provider", None) is not None
+            and catalogue.preflight_trusted_seed(successor_seed).value != "EXACT_REPLAY"
+        ):
+            raise RecipeCatalogueConflictError(
+                f"DC4-A3 successor is not exact replay: {old_seed.canonical_code}."
+            )
         _require_current_authority(nutrition, current.version.id, expected_energy)
         replay = nutrition.publish_prepared(successor_spec)
         if (
@@ -323,15 +333,21 @@ def _publish_one(
 
 def seed_dc4_a3_russian_step_corrections(
     config: DatabaseConfig | None = None,
+    *,
+    id_provider: FixtureTypedIdProvider | None = None,
 ) -> A3CorrectionResult:
     artifact = _load_corrections()
-    seed_r3d_final_dc3_batch(config)
+    seed_r3d_final_dc3_batch(
+        config, **({"id_provider": id_provider} if id_provider is not None else {})
+    )
     specs_payload = _r3a_payload()
     corrections = {row["canonical_code"]: row for row in artifact["recipes"]}
 
     engine = create_sqlite_engine(config)
     try:
-        catalogue = create_food_recipe_catalogue_service(engine)
+        catalogue = create_food_recipe_catalogue_service(
+            engine, **({"id_provider": id_provider} if id_provider is not None else {})
+        )
         nutrition = create_recipe_nutrition_v2_service(engine)
         results = []
         for code in CORRECTION_CODES:

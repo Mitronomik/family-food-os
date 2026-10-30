@@ -35,6 +35,7 @@ from app.services.food_recipes import (
     TrustedRecipeVersionSeed,
 )
 from app.services.planner import PlannerAdmissionBlocker, PlannerService
+from app.services.pr10_ff_typed_ids import FixtureTypedIdProvider
 from app.services.prepared_recipe_activation import activate_prepared_recipe
 from app.services.recipe_nutrition_v2 import (
     PreparedPublicationDisposition,
@@ -339,17 +340,22 @@ def seed_r2_breakfast_capacity(
     config: DatabaseConfig | None = None,
     *,
     package: Path = PACKAGE,
+    id_provider: FixtureTypedIdProvider | None = None,
 ) -> R2BreakfastCapacityResult:
     _, _, specs_payload = _load_contract(package)
 
     apply_migrations(config)
-    seed_r1h_school2022_main(config)
+    seed_r1h_school2022_main(
+        config, **({"id_provider": id_provider} if id_provider is not None else {})
+    )
 
     engine = create_sqlite_engine(config)
     try:
         food = create_food_catalogue_service(engine)
         identity_summary = food.reconcile_identity_seed(_identity_seeds(specs_payload))
-        catalogue = create_food_recipe_catalogue_service(engine)
+        catalogue = create_food_recipe_catalogue_service(
+            engine, **({"id_provider": id_provider} if id_provider is not None else {})
+        )
         nutrition = create_recipe_nutrition_v2_service(engine)
         seeds, specs = _recipe_seeds_and_specs(specs_payload)
 

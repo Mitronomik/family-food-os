@@ -1,3 +1,29 @@
+# 2026-10-30 — PR #263 independent follow-up P1/P2 corrections delivered
+
+- P1: blocked mixed provider scenario where an existing canonical Recipe with random UUID and zero RecipeVersions could otherwise acquire a typed Version. Guarded opt-in preflight, reconcile, append and shared Version allocation path; verified no partial persisted write, while providerless legacy append remains allowed.
+- P2: DC4-A3 existing-v2 additional corrected seed preflight now only in explicitly enabled fixture mode; ordinary default branch retains prior call sequence and nutrition/rights/replay. New real SQLite regression catches any unexpected corrected-v2 preflight, verifies seven-v2 EXACT_REPLAY and zero writes.
+- [Focused verification on runtime HEAD `96ccff16fae3d...`](https://github.com/Mitronomik/family-food-os/actions/runs/41053340733): **36 passed, Ruff check and format PASS**. Added amended focused workflow/test inventory; no Planner/DB schema/source/Prep changes. Final docs-only receipt and remaining required CI still require exact-head check, independent review and owner merge decision.
+
+---
+
+# 2026-10-30 — PR #263 reviewer P1/P2 corrections implemented and focused QA passed
+
+- All four review requests addressed in [PR #263](https://github.com/Mitronomik/family-food-os/pull/263): existing persisted Recipe/Version/Ingredient/Step UUID parity on replay; actual complete 12-stage 51-v1/7-v2 SQLite trusted seed fresh/replay integration; full metadata source/rights/equipment verification of predecessor in UoW; exact closed Recipe/Version/Ingredient/Step manifest allowlist.
+- Immutable SQLite cannot be mutated in QA; negative cases inject forged repository readbacks (Step UUID, source-output metadata) without bypassing storage triggers. Invalid keys, missing/extra allowlist and altered v2 remain fail-closed.
+- [Exact runtime focused run 41048238795](https://github.com/Mitronomik/family-food-os/actions/runs/41048238795): **34 tests passed, Ruff lint/format SUCCESS**, runtime HEAD `a243287b242b`. Docs-only receipt update after runtime freeze does not change tested backend bytes. Broad and docs verification on final HEAD plus independent review remain.
+- No approved current-Planner input manifest, 3/21/42 real two-process proof, Prep/D3/Gate2/portion/safe batch acceptance claimed.
+
+---
+
+# 2026-10-30 — PR #263 resumption after merged publication-binding contract
+
+- Verified [#264](https://github.com/Mitronomik/family-food-os/pull/264) merged as `dc4f2ff41865ce7721dac90b8bc29e4cdce6a0b1`. Integrated accepted main into the existing #263 branch without force-push.
+- Added explicit frozen `PR10_FF_PUBLICATION_MANIFEST_V1` loader with independently passed raw SHA/source commit/stage inventory, full `TrustedRecipeVersionSeed` projection, immutable pre-approved key index, DC4-A3 raw artifact Git blob/SHA-256 and old/new Step authority checks; `recipe_version_key_for` as the only added provider method.
+- Wired optional provider into existing Recipe constructor and composer, all 12 nested trusted seed modules/22 audited composer calls, preserving default providerless `uuid4` path. Confirmed static source and tests for conditional R3-A/B prerequisites and v1/v2 lineage.
+- Added targeted workflow and focused conformance/SQLite/seed inventory tests: first run **28 passed**, then lint failure, which was corrected; exact HEAD verification required. Does **not** establish independently approved full pre-run manifest, two-process Planner fixture or downstream release gates.
+
+---
+
 # 2026-10-30 — PR #264 P2 manifest loader follow-up recorded
 
 - Independent review P2 acknowledged as **non-blocking for docs-only #264**, but a **mandatory #263 implementation acceptance**. Added [§3.1 loader/completeness requirement](../docs/family-food/pr10-ff-publication-key-binding-amendment-2026-10-30.md): externally pinned test-only manifest; allowlist + complete trusted-seed/publication/lineage evidence; immutable snapshot, closed 12/22/7 coverage and negative tests. Current `ManifestPinnedFixtureIds(approved)` alone is insufficient for `recipe_version_key_for`.
