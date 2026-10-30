@@ -476,10 +476,22 @@ def materialize_pre_generation(
                     "household_id": str(household.id),
                     "selection_ids": selection_witness,
                     "food_uuid_to_code": [
-                        {"id": str(item.id), "code": item.canonical_code}
-                        for item in sorted(
-                            food_catalogue.list_active(limit=200),
-                            key=lambda item: item.canonical_code,
+                        {
+                            "id": str(food_id),
+                            "code": food_catalogue.get(food_id).canonical_code,
+                        }
+                        for food_id in sorted(
+                            {
+                                ingredient_id
+                                for candidate in request.candidates
+                                for ingredient_id in candidate.food_ingredient_ids
+                            }
+                            | {
+                                ingredient_id
+                                for member in request.members
+                                for ingredient_id in member.excluded_food_ingredient_ids
+                            },
+                            key=lambda value: value.hex,
                         )
                     ],
                 })
