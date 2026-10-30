@@ -67,6 +67,53 @@ class PreflightNoGo(ValueError):
     """Unapproved or mismatching pre-generation logical input."""
 
 
+# Independently obtained from accepted main@SOURCE_COMMIT; not read from mutable HEAD.
+# Critical source/loaders, Planner, nutrition and identity paths must match Git blobs.
+PINNED_SOURCE_BLOBS = {
+    "scripts/audit_dc4_corpus_readiness_rerun.py": "04b7c9c2bb88d95b8024e94f2174302a4fcc565a",
+    "scripts/gate1a_fixture_spec.py": "88688d7ba981b2c14f6987cf4748a66a262e7e24",
+    "backend/app/domain/planner.py": "7793e6d55f475b06b15e01e902e3144e3f5d1944",
+    "backend/app/services/planner.py": "1dde67b026b3c2cab99622482979f3e1fe2d0751",
+    "backend/app/domain/nutrition.py": "34c6131674acb9f803673e98fd0a253cab2c6c76",
+    "backend/app/services/nutrition.py": "fcc952027027934832d27d01f90b73998fc85178",
+    "backend/app/services/reference_methodology.py": "b924c935fd095e9663290d0c62b6a6c0376fd6e0",
+    "backend/app/services/recipe_nutrition_v2.py": "239f487b6d0af47a0b5ee79ea7e7c969069be267",
+    "backend/app/persistence/sqlalchemy_core/recipe_nutrition_v2.py": "f851a6c4dac9882e6fced28b8f69df73dba2573c",
+    "backend/app/services/food_recipes.py": "e0a0e91ac2f089ed1a00fae00d5092dd4e9d8962",
+    "backend/app/services/pr10_ff_manifest_loader.py": "9fd507c74086f97484e91f566f4769edfdc4ebae",
+    "backend/app/services/pr10_ff_typed_ids.py": "c0028c31cb01db4c502ba40a544ec8b58d8771b3",
+    "backend/app/seed/dc4_a3_russian_step_corrections.py": "fc547a551e07973f607d316ff355e2d427d02ab5",
+    "backend/app/seed/r1f_prepared_output.py": "ad984ba43b73f5abb1e9ec1721ae5c3af4aac5f8",
+    "backend/app/seed/r1h_school2022_main.py": "ff39a337852df8c1177847b59d37d946a84192ae",
+    "backend/app/seed/r2_breakfast_capacity.py": "c766733739872b93506f246f82ac57cd772ca31c",
+    "backend/app/seed/r2b_fish_main_diversity.py": "aeb074df0b9586e1b68796dee7be558a0e23aa92",
+    "backend/app/seed/r2c_breakfast_grain_diversity.py": "66e9b75aa1b752f1823180abcf09556abe91fb73",
+    "backend/app/seed/r2e_cottage_casserole.py": "76a625635346bdacc9a13c109e2f7c1f9c695ed8",
+    "backend/app/seed/r2f_cheese_sandwich.py": "51f26cfbe07b94caf865b9ad3ba14b8d5c59c628",
+    "backend/app/seed/r3a_school2022_main_batch.py": "7622267aea8049f8e8a4f718b770fef9f45491dd",
+    "backend/app/seed/r3b_school2022_breakfast_batch.py": "7608179107bd81e9fd1b8e10d28cabfaba5357c6",
+    "backend/app/seed/r3c_school2022_main_batch.py": "d84ad70e09c2d0e43dd56b2c13d9ae1f2f7f0de2",
+    "backend/app/seed/r3d_final_dc3_batch.py": "c07e9c99c058c21f5f950b6e228b688e274742db",
+    "data/curation/dc4-a3-russian-step-corrections/corrections.json": "ec1f8fca9ff8d3c4ac844f6eab0c3411ece54c68",
+}
+
+
+def _assert_source_integrity() -> None:
+    """Check actual raw Git-blob bytes, not an unverified source-commit label."""
+    root = Path(__file__).resolve().parents[1]
+    for relative, expected_sha1 in PINNED_SOURCE_BLOBS.items():
+        source = root / relative
+        try:
+            raw = source.read_bytes()
+        except OSError as exc:
+            raise PreflightNoGo(f"missing pinned source: {relative}") from exc
+        actual = hashlib.sha1(
+            b"blob " + str(len(raw)).encode("ascii") + b"\0" + raw
+        ).hexdigest()
+        if actual != expected_sha1:
+            raise PreflightNoGo(f"source Git blob drift: {relative}")
+
+
 def canonical_bytes(value: object) -> bytes:
     return json.dumps(
         value,
@@ -279,6 +326,7 @@ def materialize_pre_generation(
     """Emit proposals A and B and run-bound UUID witness. NEVER generates a week."""
     if expected_base != SOURCE_COMMIT:
         raise PreflightNoGo("source commit differs from reviewed proposal")
+    _assert_source_integrity()
     if output_dir.exists() and any(output_dir.iterdir()):
         raise PreflightNoGo("output directory must be empty (no overwrite/retry)")
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -565,6 +613,7 @@ def validate_externally_pinned_proposals(
     """
     if expected_source_commit != SOURCE_COMMIT:
         raise PreflightNoGo("unaccepted source revision")
+    _assert_source_integrity()
     raw_a = (output_dir / "publication-A-PROPOSED.json").read_bytes()
     raw_b = (output_dir / "planner-B-PROPOSED.json").read_bytes()
     if sha(raw_a) != expected_a_sha256 or sha(raw_b) != expected_b_sha256:
