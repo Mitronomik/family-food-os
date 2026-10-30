@@ -8,6 +8,7 @@ on:
       - "backend/app/persistence/sqlalchemy_core/food_recipe_composition.py"
       - "backend/app/seed/**"
       - "backend/app/tests/test_pr10_ff_*.py"
+      - "backend/app/tests/test_dc4_a3_russian_step_corrections.py"
       - ".github/workflows/pr10-ff-typed-identity.yml"
   workflow_dispatch:
 
@@ -29,9 +30,38 @@ jobs:
       - name: Frozen UUID, manifest and Recipe SQL integration
         env:
           AI_ENABLED: "false"
-        run: |
-          python -m pytest -q             backend/app/tests/test_pr10_ff_typed_ids.py             backend/app/tests/test_pr10_ff_manifest_loader.py             backend/app/tests/test_pr10_ff_recipe_identity_seam.py backend/app/tests/test_pr10_ff_full_trusted_chain.py             backend/app/tests/test_pr10_ff_seed_provider_coverage.py             --tb=short
-      - name: Lint and format scoped new code
-        run: |
-          python -m ruff check             backend/app/services/pr10_ff_typed_ids.py             backend/app/services/pr10_ff_manifest_loader.py             backend/app/services/food_recipes.py             backend/app/tests/test_pr10_ff_typed_ids.py             backend/app/tests/test_pr10_ff_manifest_loader.py             backend/app/tests/test_pr10_ff_recipe_identity_seam.py backend/app/tests/test_pr10_ff_full_trusted_chain.py             backend/app/tests/test_pr10_ff_seed_provider_coverage.py
-          python -m ruff format --check             backend/app/services/pr10_ff_typed_ids.py             backend/app/services/pr10_ff_manifest_loader.py             backend/app/services/food_recipes.py             backend/app/tests/test_pr10_ff_typed_ids.py             backend/app/tests/test_pr10_ff_manifest_loader.py             backend/app/tests/test_pr10_ff_recipe_identity_seam.py backend/app/tests/test_pr10_ff_full_trusted_chain.py             backend/app/tests/test_pr10_ff_seed_provider_coverage.py
+        run: >-
+          python -m pytest -q
+          backend/app/tests/test_pr10_ff_typed_ids.py
+          backend/app/tests/test_pr10_ff_manifest_loader.py
+          backend/app/tests/test_pr10_ff_recipe_identity_seam.py
+          backend/app/tests/test_pr10_ff_full_trusted_chain.py
+          backend/app/tests/test_pr10_ff_seed_provider_coverage.py
+          backend/app/tests/test_dc4_a3_russian_step_corrections.py::test_a3_providerless_replay_does_not_preflight_corrected_successor
+          --tb=short
+      - name: Lint scoped identity service and tests
+        run: >-
+          python -m ruff check
+          backend/app/services/pr10_ff_typed_ids.py
+          backend/app/services/pr10_ff_manifest_loader.py
+          backend/app/services/food_recipes.py
+          backend/app/seed/dc4_a3_russian_step_corrections.py
+          backend/app/tests/test_pr10_ff_typed_ids.py
+          backend/app/tests/test_pr10_ff_manifest_loader.py
+          backend/app/tests/test_pr10_ff_recipe_identity_seam.py
+          backend/app/tests/test_pr10_ff_full_trusted_chain.py
+          backend/app/tests/test_pr10_ff_seed_provider_coverage.py
+          backend/app/tests/test_dc4_a3_russian_step_corrections.py
+      - name: Format scoped identity service and tests
+        run: >-
+          python -m ruff format --check
+          backend/app/services/pr10_ff_typed_ids.py
+          backend/app/services/pr10_ff_manifest_loader.py
+          backend/app/services/food_recipes.py
+          backend/app/seed/dc4_a3_russian_step_corrections.py
+          backend/app/tests/test_pr10_ff_typed_ids.py
+          backend/app/tests/test_pr10_ff_manifest_loader.py
+          backend/app/tests/test_pr10_ff_recipe_identity_seam.py
+          backend/app/tests/test_pr10_ff_full_trusted_chain.py
+          backend/app/tests/test_pr10_ff_seed_provider_coverage.py
+          backend/app/tests/test_dc4_a3_russian_step_corrections.py
