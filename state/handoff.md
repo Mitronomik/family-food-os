@@ -1,3 +1,13 @@
+# 2026-10-30 — PR10-FIXTURE-FORWARD post-#258 docs-only preflight handoff
+
+**Accepted base:** `main@b73f060196aa2bb042f94395888390e0c338b979` with merged #258 forward technical fixture amendment. Owner directed continuation into the separate **docs-only** [Issue #259](https://github.com/Mitronomik/family-food-os/issues/259). Read [current preflight](../docs/family-food/pr10-fixture-forward-implementation-preflight-2026-10-30.md), accepted [forward contract](../docs/family-food/pr10-fixture-forward-contract-amendment-2026-10-29.md), [#256 ID-seam audit](../docs/family-food/pr10-option-a-historical-input-parity-id-injection-decision-2026-10-29.md), [#254 real negative evidence](../docs/family-food/pr10-option-a-issue252-two-process-no-go-2026-10-29.md) and root `AGENTS.md` first.
+
+**Preflight finding:** two independent real normal-seed Planner runs did not match even one another at full semantic-week digest; normal default composition passes generated UUIDs to candidate/member tie-breaks, and the Recipe-service zero-argument `id_factory` does **not** expose a fully reviewed semantic typed test-only ID mechanism through all nested seed/cross-context owners. The old 21×42 comparator is historical only; a new manifest/week/digest has **NOT** been approved/generated. A proposed current input manifest must be frozen externally before output; runtime UUID binding is separately captured and tie-order checked.
+
+**STOP:** `NO_GO_FORWARD_FIXTURE_IMPLEMENTATION_WITH_CURRENT_UNSTABILIZED_SEED`. Next requires independent review and **new owner-approved architecture/implementation contract** for any changed production-facing seed/composition API; no global UUID patch, Planner tie-break change, score manipulation, snapshot rehydration or automatic merge. Positive 2-event `APPROVED_IMMEDIATE`, D3, Gate2, `SAFE_BATCH_READY` and `PORTION_RELEASE_READY` unchanged.
+
+---
+
 # 2026-10-29 — Issue #257 PR10-FIXTURE-FORWARD docs-only review handoff
 
 **Base:** `main@f29f2279fa92d5b9d2854105007fb124460b4466` after merged PR #256. [Issue #257](https://github.com/Mitronomik/family-food-os/issues/257) authorizes ONLY [the proposed contract amendment](../docs/family-food/pr10-fixture-forward-contract-amendment-2026-10-29.md); owner acceptance and runtime fixture implementation are NOT yet authorized.
