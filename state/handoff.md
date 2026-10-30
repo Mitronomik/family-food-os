@@ -1,3 +1,11 @@
+# 2026-10-30 — Authorized PR10-FF typed-ID implementation, blocked on publication key binding
+
+**Accepted main:** `b1d6f88d55485fd91f9e6f65a8fb535678f44ef1` after merged [#262](https://github.com/Mitronomik/family-food-os/pull/262). Owner authorized bounded implementation, not the separate 3/21/42 two-process Planner proof. On `feature/pr10-ff-typed-test-id-seam`, `app.services.pr10_ff_typed_ids` and tests implement strict test-only key hashing/manifest gating; local **15 unit tests passed**. No seed/composer changes.
+
+**Critical blocker:** `TrustedRecipeVersionSeed`/Recipe service write path lacks externally pinned DC4-A3 correction artifact SHA-256 and predecessor semantic key; accepted §4.1 provider is only `id_for(kind,key)`. Do not infer correction artifact from change_note, use unstable DB Step hashes, or widen provider/write API without a **new approved docs-only amendment**. See [binding gap](../docs/family-food/pr10-ff-typed-id-seam-runtime-binding-gap-2026-10-30.md) for possible bounded alternatives. **Next:** independent review + owner amendment decision. No PR merge, no real fixture, no D3/Gate2, no Prep runtime.
+
+---
+
 # 2026-10-30 — PR #262 typed-key schema follow-up handoff
 
 **Current PR only:** [#262](https://github.com/Mitronomik/family-food-os/pull/262) remains docs/state-only. The [contract](../docs/family-food/pr10-ff-typed-test-identity-implementation-contract-2026-10-30.md) now includes exact six-kind JSON key schemas, explicit original-v1 / corrected-v2 predecessor construction, independently pinned process SHA and operation-scoped Household/Member identity binding. Original SHA256 v4-shaped golden vectors independently recomputed. **Next:** exact-head Docs CI and independent contract review, then explicit owner decision; do not implement/merge/advance runtime automatically. `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`.
