@@ -8,8 +8,6 @@ from decimal import Decimal
 from pathlib import Path
 from uuid import UUID
 
-from app.services.pr10_ff_typed_ids import FixtureTypedIdProvider
-
 from app.db.config import REPOSITORY_ROOT, DatabaseConfig
 from app.db.migrations import apply_migrations
 from app.domain.recipe_nutrition_v2 import NUTRIENT_CODES
@@ -34,6 +32,7 @@ from app.services.food_recipes import (
     TrustedRecipeVersionSeed,
 )
 from app.services.planner import PlannerAdmissionBlocker, PlannerService
+from app.services.pr10_ff_typed_ids import FixtureTypedIdProvider
 from app.services.prepared_recipe_activation import activate_prepared_recipe
 from app.services.recipe_nutrition_v2 import (
     PreparedPublicationDisposition,
