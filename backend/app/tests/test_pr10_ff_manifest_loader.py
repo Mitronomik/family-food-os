@@ -306,6 +306,7 @@ def test_loaded_provider_invalidates_late_manifest_mutation(tmp_path):
 
 def test_publication_provider_requires_external_loader(tmp_path):
     from app.services.pr10_ff_manifest_loader import PublicationManifestIds
+
     bundle = make_manifest(tmp_path)
     _, _, _, _, _, _, payload = bundle
     with pytest.raises(FixtureIdentityError, match="requires pinned"):
