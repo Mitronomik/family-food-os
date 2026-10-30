@@ -1,3 +1,11 @@
+# CURRENT — PR10-FF forward input freeze review after merged #263 — 2026-10-30
+
+**Accepted main:** `b734656562bca29cfb877e4e2827ff0adb81598f` — [PR #263 merged](https://github.com/Mitronomik/family-food-os/pull/263), typed test-only Recipe identity seam accepted. Owner said to continue; this new bounded docs-only [forward input freeze review packet](../docs/family-food/pr10-ff-forward-input-freeze-review-packet-2026-10-30.md) prepares a **proposed** `PR10_FF_INPUT_MANIFEST_V1` review, NOT a frozen approved input or runtime authorization. Grounded proposed new week `2026-11-02` Europe/Moscow; synthetic member profiles, roles, shares, exclusions, PlannerConfig and code/source hashes documented with explicit OPEN input/energy/candidate/rights/Household identity verification. **Next ONLY:** independent review/owner choice on proposed input parameters; then separately authorized test-only A/B input materialization and external pin; only after accepted A/B can a separate two-process Planner proof run.
+
+**Unchanged:** `NO_GO_INPUT_MANIFEST_UNVERIFIED`, `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`, `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`. No automatic merge, PR10 runtime, D3, Gate2, Prep or release.
+
+---
+
 # CURRENT — PR #263 latest P1/P2 review corrections verified; independent re-review next — 2026-10-30
 
 **Current draft:** [PR #263](https://github.com/Mitronomik/family-food-os/pull/263), baseline `main@dc4f2ff41865ce7721dac90b8bc29e4cdce6a0b1`. Owner supplied follow-up review with **P1 mixed Recipe UUID in partial DB state** and **P2 extra providerless DC4-A3 successor preflight**. Both corrected in same branch: existing Recipe UUID checked against fixture provider in preflight/reconcile/append/_new_detail; default DC4-A3 skips extra corrected-v2 preflight. Targeted regressions verify genuine partial Recipe/no-Version persistence, no writes, and ordinary default DC4-A3 zero-write replay. [Focused run 41053340733](https://github.com/Mitronomik/family-food-os/actions/runs/41053340733) at runtime SHA `96ccff16fae3d...`: **36 passed, Ruff lint+format PASS**. [Implementation evidence](../docs/family-food/pr10-ff-test-only-manifest-implementation-2026-10-30.md) updated.
