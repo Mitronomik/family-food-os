@@ -3,13 +3,19 @@
 import hashlib
 import json
 from dataclasses import replace
+from datetime import datetime, timezone
 from uuid import uuid4
 
 import pytest
 from app.db.config import DatabaseConfig
+from app.domain.food_ingredients import normalize_unicode_search_key
+from app.domain.food_recipes import Recipe
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_recipe_composition import (
     create_food_recipe_catalogue_service,
+)
+from app.persistence.sqlalchemy_core.food_recipe_uow import (
+    SqlAlchemyRecipeCatalogueUnitOfWork,
 )
 from app.persistence.sqlalchemy_core.food_recipe_repositories import (
     SqlAlchemyRecipeVersionRepository,
@@ -331,5 +337,66 @@ def test_full_persisted_predecessor_projection_rejects_metadata_drift(
         with pytest.raises(FixtureIdentityError, match="frozen publication|projection"):
             catalogue.append_trusted_version(detail.recipe.id, corrected)
         assert len(catalogue.list_versions(detail.recipe.id)) == 1
+    finally:
+        engine.dispose()
+
+
+def test_mixed_provider_partial_recipe_rejects_all_fixture_write_paths(tmp_path):
+    """A name/code-matching Recipe with a random UUID cannot gain typed Versions."""
+    original = _original()
+    provider, _ = _provider(tmp_path, original)
+    config = DatabaseConfig(path=tmp_path / "mixed-provider-partial.sqlite")
+    seed_food_ingredients(config)
+    engine = create_sqlite_engine(config)
+    try:
+        expected = derive_fixture_uuid(
+            "RECIPE", {"canonical_code": original.canonical_code}
+        )
+        random_id = uuid4()
+        assert random_id != expected
+        now = datetime(2026, 10, 30, tzinfo=timezone.utc)
+        with SqlAlchemyRecipeCatalogueUnitOfWork(engine) as scope:
+            scope.recipes.add(
+                Recipe(
+                    id=random_id,
+                    canonical_code=original.canonical_code,
+                    canonical_name=original.canonical_name,
+                    canonical_name_key=normalize_unicode_search_key(
+                        original.canonical_name, field="canonical_name"
+                    ),
+                    is_active=original.initial_is_active,
+                    created_at=now,
+                    updated_at=now,
+                )
+            )
+            scope.commit()
+
+        fixture_catalogue = create_food_recipe_catalogue_service(
+            engine, id_provider=provider
+        )
+        with pytest.raises(FixtureIdentityError, match="persisted Recipe UUID"):
+            fixture_catalogue.reconcile_seed([original])
+        with pytest.raises(FixtureIdentityError, match="persisted Recipe UUID"):
+            fixture_catalogue.preflight_trusted_seed(original)
+        with pytest.raises(FixtureIdentityError, match="persisted Recipe UUID"):
+            fixture_catalogue.append_trusted_version(random_id, original.version)
+        with SqlAlchemyRecipeCatalogueUnitOfWork(engine) as scope:
+            with pytest.raises(FixtureIdentityError, match="persisted Recipe UUID"):
+                fixture_catalogue.reconcile_seed_in_scope(scope, [original])
+            with pytest.raises(FixtureIdentityError, match="persisted Recipe UUID"):
+                fixture_catalogue.append_trusted_version_in_scope(
+                    scope, random_id, original.version
+                )
+
+        assert fixture_catalogue.get_by_code(original.canonical_code).id == random_id
+        assert fixture_catalogue.list_versions(random_id) == []
+        assert len(provider.ledger) == 1  # Only the rejected Recipe key was consulted.
+        # Ordinary providerless append remains an independent, unchanged operation.
+        ordinary_catalogue = create_food_recipe_catalogue_service(engine)
+        created = ordinary_catalogue.append_trusted_version(
+            random_id, original.version
+        )
+        assert created.version.version_number == 1
+        assert created.recipe.id == random_id
     finally:
         engine.dispose()
