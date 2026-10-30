@@ -165,7 +165,8 @@ def test_semantic_mutation_is_rejected_even_with_matching_new_sha(
         b["week_end"] = "2026-11-09"
     elif mutation == "candidate_order":
         b["candidate_inputs"][0], b["candidate_inputs"][1] = (
-            b["candidate_inputs"][1], b["candidate_inputs"][0]
+            b["candidate_inputs"][1],
+            b["candidate_inputs"][0],
         )
     elif mutation == "nutrition":
         b["candidate_inputs"][0]["kcal_per_base_serving"] = "999999"
