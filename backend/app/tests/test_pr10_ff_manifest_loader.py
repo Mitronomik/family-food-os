@@ -333,7 +333,8 @@ def test_publication_allowlist_is_closed_and_rejects_unreachable_keys(
     if mutation == "extra_version":
         changed = dict(key_v1())
         changed["source_record_key"] = {
-            **changed["source_record_key"], "source_recipe_id": "unapproved-extra"
+            **changed["source_record_key"],
+            "source_recipe_id": "unapproved-extra",
         }
         payload["approved_ids"].append({"kind": "RECIPE_VERSION", "key": changed})
     elif mutation == "missing_step":
@@ -341,9 +342,9 @@ def test_publication_allowlist_is_closed_and_rejects_unreachable_keys(
             row for row in payload["approved_ids"] if row["kind"] != "RECIPE_STEP"
         ]
     else:
-        payload["approved_ids"].append({
-            "kind": "RECIPE", "key": {"canonical_code": "NOT_IN_PUBLISHED_CORPUS"}
-        })
+        payload["approved_ids"].append(
+            {"kind": "RECIPE", "key": {"canonical_code": "NOT_IN_PUBLISHED_CORPUS"}}
+        )
     path.write_text(json.dumps(payload, ensure_ascii=False))
     with pytest.raises(FixtureIdentityError, match="missing/extra/unreachable"):
         load_pinned_publication_manifest(
