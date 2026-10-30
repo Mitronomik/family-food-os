@@ -16,7 +16,9 @@ def test_materialization_is_pre_generation_and_caller_pin_is_required(
     def forbidden(*args, **kwargs):
         pytest.fail("real Planner week generation is forbidden before A/B review")
 
-    monkeypatch.setattr(planner_module.PlannerService, "generate_authoritative", forbidden)
+    monkeypatch.setattr(
+        planner_module.PlannerService, "generate_authoritative", forbidden
+    )
     monkeypatch.setattr(domain_planner, "generate_week", forbidden)
     destination = tmp_path / "proposals"
     result = inputs.materialize_pre_generation(destination)
@@ -61,7 +63,10 @@ def test_no_unreviewed_profile_or_version_key_is_accepted(tmp_path):
     assert list(profiles) == [1, 2, 3]
     assert len(a["publications"]) == 58
     assert sum(len(v) for v in a["stages"].values()) == 58
-    assert len([item for item in a["approved_ids"] if item["kind"] == "HOUSEHOLD_MEMBER"]) == 3
+    assert (
+        len([item for item in a["approved_ids"] if item["kind"] == "HOUSEHOLD_MEMBER"])
+        == 3
+    )
     with pytest.raises(inputs.PreflightNoGo, match="ordinal"):
         inputs._member_profile(4)
     with pytest.raises(inputs.PreflightNoGo, match="nonfinite"):
