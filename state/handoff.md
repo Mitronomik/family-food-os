@@ -1,3 +1,11 @@
+# 2026-10-30 — PR10-FF publication-key resolver amendment: docs-only handoff
+
+**Base:** `main@b1d6f88d55485fd91f9e6f65a8fb535678f44ef1` (merged #262). User authorized a **new docs-only** publication-key bridge proposal while draft [#263](https://github.com/Mitronomik/family-food-os/pull/263) remains partial. [Contract amendment](../docs/family-food/pr10-ff-publication-key-binding-amendment-2026-10-30.md) selects one additional opt-in `FixtureTypedIdProvider.recipe_version_key_for(*, canonical_code, seed, version_number, predecessor_id)` method; no other production-facing signatures beyond accepted #262, no domain/DB/Planner changes. Full seed rights/Steps/provenance plus independently pinned DC4-A3 corrections Git blob and SHA256, v1 predecessor via live same-UoW reader and exact v2 replay/fail-closed are specified.
+
+**Next only:** review exact-head docs CI and get independent Architecture/Domain/QA + explicit owner amendment decision. After permitted merge reconcile overlapping `state/*` on draft #263, and seek separate owner permission to continue its runtime bridge. Two independent 3/7/21/42 real Planner runs are another later task, not claimed. No Gate2, D3, safe batch, portion release or Prep authorization; all old NO_GO states remain.
+
+---
+
 # 2026-10-30 — PR #262 typed-key schema follow-up handoff
 
 **Current PR only:** [#262](https://github.com/Mitronomik/family-food-os/pull/262) remains docs/state-only. The [contract](../docs/family-food/pr10-ff-typed-test-identity-implementation-contract-2026-10-30.md) now includes exact six-kind JSON key schemas, explicit original-v1 / corrected-v2 predecessor construction, independently pinned process SHA and operation-scoped Household/Member identity binding. Original SHA256 v4-shaped golden vectors independently recomputed. **Next:** exact-head Docs CI and independent contract review, then explicit owner decision; do not implement/merge/advance runtime automatically. `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`.
