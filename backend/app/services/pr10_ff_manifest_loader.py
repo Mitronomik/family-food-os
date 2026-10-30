@@ -14,7 +14,7 @@ from datetime import datetime, timezone
 from decimal import Decimal
 from enum import Enum
 from pathlib import Path
-from typing import Any, Mapping, Sequence
+from typing import Mapping, Sequence
 from uuid import UUID
 
 from app.services.pr10_ff_typed_ids import (
@@ -82,6 +82,24 @@ def _normalize(value: object) -> object:
     raise FixtureIdentityError("unsupported seed projection type")
 
 
+def process_steps_sha256(steps: Sequence[str]) -> str:
+    """Frozen PR10-FF process witness: exact ordered NFC instruction list only.
+
+    Rights, ingredient forms, metadata and nutrition are separately checked by
+    complete seed projections and live repositories; they are not inferred here.
+    """
+    if not isinstance(steps, (list, tuple)) or not steps:
+        raise FixtureIdentityError("empty process Step list")
+    if any(
+        not isinstance(s, str)
+        or not s
+        or unicodedata.normalize("NFC", s) != s
+        for s in steps
+    ):
+        raise FixtureIdentityError("invalid ordered process Steps")
+    return hashlib.sha256(_record_bytes({"steps": list(steps)})).hexdigest()
+
+
 def project_trusted_version_seed(seed: object) -> bytes:
     """Field-complete deterministic serialization, refusing unknown seed types."""
     from app.services.food_recipes import TrustedRecipeVersionSeed
@@ -105,6 +123,8 @@ def _fingerprint_file(path: Path, sha256: str, blob_sha1: str) -> dict[str, obje
             raw.decode("utf-8"), object_pairs_hook=_reject_duplicate_pairs,
             parse_float=_reject_float,
         )
+    except FixtureIdentityError:
+        raise
     except (UnicodeError, ValueError, TypeError) as exc:
         raise FixtureIdentityError("unreadable correction artifact") from exc
 
@@ -193,6 +213,8 @@ def load_pinned_publication_manifest(
             raw.decode("utf-8"), object_pairs_hook=_reject_duplicate_pairs,
             parse_float=_reject_float,
         )
+    except FixtureIdentityError:
+        raise
     except (UnicodeError, ValueError, TypeError) as exc:
         raise FixtureIdentityError("invalid manifest file") from exc
     if not isinstance(payload, dict) or set(payload) != {
@@ -272,6 +294,31 @@ def load_pinned_publication_manifest(
         key = record["version_key"]
         if not isinstance(key, dict):
             raise FixtureIdentityError("missing published-version key")
+        projection = record["seed_projection"]
+        if not isinstance(projection, dict) or set(projection) != {
+            "base_servings", "meal_type_code", "prep_time_minutes",
+            "cook_time_minutes", "total_time_minutes", "difficulty_code",
+            "batch_friendly", "freezable", "storage_days_fridge",
+            "storage_days_freezer", "verification_status", "verified_at",
+            "source_name", "source_recipe_id", "source_url", "source_version",
+            "source_retrieved_at", "source_document_sha256",
+            "source_original_servings", "rights_review_status",
+            "rights_basis", "change_note", "ingredients", "steps",
+            "equipment_codes", "source_output_g", "source_output_text",
+        }:
+            raise FixtureIdentityError("incomplete/extra trusted-seed fields")
+        source = key.get("source_record_key")
+        if not isinstance(source, dict) or any(
+            projection.get(attr) != source.get(attr) for attr in (
+                "source_name", "source_recipe_id", "source_version",
+                "source_document_sha256",
+            )
+        ):
+            raise FixtureIdentityError("version key/source projection mismatch")
+        if key.get("publication_process_sha256") != process_steps_sha256(
+            projection["steps"]
+        ):
+            raise FixtureIdentityError("published process/ordered Step SHA mismatch")
         if key.get("publication_kind") == "REVIEWED_CORRECTION":
             if key.get("correction_revision_sha256") != expected_correction_sha256:
                 raise FixtureIdentityError("wrong correction revision SHA")
