@@ -1,3 +1,11 @@
+# CURRENT — #267 synchronized with accepted #266 merge; frozen A/B bytes unchanged — 2026-10-30
+
+**Accepted main at synchronization:** `8368c7bdf74037afaf02b53b561935e29ecb0304`, [PR #266 merged](https://github.com/Mitronomik/family-food-os/pull/266). [PR #267](https://github.com/Mitronomik/family-food-os/pull/267) is Ready for review, NOT merged; its source A (raw SHA256 `d160b995...`, Git blob `27f6ea82...`) and Planner input B (raw SHA256 `9a9260a4...`, blob `d2dd9398...`) are unchanged and committed with separate [external pins](../docs/family-food/evidence/pr10-ff-forward-input-v1-pins.json) and [owner's limited freeze decision](../docs/family-food/pr10-ff-forward-input-v1-owner-freeze-decision-2026-10-30.md). PR branch contains a two-parent merge of the accepted main and #267 work, retaining main's complete #266 runtime/documentation and state history. No Planner generation has run.
+
+**Next only:** verify exact synchronized-head CI, A/B persisted raw bytes and 7-file scope, obtain separate explicit owner merge permission for #267. `NO_GO_INPUT_MANIFEST_UNVERIFIED` remains until freeze accepted in main; `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`, `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN` unchanged.
+
+---
+
 # CURRENT — PR #266 reviewer P1/P2 semantic-input corrections verified — 2026-10-30
 
 **Accepted base:** `main@0d390bdf0d620f711916287cf0d656aa9c8a6844`, [PR #265 merged](https://github.com/Mitronomik/family-food-os/pull/265). [PR #266](https://github.com/Mitronomik/family-food-os/pull/266) is still Draft pending independent review. Owner's P1/P2 feedback addressed within branch: exact PlannerConfig/calendar/reference kcal and **fresh SQLite/RecipeNutritionV2 candidate + admission projections** verified against caller-pinned proposed A/B, actual Git blob SHA pins for 30 critical source/Planner/nutrition modules, and 17 positive/adversarial QA scenarios with re-hashed input mutation. [Focused run #41068645092](https://github.com/Mitronomik/family-food-os/actions/runs/41068645092) on runtime `20de7b412b06`: **17 tests PASS, Ruff lint/format PASS; two input-only Python/SQLite runs byte-identical**. [Review response](../docs/family-food/pr10-ff-forward-input-materialization-evidence-2026-10-30.md) appended.

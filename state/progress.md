@@ -1,3 +1,11 @@
+# 2026-10-30 — synchronized PR #267 with accepted main after #266 merge
+
+- Verified [PR #266 merged](https://github.com/Mitronomik/family-food-os/pull/266) into `main@8368c7bdf74037afaf02b53b561935e29ecb0304`; kept all its source/materializer/test/workflow changes. Integrated [PR #267](https://github.com/Mitronomik/family-food-os/pull/267) as a **two-parent merge commit**, rather than replacing main's implementation or state history.
+- Reconciled three overlapping `state/*` documents by adding this current #267 sync note atop **all** main content; retained exact A (blob `27f6ea82...`) and B (blob `d2dd9398...`) raw JSON, independent freeze pin-record and scoped owner-decision bytes. No source/Planner/runtime changes introduced by #267.
+- Next: exact-head CI / raw SHA verification, independent #267 merge decision. No real 3/7/21/42 Planner generation, Prep or Gate2 permission.
+
+---
+
 # 2026-10-30 — PR #266 follow-up P1/P2 semantic/authority review corrections
 
 - Against prior HEAD `5d7ed1ac`, corrected [PR #266](https://github.com/Mitronomik/family-food-os/pull/266) validator with full PlannerConfig/calendar, member reference-energy truth, all candidate ordered source/rights/nutrition/kcal rows and admissions via **independent fresh SQLite RecipeNutritionV2**; source A fully checked against source stages.

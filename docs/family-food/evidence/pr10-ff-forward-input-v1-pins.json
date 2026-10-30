@@ -1,0 +1,53 @@
+{
+  "schema_version": "PR10_FF_FROZEN_INPUT_PIN_V1",
+  "fixture_id": "PR10_FF_FORWARD_3M_7D_V1",
+  "decision": "OWNER_APPROVES_EXACT_A_B_BYTES_FOR_TEST_ONLY_AFTER_DURABLE_REPOSITORY_VERIFICATION",
+  "decision_date": "2026-10-30",
+  "approval_basis": "User accepted the recommended limited technical synthetic input freeze in FamilyFoodOS Project conversation; no merge or real Planner execution permission.",
+  "purpose": "Technical forward current Planner reproducibility fixture only; never user nutrition, Prep, Gate2 or release authority.",
+  "source_commit": "0d390bdf0d620f711916287cf0d656aa9c8a6844",
+  "materializer_pr": "https://github.com/Mitronomik/family-food-os/pull/266",
+  "materializer_head": "02cc171d697359644a5638e1ac3e935d3d9e9ae2",
+  "github_actions_run": "https://github.com/Mitronomik/family-food-os/actions/runs/41068645092",
+  "original_artifact_id": 12984476386,
+  "independent_static_report": "pr266_ab_independent_static_review.json",
+  "stage_membership_sha256": "47cfbc6b69b5b73bb2c79c133befe08181b1a4aaa2259f90940fd78369737774",
+  "raw_artifacts": {
+    "publication_a": {
+      "repository_path": "docs/family-food/evidence/pr10-ff-forward-input-v1/publication-A-PROPOSED.json",
+      "schema": "PR10_FF_PUBLICATION_MANIFEST_V1",
+      "byte_count": 889601,
+      "raw_sha256": "d160b995b680d11cf9e04f3f97c0d01cd1c65ecd2518e685b8e3cfa783e0a885",
+      "git_blob_sha1": "27f6ea8284b30785fe3c0fd512b3963b1166efb9"
+    },
+    "planner_b": {
+      "repository_path": "docs/family-food/evidence/pr10-ff-forward-input-v1/planner-B-PROPOSED.json",
+      "schema": "PR10_FF_INPUT_MANIFEST_V1",
+      "byte_count": 67963,
+      "raw_sha256": "9a9260a4a8d849fa4284ff64b861d8c2db74d15777b04ca5d3741d25f1f0089f",
+      "git_blob_sha1": "d2dd93987ec48109a73cbf1c7efe0ac0a56d9bbe"
+    }
+  },
+  "scope": {
+    "planning_week_start": "2026-11-02",
+    "planning_week_end": "2026-11-08",
+    "timezone": "Europe/Moscow",
+    "synthetic_household_members": 3,
+    "source_recipe_version_v1": 51,
+    "source_recipe_version_v2": 7,
+    "planner_candidates": 51,
+    "expected_meal_events": 21,
+    "expected_servings": 42,
+    "observed_meal_events": null,
+    "observed_servings": null,
+    "nutrient_scope": "ENERGY_ONLY_TEST_INPUT; all 51 candidates nutrition_status INCOMPLETE despite exact_energy_ready=true"
+  },
+  "effective_when": "Both raw files are physically committed to the repository and independently re-read against these SHA256, byte counts and Git blob SHA1; PR reviewed and merged by explicit owner decision.",
+  "no_go_unchanged": {
+    "NO_GO_TO_PR10_CORE_RUNTIME": true,
+    "PR10_FF_FIXTURE_REPRODUCIBLE": "NOT_PROVEN",
+    "APPROVED_IMMEDIATE": 0,
+    "SAFE_BATCH_READY": false,
+    "PORTION_RELEASE_READY": "NOT_PROVEN"
+  }
+}

@@ -1,3 +1,11 @@
+# 2026-10-30 — #267 post-#266 merge synchronization handoff
+
+**Accepted main:** `8368c7bdf74037afaf02b53b561935e29ecb0304` after [#266 merged](https://github.com/Mitronomik/family-food-os/pull/266). [PR #267](https://github.com/Mitronomik/family-food-os/pull/267) branch now integrates this main as a second parent, preserves all merged #266 changes and old state chronology, and adds only 4 owner-pinned freeze files + the 3 state reconciliation edits. A/B exact Git blob IDs must stay `27f6ea8284b30785fe3c0fd512b3963b1166efb9` / `d2dd93987ec48109a73cbf1c7efe0ac0a56d9bbe`; raw SHA256 stay `d160b995b680d11cf9e04f3f97c0d01cd1c65ecd2518e685b8e3cfa783e0a885` / `9a9260a4a8d849fa4284ff64b861d8c2db74d15777b04ca5d3741d25f1f0089f`.
+
+**Next only:** complete exact-head CI and verify both raw blobs and relative links. PR #267 Ready for review; separate explicit owner approval is still necessary to merge. After its accepted merge, separately authorize actual two-process `PlannerService.generate_authoritative` proof, never cherry-pick a successful week. `NO_GO_INPUT_MANIFEST_UNVERIFIED` until freeze PR merge, `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`, `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`.
+
+---
+
 # 2026-10-30 — PR #266 follow-up Architecture/Data/QA re-review handoff
 
 **Accepted main:** `0d390bdf0d620f711916287cf0d656aa9c8a6844` after #265 merge. In current [PR #266](https://github.com/Mitronomik/family-food-os/pull/266) Draft, fixed P1 incomplete B semantic validation and P2 source blob label-only/negative QA gaps. Now separately pinned Git blob SHA for 30 seed/source/Planner/nutrition/reference modules, exact configs/calendar and source-target energy, **independent live SQLite current-candidate/RecipeNutritionV2** checks of all B rows/admissions. Negative QA mutates B and supplies matching altered B SHA; invariant failures confirmed. [Focused #41068645092](https://github.com/Mitronomik/family-food-os/actions/runs/41068645092) at `20de7b412b06`: 17 tests PASS; Ruff/format PASS; two raw A/B input preparations byte-equal. See [detailed reviewer closure](../docs/family-food/pr10-ff-forward-input-materialization-evidence-2026-10-30.md).
