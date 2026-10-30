@@ -598,6 +598,187 @@ def materialize_pre_generation(
     return results
 
 
+def _planner_config_truth() -> dict[str, object]:
+    """Complete current accepted config, never a user-provided B echo."""
+    config = PLANNER_CONFIG
+    return {
+        "version": config.version,
+        "compatibility_version": config.compatibility_version,
+        "preference_weight": _decimal(config.preference_weight),
+        "pantry_weight": _decimal(config.pantry_weight),
+        "batch_weight": _decimal(config.batch_weight),
+        "time_weight": _decimal(config.time_weight),
+        "repetition_weight": _decimal(config.repetition_weight),
+        "max_recipe_repetitions": config.max_recipe_repetitions,
+    }
+
+
+def _independent_candidate_truth(provider) -> tuple[list[dict], list[dict]]:
+    """Second real seed + read-only nutrition projection; no Planner generation.
+
+    Never reads materialized B or derives its candidate values from observed
+    output. Every nutritional kcal/status must match fresh current services.
+    """
+    from app.persistence.sqlalchemy_core.food_ingredient_composition import (
+        create_food_catalogue_service,
+    )
+    from app.persistence.sqlalchemy_core.food_recipe_composition import (
+        create_food_recipe_catalogue_service,
+    )
+    from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
+        create_recipe_nutrition_v2_service,
+    )
+
+    with tempfile.TemporaryDirectory(prefix="pr10_ff_independent_truth_") as temp:
+        db = DatabaseConfig(path=Path(temp) / "nutrition-authority.sqlite")
+        dc4.seed_dc4_a3_russian_step_corrections(db, id_provider=provider)
+        engine = create_sqlite_engine(db)
+        try:
+            recipes = create_food_recipe_catalogue_service(engine, id_provider=provider)
+            food = create_food_catalogue_service(engine)
+            nutrition = create_recipe_nutrition_v2_service(engine)
+            planner, _, _, _, _ = _services(engine)
+            admissions = [
+                {
+                    "canonical_code": row.canonical_code,
+                    "eligible": row.eligible,
+                    "exact_energy_ready": row.exact_energy_ready,
+                    "blockers": [block.value for block in row.blockers],
+                }
+                for row in planner.compose_candidate_admission()
+            ]
+            candidates = []
+            for recipe in recipes.list_all():
+                if not recipe.is_active:
+                    raise PreflightNoGo("independent source contains inactive Recipe")
+                detail = recipes.get_current_verified(recipe.id)
+                version = detail.version
+                projection = nutrition.neutral_consumption_projection(version.id)
+                if not projection.exact_energy_ready:
+                    raise PreflightNoGo("independent nutrition authority not ready")
+                candidates.append(
+                    {
+                        "canonical_code": recipe.canonical_code,
+                        "recipe_version_id": str(version.id),
+                        "source_name": version.source_name,
+                        "source_recipe_id": version.source_recipe_id,
+                        "source_version": version.source_version,
+                        "source_document_sha256": version.source_document_sha256,
+                        "rights_review_status": version.rights_review_status.value,
+                        "verification_status": version.verification_status.value,
+                        "rights_basis": version.rights_basis,
+                        "version_number": version.version_number,
+                        "process_sha256": process_steps_sha256(
+                            [step.instruction for step in detail.steps]
+                        ),
+                        "meal_type_code": version.meal_type_code.value,
+                        "kcal_per_base_serving": _decimal(
+                            projection.per_base_serving.kcal
+                        ),
+                        "nutrition_status": projection.legacy_status.value,
+                        "exact_energy_ready": projection.exact_energy_ready,
+                        "total_time_minutes": version.total_time_minutes,
+                        "batch_friendly": version.batch_friendly,
+                        "ingredient_codes": sorted(
+                            food.get(row.food_ingredient_id).canonical_code
+                            for row in detail.ingredients
+                        ),
+                    }
+                )
+            return candidates, admissions
+        finally:
+            engine.dispose()
+
+
+def _assert_complete_input_truth(a: dict, b: dict, provider) -> None:
+    """Cross-check every B field against independently pinned source truth."""
+    from datetime import datetime, timedelta, timezone
+
+    from app.domain.households import HouseholdMember
+    from app.domain.nutrition_targets import calculate_member_reference_target
+
+    source_expected, _ = build_source_proposal()
+    if canonical_bytes(a) != canonical_bytes(source_expected):
+        raise PreflightNoGo("source A differs from pinned trusted seed stages")
+    if set(b) != {
+        "schema_version", "fixture_id", "publication_manifest_sha256",
+        "source_commit", "week_start", "week_end", "timezone", "city",
+        "planner_domain_blob_sha1", "planner_service_blob_sha1",
+        "planner_config", "members", "candidate_inputs",
+        "candidate_admissions", "pantry", "history", "fixed_events",
+        "expected_structural",
+    }:
+        raise PreflightNoGo("unexpected or missing B logical input fields")
+    if b["planner_config"] != _planner_config_truth():
+        raise PreflightNoGo("PlannerConfig values differ from accepted config")
+    if b.get("week_end") != (WEEK_START + timedelta(days=6)).isoformat():
+        raise PreflightNoGo("week_end differs from seven local days")
+    if (
+        b.get("city") != "Санкт-Петербург"
+        or b.get("planner_domain_blob_sha1")
+        != PINNED_SOURCE_BLOBS["backend/app/domain/planner.py"]
+        or b.get("planner_service_blob_sha1")
+        != PINNED_SOURCE_BLOBS["backend/app/services/planner.py"]
+    ):
+        raise PreflightNoGo("locale or Planner source-code pin drift")
+    if len(b["members"]) != 3:
+        raise PreflightNoGo("incomplete member list")
+    household_id = provider.id_for(
+        "HOUSEHOLD", {"household_key": HOUSEHOLD_KEY}
+    )
+    accepted_at = datetime(2026, 10, 30, tzinfo=timezone.utc)
+    for member in b["members"]:
+        ordinal = member["ordinal"]
+        profile = _member_profile(ordinal)
+        member_id = provider.id_for(
+            "HOUSEHOLD_MEMBER",
+            {
+                "household_key": HOUSEHOLD_KEY,
+                "ordinal": ordinal,
+                "profile_sha256": sha(canonical_bytes(profile)),
+            },
+        )
+        synthetic = HouseholdMember(
+            id=member_id,
+            household_id=household_id,
+            name=profile["name"],
+            active=profile["active"],
+            birth_date=date.fromisoformat(profile["birth_date"]),
+            sex=profile["sex"],
+            height_cm=Decimal(profile["height_cm"]),
+            weight_kg=Decimal(profile["weight_kg"]),
+            activity_level=profile["activity_level"],
+            goal=profile["goal"],
+            created_at=accepted_at,
+            updated_at=accepted_at,
+        )
+        target = calculate_member_reference_target(synthetic, as_of_date=WEEK_START)
+        if member["reference_energy_kcal"] != _decimal(target.reference_energy_kcal):
+            raise PreflightNoGo("member reference-energy authority drift")
+        if (
+            member.get("selection_source_kind") != "CUSTOM"
+            or member.get("selection_version_number") != 1
+            or member.get("preferred_recipe_version_ids") != []
+            or set(member) != {
+                "ordinal", "profile", "profile_sha256", "member_id",
+                "reference_energy_kcal", "selection_source_kind",
+                "selection_version_number", "opportunities",
+                "excluded_food_codes", "preferred_recipe_version_ids",
+            }
+        ):
+            raise PreflightNoGo("unexpected accepted member selection fields")
+
+    fresh_candidates, fresh_admissions = _independent_candidate_truth(provider)
+    if b["candidate_inputs"] != fresh_candidates:
+        raise PreflightNoGo(
+            "candidate order/source/rights/RecipeVersion/nutrition projection drift"
+        )
+    if b["candidate_admissions"] != fresh_admissions:
+        raise PreflightNoGo("candidate admission semantics/order drift")
+    if len(fresh_candidates) != EXPECTED_SOURCE_CODES or len(fresh_admissions) != 51:
+        raise PreflightNoGo("independent candidate inventory incomplete")
+
+
 def validate_externally_pinned_proposals(
     output_dir: Path,
     *,
@@ -755,6 +936,7 @@ def validate_externally_pinned_proposals(
         "exact_decimal_servings": 42,
     }:
         raise PreflightNoGo("structural contract drift")
+    _assert_complete_input_truth(a, b, provider)
     return {
         "status": "VALIDATED_AGAINST_CALLER_PINS_NOT_OWNER_APPROVED",
         "a_sha256": expected_a_sha256,
