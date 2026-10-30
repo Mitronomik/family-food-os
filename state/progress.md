@@ -1,3 +1,11 @@
+# 2026-10-30 — PR #266 repeatable source/input A+B proposals, no Planner week
+
+- [PR #265](https://github.com/Mitronomik/family-food-os/pull/265) merged as `0d390bdf0d620f711916287cf0d656aa9c8a6844`. [PR #266](https://github.com/Mitronomik/family-food-os/pull/266) implements test-only 12-stage 51-v1/7-v2 A and full source-backed B with synthetic 3 members, 42 accepted role opportunities, 51 current eligible candidates, live reference-energy and nutrition/rights/Step truth, separately recorded ephemeral UUID witness.
+- [Independent pre-generation repeated CI 41062669466](https://github.com/Mitronomik/family-food-os/actions/runs/41062669466): two Python processes/fresh SQLite databases, raw A `d160b995b680d11cf9e04f3f97c0d01cd1c65ecd2518e685b8e3cfa783e0a885` and B `9a9260a4a8d849fa4284ff64b861d8c2db74d15777b04ca5d3741d25f1f0089f` exactly equal across runs. 2 focused tests, Ruff lint/format PASS; [artifact #12981151175](https://github.com/Mitronomik/family-food-os/actions/runs/41062669466/artifacts/12981151175) expires 2026-11-29. **Observed SHA, not owner pins; no Planner generation.**
+- See [full acceptance matrix](../docs/family-food/pr10-ff-forward-input-materialization-evidence-2026-10-30.md). No A/B owner acceptance, 21/42 real proof, Gate2 or release authority. NO_GO remains.
+
+---
+
 # 2026-10-30 — PR #263 accepted; bounded forward input freeze review proposed
 
 - Verified [PR #263](https://github.com/Mitronomik/family-food-os/pull/263) `merged_at=2026-10-30T12:39:04Z`, merge `b734656562bca29cfb877e4e2827ff0adb81598f`, on current main. Recipe typed identity seam is available; the full Planner input / two independent generated weeks remain **unproven**.
