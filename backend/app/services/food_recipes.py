@@ -127,7 +127,9 @@ class FoodRecipeCatalogueService:
         id_provider: FixtureTypedIdProvider | None = None,
     ) -> None:
         if id_provider is not None and id_factory is not uuid4:
-            raise FixtureIdentityError("custom id_factory conflicts with test ID provider")
+            raise FixtureIdentityError(
+                "custom id_factory conflicts with test ID provider"
+            )
         self._id_provider = id_provider
         self._write = write_scope_factory
         self._read = read_scope_factory
@@ -586,28 +588,50 @@ class FoodRecipeCatalogueService:
                     or old.source_url != seed.source_url
                     or old.source_original_servings != seed.source_original_servings
                 ):
-                    raise FixtureIdentityError("persisted predecessor source/rights drift")
+                    raise FixtureIdentityError(
+                        "persisted predecessor source/rights drift"
+                    )
                 from app.services.pr10_ff_manifest_loader import process_steps_sha256
 
-                if process_steps_sha256(
-                    [step.instruction for step in predecessor.steps]
-                ) != pinned["publication_process_sha256"]:
-                    raise FixtureIdentityError("persisted predecessor Steps/process drift")
+                if (
+                    process_steps_sha256(
+                        [step.instruction for step in predecessor.steps]
+                    )
+                    != pinned["publication_process_sha256"]
+                ):
+                    raise FixtureIdentityError(
+                        "persisted predecessor Steps/process drift"
+                    )
                 historical_ingredients = tuple(
                     (
-                        resolved.canonical_code if (
-                            resolved := scope.food_ingredients.get(item.food_ingredient_id)
-                        ) is not None else None,
-                        item.quantity, item.unit, item.source_amount_text,
-                        item.normalization_note, item.prep_note, item.optional,
-                    ) for item in predecessor.ingredients
+                        resolved.canonical_code
+                        if (
+                            resolved := scope.food_ingredients.get(
+                                item.food_ingredient_id
+                            )
+                        )
+                        is not None
+                        else None,
+                        item.quantity,
+                        item.unit,
+                        item.source_amount_text,
+                        item.normalization_note,
+                        item.prep_note,
+                        item.optional,
+                    )
+                    for item in predecessor.ingredients
                 )
                 current_ingredients = tuple(
                     (
-                        item.food_ingredient_code, item.quantity, UnitCode(item.unit),
-                        item.source_amount_text, item.normalization_note,
-                        item.prep_note, item.optional,
-                    ) for item in seed.ingredients
+                        item.food_ingredient_code,
+                        item.quantity,
+                        UnitCode(item.unit),
+                        item.source_amount_text,
+                        item.normalization_note,
+                        item.prep_note,
+                        item.optional,
+                    )
+                    for item in seed.ingredients
                 )
                 if historical_ingredients != current_ingredients:
                     raise FixtureIdentityError("persisted predecessor ingredient drift")
@@ -668,21 +692,28 @@ class FoodRecipeCatalogueService:
                                 "position": position,
                                 "food_ingredient_code": ingredient_seed.food_ingredient_code,
                                 "quantity": (
-                                    "0" if ingredient_seed.quantity.is_zero()
-                                    else format(ingredient_seed.quantity.normalize(), "f")
+                                    "0"
+                                    if ingredient_seed.quantity.is_zero()
+                                    else format(
+                                        ingredient_seed.quantity.normalize(), "f"
+                                    )
                                 ),
                                 "unit": UnitCode(ingredient_seed.unit).value,
                                 "source_amount_text_sha256": hashlib.sha256(
                                     ingredient_seed.source_amount_text.encode("utf-8")
                                 ).hexdigest(),
                                 "normalization_note_sha256": (
-                                    None if ingredient_seed.normalization_note is None
+                                    None
+                                    if ingredient_seed.normalization_note is None
                                     else hashlib.sha256(
-                                        ingredient_seed.normalization_note.encode("utf-8")
+                                        ingredient_seed.normalization_note.encode(
+                                            "utf-8"
+                                        )
                                     ).hexdigest()
                                 ),
                                 "prep_note_sha256": (
-                                    None if ingredient_seed.prep_note is None
+                                    None
+                                    if ingredient_seed.prep_note is None
                                     else hashlib.sha256(
                                         ingredient_seed.prep_note.encode("utf-8")
                                     ).hexdigest()
