@@ -26,6 +26,8 @@ jobs:
         env:
           PYTHONPATH: backend:.
         run: python -m pytest -q backend/app/tests/test_pr10_ff_two_process_proof.py
+      - name: Ruff format diagnostic diff
+        run: ruff format --diff scripts/pr10_ff_two_process_proof.py backend/app/tests/test_pr10_ff_two_process_proof.py
       - name: Ruff lint and format
         run: |
           ruff check scripts/pr10_ff_two_process_proof.py backend/app/tests/test_pr10_ff_two_process_proof.py
