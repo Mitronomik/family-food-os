@@ -1,4 +1,5 @@
 """Issue #268 input pins and fail-closed comparison invariants."""
+
 from copy import deepcopy
 
 import pytest
@@ -23,7 +24,10 @@ def test_mutated_pin_is_rejected(monkeypatch, tmp_path, which):
     pin_dir = tmp_path
     copy = deepcopy(pins)
     for key in ("publication_a", "planner_b"):
-        filename = proof.INPUT_DIR / copy["raw_artifacts"][key]["repository_path"].split("/")[-1]
+        filename = (
+            proof.INPUT_DIR
+            / copy["raw_artifacts"][key]["repository_path"].split("/")[-1]
+        )
         raw = filename.read_bytes()
         (test_dir / filename.name).write_bytes(raw + (b" " if which == key else b""))
         copy["raw_artifacts"][key]["repository_path"] = str(
@@ -40,6 +44,7 @@ def test_mutated_pin_is_rejected(monkeypatch, tmp_path, which):
 
 def test_decimal_portion_contract():
     from decimal import Decimal
+
     assert proof.portion(Decimal("1.250000")) == "1.250000"
     with pytest.raises(proof.ProofNoGo):
         proof.portion(Decimal("NaN"))
