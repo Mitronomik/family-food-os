@@ -1,3 +1,13 @@
+# 2026-10-30 — PR10-FF post-#263 forward input freeze review handoff
+
+**Source of truth:** `main@b734656562bca29cfb877e4e2827ff0adb81598f`; [PR #263 merged](https://github.com/Mitronomik/family-food-os/pull/263). Previous `state/current-focus.md` top describing #263 as Draft is historical only. Current bounded task is one **docs-only** [input freeze review packet](../docs/family-food/pr10-ff-forward-input-freeze-review-packet-2026-10-30.md): propose 2026-11-02..08 Europe/Moscow, current synthetic member/role/energy-share/exclusion and unchanged PlannerConfig, identify exact source SHA and unverified B manifest fields. **Not** an accepted `PR10_FF_INPUT_MANIFEST_V1` or authorization to run Planner.
+
+**Next only:** exact-head docs/static CI, independent Architecture/Domain/QA + owner review of proposed values; subsequently materialize independently reviewed full source A + logical Planner input B bytes and external pins in separate authorized test-only operation. Hard NO_GO if candidate/energy/rights/FK/Member data cannot be independently validated BEFORE any real generated candidate week. The approved #263 Recipe ID seam does not certify Household operation-scoped member binding or a new semantic week. No self-hash as external approval; no output-derived adjustments.
+
+**Blocked:** `NO_GO_INPUT_MANIFEST_UNVERIFIED`, `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`, `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`. No Prep/Gate2/real-family release.
+
+---
+
 # 2026-10-30 — PR #263 P1/P2 second independent review closure handoff
 
 **Current source:** [PR #263](https://github.com/Mitronomik/family-food-os/pull/263) on `feature/pr10-ff-typed-test-id-seam`, base `main@dc4f2ff41865ce7721dac90b8bc29e4cdce6a0b1`. The two latest user review items are implemented: guarded existing Recipe UUID on every relevant fixture append/reconcile/preflight and providerless DC4-A3 unchanged (conditional extra successor preflight). Added targeted actual SQLite regressions; [focused run #41053340733](https://github.com/Mitronomik/family-food-os/actions/runs/41053340733) at `96ccff16fae3d...`: 36 PASS, lint and format PASS. See [implementation spec §6](../docs/family-food/pr10-ff-test-only-manifest-implementation-2026-10-30.md) for exact evidence and safeguards.
