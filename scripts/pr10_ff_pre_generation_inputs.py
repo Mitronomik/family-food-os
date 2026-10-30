@@ -701,11 +701,23 @@ def _assert_complete_input_truth(a: dict, b: dict, provider) -> None:
     if canonical_bytes(a) != canonical_bytes(source_expected):
         raise PreflightNoGo("source A differs from pinned trusted seed stages")
     if set(b) != {
-        "schema_version", "fixture_id", "publication_manifest_sha256",
-        "source_commit", "week_start", "week_end", "timezone", "city",
-        "planner_domain_blob_sha1", "planner_service_blob_sha1",
-        "planner_config", "members", "candidate_inputs",
-        "candidate_admissions", "pantry", "history", "fixed_events",
+        "schema_version",
+        "fixture_id",
+        "publication_manifest_sha256",
+        "source_commit",
+        "week_start",
+        "week_end",
+        "timezone",
+        "city",
+        "planner_domain_blob_sha1",
+        "planner_service_blob_sha1",
+        "planner_config",
+        "members",
+        "candidate_inputs",
+        "candidate_admissions",
+        "pantry",
+        "history",
+        "fixed_events",
         "expected_structural",
     }:
         raise PreflightNoGo("unexpected or missing B logical input fields")
@@ -723,9 +735,7 @@ def _assert_complete_input_truth(a: dict, b: dict, provider) -> None:
         raise PreflightNoGo("locale or Planner source-code pin drift")
     if len(b["members"]) != 3:
         raise PreflightNoGo("incomplete member list")
-    household_id = provider.id_for(
-        "HOUSEHOLD", {"household_key": HOUSEHOLD_KEY}
-    )
+    household_id = provider.id_for("HOUSEHOLD", {"household_key": HOUSEHOLD_KEY})
     accepted_at = datetime(2026, 10, 30, tzinfo=timezone.utc)
     for member in b["members"]:
         ordinal = member["ordinal"]
@@ -759,11 +769,18 @@ def _assert_complete_input_truth(a: dict, b: dict, provider) -> None:
             member.get("selection_source_kind") != "CUSTOM"
             or member.get("selection_version_number") != 1
             or member.get("preferred_recipe_version_ids") != []
-            or set(member) != {
-                "ordinal", "profile", "profile_sha256", "member_id",
-                "reference_energy_kcal", "selection_source_kind",
-                "selection_version_number", "opportunities",
-                "excluded_food_codes", "preferred_recipe_version_ids",
+            or set(member)
+            != {
+                "ordinal",
+                "profile",
+                "profile_sha256",
+                "member_id",
+                "reference_energy_kcal",
+                "selection_source_kind",
+                "selection_version_number",
+                "opportunities",
+                "excluded_food_codes",
+                "preferred_recipe_version_ids",
             }
         ):
             raise PreflightNoGo("unexpected accepted member selection fields")
