@@ -295,7 +295,9 @@ def test_exact_replay_rejects_persisted_foreign_step_uuid(tmp_path, monkeypatch)
         engine.dispose()
 
 
-def test_full_persisted_predecessor_projection_rejects_metadata_drift(tmp_path, monkeypatch):
+def test_full_persisted_predecessor_projection_rejects_metadata_drift(
+    tmp_path, monkeypatch
+):
     """A source-identical v1 with different metadata cannot authorize v2 append."""
     original = _original()
     corrected = replace(
