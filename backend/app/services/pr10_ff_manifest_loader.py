@@ -242,13 +242,19 @@ def _expected_recipe_allowlist(
         expected.add(encoded)
 
     def sha_text(value: str | None) -> str | None:
-        return None if value is None else hashlib.sha256(value.encode("utf-8")).hexdigest()
+        return (
+            None if value is None else hashlib.sha256(value.encode("utf-8")).hexdigest()
+        )
 
     for record in records:
         code = record["canonical_code"]
         key = record["version_key"]
         projection = record["seed_projection"]
-        if not isinstance(code, str) or not isinstance(key, dict) or not isinstance(projection, dict):
+        if (
+            not isinstance(code, str)
+            or not isinstance(key, dict)
+            or not isinstance(projection, dict)
+        ):
             raise FixtureIdentityError("invalid publication allowlist projection")
         add("RECIPE", {"canonical_code": code})
         add("RECIPE_VERSION", key)
@@ -258,30 +264,41 @@ def _expected_recipe_allowlist(
             raise FixtureIdentityError("unreviewed ingredient/Step projection")
         for position, item in enumerate(ingredients, start=1):
             if not isinstance(item, dict) or set(item) != {
-                "food_ingredient_code", "quantity", "unit", "source_amount_text",
-                "normalization_note", "prep_note", "optional",
+                "food_ingredient_code",
+                "quantity",
+                "unit",
+                "source_amount_text",
+                "normalization_note",
+                "prep_note",
+                "optional",
             }:
                 raise FixtureIdentityError("incomplete/extra ingredient seed fields")
-            add("RECIPE_INGREDIENT", {
-                "recipe_version_key": key,
-                "position": position,
-                "food_ingredient_code": item["food_ingredient_code"],
-                "quantity": item["quantity"],
-                "unit": item["unit"],
-                "source_amount_text_sha256": sha_text(item["source_amount_text"]),
-                "normalization_note_sha256": sha_text(item["normalization_note"]),
-                "prep_note_sha256": sha_text(item["prep_note"]),
-                "optional": item["optional"],
-            })
+            add(
+                "RECIPE_INGREDIENT",
+                {
+                    "recipe_version_key": key,
+                    "position": position,
+                    "food_ingredient_code": item["food_ingredient_code"],
+                    "quantity": item["quantity"],
+                    "unit": item["unit"],
+                    "source_amount_text_sha256": sha_text(item["source_amount_text"]),
+                    "normalization_note_sha256": sha_text(item["normalization_note"]),
+                    "prep_note_sha256": sha_text(item["prep_note"]),
+                    "optional": item["optional"],
+                },
+            )
         for position, instruction in enumerate(steps, start=1):
             if not isinstance(instruction, str):
                 raise FixtureIdentityError("non-string source Step")
-            add("RECIPE_STEP", {
-                "recipe_version_key": key,
-                "position": position,
-                "instruction_sha256": sha_text(instruction),
-                "stage_code": None,
-            })
+            add(
+                "RECIPE_STEP",
+                {
+                    "recipe_version_key": key,
+                    "position": position,
+                    "instruction_sha256": sha_text(instruction),
+                    "stage_code": None,
+                },
+            )
     return expected
 
 
