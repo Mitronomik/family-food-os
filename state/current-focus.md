@@ -1,3 +1,11 @@
+# CURRENT — PR #263 latest P1/P2 review corrections verified; independent re-review next — 2026-10-30
+
+**Current draft:** [PR #263](https://github.com/Mitronomik/family-food-os/pull/263), baseline `main@dc4f2ff41865ce7721dac90b8bc29e4cdce6a0b1`. Owner supplied follow-up review with **P1 mixed Recipe UUID in partial DB state** and **P2 extra providerless DC4-A3 successor preflight**. Both corrected in same branch: existing Recipe UUID checked against fixture provider in preflight/reconcile/append/_new_detail; default DC4-A3 skips extra corrected-v2 preflight. Targeted regressions verify genuine partial Recipe/no-Version persistence, no writes, and ordinary default DC4-A3 zero-write replay. [Focused run 41053340733](https://github.com/Mitronomik/family-food-os/actions/runs/41053340733) at runtime SHA `96ccff16fae3d...`: **36 passed, Ruff lint+format PASS**. [Implementation evidence](../docs/family-food/pr10-ff-test-only-manifest-implementation-2026-10-30.md) updated.
+
+**Next ONLY:** docs/static and full exact-final-head CI, independent Architecture/Domain/QA re-review, and explicit owner merge decision. PR stays Draft, no auto-merge. Separately pin full actual Planner manifest before future independently authorized 3-member/7-day/21-event/42-Serving proof. `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`, `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`.
+
+---
+
 # CURRENT — PR #263 reviewer P1/P2 correction pass; independent QA pending — 2026-10-30
 
 **Accepted base:** `main@dc4f2ff41865ce7721dac90b8bc29e4cdce6a0b1` after merged #264. User authorized addressing all four reviewer concerns in existing [PR #263](https://github.com/Mitronomik/family-food-os/pull/263) only. Exact UUID replay (Recipe/Version/Ingredient/Step), complete persisted predecessor metadata and reviewed v1→v2 lineage, closed manifest allowlist, actual real-source trusted seed 51-v1/7-v2 fresh + replay QA are implemented. [Focused QA run 41048238795](https://github.com/Mitronomik/family-food-os/actions/runs/41048238795): 34 passed + lint/format SUCCESS on byte-identical runtime revision `a243287b`. [Evidence matrix](../docs/family-food/pr10-ff-test-only-manifest-implementation-2026-10-30.md) documents source/test/acceptance boundaries.

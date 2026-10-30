@@ -1,3 +1,11 @@
+# 2026-10-30 — PR #263 independent follow-up P1/P2 corrections delivered
+
+- P1: blocked mixed provider scenario where an existing canonical Recipe with random UUID and zero RecipeVersions could otherwise acquire a typed Version. Guarded opt-in preflight, reconcile, append and shared Version allocation path; verified no partial persisted write, while providerless legacy append remains allowed.
+- P2: DC4-A3 existing-v2 additional corrected seed preflight now only in explicitly enabled fixture mode; ordinary default branch retains prior call sequence and nutrition/rights/replay. New real SQLite regression catches any unexpected corrected-v2 preflight, verifies seven-v2 EXACT_REPLAY and zero writes.
+- [Focused verification on runtime HEAD `96ccff16fae3d...`](https://github.com/Mitronomik/family-food-os/actions/runs/41053340733): **36 passed, Ruff check and format PASS**. Added amended focused workflow/test inventory; no Planner/DB schema/source/Prep changes. Final docs-only receipt and remaining required CI still require exact-head check, independent review and owner merge decision.
+
+---
+
 # 2026-10-30 — PR #263 reviewer P1/P2 corrections implemented and focused QA passed
 
 - All four review requests addressed in [PR #263](https://github.com/Mitronomik/family-food-os/pull/263): existing persisted Recipe/Version/Ingredient/Step UUID parity on replay; actual complete 12-stage 51-v1/7-v2 SQLite trusted seed fresh/replay integration; full metadata source/rights/equipment verification of predecessor in UoW; exact closed Recipe/Version/Ingredient/Step manifest allowlist.
