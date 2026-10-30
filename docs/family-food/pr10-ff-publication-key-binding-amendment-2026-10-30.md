@@ -1,8 +1,8 @@
 # PR10-FF-ID-BINDING — fixture-only publication-key resolution amendment
 
-**Status: DOCS-ONLY PROPOSAL FOR INDEPENDENT ARCHITECTURE / DOMAIN / QA REVIEW; NOT APPROVED FOR RUNTIME.**  
-**Date:** 2026-10-30. **Base:** `main@b1d6f88d55485fd91f9e6f65a8fb535678f44ef1` (merged [PR #262](https://github.com/Mitronomik/family-food-os/pull/262)).  
-**Related open draft:** [PR #263](https://github.com/Mitronomik/family-food-os/pull/263) (partial, **not ready to merge**).  
+**Status: DOCS-ONLY PROPOSAL FOR INDEPENDENT ARCHITECTURE / DOMAIN / QA REVIEW; NOT APPROVED FOR RUNTIME.**
+**Date:** 2026-10-30. **Base:** `main@b1d6f88d55485fd91f9e6f65a8fb535678f44ef1` (merged [PR #262](https://github.com/Mitronomik/family-food-os/pull/262)).
+**Related open draft:** [PR #263](https://github.com/Mitronomik/family-food-os/pull/263) (partial, **not ready to merge**).
 **Controlling documents:** [merged typed ID contract](pr10-ff-typed-test-identity-implementation-contract-2026-10-30.md), [forward-fixture preflight](pr10-fixture-forward-implementation-preflight-2026-10-30.md), [accepted forward amendment](pr10-fixture-forward-contract-amendment-2026-10-29.md), [D3 eligibility](pr10-core-step-eligibility-d3-contract-2026-10-22.md), and [original #196 receipt](evidence/pr196-original-synthetic-fixture-receipt.json). This document proposes **one explicit narrow amendment to #262 §4.1**; every unmentioned clause remains controlling.
 
 ## 1. FACT / ASSUMPTION / PROPOSED DECISION / OPEN QUESTION
@@ -73,9 +73,9 @@ For each publication record, at minimum:
 **Selection and ambiguity rules:** Match the complete version `seed` projection, expected number, source tuple and predecessor from the sealed manifest. Zero matches, multiple matches, changed rights/Steps/ingredient form, unexpected version number, inconsistent source SHA, modified correction file, missing external process evidence or a predecessor not linked to live persisted v1 all **fail closed before ID acceptance**. A match does not confer permission to publish or alter an invalid source; existing application and nutrition policies still apply.
 
 **Trust split:**
-`source loaders + rights/Step/nutrition validation` → authoritative publish eligibility;  
-`sealed fixture manifest + typed key resolver` → predictable **test identity only**;  
-`real repository/UoW` → live ID, predecessor, immutable version and actual persisted readback.  
+- `source loaders + rights/Step/nutrition validation` → authoritative publish eligibility;
+- `sealed fixture manifest + typed key resolver` → predictable **test identity only**;
+- `real repository/UoW` → live ID, predecessor, immutable version and actual persisted readback.
 Do not let one layer substitute for another.
 
 ## 4. Fresh/replay/conflict, transaction and rollback contract
