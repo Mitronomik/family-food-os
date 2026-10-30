@@ -1,3 +1,13 @@
+# CURRENT — PR10-FIXTURE-FORWARD implementation preflight (docs-only) — 2026-10-30
+
+**Accepted main at task start:** `b73f060196aa2bb042f94395888390e0c338b979` ([PR #258 merged](https://github.com/Mitronomik/family-food-os/pull/258)); its forward fixture contract supersedes **only** exact historical-week output replay and D2 technical fixture proposal-entry conditions. [Original PR #196 archive](../docs/family-food/evidence/pr196-original-synthetic-fixture-receipt.json) and accepted #246/#254 negative evidence remain unchanged.
+
+**Current bounded work ONLY:** [Issue #259](https://github.com/Mitronomik/family-food-os/issues/259), [forward fixture implementation preflight](../docs/family-food/pr10-fixture-forward-implementation-preflight-2026-10-30.md): proposed input manifest **before** output, 3/7/21/42 current real Planner proof under two independent temp SQLite/Python processes, exact source/nutrition/Step/rights/Decimal per-member comparison, ID ownership and **stop before a new test-only seed/composition contract**. The ordinary unstabilized seed has not passed cross-process reproducibility (merged #254); no current safe typed test-only ID injection is approved. **Preflight disposition: `NO_GO_FORWARD_FIXTURE_IMPLEMENTATION_WITH_CURRENT_UNSTABILIZED_SEED`, not rejection of future Option A-forward.**
+
+**Next only:** docs/static + exact-head CI → independent Architecture/Domain/QA review → owner decision whether to merge this *preflight*. Any subsequent test-only ID implementation contract is a **separate approval**, no runtime now. `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`; two independently reviewed Russian same-day Prep actions, D3 anti-rollback and full Gate2 remain separately blocked.
+
+---
+
 # CURRENT — PR10-FIXTURE-FORWARD Issue #257 docs-only amendment for independent review — 2026-10-29
 
 **Accepted main at task start:** `f29f2279fa92d5b9d2854105007fb124460b4466` following [PR #256 merged](https://github.com/Mitronomik/family-food-os/pull/256). Its input-parity/ID-injection Decision Gate is accepted as historical-specific `NO_GO_TO_POSITIVE_OPTION_A_IMPLEMENTATION_FROM_CURRENT_EVIDENCE`; merged PR #254 remains authentic negative two-run Planner evidence, not a fixture PASS. The old [PR #196 archive and reference](../docs/family-food/pr10-core-option-a-frozen-semantic-reference-proposal-2026-10-27.json) are immutable. Older #255/#254 headings below are historical.
