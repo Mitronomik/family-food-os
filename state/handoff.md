@@ -1,8 +1,16 @@
-# 2026-10-30 — Authorized PR10-FF typed-ID implementation, blocked on publication key binding
+# 2026-10-30 — PR #264 P2 loader completeness handoff
 
-**Accepted main:** `b1d6f88d55485fd91f9e6f65a8fb535678f44ef1` after merged [#262](https://github.com/Mitronomik/family-food-os/pull/262). Owner authorized bounded implementation, not the separate 3/21/42 two-process Planner proof. On `feature/pr10-ff-typed-test-id-seam`, `app.services.pr10_ff_typed_ids` and tests implement strict test-only key hashing/manifest gating; local **15 unit tests passed**. No seed/composer changes.
+**Reviewer P2 (non-blocking for #264):** draft [#263](https://github.com/Mitronomik/family-food-os/pull/263) currently constructs `ManifestPinnedFixtureIds` from an approved typed-key allowlist only. This is insufficient for manifest-bound `recipe_version_key_for`. [#264 §3.1](../docs/family-food/pr10-ff-publication-key-binding-amendment-2026-10-30.md) requires #263 to specify and test a separate explicit test-only loader with pinned bytes, full trusted version-seed projection, approved correction evidence, semantic predecessor lineage, frozen immutable snapshot, full expected 12/22/7 coverage and fail-closed negative tests **without searching generated UUIDs**. The final test-only schema/loader signature is a #263 implementation review deliverable, not approved runtime work by this docs PR.
 
-**Critical blocker:** `TrustedRecipeVersionSeed`/Recipe service write path lacks externally pinned DC4-A3 correction artifact SHA-256 and predecessor semantic key; accepted §4.1 provider is only `id_for(kind,key)`. Do not infer correction artifact from change_note, use unstable DB Step hashes, or widen provider/write API without a **new approved docs-only amendment**. See [binding gap](../docs/family-food/pr10-ff-typed-id-seam-runtime-binding-gap-2026-10-30.md) for possible bounded alternatives. **Next:** independent review + owner amendment decision. No PR merge, no real fixture, no D3/Gate2, no Prep runtime.
+**Next only:** independent #264 Architecture/Domain/QA review and owner decision; #263 stays draft, blocked. Preserve all PR10/Gate2, `APPROVED_IMMEDIATE=0`, fixture reproducibility, safe batch and portion release blocks.
+
+---
+
+# 2026-10-30 — PR10-FF publication-key resolver amendment: docs-only handoff
+
+**Base:** `main@b1d6f88d55485fd91f9e6f65a8fb535678f44ef1` (merged #262). User authorized a **new docs-only** publication-key bridge proposal while draft [#263](https://github.com/Mitronomik/family-food-os/pull/263) remains partial. [Contract amendment](../docs/family-food/pr10-ff-publication-key-binding-amendment-2026-10-30.md) selects one additional opt-in `FixtureTypedIdProvider.recipe_version_key_for(*, canonical_code, seed, version_number, predecessor_id)` method; no other production-facing signatures beyond accepted #262, no domain/DB/Planner changes. Full seed rights/Steps/provenance plus independently pinned DC4-A3 corrections Git blob and SHA256, v1 predecessor via live same-UoW reader and exact v2 replay/fail-closed are specified.
+
+**Next only:** review exact-head docs CI and get independent Architecture/Domain/QA + explicit owner amendment decision. After permitted merge reconcile overlapping `state/*` on draft #263, and seek separate owner permission to continue its runtime bridge. Two independent 3/7/21/42 real Planner runs are another later task, not claimed. No Gate2, D3, safe batch, portion release or Prep authorization; all old NO_GO states remain.
 
 ---
 

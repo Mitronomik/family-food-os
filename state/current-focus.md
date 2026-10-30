@@ -1,8 +1,8 @@
-# CURRENT — PR10-FF typed ID implementation authorized, semantic binding STOP — 2026-10-30
+# CURRENT — PR10-FF publication-key binding docs-only amendment review — 2026-10-30
 
-**Owner approval:** after merged [PR #262](https://github.com/Mitronomik/family-food-os/pull/262), authorize **separate bounded test-only seam implementation only**. New branch `feature/pr10-ff-typed-test-id-seam` starts at `main@b1d6f88d55485fd91f9e6f65a8fb535678f44ef1`. Its [preflight blocker](../docs/family-food/pr10-ff-typed-id-seam-runtime-binding-gap-2026-10-30.md) records that accepted `id_for(kind,key)` + existing Recipe write inputs cannot convey DC4-A3 correction artifact SHA and semantic predecessor key. Implemented manifest-pinned typed UUID policy and unit conformance only; API/seed bridge intentionally unwired. **Next ONLY:** independently review proposed small contract amendment and obtain separate owner approval before broadening service/seed signatures. No automatic merge or Planner fixture proof.
+**Latest accepted main:** `b1d6f88d55485fd91f9e6f65a8fb535678f44ef1` (merged PR #262). Owner authorized preparing **one separate docs-only amendment**, not approving its new provider method for runtime. [Proposed narrowly scoped gate](../docs/family-food/pr10-ff-publication-key-binding-amendment-2026-10-30.md): sealed manifest-backed `recipe_version_key_for` to bind verified version/rights/Steps, correction raw artifact SHA256 and live predecessor to existing `id_for` without widening 12 seed signatures beyond #262. [Draft runtime PR #263](https://github.com/Mitronomik/family-food-os/pull/263) remains PARTIAL/BLOCKED, not to be merged. **Next ONLY:** exact-head docs/static and independent Architecture/Domain/QA review → explicit owner decision on amendment; thereafter a separately authorized #263 resumption, never automatic.
 
-**Standing:** `NO_GO_TEST_ONLY_ID_SEAM_UNPROVEN`; `NO_GO_TO_PR10_CORE_RUNTIME`, `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`.
+**Unchanged blocks:** `NO_GO_TEST_ONLY_ID_SEAM_UNPROVEN`, `NO_GO_TO_PR10_CORE_RUNTIME`, `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`.
 
 ---
 
