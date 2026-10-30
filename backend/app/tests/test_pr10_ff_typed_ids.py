@@ -24,11 +24,14 @@ def _v1():
     return {
         "canonical_code": "REC1",
         "source_record_key": {
-            "canonical_code": "REC1", "source_name": "Reviewed source",
-            "source_recipe_id": "original-1", "source_version": "v1",
+            "canonical_code": "REC1",
+            "source_name": "Reviewed source",
+            "source_recipe_id": "original-1",
+            "source_version": "v1",
             "source_document_sha256": "a" * 64,
         },
-        "version_number": 1, "predecessor_version_key": None,
+        "version_number": 1,
+        "predecessor_version_key": None,
         "publication_kind": "ORIGINAL",
         "publication_process_sha256": "b" * 64,
         "correction_revision_sha256": None,
@@ -37,7 +40,8 @@ def _v1():
 
 def _v2():
     return {
-        **_v1(), "version_number": 2,
+        **_v1(),
+        "version_number": 2,
         "predecessor_version_key": _v1(),
         "publication_kind": "REVIEWED_CORRECTION",
         "publication_process_sha256": "c" * 64,
@@ -46,7 +50,10 @@ def _v2():
 
 
 def test_two_owner_approved_algorithm_vectors():
-    assert str(derive_fixture_uuid("RECIPE", RECIPE)) == "82a8de65-1a14-49a3-bb9b-44a30d54675f"
+    assert (
+        str(derive_fixture_uuid("RECIPE", RECIPE))
+        == "82a8de65-1a14-49a3-bb9b-44a30d54675f"
+    )
     assert str(derive_fixture_uuid("HOUSEHOLD_MEMBER", MEMBER)) == (
         "a6f0adfa-af9b-4f69-a9dc-cc4220b1c819"
     )
@@ -82,18 +89,33 @@ def test_strict_allowlist_replay_and_ledger():
 def test_all_six_closed_key_shapes():
     v = _v2()
     cases = [
-        ("RECIPE", RECIPE), ("HOUSEHOLD", {"household_key": "demo"}),
-        ("HOUSEHOLD_MEMBER", MEMBER), ("RECIPE_VERSION", v),
-        ("RECIPE_STEP", {
-            "recipe_version_key": v, "position": 1,
-            "instruction_sha256": "e" * 64, "stage_code": None,
-        }),
-        ("RECIPE_INGREDIENT", {
-            "recipe_version_key": v, "position": 1, "food_ingredient_code": "EGG",
-            "quantity": "100", "unit": "g", "source_amount_text_sha256": "f" * 64,
-            "normalization_note_sha256": None, "prep_note_sha256": None,
-            "optional": False,
-        }),
+        ("RECIPE", RECIPE),
+        ("HOUSEHOLD", {"household_key": "demo"}),
+        ("HOUSEHOLD_MEMBER", MEMBER),
+        ("RECIPE_VERSION", v),
+        (
+            "RECIPE_STEP",
+            {
+                "recipe_version_key": v,
+                "position": 1,
+                "instruction_sha256": "e" * 64,
+                "stage_code": None,
+            },
+        ),
+        (
+            "RECIPE_INGREDIENT",
+            {
+                "recipe_version_key": v,
+                "position": 1,
+                "food_ingredient_code": "EGG",
+                "quantity": "100",
+                "unit": "g",
+                "source_amount_text_sha256": "f" * 64,
+                "normalization_note_sha256": None,
+                "prep_note_sha256": None,
+                "optional": False,
+            },
+        ),
     ]
     for kind, key in cases:
         data = canonical_envelope(kind, key)
@@ -101,24 +123,42 @@ def test_all_six_closed_key_shapes():
         assert derive_fixture_uuid(kind, key).version == 4
 
 
-@pytest.mark.parametrize("kind,key", [
-    ("RECIPE", {"canonical_code": "  ", "extra": 1}),
-    ("RECIPE", {"canonical_code": "e\u0301"}),
-    ("HOUSEHOLD_MEMBER", {**MEMBER, "ordinal": True}),
-    ("HOUSEHOLD_MEMBER", {**MEMBER, "profile_sha256": "ABC"}),
-    ("RECIPE_VERSION", {**_v2(), "correction_revision_sha256": None}),
-    ("RECIPE_VERSION", {**_v2(), "predecessor_version_key": None}),
-    ("RECIPE_VERSION", {**_v1(), "publication_kind": "REVIEWED_CORRECTION"}),
-    ("RECIPE_VERSION", {
-        **_v2(),
-        "source_record_key": {**_v1()["source_record_key"], "canonical_code": "OTHER"},
-    }),
-    ("RECIPE_INGREDIENT", {
-        "recipe_version_key": _v1(), "position": 1, "food_ingredient_code": "EGG",
-        "quantity": "1.000", "unit": "g", "source_amount_text_sha256": "e" * 64,
-        "normalization_note_sha256": None, "prep_note_sha256": None, "optional": False,
-    }),
-])
+@pytest.mark.parametrize(
+    "kind,key",
+    [
+        ("RECIPE", {"canonical_code": "  ", "extra": 1}),
+        ("RECIPE", {"canonical_code": "e\u0301"}),
+        ("HOUSEHOLD_MEMBER", {**MEMBER, "ordinal": True}),
+        ("HOUSEHOLD_MEMBER", {**MEMBER, "profile_sha256": "ABC"}),
+        ("RECIPE_VERSION", {**_v2(), "correction_revision_sha256": None}),
+        ("RECIPE_VERSION", {**_v2(), "predecessor_version_key": None}),
+        ("RECIPE_VERSION", {**_v1(), "publication_kind": "REVIEWED_CORRECTION"}),
+        (
+            "RECIPE_VERSION",
+            {
+                **_v2(),
+                "source_record_key": {
+                    **_v1()["source_record_key"],
+                    "canonical_code": "OTHER",
+                },
+            },
+        ),
+        (
+            "RECIPE_INGREDIENT",
+            {
+                "recipe_version_key": _v1(),
+                "position": 1,
+                "food_ingredient_code": "EGG",
+                "quantity": "1.000",
+                "unit": "g",
+                "source_amount_text_sha256": "e" * 64,
+                "normalization_note_sha256": None,
+                "prep_note_sha256": None,
+                "optional": False,
+            },
+        ),
+    ],
+)
 def test_invalid_keys_fail_closed(kind, key):
     with pytest.raises(FixtureIdentityError):
         derive_fixture_uuid(kind, key)
