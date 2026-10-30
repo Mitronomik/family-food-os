@@ -1,7 +1,7 @@
 """Application operations for the verified Recipe Catalogue."""
 
-from collections.abc import Callable, Iterable
 import hashlib
+from collections.abc import Callable, Iterable
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from decimal import Decimal
@@ -24,11 +24,11 @@ from app.domain.food_recipes import (
     scale_recipe,
 )
 from app.domain.units import UnitCode
-from app.services.pr10_ff_typed_ids import FixtureIdentityError, FixtureTypedIdProvider
 from app.services.food_recipe_contracts import (
     RecipeCatalogueReadScope,
     RecipeCatalogueUnitOfWork,
 )
+from app.services.pr10_ff_typed_ids import FixtureIdentityError, FixtureTypedIdProvider
 
 WriteFactory = Callable[[], RecipeCatalogueUnitOfWork]
 ReadFactory = Callable[[], RecipeCatalogueReadScope]
