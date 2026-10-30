@@ -13,6 +13,8 @@ from pathlib import Path
 from typing import Any
 from uuid import UUID
 
+from app.services.pr10_ff_typed_ids import FixtureTypedIdProvider
+
 from app.db.config import REPOSITORY_ROOT, DatabaseConfig
 from app.db.migrations import apply_migrations
 from app.domain.recipe_nutrition_v2 import NUTRIENT_CODES
@@ -696,18 +698,24 @@ def _recipe_seeds_and_specs(
     return seeds, specs
 
 
-def _ensure_prerequisites(config: DatabaseConfig | None) -> None:
+def _ensure_prerequisites(
+    config: DatabaseConfig | None, *, id_provider: FixtureTypedIdProvider | None = None
+) -> None:
     apply_migrations(config)
     engine = create_sqlite_engine(config)
     try:
-        catalogue = create_food_recipe_catalogue_service(engine)
+        catalogue = create_food_recipe_catalogue_service(
+            engine, **({"id_provider": id_provider} if id_provider is not None else {})
+        )
         existing_codes = {recipe.canonical_code for recipe in catalogue.list_all()}
     finally:
         engine.dispose()
 
     present = set(R3C_RECIPE_CODES) & existing_codes
     if not present:
-        seed_r3c_school2022_main_batch(config)
+        seed_r3c_school2022_main_batch(
+            config, **({"id_provider": id_provider} if id_provider is not None else {})
+        )
         return
     if present != set(R3C_RECIPE_CODES):
         raise RecipeNutritionV2ConflictError(
@@ -756,16 +764,21 @@ def publish_r3d_final_dc3_batch(
     *,
     package: Path = PACKAGE,
     bundle_path: Path = MR_BUNDLE_PATH,
+    id_provider: FixtureTypedIdProvider | None = None,
 ) -> R3DPublicationResult:
     frozen, _, bundle = _load_contract(package, bundle_path=bundle_path)
-    _ensure_prerequisites(config)
+    _ensure_prerequisites(
+        config, **({"id_provider": id_provider} if id_provider is not None else {})
+    )
 
     engine = create_sqlite_engine(config)
     try:
         food = create_food_catalogue_service(engine)
         _assert_existing_food_mappings(food, frozen)
         identity_summary = food.reconcile_identity_seed(_identity_seeds(frozen))
-        catalogue = create_food_recipe_catalogue_service(engine)
+        catalogue = create_food_recipe_catalogue_service(
+            engine, **({"id_provider": id_provider} if id_provider is not None else {})
+        )
         nutrition = create_recipe_nutrition_v2_service(engine)
         seeds, specs = _recipe_seeds_and_specs(frozen, bundle)
 
@@ -838,13 +851,18 @@ def activate_r3d_final_dc3_batch(
     *,
     package: Path = PACKAGE,
     bundle_path: Path = MR_BUNDLE_PATH,
+    id_provider: FixtureTypedIdProvider | None = None,
 ) -> bool:
     frozen, _, bundle = _load_contract(package, bundle_path=bundle_path)
-    _ensure_prerequisites(config)
+    _ensure_prerequisites(
+        config, **({"id_provider": id_provider} if id_provider is not None else {})
+    )
 
     engine = create_sqlite_engine(config)
     try:
-        catalogue = create_food_recipe_catalogue_service(engine)
+        catalogue = create_food_recipe_catalogue_service(
+            engine, **({"id_provider": id_provider} if id_provider is not None else {})
+        )
         nutrition = create_recipe_nutrition_v2_service(engine)
         seeds, specs = _recipe_seeds_and_specs(frozen, bundle)
         planner = PlannerService(
@@ -878,21 +896,26 @@ def seed_r3d_final_dc3_batch(
     *,
     package: Path = PACKAGE,
     bundle_path: Path = MR_BUNDLE_PATH,
+    id_provider: FixtureTypedIdProvider | None = None,
 ) -> R3DFinalBatchResult:
     publication = publish_r3d_final_dc3_batch(
         config,
         package=package,
         bundle_path=bundle_path,
+        **({"id_provider": id_provider} if id_provider is not None else {}),
     )
     activation_changed = activate_r3d_final_dc3_batch(
         config,
         package=package,
         bundle_path=bundle_path,
+        **({"id_provider": id_provider} if id_provider is not None else {}),
     )
 
     engine = create_sqlite_engine(config)
     try:
-        catalogue = create_food_recipe_catalogue_service(engine)
+        catalogue = create_food_recipe_catalogue_service(
+            engine, **({"id_provider": id_provider} if id_provider is not None else {})
+        )
         active_recipe_codes = tuple(
             code for code in RECIPE_CODES if catalogue.get_by_code(code).is_active
         )
