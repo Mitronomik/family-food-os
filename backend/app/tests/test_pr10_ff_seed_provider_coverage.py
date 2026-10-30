@@ -27,24 +27,29 @@ def test_entire_accepted_12_module_22_composer_inventory_is_present():
     for name, count in SITES.items():
         tree = ast.parse((SEED / name).read_text(encoding="utf-8"))
         sites = [
-            n for n in ast.walk(tree)
+            n
+            for n in ast.walk(tree)
             if isinstance(n, ast.Call)
             and isinstance(n.func, ast.Name)
             and n.func.id == "create_food_recipe_catalogue_service"
         ]
         assert len(sites) == count, name
         for call in sites:
-            surrounding = next((
-                node for node in ast.walk(tree)
-                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
-                and node.lineno <= call.lineno <= node.end_lineno
-                and not any(
-                    isinstance(child, (ast.FunctionDef, ast.AsyncFunctionDef))
-                    and child is not node
-                    and child.lineno <= call.lineno <= child.end_lineno
-                    for child in ast.walk(node)
-                )
-            ), None)
+            surrounding = next(
+                (
+                    node
+                    for node in ast.walk(tree)
+                    if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+                    and node.lineno <= call.lineno <= node.end_lineno
+                    and not any(
+                        isinstance(child, (ast.FunctionDef, ast.AsyncFunctionDef))
+                        and child is not node
+                        and child.lineno <= call.lineno <= child.end_lineno
+                        for child in ast.walk(node)
+                    )
+                ),
+                None,
+            )
             assert surrounding is not None
             if name == "r3c_school2022_main_batch.py" and (
                 surrounding.name == "_ensure_prerequisite_batch"
@@ -54,7 +59,9 @@ def test_entire_accepted_12_module_22_composer_inventory_is_present():
                 assert len(call.keywords) == 0
             else:
                 assert any(k.arg is None for k in call.keywords), (
-                    name, surrounding.name, call.lineno
+                    name,
+                    surrounding.name,
+                    call.lineno,
                 )
 
 
@@ -68,7 +75,8 @@ def test_every_seed_entrypoint_is_opt_in_only():
                 fn.name == "seed_dc4_a3_russian_step_corrections"
             ):
                 assert "id_provider" in [a.arg for a in fn.args.kwonlyargs], (
-                    name, fn.name
+                    name,
+                    fn.name,
                 )
                 assert fn.args.kw_defaults[-1] is not None, (name, fn.name)
         assert not any(
