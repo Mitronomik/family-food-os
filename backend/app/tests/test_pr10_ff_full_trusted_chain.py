@@ -59,9 +59,12 @@ def _trusted_source_inventory():
         ("r3a", r3a._recipe_seeds_and_specs(r3a._load_contract()[4])[0]),
         ("r3b", r3b._recipe_seeds_and_specs(r3b._load_contract()[4])[0]),
         ("r3c", r3c._recipe_seeds_and_specs(r3c._load_contract()[0])[0]),
-        ("r3d", r3d._recipe_seeds_and_specs(
-            r3d._load_contract()[0], r3d._load_contract()[2]
-        )[0]),
+        (
+            "r3d",
+            r3d._recipe_seeds_and_specs(
+                r3d._load_contract()[0], r3d._load_contract()[2]
+            )[0],
+        ),
     ]
     return stages
 
@@ -90,26 +93,34 @@ def _qa_provider(tmp_path):
     expected_codes = [item.canonical_code for _, recipes in stages for item in recipes]
     assert len(stages) == 11  # DC4-A3 is the separate twelfth correction stage.
     assert len(expected_codes) == len(set(expected_codes)) == 51
-    originals = {recipe.canonical_code: recipe for _, recipes in stages for recipe in recipes}
+    originals = {
+        recipe.canonical_code: recipe for _, recipes in stages for recipe in recipes
+    }
 
     artifact = dc4._load_corrections()  # source Git blob pin verified by real loader
     corrections = {row["canonical_code"]: row for row in artifact["recipes"]}
     assert len(corrections) == 7
     correction_sha = "157f2ce76cc86baae2b288ce80da069154bc6d44ca1620b2b9f0c521b92e7759"
-    assert hashlib.sha256(dc4.CORRECTIONS_PATH.read_bytes()).hexdigest() == correction_sha
+    assert (
+        hashlib.sha256(dc4.CORRECTIONS_PATH.read_bytes()).hexdigest() == correction_sha
+    )
     records = []
     membership = {}
     for stage, seeds in stages:
         membership[stage] = []
         for recipe in seeds:
             version_key = _version_key(recipe)
-            records.append({
-                "stage": stage,
-                "canonical_code": recipe.canonical_code,
-                "version_number": 1,
-                "version_key": version_key,
-                "seed_projection": json.loads(project_trusted_version_seed(recipe.version)),
-            })
+            records.append(
+                {
+                    "stage": stage,
+                    "canonical_code": recipe.canonical_code,
+                    "version_number": 1,
+                    "version_key": version_key,
+                    "seed_projection": json.loads(
+                        project_trusted_version_seed(recipe.version)
+                    ),
+                }
+            )
             membership[stage].append(f"{recipe.canonical_code}@1")
     membership["dc4_a3"] = []
     for code in dc4.CORRECTION_CODES:
@@ -122,16 +133,22 @@ def _qa_provider(tmp_path):
                 change_note=artifact["change_note"],
             ),
         )
-        records.append({
-            "stage": "dc4_a3",
-            "canonical_code": code,
-            "version_number": 2,
-            "version_key": _version_key(
-                corrected, number=2, predecessor=_version_key(original),
-                correction_sha=correction_sha,
-            ),
-            "seed_projection": json.loads(project_trusted_version_seed(corrected.version)),
-        })
+        records.append(
+            {
+                "stage": "dc4_a3",
+                "canonical_code": code,
+                "version_number": 2,
+                "version_key": _version_key(
+                    corrected,
+                    number=2,
+                    predecessor=_version_key(original),
+                    correction_sha=correction_sha,
+                ),
+                "seed_projection": json.loads(
+                    project_trusted_version_seed(corrected.version)
+                ),
+            }
+        )
         membership["dc4_a3"].append(f"{code}@2")
     assert len(records) == 58
     allowed = [
@@ -165,7 +182,9 @@ def _qa_provider(tmp_path):
     return provider, originals
 
 
-def test_actual_trusted_chain_fresh_and_repeat_uses_pinned_typed_ids(tmp_path, monkeypatch):
+def test_actual_trusted_chain_fresh_and_repeat_uses_pinned_typed_ids(
+    tmp_path, monkeypatch
+):
     """Run real R1-F -> R3-A/B -> R3-C/D -> DC4-A3 publication on SQLite twice."""
     provider, originals = _qa_provider(tmp_path)
     config = DatabaseConfig(path=tmp_path / "real-seed-path.sqlite")
@@ -178,7 +197,9 @@ def test_actual_trusted_chain_fresh_and_repeat_uses_pinned_typed_ids(tmp_path, m
         assert len(actual) == len(originals) == 51
         for recipe in actual:
             versions = catalogue.list_versions(recipe.id)
-            assert len(versions) == (2 if recipe.canonical_code in dc4.CORRECTION_CODES else 1)
+            assert len(versions) == (
+                2 if recipe.canonical_code in dc4.CORRECTION_CODES else 1
+            )
             for version in versions:
                 detail = catalogue.get_version_detail(version.id)
                 assert version.version_number in (1, 2)
@@ -196,16 +217,17 @@ def test_actual_trusted_chain_fresh_and_repeat_uses_pinned_typed_ids(tmp_path, m
     def fake_corrected_readback(repository, *args, **kwargs):
         rows = original_query(repository, *args, **kwargs)
         return [
-            replace(
-                row, steps=(replace(row.steps[0], id=uuid4()), *row.steps[1:])
-            ) if row.version.version_number == 2 else row
+            replace(row, steps=(replace(row.steps[0], id=uuid4()), *row.steps[1:]))
+            if row.version.version_number == 2
+            else row
             for row in rows
         ]
 
     # Check rejection of a content-identical foreign v2 Step ID without
     # bypassing the database's immutable Step triggers.
     monkeypatch.setattr(
-        SqlAlchemyRecipeVersionRepository, "list_by_provenance",
+        SqlAlchemyRecipeVersionRepository,
+        "list_by_provenance",
         fake_corrected_readback,
     )
     with pytest.raises(FixtureIdentityError, match="UUID/position drift"):
