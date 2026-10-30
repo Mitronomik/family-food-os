@@ -211,13 +211,32 @@ def test_seed_field_unknown_or_missing_does_not_match(tmp_path):
     path, rawsha, inventory, _, _, _, payload = bundle
     payload["publications"][0]["seed_projection"].pop("source_version")
     path.write_bytes(json.dumps(payload).encode())
-    provider = load_pinned_publication_manifest(
-        path, expected_sha256=sha256(path.read_bytes()).hexdigest(),
-        expected_source_commit="1" * 40,
-        expected_stage_membership=inventory,
-    )
-    with pytest.raises(FixtureIdentityError, match="frozen publication"):
+    with pytest.raises(FixtureIdentityError, match="trusted-seed fields"):
+        load_pinned_publication_manifest(
+            path, expected_sha256=sha256(path.read_bytes()).hexdigest(),
+            expected_source_commit="1" * 40,
+            expected_stage_membership=inventory,
+        )
+
+
+def test_loaded_provider_invalidates_late_manifest_mutation(tmp_path):
+    bundle = make_manifest(tmp_path)
+    provider = load(bundle)
+    path = bundle[0]
+    path.write_bytes(path.read_bytes() + b" ")
+    with pytest.raises(FixtureIdentityError, match="changed"):
         provider.recipe_version_key_for(
             canonical_code="SYNTHETIC", seed=seed(),
             version_number=1, predecessor_id=None,
+        )
+
+
+def test_publication_provider_requires_external_loader(tmp_path):
+    from app.services.pr10_ff_manifest_loader import PublicationManifestIds
+    bundle = make_manifest(tmp_path)
+    _, _, _, _, _, _, payload = bundle
+    with pytest.raises(FixtureIdentityError, match="requires pinned"):
+        PublicationManifestIds(
+            approved=[("RECIPE_VERSION", key_v1())],
+            records=payload["publications"],
         )
