@@ -633,7 +633,9 @@ class FoodRecipeCatalogueService:
             "RECIPE", {"canonical_code": recipe.canonical_code}
         )
         if recipe.id != expected:
-            raise FixtureIdentityError("persisted Recipe UUID differs from fixture manifest")
+            raise FixtureIdentityError(
+                "persisted Recipe UUID differs from fixture manifest"
+            )
 
     def _assert_fixture_predecessor(
         self,
