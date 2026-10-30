@@ -1,3 +1,19 @@
+# CURRENT — PR #266 reviewer P1/P2 semantic-input corrections verified — 2026-10-30
+
+**Accepted base:** `main@0d390bdf0d620f711916287cf0d656aa9c8a6844`, [PR #265 merged](https://github.com/Mitronomik/family-food-os/pull/265). [PR #266](https://github.com/Mitronomik/family-food-os/pull/266) is still Draft pending independent review. Owner's P1/P2 feedback addressed within branch: exact PlannerConfig/calendar/reference kcal and **fresh SQLite/RecipeNutritionV2 candidate + admission projections** verified against caller-pinned proposed A/B, actual Git blob SHA pins for 30 critical source/Planner/nutrition modules, and 17 positive/adversarial QA scenarios with re-hashed input mutation. [Focused run #41068645092](https://github.com/Mitronomik/family-food-os/actions/runs/41068645092) on runtime `20de7b412b06`: **17 tests PASS, Ruff lint/format PASS; two input-only Python/SQLite runs byte-identical**. [Review response](../docs/family-food/pr10-ff-forward-input-materialization-evidence-2026-10-30.md) appended.
+
+**Next only:** exact-docs/final-head CI and independent Architecture/Data/QA re-review; only after explicit owner decision accept externally checked A/B raw SHA with durable raw artifact. No real Planner generated week or positive fixture authority. `NO_GO_INPUT_MANIFEST_UNVERIFIED`, `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`, `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`.
+
+---
+
+# CURRENT — PR #266 pre-generation A/B materialization complete; independent external pin review next — 2026-10-30
+
+**Accepted main:** `0d390bdf0d620f711916287cf0d656aa9c8a6844` after [#265 merged](https://github.com/Mitronomik/family-food-os/pull/265). [PR #266](https://github.com/Mitronomik/family-food-os/pull/266) is a test-only source/input materializer. [CI 41062669466](https://github.com/Mitronomik/family-food-os/actions/runs/41062669466) at runtime `2f3e61fb`: two independent Python+SQLite pre-run processes produce byte-identical proposed A (51-v1/7-v2 source) and B (3 members/42 opportunities/51 real candidates) JSON, 2 tests/Ruff check+format PASS, **no Planner week generation**. [Source/input evidence report](../docs/family-food/pr10-ff-forward-input-materialization-evidence-2026-10-30.md) links raw artifact and observed SHA A `d160b995...` / B `9a9260a4...`; these are **NOT independently approved pins**.
+
+**Next ONLY:** exact-head docs/CI, independent Architecture/Data/QA source-rights, energy/admission, UUID-order and A/B raw SHA review; durably freeze exact reviewed A/B in separately authorized owner decision. Do **NOT** run Planner/generate a week until A/B accepted. `NO_GO_INPUT_MANIFEST_UNVERIFIED`, `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`, `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`.
+
+---
+
 # CURRENT — PR10-FF forward input freeze review after merged #263 — 2026-10-30
 
 **Accepted main:** `b734656562bca29cfb877e4e2827ff0adb81598f` — [PR #263 merged](https://github.com/Mitronomik/family-food-os/pull/263), typed test-only Recipe identity seam accepted. Owner said to continue; this new bounded docs-only [forward input freeze review packet](../docs/family-food/pr10-ff-forward-input-freeze-review-packet-2026-10-30.md) prepares a **proposed** `PR10_FF_INPUT_MANIFEST_V1` review, NOT a frozen approved input or runtime authorization. Grounded proposed new week `2026-11-02` Europe/Moscow; synthetic member profiles, roles, shares, exclusions, PlannerConfig and code/source hashes documented with explicit OPEN input/energy/candidate/rights/Household identity verification. **Next ONLY:** independent review/owner choice on proposed input parameters; then separately authorized test-only A/B input materialization and external pin; only after accepted A/B can a separate two-process Planner proof run.
