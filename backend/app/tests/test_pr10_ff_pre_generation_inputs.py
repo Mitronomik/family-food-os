@@ -155,7 +155,8 @@ def test_semantic_mutation_is_rejected_even_with_matching_new_sha(
     # for adversarial comparisons. The production validator still calls the
     # real independent read; only repeated negative tests reuse that witness.
     monkeypatch.setattr(
-        inputs, "_independent_candidate_truth",
+        inputs,
+        "_independent_candidate_truth",
         lambda _provider: deepcopy(source_truth),
     )
     b = deepcopy(accepted)
