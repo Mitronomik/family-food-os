@@ -197,8 +197,11 @@ def build_source_proposal() -> tuple[dict, dict[int, dict]]:
 
     profiles = {ordinal: _member_profile(ordinal) for ordinal in (1, 2, 3)}
     keys = [
-        json.loads(item)
-        for item in sorted(_expected_recipe_allowlist(records))
+        {"kind": obj["kind"], "key": obj["key"]}
+        for obj in (
+            json.loads(item)
+            for item in sorted(_expected_recipe_allowlist(records))
+        )
     ]
     keys.append({"kind": "HOUSEHOLD", "key": {"household_key": HOUSEHOLD_KEY}})
     for ordinal, profile in profiles.items():
@@ -283,8 +286,6 @@ def materialize_pre_generation(
         engine = create_sqlite_engine(db)
         try:
             planner, meal_plans, _, recipes, recipe_nutrition = _services(engine)
-            food = planner._nutrition  # read-only cross-context projection below
-            del food
             from app.persistence.sqlalchemy_core.food_ingredient_composition import (
                 create_food_catalogue_service,
             )
@@ -477,7 +478,7 @@ def materialize_pre_generation(
                     "food_uuid_to_code": [
                         {"id": str(item.id), "code": item.canonical_code}
                         for item in sorted(
-                            food_catalogue.list_active(limit=500),
+                            food_catalogue.list_active(limit=200),
                             key=lambda item: item.canonical_code,
                         )
                     ],
