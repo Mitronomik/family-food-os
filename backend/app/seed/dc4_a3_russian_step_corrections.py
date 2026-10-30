@@ -12,6 +12,8 @@ from pathlib import Path
 from typing import Any
 from uuid import UUID
 
+from app.services.pr10_ff_typed_ids import FixtureTypedIdProvider
+
 from app.db.config import REPOSITORY_ROOT, DatabaseConfig
 from app.domain.planner import PlannerConfig
 from app.domain.recipe_nutrition_v2 import RecipeNutritionAuthorityKind
@@ -323,15 +325,21 @@ def _publish_one(
 
 def seed_dc4_a3_russian_step_corrections(
     config: DatabaseConfig | None = None,
+    *,
+    id_provider: FixtureTypedIdProvider | None = None,
 ) -> A3CorrectionResult:
     artifact = _load_corrections()
-    seed_r3d_final_dc3_batch(config)
+    seed_r3d_final_dc3_batch(
+        config, **({"id_provider": id_provider} if id_provider is not None else {})
+    )
     specs_payload = _r3a_payload()
     corrections = {row["canonical_code"]: row for row in artifact["recipes"]}
 
     engine = create_sqlite_engine(config)
     try:
-        catalogue = create_food_recipe_catalogue_service(engine)
+        catalogue = create_food_recipe_catalogue_service(
+            engine, **({"id_provider": id_provider} if id_provider is not None else {})
+        )
         nutrition = create_recipe_nutrition_v2_service(engine)
         results = []
         for code in CORRECTION_CODES:
