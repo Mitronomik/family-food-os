@@ -104,6 +104,7 @@ def witness(output: Path) -> dict:
         create_food_catalogue_service,
     )
     from app.services.planner import AuthoritativeGenerationRequest
+
     from scripts.audit_dc4_corpus_readiness_rerun import (
         GATE1_ROLE_SHAPES,
         _accept_custom_pattern,
