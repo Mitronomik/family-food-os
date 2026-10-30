@@ -30,7 +30,10 @@ from app.seed.r3a_school2022_main_batch import (
     publish_r3a_school2022_main_batch,
 )
 from app.seed.r3d_final_dc3_batch import seed_r3d_final_dc3_batch
-from app.services.food_recipes import FoodRecipeCatalogueService, RecipeCatalogueConflictError
+from app.services.food_recipes import (
+    FoodRecipeCatalogueService,
+    RecipeCatalogueConflictError,
+)
 from app.services.recipe_nutrition_v2 import PreparedPublicationDisposition
 from sqlalchemy import event
 
