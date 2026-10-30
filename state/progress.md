@@ -1,3 +1,10 @@
+# 2026-10-30 — PR #264 P2 manifest loader follow-up recorded
+
+- Independent review P2 acknowledged as **non-blocking for docs-only #264**, but a **mandatory #263 implementation acceptance**. Added [§3.1 loader/completeness requirement](../docs/family-food/pr10-ff-publication-key-binding-amendment-2026-10-30.md): externally pinned test-only manifest; allowlist + complete trusted-seed/publication/lineage evidence; immutable snapshot, closed 12/22/7 coverage and negative tests. Current `ManifestPinnedFixtureIds(approved)` alone is insufficient for `recipe_version_key_for`.
+- No production/provider/seed/runtime change and no authority for #263 resumption or Planner fixture proof. Independent #264 review + owner merge decision still required.
+
+---
+
 # 2026-10-30 — PR10-FF publication-key bridge amendment prepared for review
 
 - After merged [#262](https://github.com/Mitronomik/family-food-os/pull/262) and blocked draft [#263](https://github.com/Mitronomik/family-food-os/pull/263), owner authorized **only docs-only amendment drafting**.
