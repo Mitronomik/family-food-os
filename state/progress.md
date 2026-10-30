@@ -1,3 +1,11 @@
+# 2026-10-30 — PR10-FF-ID-CONTRACT owner review gate, no runtime changes
+
+- Verified [PR #260 merged](https://github.com/Mitronomik/family-food-os/pull/260) to `main@c631daa523531474a2e1e4a809fb56e81c37e468`; forward preflight remains `NO_GO_FORWARD_FIXTURE_IMPLEMENTATION_WITH_CURRENT_UNSTABILIZED_SEED`. Historic PR #196 baseline and #246/#254 negative proofs unchanged.
+- [Issue #261](https://github.com/Mitronomik/family-food-os/issues/261) and [docs-only typed test identity contract](../docs/family-food/pr10-ff-typed-test-identity-implementation-contract-2026-10-30.md): 12 trusted seed stages/22 composer sites, RecipeVersion/member ordering, source/provenance and version history, and required domain UUID **v4** validation. Proposed key-based deterministic **test-only v4-shaped** IDs explicitly require separate owner approval for any added optional production-facing API signatures. Normal `uuid4` default preserved as mandatory future verification, not claimed today.
+- Future two separate fresh DB/real Planner full 21/42 semantic equality, two independent `APPROVED_IMMEDIATE` steps, D3/Gate2 and `SAFE_BATCH_READY`/`PORTION_RELEASE_READY` remain unproven. Scope limited to docs/state proposal and independent review, no code or merge permission.
+
+---
+
 # 2026-10-30 — forward fixture implementation preflight, no runtime
 
 - Verified [PR #258 merged](https://github.com/Mitronomik/family-food-os/pull/258) into `main@b73f060196aa2bb042f94395888390e0c338b979`; the accepted forward contract retains historic PR #196 and #246/#254 evidence while changing only the technical fixture comparator and D2 `B<A` proposal entry.
