@@ -13,7 +13,7 @@ import subprocess
 import sys
 import tempfile
 from datetime import date, timedelta
-from decimal import Decimal, InvalidOperation
+from decimal import Decimal
 from pathlib import Path
 
 from scripts import pr10_ff_pre_generation_inputs as inputs
@@ -105,7 +105,10 @@ def witness(output: Path) -> dict:
     )
     from app.services.planner import AuthoritativeGenerationRequest
     from scripts.audit_dc4_corpus_readiness_rerun import (
-        GATE1_ROLE_SHAPES, _accept_custom_pattern, _fixture_exclusions, _services,
+        GATE1_ROLE_SHAPES,
+        _accept_custom_pattern,
+        _fixture_exclusions,
+        _services,
     )
 
     pin, source_a, planner_b = checked_inputs()
