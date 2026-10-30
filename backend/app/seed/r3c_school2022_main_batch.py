@@ -697,12 +697,14 @@ def seed_r3c_school2022_main_batch(
     id_provider: FixtureTypedIdProvider | None = None,
 ) -> R3CMainBatchResult:
     publication = publish_r3c_school2022_main_batch(
-        config, package=package,
-        **({"id_provider": id_provider} if id_provider is not None else {})
+        config,
+        package=package,
+        **({"id_provider": id_provider} if id_provider is not None else {}),
     )
     activation_changed = activate_r3c_school2022_main_batch(
-        config, package=package,
-        **({"id_provider": id_provider} if id_provider is not None else {})
+        config,
+        package=package,
+        **({"id_provider": id_provider} if id_provider is not None else {}),
     )
 
     engine = create_sqlite_engine(config)
