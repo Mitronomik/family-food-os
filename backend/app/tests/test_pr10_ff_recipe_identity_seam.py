@@ -1,7 +1,6 @@
 """Opt-in Recipe persistence seam on disposable SQLite, not PR10 real week proof."""
 
 import hashlib
-import sqlite3
 import json
 from dataclasses import replace
 from uuid import uuid4
@@ -9,6 +8,9 @@ from uuid import uuid4
 import pytest
 from app.db.config import DatabaseConfig
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
+from app.persistence.sqlalchemy_core.food_recipe_repositories import (
+    SqlAlchemyRecipeVersionRepository,
+)
 from app.persistence.sqlalchemy_core.food_recipe_composition import (
     create_food_recipe_catalogue_service,
 )
@@ -257,7 +259,7 @@ def test_conflicting_explicit_id_factory_is_rejected(tmp_path):
         engine.dispose()
 
 
-def test_exact_replay_rejects_persisted_foreign_step_uuid(tmp_path):
+def test_exact_replay_rejects_persisted_foreign_step_uuid(tmp_path, monkeypatch):
     """Identical Step text with a different persisted PK is NOT fixture replay."""
     original = _original()
     provider, _ = _provider(tmp_path, original)
@@ -267,18 +269,23 @@ def test_exact_replay_rejects_persisted_foreign_step_uuid(tmp_path):
     try:
         catalogue = create_food_recipe_catalogue_service(engine, id_provider=provider)
         detail = catalogue.create_trusted(original)
-        with sqlite3.connect(config.path) as db:
-            original_pk = db.execute(
-                "SELECT id FROM food_recipe_steps WHERE recipe_version_id = ? "
-                "ORDER BY position LIMIT 1",
-                (str(detail.version.id),),
-            ).fetchone()
-            assert original_pk is not None
-            db.execute(
-                "UPDATE food_recipe_steps SET id = ? WHERE id = ?",
-                (str(uuid4()), original_pk[0]),
-            )
-            db.commit()
+        old_query = SqlAlchemyRecipeVersionRepository.list_by_provenance
+
+        def fake_readback(repository, *args, **kwargs):
+            results = old_query(repository, *args, **kwargs)
+            return [
+                replace(
+                    row,
+                    steps=(replace(row.steps[0], id=uuid4()), *row.steps[1:]),
+                )
+                for row in results
+            ]
+
+        # The immutable SQLite schema rightly rejects direct Step PK updates.
+        # Inject an adversarial readback instead; the real DB remains untouched.
+        monkeypatch.setattr(
+            SqlAlchemyRecipeVersionRepository, "list_by_provenance", fake_readback
+        )
         with pytest.raises(FixtureIdentityError, match="UUID/position drift"):
             catalogue.preflight_trusted_seed(original)
         with pytest.raises(FixtureIdentityError, match="UUID/position drift"):
@@ -288,7 +295,7 @@ def test_exact_replay_rejects_persisted_foreign_step_uuid(tmp_path):
         engine.dispose()
 
 
-def test_full_persisted_predecessor_projection_rejects_metadata_drift(tmp_path):
+def test_full_persisted_predecessor_projection_rejects_metadata_drift(tmp_path, monkeypatch):
     """A source-identical v1 with different metadata cannot authorize v2 append."""
     original = _original()
     corrected = replace(
@@ -303,12 +310,22 @@ def test_full_persisted_predecessor_projection_rejects_metadata_drift(tmp_path):
     try:
         catalogue = create_food_recipe_catalogue_service(engine, id_provider=provider)
         detail = catalogue.create_trusted(original)
-        with sqlite3.connect(config.path) as db:
-            db.execute(
-                "UPDATE food_recipe_versions SET source_output_text = ? WHERE id = ?",
-                ("Tampered source-output metadata", str(detail.version.id)),
+        original_detail = SqlAlchemyRecipeVersionRepository.get_detail
+
+        def fake_predecessor(repository, version_id):
+            value = original_detail(repository, version_id)
+            if value is None or value.version.version_number != 1:
+                return value
+            return replace(
+                value,
+                version=replace(
+                    value.version, source_output_text="Unapproved metadata mutation"
+                ),
             )
-            db.commit()
+
+        monkeypatch.setattr(
+            SqlAlchemyRecipeVersionRepository, "get_detail", fake_predecessor
+        )
         with pytest.raises(FixtureIdentityError, match="frozen publication|projection"):
             catalogue.append_trusted_version(detail.recipe.id, corrected)
         assert len(catalogue.list_versions(detail.recipe.id)) == 1
