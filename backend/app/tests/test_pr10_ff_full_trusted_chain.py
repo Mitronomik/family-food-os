@@ -7,6 +7,10 @@ not the separately owner-approved current Planner input fixture.
 
 import hashlib
 import json
+import sqlite3
+from uuid import uuid4
+
+import pytest
 
 from app.db.config import DatabaseConfig
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
@@ -34,7 +38,12 @@ from app.services.pr10_ff_manifest_loader import (
     process_steps_sha256,
     project_trusted_version_seed,
 )
-from app.services.pr10_ff_typed_ids import FIXTURE_ID, NAMESPACE, POLICY
+from app.services.pr10_ff_typed_ids import (
+    FIXTURE_ID,
+    NAMESPACE,
+    POLICY,
+    FixtureIdentityError,
+)
 
 
 def _trusted_source_inventory():
@@ -182,3 +191,18 @@ def test_actual_trusted_chain_fresh_and_repeat_uses_pinned_typed_ids(tmp_path):
     assert len(second.recipes) == 7
     assert all(row.disposition == "EXACT_REPLAY" for row in second.recipes)
     assert len(provider.ledger) > 58
+    # A persisted v2 Step can preserve its Russian instruction while its UUID
+    # is swapped. This is NOT an accepted DC4-A3 exact replay.
+    with sqlite3.connect(config.path) as db:
+        row = db.execute(
+            "SELECT id FROM food_recipe_steps WHERE recipe_version_id IN "
+            "(SELECT id FROM food_recipe_versions WHERE version_number=2) LIMIT 1"
+        ).fetchone()
+        assert row is not None
+        db.execute(
+            "UPDATE food_recipe_steps SET id = ? WHERE id = ?",
+            (str(uuid4()), row[0]),
+        )
+        db.commit()
+    with pytest.raises(FixtureIdentityError, match="UUID/position drift"):
+        dc4.seed_dc4_a3_russian_step_corrections(config, id_provider=provider)
