@@ -122,13 +122,17 @@ def _fixture_ingredient_key(
     position: int,
 ) -> dict[str, object]:
     def digest(value: str | None) -> str | None:
-        return None if value is None else hashlib.sha256(value.encode("utf-8")).hexdigest()
+        return (
+            None if value is None else hashlib.sha256(value.encode("utf-8")).hexdigest()
+        )
 
     return {
         "recipe_version_key": version_key,
         "position": position,
         "food_ingredient_code": seed.food_ingredient_code,
-        "quantity": "0" if seed.quantity.is_zero() else format(seed.quantity.normalize(), "f"),
+        "quantity": "0"
+        if seed.quantity.is_zero()
+        else format(seed.quantity.normalize(), "f"),
         "unit": UnitCode(seed.unit).value,
         "source_amount_text_sha256": digest(seed.source_amount_text),
         "normalization_note_sha256": digest(seed.normalization_note),
@@ -159,15 +163,17 @@ def _fixture_persisted_seed(
         resolved = scope.food_ingredients.get(row.food_ingredient_id)
         if resolved is None:
             raise FixtureIdentityError("persisted predecessor ingredient missing")
-        ingredients.append(TrustedRecipeIngredientSeed(
-            food_ingredient_code=resolved.canonical_code,
-            quantity=row.quantity,
-            unit=row.unit,
-            source_amount_text=row.source_amount_text,
-            normalization_note=row.normalization_note,
-            prep_note=row.prep_note,
-            optional=row.optional,
-        ))
+        ingredients.append(
+            TrustedRecipeIngredientSeed(
+                food_ingredient_code=resolved.canonical_code,
+                quantity=row.quantity,
+                unit=row.unit,
+                source_amount_text=row.source_amount_text,
+                normalization_note=row.normalization_note,
+                prep_note=row.prep_note,
+                optional=row.optional,
+            )
+        )
     return TrustedRecipeVersionSeed(
         base_servings=version.base_servings,
         meal_type_code=version.meal_type_code,
@@ -653,9 +659,13 @@ class FoodRecipeCatalogueService:
         ):
             raise FixtureIdentityError("persisted predecessor full projection/ID drift")
         if project_trusted_version_seed(
-            replace(actual_seed, steps=successor.steps, change_note=successor.change_note)
+            replace(
+                actual_seed, steps=successor.steps, change_note=successor.change_note
+            )
         ) != project_trusted_version_seed(successor):
-            raise FixtureIdentityError("correction changed non-Step trusted version data")
+            raise FixtureIdentityError(
+                "correction changed non-Step trusted version data"
+            )
 
     def _assert_fixture_replay(
         self,
@@ -673,16 +683,20 @@ class FoodRecipeCatalogueService:
             version_number=version.version_number,
             predecessor_id=version.created_from_version_id,
         )
-        if (
-            detail.recipe.id
-            != self._id_provider.id_for("RECIPE", {"canonical_code": seed.canonical_code})
-            or version.id != self._id_provider.id_for("RECIPE_VERSION", key)
-        ):
-            raise FixtureIdentityError("persisted Recipe/Version UUID differs from manifest")
+        if detail.recipe.id != self._id_provider.id_for(
+            "RECIPE", {"canonical_code": seed.canonical_code}
+        ) or version.id != self._id_provider.id_for("RECIPE_VERSION", key):
+            raise FixtureIdentityError(
+                "persisted Recipe/Version UUID differs from manifest"
+            )
         if version.created_from_version_id is not None:
             self._assert_fixture_predecessor(
-                scope, detail.recipe, seed.version, version.version_number,
-                version.created_from_version_id, key,
+                scope,
+                detail.recipe,
+                seed.version,
+                version.version_number,
+                version.created_from_version_id,
+                key,
             )
         if len(detail.ingredients) != len(seed.version.ingredients) or len(
             detail.steps
@@ -695,7 +709,9 @@ class FoodRecipeCatalogueService:
                 "RECIPE_INGREDIENT", _fixture_ingredient_key(key, ingredient, position)
             )
             if row.id != expected or row.position != position:
-                raise FixtureIdentityError("persisted RecipeIngredient UUID/position drift")
+                raise FixtureIdentityError(
+                    "persisted RecipeIngredient UUID/position drift"
+                )
         for position, (row, instruction) in enumerate(
             zip(detail.steps, seed.version.steps, strict=True), start=1
         ):
@@ -797,7 +813,9 @@ class FoodRecipeCatalogueService:
                         if version_key is None
                         else self._id_provider.id_for(
                             "RECIPE_INGREDIENT",
-                            _fixture_ingredient_key(version_key, ingredient_seed, position),
+                            _fixture_ingredient_key(
+                                version_key, ingredient_seed, position
+                            ),
                         )
                     ),
                     recipe_version_id=version_id,
