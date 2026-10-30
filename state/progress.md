@@ -1,3 +1,11 @@
+# 2026-10-30 — PR #266 follow-up P1/P2 semantic/authority review corrections
+
+- Against prior HEAD `5d7ed1ac`, corrected [PR #266](https://github.com/Mitronomik/family-food-os/pull/266) validator with full PlannerConfig/calendar, member reference-energy truth, all candidate ordered source/rights/nutrition/kcal rows and admissions via **independent fresh SQLite RecipeNutritionV2**; source A fully checked against source stages.
+- Added **actual Git blob SHA verification** for 30 accepted critical seed, Recipe, Planner, nutrition, target-energy, source/identity paths; `SOURCE_COMMIT` text alone cannot pass. Expanded fail-closed tests to **17**, including modified B + newly matching B SHA, source drift, reordering, hidden pantry/history, changing reference energy/roles/weights.
+- [Focused CI #41068645092](https://github.com/Mitronomik/family-food-os/actions/runs/41068645092), runtime HEAD `20de7b412b06`: **17 PASS, Ruff lint and format PASS**; two input-only CLI processes produce unchanged byte-identical raw A/B, [artifact #12984476386](https://github.com/Mitronomik/family-food-os/actions/runs/41068645092/artifacts/12984476386). Observed SHA A/B remain **not independently approved**. No Planner output or gate escalation.
+
+---
+
 # 2026-10-30 — PR #266 repeatable source/input A+B proposals, no Planner week
 
 - [PR #265](https://github.com/Mitronomik/family-food-os/pull/265) merged as `0d390bdf0d620f711916287cf0d656aa9c8a6844`. [PR #266](https://github.com/Mitronomik/family-food-os/pull/266) implements test-only 12-stage 51-v1/7-v2 A and full source-backed B with synthetic 3 members, 42 accepted role opportunities, 51 current eligible candidates, live reference-energy and nutrition/rights/Step truth, separately recorded ephemeral UUID witness.
