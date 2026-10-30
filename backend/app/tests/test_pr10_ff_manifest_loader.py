@@ -1,27 +1,30 @@
 """Pinned test-only publication manifest: exact projections, no DB reverse lookups."""
 
+import json
 from dataclasses import replace
 from decimal import Decimal
 from hashlib import sha1, sha256
-import json
 
 import pytest
-
 from app.services.food_recipes import TrustedRecipeVersionSeed
 from app.services.pr10_ff_manifest_loader import (
     SCHEMA_VERSION,
     load_pinned_publication_manifest,
-    project_trusted_version_seed,
     process_steps_sha256,
+    project_trusted_version_seed,
 )
 from app.services.pr10_ff_typed_ids import (
-    FIXTURE_ID, NAMESPACE, POLICY, FixtureIdentityError, derive_fixture_uuid,
+    FIXTURE_ID,
+    NAMESPACE,
+    POLICY,
+    FixtureIdentityError,
+    derive_fixture_uuid,
 )
 
 
 def seed(*, steps=("Original approved step.",)):
     return TrustedRecipeVersionSeed(
-        base_servings=Decimal("2"), meal_type_code="DINNER",
+        base_servings=Decimal(2), meal_type_code="DINNER",
         prep_time_minutes=5, cook_time_minutes=10, total_time_minutes=15,
         difficulty_code=None, batch_friendly=None, freezable=None,
         storage_days_fridge=None, storage_days_freezer=None,
@@ -29,7 +32,7 @@ def seed(*, steps=("Original approved step.",)):
         source_name="fixture_source", source_recipe_id="fixture_item",
         source_url="https://example.test/recipe", source_version="fixture_v1",
         source_retrieved_at=None, source_document_sha256="a" * 64,
-        source_original_servings=Decimal("2"),
+        source_original_servings=Decimal(2),
         rights_review_status="REVIEWED", rights_basis="Synthetic fixture test.",
         change_note="original source", ingredients=(),
         steps=tuple(steps), equipment_codes=(),
@@ -208,7 +211,7 @@ def test_correction_file_tamper_fails_before_provider(tmp_path):
 
 def test_seed_field_unknown_or_missing_does_not_match(tmp_path):
     bundle = make_manifest(tmp_path)
-    path, rawsha, inventory, _, _, _, payload = bundle
+    path, _, inventory, _, _, _, payload = bundle
     payload["publications"][0]["seed_projection"].pop("source_version")
     path.write_bytes(json.dumps(payload).encode())
     with pytest.raises(FixtureIdentityError, match="trusted-seed fields"):
