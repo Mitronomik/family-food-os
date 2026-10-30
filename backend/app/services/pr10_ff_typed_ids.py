@@ -39,6 +39,15 @@ class FixtureIdentityError(ValueError):
 class FixtureTypedIdProvider(Protocol):
     def id_for(self, kind: FixtureEntityKind, key: Mapping[str, object]) -> UUID: ...
 
+    def recipe_version_key_for(
+        self,
+        *,
+        canonical_code: str,
+        seed: object,
+        version_number: int,
+        predecessor_id: UUID | None,
+    ) -> Mapping[str, object]: ...
+
 
 def _object(value: object, fields: set[str], *, context: str) -> Mapping[str, object]:
     if (
