@@ -23,20 +23,18 @@ from app.persistence.sqlalchemy_core.household_uow import (
     SqlAlchemyHouseholdReadScope,
     SqlAlchemyHouseholdUnitOfWork,
 )
-from app.seed import (
-    dc4_a3_russian_step_corrections as dc4,
-    r1f_prepared_output as r1f,
-    r1h_school2022_main as r1h,
-    r2_breakfast_capacity as r2,
-    r2b_fish_main_diversity as r2b,
-    r2c_breakfast_grain_diversity as r2c,
-    r2e_cottage_casserole as r2e,
-    r2f_cheese_sandwich as r2f,
-    r3a_school2022_main_batch as r3a,
-    r3b_school2022_breakfast_batch as r3b,
-    r3c_school2022_main_batch as r3c,
-    r3d_final_dc3_batch as r3d,
-)
+from app.seed import dc4_a3_russian_step_corrections as dc4
+from app.seed import r1f_prepared_output as r1f
+from app.seed import r1h_school2022_main as r1h
+from app.seed import r2_breakfast_capacity as r2
+from app.seed import r2b_fish_main_diversity as r2b
+from app.seed import r2c_breakfast_grain_diversity as r2c
+from app.seed import r2e_cottage_casserole as r2e
+from app.seed import r2f_cheese_sandwich as r2f
+from app.seed import r3a_school2022_main_batch as r3a
+from app.seed import r3b_school2022_breakfast_batch as r3b
+from app.seed import r3c_school2022_main_batch as r3c
+from app.seed import r3d_final_dc3_batch as r3d
 from app.services.households import HouseholdService
 from app.services.pr10_ff_manifest_loader import (
     SCHEMA_VERSION,
@@ -285,7 +283,7 @@ def materialize_pre_generation(
         dc4.seed_dc4_a3_russian_step_corrections(db, id_provider=provider)
         engine = create_sqlite_engine(db)
         try:
-            planner, meal_plans, _, recipes, recipe_nutrition = _services(engine)
+            planner, meal_plans, _, recipes, _ = _services(engine)
             from app.persistence.sqlalchemy_core.food_ingredient_composition import (
                 create_food_catalogue_service,
             )
