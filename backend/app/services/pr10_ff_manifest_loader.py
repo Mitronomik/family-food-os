@@ -229,6 +229,62 @@ class PublicationManifestIds(ManifestPinnedFixtureIds, FixtureTypedIdProvider):
         return json.loads(frozen.decode("utf-8"))["key"]
 
 
+def _expected_recipe_allowlist(
+    records: Sequence[Mapping[str, object]],
+) -> set[bytes]:
+    """Every source-bound Recipe/Version/Ingredient/Step key must be reachable."""
+    expected: set[bytes] = set()
+
+    def add(kind: str, key: Mapping[str, object]) -> None:
+        encoded = canonical_envelope(kind, key)  # type: ignore[arg-type]
+        if encoded in expected and kind != "RECIPE":
+            raise FixtureIdentityError("duplicate generated publication identity")
+        expected.add(encoded)
+
+    def sha_text(value: str | None) -> str | None:
+        return None if value is None else hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+    for record in records:
+        code = record["canonical_code"]
+        key = record["version_key"]
+        projection = record["seed_projection"]
+        if not isinstance(code, str) or not isinstance(key, dict) or not isinstance(projection, dict):
+            raise FixtureIdentityError("invalid publication allowlist projection")
+        add("RECIPE", {"canonical_code": code})
+        add("RECIPE_VERSION", key)
+        ingredients = projection.get("ingredients")
+        steps = projection.get("steps")
+        if not isinstance(ingredients, list) or not isinstance(steps, list):
+            raise FixtureIdentityError("unreviewed ingredient/Step projection")
+        for position, item in enumerate(ingredients, start=1):
+            if not isinstance(item, dict) or set(item) != {
+                "food_ingredient_code", "quantity", "unit", "source_amount_text",
+                "normalization_note", "prep_note", "optional",
+            }:
+                raise FixtureIdentityError("incomplete/extra ingredient seed fields")
+            add("RECIPE_INGREDIENT", {
+                "recipe_version_key": key,
+                "position": position,
+                "food_ingredient_code": item["food_ingredient_code"],
+                "quantity": item["quantity"],
+                "unit": item["unit"],
+                "source_amount_text_sha256": sha_text(item["source_amount_text"]),
+                "normalization_note_sha256": sha_text(item["normalization_note"]),
+                "prep_note_sha256": sha_text(item["prep_note"]),
+                "optional": item["optional"],
+            })
+        for position, instruction in enumerate(steps, start=1):
+            if not isinstance(instruction, str):
+                raise FixtureIdentityError("non-string source Step")
+            add("RECIPE_STEP", {
+                "recipe_version_key": key,
+                "position": position,
+                "instruction_sha256": sha_text(instruction),
+                "stage_code": None,
+            })
+    return expected
+
+
 def load_pinned_publication_manifest(
     path: Path,
     *,
@@ -435,6 +491,14 @@ def load_pinned_publication_manifest(
         raise FixtureIdentityError("incomplete/extra publication coverage")
     if len(records) != len(expected_members):
         raise FixtureIdentityError("duplicate publication membership")
+    actual_recipe_keys = {
+        canonical_envelope(kind, key)  # type: ignore[arg-type]
+        for kind, key in approved
+        if kind in {"RECIPE", "RECIPE_VERSION", "RECIPE_INGREDIENT", "RECIPE_STEP"}
+    }
+    expected_recipe_keys = _expected_recipe_allowlist(records)
+    if actual_recipe_keys != expected_recipe_keys:
+        raise FixtureIdentityError("missing/extra/unreachable approved Recipe keys")
     provider = PublicationManifestIds(
         approved=approved, records=records, _loader_token=_LOADER_TOKEN
     )
