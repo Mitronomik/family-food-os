@@ -1,3 +1,27 @@
+# 2026-10-30 — PR #262 typed-key schema follow-up handoff
+
+**Current PR only:** [#262](https://github.com/Mitronomik/family-food-os/pull/262) remains docs/state-only. The [contract](../docs/family-food/pr10-ff-typed-test-identity-implementation-contract-2026-10-30.md) now includes exact six-kind JSON key schemas, explicit original-v1 / corrected-v2 predecessor construction, independently pinned process SHA and operation-scoped Household/Member identity binding. Original SHA256 v4-shaped golden vectors independently recomputed. **Next:** exact-head Docs CI and independent contract review, then explicit owner decision; do not implement/merge/advance runtime automatically. `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`.
+
+---
+
+# 2026-10-30 — PR #262 reviewer P1/P2 corrections handoff
+
+**Accepted main at review:** `c631daa523531474a2e1e4a809fb56e81c37e468`. [PR #262](https://github.com/Mitronomik/family-food-os/pull/262) remains docs-only on its original branch. [Contract](../docs/family-food/pr10-ff-typed-test-identity-implementation-contract-2026-10-30.md) now explicitly specifies domain-separated SHA256 v4-shaped test UUID bytes, canonical source-key fields and vectors (P1), 12 seed modules with per-function/caller signatures and all 22 catalogue composer locations/default leakage tests (P1), three identities and valid DC4-A3 correction v1→v2 / EXACT_REPLAY vs unauthorized same-version conflict (P2).
+
+**Not approved:** ID provider, production-facing optional signatures, tests executing Planner, new 21×42 week, D3 publisher or any executable Prep. Next independently re-review exact-head docs and obtain owner approval for architecture before *another* bounded implementation PR. Original PR #196, #246/#254 NO_GO and #256/#258/#260 remain unchanged. All Gate2, D3, safe-batch and portion gates still blocked.
+
+---
+
+# 2026-10-30 — PR10-FF-ID-CONTRACT docs-only typed identity architecture handoff
+
+**Accepted base:** `main@c631daa523531474a2e1e4a809fb56e81c37e468` after [PR #260 merged](https://github.com/Mitronomik/family-food-os/pull/260). Current [Issue #261](https://github.com/Mitronomik/family-food-os/issues/261) is one [proposed test-only ID implementation contract](../docs/family-food/pr10-ff-typed-test-identity-implementation-contract-2026-10-30.md). Read root `AGENTS.md`, [accepted #258 forward amendment](../docs/family-food/pr10-fixture-forward-contract-amendment-2026-10-29.md), [#260 preflight](../docs/family-food/pr10-fixture-forward-implementation-preflight-2026-10-30.md), [#256 ID audit](../docs/family-food/pr10-option-a-historical-input-parity-id-injection-decision-2026-10-29.md) and original [PR #196 archive](../docs/family-food/evidence/pr196-original-synthetic-fixture-receipt.json) before review.
+
+**FACT:** 12 trusted Recipe seed modules contain 22 literal normal catalogue composer call sites. `FoodRecipeCatalogueService.id_factory` is unkeyed and mints Recipe/Version/Ingredient/Step; Household/FoodIngredient/MealPlan have separate owners. Planner candidate/member tie-order depends on UUID. Domain UUID constraints **require version 4**; raw uuid5 cannot fit. Proposed typed deterministic v4-shaped IDs are **test-only, predictable tokens**, not production random UUID4, and remain an **unapproved implementation option** requiring explicit owner permission for any production-facing optional service/seed signature change.
+
+**Stop / next:** independently review proposal and doc CI, request owner selection. No code, schema, fixture generation, Planner tie-break/ranking or data source/rights edits; no automatic merge. Existing ordinary seed is not cross-process reproducible by accepted evidence; no new forward fixture PASS. Two currently active independent `APPROVED_IMMEDIATE` source-bound Prep actions, D3 revocation/rollback, Gate2 vertical chain, safe batch and complete portion release remain unproved.
+
+---
+
 # 2026-10-30 — PR10-FIXTURE-FORWARD post-#258 docs-only preflight handoff
 
 **Accepted base:** `main@b73f060196aa2bb042f94395888390e0c338b979` with merged #258 forward technical fixture amendment. Owner directed continuation into the separate **docs-only** [Issue #259](https://github.com/Mitronomik/family-food-os/issues/259). Read [current preflight](../docs/family-food/pr10-fixture-forward-implementation-preflight-2026-10-30.md), accepted [forward contract](../docs/family-food/pr10-fixture-forward-contract-amendment-2026-10-29.md), [#256 ID-seam audit](../docs/family-food/pr10-option-a-historical-input-parity-id-injection-decision-2026-10-29.md), [#254 real negative evidence](../docs/family-food/pr10-option-a-issue252-two-process-no-go-2026-10-29.md) and root `AGENTS.md` first.
