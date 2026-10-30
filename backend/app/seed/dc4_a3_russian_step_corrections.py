@@ -292,11 +292,14 @@ def _publish_one(
             )
         # The extra ID/replay assertion belongs only to explicit fixture mode.
         # Providerless DC4-A3 must keep its historical replay call path intact.
-        if getattr(catalogue, "_id_provider", None) is not None:
-            if catalogue.preflight_trusted_seed(successor_seed).value != "EXACT_REPLAY":
-                raise RecipeCatalogueConflictError(
-                    f"DC4-A3 successor is not exact replay: {old_seed.canonical_code}."
-                )
+        if (
+            getattr(catalogue, "_id_provider", None) is not None
+            and catalogue.preflight_trusted_seed(successor_seed).value
+            != "EXACT_REPLAY"
+        ):
+            raise RecipeCatalogueConflictError(
+                f"DC4-A3 successor is not exact replay: {old_seed.canonical_code}."
+            )
         _require_current_authority(nutrition, current.version.id, expected_energy)
         replay = nutrition.publish_prepared(successor_spec)
         if (
