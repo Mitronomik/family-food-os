@@ -11,7 +11,6 @@ from dataclasses import replace
 from uuid import uuid4
 
 import pytest
-
 from app.db.config import DatabaseConfig
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_recipe_composition import (
