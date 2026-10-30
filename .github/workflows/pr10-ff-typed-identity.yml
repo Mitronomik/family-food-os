@@ -1,0 +1,37 @@
+name: PR10-FF typed identity seam focused verification
+
+on:
+  pull_request:
+    paths:
+      - "backend/app/services/pr10_ff_*.py"
+      - "backend/app/services/food_recipes.py"
+      - "backend/app/persistence/sqlalchemy_core/food_recipe_composition.py"
+      - "backend/app/seed/**"
+      - "backend/app/tests/test_pr10_ff_*.py"
+      - ".github/workflows/pr10-ff-typed-identity.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  typed-identity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install backend tests and Ruff
+        run: |
+          python -m pip install -e "./backend[test]"
+          python -m pip install "ruff==0.16.8"
+      - name: Frozen UUID, manifest and Recipe SQL integration
+        env:
+          AI_ENABLED: "false"
+        run: |
+          python -m pytest -q             backend/app/tests/test_pr10_ff_typed_ids.py             backend/app/tests/test_pr10_ff_manifest_loader.py             backend/app/tests/test_pr10_ff_recipe_identity_seam.py             backend/app/tests/test_pr10_ff_seed_provider_coverage.py             --tb=short
+      - name: Lint and format scoped new code
+        run: |
+          python -m ruff check             backend/app/services/pr10_ff_typed_ids.py             backend/app/services/pr10_ff_manifest_loader.py             backend/app/services/food_recipes.py             backend/app/tests/test_pr10_ff_typed_ids.py             backend/app/tests/test_pr10_ff_manifest_loader.py             backend/app/tests/test_pr10_ff_recipe_identity_seam.py             backend/app/tests/test_pr10_ff_seed_provider_coverage.py
+          python -m ruff format --check             backend/app/services/pr10_ff_typed_ids.py             backend/app/services/pr10_ff_manifest_loader.py             backend/app/services/food_recipes.py             backend/app/tests/test_pr10_ff_typed_ids.py             backend/app/tests/test_pr10_ff_manifest_loader.py             backend/app/tests/test_pr10_ff_recipe_identity_seam.py             backend/app/tests/test_pr10_ff_seed_provider_coverage.py
