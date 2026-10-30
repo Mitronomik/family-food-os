@@ -1,3 +1,11 @@
+# 2026-10-30 — PR #264 P2 loader completeness handoff
+
+**Reviewer P2 (non-blocking for #264):** draft [#263](https://github.com/Mitronomik/family-food-os/pull/263) currently constructs `ManifestPinnedFixtureIds` from an approved typed-key allowlist only. This is insufficient for manifest-bound `recipe_version_key_for`. [#264 §3.1](../docs/family-food/pr10-ff-publication-key-binding-amendment-2026-10-30.md) requires #263 to specify and test a separate explicit test-only loader with pinned bytes, full trusted version-seed projection, approved correction evidence, semantic predecessor lineage, frozen immutable snapshot, full expected 12/22/7 coverage and fail-closed negative tests **without searching generated UUIDs**. The final test-only schema/loader signature is a #263 implementation review deliverable, not approved runtime work by this docs PR.
+
+**Next only:** independent #264 Architecture/Domain/QA review and owner decision; #263 stays draft, blocked. Preserve all PR10/Gate2, `APPROVED_IMMEDIATE=0`, fixture reproducibility, safe batch and portion release blocks.
+
+---
+
 # 2026-10-30 — PR10-FF publication-key resolver amendment: docs-only handoff
 
 **Base:** `main@b1d6f88d55485fd91f9e6f65a8fb535678f44ef1` (merged #262). User authorized a **new docs-only** publication-key bridge proposal while draft [#263](https://github.com/Mitronomik/family-food-os/pull/263) remains partial. [Contract amendment](../docs/family-food/pr10-ff-publication-key-binding-amendment-2026-10-30.md) selects one additional opt-in `FixtureTypedIdProvider.recipe_version_key_for(*, canonical_code, seed, version_number, predecessor_id)` method; no other production-facing signatures beyond accepted #262, no domain/DB/Planner changes. Full seed rights/Steps/provenance plus independently pinned DC4-A3 corrections Git blob and SHA256, v1 predecessor via live same-UoW reader and exact v2 replay/fail-closed are specified.
