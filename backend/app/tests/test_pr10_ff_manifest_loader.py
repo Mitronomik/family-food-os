@@ -322,3 +322,33 @@ def test_publication_provider_requires_external_loader(tmp_path):
             approved=[("RECIPE_VERSION", key_v1())],
             records=payload["publications"],
         )
+
+
+@pytest.mark.parametrize("mutation", ["extra_version", "missing_step", "extra_recipe"])
+def test_publication_allowlist_is_closed_and_rejects_unreachable_keys(
+    tmp_path, mutation
+):
+    bundle = make_manifest(tmp_path)
+    path, _, stages, _, _, _, payload = bundle
+    if mutation == "extra_version":
+        changed = dict(key_v1())
+        changed["source_record_key"] = {
+            **changed["source_record_key"], "source_recipe_id": "unapproved-extra"
+        }
+        payload["approved_ids"].append({"kind": "RECIPE_VERSION", "key": changed})
+    elif mutation == "missing_step":
+        payload["approved_ids"] = [
+            row for row in payload["approved_ids"] if row["kind"] != "RECIPE_STEP"
+        ]
+    else:
+        payload["approved_ids"].append({
+            "kind": "RECIPE", "key": {"canonical_code": "NOT_IN_PUBLISHED_CORPUS"}
+        })
+    path.write_text(json.dumps(payload, ensure_ascii=False))
+    with pytest.raises(FixtureIdentityError, match="missing/extra/unreachable"):
+        load_pinned_publication_manifest(
+            path,
+            expected_sha256=sha256(path.read_bytes()).hexdigest(),
+            expected_source_commit="1" * 40,
+            expected_stage_membership=stages,
+        )
