@@ -5,7 +5,6 @@ import subprocess
 import sys
 
 import pytest
-
 from app.services.pr10_ff_typed_ids import (
     FixtureIdentityError,
     ManifestPinnedFixtureIds,
