@@ -1,3 +1,11 @@
+# 2026-10-30 — PR10-FF implementation authorization; typed ID core partial
+
+- Confirmed [PR #262](https://github.com/Mitronomik/family-food-os/pull/262) merged as `b1d6f88d55485fd91f9e6f65a8fb535678f44ef1`; owner explicitly authorized the separate bounded **test-only** implementation (not a real Planner fixture).
+- Added opt-in typed fixture ID derivation, all six closed schemas, approved SHA256/v4-shaped vectors, manifest allowlist and collision/replay negatives. Local isolated unit suite: **15 passed**. No production default/seed/schema/Planner modification.
+- Found missing independently pinned DC4-A3 v2 correction-artifact SHA + predecessor semantic context in existing Recipe write path; see [blocker](../docs/family-food/pr10-ff-typed-id-seam-runtime-binding-gap-2026-10-30.md). Stopped before unapproved API expansion. No fixture success or gate promotion claimed.
+
+---
+
 # 2026-10-30 — PR #262 exact-HEAD contract key-schema clarification
 
 - Follow-up to owner P1/P2 review: independent SHA256→v4-shaped UUID conformance recalculation matched both pinned vectors. Tightened the same docs-only [typed ID contract](../docs/family-food/pr10-ff-typed-test-identity-implementation-contract-2026-10-30.md) to fix complete six-kind semantic key schemas, pre-frozen process evidence and operation-scoped Household/Member ID factories (not invocation-order counters). No code, schema or runtime tests changed. Review/owner decision and all PR10/Gate2 release blocks remain pending.
