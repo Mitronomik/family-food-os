@@ -1,6 +1,7 @@
 """Opt-in Recipe persistence seam on disposable SQLite, not PR10 real week proof."""
 
 import hashlib
+import sqlite3
 import json
 from dataclasses import replace
 from uuid import uuid4
@@ -252,5 +253,64 @@ def test_conflicting_explicit_id_factory_is_rejected(tmp_path):
                 id_factory=lambda: uuid4(),
                 id_provider=provider,
             )
+    finally:
+        engine.dispose()
+
+
+def test_exact_replay_rejects_persisted_foreign_step_uuid(tmp_path):
+    """Identical Step text with a different persisted PK is NOT fixture replay."""
+    original = _original()
+    provider, _ = _provider(tmp_path, original)
+    config = DatabaseConfig(path=tmp_path / "foreign-step-uuid.sqlite")
+    seed_food_ingredients(config)
+    engine = create_sqlite_engine(config)
+    try:
+        catalogue = create_food_recipe_catalogue_service(engine, id_provider=provider)
+        detail = catalogue.create_trusted(original)
+        with sqlite3.connect(config.path) as db:
+            original_pk = db.execute(
+                "SELECT id FROM food_recipe_steps WHERE recipe_version_id = ? "
+                "ORDER BY position LIMIT 1",
+                (str(detail.version.id),),
+            ).fetchone()
+            assert original_pk is not None
+            db.execute(
+                "UPDATE food_recipe_steps SET id = ? WHERE id = ?",
+                (str(uuid4()), original_pk[0]),
+            )
+            db.commit()
+        with pytest.raises(FixtureIdentityError, match="UUID/position drift"):
+            catalogue.preflight_trusted_seed(original)
+        with pytest.raises(FixtureIdentityError, match="UUID/position drift"):
+            catalogue.reconcile_seed([original])
+        assert len(catalogue.list_versions(detail.recipe.id)) == 1
+    finally:
+        engine.dispose()
+
+
+def test_full_persisted_predecessor_projection_rejects_metadata_drift(tmp_path):
+    """A source-identical v1 with different metadata cannot authorize v2 append."""
+    original = _original()
+    corrected = replace(
+        original.version,
+        change_note="Reviewed test-only step correction",
+        steps=(*original.version.steps[:-1], "Corrected trusted Step text."),
+    )
+    provider, _ = _provider(tmp_path, original, corrected=corrected)
+    config = DatabaseConfig(path=tmp_path / "tampered-predecessor.sqlite")
+    seed_food_ingredients(config)
+    engine = create_sqlite_engine(config)
+    try:
+        catalogue = create_food_recipe_catalogue_service(engine, id_provider=provider)
+        detail = catalogue.create_trusted(original)
+        with sqlite3.connect(config.path) as db:
+            db.execute(
+                "UPDATE food_recipe_versions SET source_output_text = ? WHERE id = ?",
+                ("Tampered source-output metadata", str(detail.version.id)),
+            )
+            db.commit()
+        with pytest.raises(FixtureIdentityError, match="frozen publication|projection"):
+            catalogue.append_trusted_version(detail.recipe.id, corrected)
+        assert len(catalogue.list_versions(detail.recipe.id)) == 1
     finally:
         engine.dispose()
