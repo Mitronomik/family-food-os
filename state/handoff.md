@@ -1,3 +1,11 @@
+# 2026-10-30 — PR #262 reviewer P1/P2 corrections handoff
+
+**Accepted main at review:** `c631daa523531474a2e1e4a809fb56e81c37e468`. [PR #262](https://github.com/Mitronomik/family-food-os/pull/262) remains docs-only on its original branch. [Contract](../docs/family-food/pr10-ff-typed-test-identity-implementation-contract-2026-10-30.md) now explicitly specifies domain-separated SHA256 v4-shaped test UUID bytes, canonical source-key fields and vectors (P1), 12 seed modules with per-function/caller signatures and all 22 catalogue composer locations/default leakage tests (P1), three identities and valid DC4-A3 correction v1→v2 / EXACT_REPLAY vs unauthorized same-version conflict (P2).
+
+**Not approved:** ID provider, production-facing optional signatures, tests executing Planner, new 21×42 week, D3 publisher or any executable Prep. Next independently re-review exact-head docs and obtain owner approval for architecture before *another* bounded implementation PR. Original PR #196, #246/#254 NO_GO and #256/#258/#260 remain unchanged. All Gate2, D3, safe-batch and portion gates still blocked.
+
+---
+
 # 2026-10-30 — PR10-FF-ID-CONTRACT docs-only typed identity architecture handoff
 
 **Accepted base:** `main@c631daa523531474a2e1e4a809fb56e81c37e468` after [PR #260 merged](https://github.com/Mitronomik/family-food-os/pull/260). Current [Issue #261](https://github.com/Mitronomik/family-food-os/issues/261) is one [proposed test-only ID implementation contract](../docs/family-food/pr10-ff-typed-test-identity-implementation-contract-2026-10-30.md). Read root `AGENTS.md`, [accepted #258 forward amendment](../docs/family-food/pr10-fixture-forward-contract-amendment-2026-10-29.md), [#260 preflight](../docs/family-food/pr10-fixture-forward-implementation-preflight-2026-10-30.md), [#256 ID audit](../docs/family-food/pr10-option-a-historical-input-parity-id-injection-decision-2026-10-29.md) and original [PR #196 archive](../docs/family-food/evidence/pr196-original-synthetic-fixture-receipt.json) before review.
