@@ -1,0 +1,137 @@
+name: PR10-FF one-time exact A/B byte persistence (temporary)
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - ".github/workflows/pr10-ff-freeze-once.yml"
+
+jobs:
+  generate-verify-readonly:
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.head.ref == 'docs/pr10-ff-approved-input-bytes-2026-10-30'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      AI_ENABLED: "false"
+    steps:
+      - name: Checkout trusted source generation code at exact reviewed HEAD
+        uses: actions/checkout@v4
+        with:
+          repository: Mitronomik/family-food-os
+          ref: 02cc171d697359644a5638e1ac3e935d3d9e9ae2
+          path: generator
+          persist-credentials: false
+      - name: Checkout independent owner-reviewed pin record
+        uses: actions/checkout@v4
+        with:
+          path: pinrepo
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install backend dependencies
+        run: python -m pip install -e "./generator/backend[test]"
+      - name: Create A/B without running Planner, at pinned source revision
+        run: |
+          cd generator
+          python -m scripts.pr10_ff_pre_generation_inputs --output-dir "${{ runner.temp }}/source-ab"
+      - name: Independently gate exact bytes, source record and stage inventory
+        env:
+          RAW_DIR: ${{ runner.temp }}/source-ab
+        run: |
+          python - <<'PY'
+          import hashlib, json, os, sys
+          from pathlib import Path
+          sys.path.insert(0, str(Path("generator").resolve()))
+          from scripts.pr10_ff_pre_generation_inputs import (
+              validate_externally_pinned_proposals,
+              canonical_bytes,
+          )
+          pin = json.loads(Path("pinrepo/docs/family-food/evidence/pr10-ff-forward-input-v1-pins.json").read_bytes())
+          folder = Path(os.environ["RAW_DIR"])
+          raw_a = (folder / "publication-A-PROPOSED.json").read_bytes()
+          raw_b = (folder / "planner-B-PROPOSED.json").read_bytes()
+          a = json.loads(raw_a)
+          assert hashlib.sha256(canonical_bytes(a["stages"])).hexdigest() == pin["stage_membership_sha256"]
+          for key, raw in (("publication_a", raw_a), ("planner_b", raw_b)):
+              record = pin["raw_artifacts"][key]
+              assert len(raw) == record["byte_count"]
+              assert hashlib.sha256(raw).hexdigest() == record["raw_sha256"]
+          result = validate_externally_pinned_proposals(
+              folder,
+              expected_a_sha256=pin["raw_artifacts"]["publication_a"]["raw_sha256"],
+              expected_b_sha256=pin["raw_artifacts"]["planner_b"]["raw_sha256"],
+              expected_source_commit=pin["source_commit"],
+              expected_stage_membership=a["stages"],
+          )
+          assert result["no_Planner_generation"] is True
+          print("exact reviewed A/B raw SHA and complete semantic preflight PASS")
+          PY
+      - name: Upload only verified bytes for separate privileged persistence job
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr10-ff-owner-pinned-input-bytes-temporary
+          path: |
+            ${{ runner.temp }}/source-ab/publication-A-PROPOSED.json
+            ${{ runner.temp }}/source-ab/planner-B-PROPOSED.json
+          retention-days: 1
+
+  persist-exact-bytes:
+    needs: generate-verify-readonly
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.head.ref == 'docs/pr10-ff-approved-input-bytes-2026-10-30'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout only the source-independent PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: docs/pr10-ff-approved-input-bytes-2026-10-30
+          path: frozen
+          persist-credentials: true
+      - name: Download reviewed candidate bytes (never execute contents)
+        uses: actions/download-artifact@v4
+        with:
+          name: pr10-ff-owner-pinned-input-bytes-temporary
+          path: raw
+      - name: Verify external pins and independently rehash before git staging
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          record = json.loads(Path("frozen/docs/family-food/evidence/pr10-ff-forward-input-v1-pins.json").read_bytes())
+          for name, filename in (
+              ("publication_a","publication-A-PROPOSED.json"),
+              ("planner_b","planner-B-PROPOSED.json")
+          ):
+              expected = record["raw_artifacts"][name]
+              raw = Path("raw",filename).read_bytes()
+              calculated = hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest()
+              assert len(raw) == expected["byte_count"], filename
+              assert hashlib.sha256(raw).hexdigest() == expected["raw_sha256"], filename
+              assert calculated == expected["git_blob_sha1"], filename
+              target = Path("frozen") / expected["repository_path"]
+              if target.exists():
+                  assert target.read_bytes() == raw, "existing frozen file drift"
+              else:
+                  target.parent.mkdir(parents=True,exist_ok=True)
+                  target.write_bytes(raw)
+          print("stored exact A/B bytes and Git object SHA pins verified")
+          PY
+      - name: Persist only the two exact raw JSON files into owner PR branch
+        run: |
+          cd frozen
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/family-food/evidence/pr10-ff-forward-input-v1/publication-A-PROPOSED.json docs/family-food/evidence/pr10-ff-forward-input-v1/planner-B-PROPOSED.json
+          if ! git diff --cached --quiet; then
+            git commit -m "data(pr10): persist exact owner-pinned A/B test-only input bytes"
+            git push origin HEAD:refs/heads/docs/pr10-ff-approved-input-bytes-2026-10-30
+          else
+            echo "Exact immutable A/B bytes already present; no new commit"
+          fi
