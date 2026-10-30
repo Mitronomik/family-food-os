@@ -1,0 +1,29 @@
+# PR10-FF — pre-generation A/B materialization evidence (2026-10-30)
+
+**Status: PROPOSED_INPUT_ONLY_NOT_INDEPENDENTLY_APPROVED / NO_GO_INPUT_MANIFEST_UNVERIFIED.** No genuine Planner week generated or approved. Review the prior [input freeze packet](pr10-ff-forward-input-freeze-review-packet-2026-10-30.md), [forward fixture contract](pr10-fixture-forward-contract-amendment-2026-10-29.md) and [approved ID seam](pr10-ff-test-only-manifest-implementation-2026-10-30.md).
+
+**Accepted code baseline:** `main@0d390bdf0d620f711916287cf0d656aa9c8a6844` ([PR #265 merged](https://github.com/Mitronomik/family-food-os/pull/265)). Materialization implemented separately in [PR #266](https://github.com/Mitronomik/family-food-os/pull/266).
+
+## FACT — byte-identical inputs from separate fresh SQLite/Python executions
+
+[GitHub Actions run #41062669466](https://github.com/Mitronomik/family-food-os/actions/runs/41062669466) at runtime HEAD `2f3e61fb2f5ccef53af08bb75e045e2c53de49eb` invokes [the input-only tool](../../scripts/pr10_ff_pre_generation_inputs.py) **twice** in separate Python processes, each with its own disposable SQLite database. It uses the accepted R1-F through R3-D source-checked seed chain plus the seven DC4-A3 correction rows, source-bound typed IDs and a new synthetic three-member Household with single-key-per-operation factories. It calls `PlannerService.compose_candidate_admission` and `compose_authoritative_request` **but not** `generate_week` or `PlannerService.generate_authoritative`; no MealPlan, MealEvent or Serving is produced.
+
+| Raw artifact | Observed CI SHA-256 — **not a reviewer pin** |
+| --- | --- |
+| `publication-A-PROPOSED.json`: full `PR10_FF_PUBLICATION_MANIFEST_V1`, 12 stages, 51 original v1 + seven DC4-A3 v2, complete source/rights/Step/ingredient projections, closed Recipe/Version/Step/Ingredient and scoped Household/Member keys | `d160b995b680d11cf9e04f3f97c0d01cd1c65ecd2518e685b8e3cfa783e0a885` |
+| `planner-B-PROPOSED.json`: `PR10_FF_INPUT_MANIFEST_V1`; one proposed 2026-11-02..08 Europe/Moscow week, three synthetic profiles, accepted 3/2/1 roles and exact Decimal shares/targets, member exclusions, 51 source-bound candidates with rights/Step/process/form/energy/admission, explicitly empty Pantry/history/fixed events | `9a9260a4a8d849fa4284ff64b861d8c2db74d15777b04ca5d3741d25f1f0089f` |
+| `run-bound-uuid-witness-NOT-PIN.json` | Run-local MealPatternSelection/FoodIngredient ID→source-code evidence, **not** assumed stable across runs |
+| `observed-digests-NOT-APPROVAL.json` | Self-observed facts; explicitly not an external acceptance certificate |
+
+Both A and B raw JSON files independently matched **byte-for-byte** via `cmp` between separate CLI processes. Raw evidence: [GitHub Actions artifact #12981151175](https://github.com/Mitronomik/family-food-os/actions/runs/41062669466/artifacts/12981151175), expires **2026-11-29**. The ZIP's own `sha256:7696b759903331d90eb85550b59cd7b2a7a2e9bf47aea60ab05c6a8c30b35f17` is **not** either raw JSON digest. Save separately accepted A/B raw bytes durably in the repository before expiration.
+
+**Focused QA:** `pytest backend/app/tests/test_pr10_ff_pre_generation_inputs.py`: 2 passed; Ruff lint and format successful. Test forces both Planner-generation functions to fail if called and verifies missing/wrong source pin, external SHA rejection, immutable output no-overwrite, unsupported Decimal, source/stage and member counts. `validate_externally_pinned_proposals` requires **caller-supplied** source commit, A+B raw SHA and complete stage membership; generating a hash inside this tool is not owner approval.
+
+## OPEN — required independent Architecture/Data/QA and owner review
+
+1. Independently inspect exact A raw bytes, every source/version/rights/ordered-Step/correction/lineage pin and closed six-kind allowlist against the accepted source revision. Sign and durably pin exact A raw SHA **outside** the generating tool.
+2. Independently inspect B raw bytes: source and code SHA, proposed calendar, all three complete member profiles, exact target-energy calculation/methodology, CUSTOM selection schedules/energy shares, exclusions, complete candidate ordering and score inputs, verified nutrition/ingredient form, Pantry/history/fixed absence. Sign and durably pin exact B raw SHA **outside** the generating tool.
+3. Review that separately captured run-local FoodIngredient/Selection UUIDs legitimately normalize to source/ordinal semantics and do not secretly change Planner choices. If proof of harmlessness requires new ID authorities or changes in production signatures, STOP for a separate contract.
+4. Only **after** independent raw A+B approvals, commission a distinct two-process **real** `PlannerService.generate_authoritative` → persisted 3-member / 7-local-day / 21-MealEvent / 42-exact-Decimal-Serving proof. No re-selection of input after observing generated events.
+
+**NO_GO_INPUT_MANIFEST_UNVERIFIED** stays in force until independent A+B approval. A green input-preparation CI is **not** `PR10_FF_FIXTURE_REPRODUCIBLE=PASS`. No D3, Prep, Gate2, safe-batch, portion or real-family release authority is created. `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`; `NO_GO_TO_PR10_CORE_RUNTIME`; `APPROVED_IMMEDIATE=0`; `SAFE_BATCH_READY=false`; `PORTION_RELEASE_READY=NOT_PROVEN`.
