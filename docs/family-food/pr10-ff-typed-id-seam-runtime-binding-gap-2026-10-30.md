@@ -1,5 +1,7 @@
 # PR10-FF typed test-only ID implementation — source-binding preflight
 
+> **2026-10-30 follow-up after merged #264:** The historical API-binding STOP described below was addressed **in code, not yet accepted as a verified Gate**: an explicit manifest loader with external raw SHA/source/coverage pins now provides the approved `recipe_version_key_for` without an extra production-facing write argument; the opt-in Recipe/seed pipeline is wired in draft [PR #263](https://github.com/Mitronomik/family-food-os/pull/263). This file preserves the original preflight rationale. Acceptance still requires exact-head QA, independent source/rights/lineage review and a separately approved *real* manifest and Planner proof. `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`; no PR10 core runtime or release gate is unlocked.
+
 **Status:** PARTIAL IMPLEMENTATION / BLOCKED ON ARCHITECTURE CONTRACT AMENDMENT — NOT REVIEW-READY FOR MERGE.
 **Accepted starting base:** `main@b1d6f88d55485fd91f9e6f65a8fb535678f44ef1` (merged PR #262).
 **Authorization:** owner explicitly authorized a separate bounded test-only identity seam implementation PR, **not** the later real two-process Planner fixture or PR10 Prep runtime.
