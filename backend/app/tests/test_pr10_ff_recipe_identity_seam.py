@@ -14,11 +14,11 @@ from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_recipe_composition import (
     create_food_recipe_catalogue_service,
 )
-from app.persistence.sqlalchemy_core.food_recipe_uow import (
-    SqlAlchemyRecipeCatalogueUnitOfWork,
-)
 from app.persistence.sqlalchemy_core.food_recipe_repositories import (
     SqlAlchemyRecipeVersionRepository,
+)
+from app.persistence.sqlalchemy_core.food_recipe_uow import (
+    SqlAlchemyRecipeCatalogueUnitOfWork,
 )
 from app.seed.food_ingredients import seed_food_ingredients
 from app.seed.food_recipes import load_seed_entries
