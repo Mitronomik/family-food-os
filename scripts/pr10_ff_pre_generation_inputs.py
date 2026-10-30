@@ -499,6 +499,160 @@ def materialize_pre_generation(
     return results
 
 
+def validate_externally_pinned_proposals(
+    output_dir: Path,
+    *,
+    expected_a_sha256: str,
+    expected_b_sha256: str,
+    expected_source_commit: str,
+    expected_stage_membership: dict[str, list[str]],
+) -> dict[str, object]:
+    """Only caller-supplied independent pins count. No internal self-approval.
+
+    Cross-check A/B against source-keyed typed UUIDs and full closed inventory.
+    Does not generate, read or choose any Planner week.
+    """
+    if expected_source_commit != SOURCE_COMMIT:
+        raise PreflightNoGo("unaccepted source revision")
+    raw_a = (output_dir / "publication-A-PROPOSED.json").read_bytes()
+    raw_b = (output_dir / "planner-B-PROPOSED.json").read_bytes()
+    if sha(raw_a) != expected_a_sha256 or sha(raw_b) != expected_b_sha256:
+        raise PreflightNoGo("external A/B raw SHA mismatch")
+    def reject_duplicates(items):
+        seen = {}
+        for key, value in items:
+            if key in seen:
+                raise PreflightNoGo("duplicate JSON input key")
+            seen[key] = value
+        return seen
+
+    def reject_float(_):
+        raise PreflightNoGo("floating-point input is prohibited")
+
+    a = json.loads(
+        raw_a.decode("utf-8"), object_pairs_hook=reject_duplicates,
+        parse_float=reject_float,
+    )
+    b = json.loads(
+        raw_b.decode("utf-8"), object_pairs_hook=reject_duplicates,
+        parse_float=reject_float,
+    )
+    if a["stages"] != expected_stage_membership:
+        raise PreflightNoGo("external stage membership mismatch")
+    if (
+        b.get("schema_version") != INPUT_SCHEMA
+        or b.get("publication_manifest_sha256") != expected_a_sha256
+        or b.get("source_commit") != expected_source_commit
+        or b.get("fixture_id") != FIXTURE_ID
+    ):
+        raise PreflightNoGo("B is not bound to externally accepted A and source")
+    provider = load_pinned_publication_manifest(
+        output_dir / "publication-A-PROPOSED.json",
+        expected_sha256=expected_a_sha256,
+        expected_source_commit=expected_source_commit,
+        expected_stage_membership=expected_stage_membership,
+        correction_path=dc4.CORRECTIONS_PATH,
+        expected_correction_sha256=CORRECTION_SHA256,
+        expected_correction_blob_sha1=CORRECTION_GIT_BLOB,
+    )
+    version_keys = {
+        (row["canonical_code"], row["version_number"]): row["version_key"]
+        for row in a["publications"]
+    }
+    current_codes = {
+        code for code, version in version_keys if version == 2
+    }
+    all_codes = {code for code, _ in version_keys}
+    if len(all_codes) != 51 or len(current_codes) != 7:
+        raise PreflightNoGo("expected 51 active and seven corrected versions")
+    if len(b["candidate_inputs"]) != 51:
+        raise PreflightNoGo("incomplete source candidate coverage")
+    if len({r["canonical_code"] for r in b["candidate_inputs"]}) != 51:
+        raise PreflightNoGo("duplicate candidate code")
+    if {r["canonical_code"] for r in b["candidate_inputs"]} != all_codes:
+        raise PreflightNoGo("source/candidate membership mismatch")
+    for row in b["candidate_inputs"]:
+        code = row["canonical_code"]
+        number = 2 if code in current_codes else 1
+        expected_key = version_keys[(code, number)]
+        expected_version_id = provider.id_for("RECIPE_VERSION", expected_key)
+        if row["recipe_version_id"] != str(expected_version_id):
+            raise PreflightNoGo("candidate UUID is not source-keyed")
+        if row["source_document_sha256"] != expected_key["source_record_key"][
+            "source_document_sha256"
+        ]:
+            raise PreflightNoGo("candidate source-document drift")
+        if row["process_sha256"] != expected_key["publication_process_sha256"]:
+            raise PreflightNoGo("candidate RecipeStep content drift")
+        if row["rights_review_status"] != "REVIEWED" or not row["rights_basis"]:
+            raise PreflightNoGo("unapproved candidate source rights")
+    if set(b["planner_config"]) != {
+        "version", "compatibility_version", "preference_weight",
+        "pantry_weight", "batch_weight", "time_weight", "repetition_weight",
+        "max_recipe_repetitions",
+    }:
+        raise PreflightNoGo("unreviewed planner config")
+    if b["planner_config"]["version"] != "planner-v0.5":
+        raise PreflightNoGo("planner version drift")
+    if b.get("timezone") != "Europe/Moscow":
+        raise PreflightNoGo("timezone drift")
+    if b.get("week_start") != WEEK_START.isoformat():
+        raise PreflightNoGo("week_start drift")
+    _check_input(b, actual_candidates=len(b["candidate_inputs"]))
+    if [m["ordinal"] for m in b["members"]] != [1, 2, 3]:
+        raise PreflightNoGo("member ordinal ordering drift")
+    for member in b["members"]:
+        ordinal = member["ordinal"]
+        expected_profile = _member_profile(ordinal)
+        if member["profile"] != expected_profile:
+            raise PreflightNoGo("synthetic profile drift")
+        profile_sha = sha(canonical_bytes(expected_profile))
+        if member["profile_sha256"] != profile_sha:
+            raise PreflightNoGo("member profile SHA drift")
+        expected_id = provider.id_for("HOUSEHOLD_MEMBER", {
+            "household_key": HOUSEHOLD_KEY,
+            "ordinal": ordinal,
+            "profile_sha256": profile_sha,
+        })
+        if member["member_id"] != str(expected_id):
+            raise PreflightNoGo("member persisted UUID binding drift")
+        expected_roles = GATE1_ROLE_SHAPES[2][ordinal - 1]
+        shares = {
+            MealRole.BREAKFAST: "0.3",
+            MealRole.LUNCH: "0.35",
+            MealRole.DINNER: "0.25",
+        }
+        expected_opps = [
+            {
+                "weekday": weekday,
+                "position": pos,
+                "role": role.value,
+                "energy_share": shares[role],
+            }
+            for weekday in range(1, 8)
+            for pos, role in enumerate(expected_roles, start=1)
+        ]
+        if member["opportunities"] != expected_opps:
+            raise PreflightNoGo("accepted member pattern/share drift")
+        if member["excluded_food_codes"] != (
+            ["BEEF_CATEGORY_1_RAW"] if ordinal == 3 else []
+        ):
+            raise PreflightNoGo("member exclusion drift")
+    if b.get("expected_structural") != {
+        "household_members": 3, "local_days": 7,
+        "genuine_cook_recipe_events": 21, "exact_decimal_servings": 42,
+    }:
+        raise PreflightNoGo("structural contract drift")
+    return {
+        "status": "VALIDATED_AGAINST_CALLER_PINS_NOT_OWNER_APPROVED",
+        "a_sha256": expected_a_sha256,
+        "b_sha256": expected_b_sha256,
+        "candidate_count": len(b["candidate_inputs"]),
+        "member_count": len(b["members"]),
+        "no_Planner_generation": True,
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-dir", required=True, type=Path)
