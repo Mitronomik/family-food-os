@@ -44,6 +44,12 @@ jobs:
         run: >-
           python -m scripts.pr10_ff_pre_generation_inputs
           --output-dir "${{ runner.temp }}/pr10-ff-proposed-inputs"
+      - name: Independently re-materialize without a Planner week and compare raw A/B
+        run: |
+          python -m scripts.pr10_ff_pre_generation_inputs --output-dir "${{ runner.temp }}/pr10-ff-independent-inputs"
+          cmp "${{ runner.temp }}/pr10-ff-proposed-inputs/publication-A-PROPOSED.json" "${{ runner.temp }}/pr10-ff-independent-inputs/publication-A-PROPOSED.json"
+          cmp "${{ runner.temp }}/pr10-ff-proposed-inputs/planner-B-PROPOSED.json" "${{ runner.temp }}/pr10-ff-independent-inputs/planner-B-PROPOSED.json"
+          sha256sum "${{ runner.temp }}/pr10-ff-proposed-inputs/publication-A-PROPOSED.json" "${{ runner.temp }}/pr10-ff-proposed-inputs/planner-B-PROPOSED.json"
       - name: Upload raw proposals for independent reviewer
         uses: actions/upload-artifact@v4
         with:
