@@ -245,6 +245,7 @@ def test_conflicting_explicit_id_factory_is_rejected(tmp_path):
     try:
         with pytest.raises(FixtureIdentityError, match="conflicts"):
             from app.services.food_recipes import FoodRecipeCatalogueService
+
             FoodRecipeCatalogueService(
                 lambda: None,
                 lambda: None,
