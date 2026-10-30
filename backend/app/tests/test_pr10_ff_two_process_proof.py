@@ -44,6 +44,6 @@ def test_decimal_portion_contract():
     with pytest.raises(proof.ProofNoGo):
         proof.portion(Decimal("NaN"))
     with pytest.raises(proof.ProofNoGo):
-        proof.portion(Decimal("0"))
+        proof.portion(Decimal(0))
     with pytest.raises(proof.ProofNoGo):
         proof.portion(Decimal("0.1234567"))
