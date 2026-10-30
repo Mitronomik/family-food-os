@@ -306,6 +306,7 @@ def materialize_pre_generation(
             from app.persistence.sqlalchemy_core.food_ingredient_composition import (
                 create_food_catalogue_service,
             )
+
             food_catalogue = create_food_catalogue_service(engine)
             household_key = {"household_key": HOUSEHOLD_KEY}
             hh_service = _household_service(
@@ -354,6 +355,7 @@ def materialize_pre_generation(
                 members.append(member)
                 member_rows.append((ordinal, profile, member, selection))
             from app.services.planner import AuthoritativeGenerationRequest
+
             command = AuthoritativeGenerationRequest(
                 household.id,
                 WEEK_START,
@@ -567,6 +569,7 @@ def validate_externally_pinned_proposals(
     raw_b = (output_dir / "planner-B-PROPOSED.json").read_bytes()
     if sha(raw_a) != expected_a_sha256 or sha(raw_b) != expected_b_sha256:
         raise PreflightNoGo("external A/B raw SHA mismatch")
+
     def reject_duplicates(items):
         seen = {}
         for key, value in items:
