@@ -43,7 +43,7 @@ def checked_inputs() -> tuple[dict, dict, dict]:
             raise ProofNoGo("Missing or foreign frozen input path")
         raw = path.read_bytes()
         git_blob = hashlib.sha1(
-            b"blob " + str(len(raw)).encode("ascii") + b"\\0" + raw
+            b"blob " + str(len(raw)).encode("ascii") + b"\0" + raw
         ).hexdigest()
         if (len(raw) != entry["byte_count"]
             or digest(raw) != entry["raw_sha256"]
