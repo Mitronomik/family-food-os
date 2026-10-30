@@ -48,8 +48,11 @@ def _reject_float(value: str) -> None:
 def _record_bytes(value: object) -> bytes:
     try:
         return json.dumps(
-            value, ensure_ascii=False, sort_keys=True,
-            separators=(",", ":"), allow_nan=False,
+            value,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+            allow_nan=False,
         ).encode("utf-8")
     except (ValueError, TypeError, UnicodeError) as exc:
         raise FixtureIdentityError("invalid manifest JSON data") from exc
@@ -92,9 +95,7 @@ def process_steps_sha256(steps: Sequence[str]) -> str:
     if not isinstance(steps, (list, tuple)) or not steps:
         raise FixtureIdentityError("empty process Step list")
     if any(
-        not isinstance(s, str)
-        or not s
-        or unicodedata.normalize("NFC", s) != s
+        not isinstance(s, str) or not s or unicodedata.normalize("NFC", s) != s
         for s in steps
     ):
         raise FixtureIdentityError("invalid ordered process Steps")
@@ -121,7 +122,8 @@ def _fingerprint_file(path: Path, sha256: str, blob_sha1: str) -> dict[str, obje
         raise FixtureIdentityError("correction artifact Git blob mismatch")
     try:
         return json.loads(
-            raw.decode("utf-8"), object_pairs_hook=_reject_duplicate_pairs,
+            raw.decode("utf-8"),
+            object_pairs_hook=_reject_duplicate_pairs,
             parse_float=_reject_float,
         )
     except FixtureIdentityError:
@@ -141,7 +143,9 @@ class PublicationManifestIds(ManifestPinnedFixtureIds, FixtureTypedIdProvider):
         _loader_token: object | None = None,
     ) -> None:
         if _loader_token is not _LOADER_TOKEN:
-            raise FixtureIdentityError("publication provider requires pinned manifest loader")
+            raise FixtureIdentityError(
+                "publication provider requires pinned manifest loader"
+            )
         super().__init__(approved)  # type: ignore[arg-type]
         self._source_path: Path | None = None
         self._expected_sha256: str | None = None
@@ -154,7 +158,11 @@ class PublicationManifestIds(ManifestPinnedFixtureIds, FixtureTypedIdProvider):
             version = entry["version_number"]
             key = entry["version_key"]
             projection = entry["seed_projection"]
-            if type(code) is not str or type(version) is not int or not isinstance(key, dict):
+            if (
+                type(code) is not str
+                or type(version) is not int
+                or not isinstance(key, dict)
+            ):
                 raise FixtureIdentityError("invalid publication record")
             if not isinstance(projection, dict):
                 raise FixtureIdentityError("missing complete trusted-seed projection")
@@ -169,12 +177,14 @@ class PublicationManifestIds(ManifestPinnedFixtureIds, FixtureTypedIdProvider):
                 raise FixtureIdentityError("ambiguous trusted publication projection")
             predecessor = key["predecessor_version_key"]
             expected_id = (
-                None if predecessor is None
+                None
+                if predecessor is None
                 else derive_fixture_uuid("RECIPE_VERSION", predecessor)
             )
             if (
                 predecessor is not None
-                and canonical_envelope("RECIPE_VERSION", predecessor) not in self._approved
+                and canonical_envelope("RECIPE_VERSION", predecessor)
+                not in self._approved
             ):
                 raise FixtureIdentityError("unapproved predecessor key")
             self._publication_index[identity] = frozen_key
@@ -212,7 +222,9 @@ class PublicationManifestIds(ManifestPinnedFixtureIds, FixtureTypedIdProvider):
         if frozen is None:
             raise FixtureIdentityError("missing exact frozen publication/seed")
         if self._predecessors[frozen] != predecessor_id:
-            raise FixtureIdentityError("real predecessor does not match frozen semantic key")
+            raise FixtureIdentityError(
+                "real predecessor does not match frozen semantic key"
+            )
         # Return a new dictionary; the manifest's internal copy stays sealed.
         return json.loads(frozen.decode("utf-8"))["key"]
 
@@ -237,7 +249,8 @@ def load_pinned_publication_manifest(
         raise FixtureIdentityError("unapproved fixture manifest bytes")
     try:
         payload = json.loads(
-            raw.decode("utf-8"), object_pairs_hook=_reject_duplicate_pairs,
+            raw.decode("utf-8"),
+            object_pairs_hook=_reject_duplicate_pairs,
             parse_float=_reject_float,
         )
     except FixtureIdentityError:
@@ -245,22 +258,35 @@ def load_pinned_publication_manifest(
     except (UnicodeError, ValueError, TypeError) as exc:
         raise FixtureIdentityError("invalid manifest file") from exc
     if not isinstance(payload, dict) or set(payload) != {
-        "schema_version", "policy", "namespace", "fixture_id", "source_commit",
-        "review_reference", "approved_ids", "publications", "stages",
+        "schema_version",
+        "policy",
+        "namespace",
+        "fixture_id",
+        "source_commit",
+        "review_reference",
+        "approved_ids",
+        "publications",
+        "stages",
     }:
         raise FixtureIdentityError("incorrect fixture manifest schema")
     for name, required in (
-        ("schema_version", SCHEMA_VERSION), ("policy", POLICY),
-        ("namespace", NAMESPACE), ("fixture_id", FIXTURE_ID),
+        ("schema_version", SCHEMA_VERSION),
+        ("policy", POLICY),
+        ("namespace", NAMESPACE),
+        ("fixture_id", FIXTURE_ID),
         ("source_commit", expected_source_commit),
     ):
         if payload[name] != required:
             raise FixtureIdentityError(f"manifest {name} conflicts with external pin")
-    if not isinstance(payload["review_reference"], str) or not payload["review_reference"]:
+    if (
+        not isinstance(payload["review_reference"], str)
+        or not payload["review_reference"]
+    ):
         raise FixtureIdentityError("missing external reviewer reference")
 
     stage_membership = {
-        stage: list(identities) for stage, identities in expected_stage_membership.items()
+        stage: list(identities)
+        for stage, identities in expected_stage_membership.items()
     }
     if not stage_membership or payload["stages"] != stage_membership:
         raise FixtureIdentityError("manifest stage inventory differs from external pin")
@@ -278,10 +304,15 @@ def load_pinned_publication_manifest(
         approved.append((obj["kind"], obj["key"]))
     records = payload["publications"]
     observed_members: list[str] = []
-    corrections = [r for r in records if (
-        isinstance(r, dict) and isinstance(r.get("version_key"), dict)
-        and r["version_key"].get("publication_kind") == "REVIEWED_CORRECTION"
-    )]
+    corrections = [
+        r
+        for r in records
+        if (
+            isinstance(r, dict)
+            and isinstance(r.get("version_key"), dict)
+            and r["version_key"].get("publication_kind") == "REVIEWED_CORRECTION"
+        )
+    ]
     correction_source: dict[str, object] | None = None
     if corrections:
         if (
@@ -289,7 +320,9 @@ def load_pinned_publication_manifest(
             or expected_correction_sha256 is None
             or expected_correction_blob_sha1 is None
         ):
-            raise FixtureIdentityError("missing independently pinned correction artifact")
+            raise FixtureIdentityError(
+                "missing independently pinned correction artifact"
+            )
         correction_source = _fingerprint_file(
             correction_path, expected_correction_sha256, expected_correction_blob_sha1
         )
@@ -305,14 +338,21 @@ def load_pinned_publication_manifest(
             raise FixtureIdentityError("missing/extra approved correction")
     for record in records:
         if not isinstance(record, dict) or set(record) != {
-            "stage", "canonical_code", "version_number", "version_key",
+            "stage",
+            "canonical_code",
+            "version_number",
+            "version_key",
             "seed_projection",
         }:
             raise FixtureIdentityError("incomplete publication record")
         code = record["canonical_code"]
         version = record["version_number"]
         stage = record["stage"]
-        if not isinstance(stage, str) or not isinstance(code, str) or type(version) is not int:
+        if (
+            not isinstance(stage, str)
+            or not isinstance(code, str)
+            or type(version) is not int
+        ):
             raise FixtureIdentityError("invalid stage/code/version")
         member = f"{code}@{version}"
         if member not in stage_membership.get(stage, ()):
@@ -323,21 +363,42 @@ def load_pinned_publication_manifest(
             raise FixtureIdentityError("missing published-version key")
         projection = record["seed_projection"]
         if not isinstance(projection, dict) or set(projection) != {
-            "base_servings", "meal_type_code", "prep_time_minutes",
-            "cook_time_minutes", "total_time_minutes", "difficulty_code",
-            "batch_friendly", "freezable", "storage_days_fridge",
-            "storage_days_freezer", "verification_status", "verified_at",
-            "source_name", "source_recipe_id", "source_url", "source_version",
-            "source_retrieved_at", "source_document_sha256",
-            "source_original_servings", "rights_review_status",
-            "rights_basis", "change_note", "ingredients", "steps",
-            "equipment_codes", "source_output_g", "source_output_text",
+            "base_servings",
+            "meal_type_code",
+            "prep_time_minutes",
+            "cook_time_minutes",
+            "total_time_minutes",
+            "difficulty_code",
+            "batch_friendly",
+            "freezable",
+            "storage_days_fridge",
+            "storage_days_freezer",
+            "verification_status",
+            "verified_at",
+            "source_name",
+            "source_recipe_id",
+            "source_url",
+            "source_version",
+            "source_retrieved_at",
+            "source_document_sha256",
+            "source_original_servings",
+            "rights_review_status",
+            "rights_basis",
+            "change_note",
+            "ingredients",
+            "steps",
+            "equipment_codes",
+            "source_output_g",
+            "source_output_text",
         }:
             raise FixtureIdentityError("incomplete/extra trusted-seed fields")
         source = key.get("source_record_key")
         if not isinstance(source, dict) or any(
-            projection.get(attr) != source.get(attr) for attr in (
-                "source_name", "source_recipe_id", "source_version",
+            projection.get(attr) != source.get(attr)
+            for attr in (
+                "source_name",
+                "source_recipe_id",
+                "source_version",
                 "source_document_sha256",
             )
         ):
@@ -359,12 +420,15 @@ def load_pinned_publication_manifest(
             if not isinstance(predecessor, dict):
                 raise FixtureIdentityError("missing correction lineage")
             predecessor_records = [
-                r for r in records
-                if r["canonical_code"] == code and r["version_number"] == 1
+                r
+                for r in records
+                if r["canonical_code"] == code
+                and r["version_number"] == 1
                 and r["version_key"] == predecessor
             ]
             if len(predecessor_records) != 1 or (
-                predecessor_records[0]["seed_projection"].get("steps") != row.get("old_steps")
+                predecessor_records[0]["seed_projection"].get("steps")
+                != row.get("old_steps")
             ):
                 raise FixtureIdentityError("unverified original predecessor Steps")
     if sorted(observed_members) != sorted(expected_members):
