@@ -1,3 +1,12 @@
+# 2026-10-30 — PR #263 reviewer P1/P2 corrections implemented and focused QA passed
+
+- All four review requests addressed in [PR #263](https://github.com/Mitronomik/family-food-os/pull/263): existing persisted Recipe/Version/Ingredient/Step UUID parity on replay; actual complete 12-stage 51-v1/7-v2 SQLite trusted seed fresh/replay integration; full metadata source/rights/equipment verification of predecessor in UoW; exact closed Recipe/Version/Ingredient/Step manifest allowlist.
+- Immutable SQLite cannot be mutated in QA; negative cases inject forged repository readbacks (Step UUID, source-output metadata) without bypassing storage triggers. Invalid keys, missing/extra allowlist and altered v2 remain fail-closed.
+- [Exact runtime focused run 41048238795](https://github.com/Mitronomik/family-food-os/actions/runs/41048238795): **34 tests passed, Ruff lint/format SUCCESS**, runtime HEAD `a243287b242b`. Docs-only receipt update after runtime freeze does not change tested backend bytes. Broad and docs verification on final HEAD plus independent review remain.
+- No approved current-Planner input manifest, 3/21/42 real two-process proof, Prep/D3/Gate2/portion/safe batch acceptance claimed.
+
+---
+
 # 2026-10-30 — PR #263 resumption after merged publication-binding contract
 
 - Verified [#264](https://github.com/Mitronomik/family-food-os/pull/264) merged as `dc4f2ff41865ce7721dac90b8bc29e4cdce6a0b1`. Integrated accepted main into the existing #263 branch without force-push.

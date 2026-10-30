@@ -1,3 +1,11 @@
+# CURRENT — PR #263 reviewer P1/P2 correction pass; independent QA pending — 2026-10-30
+
+**Accepted base:** `main@dc4f2ff41865ce7721dac90b8bc29e4cdce6a0b1` after merged #264. User authorized addressing all four reviewer concerns in existing [PR #263](https://github.com/Mitronomik/family-food-os/pull/263) only. Exact UUID replay (Recipe/Version/Ingredient/Step), complete persisted predecessor metadata and reviewed v1→v2 lineage, closed manifest allowlist, actual real-source trusted seed 51-v1/7-v2 fresh + replay QA are implemented. [Focused QA run 41048238795](https://github.com/Mitronomik/family-food-os/actions/runs/41048238795): 34 passed + lint/format SUCCESS on byte-identical runtime revision `a243287b`. [Evidence matrix](../docs/family-food/pr10-ff-test-only-manifest-implementation-2026-10-30.md) documents source/test/acceptance boundaries.
+
+**Next ONLY:** exact-head docs/scope and broad required CI, independent Architecture/Domain/QA review, explicit owner merge decision. This does **not** authorize generating or selecting a real Planner week. `NO_GO_TO_PR10_CORE_RUNTIME`, `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN` remain.
+
+---
+
 # CURRENT — PR #263 typed test-only identity seam resumed after merged #264 — 2026-10-30
 
 **Accepted main:** `dc4f2ff41865ce7721dac90b8bc29e4cdce6a0b1` after merged [#264](https://github.com/Mitronomik/family-food-os/pull/264). The owner authorized **continuing the existing draft implementation [#263](https://github.com/Mitronomik/family-food-os/pull/263)**, not the independent two-process real Planner proof or PR10 Prep core runtime. PR263 branch has an explicit two-parent integration of #264, no history rewrite.
