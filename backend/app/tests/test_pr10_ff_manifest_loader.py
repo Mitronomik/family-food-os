@@ -9,6 +9,7 @@ import pytest
 from app.services.food_recipes import TrustedRecipeVersionSeed
 from app.services.pr10_ff_manifest_loader import (
     SCHEMA_VERSION,
+    _expected_recipe_allowlist,
     load_pinned_publication_manifest,
     process_steps_sha256,
     project_trusted_version_seed,
@@ -124,6 +125,13 @@ def make_manifest(tmp_path, *, corrected=False):
         )
         allowed.append({"kind": "RECIPE_VERSION", "key": v2})
         inventory["synthetic"].append("SYNTHETIC@2")
+    allowed = [
+        {"kind": row["kind"], "key": row["key"]}
+        for row in (
+            json.loads(value.decode("utf-8"))
+            for value in sorted(_expected_recipe_allowlist(records))
+        )
+    ]
     payload = {
         "schema_version": SCHEMA_VERSION,
         "policy": POLICY,
