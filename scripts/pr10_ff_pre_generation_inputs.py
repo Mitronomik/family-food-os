@@ -69,7 +69,10 @@ class PreflightNoGo(ValueError):
 
 def canonical_bytes(value: object) -> bytes:
     return json.dumps(
-        value, ensure_ascii=False, sort_keys=True, separators=(",", ":"),
+        value,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
         allow_nan=False,
     ).encode("utf-8")
 
@@ -99,9 +102,13 @@ def _source_stages() -> list[tuple[str, tuple]]:
         ("r3a", r3a._recipe_seeds_and_specs(r3a._load_contract()[4])[0]),
         ("r3b", r3b._recipe_seeds_and_specs(r3b._load_contract()[4])[0]),
         ("r3c", r3c._recipe_seeds_and_specs(r3c._load_contract()[0])[0]),
-        ("r3d", r3d._recipe_seeds_and_specs(
-            r3d._load_contract()[0], r3d._load_contract()[2],
-        )[0]),
+        (
+            "r3d",
+            r3d._recipe_seeds_and_specs(
+                r3d._load_contract()[0],
+                r3d._load_contract()[2],
+            )[0],
+        ),
     ]
 
 
@@ -160,13 +167,17 @@ def build_source_proposal() -> tuple[dict, dict[int, dict]]:
     for stage, rows in stages:
         stages_map[stage] = []
         for row in rows:
-            records.append({
-                "stage": stage,
-                "canonical_code": row.canonical_code,
-                "version_number": 1,
-                "version_key": _version_key(row),
-                "seed_projection": json.loads(project_trusted_version_seed(row.version)),
-            })
+            records.append(
+                {
+                    "stage": stage,
+                    "canonical_code": row.canonical_code,
+                    "version_number": 1,
+                    "version_key": _version_key(row),
+                    "seed_projection": json.loads(
+                        project_trusted_version_seed(row.version)
+                    ),
+                }
+            )
             stages_map[stage].append(f"{row.canonical_code}@1")
     stages_map["dc4_a3"] = []
     for code in dc4.CORRECTION_CODES:
@@ -179,16 +190,22 @@ def build_source_proposal() -> tuple[dict, dict[int, dict]]:
                 change_note=correction_artifact["change_note"],
             ),
         )
-        records.append({
-            "stage": "dc4_a3",
-            "canonical_code": code,
-            "version_number": 2,
-            "version_key": _version_key(
-                successor, number=2, predecessor=_version_key(predecessor),
-                correction_sha=CORRECTION_SHA256,
-            ),
-            "seed_projection": json.loads(project_trusted_version_seed(successor.version)),
-        })
+        records.append(
+            {
+                "stage": "dc4_a3",
+                "canonical_code": code,
+                "version_number": 2,
+                "version_key": _version_key(
+                    successor,
+                    number=2,
+                    predecessor=_version_key(predecessor),
+                    correction_sha=CORRECTION_SHA256,
+                ),
+                "seed_projection": json.loads(
+                    project_trusted_version_seed(successor.version)
+                ),
+            }
+        )
         stages_map["dc4_a3"].append(f"{code}@2")
     if len(records) != 58 or len(stages_map) != 12:
         raise PreflightNoGo("incomplete v1/v2 source lineage")
@@ -197,19 +214,21 @@ def build_source_proposal() -> tuple[dict, dict[int, dict]]:
     keys = [
         {"kind": obj["kind"], "key": obj["key"]}
         for obj in (
-            json.loads(item)
-            for item in sorted(_expected_recipe_allowlist(records))
+            json.loads(item) for item in sorted(_expected_recipe_allowlist(records))
         )
     ]
     keys.append({"kind": "HOUSEHOLD", "key": {"household_key": HOUSEHOLD_KEY}})
     for ordinal, profile in profiles.items():
-        keys.append({
-            "kind": "HOUSEHOLD_MEMBER",
-            "key": {
-                "household_key": HOUSEHOLD_KEY, "ordinal": ordinal,
-                "profile_sha256": sha(canonical_bytes(profile)),
-            },
-        })
+        keys.append(
+            {
+                "kind": "HOUSEHOLD_MEMBER",
+                "key": {
+                    "household_key": HOUSEHOLD_KEY,
+                    "ordinal": ordinal,
+                    "profile_sha256": sha(canonical_bytes(profile)),
+                },
+            }
+        )
     manifest = {
         "schema_version": SCHEMA_VERSION,
         "policy": POLICY,
@@ -327,20 +346,26 @@ def materialize_pre_generation(
                 if member not in state.members:
                     raise PreflightNoGo("missing persisted member readback")
                 selection = _accept_custom_pattern(
-                    meal_plans, household.id, member.id, roles,
+                    meal_plans,
+                    household.id,
+                    member.id,
+                    roles,
                 )
                 members.append(member)
                 member_rows.append((ordinal, profile, member, selection))
             from app.services.planner import AuthoritativeGenerationRequest
             command = AuthoritativeGenerationRequest(
-                household.id, WEEK_START,
+                household.id,
+                WEEK_START,
                 _fixture_exclusions(3, members, food_catalogue),
             )
             request = planner.compose_authoritative_request(command)
             admissions = planner.compose_candidate_admission()
             if len(request.candidates) != 51 or len(admissions) != 51:
                 raise PreflightNoGo("full candidate admission not confirmed")
-            if any(not row.eligible or not row.exact_energy_ready for row in admissions):
+            if any(
+                not row.eligible or not row.exact_energy_ready for row in admissions
+            ):
                 raise PreflightNoGo("candidate source/nutrition admission incomplete")
             by_version = {}
             for recipe in recipes.list_all():
@@ -354,31 +379,33 @@ def materialize_pre_generation(
                 version = detail.version
                 if version.rights_review_status.value != "REVIEWED":
                     raise PreflightNoGo("candidate rights not reviewed")
-                candidate_records.append({
-                    "canonical_code": recipe.canonical_code,
-                    "recipe_version_id": str(candidate.recipe_version_id),
-                    "source_name": version.source_name,
-                    "source_recipe_id": version.source_recipe_id,
-                    "source_version": version.source_version,
-                    "source_document_sha256": version.source_document_sha256,
-                    "rights_review_status": version.rights_review_status.value,
-                    "verification_status": version.verification_status.value,
-                    "rights_basis": version.rights_basis,
-                    "version_number": version.version_number,
-                    "process_sha256": process_steps_sha256(
-                        [step.instruction for step in detail.steps]
-                    ),
-                    "meal_type_code": candidate.meal_type_code.value,
-                    "kcal_per_base_serving": _decimal(candidate.kcal_per_serving),
-                    "nutrition_status": candidate.nutrition_status.value,
-                    "exact_energy_ready": candidate.exact_energy_ready,
-                    "total_time_minutes": candidate.total_time_minutes,
-                    "batch_friendly": candidate.batch_friendly,
-                    "ingredient_codes": sorted(
-                        food_catalogue.get(ingredient_id).canonical_code
-                        for ingredient_id in candidate.food_ingredient_ids
-                    ),
-                })
+                candidate_records.append(
+                    {
+                        "canonical_code": recipe.canonical_code,
+                        "recipe_version_id": str(candidate.recipe_version_id),
+                        "source_name": version.source_name,
+                        "source_recipe_id": version.source_recipe_id,
+                        "source_version": version.source_version,
+                        "source_document_sha256": version.source_document_sha256,
+                        "rights_review_status": version.rights_review_status.value,
+                        "verification_status": version.verification_status.value,
+                        "rights_basis": version.rights_basis,
+                        "version_number": version.version_number,
+                        "process_sha256": process_steps_sha256(
+                            [step.instruction for step in detail.steps]
+                        ),
+                        "meal_type_code": candidate.meal_type_code.value,
+                        "kcal_per_base_serving": _decimal(candidate.kcal_per_serving),
+                        "nutrition_status": candidate.nutrition_status.value,
+                        "exact_energy_ready": candidate.exact_energy_ready,
+                        "total_time_minutes": candidate.total_time_minutes,
+                        "batch_friendly": candidate.batch_friendly,
+                        "ingredient_codes": sorted(
+                            food_catalogue.get(ingredient_id).canonical_code
+                            for ingredient_id in candidate.food_ingredient_ids
+                        ),
+                    }
+                )
             member_records = []
             selection_witness = []
             for ordinal, profile, member, selection in member_rows:
@@ -397,31 +424,41 @@ def materialize_pre_generation(
                         key=lambda item: (item.weekday, item.position),
                     )
                 ]
-                member_records.append({
-                    "ordinal": ordinal,
-                    "profile": profile,
-                    "profile_sha256": sha(canonical_bytes(profile)),
-                    "member_id": str(member.id),
-                    "reference_energy_kcal": _decimal(matched.reference_energy_kcal),
-                    "selection_source_kind": selection.selection.source_kind.value,
-                    "selection_version_number": selection.selection.version_number,
-                    "opportunities": opportunities,
-                    "excluded_food_codes": sorted(
-                        food_catalogue.get(uid).canonical_code
-                        for uid in matched.excluded_food_ingredient_ids
-                    ),
-                    "preferred_recipe_version_ids": sorted(
-                        str(uid) for uid in matched.preferred_recipe_version_ids
-                    ),
-                })
-                selection_witness.append({
-                    "ordinal": ordinal,
-                    "member_id": str(member.id),
-                    "selection_id": str(selection.selection.id),
-                })
+                member_records.append(
+                    {
+                        "ordinal": ordinal,
+                        "profile": profile,
+                        "profile_sha256": sha(canonical_bytes(profile)),
+                        "member_id": str(member.id),
+                        "reference_energy_kcal": _decimal(
+                            matched.reference_energy_kcal
+                        ),
+                        "selection_source_kind": selection.selection.source_kind.value,
+                        "selection_version_number": selection.selection.version_number,
+                        "opportunities": opportunities,
+                        "excluded_food_codes": sorted(
+                            food_catalogue.get(uid).canonical_code
+                            for uid in matched.excluded_food_ingredient_ids
+                        ),
+                        "preferred_recipe_version_ids": sorted(
+                            str(uid) for uid in matched.preferred_recipe_version_ids
+                        ),
+                    }
+                )
+                selection_witness.append(
+                    {
+                        "ordinal": ordinal,
+                        "member_id": str(member.id),
+                        "selection_id": str(selection.selection.id),
+                    }
+                )
             if set(request.pantry_food_ingredient_ids):
                 raise PreflightNoGo("unexpected nonempty pantry")
-            if request.fixed_events or request.recent_plan_ids or request.recent_recipe_version_ids:
+            if (
+                request.fixed_events
+                or request.recent_plan_ids
+                or request.recent_recipe_version_ids
+            ):
                 raise PreflightNoGo("unexpected historical/fixed events")
             config = PLANNER_CONFIG
             proposal = {
@@ -470,29 +507,31 @@ def materialize_pre_generation(
             logical_bytes = canonical_bytes(proposal)
             (output_dir / "planner-B-PROPOSED.json").write_bytes(logical_bytes)
             (output_dir / "run-bound-uuid-witness-NOT-PIN.json").write_bytes(
-                canonical_bytes({
-                    "household_id": str(household.id),
-                    "selection_ids": selection_witness,
-                    "food_uuid_to_code": [
-                        {
-                            "id": str(food_id),
-                            "code": food_catalogue.get(food_id).canonical_code,
-                        }
-                        for food_id in sorted(
+                canonical_bytes(
+                    {
+                        "household_id": str(household.id),
+                        "selection_ids": selection_witness,
+                        "food_uuid_to_code": [
                             {
-                                ingredient_id
-                                for candidate in request.candidates
-                                for ingredient_id in candidate.food_ingredient_ids
+                                "id": str(food_id),
+                                "code": food_catalogue.get(food_id).canonical_code,
                             }
-                            | {
-                                ingredient_id
-                                for member in request.members
-                                for ingredient_id in member.excluded_food_ingredient_ids
-                            },
-                            key=lambda value: value.hex,
-                        )
-                    ],
-                })
+                            for food_id in sorted(
+                                {
+                                    ingredient_id
+                                    for candidate in request.candidates
+                                    for ingredient_id in candidate.food_ingredient_ids
+                                }
+                                | {
+                                    ingredient_id
+                                    for member in request.members
+                                    for ingredient_id in member.excluded_food_ingredient_ids
+                                },
+                                key=lambda value: value.hex,
+                            )
+                        ],
+                    }
+                )
             )
         finally:
             engine.dispose()
@@ -540,11 +579,13 @@ def validate_externally_pinned_proposals(
         raise PreflightNoGo("floating-point input is prohibited")
 
     a = json.loads(
-        raw_a.decode("utf-8"), object_pairs_hook=reject_duplicates,
+        raw_a.decode("utf-8"),
+        object_pairs_hook=reject_duplicates,
         parse_float=reject_float,
     )
     b = json.loads(
-        raw_b.decode("utf-8"), object_pairs_hook=reject_duplicates,
+        raw_b.decode("utf-8"),
+        object_pairs_hook=reject_duplicates,
         parse_float=reject_float,
     )
     if a["stages"] != expected_stage_membership:
@@ -569,9 +610,7 @@ def validate_externally_pinned_proposals(
         (row["canonical_code"], row["version_number"]): row["version_key"]
         for row in a["publications"]
     }
-    current_codes = {
-        code for code, version in version_keys if version == 2
-    }
+    current_codes = {code for code, version in version_keys if version == 2}
     all_codes = {code for code, _ in version_keys}
     if len(all_codes) != 51 or len(current_codes) != 7:
         raise PreflightNoGo("expected 51 active and seven corrected versions")
@@ -588,17 +627,23 @@ def validate_externally_pinned_proposals(
         expected_version_id = provider.id_for("RECIPE_VERSION", expected_key)
         if row["recipe_version_id"] != str(expected_version_id):
             raise PreflightNoGo("candidate UUID is not source-keyed")
-        if row["source_document_sha256"] != expected_key["source_record_key"][
-            "source_document_sha256"
-        ]:
+        if (
+            row["source_document_sha256"]
+            != expected_key["source_record_key"]["source_document_sha256"]
+        ):
             raise PreflightNoGo("candidate source-document drift")
         if row["process_sha256"] != expected_key["publication_process_sha256"]:
             raise PreflightNoGo("candidate RecipeStep content drift")
         if row["rights_review_status"] != "REVIEWED" or not row["rights_basis"]:
             raise PreflightNoGo("unapproved candidate source rights")
     if set(b["planner_config"]) != {
-        "version", "compatibility_version", "preference_weight",
-        "pantry_weight", "batch_weight", "time_weight", "repetition_weight",
+        "version",
+        "compatibility_version",
+        "preference_weight",
+        "pantry_weight",
+        "batch_weight",
+        "time_weight",
+        "repetition_weight",
         "max_recipe_repetitions",
     }:
         raise PreflightNoGo("unreviewed planner config")
@@ -619,11 +664,14 @@ def validate_externally_pinned_proposals(
         profile_sha = sha(canonical_bytes(expected_profile))
         if member["profile_sha256"] != profile_sha:
             raise PreflightNoGo("member profile SHA drift")
-        expected_id = provider.id_for("HOUSEHOLD_MEMBER", {
-            "household_key": HOUSEHOLD_KEY,
-            "ordinal": ordinal,
-            "profile_sha256": profile_sha,
-        })
+        expected_id = provider.id_for(
+            "HOUSEHOLD_MEMBER",
+            {
+                "household_key": HOUSEHOLD_KEY,
+                "ordinal": ordinal,
+                "profile_sha256": profile_sha,
+            },
+        )
         if member["member_id"] != str(expected_id):
             raise PreflightNoGo("member persisted UUID binding drift")
         expected_roles = GATE1_ROLE_SHAPES[2][ordinal - 1]
@@ -649,8 +697,10 @@ def validate_externally_pinned_proposals(
         ):
             raise PreflightNoGo("member exclusion drift")
     if b.get("expected_structural") != {
-        "household_members": 3, "local_days": 7,
-        "genuine_cook_recipe_events": 21, "exact_decimal_servings": 42,
+        "household_members": 3,
+        "local_days": 7,
+        "genuine_cook_recipe_events": 21,
+        "exact_decimal_servings": 42,
     }:
         raise PreflightNoGo("structural contract drift")
     return {
