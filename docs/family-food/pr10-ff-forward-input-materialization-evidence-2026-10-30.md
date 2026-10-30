@@ -41,4 +41,3 @@ Both A and B raw JSON files independently matched **byte-for-byte** via `cmp` be
 **Evidence classification:** 17 focused tests and two input-process runs prove the *implementation of fail-closed input validation*, not independent owner approval of A/B. The same observed A `d160b995b680d11cf9e04f3f97c0d01cd1c65ecd2518e685b8e3cfa783e0a885` and B `9a9260a4a8d849fa4284ff64b861d8c2db74d15777b04ca5d3741d25f1f0089f` remain **NOT APPROVED**. Full PR CI and independent Architecture/Data/QA re-review remain required before any merge decision, and a separate owner decision must independently pin source A + input B **before** executing real `PlannerService.generate_authoritative`.
 
 **All hard gates unchanged:** `NO_GO_INPUT_MANIFEST_UNVERIFIED`, `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`, `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`.
-
