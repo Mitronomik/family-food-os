@@ -429,6 +429,7 @@ class FoodRecipeCatalogueService:
         recipe = scope.recipes.get(recipe_id)
         if recipe is None:
             raise RecipeNotFoundError(recipe_id)
+        self._assert_fixture_recipe_id(recipe)
         versions = scope.versions.list_for_recipe(recipe_id)
         previous = versions[-1] if versions else None
         number = 1 if previous is None else previous.version_number + 1
@@ -494,6 +495,7 @@ class FoodRecipeCatalogueService:
             raise RecipeCatalogueConflictError(
                 "Existing Recipe identity conflicts with trusted seed."
             )
+        self._assert_fixture_recipe_id(by_code)
         candidates = scope.versions.list_by_provenance(
             by_code.id,
             seed.version.source_name,
@@ -586,6 +588,7 @@ class FoodRecipeCatalogueService:
                 raise RecipeCatalogueConflictError(
                     "Existing Recipe differs from trusted seed."
                 )
+            self._assert_fixture_recipe_id(recipe)
             counts["recipes_existing"] += 1
             candidates = scope.versions.list_by_provenance(
                 recipe.id,
@@ -621,6 +624,16 @@ class FoodRecipeCatalogueService:
             scope.versions.add_detail(detail)
             _increment_detail(counts, detail, inserted=True)
         return RecipeSeedSummary(**counts)
+
+    def _assert_fixture_recipe_id(self, recipe: Recipe) -> None:
+        """Never attach a fixture Version to a providerless/random Recipe UUID."""
+        if self._id_provider is None:
+            return
+        expected = self._id_provider.id_for(
+            "RECIPE", {"canonical_code": recipe.canonical_code}
+        )
+        if recipe.id != expected:
+            raise FixtureIdentityError("persisted Recipe UUID differs from fixture manifest")
 
     def _assert_fixture_predecessor(
         self,
@@ -749,6 +762,7 @@ class FoodRecipeCatalogueService:
         previous_id: UUID | None,
         now: datetime,
     ) -> RecipeVersionDetail:
+        self._assert_fixture_recipe_id(recipe)
         version_key = None
         if self._id_provider is not None:
             version_key = self._id_provider.recipe_version_key_for(
