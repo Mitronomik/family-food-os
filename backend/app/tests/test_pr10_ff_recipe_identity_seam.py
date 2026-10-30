@@ -3,11 +3,9 @@
 import hashlib
 import json
 from dataclasses import replace
-from pathlib import Path
 from uuid import uuid4
 
 import pytest
-
 from app.db.config import DatabaseConfig
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_recipe_composition import (
@@ -182,7 +180,7 @@ def test_real_sqlite_v2_lineage_and_wrong_manifest_rollback(tmp_path):
         change_note="Reviewed synthetic correction for test only",
         steps=(*original.version.steps[:-1], "Updated reviewed synthetic step."),
     )
-    provider, v1 = _provider(tmp_path, original, corrected=changed)
+    provider, _ = _provider(tmp_path, original, corrected=changed)
     config = DatabaseConfig(path=tmp_path / "lineage.sqlite")
     seed_food_ingredients(config)
     engine = create_sqlite_engine(config)
