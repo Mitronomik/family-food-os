@@ -10,8 +10,8 @@ from scripts import pr10_ff_pre_generation_inputs as inputs
 def test_materialization_is_pre_generation_and_caller_pin_is_required(
     tmp_path, monkeypatch
 ):
-    from app.services import planner as planner_module
     from app.domain import planner as domain_planner
+    from app.services import planner as planner_module
 
     def forbidden(*args, **kwargs):
         pytest.fail("real Planner week generation is forbidden before A/B review")
