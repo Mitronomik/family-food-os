@@ -12,8 +12,6 @@ from pathlib import Path
 from typing import Any
 from uuid import UUID
 
-from app.services.pr10_ff_typed_ids import FixtureTypedIdProvider
-
 from app.db.config import REPOSITORY_ROOT, DatabaseConfig
 from app.domain.planner import PlannerConfig
 from app.domain.recipe_nutrition_v2 import RecipeNutritionAuthorityKind
@@ -41,6 +39,7 @@ from app.seed.r3a_school2022_main_batch import (
 from app.seed.r3d_final_dc3_batch import seed_r3d_final_dc3_batch
 from app.services.food_recipes import RecipeCatalogueConflictError
 from app.services.planner import PlannerService
+from app.services.pr10_ff_typed_ids import FixtureTypedIdProvider
 from app.services.recipe_nutrition_v2 import (
     PreparedPublicationDisposition,
     RecipeNutritionV2ConflictError,
