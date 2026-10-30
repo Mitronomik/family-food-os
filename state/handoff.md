@@ -1,3 +1,9 @@
+# 2026-10-30 — PR #262 typed-key schema follow-up handoff
+
+**Current PR only:** [#262](https://github.com/Mitronomik/family-food-os/pull/262) remains docs/state-only. The [contract](../docs/family-food/pr10-ff-typed-test-identity-implementation-contract-2026-10-30.md) now includes exact six-kind JSON key schemas, explicit original-v1 / corrected-v2 predecessor construction, independently pinned process SHA and operation-scoped Household/Member identity binding. Original SHA256 v4-shaped golden vectors independently recomputed. **Next:** exact-head Docs CI and independent contract review, then explicit owner decision; do not implement/merge/advance runtime automatically. `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`.
+
+---
+
 # 2026-10-30 — PR #262 reviewer P1/P2 corrections handoff
 
 **Accepted main at review:** `c631daa523531474a2e1e4a809fb56e81c37e468`. [PR #262](https://github.com/Mitronomik/family-food-os/pull/262) remains docs-only on its original branch. [Contract](../docs/family-food/pr10-ff-typed-test-identity-implementation-contract-2026-10-30.md) now explicitly specifies domain-separated SHA256 v4-shaped test UUID bytes, canonical source-key fields and vectors (P1), 12 seed modules with per-function/caller signatures and all 22 catalogue composer locations/default leakage tests (P1), three identities and valid DC4-A3 correction v1→v2 / EXACT_REPLAY vs unauthorized same-version conflict (P2).
