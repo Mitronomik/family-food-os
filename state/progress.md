@@ -1,3 +1,11 @@
+# 2026-10-30 — PR #267 exact test-only A/B input byte freeze published for review
+
+- Following owner `делаем так` acceptance of limited technical input freeze (not Planner/release), [PR #267](https://github.com/Mitronomik/family-food-os/pull/267) preserves the **original unmodified** A/B raw JSON in repository Git history and a separate independently pinned decision record. A: 889601 bytes/SHA256 `d160b995...`/Git blob `27f6ea82...`; B: 67963 bytes/SHA256 `9a9260a4...`/blob `d2dd9398...`. GitHub returned both exact expected blob IDs after persistence.
+- One-time read-only generation + separate privileged byte-only GitHub Action persisted verified files; temporary elevated workflow removed after commit. Existing [PR #266](https://github.com/Mitronomik/family-food-os/pull/266) remains a separate implementation tool review/merge decision; #267 is raw evidence freeze, no code/Planner/schema/data publication change.
+- [Owner scoped decision](../docs/family-food/pr10-ff-forward-input-v1-owner-freeze-decision-2026-10-30.md) preserves 51/51 `nutrition_status=INCOMPLETE`, energy-only technical meaning, UUID input uncertainty and full downstream NO_GO gates. Next: exact-head docs CI, independent PR review and owner merge decision, no positive Planner generation yet.
+
+---
+
 # 2026-10-30 — PR #263 accepted; bounded forward input freeze review proposed
 
 - Verified [PR #263](https://github.com/Mitronomik/family-food-os/pull/263) `merged_at=2026-10-30T12:39:04Z`, merge `b734656562bca29cfb877e4e2827ff0adb81598f`, on current main. Recipe typed identity seam is available; the full Planner input / two independent generated weeks remain **unproven**.
