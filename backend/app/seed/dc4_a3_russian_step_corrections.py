@@ -290,6 +290,11 @@ def _publish_one(
                 f"DC4-A3 current RecipeVersion is not the exact successor: "
                 f"{old_seed.canonical_code}."
             )
+        # Exact source replay must also validate every persisted fixture UUID.
+        if catalogue.preflight_trusted_seed(successor_seed).value != "EXACT_REPLAY":
+            raise RecipeCatalogueConflictError(
+                f"DC4-A3 successor is not exact replay: {old_seed.canonical_code}."
+            )
         _require_current_authority(nutrition, current.version.id, expected_energy)
         replay = nutrition.publish_prepared(successor_spec)
         if (
