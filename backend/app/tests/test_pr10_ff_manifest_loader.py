@@ -12,6 +12,7 @@ from app.services.pr10_ff_manifest_loader import (
     SCHEMA_VERSION,
     load_pinned_publication_manifest,
     project_trusted_version_seed,
+    process_steps_sha256,
 )
 from app.services.pr10_ff_typed_ids import (
     FIXTURE_ID, NAMESPACE, POLICY, FixtureIdentityError, derive_fixture_uuid,
@@ -44,7 +45,8 @@ def key_v1():
             "source_document_sha256": "a" * 64,
         },
         "version_number": 1, "predecessor_version_key": None,
-        "publication_kind": "ORIGINAL", "publication_process_sha256": "b" * 64,
+        "publication_kind": "ORIGINAL",
+        "publication_process_sha256": process_steps_sha256(seed().steps),
         "correction_revision_sha256": None,
     }
 
@@ -80,7 +82,7 @@ def make_manifest(tmp_path, *, corrected=False):
         v2 = {
             **v1, "version_number": 2,
             "publication_kind": "REVIEWED_CORRECTION",
-            "publication_process_sha256": "c" * 64,
+            "publication_process_sha256": process_steps_sha256(("Corrected, reviewed step.",)),
             "correction_revision_sha256": correction_sha,
             "predecessor_version_key": v1,
         }
