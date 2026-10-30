@@ -30,7 +30,7 @@ from app.seed.r3a_school2022_main_batch import (
     publish_r3a_school2022_main_batch,
 )
 from app.seed.r3d_final_dc3_batch import seed_r3d_final_dc3_batch
-from app.services.food_recipes import RecipeCatalogueConflictError
+from app.services.food_recipes import FoodRecipeCatalogueService, RecipeCatalogueConflictError
 from app.services.recipe_nutrition_v2 import PreparedPublicationDisposition
 from sqlalchemy import event
 
@@ -169,6 +169,34 @@ def test_a3_exact_replay_is_zero_write(tmp_path: Path) -> None:
         (row.canonical_code, row.predecessor_version_id, row.successor_version_id)
         for row in first.recipes
     ]
+    assert db_dump(config) == before
+
+
+def test_a3_providerless_replay_does_not_preflight_corrected_successor(
+    tmp_path: Path, monkeypatch
+) -> None:
+    """Normal DC4-A3 only preflights the original v1, never an extra fixture v2."""
+    config = DatabaseConfig(path=tmp_path / "a3-default-compat.sqlite")
+    first = a3.seed_dc4_a3_russian_step_corrections(config)
+    assert {item.disposition for item in first.recipes} == {"FRESH"}
+    before = db_dump(config)
+    review_change_note = a3._load_corrections()["change_note"]
+    original_preflight = FoodRecipeCatalogueService.preflight_trusted_seed
+    predecessor_calls: list[str] = []
+
+    def checked_preflight(self, seed):
+        if seed.version.change_note == review_change_note:
+            pytest.fail("providerless DC4-A3 must not preflight corrected v2")
+        if seed.canonical_code in a3.CORRECTION_CODES:
+            predecessor_calls.append(seed.canonical_code)
+        return original_preflight(self, seed)
+
+    monkeypatch.setattr(
+        FoodRecipeCatalogueService, "preflight_trusted_seed", checked_preflight
+    )
+    replay = a3.seed_dc4_a3_russian_step_corrections(config)
+    assert {item.disposition for item in replay.recipes} == {"EXACT_REPLAY"}
+    assert set(predecessor_calls) == set(a3.CORRECTION_CODES)
     assert db_dump(config) == before
 
 
