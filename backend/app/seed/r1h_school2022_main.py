@@ -11,6 +11,8 @@ from pathlib import Path
 from typing import Any
 from uuid import UUID
 
+from app.services.pr10_ff_typed_ids import FixtureTypedIdProvider
+
 from app.db.config import REPOSITORY_ROOT, DatabaseConfig
 from app.db.migrations import apply_migrations
 from app.domain.recipe_nutrition_v2 import NUTRIENT_CODES
@@ -311,6 +313,7 @@ def seed_r1h_school2022_main(
     config: DatabaseConfig | None = None,
     *,
     package: Path = PACKAGE,
+    id_provider: FixtureTypedIdProvider | None = None,
 ) -> R1HSchool2022MainResult:
     specs_payload, batch_payload = _load_contract(package)
 
@@ -319,13 +322,17 @@ def seed_r1h_school2022_main(
     seed_ru_nut_db_step4(config)
     seed_ru_nut_db_r1a(config)
     seed_ru_nut_db_step8_butter(config)
-    seed_r1f_prepared_output(config)
+    seed_r1f_prepared_output(
+        config, **({"id_provider": id_provider} if id_provider is not None else {})
+    )
 
     engine = create_sqlite_engine(config)
     try:
         food = create_food_catalogue_service(engine)
         identity_summary = food.reconcile_identity_seed(_identity_seeds(batch_payload))
-        catalogue = create_food_recipe_catalogue_service(engine)
+        catalogue = create_food_recipe_catalogue_service(
+            engine, **({"id_provider": id_provider} if id_provider is not None else {})
+        )
         nutrition = create_recipe_nutrition_v2_service(engine)
         seeds, specs = _recipe_seeds_and_specs(specs_payload)
 
