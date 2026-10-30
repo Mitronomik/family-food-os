@@ -1,6 +1,6 @@
 # PR10-FF — test-only pinned publication manifest implementation contract
 
-**Status:** implementation-specific evidence for draft [PR #263](https://github.com/Mitronomik/family-food-os/pull/263); **not** an independently owner-approved real fixture manifest or PR10 release approval.  
+**Status:** implementation-specific evidence for draft [PR #263](https://github.com/Mitronomik/family-food-os/pull/263); **not** an independently owner-approved real fixture manifest or PR10 release approval.
 **Authority:** merged [#262 typed ID contract](pr10-ff-typed-test-identity-implementation-contract-2026-10-30.md) and [#264 publication-key amendment](pr10-ff-publication-key-binding-amendment-2026-10-30.md).
 
 ## 1. Explicit loader API and boundaries
