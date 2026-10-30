@@ -393,9 +393,7 @@ def test_mixed_provider_partial_recipe_rejects_all_fixture_write_paths(tmp_path)
         assert len(provider.ledger) == 1  # Only the rejected Recipe key was consulted.
         # Ordinary providerless append remains an independent, unchanged operation.
         ordinary_catalogue = create_food_recipe_catalogue_service(engine)
-        created = ordinary_catalogue.append_trusted_version(
-            random_id, original.version
-        )
+        created = ordinary_catalogue.append_trusted_version(random_id, original.version)
         assert created.version.version_number == 1
         assert created.recipe.id == random_id
     finally:
