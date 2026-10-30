@@ -1,3 +1,11 @@
+# CURRENT — PR #262 review corrections: two P1 and one P2 addressed in docs-only scope — 2026-10-30
+
+**Review basis:** owner's `REQUEST CHANGES` on [PR #262](https://github.com/Mitronomik/family-food-os/pull/262), HEAD `80cc0df816b2178d0e2c0aff33377a75ad373500`, base `main@c631daa523531474a2e1e4a809fb56e81c37e468`. Updated [typed test-ID contract](../docs/family-food/pr10-ff-typed-test-identity-implementation-contract-2026-10-30.md) in the **same PR**: exact SHA256 domain-separated test-only v4-shaped UUID algorithm with two independent conformance vectors (P1); per-function signatures/callers/default path and all 22 composer sites (P1); original SourceRecord vs RecipeVersion vs independently reviewed DC4-A3 correction revision with v2 append/EXACT_REPLAY (P2). These are proposed **for owner approval**, not implemented.
+
+**Next ONLY:** exact-head Docs/static verification → independent re-review → explicit owner decision. No production-facing seed/composition changes, no Planner/DB code, runtime fixture, automated merge or Gate2 promotion. `NO_GO_TO_PR10_CORE_RUNTIME`, `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`.
+
+---
+
 # CURRENT — PR10-FF-ID-CONTRACT typed test-only identity proposal (docs-only) — 2026-10-30
 
 **Accepted main at task start:** `c631daa523531474a2e1e4a809fb56e81c37e468` after [PR #260 merged](https://github.com/Mitronomik/family-food-os/pull/260). Its forward fixture preflight `NO_GO_FORWARD_FIXTURE_IMPLEMENTATION_WITH_CURRENT_UNSTABILIZED_SEED` remains authoritative **only for ordinary, unstabilized seed**. Merged #258 permits a separately verified new current-Planner technical week, not arbitrary Planner/seed/runtime changes. Historical #196 raw 21×42 and #246/#254 negative evidence preserved.
