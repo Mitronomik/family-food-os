@@ -1,3 +1,11 @@
+# 2026-11-01 — PR #269 re-review handoff (NOT MERGED)
+
+Accepted `main@58e7752733c66d6acaf020c43ec62b1557614a85` includes #267 frozen A/B. Existing Draft [PR #269](https://github.com/Mitronomik/family-food-os/pull/269) implements Issue #268; original `5125b2ac` two-process raw week semantically matched but request/trace fingerprints differed because of possible run-local UUIDs. Independent reviewer requested changes (two P1, two P2), so this branch now extends the same proof: exact working `PlannerRequest`→B normalized parity *prior* to generation, separate UUID ordering and selection/FoodIngredient binding map, verified source/version/process/FK/roles/3-2-1 attendance/individual exclusions, compare v2 without changing v1 semantic SHA, NO_GO JSON on worker failure, adversarial tests, updated state. **No new acceptance until exact-head CI + independent Architecture/Domain/QA review.** If differences are detected: preserve raw receipts and fail closed; do not reroll or modify approved A/B or production Planner.
+
+Follow-up only: run/fix task-local checks on PR #269 branch, inspect real raw artifacts and report actual first divergence or PASS; owner separately decides merge. `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`, `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`. No Prep, D3, Gate2 or release.
+
+---
+
 # 2026-10-30 — #267 post-#266 merge synchronization handoff
 
 **Accepted main:** `8368c7bdf74037afaf02b53b561935e29ecb0304` after [#266 merged](https://github.com/Mitronomik/family-food-os/pull/266). [PR #267](https://github.com/Mitronomik/family-food-os/pull/267) branch now integrates this main as a second parent, preserves all merged #266 changes and old state chronology, and adds only 4 owner-pinned freeze files + the 3 state reconciliation edits. A/B exact Git blob IDs must stay `27f6ea8284b30785fe3c0fd512b3963b1166efb9` / `d2dd93987ec48109a73cbf1c7efe0ac0a56d9bbe`; raw SHA256 stay `d160b995b680d11cf9e04f3f97c0d01cd1c65ecd2518e685b8e3cfa783e0a885` / `9a9260a4a8d849fa4284ff64b861d8c2db74d15777b04ca5d3741d25f1f0089f`.
