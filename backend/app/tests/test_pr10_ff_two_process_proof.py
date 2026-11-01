@@ -65,9 +65,7 @@ def _synthetic_comparison_receipt():
             "position": i % 3 + 1,
             "role": ("BREAKFAST", "LUNCH", "DINNER")[i % 3],
             "recipe": {"code": f"TEST_RECIPE_{i}", "version": 1},
-            "servings": [
-                {"member_ordinal": 1, "portion_servings": "1.000000"}
-            ],
+            "servings": [{"member_ordinal": 1, "portion_servings": "1.000000"}],
         }
         for i in range(21)
     ]
@@ -95,7 +93,9 @@ def _synthetic_comparison_receipt():
         "semantic_events": events,
         "semantic_sha256": proof.digest(proof.inputs.canonical_bytes(events)),
         "actual_request_normalized_v2": request,
-        "request_normalized_sha256_v2": proof.digest(proof.inputs.canonical_bytes(request)),
+        "request_normalized_sha256_v2": proof.digest(
+            proof.inputs.canonical_bytes(request)
+        ),
         "provenance_semantic_v2": source,
         "provenance_sha256_v2": proof.digest(proof.inputs.canonical_bytes(source)),
         "uuid_order_witness_v2": uuid_order,
@@ -109,9 +109,17 @@ def _synthetic_comparison_receipt():
 @pytest.mark.parametrize(
     "mutation",
     [
-        "recipe_version", "role", "event_order", "member", "portion",
-        "input", "provenance", "candidate_uuid_order", "candidate_tie_order",
-        "selection_id_collision", "food_id_collision",
+        "recipe_version",
+        "role",
+        "event_order",
+        "member",
+        "portion",
+        "input",
+        "provenance",
+        "candidate_uuid_order",
+        "candidate_tie_order",
+        "selection_id_collision",
+        "food_id_collision",
     ],
 )
 def test_cross_process_adversarial_change_is_no_go(mutation):
@@ -125,7 +133,8 @@ def test_cross_process_adversarial_change_is_no_go(mutation):
         second["semantic_events"][0]["role"] = "DINNER"
     elif mutation == "event_order":
         second["semantic_events"][0], second["semantic_events"][1] = (
-            second["semantic_events"][1], second["semantic_events"][0]
+            second["semantic_events"][1],
+            second["semantic_events"][0],
         )
     elif mutation == "member":
         second["semantic_events"][0]["servings"][0]["member_ordinal"] = 2
@@ -163,7 +172,8 @@ def test_run_local_uuid_changes_are_explicit_and_do_not_fake_input_equality():
     second["uuid_order_witness_v2"]["food_ingredient_id_to_code"][0]["id"] = "new-f1"
     findings = evidence.compare_evidence(first, second, pin=pins)
     assert findings["run_local_uuid_difference_categories"] == [
-        "selection_id_by_member_ordinal", "food_ingredient_id_to_code"
+        "selection_id_by_member_ordinal",
+        "food_ingredient_id_to_code",
     ]
 
 
