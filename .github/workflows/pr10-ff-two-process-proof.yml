@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'scripts/pr10_ff_two_process_proof.py'
+      - 'scripts/pr10_ff_proof_evidence.py'
       - 'backend/app/tests/test_pr10_ff_two_process_proof.py'
       - '.github/workflows/pr10-ff-two-process-proof.yml'
   workflow_dispatch:
@@ -27,11 +28,11 @@ jobs:
           PYTHONPATH: backend:.
         run: python -m pytest -q backend/app/tests/test_pr10_ff_two_process_proof.py
       - name: Ruff format diagnostic diff
-        run: ruff format --diff scripts/pr10_ff_two_process_proof.py backend/app/tests/test_pr10_ff_two_process_proof.py
+        run: ruff format --diff scripts/pr10_ff_two_process_proof.py scripts/pr10_ff_proof_evidence.py backend/app/tests/test_pr10_ff_two_process_proof.py
       - name: Ruff lint and format
         run: |
-          ruff check scripts/pr10_ff_two_process_proof.py backend/app/tests/test_pr10_ff_two_process_proof.py
-          ruff format --check scripts/pr10_ff_two_process_proof.py backend/app/tests/test_pr10_ff_two_process_proof.py
+          ruff check scripts/pr10_ff_two_process_proof.py scripts/pr10_ff_proof_evidence.py backend/app/tests/test_pr10_ff_two_process_proof.py
+          ruff format --check scripts/pr10_ff_two_process_proof.py scripts/pr10_ff_proof_evidence.py backend/app/tests/test_pr10_ff_two_process_proof.py
       - name: One-shot independent processes (no reroll)
         env:
           PYTHONPATH: backend:.
