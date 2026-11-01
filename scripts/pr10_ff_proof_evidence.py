@@ -361,9 +361,18 @@ def assert_week_and_provenance(
                 "serving_rows": sorted(
                     [
                         {
-                            "serving_id": str(s.id),
-                            "event_id": str(s.event_id),
-                            "member_id": str(s.member_id),
+                            "serving_id": str(item.id),
+                            "event_id": str(item.event_id),
+                            "member_id": str(item.member_id),
+                            "ordinal": ordinals[item.member_id],
+                            "portion": format(item.portion_servings, ".6f"),
+                        }
+                        for item in rows
+                    ],
+                    key=lambda row: row["ordinal"],
+                ),
+            }
+        )
     if len({(r["date"], r["position"]) for r in source_rows}) != 21:
         raise EvidenceNoGo("duplicate date/position")
     if {r["date"] for r in source_rows} != {
