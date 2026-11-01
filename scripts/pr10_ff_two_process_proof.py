@@ -332,8 +332,14 @@ def compare(output_dir: Path) -> int:
         decision["two_independent_processes"] = True
         decision["status"] = "MATCH_PENDING_INDEPENDENT_REVIEW"
         exit_code = 0
-    except (subprocess.CalledProcessError, evidence.EvidenceNoGo, ValueError,
-            OSError, KeyError, TypeError) as exc:
+    except (
+        subprocess.CalledProcessError,
+        evidence.EvidenceNoGo,
+        ValueError,
+        OSError,
+        KeyError,
+        TypeError,
+    ) as exc:
         # Preserve first failure and partial raw receipts rather than rerunning.
         decision["failure_class"] = type(exc).__name__
         decision["first_failure"] = str(exc)
