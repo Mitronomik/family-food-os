@@ -18,6 +18,7 @@ from decimal import Decimal
 from pathlib import Path
 
 from scripts import pr10_ff_pre_generation_inputs as inputs
+from scripts import pr10_ff_proof_evidence as evidence
 
 ROOT = Path(__file__).resolve().parents[1]
 PIN_PATH = ROOT / "docs/family-food/evidence/pr10-ff-forward-input-v1-pins.json"
@@ -205,7 +206,19 @@ def witness(output: Path) -> dict:
             command = AuthoritativeGenerationRequest(
                 household.id, inputs.WEEK_START, _fixture_exclusions(3, members, food)
             )
-            # The only actual generation, after all frozen-input preflights.
+            # Assert full *working* request/B parity BEFORE real generation.
+            # The preflight materializer uses a different SQLite instance.
+            actual_request = planner.compose_authoritative_request(command)
+            normalized_input, uuid_order = evidence.project_actual_request(
+                actual_request,
+                planner=planner,
+                household_state=households.get_household(household.id),
+                recipes=recipes,
+                food=food,
+                ordinals=member_ordinals,
+                b=planner_b,
+            )
+            # Only generate after independently proving the working request.
             generated, persisted = planner.generate_authoritative(command)
             if not isinstance(generated, PlannerSuccess) or persisted is None:
                 raise ProofNoGo("Real Planner did not generate a persisted success")
@@ -225,6 +238,15 @@ def witness(output: Path) -> dict:
                 or any(row["source_kind"] != "COOK_RECIPE" for row in events)
             ):
                 raise ProofNoGo("Real Planner 3/7/21/42 structural condition failed")
+            provenance_rows, fk_rows = evidence.assert_week_and_provenance(
+                readback,
+                generated=generated,
+                recipes=recipes,
+                food=food,
+                ordinals=member_ordinals,
+                b=planner_b,
+                expected_semantics=events,
+            )
             result = {
                 "schema": "PR10_FF_TWO_PROCESS_PROOF_RECEIPT_V1",
                 "status": "TECHNICAL_ENERGY_ONLY_NOT_RELEASE",
@@ -236,6 +258,29 @@ def witness(output: Path) -> dict:
                 "planner_request_fingerprint": generated.trace.request_fingerprint,
                 "semantic_events": events,
                 "semantic_sha256": digest(inputs.canonical_bytes(events)),
+                # V2 supplemental witness: original V1 semantic digest is unchanged.
+                "input_parity_with_B": True,
+                "actual_request_normalized_v2": normalized_input,
+                "request_normalized_sha256_v2": digest(
+                    inputs.canonical_bytes(normalized_input)
+                ),
+                "uuid_order_witness_v2": uuid_order,
+                "provenance_semantic_v2": provenance_rows,
+                "provenance_sha256_v2": digest(inputs.canonical_bytes(provenance_rows)),
+                "persisted_fk_witness_v2": {
+                    "plan_id": str(readback.plan.id),
+                    "household_id": str(readback.plan.household_id),
+                    "member_selection_rows": [
+                        {
+                            "plan_id": str(item.plan_id),
+                            "member_id": str(item.member_id),
+                            "selection_id": str(item.selection_id),
+                            "ordinal": member_ordinals[item.member_id],
+                        }
+                        for item in readback.member_selections
+                    ],
+                    "event_rows": fk_rows,
+                },
                 "gate": "NO_GO_TO_PR10_CORE_RUNTIME",
             }
             output.parent.mkdir(parents=True, exist_ok=True)
@@ -246,45 +291,58 @@ def witness(output: Path) -> dict:
 
 
 def compare(output_dir: Path) -> int:
-    # One trial, no rerolls. Each invocation has its own process and SQLite DB.
+    """One attempt per process, always leave a structured NO_GO on failures."""
     pin, _, _ = checked_inputs()
     if output_dir.exists() and any(output_dir.iterdir()):
         raise ProofNoGo("Output directory must be empty; no favorable reroll")
     output_dir.mkdir(parents=True, exist_ok=True)
-    for index in (1, 2):
-        subprocess.run(
-            [
-                sys.executable,
-                str(Path(__file__).resolve()),
-                "--worker",
-                "--output",
-                str(output_dir / f"process-{index}.json"),
-            ],
-            check=True,
-            cwd=ROOT,
-            env={
-                **os.environ,
-                "PYTHONPATH": str(ROOT / "backend") + os.pathsep + str(ROOT),
-            },
-        )
-    first = json.loads((output_dir / "process-1.json").read_bytes())
-    second = json.loads((output_dir / "process-2.json").read_bytes())
-    same = first["semantic_events"] == second["semantic_events"]
     decision = {
-        "status": "MATCH_PENDING_INDEPENDENT_REVIEW"
-        if same
-        else "NO_GO_FORWARD_FIXTURE_UNSTABLE",
-        "two_independent_processes": True,
-        "semantic_sha256": [first["semantic_sha256"], second["semantic_sha256"]],
-        "input_pin_schema": pin["schema_version"],
+        "status": "NO_GO_FORWARD_FIXTURE_UNSTABLE",
+        "two_independent_processes": False,
         "PR10_FF_FIXTURE_REPRODUCIBLE": "NOT_PROVEN",
         "NO_GO_TO_PR10_CORE_RUNTIME": True,
+        "APPROVED_IMMEDIATE": 0,
         "SAFE_BATCH_READY": False,
         "PORTION_RELEASE_READY": "NOT_PROVEN",
+        "input_pin_schema": pin["schema_version"],
     }
+    exit_code = 1
+    try:
+        for index in (1, 2):
+            # Never retry or cherry-pick a favorable independent run.
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(Path(__file__).resolve()),
+                    "--worker",
+                    "--output",
+                    str(output_dir / f"process-{index}.json"),
+                ],
+                check=True,
+                cwd=ROOT,
+                env={
+                    **os.environ,
+                    "PYTHONPATH": str(ROOT / "backend") + os.pathsep + str(ROOT),
+                },
+            )
+        first = json.loads((output_dir / "process-1.json").read_bytes())
+        second = json.loads((output_dir / "process-2.json").read_bytes())
+        findings = evidence.compare_evidence(first, second, pin=pin)
+        decision.update(findings)
+        decision["two_independent_processes"] = True
+        decision["status"] = "MATCH_PENDING_INDEPENDENT_REVIEW"
+        exit_code = 0
+    except (subprocess.CalledProcessError, evidence.EvidenceNoGo, ValueError,
+            OSError, KeyError, TypeError) as exc:
+        # Preserve first failure and partial raw receipts rather than rerunning.
+        decision["failure_class"] = type(exc).__name__
+        decision["first_failure"] = str(exc)
+        decision["worker_receipts_present"] = [
+            (output_dir / f"process-{index}.json").exists() for index in (1, 2)
+        ]
     (output_dir / "comparison.json").write_bytes(inputs.canonical_bytes(decision))
     print(json.dumps(decision, sort_keys=True))
-    return 0 if same else 1
+    return exit_code
 
 
 def main() -> int:
