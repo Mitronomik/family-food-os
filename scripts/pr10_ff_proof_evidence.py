@@ -39,7 +39,9 @@ def _member_profile(member, ordinal):
     }
 
 
-def project_actual_request(request, *, planner, household_state, recipes, food, ordinals, b):
+def project_actual_request(
+    request, *, planner, household_state, recipes, food, ordinals, b
+):
     """Project the *working* SQLite PlannerRequest before generation, not preflight DB.
 
     Build every B decision input directly from the real request and current
@@ -49,7 +51,11 @@ def project_actual_request(request, *, planner, household_state, recipes, food, 
     """
     _eq(request.household_id, household_state.household.id, "Household FK")
     _eq(request.week_start.isoformat(), b["week_start"], "calendar start")
-    _eq((request.week_start + timedelta(days=6)).isoformat(), b["week_end"], "calendar end")
+    _eq(
+        (request.week_start + timedelta(days=6)).isoformat(),
+        b["week_end"],
+        "calendar end",
+    )
     _eq(household_state.household.timezone, b["timezone"], "timezone")
     _eq(household_state.household.city, b["city"], "city")
     config = planner._config
@@ -84,32 +90,38 @@ def project_actual_request(request, *, planner, household_state, recipes, food, 
             food.get(identifier).canonical_code
             for identifier in candidate.food_ingredient_ids
         )
-        _eq(candidate_ingredients, sorted(
-            food.get(item.food_ingredient_id).canonical_code
-            for item in detail.ingredients
-        ), "candidate ingredient FK")
-        candidates.append({
-            "canonical_code": recipe.canonical_code,
-            "recipe_version_id": str(candidate.recipe_version_id),
-            "source_name": version.source_name,
-            "source_recipe_id": version.source_recipe_id,
-            "source_version": version.source_version,
-            "source_document_sha256": version.source_document_sha256,
-            "rights_review_status": version.rights_review_status.value,
-            "verification_status": version.verification_status.value,
-            "rights_basis": version.rights_basis,
-            "version_number": version.version_number,
-            "process_sha256": inputs.process_steps_sha256(
-                [step.instruction for step in detail.steps]
+        _eq(
+            candidate_ingredients,
+            sorted(
+                food.get(item.food_ingredient_id).canonical_code
+                for item in detail.ingredients
             ),
-            "meal_type_code": candidate.meal_type_code.value,
-            "kcal_per_base_serving": inputs._decimal(candidate.kcal_per_serving),
-            "nutrition_status": candidate.nutrition_status.value,
-            "exact_energy_ready": candidate.exact_energy_ready,
-            "total_time_minutes": candidate.total_time_minutes,
-            "batch_friendly": candidate.batch_friendly,
-            "ingredient_codes": candidate_ingredients,
-        })
+            "candidate ingredient FK",
+        )
+        candidates.append(
+            {
+                "canonical_code": recipe.canonical_code,
+                "recipe_version_id": str(candidate.recipe_version_id),
+                "source_name": version.source_name,
+                "source_recipe_id": version.source_recipe_id,
+                "source_version": version.source_version,
+                "source_document_sha256": version.source_document_sha256,
+                "rights_review_status": version.rights_review_status.value,
+                "verification_status": version.verification_status.value,
+                "rights_basis": version.rights_basis,
+                "version_number": version.version_number,
+                "process_sha256": inputs.process_steps_sha256(
+                    [step.instruction for step in detail.steps]
+                ),
+                "meal_type_code": candidate.meal_type_code.value,
+                "kcal_per_base_serving": inputs._decimal(candidate.kcal_per_serving),
+                "nutrition_status": candidate.nutrition_status.value,
+                "exact_energy_ready": candidate.exact_energy_ready,
+                "total_time_minutes": candidate.total_time_minutes,
+                "batch_friendly": candidate.batch_friendly,
+                "ingredient_codes": candidate_ingredients,
+            }
+        )
     admissions = [
         {
             "canonical_code": row.canonical_code,
@@ -132,8 +144,10 @@ def project_actual_request(request, *, planner, household_state, recipes, food, 
         member = actual_members[item.member_id]
         profile = _member_profile(member, ordinal)
         selection = item.selection
-        if (selection.selection.household_id != request.household_id
-            or selection.selection.member_id != item.member_id):
+        if (
+            selection.selection.household_id != request.household_id
+            or selection.selection.member_id != item.member_id
+        ):
             raise EvidenceNoGo("accepted pattern foreign FK")
         selection_ids[ordinal] = selection.selection.id
         opportunities = [
@@ -143,28 +157,37 @@ def project_actual_request(request, *, planner, household_state, recipes, food, 
                 "role": opp.role.value,
                 "energy_share": inputs._decimal(opp.energy_share),
             }
-            for opp in sorted(selection.opportunities, key=lambda o: (o.weekday, o.position))
+            for opp in sorted(
+                selection.opportunities, key=lambda o: (o.weekday, o.position)
+            )
         ]
-        members.append({
-            "ordinal": ordinal,
-            "profile": profile,
-            "profile_sha256": inputs.sha(inputs.canonical_bytes(profile)),
-            "member_id": str(item.member_id),
-            "reference_energy_kcal": inputs._decimal(item.reference_energy_kcal),
-            "selection_source_kind": selection.selection.source_kind.value,
-            "selection_version_number": selection.selection.version_number,
-            "opportunities": opportunities,
-            "excluded_food_codes": sorted(
-                food.get(fid).canonical_code for fid in item.excluded_food_ingredient_ids
-            ),
-            "preferred_recipe_version_ids": sorted(
-                str(rid) for rid in item.preferred_recipe_version_ids
-            ),
-        })
+        members.append(
+            {
+                "ordinal": ordinal,
+                "profile": profile,
+                "profile_sha256": inputs.sha(inputs.canonical_bytes(profile)),
+                "member_id": str(item.member_id),
+                "reference_energy_kcal": inputs._decimal(item.reference_energy_kcal),
+                "selection_source_kind": selection.selection.source_kind.value,
+                "selection_version_number": selection.selection.version_number,
+                "opportunities": opportunities,
+                "excluded_food_codes": sorted(
+                    food.get(fid).canonical_code
+                    for fid in item.excluded_food_ingredient_ids
+                ),
+                "preferred_recipe_version_ids": sorted(
+                    str(rid) for rid in item.preferred_recipe_version_ids
+                ),
+            }
+        )
     members.sort(key=lambda m: m["ordinal"])
     _eq(members, b["members"], "actual member/profile/pattern/energy/exclusions")
-    if (request.pantry_food_ingredient_ids or request.recent_plan_ids
-        or request.recent_recipe_version_ids or request.fixed_events):
+    if (
+        request.pantry_food_ingredient_ids
+        or request.recent_plan_ids
+        or request.recent_recipe_version_ids
+        or request.fixed_events
+    ):
         raise EvidenceNoGo("unexpected actual Pantry/history/fixed event")
     _eq(b["pantry"], [], "frozen Pantry")
     _eq(b["history"], [], "frozen history")
@@ -187,7 +210,9 @@ def project_actual_request(request, *, planner, household_state, recipes, food, 
     # Record the exact UUID tie order that the actual planner sees. Version and
     # Member IDs must stay stable; Food and Selection IDs are run-local.
     uuid_order = {
-        "candidate_input_uuid_order": [str(c.recipe_version_id) for c in request.candidates],
+        "candidate_input_uuid_order": [
+            str(c.recipe_version_id) for c in request.candidates
+        ],
         "candidate_tie_uuid_order": [
             str(c.recipe_version_id)
             for c in sorted(request.candidates, key=lambda c: c.recipe_version_id.hex)
@@ -197,18 +222,22 @@ def project_actual_request(request, *, planner, household_state, recipes, food, 
             for c in sorted(request.candidates, key=lambda c: c.recipe_version_id.hex)
         ],
         "member_request_uuid_order": [str(m.member_id) for m in request.members],
-        "member_request_ordinal_order": [ordinals[m.member_id] for m in request.members],
+        "member_request_ordinal_order": [
+            ordinals[m.member_id] for m in request.members
+        ],
         "selection_id_by_member_ordinal": {
             str(k): str(v) for k, v in sorted(selection_ids.items())
         },
         "food_ingredient_id_to_code": [
             {"id": str(fid), "code": food.get(fid).canonical_code}
             for fid in sorted(
-                {
-                    fid for c in request.candidates for fid in c.food_ingredient_ids
-                } | {
-                    fid for m in request.members for fid in m.excluded_food_ingredient_ids
-                } | set(request.pantry_food_ingredient_ids),
+                {fid for c in request.candidates for fid in c.food_ingredient_ids}
+                | {
+                    fid
+                    for m in request.members
+                    for fid in m.excluded_food_ingredient_ids
+                }
+                | set(request.pantry_food_ingredient_ids),
                 key=lambda item: item.hex,
             )
         ],
@@ -216,8 +245,9 @@ def project_actual_request(request, *, planner, household_state, recipes, food, 
     return normalized, uuid_order
 
 
-def assert_week_and_provenance(detail, *, generated, recipes, food, ordinals, b,
-                               expected_semantics):
+def assert_week_and_provenance(
+    detail, *, generated, recipes, food, ordinals, b, expected_semantics
+):
     """Validate every real persisted FK, participation, exclusion and source step.
 
     A second versioned witness adds metadata *without changing* V1 semantic_events
@@ -234,12 +264,18 @@ def assert_week_and_provenance(detail, *, generated, recipes, food, ordinals, b,
         seen_serving_ids.add(s.id)
         seen_pairs.add((s.event_id, s.member_id))
         serving_by_event[s.event_id].append(s)
-    if (len(events) != 21 or len(detail.servings) != 42
-        or len({e.id for e in events}) != 21 or len(detail.member_selections) != 3):
+    if (
+        len(events) != 21
+        or len(detail.servings) != 42
+        or len({e.id for e in events}) != 21
+        or len(detail.member_selections) != 3
+    ):
         raise EvidenceNoGo("real 3/21/42 identity coverage")
-    if (len({s.member_id for s in detail.member_selections}) != 3
+    if (
+        len({s.member_id for s in detail.member_selections}) != 3
         or {s.member_id for s in detail.member_selections} != set(ordinals)
-        or any(s.plan_id != plan.id for s in detail.member_selections)):
+        or any(s.plan_id != plan.id for s in detail.member_selections)
+    ):
         raise EvidenceNoGo("real plan selection FK coverage")
     if any(s.event_id not in {e.id for e in events} for s in detail.servings):
         raise EvidenceNoGo("orphan Serving event FK")
@@ -258,7 +294,10 @@ def assert_week_and_provenance(detail, *, generated, recipes, food, ordinals, b,
     for event in events:
         if event.plan_id != plan.id or event.recipe_version_id not in current:
             raise EvidenceNoGo("event plan or RecipeVersion FK mismatch")
-        if event.source_kind.value != "COOK_RECIPE" or event.source_reference is not None:
+        if (
+            event.source_kind.value != "COOK_RECIPE"
+            or event.source_reference is not None
+        ):
             raise EvidenceNoGo("unapproved event source kind/reference")
         if event.position not in expected_roles:
             raise EvidenceNoGo("unapproved event position")
@@ -304,30 +343,28 @@ def assert_week_and_provenance(detail, *, generated, recipes, food, ordinals, b,
         for ordinal in ordinals_here:
             if exclusions[ordinal].intersection(actual["ingredient_codes"]):
                 raise EvidenceNoGo("selected recipe violates individual exclusion")
-        source_rows.append({
-            "date": event.local_date.isoformat(),
-            "position": event.position,
-            "role": event.role.value,
-            "participant_ordinals": list(ordinals_here),
-            **actual,
-        })
-        fk_rows.append({
-            "event_id": str(event.id),
-            "plan_id": str(event.plan_id),
-            "recipe_version_id": str(event.recipe_version_id),
-            "date": event.local_date.isoformat(),
-            "position": event.position,
-            "serving_rows": sorted([
-                {
-                    "serving_id": str(s.id),
-                    "event_id": str(s.event_id),
-                    "member_id": str(s.member_id),
-                    "ordinal": ordinals[s.member_id],
-                    "portion": format(s.portion_servings, ".6f"),
-                }
-                for s in rows
-            ], key=lambda row: row["ordinal"]),
-        })
+        source_rows.append(
+            {
+                "date": event.local_date.isoformat(),
+                "position": event.position,
+                "role": event.role.value,
+                "participant_ordinals": list(ordinals_here),
+                **actual,
+            }
+        )
+        fk_rows.append(
+            {
+                "event_id": str(event.id),
+                "plan_id": str(event.plan_id),
+                "recipe_version_id": str(event.recipe_version_id),
+                "date": event.local_date.isoformat(),
+                "position": event.position,
+                "serving_rows": sorted(
+                    [
+                        {
+                            "serving_id": str(s.id),
+                            "event_id": str(s.event_id),
+                            "member_id": str(s.member_id),
     if len({(r["date"], r["position"]) for r in source_rows}) != 21:
         raise EvidenceNoGo("duplicate date/position")
     if {r["date"] for r in source_rows} != {
@@ -345,21 +382,29 @@ def assert_week_and_provenance(detail, *, generated, recipes, food, ordinals, b,
     )
     if len(expected_generated) != len(source_rows):
         raise EvidenceNoGo("generated and persisted event cardinality differs")
-    for actual, planned, sem in zip(source_rows, expected_generated, expected_semantics):
-        if (actual["date"] != planned.local_date.isoformat()
+    for actual, planned, sem in zip(
+        source_rows, expected_generated, expected_semantics
+    ):
+        if (
+            actual["date"] != planned.local_date.isoformat()
             or actual["position"] != planned.position
             or actual["role"] != planned.role.value
             or actual["recipe_version_id"] != str(planned.recipe_version_id)
             or actual["participant_ordinals"]
             != sorted(ordinals[mid] for mid in planned.participant_member_ids)
-            or sem["recipe"]["code"] != actual["canonical_code"]):
-            raise EvidenceNoGo("true Planner events differ from persisted/source witness")
+            or sem["recipe"]["code"] != actual["canonical_code"]
+        ):
+            raise EvidenceNoGo(
+                "true Planner events differ from persisted/source witness"
+            )
         planned_portions = {
             ordinals[mid]: format(value, ".6f") for mid, value in planned.portions
         }
         actual_portions = {
-            s["ordinal"]: s["portion"] for s in next(
-                x for x in fk_rows
+            s["ordinal"]: s["portion"]
+            for s in next(
+                x
+                for x in fk_rows
                 if x["date"] == actual["date"] and x["position"] == actual["position"]
             )["serving_rows"]
         }
@@ -385,9 +430,11 @@ def compare_evidence(first, second, *, pin):
         ):
             if inputs.sha(inputs.canonical_bytes(receipt[field])) != receipt[sha_key]:
                 raise EvidenceNoGo(f"{name} self-inconsistent {field}")
-        if (len(receipt["semantic_events"]) != 21
+        if (
+            len(receipt["semantic_events"]) != 21
             or len(receipt["provenance_semantic_v2"]) != 21
-            or not receipt.get("input_parity_with_B")):
+            or not receipt.get("input_parity_with_B")
+        ):
             raise EvidenceNoGo(f"{name} invalid coverage/input parity")
     for field in (
         "semantic_events",
@@ -416,7 +463,9 @@ def compare_evidence(first, second, *, pin):
             raise EvidenceNoGo("duplicate run-local FoodIngredient ID")
         if len({row["code"] for row in food}) != len(food):
             raise EvidenceNoGo("non-bijective FoodIngredient mapping")
-    if sorted(x["code"] for x in first["uuid_order_witness_v2"]["food_ingredient_id_to_code"]) != sorted(
+    if sorted(
+        x["code"] for x in first["uuid_order_witness_v2"]["food_ingredient_id_to_code"]
+    ) != sorted(
         x["code"] for x in second["uuid_order_witness_v2"]["food_ingredient_id_to_code"]
     ):
         raise EvidenceNoGo("run-local FoodIngredient logical membership mismatch")
@@ -425,11 +474,15 @@ def compare_evidence(first, second, *, pin):
         "request_normalized_sha256_v2": first["request_normalized_sha256_v2"],
         "provenance_sha256_v2": first["provenance_sha256_v2"],
         "raw_planner_fingerprint_parity": (
-            first["planner_request_fingerprint"] == second["planner_request_fingerprint"]
-            and first["planner_trace_fingerprint"] == second["planner_trace_fingerprint"]
+            first["planner_request_fingerprint"]
+            == second["planner_request_fingerprint"]
+            and first["planner_trace_fingerprint"]
+            == second["planner_trace_fingerprint"]
         ),
         "run_local_uuid_difference_categories": [
-            key for key in ("selection_id_by_member_ordinal", "food_ingredient_id_to_code")
-            if first["uuid_order_witness_v2"][key] != second["uuid_order_witness_v2"][key]
+            key
+            for key in ("selection_id_by_member_ordinal", "food_ingredient_id_to_code")
+            if first["uuid_order_witness_v2"][key]
+            != second["uuid_order_witness_v2"][key]
         ],
     }
