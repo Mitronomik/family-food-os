@@ -9,7 +9,6 @@ from __future__ import annotations
 
 from collections import defaultdict
 from datetime import timedelta
-from decimal import Decimal
 
 from scripts import pr10_ff_pre_generation_inputs as inputs
 
