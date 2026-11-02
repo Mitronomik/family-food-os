@@ -1,3 +1,13 @@
+# 2026-11-02 — PR10-A1 sequencing amendment handoff (DOCS-ONLY, unmerged)
+
+**Accepted `main@ff7a42cb132327177c15e9ea850d8bbc69e5077a`**, [PR #276 merged](https://github.com/Mitronomik/family-food-os/pull/276). Owner's latest directive authorizes **one docs-only sequencing proposal**, NOT code. New [PR10-A1 pure diagnostic amendment](../docs/family-food/pr10-pure-calculation-sequencing-amendment-2026-11-02.md) explicitly supersedes only the *pre-implementation positive-step permission prerequisite* in Option B §4/§5 and PR10-ARCH §9 for a future **pure in-memory, non-executable, unpersisted calculator**; original current-step research `NO_GO` remains factual and all existing Gate2/D3/release authority remains.
+
+**PR10-A1 implementation is NOT authorized:** after independent docs review + owner merge, still need distinct owner instruction for A1. A1 bounded pure-domain input → Decimal quantities/candidate references/unresolved/fingerprint, executable tasks always empty; no SQL/API/UI/PDF/AI/Retail/Pantry/Shopping changes, no migrations, no executable Step assumptions. Option B technical Gate2 still needs **two distinct positively reviewed actionable MealEvents** and truthful unresolved/all-UNKNOWN negative; D3 signed publisher, rollback-independent current status and revoke/rollback rejection before any executable action. Retain `PR10_FF_FIXTURE_REPRODUCIBLE=PASS` technical energy-only fixture, `APPROVED_IMMEDIATE=0`, `NO_GO_TO_PR10_CORE_RUNTIME` for executable/persistent capability, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`.
+
+**Next ONLY:** check exact PR diff/scope/links/Docs CI, seek independent Architecture/Domain/QA review and separate owner merge authorization. Do not start PR10-A1, A2, PR10-B/C, D3 publisher or next milestone automatically. Earlier handoffs below are historical.
+
+---
+
 # 2026-11-02 — next only: independent review of forward two-Step research evidence
 
 **Accepted `main@1297393a86f020b86a8b3ddbf7b8754e68d99318`** following PR #274 merged. `PR10_FF_FIXTURE_REPRODUCIBLE=PASS` remains valid solely for the exact accepted **technical kcal-only** Planner fixture, not D3/Prep/Gate2/release.
