@@ -1,3 +1,12 @@
+# 2026-11-02 — current two-Step source/process evidence review (Issue #275)
+
+- [PR #274](https://github.com/Mitronomik/family-food-os/pull/274) merged into `main@1297393a86f020b86a8b3ddbf7b8754e68d99318`; accepted current-week 3/7/21/42 energy-only Planner fixture unchanged.
+- Bounded [two-Step review report](../docs/family-food/pr10-core-forward-two-step-source-review-2026-11-02.md) and [machine evidence](../docs/family-food/pr10-core-forward-two-step-review-evidence-2026-11-02.json) cross-check two real selected events' immutable Russian Step1 SHA, expected typed test-only Step UUIDs and real raw-receipt RecipeVersion IDs, source rights and per-member Decimal grain projections. Buckwheat 312.193218 g on 11-03 and corn groats 304.762641 g on 11-08; rinsing water UNKNOWN and not substituted from cooking water.
+- **Unproven:** actual independently persisted Step FK readback (derived test-only ID is not readback), original public PDF binary/current-page recheck (fetch timed out), qualified named source/process reviewer, household applicability and distinct practical prep value, D3 signed eligibility publisher/reader and rollback-independent status. **No `APPROVED_IMMEDIATE` authorized**. `GO_TO_QUALIFIED_INDEPENDENT_SOURCE_PROCESS_REVIEW_ONLY` and `NO_GO_TO_PR10_A_RUNTIME`; `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN` unchanged.
+- This is only a docs/evidence branch pending independent review/merge. Runtime, source A/B, nutrition, Planner, Prep, schema, Shopping/PDF, historical receipts and safety gates untouched.
+
+---
+
 # 2026-11-02 — PR10-CORE forward positive-data preflight against accepted fixture
 
 - **Accepted main:** `418756bfc16af4b6786226725438d075f7ddd609` after [PR #272 merged](https://github.com/Mitronomik/family-food-os/pull/272). Owner-approved exact technical kcal-only `PR10_FF_FIXTURE_REPRODUCIBLE=PASS` is effective **for that fixture alone**; 51 candidates nutrient-INCOMPLETE and all separate PR10/Prep/Gate2/release NO_GO intact.
