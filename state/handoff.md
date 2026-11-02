@@ -1,3 +1,15 @@
+# 2026-11-02 — next only: independent review of forward two-Step research evidence
+
+**Accepted `main@1297393a86f020b86a8b3ddbf7b8754e68d99318`** following PR #274 merged. `PR10_FF_FIXTURE_REPRODUCIBLE=PASS` remains valid solely for the exact accepted **technical kcal-only** Planner fixture, not D3/Prep/Gate2/release.
+
+[Issue #275](https://github.com/Mitronomik/family-food-os/issues/275) scopes the **two** actual Step1 candidates. This branch adds [bounded source/scale report](../docs/family-food/pr10-core-forward-two-step-source-review-2026-11-02.md) and [non-authoritative machine witness](../docs/family-food/pr10-core-forward-two-step-review-evidence-2026-11-02.json). Frozen A/real #269 receipts confirm Step texts, source/process, 3/2/1 member source projection; independent typed-ID derivation predicts Step UUIDs `11cb3e62-2f6c-4505-87be-cf162053c7d6` and `fd63a305-c919-40bf-be01-98783e8caa22`, **but those UUIDs were not independently read back from current SQLite Step rows**. Original PDF download timed out; no actual certified family-scale/washing method, separately useful same-day task, independent named reviewer, D3 trusted publisher/read/rollback-independent current status or executable eligibility exists.
+
+**Verdict:** `GO_TO_QUALIFIED_INDEPENDENT_SOURCE_PROCESS_REVIEW_ONLY`; `NO_GO_TO_APPROVED_IMMEDIATE_ON_CURRENT_EVIDENCE` for both. Hold `NO_GO_TO_PR10_A_RUNTIME`, `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`. No third candidate/Planner reroll, no production code or source/RecipeVersion changes.
+
+**Next ONLY:** verify docs-only PR scope/links/CI and independent Architecture/Data/Domain/QA review; request separate owner merge decision. **After** accepted merge, explicitly request owner authorization for a qualified independent human source/whole-Step/scale review and the distinct D3 status/anti-rollback publication-reader contract. No automatic PR10-A, Prep, DB, PDF, AI, Retail or Gate2.
+
+---
+
 # 2026-11-02 — accepted #272 and forward PR10-CORE source evidence preflight handoff
 
 **Current accepted main at branch creation** `418756bfc16af4b6786226725438d075f7ddd609` after PR #272 merged; owner-approved `PR10_FF_FIXTURE_REPRODUCIBLE=PASS` applies only to exact synthetic `PR10_FF_FORWARD_3M_7D_V1` (kcal-only; A/B and semantic-input/provenance hashes already frozen). No Prep/Step source approval or broader Planner/nutrition/release claim.
