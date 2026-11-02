@@ -1,3 +1,11 @@
+# 2026-11-01 — PR #269 reviewer corrections: direct PlannerRequest and provenance witness
+
+- [PR #267](https://github.com/Mitronomik/family-food-os/pull/267) **merged** as `58e7752733c66d6acaf020c43ec62b1557614a85`; A/B raw frozen input SHA remain authoritative and immutable.
+- [PR #269](https://github.com/Mitronomik/family-food-os/pull/269) exact pre-review HEAD `5125b2ac`: 3/3 CI PASS; two fresh real Planner calls produced 21 events / 42 Decimal Servings and identical **V1** semantic SHA `45c8773b6bd51fdb9f69f8c887dc2c66ae8a7674756b4787e72995a6d84df5e2`. Reviewer found nonidentical opaque raw request/trace hashes and incomplete input/provenance proof; **REQUEST CHANGES**, not accepted fixture.
+- On #269 branch, added independent same-working-DB B parity before execution, UUID tie-order and run-local mapping witness, versioned provenance + real FK/roles/exclusions checks, cross-process normalized input/provenance comparisons, structured failure report and adversarial mutations. Focused runtime proof on [41309392588](https://github.com/Mitronomik/family-food-os/actions/runs/41309392588) at `e1762568` **PASS** (17 tests, Ruff, true two-process persisted real Planner). V1 semantic SHA unchanged `45c8773b...`; V2 normalized B parity SHA `5f812e41...` and provenance SHA `6e03e038...` match. Raw request/trace fingerprints still differ; per-run selection/Food UUID differences documented, stable candidate tie/member ordering confirmed. This is review evidence, NOT automatic fixture acceptance or authorization to merge. Nothing merged, A/B/Planner untouched.
+
+---
+
 # 2026-10-30 — synchronized PR #267 with accepted main after #266 merge
 
 - Verified [PR #266 merged](https://github.com/Mitronomik/family-food-os/pull/266) into `main@8368c7bdf74037afaf02b53b561935e29ecb0304`; kept all its source/materializer/test/workflow changes. Integrated [PR #267](https://github.com/Mitronomik/family-food-os/pull/267) as a **two-parent merge commit**, rather than replacing main's implementation or state history.
