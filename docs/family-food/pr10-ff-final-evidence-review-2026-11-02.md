@@ -1,8 +1,8 @@
 # PR10-FF — independent final evidence review of merged PR #269
 
-**Date:** 2026-11-02  
-**Scope:** read-only Architecture/Domain/QA verification of the *technical synthetic energy-only* forward Planner reproducibility fixture; docs-only state reconciliation.  
-**Review verdict:** `PR10_FF_FIXTURE_REPRODUCIBILITY_REVIEW=PASS`.  
+**Date:** 2026-11-02
+**Scope:** read-only Architecture/Domain/QA verification of the *technical synthetic energy-only* forward Planner reproducibility fixture; docs-only state reconciliation.
+**Review verdict:** `PR10_FF_FIXTURE_REPRODUCIBILITY_REVIEW=PASS`.
 **Project gate:** `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN` pending **separate explicit owner acceptance** of the reviewed fixture/digest. A passed technical evidence review does not itself grant PR10 runtime, D3, Prep, Gate2, safe-batch, or portion/release permission.
 
 ## FACT — accepted repository and authority
