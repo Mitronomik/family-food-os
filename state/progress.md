@@ -1,3 +1,11 @@
+# 2026-11-02 — Owner Acceptance Gate #271: precise PR10-FF technical fixture (docs-only)
+
+- **FACT:** [PR #270](https://github.com/Mitronomik/family-food-os/pull/270) merged at `1880c76b5891dba6bd8138d0c2a0e64460eb645d`; its [independent review](../docs/family-food/pr10-ff-final-evidence-review-2026-11-02.md) is `PR10_FF_FIXTURE_REPRODUCIBILITY_REVIEW=PASS` (no new Planner run here).
+- **OWNER DECISION:** separately and explicitly accepted in project conversation on 2026-11-02, [Issue #271](https://github.com/Mitronomik/family-food-os/issues/271), only the immutable technical energy-only `PR10_FF_FORWARD_3M_7D_V1`, A SHA `d160b995...`, B SHA `9a9260a4...`, V1 semantic SHA `45c8773b6bd51fdb9f69f8c887dc2c66ae8a7674756b4787e72995a6d84df5e2`, normalized-input SHA `5f812e41...` and provenance SHA `6e03e038...`; see [full owner decision/pins](../docs/family-food/pr10-ff-owner-fixture-acceptance-2026-11-02.md).
+- **PROPOSED effective state after reviewed docs PR merge:** `PR10_FF_FIXTURE_REPRODUCIBLE=PASS` solely for this frozen, synthetic 3/7/21/42 kcal-only evidence. Accepted main is still `NOT_PROVEN` before that merge. All separate `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN` preserved. No PR10-A/D3/Prep/Gate2/release authorization or code/source modification.
+
+---
+
 # 2026-11-02 — independent final review of accepted PR #269, docs-only reconciliation
 
 - [PR #269](https://github.com/Mitronomik/family-food-os/pull/269) **merged** into `main@366f40d9dc3a69b44e2262e18d6a4b407b0371de` (2026-11-02T09:36:45Z); Issue #268 closed. Frozen input PR #267 remains accepted and byte-unchanged.
