@@ -1,3 +1,15 @@
+# 2026-11-02 — accepted #272 and forward PR10-CORE source evidence preflight handoff
+
+**Current accepted main at branch creation** `418756bfc16af4b6786226725438d075f7ddd609` after PR #272 merged; owner-approved `PR10_FF_FIXTURE_REPRODUCIBLE=PASS` applies only to exact synthetic `PR10_FF_FORWARD_3M_7D_V1` (kcal-only; A/B and semantic-input/provenance hashes already frozen). No Prep/Step source approval or broader Planner/nutrition/release claim.
+
+[Issue #273](https://github.com/Mitronomik/family-food-os/issues/273) contains the bounded docs-only [forward actual-week preflight report](../docs/family-food/pr10-core-forward-positive-preflight-2026-11-02.md): 21 authentic selected 2026-11-02..08 RecipeVersion/provenance rows from unchanged #269 raw receipts; two separate **unapproved** research candidates are (1) 11-03 buckwheat breakfast Step 1 (`312.193218 g` grain source-scaled) and (2) 11-08 viscous corn-milk breakfast Step 1 (`304.762641 g`). Source-process and Decimal pins are verifiable; Step 1 review, current UUID/instruction status, source-form/scale/water/equipment suitability, D3 current-status/anti-rollback publisher/reader, and Prep three-table migration/UoW are NOT accepted. Historical salmon/pollock and cottage-cheese/corn review receipts are not substitute current grants.
+
+**Evidence decision:** `GO_TO_INDEPENDENT_SOURCE_STEP_REVIEW_ONLY` while `NO_GO_TO_PR10_A_RUNTIME`, `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN` remain. No source/catalogue/Planner/Recipe/Nutrition/SQLite/API/UI/migration/Prep/PDF runtime changes; only docs/state.
+
+**Next ONLY:** verify this exact docs-only PR's links, diff/CI and independent Architecture/Data/Domain/QA review, get explicit owner merge choice. Do not auto-merge or continue to Step approval/D3 reader, PR10-A/B/C or Gate2 without another separately scoped permission. Old handoffs are preserved as historical chronology.
+
+---
+
 # 2026-11-02 — accepted Owner Decision #271; test-only fixture gate documentation PR for review
 
 **Current accepted main at task start:** `1880c76b5891dba6bd8138d0c2a0e64460eb645d` following [PR #270 merged](https://github.com/Mitronomik/family-food-os/pull/270). Independent evidence verdict `PR10_FF_FIXTURE_REPRODUCIBILITY_REVIEW=PASS` exists and was accepted for the **exact synthetic technical energy-only fixture only** by a distinct owner statement on 2026-11-02 (tracked by [Issue #271](https://github.com/Mitronomik/family-food-os/issues/271)). Full immutable fixture/source A+B and V1 semantic/V2 normalized/provenance SHA pins are preserved in [owner acceptance decision](../docs/family-food/pr10-ff-owner-fixture-acceptance-2026-11-02.md).
