@@ -1,3 +1,15 @@
+# CURRENT — Owner Acceptance Gate #271 approved; documentation merge pending — 2026-11-02
+
+**Accepted main at branch creation:** `1880c76b5891dba6bd8138d0c2a0e64460eb645d` after [PR #270 merged](https://github.com/Mitronomik/family-food-os/pull/270). Owner gave **separate explicit acceptance** in the FamilyFoodOS project conversation on 2026-11-02 for the precise `PR10_FF_FORWARD_3M_7D_V1` energy-only technical fixture and semantic SHA `45c8773b6bd51fdb9f69f8c887dc2c66ae8a7674756b4787e72995a6d84df5e2` — [Decision Gate #271](https://github.com/Mitronomik/family-food-os/issues/271). [Independent QA report](../docs/family-food/pr10-ff-final-evidence-review-2026-11-02.md) remains `PR10_FF_FIXTURE_REPRODUCIBILITY_REVIEW=PASS`. Complete owner-approved A/B, normalized-request, provenance and semantic SHA pins and limits are in [owner decision](../docs/family-food/pr10-ff-owner-fixture-acceptance-2026-11-02.md).
+
+**Gate transition proposed by this bounded docs-only PR:** after independent review and explicit merge authorization, `PR10_FF_FIXTURE_REPRODUCIBLE=PASS` **only for the owner-accepted synthetic 3-member/7-day/21-MealEvent/42-Serving technical kcal-only fixture**. Until that PR is merged, current accepted `main` still records `PR10_FF_FIXTURE_REPRODUCIBLE=NOT_PROVEN`. Do not interpret a successful CI or this draft branch alone as completed durable gate promotion.
+
+**Other independent gates unchanged:** `NO_GO_TO_PR10_CORE_RUNTIME`, `APPROVED_IMMEDIATE=0`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`. 51 candidates retain `nutrition_status=INCOMPLETE`; no nutritionally complete meal plan, safe prep, D3/Step publication, Gate2/Shopping→Prep→PDF, safe-batch or real-family release authority. No code, seed, A/B input, archived evidence or Planner behavior changed.
+
+**Next authorized action ONLY:** independently review and decide whether to merge this docs-only Owner Acceptance PR; **do not** begin PR10-A, D3, Prep or Gate2 implementation without a separate owner scope decision. Earlier focus entries below are historical snapshots.
+
+---
+
 # CURRENT — merged #269 independently reviewed; docs-only reconciliation pending — 2026-11-02
 
 **Accepted `main`:** `366f40d9dc3a69b44e2262e18d6a4b407b0371de` — [PR #269 merged](https://github.com/Mitronomik/family-food-os/pull/269) on 2026-11-02T09:36:45Z, [Issue #268 closed](https://github.com/Mitronomik/family-food-os/issues/268). PR #267 frozen A/B inputs also merged and unchanged. The previous top headings describing #267/#269 as open or Draft below are **historical snapshots**, not the current state.
