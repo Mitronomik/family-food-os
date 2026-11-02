@@ -1,0 +1,128 @@
+{
+  "schema": "PR10_CORE_FORWARD_TWO_STEP_REVIEW_EVIDENCE_V1",
+  "status": "NON_AUTHORITATIVE_SOURCE_REVIEW_EVIDENCE_ONLY",
+  "scope": "EXACT_TWO_SELECTED_EVENTS_NO_SUBSTITUTION",
+  "accepted_main": "1297393a86f020b86a8b3ddbf7b8754e68d99318",
+  "fixture_id": "PR10_FF_FORWARD_3M_7D_V1",
+  "source_publication_A_sha256": "d160b995b680d11cf9e04f3f97c0d01cd1c65ecd2518e685b8e3cfa783e0a885",
+  "planner_input_B_sha256": "9a9260a4a8d849fa4284ff64b861d8c2db74d15777b04ca5d3741d25f1f0089f",
+  "accepted_semantic_sha256": "45c8773b6bd51fdb9f69f8c887dc2c66ae8a7674756b4787e72995a6d84df5e2",
+  "fixture_source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+  "test_only_identity_policy": "PR10_FF_TYPED_ID_POLICY_V1",
+  "source_primary_pdf_binary_newly_verified": false,
+  "provenance_of_expected_step_id": "derived from pre-approved typed fixture identity in frozen A; not independent persisted RecipeStep DB readback",
+  "evidence_sources": [
+    "docs/family-food/pr10-core-forward-positive-preflight-2026-11-02.md",
+    "docs/family-food/evidence/pr10-ff-forward-input-v1/publication-A-PROPOSED.json",
+    "docs/family-food/evidence/pr10-ff-forward-input-v1/planner-B-PROPOSED.json",
+    "https://github.com/Mitronomik/family-food-os/actions/runs/41309700338/artifacts/13084512933"
+  ],
+  "candidates": [
+    {
+      "local_date": "2026-11-03",
+      "position": 1,
+      "role": "BREAKFAST",
+      "source_kind": "COOK_RECIPE",
+      "recipe_code": "SCHOOL2022_54_20K_BUCKWHEAT_MILK_PORRIDGE",
+      "source_recipe_id": "ru-school2022:recipe:54-20к",
+      "recipe_version_number": 1,
+      "recipe_version_id_from_persisted_receipt": "025fc5c5-95f8-4e37-bffd-937f5630798b",
+      "process_steps_sha256": "d6340081a54597250753ef81de33af980212098c7e3a6ba292ac4710fe8af20b",
+      "step_position": 1,
+      "expected_typed_step_id_NOT_PERSISTED_READBACK": "11cb3e62-2f6c-4505-87be-cf162053c7d6",
+      "step_instruction_sha256": "fc78f3e59e588c116421a44824bfe0e77a53d36bdb64c38355cccceafae25afc",
+      "step_text_ru": "Гречневую крупу перебрать и промыть, несколько раз меняя воду.",
+      "source_ingredient_code": "BUCKWHEAT",
+      "source_ingredient_form": "canonical dry buckwheat groats; independent family execution validation required",
+      "source_base_quantity_g": "38",
+      "base_servings": "1",
+      "member_servings": [
+        {
+          "ordinal": 1,
+          "portion_servings": "3.798916",
+          "source_scaled_g": "144.358808"
+        },
+        {
+          "ordinal": 2,
+          "portion_servings": "4.416695",
+          "source_scaled_g": "167.834410"
+        }
+      ],
+      "total_portion_servings": "8.215611",
+      "total_source_scaled_g": "312.193218",
+      "structured_cooking_water_per_base_g": "64",
+      "rinse_water_quantity_g": null,
+      "rinse_water_authority": "UNKNOWN_NOT_EQUAL_TO_STRUCTURED_COOKING_WATER",
+      "source_rights_review_status": "REVIEWED",
+      "verification_status": "SOURCE_VERIFIED",
+      "numeric_direction_classification": "CANDIDATE_NO_LITERAL_DIGITS_NOT_REVIEWER_APPROVED",
+      "immediate_same_day_eligibility": "REVIEW_REQUIRED_NO_AUTHORITY",
+      "independent_culinary_reviewer_id": null,
+      "independent_review_reference": null,
+      "source_scale_equipment_review": "NOT_DONE",
+      "trusted_published_package": null,
+      "current_revocation_status_authority": null
+    },
+    {
+      "local_date": "2026-11-08",
+      "position": 1,
+      "role": "BREAKFAST",
+      "source_kind": "COOK_RECIPE",
+      "recipe_code": "SCHOOL2022_54_2K_VISCOUS_CORN_MILK_PORRIDGE",
+      "source_recipe_id": "ru-school2022:recipe:54-2к",
+      "recipe_version_number": 1,
+      "recipe_version_id_from_persisted_receipt": "31d36b91-3d2e-4aa6-9363-57d7c5aebbc6",
+      "process_steps_sha256": "2807cf22feb369bbe976c9ce75e1986cd595be7c48b7215397adb8971ff53b54",
+      "step_position": 1,
+      "expected_typed_step_id_NOT_PERSISTED_READBACK": "fd63a305-c919-40bf-be01-98783e8caa22",
+      "step_instruction_sha256": "eb152a402c4347be0bd2aad22f277ed3999a851a05018f73bde4d9c269d55d0a",
+      "step_text_ru": "Перебрать и промыть кукурузную крупу, несколько раз меняя воду.",
+      "source_ingredient_code": "CORN_GROATS",
+      "source_ingredient_form": "canonical dry corn groats; independent family execution validation required",
+      "source_base_quantity_g": "57",
+      "base_servings": "1",
+      "member_servings": [
+        {
+          "ordinal": 1,
+          "portion_servings": "2.472331",
+          "source_scaled_g": "140.922867"
+        },
+        {
+          "ordinal": 2,
+          "portion_servings": "2.874382",
+          "source_scaled_g": "163.839774"
+        }
+      ],
+      "total_portion_servings": "5.346713",
+      "total_source_scaled_g": "304.762641",
+      "structured_cooking_water_per_base_g": "65",
+      "rinse_water_quantity_g": null,
+      "rinse_water_authority": "UNKNOWN_NOT_EQUAL_TO_STRUCTURED_COOKING_WATER",
+      "source_rights_review_status": "REVIEWED",
+      "verification_status": "SOURCE_VERIFIED",
+      "numeric_direction_classification": "CANDIDATE_NO_LITERAL_DIGITS_NOT_REVIEWER_APPROVED",
+      "immediate_same_day_eligibility": "REVIEW_REQUIRED_NO_AUTHORITY",
+      "independent_culinary_reviewer_id": null,
+      "independent_review_reference": null,
+      "source_scale_equipment_review": "NOT_DONE",
+      "trusted_published_package": null,
+      "current_revocation_status_authority": null
+    }
+  ],
+  "review_decision": "GO_TO_QUALIFIED_INDEPENDENT_SOURCE_PROCESS_REVIEW_ONLY",
+  "runtime_decision": "NO_GO_TO_PR10_A_RUNTIME",
+  "gates": {
+    "PR10_FF_FIXTURE_REPRODUCIBLE": "PASS_TECHNICAL_KCAL_ONLY",
+    "APPROVED_IMMEDIATE": 0,
+    "NO_GO_TO_PR10_CORE_RUNTIME": true,
+    "SAFE_BATCH_READY": false,
+    "PORTION_RELEASE_READY": "NOT_PROVEN"
+  },
+  "non_goals": [
+    "NO_PREP_TASK_AUTHORITY",
+    "NO_PUBLISHER_OR_READER",
+    "NO_STORAGE_OR_FREEZER_CLAIM",
+    "NO_STEP_OR_RECIPE_REPUBLICATION",
+    "NO_THIRD_CANDIDATE"
+  ]
+}
