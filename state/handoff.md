@@ -1,3 +1,15 @@
+# 2026-11-03 — after merged #279: one-recipe correction gate handoff
+
+**Accepted base** `main@f7193dd6c66f11fae82fe874de971f5945b9a1c9`; [#279 merged](https://github.com/Mitronomik/family-food-os/pull/279). New bounded [Candidate A publication contract gate](../docs/family-food/pr10-candidate-a-successor-publication-contract-gate-2026-11-03.md) is **docs-only, proposed, unmerged**, not a new revision or trusted review.
+
+**Reviewer must challenge:** zero-write post-successor R2-C historical replay and no-repair of missing old authority; exact target DB predecessor/child/authority readback (missing), independent human source/process and output/energy applicability review (missing), atomic version + its own approved nutrition authority, explicit impact of latest verified on active Recipe/Planner, rollback compatibility, frozen A/B/historic v1 retention. Old fixture A stays `NO_GO` and B `INSUFFICIENT_EVIDENCE`. No test-only UUID as production identity. No D3 eligibility by unchanged Step 1.
+
+**No promotion:** `CONTRACT_PROPOSED / IMPLEMENTATION_NOT_READY / NO_GO_TO_CORRECTION_PUBLICATION`, `APPROVED_IMMEDIATE=0`, `NO_GO_TO_PR10_CORE_RUNTIME` executable/persistent, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`, technical energy-only `PR10_FF_FIXTURE_REPRODUCIBLE=PASS`. No production/runtime, canonical data, migration/API/PDF, retailer, safe-batch release or fixture changes.
+
+**Next ONLY:** independent docs/links/scope/CI review, obtain owner merge decision. Then independently request scoped authorization to produce actual read-only target DB receipt and qualified source/nutrition review. Do not start corrective RecipeVersion publication, D3 reader, PR10-A2/B/C/PDF or Gate2 automatically.
+
+---
+
 # 2026-11-03 — PR #279 Candidate A docs-only correction decision for review
 
 **Base:** `main@1b7d307c7de1bb298611e019cc7e233dfa21040b`, PR #278 merged. Read the [Candidate A decision](../docs/family-food/pr10-core-candidate-a-immutable-correction-decision-2026-11-03.md) for the sole current bounded result and evidence. Earlier “A1 under review” / “PDF unavailable” statements below are historical; original PDF is now checked for A, while actual persisted Step/target identity and qualified human approval remain unproved.
