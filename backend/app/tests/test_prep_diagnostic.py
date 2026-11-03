@@ -121,11 +121,14 @@ def test_exact_decimal_scaling_multiple_members_source_base_and_no_execution():
     assert by_code["RICE"].source_quantity == Decimal("600")
     assert by_code["RICE"].total_servings == Decimal("4")
     assert by_code["RICE"].required_quantity == Decimal("400")
-    assert by_code["BAY_LEAF"].required_quantity == Decimal("0.66666666666666666666666666666666666666666666666667")
+    assert by_code["BAY_LEAF"].required_quantity == Decimal(
+        "0.66666666666666666666666666666666666666666666666667"
+    )
     assert all(item.meal_event_id == meal.events[0].id for item in by_code.values())
-    assert result.candidate_step_references[0].recipe_step_id == recipes[
-        meal.events[0].recipe_version_id
-    ].steps[0].id
+    assert (
+        result.candidate_step_references[0].recipe_step_id
+        == recipes[meal.events[0].recipe_version_id].steps[0].id
+    )
     assert not hasattr(result.candidate_step_references[0], "instruction")
     assert result.unresolved == (
         module.PrepUnresolvedDiagnostic(
@@ -154,12 +157,16 @@ def test_multiple_genuine_events_not_grouped_and_repeat_is_identical():
 
 def test_base_servings_noninteger_and_zero_rounding_never_assumed():
     detail = _detail()
-    detail = replace(detail, version=replace(detail.version, base_servings=Decimal("2.5")))
+    detail = replace(
+        detail, version=replace(detail.version, base_servings=Decimal("2.5"))
+    )
     meal, recipes, foods, exclusions = _input(
         portions=("0.250000", "1.250000"), recipe=detail
     )
     got = _calculate(meal, recipes, foods, exclusions)
-    amounts = {x.food_code: x.required_quantity for x in got.event_ingredient_quantities}
+    amounts = {
+        x.food_code: x.required_quantity for x in got.event_ingredient_quantities
+    }
     assert amounts == {"RICE": Decimal("360"), "BAY_LEAF": Decimal("0.6")}
 
 
@@ -172,9 +179,7 @@ def test_base_servings_noninteger_and_zero_rounding_never_assumed():
         (MealSourceKind.READY_MEAL, PrepDiagnosticReason.READY_MEAL_UNRESOLVED),
     ],
 )
-def test_unverified_mixed_source_has_explicit_unresolved_not_fake_demand(
-    kind, reason
-):
+def test_unverified_mixed_source_has_explicit_unresolved_not_fake_demand(kind, reason):
     meal, recipes, foods, exclusions = _input(kinds=(kind,))
     result = _calculate(meal, recipes, foods, exclusions)
     assert result.status == PrepDiagnosticStatus.INCOMPLETE
@@ -196,7 +201,11 @@ def test_outside_home_does_not_invent_home_prep_or_unresolved(kind):
 
 def test_mixed_shared_recipe_and_nonrecipe_is_not_fabricated_or_double_counted():
     meal, recipes, foods, exclusions = _input(
-        kinds=(MealSourceKind.COOK_RECIPE, MealSourceKind.PREPARED, MealSourceKind.EAT_OUT)
+        kinds=(
+            MealSourceKind.COOK_RECIPE,
+            MealSourceKind.PREPARED,
+            MealSourceKind.EAT_OUT,
+        )
     )
     result = _calculate(meal, recipes, foods, exclusions)
     assert len(result.event_ingredient_quantities) == 2
@@ -244,7 +253,17 @@ def test_change_in_exclusions_changes_source_fingerprint_without_mutation():
     assert changed.event_ingredient_quantities == original.event_ingredient_quantities
 
 
-@pytest.mark.parametrize("invalid", [Decimal(0), Decimal(-1), Decimal("NaN"), 1.5, Decimal("Infinity"), Decimal("1E+999999")])
+@pytest.mark.parametrize(
+    "invalid",
+    [
+        Decimal(0),
+        Decimal(-1),
+        Decimal("NaN"),
+        1.5,
+        Decimal("Infinity"),
+        Decimal("1E+999999"),
+    ],
+)
 def test_invalid_serving_or_source_decimal_is_rejected_even_if_snapshot_forged(invalid):
     meal, recipes, foods, exclusions = _input()
     serving = meal.servings[0]
@@ -257,7 +276,12 @@ def test_invalid_recipe_source_rights_status_and_optional_ingredient_are_rejecte
     meal, recipes, foods, exclusions = _input()
     detail = next(iter(recipes.values()))
     variants = (
-        replace(detail, version=replace(detail.version, verification_status=VerificationStatus.UNVERIFIED)),
+        replace(
+            detail,
+            version=replace(
+                detail.version, verification_status=VerificationStatus.UNVERIFIED
+            ),
+        ),
         replace(
             detail,
             version=replace(
@@ -266,7 +290,13 @@ def test_invalid_recipe_source_rights_status_and_optional_ingredient_are_rejecte
                 rights_review_status=RightsReviewStatus.BLOCKED,
             ),
         ),
-        replace(detail, ingredients=(replace(detail.ingredients[0], optional=True), *detail.ingredients[1:])),
+        replace(
+            detail,
+            ingredients=(
+                replace(detail.ingredients[0], optional=True),
+                *detail.ingredients[1:],
+            ),
+        ),
     )
     for modified in variants:
         with pytest.raises(PrepDiagnosticError):
@@ -278,7 +308,10 @@ def test_mismatched_unit_missing_food_and_missing_recipe_are_blocking():
     detail = next(iter(recipes.values()))
     wrong_unit = replace(
         detail,
-        ingredients=(replace(detail.ingredients[0], unit=UnitCode.MILLILITER), *detail.ingredients[1:]),
+        ingredients=(
+            replace(detail.ingredients[0], unit=UnitCode.MILLILITER),
+            *detail.ingredients[1:],
+        ),
     )
     for invalid_recipes, invalid_foods in (
         ({}, foods),
@@ -292,16 +325,15 @@ def test_mismatched_unit_missing_food_and_missing_recipe_are_blocking():
 def test_stale_revision_and_step_content_invalidate_fingerprints():
     meal, recipes, foods, exclusions = _input()
     baseline = _calculate(meal, recipes, foods, exclusions)
-    modified_meal = replace(
-        meal, plan=replace(meal.plan, revision_number=2)
-    )
+    modified_meal = replace(meal, plan=replace(meal.plan, revision_number=2))
     revised = _calculate(modified_meal, recipes, foods, exclusions)
     assert baseline.source_fingerprint != revised.source_fingerprint
     assert baseline.content_fingerprint == revised.content_fingerprint
 
     detail = next(iter(recipes.values()))
     modified_detail = replace(
-        detail, steps=(replace(detail.steps[0], instruction="Другая исходная инструкция."),)
+        detail,
+        steps=(replace(detail.steps[0], instruction="Другая исходная инструкция."),),
     )
     step_changed = _calculate(
         meal, {detail.version.id: modified_detail}, foods, exclusions
@@ -328,24 +360,36 @@ def test_timestamp_and_tuple_order_do_not_change_fingerprints():
         servings=tuple(reversed(meal.servings)),
         member_selections=tuple(reversed(meal.member_selections)),
     )
-    assert _calculate(edited, recipes, foods, exclusions).content_fingerprint == original.content_fingerprint
-    assert _calculate(edited, recipes, foods, exclusions).source_fingerprint == original.source_fingerprint
+    assert (
+        _calculate(edited, recipes, foods, exclusions).content_fingerprint
+        == original.content_fingerprint
+    )
+    assert (
+        _calculate(edited, recipes, foods, exclusions).source_fingerprint
+        == original.source_fingerprint
+    )
 
 
 def test_calculator_has_no_repo_sql_clock_network_or_inventory_side_effect_import():
     tree = ast.parse(inspect.getsource(module))
     imports = [
-        item.module or ""
-        for item in ast.walk(tree)
-        if isinstance(item, ast.ImportFrom)
+        item.module or "" for item in ast.walk(tree) if isinstance(item, ast.ImportFrom)
     ]
     forbidden = (
-        "app.services", "app.persistence", "sqlalchemy", "sqlite3",
-        "socket", "requests", "app.domain.shopping_calculation",
+        "app.services",
+        "app.persistence",
+        "sqlalchemy",
+        "sqlite3",
+        "socket",
+        "requests",
+        "app.domain.shopping_calculation",
     )
     assert not any(
         name.startswith(forbidden_namespace)
         for name in imports
         for forbidden_namespace in forbidden
     )
-    assert module.PrepDiagnosticResult.__dataclass_fields__["executable_tasks"].init is False
+    assert (
+        module.PrepDiagnosticResult.__dataclass_fields__["executable_tasks"].init
+        is False
+    )
