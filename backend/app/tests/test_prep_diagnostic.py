@@ -258,7 +258,14 @@ def test_invalid_recipe_source_rights_status_and_optional_ingredient_are_rejecte
     detail = next(iter(recipes.values()))
     variants = (
         replace(detail, version=replace(detail.version, verification_status=VerificationStatus.UNVERIFIED)),
-        replace(detail, version=replace(detail.version, rights_review_status=RightsReviewStatus.BLOCKED)),
+        replace(
+            detail,
+            version=replace(
+                detail.version,
+                verification_status=VerificationStatus.UNVERIFIED,
+                rights_review_status=RightsReviewStatus.BLOCKED,
+            ),
+        ),
         replace(detail, ingredients=(replace(detail.ingredients[0], optional=True), *detail.ingredients[1:])),
     )
     for modified in variants:
