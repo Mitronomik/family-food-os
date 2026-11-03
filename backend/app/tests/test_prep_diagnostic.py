@@ -215,7 +215,7 @@ def test_all_unknown_and_forged_policy_label_cannot_grant_executable_status():
         kinds=(MealSourceKind.ASSEMBLY, MealSourceKind.PREPARED)
     )
     result = _calculate(
-        meal, recipes, foods, exclusions, policy="APPROVED_IMMEDIATE_TRUE"
+        meal, recipes, foods, exclusions, ordinals, policy="APPROVED_IMMEDIATE_TRUE"
     )
     assert result.status is PrepDiagnosticStatus.INCOMPLETE
     assert result.executable_tasks == ()
