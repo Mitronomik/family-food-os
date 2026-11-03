@@ -1,3 +1,13 @@
+# 2026-11-03 — PR10-A1 pure diagnostic domain PR: verify and review, no merge
+
+**Accepted base:** `main@17e9a7b844f9e1709d04d8d2603b8c6827a0ee2d`, [#277 merged](https://github.com/Mitronomik/family-food-os/pull/277). Bounded owner-authorized PR10-A1 implements only `backend/app/domain/prep_diagnostic.py` with tests, dedicated AI-off CI and state updates. Input: already-validated MealPlan/Serving, RecipeVersion/RecipeIngredient/Step and FoodIngredient snapshots plus mandatory member-exclusion map. Output: immutable event-specific source quantities (exact Decimal), non-executable step identity hashes, typed missing-approval/supply reasons, reproducible source/content fingerprints. No executable tasks, `INCOMPLETE` always. Scope is **not** PrepPlan publication, D3 eligibility, SQL/API/PDF, source step instructions or batch/freezer execution.
+
+**Hard stop:** no trusted Step approval or D3 publisher/reader/anti-rollback; `APPROVED_IMMEDIATE=0`, `NO_GO_TO_PR10_CORE_RUNTIME` for executable/persistent Prep, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`. Accepted `PR10_FF_FIXTURE_REPRODUCIBLE=PASS` only for owner-frozen technical energy-only fixture. No Gate2 positive/negative acceptance or real-family permission from A1 diagnostics.
+
+**Next ONLY:** exact-head focused domain/affected Shopping/MealPlan tests and Ruff/format, scope/CI review, independent QA/Architecture review and explicit owner merge approval. Don't start A2, trusted D3 source publication, PR10-B/C, PDF, batch stock or frontend automatically.
+
+---
+
 # 2026-11-02 — PR10-A1 sequencing amendment handoff (DOCS-ONLY, unmerged)
 
 **Accepted `main@ff7a42cb132327177c15e9ea850d8bbc69e5077a`**, [PR #276 merged](https://github.com/Mitronomik/family-food-os/pull/276). Owner's latest directive authorizes **one docs-only sequencing proposal**, NOT code. New [PR10-A1 pure diagnostic amendment](../docs/family-food/pr10-pure-calculation-sequencing-amendment-2026-11-02.md) explicitly supersedes only the *pre-implementation positive-step permission prerequisite* in Option B §4/§5 and PR10-ARCH §9 for a future **pure in-memory, non-executable, unpersisted calculator**; original current-step research `NO_GO` remains factual and all existing Gate2/D3/release authority remains.
