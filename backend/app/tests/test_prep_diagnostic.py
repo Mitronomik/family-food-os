@@ -214,7 +214,7 @@ def test_all_unknown_and_forged_policy_label_cannot_grant_executable_status():
     assert result.status is PrepDiagnosticStatus.INCOMPLETE
     assert result.executable_tasks == ()
     assert not hasattr(result, "gate2_pass")
-    with pytest.raises(TypeError):
+    with pytest.raises(ValueError):
         replace(result, executable_tasks=("FORGED",))
 
 
