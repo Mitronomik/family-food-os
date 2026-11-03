@@ -1,3 +1,15 @@
+# 2026-11-03 — PR10-A1 read-only Planner → Shopping → Prep integration proof, review only
+
+**Accepted base** `main@fb1840edf7391aeb97261b03949ff8510080c02b` after merged [PR #280](https://github.com/Mitronomik/family-food-os/pull/280). [PR #281](https://github.com/Mitronomik/family-food-os/pull/281) is a bounded test/workflow/state implementation: use accepted R2-C trusted catalogue in temporary SQLite, actual deterministic Planner/MealPlan persistence, mixed fixed `EAT_OUT` / shared `COOK_RECIPE`, read-only version/food/Pantry snapshots and unchanged Shopping+Prep calculators. Focused test receipts must show gross vs Pantry-net quantities, exact Decimal source, explicit Step unresolved, zero executable tasks and no writes after baseline.
+
+**Important trust boundary:** captured generation request/PlannerTrace and explicit semantic member slot order are **test-only trusted context**, verified against current persisted Household/MealPlan. No persisted general-purpose exclusion/ordinal authority exists in the original HouseholdMember/MealPlan rows. `PASS` may only refer to this isolated captured-context vertical; a new process with no matching witness is **BLOCKED**, never default empty restrictions/UUID-sorted ordinals. Review must check the ambiguity before any implementation of a real generation reader.
+
+**Hard gates:** Candidate A successor publication separate `NOT_READY`; Candidate A original `NO_GO`, B `INSUFFICIENT_EVIDENCE`; `APPROVED_IMMEDIATE=0`, executable/persistent `NO_GO_TO_PR10_CORE_RUNTIME`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`, technical kcal-only fixture reproducibility unchanged. No D3, schema, public API/PDF/UI, real-family use or Gate2.
+
+**Next ONLY:** exact-head focused tests/CI + independent Architecture/Domain/QA review of PR #281, then owner merge decision. No further milestone automatically.
+
+---
+
 # 2026-11-03 — after merged #279: one-recipe correction gate handoff
 
 **Accepted base** `main@f7193dd6c66f11fae82fe874de971f5945b9a1c9`; [#279 merged](https://github.com/Mitronomik/family-food-os/pull/279). New bounded [Candidate A publication contract gate](../docs/family-food/pr10-candidate-a-successor-publication-contract-gate-2026-11-03.md) is **docs-only, proposed, unmerged**, not a new revision or trusted review.
