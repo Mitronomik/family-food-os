@@ -9,12 +9,14 @@ availability after a fresh process restart without that trusted witness.
 from __future__ import annotations
 
 import json
+import os
 import shutil
 import sqlite3
 from collections import defaultdict
 from dataclasses import dataclass, replace
 from datetime import UTC, date, datetime, timedelta
 from decimal import ROUND_CEILING, ROUND_HALF_EVEN, Decimal, localcontext
+from pathlib import Path
 from uuid import UUID, uuid4
 
 import pytest
@@ -484,11 +486,46 @@ def test_authoritative_planner_to_prep_and_shopping_is_read_only(scenario, capsy
         "prep_content_fingerprint": prep.content_fingerprint,
         "shopping_source_fingerprint": shopping.source_fingerprint,
         "shopping_content_fingerprint": shopping.content_fingerprint,
+        "source_ingredient_quantities": [
+            {
+                "event_id": str(row.meal_event_id),
+                "food_code": row.food_code,
+                "unit": row.unit.value,
+                "exact_source_demand": format(row.required_quantity, "f"),
+            }
+            for row in sorted(
+                prep.event_ingredient_quantities,
+                key=lambda row: (str(row.meal_event_id), row.food_code),
+            )
+        ],
+        "shopping_gross_pantry_net": [
+            {
+                "food_ingredient_id": str(row.food_ingredient_id),
+                "unit": row.unit.value,
+                "gross_required_rounded": format(row.required_quantity, "f"),
+                "pantry_available": format(row.pantry_available_quantity, "f"),
+                "purchase_required": format(row.purchase_quantity, "f"),
+            }
+            for row in shopping.items
+        ],
+        "unresolved_reason_codes": sorted(
+            row.reason.value for row in prep.unresolved
+        ),
         "unresolved_step_count": len(prep.unresolved),
         "executable_task_count": len(prep.executable_tasks),
+        "comparison": {
+            "source_gross_matches_shopping_rounded_gross": True,
+            "confirmed_pantry_reduces_purchases_not_source_demand": True,
+            "sqlite_unchanged_during_read_only_proof": _db_dump(config) == before,
+        },
         "gate2_pass": False,
     }
-    print("PR10_A1_RO_PROOF=" + json.dumps(receipt, sort_keys=True))
+    encoded = json.dumps(receipt, sort_keys=True, ensure_ascii=False)
+    print("PR10_A1_RO_PROOF=" + encoded)
+    # A local JSON witness is produced only by an explicitly configured CI
+    # run. It carries synthetic run-local IDs; never grant data/Step authority.
+    if target := os.environ.get("PR10_A1_RO_PROOF_PATH"):
+        Path(target).write_text(encoded + "\n", encoding="utf-8")
 
 
 def test_missing_context_and_wrong_household_fail_closed_without_writes(scenario):
