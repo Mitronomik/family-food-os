@@ -1,3 +1,15 @@
+# CURRENT — Candidate A source-process correction decision, docs only — 2026-11-03
+
+**Accepted base:** `main@1b7d307c7de1bb298611e019cc7e233dfa21040b` after [PR #278 merged](https://github.com/Mitronomik/family-food-os/pull/278). The earlier A1 “under review” entries below are historical; accepted pure non-executable diagnostics remain unchanged.
+
+**Owner-authorized scope:** [Candidate A immutable correction decision](../docs/family-food/pr10-core-candidate-a-immutable-correction-decision-2026-11-03.md) only. Original School2022 p64 was independently rehashed and checked; R2-C introduced the weakened Step 4 before frozen A. Recommended result: `IMMUTABLE_CORRECTION_REQUIRED`, proposed separately reviewed successor, **publication NOT_READY**. The old DC4 language-only authority does not cover this process restoration. Target predecessor readback, independent source/nutrition applicability and R2-C post-successor zero-write replay/rollback contract remain prerequisites.
+
+**Preserved:** v1 and all source/fixture A/B/pins/receipts; no source publication or code/data writes. `APPROVED_IMMEDIATE=0`, `NO_GO_TO_PR10_CORE_RUNTIME` for executable/persistent Prep, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`; `PR10_FF_FIXTURE_REPRODUCIBLE=PASS` only for the accepted energy-only fixture. A future successor cannot repair Candidate A in that frozen v1 fixture or inherit D3 eligibility from unchanged Step 1 text.
+
+**Next ONLY:** verify/review this docs-only decision and request a separate owner merge decision. Even after merge, no correction implementation/publication, fixture rebinding or D3/runtime authorization follows. Closing the one-recipe prerequisites and any later publication require separate scoped authorization. Older entries below are historical snapshots.
+
+---
+
 # CURRENT — PR10-A1 pure diagnostic domain implementation under review — 2026-11-03
 
 **Accepted main at implementation start:** `17e9a7b844f9e1709d04d8d2603b8c6827a0ee2d` after [PR #277 merged](https://github.com/Mitronomik/family-food-os/pull/277) on 2026-11-03. This separately requested, bounded **PR10-A1** task implements only a *pure in-memory, non-executable* Prep diagnostic calculation in `backend/app/domain/prep_diagnostic.py` plus focused adversarial tests and CI. No previously proposed "waiting for amendment review" heading below remains current.
