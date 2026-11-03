@@ -1,3 +1,12 @@
+# 2026-11-03 — PR10-A1 pure non-executable diagnostic foundation (implementation PR)
+
+- **FACT:** [PR #277](https://github.com/Mitronomik/family-food-os/pull/277) merged at `main@17e9a7b844f9e1709d04d8d2603b8c6827a0ee2d`. Owner subsequently requested bounded implementation of **PR10-A1**; no D3/executable Prep/DB/API/PDF authorization.
+- Added pure domain calculator `backend/app/domain/prep_diagnostic.py`: validates MealPlan/member selections and explicit per-member exclusions, verified original RecipeVersion, immutable FoodIngredient/unit/form, computes exact `Decimal` source quantities per real MealEvent, Step hash-only diagnostic references, missing approval/supply as explicit unresolved, stable source/content SHA256, **zero executable_tasks** and `INCOMPLETE` status unconditionally. No mutable Pantry/Shopping/stock state touched.
+- Added `backend/app/tests/test_prep_diagnostic.py` and task-scoped `.github/workflows/pr10-a1-pure-prep-diagnostic.yml` to verify heterogeneity, noninteger/base Serving factors, repeated/shared events, unsupported sources, fail-closed rights/unit/quantity/exclusions, no-digit/forged approval not promoting, stable replay and no persistence/network imports. Exact-head GitHub CI receipt should be read before any PASS claim.
+- `PR10_FF_FIXTURE_REPRODUCIBLE=PASS` remains energy-only technical fixture; **`APPROVED_IMMEDIATE=0`**, `NO_GO_TO_PR10_CORE_RUNTIME` for executable/persistent Prep, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`. D3 and genuine Gate2 source-positive/negative proof remain blockers. Current work is PR only, not merged.
+
+---
+
 # 2026-11-02 — proposed PR10 Product Value / PR10-A1 sequencing amendment
 
 - [PR #276](https://github.com/Mitronomik/family-food-os/pull/276) confirmed merged, accepted `main@ff7a42cb132327177c15e9ea850d8bbc69e5077a`. Owner instructed **docs-only** narrow sequencing change; new [amendment](../docs/family-food/pr10-pure-calculation-sequencing-amendment-2026-11-02.md) reconciles Option B §4–5, PR10-ARCH §4/§9 and accepted forward positive preflight **without** changing Gate2/release authority or Master Roadmap order.
