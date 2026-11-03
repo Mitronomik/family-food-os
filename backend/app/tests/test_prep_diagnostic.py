@@ -145,7 +145,13 @@ def test_multiple_genuine_events_not_grouped_and_repeat_is_identical():
     first = _calculate(meal, recipes, foods, exclusions, ordinals)
     second = _calculate(meal, recipes, foods, exclusions, ordinals)
     assert first == second
-    assert before == (meal, dict(recipes), dict(foods), dict(exclusions), dict(ordinals))
+    assert before == (
+        meal,
+        dict(recipes),
+        dict(foods),
+        dict(exclusions),
+        dict(ordinals),
+    )
     assert len(first.event_ingredient_quantities) == 4
     assert len({item.meal_event_id for item in first.event_ingredient_quantities}) == 2
     assert len(first.unresolved) == 2
@@ -367,7 +373,6 @@ def test_timestamp_and_tuple_order_do_not_change_fingerprints():
     )
 
 
-
 def _with_member_ids(snapshot, member_ids):
     """Two SQLite-like run-local IDs with the SAME explicit semantic ordinals."""
     meal, recipes, foods, exclusions, ordinals = snapshot
@@ -478,14 +483,13 @@ def test_decimal_rounding_is_fixed_and_independent_of_ambient_context():
 
     assert under_low_context == under_high_context
     leaf = next(
-        value.required_quantity for value in under_low_context.event_ingredient_quantities
+        value.required_quantity
+        for value in under_low_context.event_ingredient_quantities
         if value.food_code == "BAY_LEAF"
     )
     # 4/6 is a repeating rational. The result is a documented 50-significant-
     # digit HALF_EVEN approximation, NEVER an exact 2/3 or a package count.
-    assert leaf == Decimal(
-        "0.66666666666666666666666666666666666666666666666667"
-    )
+    assert leaf == Decimal("0.66666666666666666666666666666666666666666666666667")
 
 
 def test_calculator_has_no_repo_sql_clock_network_or_inventory_side_effect_import():
