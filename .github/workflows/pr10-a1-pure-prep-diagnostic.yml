@@ -1,0 +1,36 @@
+name: PR10-A1 pure Prep diagnostic domain
+
+on:
+  pull_request:
+    paths:
+      - 'backend/app/domain/prep_diagnostic.py'
+      - 'backend/app/tests/test_prep_diagnostic.py'
+      - '.github/workflows/pr10-a1-pure-prep-diagnostic.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  domain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install backend and verification tools
+        run: python -m pip install -e './backend[test]' ruff
+      - name: Focused PR10-A1 and affected domain regressions
+        env:
+          PYTHONPATH: backend:.
+          AI_ENABLED: 'false'
+        run: |
+          python -m pytest -q backend/app/tests/test_prep_diagnostic.py backend/app/tests/test_food_recipe_domain.py backend/app/tests/test_meal_plans.py backend/app/tests/test_shopping_calculation.py
+      - name: Ruff diagnostic format diff
+        run: ruff format --diff backend/app/domain/prep_diagnostic.py backend/app/tests/test_prep_diagnostic.py
+      - name: Ruff lint and format gate
+        run: |
+          ruff check backend/app/domain/prep_diagnostic.py backend/app/tests/test_prep_diagnostic.py
+          ruff format --check backend/app/domain/prep_diagnostic.py backend/app/tests/test_prep_diagnostic.py
