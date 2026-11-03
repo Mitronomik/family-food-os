@@ -508,9 +508,7 @@ def test_authoritative_planner_to_prep_and_shopping_is_read_only(scenario, capsy
             }
             for row in shopping.items
         ],
-        "unresolved_reason_codes": sorted(
-            row.reason.value for row in prep.unresolved
-        ),
+        "unresolved_reason_codes": sorted(row.reason.value for row in prep.unresolved),
         "unresolved_step_count": len(prep.unresolved),
         "executable_task_count": len(prep.executable_tasks),
         "comparison": {
