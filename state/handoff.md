@@ -1,3 +1,17 @@
+# 2026-11-03 — PR #279 Candidate A docs-only correction decision for review
+
+**Base:** `main@1b7d307c7de1bb298611e019cc7e233dfa21040b`, PR #278 merged. Read the [Candidate A decision](../docs/family-food/pr10-core-candidate-a-immutable-correction-decision-2026-11-03.md) for the sole current bounded result and evidence. Earlier “A1 under review” / “PDF unavailable” statements below are historical; original PDF is now checked for A, while actual persisted Step/target identity and qualified human approval remain unproved.
+
+**Outcome:** source Step 4 explicitly specifies evaporation under a closed lid; initial R2-C publication weakened it to generic completion. `IMMUTABLE_CORRECTION_REQUIRED` recommends a separately approved successor, not mutation of @1. Proposed draft is not source publication. No successor number/production ID or nutrition permission has been assigned. Existing current-version selection makes an active successor consequential; its own reviewed authority must be atomic with future publication. Read the exact R2-C replay gap and future negative matrix before proposing implementation.
+
+**Preserve:** old v1/children/authority, A/B/pins/receipts and original MealEvent/Serving references; unchanged Step 1 SHA never transfers D3 eligibility. Old fixture Candidate A stays NO_GO; no substitute candidate or fixture regeneration. `APPROVED_IMMEDIATE=0`, executable/persistent `NO_GO_TO_PR10_CORE_RUNTIME`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`, technical-only `PR10_FF_FIXTURE_REPRODUCIBLE=PASS`; A1 diagnostics unexpanded.
+
+**Review checkpoint:** [PR #279](https://github.com/Mitronomik/family-food-os/pull/279) is open, not merged; old/proposed Step 4 and complete-process SHA-256 independently match the document. This review confirms only the **documented plausibility** of the R2-C replay risk, not a reproduced bug or verified new recipe authority. Candidate A `NO_GO` on original fixture and Candidate B `INSUFFICIENT_EVIDENCE` remain; no eligibility publication or safe-use approval.
+
+**Next ONLY:** independently review four-file docs/state scope and exact-head Docs CI, then obtain an explicit owner merge decision. Future source/process + nutrition applicability review, actual target readback and completed replay/rollback contract require separate authorization; only after their acceptance may implementation/publication be separately requested. No merge or runtime action is authorized by this handoff.
+
+---
+
 # 2026-11-03 — PR10-A1 pure diagnostic domain PR: verify and review, no merge
 
 **Accepted base:** `main@17e9a7b844f9e1709d04d8d2603b8c6827a0ee2d`, [#277 merged](https://github.com/Mitronomik/family-food-os/pull/277). Bounded owner-authorized PR10-A1 implements only `backend/app/domain/prep_diagnostic.py` with tests, dedicated AI-off CI and state updates. Input: already-validated MealPlan/Serving, RecipeVersion/RecipeIngredient/Step and FoodIngredient snapshots plus mandatory member-exclusion map. Output: immutable event-specific source quantities (exact Decimal), non-executable step identity hashes, typed missing-approval/supply reasons, reproducible source/content fingerprints. No executable tasks, `INCOMPLETE` always. Scope is **not** PrepPlan publication, D3 eligibility, SQL/API/PDF, source step instructions or batch/freezer execution.

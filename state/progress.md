@@ -1,3 +1,13 @@
+# 2026-11-03 — PR #279 Candidate A docs-only correction decision (review pending)
+
+- Accepted base `1b7d307c7de1bb298611e019cc7e233dfa21040b` includes merged [PR #278](https://github.com/Mitronomik/family-food-os/pull/278); prior A1 unmerged labels below are historical.
+- [One docs-only decision](../docs/family-food/pr10-core-candidate-a-immutable-correction-decision-2026-11-03.md) records verified PDF/source and four-step hashes, introduction in R2-C commit `a88ccda5c7cb0472ef663be3ce835836b0d0d7aa` / PR #132, minimal review-only Step 4 restoration, preservation matrix and future atomicity/replay requirements. No supported equivalence rationale was found.
+- Recommended `IMMUTABLE_CORRECTION_REQUIRED`; future publication **NOT_READY**. Existing append/prepared-authority UoW mechanisms are available, but old language-only approvals cannot authorize process restoration or automatic nutrition carryover. R2-C post-successor replay has a documented, unexecuted code-path concern requiring no-repair tests.
+- Review checkpoint: [PR #279](https://github.com/Mitronomik/family-food-os/pull/279) is **open, not merged**; independently recalculated both Step 4 and two ordered-process SHA-256 hashes match its proposed correction witness. The R2-C replay concern is confirmed as a plausible **code-path inference**, not a tested defect. Candidate A remains `NO_GO` on frozen v1, Candidate B remains `INSUFFICIENT_EVIDENCE` outside this change; no human culinary or nutrition sign-off is claimed.
+- Only documentation/state changed. v1, frozen fixture, all runtime gates and accepted pure A1 scope remain unchanged. Source/household/D3 approval is not granted; exact target Step readback remains absent. This decision awaits independent PR review and owner merge; no automatic next phase.
+
+---
+
 # 2026-11-03 — PR10-A1 pure non-executable diagnostic foundation (implementation PR)
 
 - **FACT:** [PR #277](https://github.com/Mitronomik/family-food-os/pull/277) merged at `main@17e9a7b844f9e1709d04d8d2603b8c6827a0ee2d`. Owner subsequently requested bounded implementation of **PR10-A1**; no D3/executable Prep/DB/API/PDF authorization.
