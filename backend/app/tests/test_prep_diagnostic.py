@@ -94,7 +94,7 @@ def _input(
     )
 
 
-def _calculate(meal, recipes, foods, exclusions, ordinals, ordinals, **kwargs):
+def _calculate(meal, recipes, foods, exclusions, ordinals, **kwargs):
     return calculate_prep_diagnostic(
         plan=meal,
         recipes=recipes,
@@ -364,6 +364,127 @@ def test_timestamp_and_tuple_order_do_not_change_fingerprints():
     assert (
         _calculate(edited, recipes, foods, exclusions, ordinals).source_fingerprint
         == original.source_fingerprint
+    )
+
+
+
+def _with_member_ids(snapshot, member_ids):
+    """Two SQLite-like run-local IDs with the SAME explicit semantic ordinals."""
+    meal, recipes, foods, exclusions, ordinals = snapshot
+    old_ids = [pin.member_id for pin in meal.member_selections]
+    binding = dict(zip(old_ids, member_ids, strict=True))
+    remapped = replace(
+        meal,
+        member_selections=tuple(
+            replace(pin, member_id=binding[pin.member_id])
+            for pin in meal.member_selections
+        ),
+        servings=tuple(
+            replace(serving, member_id=binding[serving.member_id])
+            for serving in meal.servings
+        ),
+    )
+    return (
+        remapped,
+        recipes,
+        foods,
+        {binding[mid]: value for mid, value in exclusions.items()},
+        {binding[mid]: ordinal for mid, ordinal in ordinals.items()},
+    )
+
+
+def test_unequal_servings_and_inverted_runtime_uuid_order_keep_semantic_hash():
+    low = UUID("11111111-1111-4111-8111-111111111111")
+    high = UUID("eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee")
+    one_snapshot = _with_member_ids(_input(portions=("1.5", "2.5")), (low, high))
+    two_snapshot = _with_member_ids(_input(portions=("1.5", "2.5")), (high, low))
+    assert low.hex < high.hex
+    assert one_snapshot[4][low] == 1 and two_snapshot[4][low] == 2
+    one = _calculate(*one_snapshot)
+    two = _calculate(*two_snapshot)
+    assert one.content_fingerprint == two.content_fingerprint
+    assert one.source_fingerprint != two.source_fingerprint
+    assert one.event_ingredient_quantities[0].required_quantity == (
+        two.event_ingredient_quantities[0].required_quantity
+    )
+    assert one.executable_tasks == two.executable_tasks == ()
+
+    # Swapping logical portions (not just UUID assignments) MUST change content.
+    changed = _with_member_ids(_input(portions=("2.5", "1.5")), (high, low))
+    assert _calculate(*changed).content_fingerprint != one.content_fingerprint
+
+
+def test_missing_or_ambiguous_semantic_ordinals_fail_closed():
+    meal, recipes, foods, exclusions, ordinals = _input()
+    members = list(ordinals)
+    bad = (
+        {members[0]: 1},
+        {members[0]: 1, members[1]: 1},
+        {members[0]: 1, members[1]: 3},
+        {members[0]: True, members[1]: 2},
+        {members[0]: "1", members[1]: 2},
+        {members[0]: 0, members[1]: 1},
+        {**ordinals, uuid4(): 3},
+    )
+    for mapping in bad:
+        with pytest.raises(PrepDiagnosticError, match="номера|нумерация"):
+            _calculate(meal, recipes, foods, exclusions, mapping)
+    with pytest.raises(PrepDiagnosticError, match="нумерация"):
+        calculate_prep_diagnostic(
+            plan=meal,
+            recipes=recipes,
+            foods=foods,
+            member_exclusions=exclusions,
+            member_ordinals=None,
+            policy_version=POLICY,
+        )
+
+
+@pytest.mark.parametrize("kind", [MealSourceKind.EAT_OUT, MealSourceKind.READY_MEAL])
+def test_nonrecipe_source_reference_is_pinned_and_normalized(kind):
+    meal, recipes, foods, exclusions, ordinals = _input(kinds=(kind,))
+    baseline = _calculate(meal, recipes, foods, exclusions, ordinals)
+    event = meal.events[0]
+    updated = replace(
+        meal,
+        events=(replace(event, source_reference="  order   reference A  "),),
+    )
+    changed = _calculate(updated, recipes, foods, exclusions, ordinals)
+    assert changed.source_fingerprint != baseline.source_fingerprint
+    assert changed.content_fingerprint != baseline.content_fingerprint
+    normalized = replace(
+        meal,
+        events=(replace(event, source_reference="order reference A"),),
+    )
+    normalized_receipt = _calculate(normalized, recipes, foods, exclusions, ordinals)
+    assert changed.source_fingerprint == normalized_receipt.source_fingerprint
+    assert changed.content_fingerprint == normalized_receipt.content_fingerprint
+    assert changed.executable_tasks == baseline.executable_tasks == ()
+
+
+def test_decimal_rounding_is_fixed_and_independent_of_ambient_context():
+    meal, recipes, foods, exclusions, ordinals = _input()
+    assert module.QUANTITY_PRECISION == 50
+    assert module.QUANTITY_ROUNDING == "ROUND_HALF_EVEN"
+
+    with localcontext() as ctx:
+        ctx.prec = 6
+        ctx.rounding = ROUND_DOWN
+        under_low_context = _calculate(meal, recipes, foods, exclusions, ordinals)
+    with localcontext() as ctx:
+        ctx.prec = 80
+        ctx.rounding = ROUND_UP
+        under_high_context = _calculate(meal, recipes, foods, exclusions, ordinals)
+
+    assert under_low_context == under_high_context
+    leaf = next(
+        value.required_quantity for value in under_low_context.event_ingredient_quantities
+        if value.food_code == "BAY_LEAF"
+    )
+    # 4/6 is a repeating rational. The result is a documented 50-significant-
+    # digit HALF_EVEN approximation, NEVER an exact 2/3 or a package count.
+    assert leaf == Decimal(
+        "0.66666666666666666666666666666666666666666666666667"
     )
 
 
