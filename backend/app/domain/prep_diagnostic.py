@@ -138,7 +138,9 @@ def _multiply(source: Decimal, total: Decimal, base: Decimal) -> Decimal:
             ctx.prec = 50
             amount = source * total / base
     except DecimalException as exc:
-        raise PrepDiagnosticError("Не удалось безопасно масштабировать рецепт.") from exc
+        raise PrepDiagnosticError(
+            "Не удалось безопасно масштабировать рецепт."
+        ) from exc
     return _positive_decimal(amount)
 
 
@@ -194,7 +196,9 @@ def calculate_prep_diagnostic(
     unresolved: list[PrepUnresolvedDiagnostic] = []
     source_events: list[object] = []
     content_events: list[object] = []
-    events = sorted(plan.events, key=lambda item: (item.local_date, item.position, item.id.hex))
+    events = sorted(
+        plan.events, key=lambda item: (item.local_date, item.position, item.id.hex)
+    )
     for event in events:
         if event.plan_id != plan.plan.id:
             _reject("Событие относится к другой ревизии плана.")
@@ -210,7 +214,10 @@ def calculate_prep_diagnostic(
             event.role.value,
             event.source_kind.value,
             str(event.recipe_version_id) if event.recipe_version_id else None,
-            [[str(member), _canonical_decimal(value)] for member, value in participants],
+            [
+                [str(member), _canonical_decimal(value)]
+                for member, value in participants
+            ],
         ]
         content_event: list[object] = [
             event.local_date.isoformat(),
@@ -239,7 +246,8 @@ def calculate_prep_diagnostic(
                 or not detail.recipe.is_active
                 or detail.version.verification_status
                 is not VerificationStatus.SOURCE_VERIFIED
-                or detail.version.rights_review_status is not RightsReviewStatus.REVIEWED
+                or detail.version.rights_review_status
+                is not RightsReviewStatus.REVIEWED
             ):
                 _reject("Не найдена активная исходно подтверждённая версия рецепта.")
             base = _positive_decimal(detail.version.base_servings)
@@ -288,7 +296,11 @@ def calculate_prep_diagnostic(
                     ]
                 )
                 content_ingredients.append(
-                    [food.canonical_code, ingredient.unit.value, _canonical_decimal(required)]
+                    [
+                        food.canonical_code,
+                        ingredient.unit.value,
+                        _canonical_decimal(required),
+                    ]
                 )
             step_pins: list[object] = []
             content_steps: list[object] = []
@@ -301,7 +313,9 @@ def calculate_prep_diagnostic(
                 )
                 unresolved.append(
                     PrepUnresolvedDiagnostic(
-                        event.id, PrepDiagnosticReason.STEP_ELIGIBILITY_UNVERIFIED, step.id
+                        event.id,
+                        PrepDiagnosticReason.STEP_ELIGIBILITY_UNVERIFIED,
+                        step.id,
                     )
                 )
                 step_pins.append([str(step.id), step.position, digest, step.stage_code])
