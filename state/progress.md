@@ -1,3 +1,11 @@
+# 2026-11-02 — proposed PR10 Product Value / PR10-A1 sequencing amendment
+
+- [PR #276](https://github.com/Mitronomik/family-food-os/pull/276) confirmed merged, accepted `main@ff7a42cb132327177c15e9ea850d8bbc69e5077a`. Owner instructed **docs-only** narrow sequencing change; new [amendment](../docs/family-food/pr10-pure-calculation-sequencing-amendment-2026-11-02.md) reconciles Option B §4–5, PR10-ARCH §4/§9 and accepted forward positive preflight **without** changing Gate2/release authority or Master Roadmap order.
+- Proposed after independent review and owner-authorized merge: future **PR10-A1** pure source-backed Decimal diagnostic calculator can be separately authorized **before** `APPROVED_IMMEDIATE`/D3 executable approvals. It may return per-event quantities, trace and explicit unresolved data, but **zero executable tasks**, no stock, schema, API, PDF or consumer instructions. Future A2/D3/PR10-B/C/Gate2 and finished cooked-batch/release keep their own prerequisites; accepted 3/7/21/42 energy-only fixture unchanged.
+- Status: **PROPOSED CONTRACT ONLY**, no new runtime implemented or approved. `APPROVED_IMMEDIATE=0`, `NO_GO_TO_PR10_CORE_RUNTIME`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`; two-positive-event Gate2 plus negative/all-UNKNOWN rejection unchanged. Next only docs review/merge decision; separately request A1 implementation permission.
+
+---
+
 # 2026-11-02 — current two-Step source/process evidence review (Issue #275)
 
 - [PR #274](https://github.com/Mitronomik/family-food-os/pull/274) merged into `main@1297393a86f020b86a8b3ddbf7b8754e68d99318`; accepted current-week 3/7/21/42 energy-only Planner fixture unchanged.

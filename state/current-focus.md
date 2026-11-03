@@ -1,3 +1,13 @@
+# CURRENT — proposed PR10-A1 pure calculation sequencing; docs-only review — 2026-11-02
+
+**Accepted base:** `main@ff7a42cb132327177c15e9ea850d8bbc69e5077a`, [PR #276 merged](https://github.com/Mitronomik/family-food-os/pull/276) on 2026-11-02. Product owner requested **one docs-only contract amendment**, **not runtime**: [PR10-A1 pure calculation sequencing proposal](../docs/family-food/pr10-pure-calculation-sequencing-amendment-2026-11-02.md). This proposes lifting the source-reviewed `APPROVED_IMMEDIATE` prerequisite **only for a future, separately authorized, pure, non-executable in-memory diagnostic calculator**. All previous historic state entries below describing PR #276 as unmerged are snapshots, not current facts.
+
+**FACT:** `PR10_FF_FIXTURE_REPRODUCIBLE=PASS` remains for the owner-frozen 3/7/21/42 **kcal-only** technical fixture; the two current Step1 research candidates have no executable approvals and `APPROVED_IMMEDIATE=0`. Existing `NO_GO_TO_PR10_CORE_RUNTIME`, `NO_GO_TO_PR10_A_RUNTIME` (for executable/persistent/user-visible capability), `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`, D3 anti-rollback and Gate2 **two approved distinct task-bearing events plus negative evidence** all remain. Proposed A1 is not a consumer PrepPlan, executable PrepTask, trusted eligibility, persistent schema, Shopping mutation or food-safety approval.
+
+**Next ONLY:** independently review, validate docs-only exact-head CI, and request **separate owner merge approval** for this amendment. **After acceptance/merge**, request another explicit owner authorization for bounded **PR10-A1 pure diagnostic domain implementation** (no DB/API/UI/PDF/retail). Do not start A1 or D3/Prep/Gate2/runtime automatically. No Planner, source, frozen input, RecipeVersion or migration change.
+
+---
+
 # CURRENT — forward Step 1 source/process review, no executable approval — 2026-11-02
 
 **Accepted base:** `main@1297393a86f020b86a8b3ddbf7b8754e68d99318` after [PR #274 merged](https://github.com/Mitronomik/family-food-os/pull/274) 2026-11-02T16:26:24Z. `PR10_FF_FIXTURE_REPRODUCIBLE=PASS` remains valid solely for the exact owner-accepted 3-member / 7-day / 21 genuine event / 42 Decimal Serving **energy-only** forward fixture. Earlier headings below describing #274 as open are historical snapshots.

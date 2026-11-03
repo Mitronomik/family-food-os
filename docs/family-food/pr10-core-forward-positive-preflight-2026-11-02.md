@@ -1,5 +1,7 @@
 # PR10-CORE — current forward fixture positive-data / D3 / schema preflight
 
+> **Later proposed sequencing exception (2026-11-02):** [PR10-A1 pure diagnostic calculation amendment](pr10-pure-calculation-sequencing-amendment-2026-11-02.md) would allow the **separate future pure, non-executable** domain calculation substep to proceed after review/merge and explicit owner authorization **without** the positive step eligibility currently missing from this preflight. The source-readiness `NO_GO`, `APPROVED_IMMEDIATE=0`, D3 and positive Gate2 conditions recorded here **remain true for executable/persistent/user-actionable Prep**. This note does not retroactively turn the audited steps into approved instructions or authorize implementation.
+
 **Date:** 2026-11-02
 **Tracking:** [Issue #273](https://github.com/Mitronomik/family-food-os/issues/273).
 **Base:** accepted `main@418756bfc16af4b6786226725438d075f7ddd609`, after [PR #272 merged](https://github.com/Mitronomik/family-food-os/pull/272).

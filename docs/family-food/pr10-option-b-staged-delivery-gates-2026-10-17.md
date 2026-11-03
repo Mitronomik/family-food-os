@@ -1,5 +1,7 @@
 # PR10 Option B — staged technical Prep and safe-batch release gates
 
+> **Later owner-requested A1 calculation sequencing proposal — 2026-11-02:** [pure diagnostic PR10-A1 sequencing amendment](pr10-pure-calculation-sequencing-amendment-2026-11-02.md) proposes to allow a **separately owner-authorized, pure non-executable diagnostic calculator** before source-reviewed `APPROVED_IMMEDIATE` exists. It narrows **only** the pre-implementation source-positive prerequisite in this document's §4 opening and §5(1)–(2) for **A1**; this is **NOT effective until independent review and owner-authorized merge**. §3 executable eligibility, §4 genuine **two positive MealEvents + unresolved/negative Gate2** proof, §6/§6.1 safe batch and portion release conditions, D3 rollback-safe reader and all other gates are unchanged. No A1 runtime implementation is authorized by this notice.
+
 **Status:** PROPOSED DOCS-ONLY AMENDMENT, **NOT EFFECTIVE UNTIL INDEPENDENT REVIEW AND MERGE**.
 **Date:** 2026-10-17.
 **Owner authorization — independently reviewable evidence:** [Issue #220 owner-decision record, comment #6233466777](https://github.com/Mitronomik/family-food-os/issues/220#issuecomment-6233466777) transcribes the **later** explicit 2026-10-17 FamilyFoodOS project-chat instruction **verbatim** (it was not originally entered as a GitHub comment):
