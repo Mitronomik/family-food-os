@@ -253,6 +253,46 @@ def _db_dump(config: DatabaseConfig) -> str:
         return "\n".join(connection.iterdump())
 
 
+
+def _persisted_event_signature(plan):
+    """Actual MealEvent and participant Serving identity from persisted readback."""
+    per_event = defaultdict(list)
+    for serving in plan.servings:
+        per_event[serving.event_id].append(
+            (serving.member_id, serving.portion_servings)
+        )
+    return tuple(
+        (
+            event.local_date,
+            event.position,
+            event.role,
+            event.source_kind,
+            event.recipe_version_id,
+            event.source_reference,
+            tuple(sorted(per_event[event.id])),
+        )
+        for event in sorted(plan.events, key=lambda event: (event.local_date, event.position))
+    )
+
+
+def _planner_event_signature(result):
+    """Separately captured deterministic Planner output (not reconstructed)."""
+    return tuple(
+        (
+            event.local_date,
+            event.position,
+            event.role,
+            event.source_kind,
+            event.recipe_version_id,
+            event.source_reference,
+            tuple(sorted(event.portions)),
+        )
+        for event in sorted(
+            result.events, key=lambda event: (event.local_date, event.position)
+        )
+    )
+
+
 def _verified_generation_inputs(
     plan: MealPlanDetail, state, witness: CapturedGenerationContext
 ):
@@ -288,6 +328,8 @@ def _verified_generation_inputs(
     }
     if traced_exclusions != expected_exclusions:
         raise ProofBlocked("Untrusted, missing or stale exclusion context")
+    if _persisted_event_signature(plan) != _planner_event_signature(witness.result):
+        raise ProofBlocked("Persisted MealEvent/Serving differs from Planner witness")
     if (
         len(witness.semantic_slots) != len(source_members)
         or len(set(witness.semantic_slots)) != len(source_members)
@@ -306,7 +348,8 @@ def _read_only(
     scenario, *, witness=None, household_id=None, tamper_plan=None, drop_food=False
 ):
     _, engine, households, original, _ = scenario
-    witness = witness if witness is not None else original
+    if witness is None:
+        raise ProofBlocked("Missing captured generation witness")
     household_id = household_id or original.command.household_id
     state = households.get_household(household_id)
     with SqlAlchemyShoppingReadScope(engine) as scope:
@@ -369,8 +412,10 @@ def _raw_requirements(prep):
 def test_authoritative_planner_to_prep_and_shopping_is_read_only(scenario, capsys):
     config, _, _, _, stock = scenario
     before = _db_dump(config)
-    plan, prep, shopping = _read_only(scenario)
-    second_plan, second_prep, second_shopping = _read_only(scenario)
+    plan, prep, shopping = _read_only(scenario, witness=scenario[3])
+    second_plan, second_prep, second_shopping = _read_only(
+        scenario, witness=scenario[3]
+    )
     assert (plan, prep, shopping) == (second_plan, second_prep, second_shopping)
     assert _db_dump(config) == before
 
@@ -465,22 +510,59 @@ def test_missing_context_and_wrong_household_fail_closed_without_writes(scenario
     for invalid in cases:
         with pytest.raises(ProofBlocked):
             _read_only(scenario, witness=invalid)
+    with pytest.raises(ProofBlocked, match="Missing captured"):
+        _read_only(scenario)
     with pytest.raises((ProofBlocked, LookupError)):
-        _read_only(scenario, household_id=uuid4())
+        _read_only(scenario, witness=witness, household_id=uuid4())
     assert _db_dump(config) == before
 
 
 def test_stale_revision_and_missing_canonical_food_are_rejected(scenario):
-    config, _, _, _, _ = scenario
+    config, _, _, witness, _ = scenario
     before = _db_dump(config)
     with pytest.raises(ProofBlocked, match="Stale"):
         _read_only(
             scenario,
+            witness=witness,
             tamper_plan=lambda plan: replace(
                 plan,
                 plan=replace(plan.plan, revision_number=plan.plan.revision_number + 1),
             ),
         )
     with pytest.raises(PrepDiagnosticError, match="Неизвестная форма"):
-        _read_only(scenario, drop_food=True)
+        _read_only(scenario, witness=witness, drop_food=True)
+    with pytest.raises(ProofBlocked, match="MealEvent/Serving"):
+        _read_only(
+            scenario,
+            witness=witness,
+            tamper_plan=lambda plan: replace(
+                plan,
+                events=(
+                    replace(
+                        plan.events[0],
+                        recipe_version_id=uuid4()
+                        if plan.events[0].source_kind is MealSourceKind.COOK_RECIPE
+                        else None,
+                        source_reference="подменённый источник",
+                    ),
+                    *plan.events[1:],
+                ),
+            ),
+        )
+    with pytest.raises(ProofBlocked, match="MealEvent/Serving"):
+        _read_only(
+            scenario,
+            witness=witness,
+            tamper_plan=lambda plan: replace(
+                plan,
+                servings=(
+                    replace(
+                        plan.servings[0],
+                        portion_servings=plan.servings[0].portion_servings
+                        + Decimal("0.125"),
+                    ),
+                    *plan.servings[1:],
+                ),
+            ),
+        )
     assert _db_dump(config) == before
