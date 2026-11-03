@@ -18,7 +18,6 @@ from decimal import ROUND_CEILING, ROUND_HALF_EVEN, Decimal, localcontext
 from uuid import UUID, uuid4
 
 import pytest
-
 from app.db.config import DatabaseConfig
 from app.domain.meal_patterns import MealRole
 from app.domain.meal_plans import MealPlanDetail, MealSourceKind
@@ -55,7 +54,6 @@ from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
 )
 from app.persistence.sqlalchemy_core.shopping_uow import SqlAlchemyShoppingReadScope
 from app.seed.r2c_breakfast_grain_diversity import seed_r2c_breakfast_grain_diversity
-from app.services.meal_plans import MealPlanService
 from app.services.pantry import PantryService
 from app.services.planner import (
     AuthoritativeGenerationRequest,
