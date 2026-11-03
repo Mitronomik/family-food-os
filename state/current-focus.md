@@ -1,3 +1,15 @@
+# CURRENT — PR #279 merged; Candidate A one-recipe correction contract review — 2026-11-03
+
+**Accepted main:** `f7193dd6c66f11fae82fe874de971f5945b9a1c9` after [PR #279 merged](https://github.com/Mitronomik/family-food-os/pull/279). Historical entries below that describe PR #279 as open are archived snapshots. The owner has now asked to continue with the next bounded prerequisite, **not** to execute or publish a corrected RecipeVersion.
+
+**Current docs-only work:** [Candidate A successor publication Implementation Contract Gate](../docs/family-food/pr10-candidate-a-successor-publication-contract-gate-2026-11-03.md) records the concrete preconditions and atomic fresh/replay/conflict/rollback acceptance for **one future immutable successor** of `SCHOOL2022_54_20K_BUCKWHEAT_MILK_PORRIDGE`. Status remains `CONTRACT_PROPOSED / IMPLEMENTATION_NOT_READY / NO_GO_TO_CORRECTION_PUBLICATION`: actual target predecessor/child/prepared-authority DB readback, human qualified whole-process and successor-nutrition applicability approval, active-version impact authorization and R2-C post-successor zero-write replay proof are not available. Earlier source Step 4 correction is only a **review-only proposal**. Candidate B still `INSUFFICIENT_EVIDENCE`.
+
+**Unchanged:** `PR10_FF_FIXTURE_REPRODUCIBLE=PASS` narrow technical energy-only fixture; `APPROVED_IMMEDIATE=0`, `NO_GO_TO_PR10_CORE_RUNTIME` for executable/persistent Prep, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`. Frozen A/B, historical v1/MealEvent/Serving and pure A1 diagnostics unchanged; no new code, RecipeVersion, D3, Planner, Shopping or migration.
+
+**Next ONLY:** verify this docs-only contract PR and obtain independent Architecture/Data/Domain/QA review and owner merge choice. After acceptance, separately authorize the read-only predecessor/authority receipt and qualified source/nutrition assessment. No automatic publication, D3/Prep, Gate2, Gate3 or release.
+
+---
+
 # CURRENT — PR #279 Candidate A correction decision, docs-only review — 2026-11-03
 
 **Accepted base:** `main@1b7d307c7de1bb298611e019cc7e233dfa21040b` after [PR #278 merged](https://github.com/Mitronomik/family-food-os/pull/278). The earlier A1 “under review” entries below are historical; accepted pure non-executable diagnostics remain unchanged.

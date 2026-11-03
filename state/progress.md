@@ -1,3 +1,12 @@
+# 2026-11-03 — Candidate A successor implementation contract gate (proposal only)
+
+- [PR #279](https://github.com/Mitronomik/family-food-os/pull/279) confirmed merged at `main@f7193dd6c66f11fae82fe874de971f5945b9a1c9`; its `IMMUTABLE_CORRECTION_REQUIRED` decision is accepted as a **recommendation to develop a reviewed successor**, not permission to publish one.
+- New [bounded implementation contract gate](../docs/family-food/pr10-candidate-a-successor-publication-contract-gate-2026-11-03.md) specifies exact v1 preservation, real target readback, explicit independent source/nutrition/output basis reviews, atomic one-recipe append + new prepared authority, current-version selection, strict zero-write replay/conflict/rollback, and R2-C historical post-successor adversarial tests.
+- **Evidence status:** `CONTRACT_PROPOSED / IMPLEMENTATION_NOT_READY`. No actual target SQLite readback or signed professional/owner correction publication approval supplied. The R2-C replay risk is **code-path inference, not reproduced**. No runtime tests, source publication, recipe data, migration, A/B fixture or production changes.
+- `APPROVED_IMMEDIATE=0`, executable Prep `NO_GO_TO_PR10_CORE_RUNTIME`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`; technical energy-only `PR10_FF_FIXTURE_REPRODUCIBLE=PASS` unchanged. Await independent docs review and owner's separate merge decision.
+
+---
+
 # 2026-11-03 — PR #279 Candidate A docs-only correction decision (review pending)
 
 - Accepted base `1b7d307c7de1bb298611e019cc7e233dfa21040b` includes merged [PR #278](https://github.com/Mitronomik/family-food-os/pull/278); prior A1 unmerged labels below are historical.
