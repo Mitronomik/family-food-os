@@ -382,7 +382,6 @@ def test_authoritative_planner_to_prep_and_shopping_is_read_only(scenario, capsy
     )
     assert any(event.source_kind is MealSourceKind.EAT_OUT for event in plan.events)
     assert shopping.price_status is ShoppingPriceStatus.UNKNOWN
-    assert all(item.panry_available_quantity >= 0 for item in ())  # no false stock assertions
 
     totals = _raw_requirements(prep)
     assert {item.food_ingredient_id for item in shopping.items} == {
@@ -399,7 +398,7 @@ def test_authoritative_planner_to_prep_and_shopping_is_read_only(scenario, capsy
             )
         assert item.required_quantity == expected_required
         assert item.purchase_quantity >= Decimal(0)
-        assert item.panry_available_quantity >= Decimal(0) if False else True
+        assert item.pantry_available_quantity >= Decimal(0)
 
     stocked = next(
         item for item in shopping.items if item.food_ingredient_id == stock.food_ingredient_id
