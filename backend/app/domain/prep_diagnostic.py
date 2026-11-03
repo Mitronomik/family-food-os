@@ -192,13 +192,14 @@ def calculate_prep_diagnostic(
     # Caller-supplied stable 1..N identity, not derived from run-local UUIDs.
     # Validate complete, unambiguous mapping before any semantic fingerprint.
     if set(member_ordinals) != member_ids or any(
-        not isinstance(member_id, UUID)
-        or type(ordinal) is not int
+        not isinstance(member_id, UUID) or type(ordinal) is not int
         for member_id, ordinal in member_ordinals.items()
     ):
         _reject("Семантические номера должны охватывать всех участников плана.")
     if sorted(member_ordinals.values()) != list(range(1, len(member_ids) + 1)):
-        _reject("Семантические номера участников должны быть уникальны и последовательны.")
+        _reject(
+            "Семантические номера участников должны быть уникальны и последовательны."
+        )
     member_servings: dict[UUID, list[tuple[UUID, Decimal]]] = defaultdict(list)
     for serving in plan.servings:
         if serving.member_id not in member_ids:
@@ -284,7 +285,9 @@ def calculate_prep_diagnostic(
                     ctx.rounding = QUANTITY_ROUNDING
                     total = sum((value for _, value in participants), Decimal(0))
             except DecimalException as exc:
-                raise PrepDiagnosticError("Не удалось безопасно сложить порции.") from exc
+                raise PrepDiagnosticError(
+                    "Не удалось безопасно сложить порции."
+                ) from exc
             _positive_decimal(total)
             ingredient_pins: list[object] = []
             content_ingredients: list[object] = []
