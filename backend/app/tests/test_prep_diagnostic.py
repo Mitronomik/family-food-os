@@ -3,18 +3,13 @@
 import ast
 import inspect
 from dataclasses import replace
-from datetime import date, datetime, timedelta, timezone
+from datetime import UTC, date, datetime, timedelta
 from decimal import Decimal
 from uuid import uuid4
 
-import pytest
-
 import app.domain.prep_diagnostic as module
-from app.domain.food_recipes import (
-    RecipeVersionDetail,
-    RightsReviewStatus,
-    VerificationStatus,
-)
+import pytest
+from app.domain.food_recipes import RightsReviewStatus, VerificationStatus
 from app.domain.meal_patterns import MealRole
 from app.domain.meal_plans import (
     HouseholdMealEvent,
@@ -35,7 +30,7 @@ from app.domain.units import UnitCode
 from app.tests.test_food_ingredient_domain import ingredient
 from app.tests.test_food_recipe_domain import _detail
 
-NOW = datetime(2026, 11, 3, 9, tzinfo=timezone.utc)
+NOW = datetime(2026, 11, 3, 9, tzinfo=UTC)
 WEEK = date(2026, 11, 2)
 POLICY = "pr10-a1-diagnostic-v1"
 
@@ -118,9 +113,9 @@ def test_exact_decimal_scaling_multiple_members_source_base_and_no_execution():
     assert len(result.event_ingredient_quantities) == 2
     by_code = {item.food_code: item for item in result.event_ingredient_quantities}
     # Existing RecipeVersion has base_servings=6; total member Servings=4.
-    assert by_code["RICE"].source_quantity == Decimal("600")
-    assert by_code["RICE"].total_servings == Decimal("4")
-    assert by_code["RICE"].required_quantity == Decimal("400")
+    assert by_code["RICE"].source_quantity == Decimal(600)
+    assert by_code["RICE"].total_servings == Decimal(4)
+    assert by_code["RICE"].required_quantity == Decimal(400)
     assert by_code["BAY_LEAF"].required_quantity == Decimal(
         "0.66666666666666666666666666666666666666666666666667"
     )
@@ -167,7 +162,7 @@ def test_base_servings_noninteger_and_zero_rounding_never_assumed():
     amounts = {
         x.food_code: x.required_quantity for x in got.event_ingredient_quantities
     }
-    assert amounts == {"RICE": Decimal("360"), "BAY_LEAF": Decimal("0.6")}
+    assert amounts == {"RICE": Decimal(360), "BAY_LEAF": Decimal("0.6")}
 
 
 @pytest.mark.parametrize(
