@@ -4,8 +4,8 @@ import ast
 import inspect
 from dataclasses import replace
 from datetime import UTC, date, datetime, timedelta
-from decimal import Decimal
-from uuid import uuid4
+from decimal import ROUND_DOWN, ROUND_UP, Decimal, localcontext
+from uuid import UUID, uuid4
 
 import app.domain.prep_diagnostic as module
 import pytest
@@ -90,22 +90,24 @@ def _input(
         {recipe.version.id: recipe},
         {food_1.id: food_1, food_2.id: food_2},
         {member: frozenset() for member in members},
+        {member: ordinal for ordinal, member in enumerate(members, start=1)},
     )
 
 
-def _calculate(meal, recipes, foods, exclusions, **kwargs):
+def _calculate(meal, recipes, foods, exclusions, ordinals, ordinals, **kwargs):
     return calculate_prep_diagnostic(
         plan=meal,
         recipes=recipes,
         foods=foods,
         member_exclusions=exclusions,
+        member_ordinals=ordinals,
         policy_version=kwargs.get("policy", POLICY),
     )
 
 
 def test_exact_decimal_scaling_multiple_members_source_base_and_no_execution():
-    meal, recipes, foods, exclusions = _input()
-    result = _calculate(meal, recipes, foods, exclusions)
+    meal, recipes, foods, exclusions, ordinals = _input()
+    result = _calculate(meal, recipes, foods, exclusions, ordinals)
 
     assert result.status is PrepDiagnosticStatus.INCOMPLETE
     assert result.engine_version == "prep-diagnostic-a1-v1"
@@ -136,14 +138,14 @@ def test_exact_decimal_scaling_multiple_members_source_base_and_no_execution():
 
 
 def test_multiple_genuine_events_not_grouped_and_repeat_is_identical():
-    meal, recipes, foods, exclusions = _input(
+    meal, recipes, foods, exclusions, ordinals = _input(
         kinds=(MealSourceKind.COOK_RECIPE, MealSourceKind.COOK_RECIPE)
     )
-    before = (meal, dict(recipes), dict(foods), dict(exclusions))
-    first = _calculate(meal, recipes, foods, exclusions)
-    second = _calculate(meal, recipes, foods, exclusions)
+    before = (meal, dict(recipes), dict(foods), dict(exclusions), dict(ordinals))
+    first = _calculate(meal, recipes, foods, exclusions, ordinals)
+    second = _calculate(meal, recipes, foods, exclusions, ordinals)
     assert first == second
-    assert before == (meal, dict(recipes), dict(foods), dict(exclusions))
+    assert before == (meal, dict(recipes), dict(foods), dict(exclusions), dict(ordinals))
     assert len(first.event_ingredient_quantities) == 4
     assert len({item.meal_event_id for item in first.event_ingredient_quantities}) == 2
     assert len(first.unresolved) == 2
@@ -155,10 +157,10 @@ def test_base_servings_noninteger_and_zero_rounding_never_assumed():
     detail = replace(
         detail, version=replace(detail.version, base_servings=Decimal("2.5"))
     )
-    meal, recipes, foods, exclusions = _input(
+    meal, recipes, foods, exclusions, ordinals = _input(
         portions=("0.250000", "1.250000"), recipe=detail
     )
-    got = _calculate(meal, recipes, foods, exclusions)
+    got = _calculate(meal, recipes, foods, exclusions, ordinals)
     amounts = {
         x.food_code: x.required_quantity for x in got.event_ingredient_quantities
     }
@@ -175,8 +177,8 @@ def test_base_servings_noninteger_and_zero_rounding_never_assumed():
     ],
 )
 def test_unverified_mixed_source_has_explicit_unresolved_not_fake_demand(kind, reason):
-    meal, recipes, foods, exclusions = _input(kinds=(kind,))
-    result = _calculate(meal, recipes, foods, exclusions)
+    meal, recipes, foods, exclusions, ordinals = _input(kinds=(kind,))
+    result = _calculate(meal, recipes, foods, exclusions, ordinals)
     assert result.status == PrepDiagnosticStatus.INCOMPLETE
     assert result.unresolved[0].reason is reason
     assert result.event_ingredient_quantities == ()
@@ -186,8 +188,8 @@ def test_unverified_mixed_source_has_explicit_unresolved_not_fake_demand(kind, r
 
 @pytest.mark.parametrize("kind", [MealSourceKind.ORDER_OUT, MealSourceKind.EAT_OUT])
 def test_outside_home_does_not_invent_home_prep_or_unresolved(kind):
-    meal, recipes, foods, exclusions = _input(kinds=(kind,))
-    result = _calculate(meal, recipes, foods, exclusions)
+    meal, recipes, foods, exclusions, ordinals = _input(kinds=(kind,))
+    result = _calculate(meal, recipes, foods, exclusions, ordinals)
     assert not result.unresolved
     assert result.event_ingredient_quantities == ()
     assert result.executable_tasks == ()
@@ -195,21 +197,21 @@ def test_outside_home_does_not_invent_home_prep_or_unresolved(kind):
 
 
 def test_mixed_shared_recipe_and_nonrecipe_is_not_fabricated_or_double_counted():
-    meal, recipes, foods, exclusions = _input(
+    meal, recipes, foods, exclusions, ordinals = _input(
         kinds=(
             MealSourceKind.COOK_RECIPE,
             MealSourceKind.PREPARED,
             MealSourceKind.EAT_OUT,
         )
     )
-    result = _calculate(meal, recipes, foods, exclusions)
+    result = _calculate(meal, recipes, foods, exclusions, ordinals)
     assert len(result.event_ingredient_quantities) == 2
     assert len(result.unresolved) == 2  # One unapproved step, one unknown stock.
     assert result.executable_tasks == ()
 
 
 def test_all_unknown_and_forged_policy_label_cannot_grant_executable_status():
-    meal, recipes, foods, exclusions = _input(
+    meal, recipes, foods, exclusions, ordinals = _input(
         kinds=(MealSourceKind.ASSEMBLY, MealSourceKind.PREPARED)
     )
     result = _calculate(
@@ -223,27 +225,27 @@ def test_all_unknown_and_forged_policy_label_cannot_grant_executable_status():
 
 
 def test_member_exclusions_explicit_and_per_participant_fail_closed():
-    meal, recipes, foods, exclusions = _input()
+    meal, recipes, foods, exclusions, ordinals = _input()
     leaf = recipes[meal.events[0].recipe_version_id].ingredients[1].food_ingredient_id
     excluded = dict(exclusions)
     excluded[meal.servings[-1].member_id] = frozenset({leaf})
     with pytest.raises(PrepDiagnosticError, match="исключения"):
-        _calculate(meal, recipes, foods, excluded)
+        _calculate(meal, recipes, foods, excluded, ordinals)
 
     missing = dict(exclusions)
     missing.pop(next(iter(missing)))
     with pytest.raises(PrepDiagnosticError, match="охватывать"):
-        _calculate(meal, recipes, foods, missing)
+        _calculate(meal, recipes, foods, missing, ordinals)
     with pytest.raises(PrepDiagnosticError):
-        _calculate(meal, recipes, foods, {k: set() for k in exclusions})
+        _calculate(meal, recipes, foods, {k: set() for k in exclusions}, ordinals)
 
 
 def test_change_in_exclusions_changes_source_fingerprint_without_mutation():
-    meal, recipes, foods, exclusions = _input()
-    original = _calculate(meal, recipes, foods, exclusions)
+    meal, recipes, foods, exclusions, ordinals = _input()
+    original = _calculate(meal, recipes, foods, exclusions, ordinals)
     extra = dict(exclusions)
     extra[meal.servings[0].member_id] = frozenset({uuid4()})
-    changed = _calculate(meal, recipes, foods, extra)
+    changed = _calculate(meal, recipes, foods, extra, ordinals)
     assert changed.source_fingerprint != original.source_fingerprint
     assert changed.event_ingredient_quantities == original.event_ingredient_quantities
 
@@ -260,15 +262,15 @@ def test_change_in_exclusions_changes_source_fingerprint_without_mutation():
     ],
 )
 def test_invalid_serving_or_source_decimal_is_rejected_even_if_snapshot_forged(invalid):
-    meal, recipes, foods, exclusions = _input()
+    meal, recipes, foods, exclusions, ordinals = _input()
     serving = meal.servings[0]
     object.__setattr__(serving, "portion_servings", invalid)
     with pytest.raises(PrepDiagnosticError):
-        _calculate(meal, recipes, foods, exclusions)
+        _calculate(meal, recipes, foods, exclusions, ordinals)
 
 
 def test_invalid_recipe_source_rights_status_and_optional_ingredient_are_rejected():
-    meal, recipes, foods, exclusions = _input()
+    meal, recipes, foods, exclusions, ordinals = _input()
     detail = next(iter(recipes.values()))
     variants = (
         replace(
@@ -295,11 +297,11 @@ def test_invalid_recipe_source_rights_status_and_optional_ingredient_are_rejecte
     )
     for modified in variants:
         with pytest.raises(PrepDiagnosticError):
-            _calculate(meal, {detail.version.id: modified}, foods, exclusions)
+            _calculate(meal, {detail.version.id: modified}, foods, exclusions, ordinals)
 
 
 def test_mismatched_unit_missing_food_and_missing_recipe_are_blocking():
-    meal, recipes, foods, exclusions = _input()
+    meal, recipes, foods, exclusions, ordinals = _input()
     detail = next(iter(recipes.values()))
     wrong_unit = replace(
         detail,
@@ -314,14 +316,14 @@ def test_mismatched_unit_missing_food_and_missing_recipe_are_blocking():
         (recipes, {}),
     ):
         with pytest.raises(PrepDiagnosticError):
-            _calculate(meal, invalid_recipes, invalid_foods, exclusions)
+            _calculate(meal, invalid_recipes, invalid_foods, exclusions, ordinals)
 
 
 def test_stale_revision_and_step_content_invalidate_fingerprints():
-    meal, recipes, foods, exclusions = _input()
-    baseline = _calculate(meal, recipes, foods, exclusions)
+    meal, recipes, foods, exclusions, ordinals = _input()
+    baseline = _calculate(meal, recipes, foods, exclusions, ordinals)
     modified_meal = replace(meal, plan=replace(meal.plan, revision_number=2))
-    revised = _calculate(modified_meal, recipes, foods, exclusions)
+    revised = _calculate(modified_meal, recipes, foods, exclusions, ordinals)
     assert baseline.source_fingerprint != revised.source_fingerprint
     assert baseline.content_fingerprint == revised.content_fingerprint
 
@@ -331,7 +333,7 @@ def test_stale_revision_and_step_content_invalidate_fingerprints():
         steps=(replace(detail.steps[0], instruction="Другая исходная инструкция."),),
     )
     step_changed = _calculate(
-        meal, {detail.version.id: modified_detail}, foods, exclusions
+        meal, {detail.version.id: modified_detail}, foods, exclusions, ordinals
     )
     assert step_changed.content_fingerprint != baseline.content_fingerprint
     assert step_changed.source_fingerprint != baseline.source_fingerprint
@@ -347,8 +349,8 @@ def test_new_runtime_ids_do_not_change_semantic_content_fingerprint():
 
 
 def test_timestamp_and_tuple_order_do_not_change_fingerprints():
-    meal, recipes, foods, exclusions = _input()
-    original = _calculate(meal, recipes, foods, exclusions)
+    meal, recipes, foods, exclusions, ordinals = _input()
+    original = _calculate(meal, recipes, foods, exclusions, ordinals)
     edited = replace(
         meal,
         plan=replace(meal.plan, created_at=NOW + timedelta(days=1)),
@@ -356,11 +358,11 @@ def test_timestamp_and_tuple_order_do_not_change_fingerprints():
         member_selections=tuple(reversed(meal.member_selections)),
     )
     assert (
-        _calculate(edited, recipes, foods, exclusions).content_fingerprint
+        _calculate(edited, recipes, foods, exclusions, ordinals).content_fingerprint
         == original.content_fingerprint
     )
     assert (
-        _calculate(edited, recipes, foods, exclusions).source_fingerprint
+        _calculate(edited, recipes, foods, exclusions, ordinals).source_fingerprint
         == original.source_fingerprint
     )
 
