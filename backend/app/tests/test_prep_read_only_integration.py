@@ -39,8 +39,12 @@ from app.persistence.sqlalchemy_core.food_ingredient_composition import (
 from app.persistence.sqlalchemy_core.food_recipe_composition import (
     create_food_recipe_catalogue_service,
 )
-from app.persistence.sqlalchemy_core.household_composition import create_household_service
-from app.persistence.sqlalchemy_core.nutrition_composition import create_nutrition_service
+from app.persistence.sqlalchemy_core.household_composition import (
+    create_household_service,
+)
+from app.persistence.sqlalchemy_core.nutrition_composition import (
+    create_nutrition_service,
+)
 from app.persistence.sqlalchemy_core.pantry_composition import create_pantry_service
 from app.persistence.sqlalchemy_core.pantry_uow import (
     SqlAlchemyPantryReadScope,
@@ -86,7 +90,9 @@ class CapturedGenerationContext:
 
 @pytest.fixture(scope="module")
 def trusted_catalogue(tmp_path_factory):
-    config = DatabaseConfig(path=tmp_path_factory.mktemp("prep-ro-source") / "r2c.sqlite")
+    config = DatabaseConfig(
+        path=tmp_path_factory.mktemp("prep-ro-source") / "r2c.sqlite"
+    )
     seed_r2c_breakfast_grain_diversity(config)
     return config
 
@@ -146,12 +152,8 @@ def scenario(trusted_catalogue, tmp_path):
                 household_id=household.id,
                 member_id=member.id,
                 source_kind="CUSTOM",
-                schedule={
-                    weekday: (MealRole.BREAKFAST,) for weekday in range(1, 8)
-                },
-                energy_shares={
-                    weekday: (Decimal("0.30"),) for weekday in range(1, 8)
-                },
+                schedule={weekday: (MealRole.BREAKFAST,) for weekday in range(1, 8)},
+                energy_shares={weekday: (Decimal("0.30"),) for weekday in range(1, 8)},
             )
 
         # Explicit nonempty exclusion comes from *this* trusted generation
@@ -185,13 +187,21 @@ def scenario(trusted_catalogue, tmp_path):
         persisted = meal_plans.get_current_plan(household.id, WEEK)
         assert persisted == saved
         assert any(e.source_kind is MealSourceKind.EAT_OUT for e in persisted.events)
-        assert any(e.source_kind is MealSourceKind.COOK_RECIPE for e in persisted.events)
-        assert len({
-            p.member_id for p in persisted.member_selections
-        }) == 2
         assert any(
-            len({serving.member_id for serving in persisted.servings if serving.event_id == e.id}) == 2
-            for e in persisted.events if e.source_kind is MealSourceKind.COOK_RECIPE
+            e.source_kind is MealSourceKind.COOK_RECIPE for e in persisted.events
+        )
+        assert len({p.member_id for p in persisted.member_selections}) == 2
+        assert any(
+            len(
+                {
+                    serving.member_id
+                    for serving in persisted.servings
+                    if serving.event_id == e.id
+                }
+            )
+            == 2
+            for e in persisted.events
+            if e.source_kind is MealSourceKind.COOK_RECIPE
         )
 
         # Pantry is established once before the read-only proof, via the
@@ -202,7 +212,11 @@ def scenario(trusted_catalogue, tmp_path):
                     detail = scope.recipes.get_detail(event.recipe_version_id)
                     assert detail is not None
                     chosen = next(
-                        (row for row in detail.ingredients if row.unit is UnitCode.GRAM),
+                        (
+                            row
+                            for row in detail.ingredients
+                            if row.unit is UnitCode.GRAM
+                        ),
                         None,
                     )
                     if chosen is not None:
@@ -225,7 +239,11 @@ def scenario(trusted_catalogue, tmp_path):
             expires_on=WEEK + timedelta(days=8),
         )
         witness = CapturedGenerationContext(
-            command, semantic_slots, result, persisted.plan.id, persisted.plan.revision_number
+            command,
+            semantic_slots,
+            result,
+            persisted.plan.id,
+            persisted.plan.revision_number,
         )
         yield config, engine, households, witness, stock
     finally:
@@ -268,8 +286,7 @@ def _verified_generation_inputs(
         for member in command.members
     }
     traced_exclusions = {
-        member_id: frozenset(foods)
-        for member_id, foods in trace.applied_exclusions
+        member_id: frozenset(foods) for member_id, foods in trace.applied_exclusions
     }
     if traced_exclusions != expected_exclusions:
         raise ProofBlocked("Untrusted, missing or stale exclusion context")
@@ -288,8 +305,7 @@ def _verified_generation_inputs(
 
 
 def _read_only(
-    scenario, *,
-    witness=None, household_id=None, tamper_plan=None, drop_food=False
+    scenario, *, witness=None, household_id=None, tamper_plan=None, drop_food=False
 ):
     _, engine, households, original, _ = scenario
     witness = witness if witness is not None else original
@@ -299,7 +315,9 @@ def _read_only(
         plan = scope.plans.get_detail(household_id, original.plan_id)
         current = scope.plans.get_current(household_id, WEEK)
         if plan is None or current is None or current.plan.id != plan.plan.id:
-            raise ProofBlocked("Missing, cross-Household or superseded persisted MealPlan")
+            raise ProofBlocked(
+                "Missing, cross-Household or superseded persisted MealPlan"
+            )
         if tamper_plan is not None:
             plan = tamper_plan(plan)
         exclusions, ordinals = _verified_generation_inputs(plan, state, witness)
@@ -372,7 +390,9 @@ def test_authoritative_planner_to_prep_and_shopping_is_read_only(scenario, capsy
     assert len({r.meal_event_id for r in prep.event_ingredient_quantities}) > 1
 
     shared = [
-        event for event in plan.events if event.source_kind is MealSourceKind.COOK_RECIPE
+        event
+        for event in plan.events
+        if event.source_kind is MealSourceKind.COOK_RECIPE
         and sum(s.event_id == event.id for s in plan.servings) == 2
     ]
     assert shared
@@ -401,7 +421,9 @@ def test_authoritative_planner_to_prep_and_shopping_is_read_only(scenario, capsy
         assert item.pantry_available_quantity >= Decimal(0)
 
     stocked = next(
-        item for item in shopping.items if item.food_ingredient_id == stock.food_ingredient_id
+        item
+        for item in shopping.items
+        if item.food_ingredient_id == stock.food_ingredient_id
     )
     assert stocked.pantry_available_quantity > Decimal(0)
     assert stocked.purchase_quantity < stocked.required_quantity
@@ -433,11 +455,10 @@ def test_missing_context_and_wrong_household_fail_closed_without_writes(scenario
         replace(witness, semantic_slots=()),
         replace(witness, semantic_slots=(witness.semantic_slots[0],) * 2),
         replace(witness, plan_revision=witness.plan_revision + 1),
+        replace(witness, command=replace(command, members=(command.members[0],))),
         replace(
-            witness, command=replace(command, members=(command.members[0],))
-        ),
-        replace(
-            witness, result=replace(
+            witness,
+            result=replace(
                 witness.result,
                 trace=replace(witness.result.trace, applied_exclusions=()),
             ),
@@ -458,7 +479,8 @@ def test_stale_revision_and_missing_canonical_food_are_rejected(scenario):
         _read_only(
             scenario,
             tamper_plan=lambda plan: replace(
-                plan, plan=replace(plan.plan, revision_number=plan.plan.revision_number + 1)
+                plan,
+                plan=replace(plan.plan, revision_number=plan.plan.revision_number + 1),
             ),
         )
     with pytest.raises(PrepDiagnosticError, match="Неизвестная форма"):
