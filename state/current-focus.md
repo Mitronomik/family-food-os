@@ -1,3 +1,15 @@
+# CURRENT — PR10-A1 pure diagnostic domain implementation under review — 2026-11-03
+
+**Accepted main at implementation start:** `17e9a7b844f9e1709d04d8d2603b8c6827a0ee2d` after [PR #277 merged](https://github.com/Mitronomik/family-food-os/pull/277) on 2026-11-03. This separately requested, bounded **PR10-A1** task implements only a *pure in-memory, non-executable* Prep diagnostic calculation in `backend/app/domain/prep_diagnostic.py` plus focused adversarial tests and CI. No previously proposed "waiting for amendment review" heading below remains current.
+
+**Implementation boundary:** already-authoritative `MealPlanDetail`, current `RecipeVersionDetail`, FoodIngredient snapshot and complete member-exclusion snapshot → exact `Decimal` per-event ingredient quantities, non-actionable RecipeStep hashes/IDs, typed unresolved reasons, immutable deterministic source/content fingerprints. Always `status=INCOMPLETE` and `executable_tasks=()`, even for digit-free source text or manipulated policy labels. Missing/invalid Household/Serving, source rights, form/units, ingredients or member exclusions => reject (no partial output). No database, persisted PrepPlan, PrepTask execution, D3 publisher/reader, API, PDF, Retail, AI, Pantry/Shopping/confirmed-stock mutation or new source/recipe/Planner rules.
+
+**Project gates:** `PR10_FF_FIXTURE_REPRODUCIBLE=PASS` remains limited to the accepted synthetic kcal-only 3/7/21/42 week; no nutrient or portion release claim. `APPROVED_IMMEDIATE=0`, `NO_GO_TO_PR10_CORE_RUNTIME` for executable/persistent/user-facing Prep, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`, two-positive MealEvent technical Gate2 proof and negative controls remain. This PR **does not** authorize PR10-A2, PR10-B/C, source publication or Gate2.
+
+**Next ONLY:** run/fix exact-head focused PR10-A1 unit, lint and relevant existing domain regression, inspect changed scope and independent Architecture/Domain/QA review; request distinct owner merge decision. No automatic merge or next milestone.
+
+---
+
 # CURRENT — proposed PR10-A1 pure calculation sequencing; docs-only review — 2026-11-02
 
 **Accepted base:** `main@ff7a42cb132327177c15e9ea850d8bbc69e5077a`, [PR #276 merged](https://github.com/Mitronomik/family-food-os/pull/276) on 2026-11-02. Product owner requested **one docs-only contract amendment**, **not runtime**: [PR10-A1 pure calculation sequencing proposal](../docs/family-food/pr10-pure-calculation-sequencing-amendment-2026-11-02.md). This proposes lifting the source-reviewed `APPROVED_IMMEDIATE` prerequisite **only for a future, separately authorized, pure, non-executable in-memory diagnostic calculator**. All previous historic state entries below describing PR #276 as unmerged are snapshots, not current facts.
