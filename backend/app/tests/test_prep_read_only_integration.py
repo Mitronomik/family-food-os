@@ -253,7 +253,6 @@ def _db_dump(config: DatabaseConfig) -> str:
         return "\n".join(connection.iterdump())
 
 
-
 def _persisted_event_signature(plan):
     """Actual MealEvent and participant Serving identity from persisted readback."""
     per_event = defaultdict(list)
@@ -271,7 +270,9 @@ def _persisted_event_signature(plan):
             event.source_reference,
             tuple(sorted(per_event[event.id])),
         )
-        for event in sorted(plan.events, key=lambda event: (event.local_date, event.position))
+        for event in sorted(
+            plan.events, key=lambda event: (event.local_date, event.position)
+        )
     )
 
 
@@ -520,7 +521,8 @@ def test_missing_context_and_wrong_household_fail_closed_without_writes(scenario
 def _wrong_recipe_version(plan):
     events = list(plan.events)
     index = next(
-        i for i, event in enumerate(events)
+        i
+        for i, event in enumerate(events)
         if event.source_kind is MealSourceKind.COOK_RECIPE
     )
     events[index] = replace(events[index], recipe_version_id=uuid4())
