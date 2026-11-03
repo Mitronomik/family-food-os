@@ -517,6 +517,16 @@ def test_missing_context_and_wrong_household_fail_closed_without_writes(scenario
     assert _db_dump(config) == before
 
 
+def _wrong_recipe_version(plan):
+    events = list(plan.events)
+    index = next(
+        i for i, event in enumerate(events)
+        if event.source_kind is MealSourceKind.COOK_RECIPE
+    )
+    events[index] = replace(events[index], recipe_version_id=uuid4())
+    return replace(plan, events=tuple(events))
+
+
 def test_stale_revision_and_missing_canonical_food_are_rejected(scenario):
     config, _, _, witness, _ = scenario
     before = _db_dump(config)
@@ -535,19 +545,7 @@ def test_stale_revision_and_missing_canonical_food_are_rejected(scenario):
         _read_only(
             scenario,
             witness=witness,
-            tamper_plan=lambda plan: replace(
-                plan,
-                events=(
-                    replace(
-                        plan.events[0],
-                        recipe_version_id=uuid4()
-                        if plan.events[0].source_kind is MealSourceKind.COOK_RECIPE
-                        else None,
-                        source_reference="подменённый источник",
-                    ),
-                    *plan.events[1:],
-                ),
-            ),
+            tamper_plan=_wrong_recipe_version,
         )
     with pytest.raises(ProofBlocked, match="MealEvent/Serving"):
         _read_only(
