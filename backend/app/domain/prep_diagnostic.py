@@ -11,7 +11,7 @@ import json
 from collections import defaultdict
 from collections.abc import Mapping
 from dataclasses import dataclass, field
-from decimal import Decimal, DecimalException, localcontext
+from decimal import ROUND_HALF_EVEN, Decimal, DecimalException, localcontext
 from enum import StrEnum
 from hashlib import sha256
 from uuid import UUID
@@ -27,6 +27,12 @@ from app.domain.pantry import MAX_QUANTITY
 from app.domain.units import UnitCode
 
 ENGINE_VERSION = "prep-diagnostic-a1-v1"
+# Numeric policy V1: diagnostic quantities use 50 significant decimal digits,
+# ROUND_HALF_EVEN, independent of the ambient Python Decimal context.
+# Non-terminating ratios are approximations, NOT mathematically exact quantities.
+# Never derive purchase packages, physical portions or executable steps here.
+QUANTITY_PRECISION = 50
+QUANTITY_ROUNDING = ROUND_HALF_EVEN
 
 
 class PrepDiagnosticError(ValueError):
@@ -135,7 +141,8 @@ def _digest(value: object) -> str:
 def _multiply(source: Decimal, total: Decimal, base: Decimal) -> Decimal:
     try:
         with localcontext() as ctx:
-            ctx.prec = 50
+            ctx.prec = QUANTITY_PRECISION
+            ctx.rounding = QUANTITY_ROUNDING
             amount = source * total / base
     except DecimalException as exc:
         raise PrepDiagnosticError(
@@ -150,13 +157,16 @@ def calculate_prep_diagnostic(
     recipes: Mapping[UUID, RecipeVersionDetail],
     foods: Mapping[UUID, FoodIngredient],
     member_exclusions: Mapping[UUID, frozenset[UUID]],
+    member_ordinals: Mapping[UUID, int],
     policy_version: str,
 ) -> PrepDiagnosticResult:
     """Calculate *non-actionable* demand only; no step can become executable.
 
     All dependencies must be supplied as independently validated immutable
     Household-scoped snapshots by a future application-layer caller. Missing
-    member exclusions fail closed; no inferred empty exclusion set.
+    member exclusions or stable semantic ordinals fail closed. Ordinals MUST
+    come from independently verified HouseholdMember bindings, never UUID sort,
+    insertion order, inferred member profile, or the generated Planner result.
     """
     if not isinstance(plan, MealPlanDetail) or not plan.events:
         _reject("Требуется версия плана с событиями и участниками.")
@@ -166,6 +176,8 @@ def calculate_prep_diagnostic(
         _reject("Требуются проверенные справочники рецептов и продуктов.")
     if not isinstance(member_exclusions, Mapping):
         _reject("Требуется проверенный снимок исключений участников.")
+    if not isinstance(member_ordinals, Mapping):
+        _reject("Требуется проверенная семантическая нумерация участников.")
 
     household_id = plan.plan.household_id
     member_ids = {pin.member_id for pin in plan.member_selections}
@@ -177,12 +189,16 @@ def calculate_prep_diagnostic(
         if any(not isinstance(food_id, UUID) for food_id in excluded):
             _reject("Некорректный FoodIngredient в исключениях.")
 
-    member_ordinals = {
-        pin.member_id: index
-        for index, pin in enumerate(
-            sorted(plan.member_selections, key=lambda pin: pin.member_id.hex), start=1
-        )
-    }
+    # Caller-supplied stable 1..N identity, not derived from run-local UUIDs.
+    # Validate complete, unambiguous mapping before any semantic fingerprint.
+    if set(member_ordinals) != member_ids or any(
+        not isinstance(member_id, UUID)
+        or type(ordinal) is not int
+        for member_id, ordinal in member_ordinals.items()
+    ):
+        _reject("Семантические номера должны охватывать всех участников плана.")
+    if sorted(member_ordinals.values()) != list(range(1, len(member_ids) + 1)):
+        _reject("Семантические номера участников должны быть уникальны и последовательны.")
     member_servings: dict[UUID, list[tuple[UUID, Decimal]]] = defaultdict(list)
     for serving in plan.servings:
         if serving.member_id not in member_ids:
@@ -207,6 +223,15 @@ def calculate_prep_diagnostic(
             participants
         ):
             _reject("У события нет однозначных порций участников.")
+        # MealPlan domain normalizes whitespace in source_reference; reject
+        # forged mutable snapshots instead of silently hashing untrusted data.
+        reference = event.source_reference
+        if reference is not None and (
+            not isinstance(reference, str)
+            or reference != " ".join(reference.strip().split())
+            or not reference
+        ):
+            _reject("Некорректная привязка источника приёма пищи.")
         source_event: list[object] = [
             str(event.id),
             event.local_date.isoformat(),
@@ -214,6 +239,7 @@ def calculate_prep_diagnostic(
             event.role.value,
             event.source_kind.value,
             str(event.recipe_version_id) if event.recipe_version_id else None,
+            reference,
             [
                 [str(member), _canonical_decimal(value)]
                 for member, value in participants
@@ -224,6 +250,7 @@ def calculate_prep_diagnostic(
             event.position,
             event.role.value,
             event.source_kind.value,
+            reference,
             sorted(
                 [member_ordinals[member], _canonical_decimal(value)]
                 for member, value in participants
@@ -251,7 +278,13 @@ def calculate_prep_diagnostic(
             ):
                 _reject("Не найдена активная исходно подтверждённая версия рецепта.")
             base = _positive_decimal(detail.version.base_servings)
-            total = sum((value for _, value in participants), Decimal(0))
+            try:
+                with localcontext() as ctx:
+                    ctx.prec = QUANTITY_PRECISION
+                    ctx.rounding = QUANTITY_ROUNDING
+                    total = sum((value for _, value in participants), Decimal(0))
+            except DecimalException as exc:
+                raise PrepDiagnosticError("Не удалось безопасно сложить порции.") from exc
             _positive_decimal(total)
             ingredient_pins: list[object] = []
             content_ingredients: list[object] = []
@@ -357,6 +390,8 @@ def calculate_prep_diagnostic(
         {
             "engine": ENGINE_VERSION,
             "policy": policy_version,
+            "quantity_precision": QUANTITY_PRECISION,
+            "quantity_rounding": QUANTITY_ROUNDING,
             "plan": [
                 str(plan.plan.id),
                 str(household_id),
@@ -372,6 +407,9 @@ def calculate_prep_diagnostic(
                 [str(member), sorted(str(food) for food in excluded)]
                 for member, excluded in member_exclusions.items()
             ),
+            "member_ordinals": sorted(
+                [str(member), ordinal] for member, ordinal in member_ordinals.items()
+            ),
             "events": source_events,
         }
     )
@@ -379,6 +417,8 @@ def calculate_prep_diagnostic(
         {
             "engine": ENGINE_VERSION,
             "policy": policy_version,
+            "quantity_precision": QUANTITY_PRECISION,
+            "quantity_rounding": QUANTITY_ROUNDING,
             "events": content_events,
             "status": PrepDiagnosticStatus.INCOMPLETE.value,
         }
