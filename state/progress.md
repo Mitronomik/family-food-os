@@ -1,3 +1,12 @@
+# 2026-11-06 — merged #281 and post-merge next gate proposal
+
+- **FACT:** [PR #281](https://github.com/Mitronomik/family-food-os/pull/281) merged as `80ddc7ba95673681cce2f62b6294ebe0de3f5946` (accepted head `f3bb53a8b2e45c4f7d91c654b544e5ff608f084d`). Exact-head [CI #42256126898](https://github.com/Mitronomik/family-food-os/actions/runs/42256126898) 90 passed, Ruff PASS; Docs PASS. JSON/JUnit [artifact #13521863262](https://github.com/Mitronomik/family-food-os/actions/runs/42256126898/artifacts/13521863262) confirms **27** unresolved reasons, 35 Prep source rows and 10 Shopping rows with joinable `food_code` + `food_ingredient_id`.
+- **BOUNDARY:** synthetic test-only captured Planner generation witness does not demonstrate independently durable per-member exclusion or semantic-slot source for arbitrary process restart. A1 remains diagnostic `INCOMPLETE` / zero executable tasks; no production/release/Gate2 transition.
+- **RECOMMENDATION (not authorized implementation):** [one docs-only postmerge gate proposal](../docs/family-food/pr10-a1-postmerge-next-gate-2026-11-06.md) scopes a separately reviewed read-only generation-context authority preflight. Preserve D3 positive-step/source and rollback-independent trust, Candidate A correction, fixed technical fixture and all release gates.
+- **CURRENT REVIEW:** docs/state-only PR pending independent Architecture/Data/Domain/QA review and separate owner merge decision.
+
+---
+
 # 2026-11-03 — PR10-A1 persisted read-only integration proof (PR #281)
 
 - [PR #280](https://github.com/Mitronomik/family-food-os/pull/280) merged: accepted `main@fb1840edf7391aeb97261b03949ff8510080c02b`; Candidate A immutable correction contract remains a separate `NO_GO_TO_CORRECTION_PUBLICATION` data-quality task, not a blocker for read-only A1 integration.

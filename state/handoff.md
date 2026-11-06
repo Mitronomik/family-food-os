@@ -1,3 +1,13 @@
+# 2026-11-06 — post-merge A1 evidence accepted, next authority contract preflight proposed
+
+[PR #281](https://github.com/Mitronomik/family-food-os/pull/281) merged to `main@80ddc7ba95673681cce2f62b6294ebe0de3f5946` after exact-head CI [#42256126898](https://github.com/Mitronomik/family-food-os/actions/runs/42256126898) (90 PASS; Ruff PASS, Docs PASS). New JSON/JUnit [artifact](https://github.com/Mitronomik/family-food-os/actions/runs/42256126898/artifacts/13521863262): 27 unresolved, Prep 35 event-level ingredient rows, Shopping 10 aggregate rows, both food identities joinable. Prior #281 'under review' entry below is archival.
+
+Docs-only [next gate proposal](../docs/family-food/pr10-a1-postmerge-next-gate-2026-11-06.md) records the most immediate newly evidenced blocker: isolated A1 captured trusted generation context before Planner, but no durable production exclusion/semantic ordinal readback from persisted Household/MealPlan alone. A future independent read-only authority preflight is proposed; no schema/status-authority decision or runtime is allowed yet. Separate D3 approved whole-Steps, anti-rollback reader, Candidate A correction and technical Gate2 remain NO_GO/NOT_READY.
+
+**Stop:** obtain independent review + owner merge decision for this docs-only PR first. No automatic implementation/next milestone.
+
+---
+
 # 2026-11-03 — PR10-A1 read-only Planner → Shopping → Prep integration proof, review only
 
 **Accepted base** `main@fb1840edf7391aeb97261b03949ff8510080c02b` after merged [PR #280](https://github.com/Mitronomik/family-food-os/pull/280). [PR #281](https://github.com/Mitronomik/family-food-os/pull/281) is a bounded test/workflow/state implementation: use accepted R2-C trusted catalogue in temporary SQLite, actual deterministic Planner/MealPlan persistence, mixed fixed `EAT_OUT` / shared `COOK_RECIPE`, read-only version/food/Pantry snapshots and unchanged Shopping+Prep calculators. Focused test receipts must show gross vs Pantry-net quantities, exact Decimal source, explicit Step unresolved, zero executable tasks and no writes after baseline.
