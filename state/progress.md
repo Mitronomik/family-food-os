@@ -1,3 +1,12 @@
+# 2026-11-03 — PR10-A1 persisted read-only integration proof (PR #281)
+
+- [PR #280](https://github.com/Mitronomik/family-food-os/pull/280) merged: accepted `main@fb1840edf7391aeb97261b03949ff8510080c02b`; Candidate A immutable correction contract remains a separate `NO_GO_TO_CORRECTION_PUBLICATION` data-quality task, not a blocker for read-only A1 integration.
+- [PR #281](https://github.com/Mitronomik/family-food-os/pull/281) introduces **synthetic isolated SQLite integration tests** exercising authoritative Planner v0.5, persisted MealPlan/Servings, read-only repository snapshots, Shopping gross/FEFO Pantry net, and pure Prep A1 with unresolved/zero tasks. All fixture writes occur *before* read-only proof; relevant SQLite tables' dump before and after calculation must match.
+- **Authority limit:** member exclusion sets and semantic ordinals originate from explicitly captured test-generation context and are checked against PlannerTrace and Household/member/plan revision. They are **not inferred from random UUID, profiles or reconstructed from persisted MealPlan**. The general production service still lacks independently durable generation-context/ordinal readback; no new authority or persistence is added in this task. Final acceptance depends on exact-head CI.
+- Runtime/fixture gates unchanged: `APPROVED_IMMEDIATE=0`, executable/persistent `NO_GO_TO_PR10_CORE_RUNTIME`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`; accepted 3/7/21/42 fixture remains technical kcal-only. No D3/PrepTask/confirmed stock or retailer/UI changes.
+
+---
+
 # 2026-11-03 — Candidate A successor implementation contract gate (proposal only)
 
 - [PR #279](https://github.com/Mitronomik/family-food-os/pull/279) confirmed merged at `main@f7193dd6c66f11fae82fe874de971f5945b9a1c9`; its `IMMUTABLE_CORRECTION_REQUIRED` decision is accepted as a **recommendation to develop a reviewed successor**, not permission to publish one.

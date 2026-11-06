@@ -1,3 +1,15 @@
+# CURRENT — PR10-A1 read-only integration proof (isolated SQLite) — 2026-11-03
+
+**Accepted base:** `main@fb1840edf7391aeb97261b03949ff8510080c02b` after [PR #280 merged](https://github.com/Mitronomik/family-food-os/pull/280). The owner's latest task **explicitly authorizes one read-only integration proof** across persisted Household/Planner/MealPlan/Serving/RecipeVersion/Shopping/Prep. Candidate A correction remains separately blocked and is **not on this PR's critical path**.
+
+**Current bounded [PR #281](https://github.com/Mitronomik/family-food-os/pull/281):** isolated SQLite synthetic actual Planner v0.5 generation → persisted plan readback, source version/food/current Household read-only scope, `calculate_shopping` and unchanged `calculate_prep_diagnostic`. An explicitly captured, pre-generation *test-only* context binds ordered semantic member slots, `GenerationMemberConstraints` exclusions and PlannerTrace to selected persisted plan; the Household schema **does not independently persist exclusions or semantic ordinals**. Therefore proof may be `PASS_ISOLATED_CAPTURED_CONTEXT` but **not** production restart-readback authority. Missing/stale context must `BLOCKED`, never infer empty exclusions or UUID ordering.
+
+**Hard gates unchanged:** `PR10_FF_FIXTURE_REPRODUCIBLE=PASS` energy-only technical fixture; `APPROVED_IMMEDIATE=0`, executable/persistent `NO_GO_TO_PR10_CORE_RUNTIME`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`, Gate2 not passed. No production schema/API/UI/PDF/Planner/nutrition, Retail/AI, D3 source/reader, RecipeVersion or inventory mutation. Existing historical entries below reflect prior decisions, not current merge status.
+
+**Next ONLY:** focused integration + affected domain tests, Ruff, exact-head CI and independent Architecture/Domain/QA review of the current PR; owner merge separately. On a missing authoritative binding, report exact `BLOCKED` seam instead of adding unreviewed persistence/permissions. No next implementation stage automatically.
+
+---
+
 # CURRENT — PR #279 merged; Candidate A one-recipe correction contract review — 2026-11-03
 
 **Accepted main:** `f7193dd6c66f11fae82fe874de971f5945b9a1c9` after [PR #279 merged](https://github.com/Mitronomik/family-food-os/pull/279). Historical entries below that describe PR #279 as open are archived snapshots. The owner has now asked to continue with the next bounded prerequisite, **not** to execute or publish a corrected RecipeVersion.

@@ -5,6 +5,7 @@ on:
     paths:
       - 'backend/app/domain/prep_diagnostic.py'
       - 'backend/app/tests/test_prep_diagnostic.py'
+      - 'backend/app/tests/test_prep_read_only_integration.py'
       - '.github/workflows/pr10-a1-pure-prep-diagnostic.yml'
   workflow_dispatch:
 
@@ -26,11 +27,22 @@ jobs:
         env:
           PYTHONPATH: backend:.
           AI_ENABLED: 'false'
+          PR10_A1_RO_PROOF_PATH: pr10-a1-ro-proof.json
         run: |
-          python -m pytest -q backend/app/tests/test_prep_diagnostic.py backend/app/tests/test_food_recipe_domain.py backend/app/tests/test_meal_plans.py backend/app/tests/test_shopping_calculation.py
+          python -m pytest -q -s --junitxml=pr10-a1-read-only-proof.xml backend/app/tests/test_prep_read_only_integration.py backend/app/tests/test_prep_diagnostic.py backend/app/tests/test_food_recipe_domain.py backend/app/tests/test_meal_plans.py backend/app/tests/test_shopping_calculation.py
       - name: Ruff diagnostic format diff
-        run: ruff format --diff backend/app/domain/prep_diagnostic.py backend/app/tests/test_prep_diagnostic.py
+        run: ruff format --diff backend/app/domain/prep_diagnostic.py backend/app/tests/test_prep_diagnostic.py backend/app/tests/test_prep_read_only_integration.py
       - name: Ruff lint and format gate
         run: |
-          ruff check backend/app/domain/prep_diagnostic.py backend/app/tests/test_prep_diagnostic.py
-          ruff format --check backend/app/domain/prep_diagnostic.py backend/app/tests/test_prep_diagnostic.py
+          ruff check backend/app/domain/prep_diagnostic.py backend/app/tests/test_prep_diagnostic.py backend/app/tests/test_prep_read_only_integration.py
+          ruff format --check backend/app/domain/prep_diagnostic.py backend/app/tests/test_prep_diagnostic.py backend/app/tests/test_prep_read_only_integration.py
+      - name: Retain read-only integration test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr10-a1-read-only-junit
+          path: |
+            pr10-a1-read-only-proof.xml
+            pr10-a1-ro-proof.json
+          if-no-files-found: warn
+          retention-days: 14
