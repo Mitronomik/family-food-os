@@ -1,3 +1,15 @@
+# CURRENT — after merged PR #281: post-merge A1 closure and next authority preflight — 2026-11-06
+
+**Accepted main:** `80ddc7ba95673681cce2f62b6294ebe0de3f5946` after [PR #281 merged](https://github.com/Mitronomik/family-food-os/pull/281). The prior 2026-11-03 heading below describing #281 as under review is a historical snapshot, NOT the current status. Exact-head CI [#42256126898](https://github.com/Mitronomik/family-food-os/actions/runs/42256126898) 90 PASS and retained receipt (27 unresolved, 35 Prep rows, 10 Shopping rows, joinable identity pairs); Docs CI PASS.
+
+**Current work:** [post-merge closure / next-gate preflight proposal](../docs/family-food/pr10-a1-postmerge-next-gate-2026-11-06.md), docs/state only, pending independent review and owner merge. No new runtime/schema/source authority.
+
+**Next ONLY after this docs PR is reviewed/merged:** separately authorize a bounded **read-only generation-context authority preflight**: determine how original exclusions + semantic member ordering can be retrieved with provenance after restart, bound to exact persisted MealPlan/Serving revision, without defaulting or UUID inference. This is a proposed task, NOT permission to implement persistence or PR10-A2.
+
+**Unchanged gates:** A1 `INCOMPLETE` and `executable_tasks=()`; Candidate A successor `IMPLEMENTATION_NOT_READY`; `APPROVED_IMMEDIATE=0`, executable `NO_GO_TO_PR10_CORE_RUNTIME`, `SAFE_BATCH_READY=false`, `PORTION_RELEASE_READY=NOT_PROVEN`, Gate2 not passed. Separate qualified source review and D3 rollback-independent trust remain blocked. Do not autonomously start PR10-A2/B/C, migration, D3 runtime or release.
+
+---
+
 # CURRENT — PR10-A1 read-only integration proof (isolated SQLite) — 2026-11-03
 
 **Accepted base:** `main@fb1840edf7391aeb97261b03949ff8510080c02b` after [PR #280 merged](https://github.com/Mitronomik/family-food-os/pull/280). The owner's latest task **explicitly authorizes one read-only integration proof** across persisted Household/Planner/MealPlan/Serving/RecipeVersion/Shopping/Prep. Candidate A correction remains separately blocked and is **not on this PR's critical path**.
