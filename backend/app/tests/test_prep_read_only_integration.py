@@ -475,6 +475,20 @@ def test_authoritative_planner_to_prep_and_shopping_is_read_only(scenario, capsy
     assert stocked.purchase_quantity < stocked.required_quantity
     assert any(a.pantry_item_id == stock.id for a in shopping.allocations)
 
+    # Preserve the canonical food identity on both sides of the receipt so
+    # reviewers can join Prep per-event rows to Shopping aggregate rows by ID.
+    food_codes_by_id = {
+        row.food_ingredient_id: row.food_code
+        for row in prep.event_ingredient_quantities
+    }
+    assert all(
+        food_codes_by_id[row.food_ingredient_id] == row.food_code
+        for row in prep.event_ingredient_quantities
+    )
+    assert set(food_codes_by_id) == {
+        item.food_ingredient_id for item in shopping.items
+    }
+
     # Test-only receipts: exact run-local source hashes are visible in CI logs,
     # NOT committed as stable authority or reused as executable Task approvals.
     receipt = {
@@ -490,6 +504,7 @@ def test_authoritative_planner_to_prep_and_shopping_is_read_only(scenario, capsy
             {
                 "event_id": str(row.meal_event_id),
                 "food_code": row.food_code,
+                "food_ingredient_id": str(row.food_ingredient_id),
                 "unit": row.unit.value,
                 "exact_source_demand": format(row.required_quantity, "f"),
             }
@@ -501,6 +516,7 @@ def test_authoritative_planner_to_prep_and_shopping_is_read_only(scenario, capsy
         "shopping_gross_pantry_net": [
             {
                 "food_ingredient_id": str(row.food_ingredient_id),
+                "food_code": food_codes_by_id[row.food_ingredient_id],
                 "unit": row.unit.value,
                 "gross_required_rounded": format(row.required_quantity, "f"),
                 "pantry_available": format(row.pantry_available_quantity, "f"),
@@ -518,6 +534,14 @@ def test_authoritative_planner_to_prep_and_shopping_is_read_only(scenario, capsy
         },
         "gate2_pass": False,
     }
+    assert {
+        (row["food_ingredient_id"], row["food_code"])
+        for row in receipt["source_ingredient_quantities"]
+    } == {
+        (row["food_ingredient_id"], row["food_code"])
+        for row in receipt["shopping_gross_pantry_net"]
+    }
+    assert receipt["unresolved_step_count"] == len(receipt["unresolved_reason_codes"])
     encoded = json.dumps(receipt, sort_keys=True, ensure_ascii=False)
     print("PR10_A1_RO_PROOF=" + encoded)
     # A local JSON witness is produced only by an explicitly configured CI
