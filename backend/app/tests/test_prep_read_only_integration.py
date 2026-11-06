@@ -485,9 +485,7 @@ def test_authoritative_planner_to_prep_and_shopping_is_read_only(scenario, capsy
         food_codes_by_id[row.food_ingredient_id] == row.food_code
         for row in prep.event_ingredient_quantities
     )
-    assert set(food_codes_by_id) == {
-        item.food_ingredient_id for item in shopping.items
-    }
+    assert set(food_codes_by_id) == {item.food_ingredient_id for item in shopping.items}
 
     # Test-only receipts: exact run-local source hashes are visible in CI logs,
     # NOT committed as stable authority or reused as executable Task approvals.
