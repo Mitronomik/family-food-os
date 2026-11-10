@@ -195,46 +195,46 @@ def render_html(preview):
         '<meta name="viewport" content="width=device-width,initial-scale=1">'
         '<meta name="robots" content="noindex,nofollow">'
         "<title>FamilyFoodOS — техническая демонстрационная неделя</title>"
-        f"<style>{_CSS}</style></head><body><div class=\"container\">"
+        f'<style>{_CSS}</style></head><body><div class="container">'
         '<header><div class="brand">FAMILYFOODOS</div></header>'
         '<div class="hero"><div class="eyebrow">Внутренний прототип · без AI</div>'
-        '<h1>Демонстрационная неделя</h1>'
-        '<p>2–8 ноября 2026 · синтетическая семья, а не рекомендация рациона</p>'
+        "<h1>Демонстрационная неделя</h1>"
+        "<p>2–8 ноября 2026 · синтетическая семья, а не рекомендация рациона</p>"
         '<div class="numbers"><div class="metric"><strong>7</strong> дней</div>'
         '<div class="metric"><strong>21</strong> приём пищи</div>'
         '<div class="metric"><strong>42</strong> доли рецептов</div>'
         f'<div class="metric"><strong>{len(groceries)}</strong> продуктов</div></div></div>'
         '<div class="notice"><strong>Важные ограничения.</strong> Полная пищевая '
-        'ценность и масса готовых порций не подтверждены. Цены неизвестны. '
-        'Заготовки и хранение не разрешены. Это не готовое меню для семьи.</div>'
+        "ценность и масса готовых порций не подтверждены. Цены неизвестны. "
+        "Заготовки и хранение не разрешены. Это не готовое меню для семьи.</div>"
         '<nav class="nav" aria-label="Разделы">'
         '<a href="#week">Неделя</a><a href="#buy">Купить</a>'
         '<a href="#prep">Заготовки</a></nav>'
         '<main><section id="week"><h2>Неделя</h2>'
         '<p class="muted">Коэффициенты × показывают долю базового рецепта, '
-        'а не граммы готового блюда.</p>'
+        "а не граммы готового блюда.</p>"
         f'<div class="grid">{"".join(days_html)}</div></section>'
         '<section id="buy"><h2>Купить</h2>'
         '<p class="muted">Только исходные ингредиенты. Pantry в этом примере пуст. '
-        'Для удобства масса и объём округлены <strong>вверх</strong> до целых '
-        'граммов или миллилитров; исходные значения доступны ниже. '
-        'Упаковки, штуки яиц и цены не определены.</p>'
+        "Для удобства масса и объём округлены <strong>вверх</strong> до целых "
+        "граммов или миллилитров; исходные значения доступны ниже. "
+        "Упаковки, штуки яиц и цены не определены.</p>"
         '<div class="notice">Отметки покупок действуют только на этой странице '
-        'и <strong>не сохраняются</strong> в Pantry.</div>'
+        "и <strong>не сохраняются</strong> в Pantry.</div>"
         '<div class="buy-controls"><input id="search" class="search" type="search" '
         'placeholder="Найти продукт" aria-label="Поиск по покупкам">'
         '<span class="counter" id="counter"></span></div>'
         f'<div class="shopping">{"".join(groceries_html)}</div>'
-        '<details><summary>Точные расчётные количества</summary>'
+        "<details><summary>Точные расчётные количества</summary>"
         '<div class="table-scroll"><table><thead><tr><th>Ингредиент</th>'
-        '<th>Нужно</th><th>Дома</th><th>Купить</th></tr></thead><tbody>'
-        f'{"".join(raw_rows)}</tbody></table></div></details></section>'
+        "<th>Нужно</th><th>Дома</th><th>Купить</th></tr></thead><tbody>"
+        f"{''.join(raw_rows)}</tbody></table></div></details></section>"
         '<section id="prep"><h2>Заготовки</h2><div class="locked">'
-        '<strong>Пока недоступны.</strong><p>Нет независимо проверенных '
-        'исполняемых инструкций, сроков хранения или правил заморозки. '
-        'Никаких готовых запасов не создано.</p></div></section></main>'
-        '<footer>Техническая проверка существующего Planner и Shopping; '
-        'не Gate2, не consumer PWA, не медицинская или пищевая рекомендация. '
-        'Все отметки покупок локальные.</footer></div>'
+        "<strong>Пока недоступны.</strong><p>Нет независимо проверенных "
+        "исполняемых инструкций, сроков хранения или правил заморозки. "
+        "Никаких готовых запасов не создано.</p></div></section></main>"
+        " <footer>Техническая проверка существующего Planner и Shopping; ".trimStart().replace(/^/,'        ')
+        "не Gate2, не consumer PWA, не медицинская или пищевая рекомендация. "
+        "Все отметки покупок локальные.</footer></div>"
         f"<script>{_SCRIPT}</script></body></html>"
     )
