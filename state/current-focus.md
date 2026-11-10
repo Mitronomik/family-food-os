@@ -1,3 +1,13 @@
+# CURRENT — owner-approved product-first internal weekly preview — 2026-11-11
+
+**Accepted main:** `80ddc7ba95673681cce2f62b6294ebe0de3f5946` after merged [#281](https://github.com/Mitronomik/family-food-os/pull/281). [#282](https://github.com/Mitronomik/family-food-os/pull/282) is CLOSED / SUPERSEDED without merge by explicit owner direction. Historic focus entries below are not active authorization.
+
+**Now:** one **developer-only, non-release product preview** from the accepted synthetic forward 3-member/7-day/21-event/42-Serving Planner proof, with canonical Russian recipe and food names, exact Shopping quantities and an explicit empty Pantry. Keep frozen A/B, V1 semantic hashes and original proof unchanged. No consumer API/UI, Prep instructions, invented cost, complete nutrition, safety claims, D3, Gate2 promotion or real-family use. This bounded early preview is a user-approved prioritization experiment, not general roadmap reorder.
+
+**Stop at reviewed PR:** inspect new preview artifact and cross-process consistency, Ruff/tests/docs CI. Do not self-merge. After this proof, decide based on the visible week which *real* source/nutrition/UX gap to fix next rather than authoring another standalone preflight.
+
+---
+
 # CURRENT — PR10-A1 read-only integration proof (isolated SQLite) — 2026-11-03
 
 **Accepted base:** `main@fb1840edf7391aeb97261b03949ff8510080c02b` after [PR #280 merged](https://github.com/Mitronomik/family-food-os/pull/280). The owner's latest task **explicitly authorizes one read-only integration proof** across persisted Household/Planner/MealPlan/Serving/RecipeVersion/Shopping/Prep. Candidate A correction remains separately blocked and is **not on this PR's critical path**.
