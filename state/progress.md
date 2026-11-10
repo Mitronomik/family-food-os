@@ -1,3 +1,11 @@
+# 2026-11-11 — PR #282 closed; internal product preview work
+
+- Owner-directed [PR #282](https://github.com/Mitronomik/family-food-os/pull/282) closure: SUPERSEDED / NOT MERGED. Product-first prioritization chosen over further generation-context preflight.
+- New bounded implementation derives a **human-readable seven-day menu + actual generic Shopping quantities** from the same persisted, accepted synthetic PR10-FF source week. Must preserve frozen A/B and V1 semantics, complete 42 Serving factors, UNKNOWN price/complete Nutrition, empty Pantry, non-executable Prep, and fail closed on mismatched readback. CI artifact / independent review required before merge.
+- No Gate2 or real-family promotion; source/process/Step approval and storage authority remain missing.
+
+---
+
 # 2026-11-03 — PR10-A1 persisted read-only integration proof (PR #281)
 
 - [PR #280](https://github.com/Mitronomik/family-food-os/pull/280) merged: accepted `main@fb1840edf7391aeb97261b03949ff8510080c02b`; Candidate A immutable correction contract remains a separate `NO_GO_TO_CORRECTION_PUBLICATION` data-quality task, not a blocker for read-only A1 integration.
