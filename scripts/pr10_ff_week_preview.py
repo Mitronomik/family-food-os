@@ -168,6 +168,10 @@ def render_markdown(preview):
             preview.get("individual_servings"),
         )
         != (7, 21, 42)
+        or preview.get("shopping_status") != "COMPLETE"
+        or preview.get("pantry_state") != "EXPLICIT_EMPTY_TEST_PANTRY"
+        or preview.get("serving_basis") != "DECIMAL_RECIPE_SERVINGS_NOT_COOKED_MASS"
+        or preview.get("batch_storage_safety") != "UNKNOWN"
         or preview.get("price_status") != "UNKNOWN"
         or preview.get("prep_state") != "UNREVIEWED_NO_EXECUTABLE_INSTRUCTIONS"
         or preview.get("gate2_pass") is not False
