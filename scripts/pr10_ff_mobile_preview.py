@@ -111,7 +111,7 @@ def _quantity(value, unit):
     if not amount.is_finite() or amount < 0:
         raise WeekPreviewBlocked("Negative/nonfinite grocery quantity")
     rounded = amount.to_integral_value(rounding=ROUND_CEILING)
-    if unit != "pcs" and rounded >= 1000:
+    if unit != "pcs" and amount >= 1000:
         number = f"{rounded / Decimal(1000):.3f}".replace(".", ",")
         return number + " " + _UNITS[unit][1]
     return str(rounded) + " " + _UNITS[unit][0]
