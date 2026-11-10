@@ -233,7 +233,7 @@ def render_html(preview):
         "<strong>Пока недоступны.</strong><p>Нет независимо проверенных "
         "исполняемых инструкций, сроков хранения или правил заморозки. "
         "Никаких готовых запасов не создано.</p></div></section></main>"
-        " <footer>Техническая проверка существующего Planner и Shopping; ".trimStart().replace(/^/,'        ')
+        "<footer>Техническая проверка существующего Planner и Shopping; "
         "не Gate2, не consumer PWA, не медицинская или пищевая рекомендация. "
         "Все отметки покупок локальные.</footer></div>"
         f"<script>{_SCRIPT}</script></body></html>"
