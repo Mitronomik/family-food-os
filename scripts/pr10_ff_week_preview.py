@@ -7,7 +7,7 @@ Never treats an energy-only fixture as a nutritionally validated family menu.
 
 from __future__ import annotations
 
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, datetime
 from decimal import Decimal
 
 from app.domain.shopping_calculation import (
@@ -170,6 +170,12 @@ def render_markdown(preview):
         or not preview.get("shopping")
     ):
         raise WeekPreviewBlocked("Malformed or overclaimed product preview")
+    if (
+        len({(row["date"], row["role"]) for row in preview["menu"]}) != 21
+        or len({row["date"] for row in preview["menu"]}) != 7
+        or sum(len(row["servings"]) for row in preview["menu"]) != 42
+    ):
+        raise WeekPreviewBlocked("Missing, duplicate or inconsistent meal servings")
     lines = [
         "# FamilyFoodOS — демонстрационная неделя",
         "",
