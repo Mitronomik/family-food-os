@@ -76,6 +76,10 @@ def test_renderer_is_readable_and_does_not_promote_unknowns():
     "key,value",
     [
         ("status", "READY_FOR_FAMILY"),
+        ("shopping_status", "INCOMPLETE"),
+        ("pantry_state", "UNKNOWN"),
+        ("serving_basis", "COOKED_MASS_G"),
+        ("batch_storage_safety", "VERIFIED"),
         ("price_status", "COMPLETE"),
         ("prep_state", "APPROVED_IMMEDIATE"),
         ("gate2_pass", True),
@@ -86,6 +90,22 @@ def test_renderer_is_readable_and_does_not_promote_unknowns():
 def test_renderer_rejects_false_product_claims(key, value):
     payload = deepcopy(_example())
     payload[key] = value
+    with pytest.raises(preview.WeekPreviewBlocked):
+        preview.render_markdown(payload)
+
+
+@pytest.mark.parametrize(
+    "key",
+    [
+        "shopping_status",
+        "pantry_state",
+        "serving_basis",
+        "batch_storage_safety",
+    ],
+)
+def test_renderer_rejects_missing_source_claims(key):
+    payload = deepcopy(_example())
+    del payload[key]
     with pytest.raises(preview.WeekPreviewBlocked):
         preview.render_markdown(payload)
 
