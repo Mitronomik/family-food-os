@@ -1,3 +1,9 @@
+# 2026-11-11 — product-first internal weekly preview (owner authorization)
+
+PR #282 was closed without merge as SUPERSEDED; source evidence from merged #281 stays intact. One bounded, developer-only internal product preview is being produced from the existing genuine forward Planner two-process proof: 21 current source-backed meals, 42 exact recipe-serving factors, Shopping computed over the *same persisted MealPlan*, explicit empty Pantry and UNKNOWN prices; Prep actions and complete Nutrition are not represented as approved. No modified A/B, Planner, RecipeVersion, Shopping/Prep domain, migrations, API/UI/PDF or safety gates. Work is intentionally an inspectable weekly artifact, not another docs-only contract. Inspect exact-head CI and validate artifact before owner merge.
+
+---
+
 # 2026-11-03 — PR10-A1 read-only Planner → Shopping → Prep integration proof, review only
 
 **Accepted base** `main@fb1840edf7391aeb97261b03949ff8510080c02b` after merged [PR #280](https://github.com/Mitronomik/family-food-os/pull/280). [PR #281](https://github.com/Mitronomik/family-food-os/pull/281) is a bounded test/workflow/state implementation: use accepted R2-C trusted catalogue in temporary SQLite, actual deterministic Planner/MealPlan persistence, mixed fixed `EAT_OUT` / shared `COOK_RECIPE`, read-only version/food/Pantry snapshots and unchanged Shopping+Prep calculators. Focused test receipts must show gross vs Pantry-net quantities, exact Decimal source, explicit Step unresolved, zero executable tasks and no writes after baseline.
