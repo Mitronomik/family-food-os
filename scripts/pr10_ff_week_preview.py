@@ -8,7 +8,6 @@ Never treats an energy-only fixture as a nutritionally validated family menu.
 from __future__ import annotations
 
 from datetime import UTC, datetime
-from decimal import Decimal
 
 from app.domain.shopping_calculation import (
     ShoppingPriceStatus,
