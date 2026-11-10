@@ -22,7 +22,7 @@ def _example():
                     "recipe_version": 1,
                     "servings": [
                         {"member_ordinal": number, "portion_servings": "1.250000"}
-                        for number in ((1, 2) if pos != 2 else (1,))
+                        for number in ((1, 2) if pos == 1 else ((1,) if pos == 2 else (1, 2, 3)))
                     ],
                     "nutrition_status": "INCOMPLETE",
                 }
