@@ -75,7 +75,9 @@ def project_week(*, engine, plan, semantic_events, candidate_inputs, timezone):
     ):
         raise WeekPreviewBlocked("Unexpected incomplete Shopping calculation")
 
-    by_slot = {(event.local_date.isoformat(), event.position): event for event in plan.events}
+    by_slot = {
+        (event.local_date.isoformat(), event.position): event for event in plan.events
+    }
     if len(by_slot) != 21:
         raise WeekPreviewBlocked("Duplicate persisted day/meal positions")
     menu = []
@@ -109,9 +111,10 @@ def project_week(*, engine, plan, semantic_events, candidate_inputs, timezone):
                 "nutrition_status": candidates[recipe_code]["nutrition_status"],
             }
         )
-    if len({r["date"] for r in menu}) != 7 or sum(
-        len(r["servings"]) for r in menu
-    ) != 42:
+    if (
+        len({r["date"] for r in menu}) != 7
+        or sum(len(r["servings"]) for r in menu) != 42
+    ):
         raise WeekPreviewBlocked("Preview lost days or individual servings")
 
     shopping_rows = []
@@ -158,9 +161,12 @@ def render_markdown(preview):
     """A readable internal week, never executable preparation instructions."""
     if (
         preview.get("schema") != "PR10_FF_PRODUCT_READ_ONLY_PREVIEW_V1"
-        or preview.get("status")
-        != "SYNTHETIC_TECHNICAL_ENERGY_ONLY_NOT_FOR_FAMILY_USE"
-        or (preview.get("days"), preview.get("meal_events"), preview.get("individual_servings"))
+        or preview.get("status") != "SYNTHETIC_TECHNICAL_ENERGY_ONLY_NOT_FOR_FAMILY_USE"
+        or (
+            preview.get("days"),
+            preview.get("meal_events"),
+            preview.get("individual_servings"),
+        )
         != (7, 21, 42)
         or preview.get("price_status") != "UNKNOWN"
         or preview.get("prep_state") != "UNREVIEWED_NO_EXECUTABLE_INSTRUCTIONS"
@@ -193,7 +199,15 @@ def render_markdown(preview):
         "## Неделя",
     ]
     for date in sorted({row["date"] for row in preview["menu"]}):
-        lines.extend(["", "### " + _cell(date), "", "| Приём | Блюдо | Доли рецепта по участникам |", "| --- | --- | --- |"])
+        lines.extend(
+            [
+                "",
+                "### " + _cell(date),
+                "",
+                "| Приём | Блюдо | Доли рецепта по участникам |",
+                "| --- | --- | --- |",
+            ]
+        )
         for row in (r for r in preview["menu"] if r["date"] == date):
             if row["role"] not in _ROLES_RU or row["nutrition_status"] != "INCOMPLETE":
                 raise WeekPreviewBlocked("Unreviewed display or nutrition promotion")
@@ -202,8 +216,7 @@ def render_markdown(preview):
                 for s in row["servings"]
             )
             lines.append(
-                "| " + _ROLES_RU[row["role"]] + " | " + _cell(row["title_ru"])
-                + " | " + serving + " |"
+                f"| {_ROLES_RU[row['role']]} | {_cell(row['title_ru'])} | {serving} |"
             )
     lines.extend(
         [
@@ -220,9 +233,8 @@ def render_markdown(preview):
         name = _cell(item["title_ru"])
         unit = _cell(item["unit"])
         lines.append(
-            "| " + name + " | " + _cell(item["required"]) + " " + unit
-            + " | " + _cell(item["at_home"]) + " " + unit
-            + " | " + _cell(item["to_buy"]) + " " + unit + " |"
+            f"| {name} | {_cell(item['required'])} {unit} | "
+            f"{_cell(item['at_home'])} {unit} | {_cell(item['to_buy'])} {unit} |"
         )
     lines.extend(
         [
