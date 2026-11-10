@@ -1,3 +1,11 @@
+# 2026-11-11 — merged #283, first mobile-view internal prototype
+
+- [PR #283](https://github.com/Mitronomik/family-food-os/pull/283) merged to `main@c6b0976a1d75a86a6ca8da84e7341df53b3817f9`. Original technical synthetic Planner/Shopping week remains 7 days, 21 MealEvents, 42 Decimal recipe-sharing factors and 37 Shopping rows, with price/Nutrition/Prep gaps explicit.
+- Bounded next product step is an offline, self-contained HTML view for human evaluation: mobile cards, week/purchases sections, local-only checkboxes/search and source-preserving upward shopping display rounding, exact raw quantity appendix. No new household/recipe/stock truth, API, database, real-family authorization or Gate2.
+- Pending exact-head CI and independent review/owner merge.
+
+---
+
 # 2026-11-11 — PR #282 closed; internal product preview work
 
 - Owner-directed [PR #282](https://github.com/Mitronomik/family-food-os/pull/282) closure: SUPERSEDED / NOT MERGED. Product-first prioritization chosen over further generation-context preflight.
