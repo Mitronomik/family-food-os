@@ -19,6 +19,7 @@ from pathlib import Path
 
 from scripts import pr10_ff_pre_generation_inputs as inputs
 from scripts import pr10_ff_proof_evidence as evidence
+from scripts import pr10_ff_week_preview as week_preview
 
 ROOT = Path(__file__).resolve().parents[1]
 PIN_PATH = ROOT / "docs/family-food/evidence/pr10-ff-forward-input-v1-pins.json"
@@ -247,6 +248,16 @@ def witness(output: Path) -> dict:
                 b=planner_b,
                 expected_semantics=events,
             )
+            # Separate user-readable projection of the *same* persisted plan.
+            # This does not mutate the frozen V1 semantic event digest or approve
+            # any source RecipeStep or real-family use.
+            product_preview = week_preview.project_week(
+                engine=engine,
+                plan=readback,
+                semantic_events=events,
+                candidate_inputs=planner_b["candidate_inputs"],
+                timezone=household.timezone,
+            )
             result = {
                 "schema": "PR10_FF_TWO_PROCESS_PROOF_RECEIPT_V1",
                 "status": "TECHNICAL_ENERGY_ONLY_NOT_RELEASE",
@@ -258,6 +269,10 @@ def witness(output: Path) -> dict:
                 "planner_request_fingerprint": generated.trace.request_fingerprint,
                 "semantic_events": events,
                 "semantic_sha256": digest(inputs.canonical_bytes(events)),
+                "product_preview_v1": product_preview,
+                "product_preview_sha256": digest(
+                    inputs.canonical_bytes(product_preview)
+                ),
                 # V2 supplemental witness: original V1 semantic digest is unchanged.
                 "input_parity_with_B": True,
                 "actual_request_normalized_v2": normalized_input,
@@ -328,6 +343,16 @@ def compare(output_dir: Path) -> int:
         first = json.loads((output_dir / "process-1.json").read_bytes())
         second = json.loads((output_dir / "process-2.json").read_bytes())
         findings = evidence.compare_evidence(first, second, pin=pin)
+        previews = (first.get("product_preview_v1"), second.get("product_preview_v1"))
+        for receipt, preview in ((first, previews[0]), (second, previews[1])):
+            if preview is None or receipt.get("product_preview_sha256") != digest(
+                inputs.canonical_bytes(preview)
+            ):
+                raise ProofNoGo("Missing or inconsistent product preview witness")
+        if previews[0] != previews[1]:
+            raise ProofNoGo("Cross-process product menu/shopping preview diverged")
+        markdown = week_preview.render_markdown(previews[0])
+        (output_dir / "week-preview.md").write_text(markdown, encoding="utf-8")
         decision.update(findings)
         decision["two_independent_processes"] = True
         decision["status"] = "MATCH_PENDING_INDEPENDENT_REVIEW"

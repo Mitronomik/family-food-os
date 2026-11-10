@@ -5,7 +5,9 @@ on:
     paths:
       - 'scripts/pr10_ff_two_process_proof.py'
       - 'scripts/pr10_ff_proof_evidence.py'
+      - 'scripts/pr10_ff_week_preview.py'
       - 'backend/app/tests/test_pr10_ff_two_process_proof.py'
+      - 'backend/app/tests/test_pr10_ff_week_preview.py'
       - '.github/workflows/pr10-ff-two-process-proof.yml'
   workflow_dispatch:
 
@@ -26,13 +28,13 @@ jobs:
       - name: Focused unit tests
         env:
           PYTHONPATH: backend:.
-        run: python -m pytest -q backend/app/tests/test_pr10_ff_two_process_proof.py
+        run: python -m pytest -q backend/app/tests/test_pr10_ff_two_process_proof.py backend/app/tests/test_pr10_ff_week_preview.py
       - name: Ruff format diagnostic diff
-        run: ruff format --diff scripts/pr10_ff_two_process_proof.py scripts/pr10_ff_proof_evidence.py backend/app/tests/test_pr10_ff_two_process_proof.py
+        run: ruff format --diff scripts/pr10_ff_two_process_proof.py scripts/pr10_ff_proof_evidence.py scripts/pr10_ff_week_preview.py backend/app/tests/test_pr10_ff_two_process_proof.py backend/app/tests/test_pr10_ff_week_preview.py
       - name: Ruff lint and format
         run: |
-          ruff check scripts/pr10_ff_two_process_proof.py scripts/pr10_ff_proof_evidence.py backend/app/tests/test_pr10_ff_two_process_proof.py
-          ruff format --check scripts/pr10_ff_two_process_proof.py scripts/pr10_ff_proof_evidence.py backend/app/tests/test_pr10_ff_two_process_proof.py
+          ruff check scripts/pr10_ff_two_process_proof.py scripts/pr10_ff_proof_evidence.py scripts/pr10_ff_week_preview.py backend/app/tests/test_pr10_ff_two_process_proof.py backend/app/tests/test_pr10_ff_week_preview.py
+          ruff format --check scripts/pr10_ff_two_process_proof.py scripts/pr10_ff_proof_evidence.py scripts/pr10_ff_week_preview.py backend/app/tests/test_pr10_ff_two_process_proof.py backend/app/tests/test_pr10_ff_week_preview.py
       - name: One-shot independent processes (no reroll)
         env:
           PYTHONPATH: backend:.
@@ -43,6 +45,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: pr10-ff-issue268-raw-process-receipts
-          path: ${{ runner.temp }}/pr10-ff-proof/*.json
+          path: |
+            ${{ runner.temp }}/pr10-ff-proof/*.json
+            ${{ runner.temp }}/pr10-ff-proof/week-preview.md
           if-no-files-found: warn
           retention-days: 30
