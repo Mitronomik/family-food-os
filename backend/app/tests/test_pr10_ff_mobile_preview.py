@@ -4,6 +4,7 @@ from copy import deepcopy
 
 import pytest
 from app.tests.test_pr10_ff_week_preview import _example
+
 from scripts import pr10_ff_mobile_preview as mobile
 from scripts.pr10_ff_week_preview import WeekPreviewBlocked
 
