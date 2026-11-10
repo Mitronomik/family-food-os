@@ -11,7 +11,7 @@ from scripts.pr10_ff_week_preview import WeekPreviewBlocked
 
 def test_mobile_preview_shows_real_source_structure_and_ephemeral_checklist():
     page = mobile.render_html(_example())
-    assert "<html lang=\"ru\">" in page
+    assert '<html lang="ru">' in page
     assert "Демонстрационная неделя" in page
     assert page.count('class="day"') == 7
     assert page.count('class="meal"') == 21
@@ -96,7 +96,7 @@ def test_source_display_text_is_html_escaped_in_attribute_and_body():
     page = mobile.render_html(payload)
     assert injection not in page
     assert "&lt;script&gt;" in page
-    assert 'alert(&quot;owned&quot;)' in page
+    assert "alert(&quot;owned&quot;)" in page
 
 
 @pytest.mark.parametrize(
