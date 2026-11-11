@@ -169,4 +169,9 @@ def test_water_source_is_explained_without_assuming_bottled_water_purchase():
     page = mobile.render_html(payload)
     assert "Из каких блюд: 1" in page
     assert "не подтверждает необходимость покупать бутилированную воду" in page
+    # The warning is visible next to the water item before any closed details.
+    checkbox = page.index('aria-label="Отметить: Вода питьевая"')
+    warning = page.index('<p class="origin-water">', checkbox)
+    disclosure = page.index('<details class="origins">', checkbox)
+    assert checkbox < warning < disclosure
     assert "3.125 g" in page
