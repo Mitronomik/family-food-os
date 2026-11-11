@@ -10,6 +10,7 @@ import pytest
 from app.domain.meal_patterns import MealRole
 from app.domain.meal_plans import MealSourceKind
 from app.domain.units import UnitCode
+
 from scripts.pr10_ff_shopping_origins import ShoppingOriginBlocked, shopping_origins
 
 
@@ -112,7 +113,7 @@ def test_bad_source_is_blocked(mutation):
             Row(
                 food_ingredient_id=shopping.items[0].food_ingredient_id,
                 unit=UnitCode.GRAM,
-                quantity=Decimal("-1"),
+                quantity=Decimal(-1),
             ),
         )
     elif mutation == "no_event":
