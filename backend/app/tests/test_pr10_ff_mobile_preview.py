@@ -93,6 +93,7 @@ def test_source_display_text_is_html_escaped_in_attribute_and_body():
     injection = '<script>alert("owned")</script>'
     payload["menu"][0]["title_ru"] = injection
     payload["shopping"][0]["title_ru"] = injection
+    payload["shopping"][0]["origins"][0]["recipe_title_ru"] = injection
     page = mobile.render_html(payload)
     assert injection not in page
     assert "&lt;script&gt;" in page
@@ -116,3 +117,61 @@ def test_html_reuses_nonrelease_gate_validation(field, value):
     payload[field] = value
     with pytest.raises(WeekPreviewBlocked):
         mobile.render_html(payload)
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "missing",
+        "empty",
+        "wrong_recipe",
+        "wrong_role",
+        "wrong_unit",
+        "negative",
+        "infinite",
+        "overstated",
+        "understated",
+        "duplicate",
+    ],
+)
+def test_mobile_preview_rejects_unverifiable_purchase_origins(mutation):
+    payload = _example()
+    row = payload["shopping"][0]
+    source = row["origins"][0]
+    if mutation == "missing":
+        del row["origins"]
+    elif mutation == "empty":
+        row["origins"] = []
+    elif mutation == "wrong_recipe":
+        source["recipe_code"] = "UNKNOWN_RECIPE"
+    elif mutation == "wrong_role":
+        source["role"] = "DINNER"
+    elif mutation == "wrong_unit":
+        source["unit"] = "ml"
+    elif mutation == "negative":
+        source["source_demand_up_001"] = "-3.125"
+    elif mutation == "infinite":
+        source["source_demand_up_001"] = "Infinity"
+    elif mutation == "overstated":
+        source["source_demand_up_001"] = "3.127"
+    elif mutation == "understated":
+        source["source_demand_up_001"] = "3.124"
+    elif mutation == "duplicate":
+        row["origins"].append(deepcopy(source))
+    with pytest.raises(WeekPreviewBlocked):
+        mobile.render_html(payload)
+
+
+def test_water_source_is_explained_without_assuming_bottled_water_purchase():
+    payload = _example()
+    payload["shopping"][0]["food_code"] = "WATER"
+    payload["shopping"][0]["title_ru"] = "Вода питьевая"
+    page = mobile.render_html(payload)
+    assert "Из каких блюд: 1" in page
+    assert "не подтверждает необходимость покупать бутилированную воду" in page
+    # The warning is visible next to the water item before any closed details.
+    checkbox = page.index('aria-label="Отметить: Вода питьевая"')
+    warning = page.index('<p class="origin-water">', checkbox)
+    disclosure = page.index('<details class="origins">', checkbox)
+    assert checkbox < warning < disclosure
+    assert "3.125 g" in page

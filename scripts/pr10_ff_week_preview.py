@@ -16,6 +16,12 @@ from app.domain.shopping_calculation import (
 )
 from app.persistence.sqlalchemy_core.shopping_uow import SqlAlchemyShoppingReadScope
 
+from scripts.pr10_ff_shopping_origins import (
+    ShoppingOriginBlocked,
+    assert_origins_match_sources,
+    shopping_origins,
+)
+
 
 class WeekPreviewBlocked(ValueError):
     """Source/readback inconsistency: do not emit a misleading preview."""
@@ -103,6 +109,7 @@ def project_week(*, engine, plan, semantic_events, candidate_inputs, timezone):
         menu.append(
             {
                 "date": date,
+                "position": pos,
                 "role": source["role"],
                 "title_ru": name,
                 "recipe_code": recipe_code,
@@ -117,9 +124,21 @@ def project_week(*, engine, plan, semantic_events, candidate_inputs, timezone):
     ):
         raise WeekPreviewBlocked("Preview lost days or individual servings")
 
+    # Explain each canonical item through actual MealEvents and RecipeIngredients.
+    # Compare exact unrounded event totals to the *existing* Shopping engine;
+    # a mismatch is BLOCKED, never a correction of published quantities.
+    try:
+        origin_map = shopping_origins(plan=plan, recipes=versions, shopping=shopping)
+    except ShoppingOriginBlocked as exc:
+        raise WeekPreviewBlocked("Unverifiable Shopping ingredient origins") from exc
+
     shopping_rows = []
+    published_origins = {}
     for item in shopping.items:
         food = foods[item.food_ingredient_id]
+        published_origins[(item.food_ingredient_id, item.unit)] = origin_map[
+            (item.food_ingredient_id, item.unit)
+        ]
         shopping_rows.append(
             {
                 "food_code": food.canonical_code,
@@ -128,8 +147,21 @@ def project_week(*, engine, plan, semantic_events, candidate_inputs, timezone):
                 "required": format(item.required_quantity, "f"),
                 "at_home": format(item.pantry_available_quantity, "f"),
                 "to_buy": format(item.purchase_quantity, "f"),
+                "origins": origin_map[(item.food_ingredient_id, item.unit)],
             }
         )
+    # Independent source-level check before serializing the explanation.
+    # HTML sees neither immutable RecipeIngredients nor persisted Servings and
+    # must never be credited with validating individual attribution.
+    try:
+        assert_origins_match_sources(
+            plan=plan,
+            recipes=versions,
+            shopping=shopping,
+            published_origins=published_origins,
+        )
+    except ShoppingOriginBlocked as exc:
+        raise WeekPreviewBlocked("Shopping source attribution mismatch") from exc
     shopping_rows.sort(key=lambda r: (r["title_ru"], r["food_code"]))
     if not shopping_rows:
         raise WeekPreviewBlocked("Expected source-backed grocery demand")
