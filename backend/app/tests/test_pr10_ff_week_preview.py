@@ -47,6 +47,17 @@ def _example():
                 "required": "3.125",
                 "at_home": "0.000",
                 "to_buy": "3.125",
+                "origins": [
+                    {
+                        "date": "2026-11-02",
+                        "position": 1,
+                        "role": "BREAKFAST",
+                        "recipe_code": "TEST_ONLY",
+                        "recipe_title_ru": "Проверочное блюдо",
+                        "source_demand_up_001": "3.125",
+                        "unit": "g",
+                    }
+                ],
             }
         ],
         "shopping_status": "COMPLETE",
