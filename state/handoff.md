@@ -1,3 +1,9 @@
+# 2026-11-11 — source-based Serving realism audit after merged #286
+
+[PR #286](https://github.com/Mitronomik/family-food-os/pull/286) merged at `c0bd92d2e671acd6ec5f839b2ca6c769b964acf1`. The next product blocker is physical portion plausibility: accepted synthetic frozen forward week has 21 source-recipe MealEvents and 42 Serving factors ranging roughly ×2.03–×6.16, but no independently accepted finished-edible-mass/physical-policy PASS. New developer-only `portion-review.md` and JSON inventory actual verified source RecipeVersion output metadata, compare every factor against exact persisted Serving and authoritative energy-only candidate, and retain `PORTION_RELEASE_READY=NOT_PROVEN`. Do not infer finished mass, clip portions, invent serving bounds, change frozen A/B/Planner/Shopping or authorize real-family Prep. Verify exact-head two-process artifacts; stop for owner merge.
+
+---
+
 # 2026-11-11 — product-first water purchasing choice on existing proof
 
 [PR #285](https://github.com/Mitronomik/family-food-os/pull/285) merged as `7873e1329f0b05a81d2b1dcd2925bd1762561c4b`. The next developer-only HTML improvement offers one explicit local choice for WATER: `UNKNOWN` (default), `BUY`, or user-declared `AVAILABLE`. A pending decision disables only the water purchase checkbox; `AVAILABLE` disables it as a *demo action*, not as authoritative Pantry coverage. No persisted setting or changed canonical Shopping demand. Backend source-attribution math/RecipeVersion/Serving, original input pins and all food-safety/release gates remain unchanged. Check real two-process artifact before owner merge.
