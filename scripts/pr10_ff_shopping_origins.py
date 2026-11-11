@@ -12,7 +12,10 @@ from decimal import ROUND_CEILING, Decimal, InvalidOperation, localcontext
 
 from app.domain.meal_plans import MealSourceKind
 from app.domain.shopping_calculation import QUANTITY_STEP
-from scripts.pr10_ff_week_preview import WeekPreviewBlocked
+
+
+class ShoppingOriginBlocked(ValueError):
+    """Invalid sources cannot support an explainable shopping item."""
 
 
 def shopping_origins(*, plan, recipes, shopping):
@@ -29,7 +32,7 @@ def shopping_origins(*, plan, recipes, shopping):
             or not serving.portion_servings.is_finite()
             or serving.portion_servings <= 0
         ):
-            raise WeekPreviewBlocked("Invalid persisted Serving in Shopping origin")
+            raise ShoppingOriginBlocked("Invalid persisted Serving in Shopping origin")
         event_totals[serving.event_id] += serving.portion_servings
 
     gross = defaultdict(lambda: Decimal(0))
@@ -45,7 +48,7 @@ def shopping_origins(*, plan, recipes, shopping):
                 or event.recipe_version_id not in recipes
                 or event.id not in event_totals
             ):
-                raise WeekPreviewBlocked("Unbound or non-recipe Shopping source")
+                raise ShoppingOriginBlocked("Unbound or non-recipe Shopping source")
             detail = recipes[event.recipe_version_id]
             base = detail.version.base_servings
             total = event_totals[event.id]
@@ -54,7 +57,7 @@ def shopping_origins(*, plan, recipes, shopping):
                 or not base.is_finite()
                 or base <= 0
             ):
-                raise WeekPreviewBlocked("Invalid source RecipeVersion servings")
+                raise ShoppingOriginBlocked("Invalid source RecipeVersion servings")
             identity = (
                 event.local_date.isoformat(),
                 event.position,
@@ -69,11 +72,11 @@ def shopping_origins(*, plan, recipes, shopping):
                     or not quantity.is_finite()
                     or quantity <= 0
                 ):
-                    raise WeekPreviewBlocked("Invalid source RecipeIngredient quantity")
+                    raise ShoppingOriginBlocked("Invalid source RecipeIngredient quantity")
                 key = ingredient.food_ingredient_id, ingredient.unit
                 value = quantity * total / base
                 if not value.is_finite() or value <= 0:
-                    raise WeekPreviewBlocked("Invalid scaled ingredient demand")
+                    raise ShoppingOriginBlocked("Invalid scaled ingredient demand")
                 gross[key] += value
                 origin_values[key][identity] += value
 
@@ -81,7 +84,7 @@ def shopping_origins(*, plan, recipes, shopping):
             (item.food_ingredient_id, item.unit) for item in shopping.items
         }
         if len(expected_keys) != len(shopping.items) or set(gross) != expected_keys:
-            raise WeekPreviewBlocked("Shopping items and event origins differ")
+            raise ShoppingOriginBlocked("Shopping items and event origins differ")
 
         result = {}
         for item in shopping.items:
@@ -91,15 +94,15 @@ def shopping_origins(*, plan, recipes, shopping):
                     QUANTITY_STEP, rounding=ROUND_CEILING
                 )
             except InvalidOperation as exc:
-                raise WeekPreviewBlocked("Unroundable source ingredient demand") from exc
+                raise ShoppingOriginBlocked("Unroundable source ingredient demand") from exc
             if required != item.required_quantity:
-                raise WeekPreviewBlocked("Event source gross differs from Shopping")
+                raise ShoppingOriginBlocked("Event source gross differs from Shopping")
             origins = []
             for (day, position, role, code, title), raw in sorted(
                 origin_values[key].items()
             ):
                 if not title or raw <= 0:
-                    raise WeekPreviewBlocked("Missing recipe display/source quantity")
+                    raise ShoppingOriginBlocked("Missing recipe display/source quantity")
                 amount = raw.quantize(QUANTITY_STEP, rounding=ROUND_CEILING)
                 origins.append(
                     {
@@ -113,6 +116,6 @@ def shopping_origins(*, plan, recipes, shopping):
                     }
                 )
             if not origins:
-                raise WeekPreviewBlocked("Missing Shopping source events")
+                raise ShoppingOriginBlocked("Missing Shopping source events")
             result[key] = origins
     return result
