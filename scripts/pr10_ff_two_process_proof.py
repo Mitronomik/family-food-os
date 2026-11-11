@@ -278,7 +278,9 @@ def witness(output: Path) -> dict:
                 or portion_audit["individual_servings"] != 42
                 or portion_audit["physically_reviewed_servings"] != 0
             ):
-                raise ProofNoGo("Portion audit may not promote fixture to physical PASS")
+                raise ProofNoGo(
+                    "Portion audit may not promote fixture to physical PASS"
+                )
             result = {
                 "schema": "PR10_FF_TWO_PROCESS_PROOF_RECEIPT_V1",
                 "status": "TECHNICAL_ENERGY_ONLY_NOT_RELEASE",
