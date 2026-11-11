@@ -37,9 +37,7 @@ def shopping_origins(*, plan, recipes, shopping):
 
     gross = defaultdict(lambda: Decimal(0))
     origin_values = defaultdict(lambda: defaultdict(lambda: Decimal(0)))
-    events = sorted(
-        plan.events, key=lambda e: (e.local_date, e.position, str(e.id))
-    )
+    events = sorted(plan.events, key=lambda e: (e.local_date, e.position, str(e.id)))
     with localcontext() as ctx:
         ctx.prec = 50
         for event in events:
@@ -52,11 +50,7 @@ def shopping_origins(*, plan, recipes, shopping):
             detail = recipes[event.recipe_version_id]
             base = detail.version.base_servings
             total = event_totals[event.id]
-            if (
-                not isinstance(base, Decimal)
-                or not base.is_finite()
-                or base <= 0
-            ):
+            if not isinstance(base, Decimal) or not base.is_finite() or base <= 0:
                 raise ShoppingOriginBlocked("Invalid source RecipeVersion servings")
             identity = (
                 event.local_date.isoformat(),
@@ -72,7 +66,9 @@ def shopping_origins(*, plan, recipes, shopping):
                     or not quantity.is_finite()
                     or quantity <= 0
                 ):
-                    raise ShoppingOriginBlocked("Invalid source RecipeIngredient quantity")
+                    raise ShoppingOriginBlocked(
+                        "Invalid source RecipeIngredient quantity"
+                    )
                 key = ingredient.food_ingredient_id, ingredient.unit
                 value = quantity * total / base
                 if not value.is_finite() or value <= 0:
@@ -90,11 +86,11 @@ def shopping_origins(*, plan, recipes, shopping):
         for item in shopping.items:
             key = item.food_ingredient_id, item.unit
             try:
-                required = gross[key].quantize(
-                    QUANTITY_STEP, rounding=ROUND_CEILING
-                )
+                required = gross[key].quantize(QUANTITY_STEP, rounding=ROUND_CEILING)
             except InvalidOperation as exc:
-                raise ShoppingOriginBlocked("Unroundable source ingredient demand") from exc
+                raise ShoppingOriginBlocked(
+                    "Unroundable source ingredient demand"
+                ) from exc
             if required != item.required_quantity:
                 raise ShoppingOriginBlocked("Event source gross differs from Shopping")
             origins = []
@@ -102,7 +98,9 @@ def shopping_origins(*, plan, recipes, shopping):
                 origin_values[key].items()
             ):
                 if not title or raw <= 0:
-                    raise ShoppingOriginBlocked("Missing recipe display/source quantity")
+                    raise ShoppingOriginBlocked(
+                        "Missing recipe display/source quantity"
+                    )
                 amount = raw.quantize(QUANTITY_STEP, rounding=ROUND_CEILING)
                 origins.append(
                     {
