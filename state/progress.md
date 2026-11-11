@@ -1,3 +1,11 @@
+# 2026-11-11 — post-#284 product-first shopping explainability
+
+- [#284](https://github.com/Mitronomik/family-food-os/pull/284) merged at `main@2c52e8acb3e32c602b4b27155a45b477b40edd97`.
+- Read actual process-1 accepted product preview: 37 Shopping items, including `WATER=19925.989 g` from structured source ingredients; purchases currently include water because generic Shopping has no accepted household water-supply policy.
+- Scope: retain existing amounts/engine, expose per-event source attribution in read-only synthetic HTML; strict Decimal gross reconciliation, explicit event-level explanatory rounding, water purchase uncertainty. No source publication/Prep/Gate2 changes.
+
+---
+
 # 2026-11-11 — merged #283, first mobile-view internal prototype
 
 - [PR #283](https://github.com/Mitronomik/family-food-os/pull/283) merged to `main@c6b0976a1d75a86a6ca8da84e7341df53b3817f9`. Original technical synthetic Planner/Shopping week remains 7 days, 21 MealEvents, 42 Decimal recipe-sharing factors and 37 Shopping rows, with price/Nutrition/Prep gaps explicit.
