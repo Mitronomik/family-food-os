@@ -17,6 +17,7 @@ from datetime import date, timedelta
 from decimal import Decimal
 from pathlib import Path
 
+from scripts import pr10_ff_mobile_preview as mobile_preview
 from scripts import pr10_ff_pre_generation_inputs as inputs
 from scripts import pr10_ff_proof_evidence as evidence
 from scripts import pr10_ff_week_preview as week_preview
@@ -353,6 +354,8 @@ def compare(output_dir: Path) -> int:
             raise ProofNoGo("Cross-process product menu/shopping preview diverged")
         markdown = week_preview.render_markdown(previews[0])
         (output_dir / "week-preview.md").write_text(markdown, encoding="utf-8")
+        mobile_html = mobile_preview.render_html(previews[0])
+        (output_dir / "week-preview.html").write_text(mobile_html, encoding="utf-8")
         decision.update(findings)
         decision["two_independent_processes"] = True
         decision["status"] = "MATCH_PENDING_INDEPENDENT_REVIEW"

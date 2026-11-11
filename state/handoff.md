@@ -1,3 +1,9 @@
+# 2026-11-11 — offline mobile product-week artifact
+
+Owner confirmed PR #283 merged at `main@c6b0976a1d75a86a6ca8da84e7341df53b3817f9`; developer-only next step creates `week-preview.html` from the existing exact Planner+Shopping `product_preview_v1` without changing accepted source A/B, recipe facts, Planner/Shopping arithmetic, V1 semantic digest, or Prep authority. Local-only shopping checkboxes/search and upward-rounded readable quantities are display affordances; original 0.001-unit values remain present. The generated HTML is **not** a consumer app, persisted shopping mutation or confirmed batch. Review exact CI and archive artifact before merge.
+
+---
+
 # 2026-11-11 — product-first internal weekly preview (owner authorization)
 
 PR #282 was closed without merge as SUPERSEDED; source evidence from merged #281 stays intact. One bounded, developer-only internal product preview is being produced from the existing genuine forward Planner two-process proof: 21 current source-backed meals, 42 exact recipe-serving factors, Shopping computed over the *same persisted MealPlan*, explicit empty Pantry and UNKNOWN prices; Prep actions and complete Nutrition are not represented as approved. No modified A/B, Planner, RecipeVersion, Shopping/Prep domain, migrations, API/UI/PDF or safety gates. Work is intentionally an inspectable weekly artifact, not another docs-only contract. Inspect exact-head CI and validate artifact before owner merge.

@@ -1,3 +1,13 @@
+# CURRENT — internal mobile week preview from merged #283 — 2026-11-11
+
+**Accepted main:** `c6b0976a1d75a86a6ca8da84e7341df53b3817f9` ([PR #283 merged](https://github.com/Mitronomik/family-food-os/pull/283)); previous headings declaring #283 under review are historical. Current owner request: proceed product-first, not with a new preflight.
+
+**Current bounded delivery:** offline, self-contained `week-preview.html` derived from the same accepted synthetic 3-member/7-day/21-meal/42-Serving Planner → Shopping readback, alongside existing Markdown+JSON. Mobile-first day cards, searchable/checkable **local-only** purchases, exact amounts in details, and display quantities rounded upward for readability without changing Shopping truth. All unknown nutrition/cost/Prep/storage remain explicit. No external assets, real-family use, consumer API/PWA, source edits, unsafe guidance or Gate2 promotion.
+
+**Next ONLY:** exact-head focused tests, Ruff, two-process proof and artifact review of the HTML, then owner merge decision. After merge prioritize actual source/portion/nutrition problems found in the week rather than another standalone architecture document.
+
+---
+
 # CURRENT — owner-approved product-first internal weekly preview — 2026-11-11
 
 **Accepted main:** `80ddc7ba95673681cce2f62b6294ebe0de3f5946` after merged [#281](https://github.com/Mitronomik/family-food-os/pull/281). [#282](https://github.com/Mitronomik/family-food-os/pull/282) is CLOSED / SUPERSEDED without merge by explicit owner direction. Historic focus entries below are not active authorization.
