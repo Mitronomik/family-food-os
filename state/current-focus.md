@@ -1,3 +1,13 @@
+# CURRENT — explicit water purchase decision in internal week preview — 2026-11-11
+
+**Accepted main:** `7873e1329f0b05a81d2b1dcd2925bd1762561c4b` ([PR #285 merged](https://github.com/Mitronomik/family-food-os/pull/285)). Previous #285 pre-merge focus below is historical.
+
+**Next bounded product job:** give the synthetic offline week one meaningful, reversible grocery decision: is water required for purchase, or does the user state that suitable water is available? Default `UNKNOWN`; water cannot be checked as purchased until explicit `BUY`. `AVAILABLE` only removes the demo checklist action; it does **not** alter the canonical `WATER=19925.989 g` RecipeIngredient/Shopping need, create/credit Pantry stock, prove safety or persist a household fact. Retain per-recipe origin breakdown and the P2/P3 trust boundary, and leave all non-WATER shopping rows unchanged.
+
+**Boundary:** developer-only HTML/JS prototype, no domain/API/schema/policy/product release, no AI, Prep/D3/Gate2 gate promotion, no frozen A/B or Planner receipt changes. Verify exact-head focused tests, Ruff, two-process proof and artifact; stop for independent owner merge.
+
+---
+
 # CURRENT — source-attributed Shopping from actual synthetic week — 2026-11-11
 
 **Accepted main:** `2c52e8acb3e32c602b4b27155a45b477b40edd97` after [#284 merged](https://github.com/Mitronomik/family-food-os/pull/284); previous #284 open/current headings below are historical.

@@ -65,6 +65,14 @@ padding:10px 14px;background:#fcfcf9;font-size:13px}
 .origins summary{color:var(--accent)}.origins ul{margin:8px 0;padding-left:20px}
 .origins li{margin:5px 0}.origins p{margin:8px 0;color:var(--muted)}
 .origin-water{border-left:3px solid #d49f31;padding-left:10px;color:#70521b!important}
+.water-decision{border:1px solid #d6c497;border-radius:14px;background:#fffaf0;
+padding:14px;margin:14px 0}.water-decision label{display:block;font-weight:750}
+.water-decision select{margin:8px 0;width:100%;max-width:420px;
+padding:10px;border:1px solid #a9aa9d;border-radius:10px;background:#fff}
+.water-decision p{margin:4px 0;font-size:13px;color:#70521b}
+.water-review-status{display:block;padding:0 14px 8px;color:#70521b;
+font-size:13px;font-weight:700}
+.item input:disabled{opacity:.5;cursor:not-allowed}
 details{background:#fff;
 border:1px solid var(--line);padding:12px 16px;border-radius:12px;margin-top:16px}
 summary{font-weight:650;cursor:pointer}table{border-collapse:collapse;width:100%;
@@ -86,17 +94,42 @@ _SCRIPT = """
   const rows = Array.from(document.querySelectorAll('.grocery-row'));
   const search = document.querySelector('#search');
   const counter = document.querySelector('#counter');
+  const waterChoice = document.querySelector('#water-choice');
+  const waterNote = document.querySelector('#water-choice-note');
+  const waterFlag = document.querySelector('.water-review-status');
+  const waterNotes = {
+    unknown: 'Покупку воды нужно уточнить. Без выбора она не отмечается как покупка.',
+    buy: 'Вы выбрали покупку воды для этого демонстрационного списка. Расчётная масса неизменна.',
+    available: 'Вы указали, что подходящая вода уже есть. В демо покупка не нужна; Pantry и Shopping не изменены.'
+  };
   function update() {
     const needle = search.value.trim().toLocaleLowerCase('ru');
     let checked = 0;
+    let actionable = 0;
+    const waterMode = waterChoice ? waterChoice.value : 'unknown';
     for (const row of rows) {
       const tick = row.querySelector('input[type=checkbox]');
+      const water = row.dataset.water === 'true';
+      const canBuy = !water || waterMode === 'buy';
+      tick.disabled = !canBuy;
+      if (!canBuy) tick.checked = false;
       row.hidden = !row.dataset.label.toLocaleLowerCase('ru').includes(needle);
       row.querySelector('.item').classList.toggle('checked', tick.checked);
+      if (canBuy) actionable++;
       if (tick.checked) checked++;
     }
-    counter.textContent = 'Отмечено ' + checked + ' из ' + rows.length;
+    if (waterNote) waterNote.textContent = waterNotes[waterMode];
+    if (waterFlag) {
+      waterFlag.textContent = waterMode === 'buy'
+        ? 'Ваш выбор: купить'
+        : waterMode === 'available'
+          ? 'Ваш выбор: есть дома (только для демо)'
+          : 'Требует решения о покупке';
+    }
+    counter.textContent = 'Отмечено ' + checked + ' из ' + actionable
+      + ' позиций для покупки';
   }
+  if (waterChoice) waterChoice.addEventListener('change', update);
   search.addEventListener('input', update);
   for (const row of rows) row.querySelector('input').addEventListener('change', update);
   update();
@@ -214,18 +247,28 @@ def render_html(preview):
             raise WeekPreviewBlocked(
                 "Displayed origin totals contradict Shopping gross"
             )
+        is_water = row["food_code"] == "WATER"
         water_note = (
             '<p class="origin-water">Вода учтена как рецептурный ингредиент. '
             "Это не подтверждает необходимость покупать бутилированную воду.</p>"
-            if row["food_code"] == "WATER"
+            if is_water
             else ""
         )
+        water_flag = (
+            '<span class="water-review-status" aria-live="polite">'
+            "Требует решения о покупке</span>"
+            if is_water
+            else ""
+        )
+        disabled = " disabled" if is_water else ""
         groceries_html.append(
-            f'<div class="grocery-row" data-label="{name}">'
+            f'<div class="grocery-row" data-label="{name}" '
+            f'data-water="{str(is_water).lower()}">'
             f'<label class="item">'
-            f'<input type="checkbox" aria-label="Отметить: {name}">'
+            f'<input type="checkbox"{disabled} aria-label="Отметить: {name}">'
             f'<span class="item-name">{name}</span>'
             f'<span class="item-price">{_html(display)}</span></label>'
+            + water_flag
             + water_note
             + f'<details class="origins"><summary>Из каких блюд: {len(sources)}</summary>'
             "<p>На блюдо округлено вверх до 0,001. Итог считается отдельно "
@@ -239,6 +282,24 @@ def render_html(preview):
             f"<td>{_html(row['at_home'])} {_html(row['unit'])}</td>"
             f"<td>{_html(row['to_buy'])} {_html(row['unit'])}</td></tr>"
         )
+
+    water_decision = (
+        '<div class="water-decision">'
+        '<label for="water-choice">Воду для приготовления нужно покупать?</label>'
+        '<select id="water-choice" aria-describedby="water-choice-note">'
+        '<option value="unknown" selected>Пока не знаю</option>'
+        '<option value="buy">Да, добавить в покупки</option>'
+        '<option value="available">Нет, подходящая вода уже есть</option>'
+        "</select>"
+        '<p id="water-choice-note" aria-live="polite">'
+        "Покупку воды нужно уточнить. Без выбора она не отмечается как покупка.</p>"
+        "<p>Выбор действует только до закрытия страницы, "
+        "не сохраняется и не меняет расчёты Shopping Engine или Pantry. "
+        "Подходящесть воды для конкретного рецепта система не проверяет.</p>"
+        "</div>"
+        if any(row["food_code"] == "WATER" for row in groceries)
+        else ""
+    )
 
     by_date = {}
     for row in menu:
@@ -305,7 +366,8 @@ def render_html(preview):
         "Упаковки, штуки яиц и цены не определены.</p>"
         '<div class="notice">Отметки покупок действуют только на этой странице '
         "и <strong>не сохраняются</strong> в Pantry.</div>"
-        '<div class="buy-controls"><input id="search" class="search" type="search" '
+        + water_decision
+        + '<div class="buy-controls"><input id="search" class="search" type="search" '
         'placeholder="Найти продукт" aria-label="Поиск по покупкам">'
         '<span class="counter" id="counter"></span></div>'
         f'<div class="shopping">{"".join(groceries_html)}</div>'

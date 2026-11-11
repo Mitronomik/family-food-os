@@ -1,3 +1,9 @@
+# 2026-11-11 — product-first water purchasing choice on existing proof
+
+[PR #285](https://github.com/Mitronomik/family-food-os/pull/285) merged as `7873e1329f0b05a81d2b1dcd2925bd1762561c4b`. The next developer-only HTML improvement offers one explicit local choice for WATER: `UNKNOWN` (default), `BUY`, or user-declared `AVAILABLE`. A pending decision disables only the water purchase checkbox; `AVAILABLE` disables it as a *demo action*, not as authoritative Pantry coverage. No persisted setting or changed canonical Shopping demand. Backend source-attribution math/RecipeVersion/Serving, original input pins and all food-safety/release gates remain unchanged. Check real two-process artifact before owner merge.
+
+---
+
 # 2026-11-11 — Shopping ingredient origins from accepted real-week readback
 
 Owner reports and GitHub confirms [#284](https://github.com/Mitronomik/family-food-os/pull/284) merged at `2c52e8acb3e32c602b4b27155a45b477b40edd97`. Existing offline week exposes `WATER=19925.989 g` as canonical Shopping demand but cannot establish whether that water must be bought. New bounded developer-only improvement provides per-recipe/per-event source quantity breakdown under each purchase, reconciled **before display** against unrounded RecipeIngredient×Serving and existing Shopping's 0.001 CEILING gross. Show unknown purchasing policy clearly; never discard water from Shopping or assume tap water/free supply. Preserve accepted source A/B, Planner, Shopping, UI boundary and gates. Exact-head tests/CI/review then owner merge only.

@@ -1,3 +1,11 @@
+# 2026-11-11 — merged #285; local decision for recipe water vs purchase
+
+- [PR #285](https://github.com/Mitronomik/family-food-os/pull/285) merged to `main@7873e1329f0b05a81d2b1dcd2925bd1762561c4b` with source-attributed Shopping and visible WATER warning.
+- Next bounded non-release UX change: do not silently treat `WATER=19925.989 g` as a mandatory bottled-water purchase. User must explicitly decide on a *local-only checklist action*. The reported canonical quantity and original empty Pantry remain unchanged; safe suitability/availability is not verified.
+- No schema/API, Shopping quantity/service modification, real-family permission or Prep/Gate2 promotion. Exact-head CI/QA required.
+
+---
+
 # 2026-11-11 — post-#284 product-first shopping explainability
 
 - [#284](https://github.com/Mitronomik/family-food-os/pull/284) merged at `main@2c52e8acb3e32c602b4b27155a45b477b40edd97`.
