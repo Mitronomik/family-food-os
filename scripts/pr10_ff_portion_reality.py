@@ -28,7 +28,9 @@ def inspect(*, plan, semantic_events, details, candidate_inputs, member_ordinals
     by_slot = {(e.local_date.isoformat(), e.position): e for e in plan.events}
     if len(by_slot) != len(plan.events) or len(by_slot) != len(semantic_events):
         raise PortionAuditBlocked("Missing or duplicate persisted meal slot")
-    if not member_ordinals or len(set(member_ordinals.values())) != len(member_ordinals):
+    if not member_ordinals or len(set(member_ordinals.values())) != len(
+        member_ordinals
+    ):
         raise PortionAuditBlocked("Unbound member semantics")
     by_code = {c["canonical_code"]: c for c in candidate_inputs}
     if len(by_code) != len(candidate_inputs):
@@ -108,7 +110,9 @@ def inspect(*, plan, semantic_events, details, candidate_inputs, member_ordinals
             except (InvalidOperation, TypeError, ValueError) as exc:
                 raise PortionAuditBlocked("Invalid frozen member factor") from exc
             if stated != factor:
-                raise PortionAuditBlocked("Frozen factor differs from persisted Serving")
+                raise PortionAuditBlocked(
+                    "Frozen factor differs from persisted Serving"
+                )
             with localcontext() as ctx:
                 ctx.prec = 50
                 energy = (kcal * factor).quantize(
@@ -125,7 +129,9 @@ def inspect(*, plan, semantic_events, details, candidate_inputs, member_ordinals
                     "portion_factor": format(factor, ".6f"),
                     "technical_energy_kcal": format(energy, "f"),
                     "source_output_g_raw": (
-                        format(source_output, "f") if source_output is not None else None
+                        format(source_output, "f")
+                        if source_output is not None
+                        else None
                     ),
                     "source_output_status": output_status,
                     "physical_feasibility": "NOT_PROVEN",
