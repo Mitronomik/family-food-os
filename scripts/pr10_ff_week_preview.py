@@ -15,6 +15,7 @@ from app.domain.shopping_calculation import (
     calculate_shopping,
 )
 from app.persistence.sqlalchemy_core.shopping_uow import SqlAlchemyShoppingReadScope
+
 from scripts.pr10_ff_shopping_origins import ShoppingOriginBlocked, shopping_origins
 
 
