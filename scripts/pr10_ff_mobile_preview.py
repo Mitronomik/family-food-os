@@ -141,7 +141,7 @@ def render_html(preview):
     groceries_html = []
     raw_rows = []
     meal_codes = {
-        (item["date"], item["role"], item["recipe_code"]): item["title_ru"]
+        (item["date"], item["position"], item["role"], item["recipe_code"]): item["title_ru"]
         for item in menu
     }
     if len(meal_codes) != len(menu):
