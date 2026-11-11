@@ -1,3 +1,9 @@
+# 2026-11-11 — Shopping ingredient origins from accepted real-week readback
+
+Owner reports and GitHub confirms [#284](https://github.com/Mitronomik/family-food-os/pull/284) merged at `2c52e8acb3e32c602b4b27155a45b477b40edd97`. Existing offline week exposes `WATER=19925.989 g` as canonical Shopping demand but cannot establish whether that water must be bought. New bounded developer-only improvement provides per-recipe/per-event source quantity breakdown under each purchase, reconciled **before display** against unrounded RecipeIngredient×Serving and existing Shopping's 0.001 CEILING gross. Show unknown purchasing policy clearly; never discard water from Shopping or assume tap water/free supply. Preserve accepted source A/B, Planner, Shopping, UI boundary and gates. Exact-head tests/CI/review then owner merge only.
+
+---
+
 # 2026-11-11 — offline mobile product-week artifact
 
 Owner confirmed PR #283 merged at `main@c6b0976a1d75a86a6ca8da84e7341df53b3817f9`; developer-only next step creates `week-preview.html` from the existing exact Planner+Shopping `product_preview_v1` without changing accepted source A/B, recipe facts, Planner/Shopping arithmetic, V1 semantic digest, or Prep authority. Local-only shopping checkboxes/search and upward-rounded readable quantities are display affordances; original 0.001-unit values remain present. The generated HTML is **not** a consumer app, persisted shopping mutation or confirmed batch. Review exact CI and archive artifact before merge.
