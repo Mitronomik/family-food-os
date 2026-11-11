@@ -256,7 +256,7 @@ def render_html(preview):
         )
         water_flag = (
             '<span class="water-review-status" aria-live="polite">'
-            'Требует решения о покупке</span>'
+            "Требует решения о покупке</span>"
             if is_water
             else ""
         )
@@ -290,13 +290,13 @@ def render_html(preview):
         '<option value="unknown" selected>Пока не знаю</option>'
         '<option value="buy">Да, добавить в покупки</option>'
         '<option value="available">Нет, подходящая вода уже есть</option>'
-        '</select>'
+        "</select>"
         '<p id="water-choice-note" aria-live="polite">'
-        'Покупку воды нужно уточнить. Без выбора она не отмечается как покупка.</p>'
-        '<p>Выбор действует только до закрытия страницы, '
-        'не сохраняется и не меняет расчёты Shopping Engine или Pantry. '
-        'Подходящесть воды для конкретного рецепта система не проверяет.</p>'
-        '</div>'
+        "Покупку воды нужно уточнить. Без выбора она не отмечается как покупка.</p>"
+        "<p>Выбор действует только до закрытия страницы, "
+        "не сохраняется и не меняет расчёты Shopping Engine или Pantry. "
+        "Подходящесть воды для конкретного рецепта система не проверяет.</p>"
+        "</div>"
         if any(row["food_code"] == "WATER" for row in groceries)
         else ""
     )
