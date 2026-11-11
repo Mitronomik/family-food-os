@@ -15,6 +15,7 @@ from app.domain.shopping_calculation import (
     calculate_shopping,
 )
 from app.persistence.sqlalchemy_core.shopping_uow import SqlAlchemyShoppingReadScope
+from scripts.pr10_ff_shopping_origins import ShoppingOriginBlocked, shopping_origins
 
 
 class WeekPreviewBlocked(ValueError):
@@ -117,6 +118,16 @@ def project_week(*, engine, plan, semantic_events, candidate_inputs, timezone):
     ):
         raise WeekPreviewBlocked("Preview lost days or individual servings")
 
+    # Explain each canonical item through actual MealEvents and RecipeIngredients.
+    # Compare exact unrounded event totals to the *existing* Shopping engine;
+    # a mismatch is BLOCKED, never a correction of published quantities.
+    try:
+        origin_map = shopping_origins(
+            plan=plan, recipes=versions, shopping=shopping
+        )
+    except ShoppingOriginBlocked as exc:
+        raise WeekPreviewBlocked("Unverifiable Shopping ingredient origins") from exc
+
     shopping_rows = []
     for item in shopping.items:
         food = foods[item.food_ingredient_id]
@@ -128,6 +139,7 @@ def project_week(*, engine, plan, semantic_events, candidate_inputs, timezone):
                 "required": format(item.required_quantity, "f"),
                 "at_home": format(item.pantry_available_quantity, "f"),
                 "to_buy": format(item.purchase_quantity, "f"),
+                "origins": origin_map[(item.food_ingredient_id, item.unit)],
             }
         )
     shopping_rows.sort(key=lambda r: (r["title_ru"], r["food_code"]))
