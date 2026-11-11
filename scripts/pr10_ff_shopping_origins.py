@@ -117,3 +117,18 @@ def shopping_origins(*, plan, recipes, shopping):
                 raise ShoppingOriginBlocked("Missing Shopping source events")
             result[key] = origins
     return result
+
+
+def assert_origins_match_sources(*, plan, recipes, shopping, published_origins):
+    """Reject a plausible but reallocated breakdown using trusted recipe facts.
+
+    Gross-only validation cannot detect two correct MealEvents exchanging their
+    displayed amounts. Recompute each individual contribution from persisted
+    RecipeIngredients and exact Decimal Servings before publication. The HTML
+    renderer has only a projection and cannot independently establish this.
+    """
+    expected = shopping_origins(plan=plan, recipes=recipes, shopping=shopping)
+    if published_origins != expected:
+        raise ShoppingOriginBlocked(
+            "Individual Shopping origins differ from source RecipeIngredients/Servings"
+        )
