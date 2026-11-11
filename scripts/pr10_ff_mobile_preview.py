@@ -126,7 +126,12 @@ def _quantity(value, unit):
 
 
 def render_html(preview):
-    """Build offline HTML after the exact same fail-closed contract as Markdown."""
+    """Render a trusted, source-validated projection, not re-verify recipe facts.
+
+    With only JSON and a gross total, HTML cannot detect swapped amounts
+    between two genuine MealEvents. Individual demand verification belongs
+    to the upstream generator with actual RecipeIngredients and Servings.
+    """
     render_markdown(preview)
     menu = preview["menu"]
     groceries = preview["shopping"]
@@ -198,8 +203,10 @@ def render_html(preview):
                 f"{_html(source['recipe_title_ru'])}: "
                 f"{_html(source['source_demand_up_001'])} {_html(row['unit'])}</li>"
             )
-        # Each source event is rounded UP independently for explanation;
-        # the canonical gross is CEILING(aggregate of UNROUNDED events).
+        # This is only a display consistency check, NOT per-event provenance
+        # verification. The generator owns validation against the persisted
+        # RecipeIngredient and Serving records. A balanced swap can pass here.
+        # Each event is rounded UP; canonical gross is CEILING(raw aggregate).
         if (
             rounded_source_total < required
             or rounded_source_total - required >= Decimal("0.001") * len(sources)
@@ -219,10 +226,10 @@ def render_html(preview):
             f'<input type="checkbox" aria-label="Отметить: {name}">'
             f'<span class="item-name">{name}</span>'
             f'<span class="item-price">{_html(display)}</span></label>'
-            f'<details class="origins"><summary>Из каких блюд: {len(sources)}</summary>'
+            + water_note
+            + f'<details class="origins"><summary>Из каких блюд: {len(sources)}</summary>'
             "<p>На блюдо округлено вверх до 0,001. Итог считается отдельно "
             "по сумме исходных количеств.</p>"
-            + water_note
             + "<ul>"
             + "".join(origin_markup)
             + "</ul></details></div>"
