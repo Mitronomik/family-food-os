@@ -16,6 +16,7 @@ def _example():
             menu.append(
                 {
                     "date": f"2026-11-{day:02d}",
+                    "position": pos,
                     "role": role,
                     "title_ru": "Проверочное блюдо",
                     "recipe_code": "TEST_ONLY",
