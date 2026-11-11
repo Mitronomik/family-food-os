@@ -1,5 +1,6 @@
 """Shopping source trace: exact unrounded reconciliation, no new authority."""
 
+from copy import deepcopy
 from datetime import date
 from decimal import Decimal
 from types import SimpleNamespace as Row
@@ -10,7 +11,11 @@ from app.domain.meal_patterns import MealRole
 from app.domain.meal_plans import MealSourceKind
 from app.domain.units import UnitCode
 
-from scripts.pr10_ff_shopping_origins import ShoppingOriginBlocked, shopping_origins
+from scripts.pr10_ff_shopping_origins import (
+    ShoppingOriginBlocked,
+    assert_origins_match_sources,
+    shopping_origins,
+)
 
 
 def _scenario():
@@ -119,3 +124,66 @@ def test_bad_source_is_blocked(mutation):
         plan.events = ()
     with pytest.raises(ShoppingOriginBlocked):
         shopping_origins(plan=plan, recipes=recipes, shopping=shopping)
+
+
+def test_swapping_two_valid_water_contributions_cannot_launder_through_gross():
+    """The source owner must catch a swap that preserves the Shopping total."""
+    plan, _, shopping = _scenario()
+    food_id = shopping.items[0].food_ingredient_id
+    soup_id, chicken_id = uuid4(), uuid4()
+    plan.events[0].recipe_version_id = soup_id
+    plan.events[1].recipe_version_id = chicken_id
+    recipes = {}
+    for version_id, code, title, quantity in (
+        (soup_id, "SOUP_TEST", "Щи", "5173.730"),
+        (chicken_id, "CHICKEN_TEST", "Курица отварная", "4362.497"),
+    ):
+        recipes[version_id] = Row(
+            recipe=Row(canonical_code=code, canonical_name=title),
+            version=Row(base_servings=Decimal(1)),
+            ingredients=(
+                Row(
+                    food_ingredient_id=food_id,
+                    unit=UnitCode.GRAM,
+                    quantity=Decimal(quantity),
+                ),
+            ),
+        )
+    shopping.items = (
+        Row(
+            food_ingredient_id=food_id,
+            unit=UnitCode.GRAM,
+            required_quantity=Decimal("9536.227"),
+        ),
+    )
+
+    trusted = shopping_origins(plan=plan, recipes=recipes, shopping=shopping)
+    assert_origins_match_sources(
+        plan=plan, recipes=recipes, shopping=shopping, published_origins=trusted
+    )
+    swapped = deepcopy(trusted)
+    lines = next(iter(swapped.values()))
+    assert [line["source_demand_up_001"] for line in lines] == [
+        "5173.730",
+        "4362.497",
+    ]
+    lines[0]["source_demand_up_001"], lines[1]["source_demand_up_001"] = (
+        lines[1]["source_demand_up_001"],
+        lines[0]["source_demand_up_001"],
+    )
+
+    # The spoofed rows still refer to genuine MealEvents, and their sum,
+    # identities, positive Decimal precision and canonical Shopping gross
+    # are all unchanged. Only a source-level check can reject their story.
+    assert sum(Decimal(line["source_demand_up_001"]) for line in lines) == Decimal(
+        "9536.227"
+    )
+    assert {line["recipe_code"] for line in lines} == {
+        "SOUP_TEST",
+        "CHICKEN_TEST",
+    }
+    with pytest.raises(ShoppingOriginBlocked, match="Individual Shopping origins"):
+        assert_origins_match_sources(
+            plan=plan, recipes=recipes, shopping=shopping, published_origins=swapped
+        )
+    assert shopping_origins(plan=plan, recipes=recipes, shopping=shopping) == trusted
