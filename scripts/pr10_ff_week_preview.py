@@ -104,6 +104,7 @@ def project_week(*, engine, plan, semantic_events, candidate_inputs, timezone):
         menu.append(
             {
                 "date": date,
+                "position": pos,
                 "role": source["role"],
                 "title_ru": name,
                 "recipe_code": recipe_code,
