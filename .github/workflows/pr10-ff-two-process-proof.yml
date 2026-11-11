@@ -7,6 +7,7 @@ on:
       - 'scripts/pr10_ff_proof_evidence.py'
       - 'scripts/pr10_ff_week_preview.py'
       - 'scripts/pr10_ff_mobile_preview.py'
+      - 'scripts/test_pr10_ff_water_choice.js'
       - 'scripts/pr10_ff_shopping_origins.py'
       - 'backend/app/tests/test_pr10_ff_two_process_proof.py'
       - 'backend/app/tests/test_pr10_ff_week_preview.py'
@@ -44,6 +45,8 @@ jobs:
           PYTHONPATH: backend:.
           AI_ENABLED: 'false'
         run: python scripts/pr10_ff_two_process_proof.py --output-dir "$RUNNER_TEMP/pr10-ff-proof"
+      - name: Verify water choice in generated HTML (no external JS dependencies)
+        run: node scripts/test_pr10_ff_water_choice.js "$RUNNER_TEMP/pr10-ff-proof/week-preview.html"
       - name: Upload raw evidence even on NO_GO
         if: always()
         uses: actions/upload-artifact@v4
