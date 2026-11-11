@@ -141,7 +141,9 @@ def render_html(preview):
     groceries_html = []
     raw_rows = []
     meal_codes = {
-        (item["date"], item["position"], item["role"], item["recipe_code"]): item["title_ru"]
+        (item["date"], item["position"], item["role"], item["recipe_code"]): item[
+            "title_ru"
+        ]
         for item in menu
     }
     if len(meal_codes) != len(menu):
@@ -200,13 +202,14 @@ def render_html(preview):
         # the canonical gross is CEILING(aggregate of UNROUNDED events).
         if (
             rounded_source_total < required
-            or rounded_source_total - required
-            >= Decimal("0.001") * len(sources)
+            or rounded_source_total - required >= Decimal("0.001") * len(sources)
         ):
-            raise WeekPreviewBlocked("Displayed origin totals contradict Shopping gross")
+            raise WeekPreviewBlocked(
+                "Displayed origin totals contradict Shopping gross"
+            )
         water_note = (
             '<p class="origin-water">Вода учтена как рецептурный ингредиент. '
-            'Это не подтверждает необходимость покупать бутилированную воду.</p>'
+            "Это не подтверждает необходимость покупать бутилированную воду.</p>"
             if row["food_code"] == "WATER"
             else ""
         )
@@ -217,8 +220,8 @@ def render_html(preview):
             f'<span class="item-name">{name}</span>'
             f'<span class="item-price">{_html(display)}</span></label>'
             f'<details class="origins"><summary>Из каких блюд: {len(sources)}</summary>'
-            '<p>На блюдо округлено вверх до 0,001. Итог считается отдельно '
-            'по сумме исходных количеств.</p>'
+            "<p>На блюдо округлено вверх до 0,001. Итог считается отдельно "
+            "по сумме исходных количеств.</p>"
             + water_note
             + "<ul>"
             + "".join(origin_markup)
