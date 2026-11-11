@@ -119,7 +119,6 @@ def test_html_reuses_nonrelease_gate_validation(field, value):
         mobile.render_html(payload)
 
 
-
 @pytest.mark.parametrize(
     "mutation",
     [
