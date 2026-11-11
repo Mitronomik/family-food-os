@@ -175,3 +175,40 @@ def test_water_source_is_explained_without_assuming_bottled_water_purchase():
     disclosure = page.index('<details class="origins">', checkbox)
     assert checkbox < warning < disclosure
     assert "3.125 g" in page
+
+
+def test_water_purchase_requires_an_explicit_local_decision():
+    payload = _example()
+    payload["shopping"][0]["food_code"] = "WATER"
+    payload["shopping"][0]["title_ru"] = "Вода питьевая"
+    page = mobile.render_html(payload)
+
+    assert '<select id="water-choice"' in page
+    assert '<option value="unknown" selected>' in page
+    assert '<option value="buy">' in page
+    assert '<option value="available">' in page
+    assert 'data-water="true"' in page
+    assert '<input type="checkbox" disabled aria-label="Отметить: Вода питьевая">' in page
+    assert "Требует решения о покупке" in page
+    assert "не меняет расчёты Shopping Engine или Pantry" in page
+    assert "Подходящесть воды для конкретного рецепта система не проверяет" in page
+    assert "3.125 g" in page  # The original canonical need is retained unchanged.
+
+
+def test_water_choice_only_reclassifies_a_local_demo_checklist():
+    script = mobile._SCRIPT
+    assert "waterChoice.addEventListener('change', update)" in script
+    assert "waterMode === 'buy'" in script
+    assert "row.dataset.water === 'true'" in script
+    assert "tick.disabled = !canBuy" in script
+    assert "if (!canBuy) tick.checked = false" in script
+    assert "if (canBuy) actionable++" in script
+    assert "localStorage" not in script
+    assert "fetch(" not in script
+
+
+def test_non_water_week_does_not_ask_for_water_supply():
+    page = mobile.render_html(_example())
+    assert '<select id="water-choice"' not in page
+    assert 'data-water="false"' in page
+    assert '<input type="checkbox" aria-label="Отметить: Тестовый продукт">' in page
