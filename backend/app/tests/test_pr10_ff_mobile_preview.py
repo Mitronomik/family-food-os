@@ -188,7 +188,9 @@ def test_water_purchase_requires_an_explicit_local_decision():
     assert '<option value="buy">' in page
     assert '<option value="available">' in page
     assert 'data-water="true"' in page
-    assert '<input type="checkbox" disabled aria-label="Отметить: Вода питьевая">' in page
+    assert (
+        '<input type="checkbox" disabled aria-label="Отметить: Вода питьевая">' in page
+    )
     assert "Требует решения о покупке" in page
     assert "не меняет расчёты Shopping Engine или Pantry" in page
     assert "Подходящесть воды для конкретного рецепта система не проверяет" in page
