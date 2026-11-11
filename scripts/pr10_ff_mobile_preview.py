@@ -165,7 +165,12 @@ def render_html(preview):
         seen_origins = set()
         rounded_source_total = Decimal(0)
         for source in sources:
-            identity = (source["date"], source["role"], source["recipe_code"])
+            identity = (
+                source["date"],
+                source["position"],
+                source["role"],
+                source["recipe_code"],
+            )
             if (
                 identity in seen_origins
                 or meal_codes.get(identity) != source["recipe_title_ru"]
