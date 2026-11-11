@@ -1,6 +1,5 @@
 """Shopping source trace: exact unrounded reconciliation, no new authority."""
 
-from dataclasses import replace
 from datetime import date
 from decimal import Decimal
 from types import SimpleNamespace as Row
