@@ -1,3 +1,13 @@
+# CURRENT — source-attributed Shopping from actual synthetic week — 2026-11-11
+
+**Accepted main:** `2c52e8acb3e32c602b4b27155a45b477b40edd97` after [#284 merged](https://github.com/Mitronomik/family-food-os/pull/284); previous #284 open/current headings below are historical.
+
+**Now:** one developer-only product improvement, not a new architecture gate. For every existing generic Shopping item in the accepted 7-day / 21-event / 42-Serving week, display **which actual recipe MealEvents require it**, and their source-scaled ingredient contributions. Validate the unrounded sum against the unchanged Shopping Engine aggregate (0.001 CEILING), fail closed on mismatches, preserve frozen A/B and V1 week SHA. Make water's nearly 20 kg source demand visible without asserting that bottled water must be purchased. Values per event are individually rounded upward *only for explanation*, so their displayed sum may exceed the canonical aggregated purchase amount.
+
+**Scope limits:** no Shopping policy/source mutation, new food statuses, mass↔volume inference, fixture rewrite, generated executable Prep, complete Nutrition, price, API/PWA, release or Gate2. Next: exact-head focused tests/Ruff/two-process CI + review of actual output, owner merge decision. Do not advance to another stand-alone preflight.
+
+---
+
 # CURRENT — internal mobile week preview from merged #283 — 2026-11-11
 
 **Accepted main:** `c6b0976a1d75a86a6ca8da84e7341df53b3817f9` ([PR #283 merged](https://github.com/Mitronomik/family-food-os/pull/283)); previous headings declaring #283 under review are historical. Current owner request: proceed product-first, not with a new preflight.
