@@ -6,7 +6,6 @@ from types import SimpleNamespace as Row
 from uuid import uuid4
 
 import pytest
-
 from app.domain.meal_patterns import MealRole
 from app.domain.meal_plans import MealSourceKind
 from app.domain.units import UnitCode
