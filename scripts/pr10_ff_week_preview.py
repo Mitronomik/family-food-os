@@ -16,7 +16,11 @@ from app.domain.shopping_calculation import (
 )
 from app.persistence.sqlalchemy_core.shopping_uow import SqlAlchemyShoppingReadScope
 
-from scripts.pr10_ff_shopping_origins import ShoppingOriginBlocked, shopping_origins
+from scripts.pr10_ff_shopping_origins import (
+    ShoppingOriginBlocked,
+    assert_origins_match_sources,
+    shopping_origins,
+)
 
 
 class WeekPreviewBlocked(ValueError):
@@ -129,8 +133,12 @@ def project_week(*, engine, plan, semantic_events, candidate_inputs, timezone):
         raise WeekPreviewBlocked("Unverifiable Shopping ingredient origins") from exc
 
     shopping_rows = []
+    published_origins = {}
     for item in shopping.items:
         food = foods[item.food_ingredient_id]
+        published_origins[(item.food_ingredient_id, item.unit)] = origin_map[
+            (item.food_ingredient_id, item.unit)
+        ]
         shopping_rows.append(
             {
                 "food_code": food.canonical_code,
@@ -142,6 +150,18 @@ def project_week(*, engine, plan, semantic_events, candidate_inputs, timezone):
                 "origins": origin_map[(item.food_ingredient_id, item.unit)],
             }
         )
+    # Independent source-level check before serializing the explanation.
+    # HTML sees neither immutable RecipeIngredients nor persisted Servings and
+    # must never be credited with validating individual attribution.
+    try:
+        assert_origins_match_sources(
+            plan=plan,
+            recipes=versions,
+            shopping=shopping,
+            published_origins=published_origins,
+        )
+    except ShoppingOriginBlocked as exc:
+        raise WeekPreviewBlocked("Shopping source attribution mismatch") from exc
     shopping_rows.sort(key=lambda r: (r["title_ru"], r["food_code"]))
     if not shopping_rows:
         raise WeekPreviewBlocked("Expected source-backed grocery demand")
