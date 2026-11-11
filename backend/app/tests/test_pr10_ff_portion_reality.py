@@ -61,8 +61,12 @@ def _sample():
             "kcal_per_base_serving": "112",
         }
     ]
-    return plan, semantic, {version_id: detail}, candidates, dict(
-        zip(member_ids, (1, 2))
+    return (
+        plan,
+        semantic,
+        {version_id: detail},
+        candidates,
+        dict(zip(member_ids, (1, 2))),
     )
 
 
@@ -95,16 +99,19 @@ def test_exact_energy_arithmetic_never_proves_physical_portion():
     assert "не рейтинг опасности" in audit.render_markdown(result)
 
 
-@pytest.mark.parametrize("original_base,expected_status", [
-    ("1.000000", "RAW_OUTPUT_APPLICABILITY_UNREVIEWED"),
-    ("2.000000", "RAW_OUTPUT_DIFFERENT_BASE_UNREVIEWED"),
-])
+@pytest.mark.parametrize(
+    "original_base,expected_status",
+    [
+        ("1.000000", "RAW_OUTPUT_APPLICABILITY_UNREVIEWED"),
+        ("2.000000", "RAW_OUTPUT_DIFFERENT_BASE_UNREVIEWED"),
+    ],
+)
 def test_raw_source_output_is_not_equated_to_cooked_member_mass(
     original_base, expected_status
 ):
     args = _sample()
     detail = next(iter(args[2].values()))
-    detail.version.source_output_g = Decimal("300")
+    detail.version.source_output_g = Decimal(300)
     detail.version.source_original_servings = Decimal(original_base)
     result = _run(args)
     assert result["source_output_present_events"] == 1
@@ -132,8 +139,9 @@ def test_source_or_member_binding_mismatch_is_blocked(mutation):
     plan, semantic, details, candidates, ordinals = _sample()
     member_id = next(iter(ordinals))
     if mutation == "orphan_serving":
-        plan.servings = (Row(event_id=uuid4(), member_id=member_id,
-                             portion_servings=Decimal(2)),) + plan.servings[1:]
+        plan.servings = (
+            Row(event_id=uuid4(), member_id=member_id, portion_servings=Decimal(2)),
+        ) + plan.servings[1:]
     elif mutation == "missing_member":
         del ordinals[member_id]
     elif mutation == "duplicate_member_ordinal":
@@ -141,8 +149,13 @@ def test_source_or_member_binding_mismatch_is_blocked(mutation):
     elif mutation == "duplicate_serving":
         plan.servings += (plan.servings[0],)
     elif mutation == "nonfinite_serving":
-        plan.servings = (Row(event_id=plan.events[0].id, member_id=member_id,
-                             portion_servings=Decimal("NaN")),) + plan.servings[1:]
+        plan.servings = (
+            Row(
+                event_id=plan.events[0].id,
+                member_id=member_id,
+                portion_servings=Decimal("NaN"),
+            ),
+        ) + plan.servings[1:]
     elif mutation == "swapped_frozen_factor":
         semantic[0]["servings"][0]["portion_servings"] = "6.000000"
     elif mutation == "wrong_version":
@@ -157,8 +170,11 @@ def test_source_or_member_binding_mismatch_is_blocked(mutation):
         details.clear()
     with pytest.raises(audit.PortionAuditBlocked):
         audit.inspect(
-            plan=plan, semantic_events=semantic, details=details,
-            candidate_inputs=candidates, member_ordinals=ordinals
+            plan=plan,
+            semantic_events=semantic,
+            details=details,
+            candidate_inputs=candidates,
+            member_ordinals=ordinals,
         )
 
 
