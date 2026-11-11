@@ -70,40 +70,51 @@ def test_two_events_reconcile_to_rounded_shopping_aggregate():
         "33.334",
         "33.334",
     ]
-    assert sum(
-        Decimal(x["source_demand_up_001"]) for x in sources
-    ) > shopping.items[0].required_quantity
+    assert (
+        sum(Decimal(x["source_demand_up_001"]) for x in sources)
+        > shopping.items[0].required_quantity
+    )
     assert all(x["recipe_title_ru"] == "Проверочный рецепт" for x in sources)
     assert all(x["unit"] == "g" for x in sources)
 
 
 def test_bad_gross_is_blocked_instead_of_rewritten():
     plan, recipes, shopping = _scenario()
-    shopping.items = (Row(
-        food_ingredient_id=shopping.items[0].food_ingredient_id,
-        unit=UnitCode.GRAM,
-        required_quantity=Decimal("66.666"),
-    ),)
+    shopping.items = (
+        Row(
+            food_ingredient_id=shopping.items[0].food_ingredient_id,
+            unit=UnitCode.GRAM,
+            required_quantity=Decimal("66.666"),
+        ),
+    )
     with pytest.raises(ShoppingOriginBlocked, match="differs"):
         shopping_origins(plan=plan, recipes=recipes, shopping=shopping)
 
 
-@pytest.mark.parametrize("mutation", ["missing_serving", "bad_serving", "bad_recipe", "bad_ingredient", "no_event"])
+@pytest.mark.parametrize(
+    "mutation",
+    ["missing_serving", "bad_serving", "bad_recipe", "bad_ingredient", "no_event"],
+)
 def test_bad_source_is_blocked(mutation):
     plan, recipes, shopping = _scenario()
     key = next(iter(recipes))
     if mutation == "missing_serving":
         plan.servings = plan.servings[1:]
     elif mutation == "bad_serving":
-        plan.servings = (Row(event_id=plan.servings[0].event_id, portion_servings=Decimal("NaN")), *plan.servings[1:])
+        plan.servings = (
+            Row(event_id=plan.servings[0].event_id, portion_servings=Decimal("NaN")),
+            *plan.servings[1:],
+        )
     elif mutation == "bad_recipe":
         recipes[key].version.base_servings = Decimal(0)
     elif mutation == "bad_ingredient":
-        recipes[key].ingredients = (Row(
-            food_ingredient_id=shopping.items[0].food_ingredient_id,
-            unit=UnitCode.GRAM,
-            quantity=Decimal("-1"),
-        ),)
+        recipes[key].ingredients = (
+            Row(
+                food_ingredient_id=shopping.items[0].food_ingredient_id,
+                unit=UnitCode.GRAM,
+                quantity=Decimal("-1"),
+            ),
+        )
     elif mutation == "no_event":
         plan.events = ()
     with pytest.raises(ShoppingOriginBlocked):
