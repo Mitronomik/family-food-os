@@ -57,7 +57,15 @@ padding:12px 14px;display:flex;align-items:center;gap:13px;cursor:pointer}
 .item input{accent-color:var(--accent);width:20px;height:20px;flex-shrink:0}
 .item-name{flex:1;min-width:0}.item-price{font-weight:750;white-space:nowrap}
 .item.checked .item-name,.item.checked .item-price{text-decoration:line-through;
-color:var(--muted)}.item[hidden]{display:none}details{background:#fff;
+color:var(--muted)}[hidden]{display:none!important}
+.grocery-row{border:1px solid var(--line);border-radius:13px;background:#fff;overflow:hidden}
+.grocery-row .item{border:0;border-radius:0}
+.origins{border:0;border-top:1px solid var(--line);margin:0;border-radius:0;
+padding:10px 14px;background:#fcfcf9;font-size:13px}
+.origins summary{color:var(--accent)}.origins ul{margin:8px 0;padding-left:20px}
+.origins li{margin:5px 0}.origins p{margin:8px 0;color:var(--muted)}
+.origin-water{border-left:3px solid #d49f31;padding-left:10px;color:#70521b!important}
+details{background:#fff;
 border:1px solid var(--line);padding:12px 16px;border-radius:12px;margin-top:16px}
 summary{font-weight:650;cursor:pointer}table{border-collapse:collapse;width:100%;
 font-size:12px;margin-top:12px}td,th{text-align:left;border-bottom:1px solid var(--line);
@@ -75,7 +83,7 @@ font-size:12px;color:var(--muted);border-top:1px solid var(--line)}
 
 _SCRIPT = """
 (() => {
-  const rows = Array.from(document.querySelectorAll('.item'));
+  const rows = Array.from(document.querySelectorAll('.grocery-row'));
   const search = document.querySelector('#search');
   const counter = document.querySelector('#counter');
   function update() {
@@ -84,7 +92,7 @@ _SCRIPT = """
     for (const row of rows) {
       const tick = row.querySelector('input[type=checkbox]');
       row.hidden = !row.dataset.label.toLocaleLowerCase('ru').includes(needle);
-      row.classList.toggle('checked', tick.checked);
+      row.querySelector('.item').classList.toggle('checked', tick.checked);
       if (tick.checked) checked++;
     }
     counter.textContent = 'Отмечено ' + checked + ' из ' + rows.length;
@@ -132,6 +140,12 @@ def render_html(preview):
 
     groceries_html = []
     raw_rows = []
+    meal_codes = {
+        (item["date"], item["role"], item["recipe_code"]): item["title_ru"]
+        for item in menu
+    }
+    if len(meal_codes) != len(menu):
+        raise WeekPreviewBlocked("Ambiguous meal identity for Shopping sources")
     for i, row in enumerate(groceries, 1):
         required = Decimal(str(row["required"]))
         at_home = Decimal(str(row["at_home"]))
@@ -144,11 +158,66 @@ def render_html(preview):
             raise WeekPreviewBlocked("Grocery rows contradict explicit empty Pantry")
         display = _quantity(row["to_buy"], row["unit"])
         name = _html(row["title_ru"])
+        sources = row.get("origins")
+        if not isinstance(sources, list) or not sources:
+            raise WeekPreviewBlocked("Shopping item lacks real source breakdown")
+        origin_markup = []
+        seen_origins = set()
+        rounded_source_total = Decimal(0)
+        for source in sources:
+            identity = (source["date"], source["role"], source["recipe_code"])
+            if (
+                identity in seen_origins
+                or meal_codes.get(identity) != source["recipe_title_ru"]
+                or source["unit"] != row["unit"]
+                or not isinstance(source["position"], int)
+                or source["position"] < 1
+            ):
+                raise WeekPreviewBlocked("Unknown or duplicated Shopping meal origin")
+            seen_origins.add(identity)
+            try:
+                amount = Decimal(source["source_demand_up_001"])
+            except (InvalidOperation, ValueError, TypeError) as exc:
+                raise WeekPreviewBlocked("Invalid Shopping origin amount") from exc
+            if (
+                not amount.is_finite()
+                or amount <= 0
+                or amount != amount.quantize(Decimal("0.001"))
+            ):
+                raise WeekPreviewBlocked("Unreliable Shopping origin precision")
+            rounded_source_total += amount
+            origin_markup.append(
+                f"<li>{_html(source['date'])} · "
+                f"{_html(source['recipe_title_ru'])}: "
+                f"{_html(source['source_demand_up_001'])} {_html(row['unit'])}</li>"
+            )
+        # Each source event is rounded UP independently for explanation;
+        # the canonical gross is CEILING(aggregate of UNROUNDED events).
+        if (
+            rounded_source_total < required
+            or rounded_source_total - required
+            >= Decimal("0.001") * len(sources)
+        ):
+            raise WeekPreviewBlocked("Displayed origin totals contradict Shopping gross")
+        water_note = (
+            '<p class="origin-water">Вода учтена как рецептурный ингредиент. '
+            'Это не подтверждает необходимость покупать бутилированную воду.</p>'
+            if row["food_code"] == "WATER"
+            else ""
+        )
         groceries_html.append(
-            f'<label class="item" data-label="{name}">'
+            f'<div class="grocery-row" data-label="{name}">'
+            f'<label class="item">'
             f'<input type="checkbox" aria-label="Отметить: {name}">'
             f'<span class="item-name">{name}</span>'
             f'<span class="item-price">{_html(display)}</span></label>'
+            f'<details class="origins"><summary>Из каких блюд: {len(sources)}</summary>'
+            '<p>На блюдо округлено вверх до 0,001. Итог считается отдельно '
+            'по сумме исходных количеств.</p>'
+            + water_note
+            + "<ul>"
+            + "".join(origin_markup)
+            + "</ul></details></div>"
         )
         raw_rows.append(
             f"<tr><td>{name}</td><td>{_html(row['required'])} {_html(row['unit'])}</td>"
