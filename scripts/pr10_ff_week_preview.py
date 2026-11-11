@@ -123,9 +123,7 @@ def project_week(*, engine, plan, semantic_events, candidate_inputs, timezone):
     # Compare exact unrounded event totals to the *existing* Shopping engine;
     # a mismatch is BLOCKED, never a correction of published quantities.
     try:
-        origin_map = shopping_origins(
-            plan=plan, recipes=versions, shopping=shopping
-        )
+        origin_map = shopping_origins(plan=plan, recipes=versions, shopping=shopping)
     except ShoppingOriginBlocked as exc:
         raise WeekPreviewBlocked("Unverifiable Shopping ingredient origins") from exc
 
