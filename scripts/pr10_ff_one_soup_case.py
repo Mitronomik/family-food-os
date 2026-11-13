@@ -16,9 +16,7 @@ POSITION = 3
 SOURCE_DOCUMENT_SHA256 = (
     "973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e"
 )
-SOURCE_CARD_SHA256 = (
-    "b209172357918043f9f92d485a8967a71d41dbcfaf69609ecb3781af983b45a9"
-)
+SOURCE_CARD_SHA256 = "b209172357918043f9f92d485a8967a71d41dbcfaf69609ecb3781af983b45a9"
 SOURCE_URL = (
     "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/"
     "prilozhenie-5/supy/tekhnologicheskaia-karta-n-1.2a/"
@@ -70,8 +68,7 @@ def check_one_soup(*, portion_audit, source_frozen, recipe_detail):
         or card.get("source_variant") != "12_PLUS"
         or card.get("source_output_g") != "350"
         or card.get("energy_kcal") != "112"
-        or card.get("prepared_authority", {}).get("available")
-        != {"ENERGY_KCAL": "112"}
+        or card.get("prepared_authority", {}).get("available") != {"ENERGY_KCAL": "112"}
     ):
         raise SoupCaseBlocked("Source output/energy/12+ card pin changed")
 
@@ -97,18 +94,15 @@ def check_one_soup(*, portion_audit, source_frozen, recipe_detail):
         row["food_code"]: _decimal(row["quantity_g"], "source ingredient")
         for row in card.get("ingredients", [])
     }
-    if (
-        len(card.get("ingredients", [])) != 7
-        or source_foods != {
-            "CABBAGE_GREEN": Decimal(69),
-            "POTATO": Decimal(35),
-            "CARROT": Decimal(14),
-            "TOMATO": Decimal("15.7"),
-            "ONION_BULB_FRESH": Decimal(7),
-            "VEGETABLE_OIL_REFINED_UNSPECIFIED": Decimal(6),
-            "WATER": Decimal(309),
-        }
-    ):
+    if len(card.get("ingredients", [])) != 7 or source_foods != {
+        "CABBAGE_GREEN": Decimal(69),
+        "POTATO": Decimal(35),
+        "CARROT": Decimal(14),
+        "TOMATO": Decimal("15.7"),
+        "ONION_BULB_FRESH": Decimal(7),
+        "VEGETABLE_OIL_REFINED_UNSPECIFIED": Decimal(6),
+        "WATER": Decimal(309),
+    }:
         raise SoupCaseBlocked("Wrong sauce/age/form recipe branch")
 
     cases = [
@@ -133,9 +127,7 @@ def check_one_soup(*, portion_audit, source_frozen, recipe_detail):
     participants = []
     for row in sorted(cases, key=lambda x: x["member_ordinal"]):
         factor = _decimal(row["portion_factor"], "persisted Serving factor")
-        energy = _decimal(
-            row["technical_energy_kcal"], "technical energy-only kcal"
-        )
+        energy = _decimal(row["technical_energy_kcal"], "technical energy-only kcal")
         # Only a dimensional sensitivity estimate: no validated linear batch
         # scale, output-form-specific loss, physical bounds or adult policy.
         with localcontext() as ctx:
