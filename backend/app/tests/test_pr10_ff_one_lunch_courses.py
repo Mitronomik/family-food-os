@@ -201,7 +201,10 @@ def test_realistic_lunch_prototype_fails_closed_on_untrusted_input(mutation):
     elif mutation == "missing_exclusions":
         del member["excluded_food_codes"]
     elif mutation == "share_over_all":
-        member["opportunities"][0]["energy_share"] = "0.95"
+        next(
+            row for row in member["opportunities"]
+            if row["weekday"] == 2 and row["role"] == "BREAKFAST"
+        )["energy_share"] = "0.95"
     elif mutation == "missing_member_schedule":
         member["opportunities"] = []
     elif mutation == "duplicate_role":
