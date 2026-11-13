@@ -211,7 +211,9 @@ def test_persisted_ingredient_mismatch_blocks_unmodified_source(mutation):
     elif mutation == "incompatible_canonical_unit":
         foods_by_id[first.food_ingredient_id].default_unit = UnitCode.MILLILITER
     detail.ingredients = tuple(stored)
-    with pytest.raises(case.SoupCaseBlocked, match="RecipeIngredient|FoodIngredient"):
+    with pytest.raises(
+        case.SoupCaseBlocked, match="RecipeVersion|RecipeIngredient|FoodIngredient"
+    ):
         case.check_one_soup(
             portion_audit=audit,
             source_frozen=frozen,
