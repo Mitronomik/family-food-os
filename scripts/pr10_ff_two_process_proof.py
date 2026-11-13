@@ -18,6 +18,7 @@ from decimal import Decimal
 from pathlib import Path
 
 from scripts import pr10_ff_mobile_preview as mobile_preview
+from scripts import pr10_ff_one_lunch_courses as one_lunch
 from scripts import pr10_ff_one_soup_case as one_soup
 from scripts import pr10_ff_portion_reality as portion_reality
 from scripts import pr10_ff_pre_generation_inputs as inputs
@@ -306,6 +307,30 @@ def witness(output: Path) -> dict:
                 recipe_detail=one_soup_versions[0],
                 foods_by_id=soup_foods,
             )
+            # One user-approved, developer-only three-course home lunch.
+            # Home attendance comes from frozen accepted member selections:
+            # only member 1 opted for LUNCH on 2026-11-03; members 2/3 do
+            # NOT receive invented outside-food events, quantities or energy.
+            lunch_foods = {}
+            for _, code, _ in one_lunch.COURSES:
+                selected = [
+                    detail for detail in selected_details.values()
+                    if detail.recipe.canonical_code == code
+                ]
+                if len(selected) != 1:
+                    raise ProofNoGo("Missing immutable source for lunch course")
+                for ingredient in selected[0].ingredients:
+                    fid = ingredient.food_ingredient_id
+                    if fid not in lunch_foods:
+                        lunch_foods[fid] = food.get(fid)
+            lunch_proposal = one_lunch.build_lunch(
+                plan=readback,
+                member_ordinals=member_ordinals,
+                members=planner_b["members"],
+                candidate_inputs=planner_b["candidate_inputs"],
+                details=selected_details,
+                foods=lunch_foods,
+            )
             result = {
                 "schema": "PR10_FF_TWO_PROCESS_PROOF_RECEIPT_V1",
                 "status": "TECHNICAL_ENERGY_ONLY_NOT_RELEASE",
@@ -326,6 +351,10 @@ def witness(output: Path) -> dict:
                 "one_soup_source_case_v1": soup_receipt,
                 "one_soup_source_case_sha256": digest(
                     inputs.canonical_bytes(soup_receipt)
+                ),
+                "one_home_lunch_three_courses_v1": lunch_proposal,
+                "one_home_lunch_three_courses_sha256": digest(
+                    inputs.canonical_bytes(lunch_proposal)
                 ),
                 # V2 supplemental witness: original V1 semantic digest is unchanged.
                 "input_parity_with_B": True,
@@ -444,6 +473,32 @@ def compare(output_dir: Path) -> int:
         (output_dir / "soup-case.json").write_bytes(inputs.canonical_bytes(cases[0]))
         (output_dir / "soup-case.md").write_text(
             one_soup.render_case(cases[0]), encoding="utf-8"
+        )
+        lunches = (
+            first.get("one_home_lunch_three_courses_v1"),
+            second.get("one_home_lunch_three_courses_v1"),
+        )
+        for receipt, lunch in ((first, lunches[0]), (second, lunches[1])):
+            if lunch is None or receipt.get("one_home_lunch_three_courses_sha256") != digest(
+                inputs.canonical_bytes(lunch)
+            ):
+                raise ProofNoGo("Missing, inconsistent 3-course home lunch witness")
+            if (
+                lunch.get("status") != "STRUCTURALLY_COMPOSED_DIAGNOSTIC_ONLY"
+                or lunch.get("home_participant_ordinals") != [1]
+                or lunch.get("non_lunch_member_ordinals") != [2, 3]
+                or lunch.get("physical_serving_approval") != "NOT_PROVEN"
+                or lunch.get("shopping_authority") != "NONE"
+                or lunch.get("authoritative_mealplan") is not False
+            ):
+                raise ProofNoGo("One-home-lunch release boundary changed")
+        if lunches[0] != lunches[1]:
+            raise ProofNoGo("Home-lunch composition differs across two processes")
+        (output_dir / "lunch-three-courses.json").write_bytes(
+            inputs.canonical_bytes(lunches[0])
+        )
+        (output_dir / "lunch-three-courses.md").write_text(
+            one_lunch.render_markdown(lunches[0]), encoding="utf-8"
         )
         markdown = week_preview.render_markdown(previews[0])
         (output_dir / "week-preview.md").write_text(markdown, encoding="utf-8")
