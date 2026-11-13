@@ -1,3 +1,12 @@
+# 2026-11-11 — merged #286 and portion feasibility product blocker
+
+- [PR #286](https://github.com/Mitronomik/family-food-os/pull/286) merged to `main@c0bd92d2e671acd6ec5f839b2ca6c769b964acf1`: the water choice remains a local-only prototype, not Pantry/purchase authority.
+- Actual accepted technical week has 42 individual recipe-scaling factors (about ×2.03–×6.16); all complete physical Serving feasibility claims remain **NOT_PROVEN** regardless of the technically reproducible energy-only Planner output.
+- Scoped next work: **actual source-based portion review artifact**, code/tests/CI only plus status synchronization; no physical serving policy, source recipe mutation, Planner tuning, Gate2 or release transition.
+- Next product decision after review should target one specific missing/invalid final-edible-output source and independently applicable portion evidence.
+
+---
+
 # 2026-11-11 — merged #285; local decision for recipe water vs purchase
 
 - [PR #285](https://github.com/Mitronomik/family-food-os/pull/285) merged to `main@7873e1329f0b05a81d2b1dcd2925bd1762561c4b` with source-attributed Shopping and visible WATER warning.

@@ -18,6 +18,7 @@ from decimal import Decimal
 from pathlib import Path
 
 from scripts import pr10_ff_mobile_preview as mobile_preview
+from scripts import pr10_ff_portion_reality as portion_reality
 from scripts import pr10_ff_pre_generation_inputs as inputs
 from scripts import pr10_ff_proof_evidence as evidence
 from scripts import pr10_ff_week_preview as week_preview
@@ -259,6 +260,27 @@ def witness(output: Path) -> dict:
                 candidate_inputs=planner_b["candidate_inputs"],
                 timezone=household.timezone,
             )
+            # Read-only source audit of real persisted Servings: do not infer
+            # physical mass, a member bound, or consumer portion readiness.
+            selected_details = {}
+            for source_recipe in recipes.list_all():
+                detail = recipes.get_current_verified(source_recipe.id)
+                selected_details[detail.version.id] = detail
+            portion_audit = portion_reality.inspect(
+                plan=readback,
+                semantic_events=events,
+                details=selected_details,
+                candidate_inputs=planner_b["candidate_inputs"],
+                member_ordinals=member_ordinals,
+            )
+            if (
+                portion_audit["meal_events"] != 21
+                or portion_audit["individual_servings"] != 42
+                or portion_audit["physically_reviewed_servings"] != 0
+            ):
+                raise ProofNoGo(
+                    "Portion audit may not promote fixture to physical PASS"
+                )
             result = {
                 "schema": "PR10_FF_TWO_PROCESS_PROOF_RECEIPT_V1",
                 "status": "TECHNICAL_ENERGY_ONLY_NOT_RELEASE",
@@ -274,6 +296,8 @@ def witness(output: Path) -> dict:
                 "product_preview_sha256": digest(
                     inputs.canonical_bytes(product_preview)
                 ),
+                "portion_audit_v1": portion_audit,
+                "portion_audit_sha256": digest(inputs.canonical_bytes(portion_audit)),
                 # V2 supplemental witness: original V1 semantic digest is unchanged.
                 "input_parity_with_B": True,
                 "actual_request_normalized_v2": normalized_input,
@@ -352,6 +376,26 @@ def compare(output_dir: Path) -> int:
                 raise ProofNoGo("Missing or inconsistent product preview witness")
         if previews[0] != previews[1]:
             raise ProofNoGo("Cross-process product menu/shopping preview diverged")
+        audits = (first.get("portion_audit_v1"), second.get("portion_audit_v1"))
+        for receipt, audit in ((first, audits[0]), (second, audits[1])):
+            if audit is None or receipt.get("portion_audit_sha256") != digest(
+                inputs.canonical_bytes(audit)
+            ):
+                raise ProofNoGo("Missing or inconsistent source-based portion audit")
+            if (
+                audit.get("meal_events") != 21
+                or audit.get("individual_servings") != 42
+                or audit.get("physically_reviewed_servings") != 0
+            ):
+                raise ProofNoGo("Portion audit cannot imply physical eligibility")
+        if audits[0] != audits[1]:
+            raise ProofNoGo("Two independent source-based portion audits differ")
+        (output_dir / "portion-review.json").write_bytes(
+            inputs.canonical_bytes(audits[0])
+        )
+        (output_dir / "portion-review.md").write_text(
+            portion_reality.render_markdown(audits[0]), encoding="utf-8"
+        )
         markdown = week_preview.render_markdown(previews[0])
         (output_dir / "week-preview.md").write_text(markdown, encoding="utf-8")
         mobile_html = mobile_preview.render_html(previews[0])

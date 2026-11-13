@@ -1,3 +1,13 @@
+# CURRENT — portion reality: quantify actual 42 Servings, don't infer physical PASS — 2026-11-11
+
+**Accepted main:** `c0bd92d2e671acd6ec5f839b2ca6c769b964acf1` after [PR #286 merged](https://github.com/Mitronomik/family-food-os/pull/286). All earlier headings describing #286 as open are history.
+
+**Now:** one developer-only, read-only product evidence improvement. Using the **same actual persisted synthetic** 3-member/7-day/21-event/42-Serving Planner fixture, report each exact Serving multiplier and energy-only calculated kcal; inventory raw RecipeVersion.source_output_g presence and original/current recipe base parity, without treating any raw output as verified cooked member portion mass. Rank review work by observed multipliers **not by an invented nutritional safe threshold**. Current physical feasibility remains `NOT_PROVEN` for **all** Servings. No historical Planner, source recipe, Nutrition, Shopping, Prep, API, schema, consumer PWA, or D3/Gate2 changes.
+
+**After this PR:** use actual source gap evidence to select *one concrete verified recipe/portion data improvement*, not another standalone contract. Exact-head CI, source-level negative tests, two-process parity and owner review required. Stop before merge.
+
+---
+
 # CURRENT — explicit water purchase decision in internal week preview — 2026-11-11
 
 **Accepted main:** `7873e1329f0b05a81d2b1dcd2925bd1762561c4b` ([PR #285 merged](https://github.com/Mitronomik/family-food-os/pull/285)). Previous #285 pre-merge focus below is historical.
