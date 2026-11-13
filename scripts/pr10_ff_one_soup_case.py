@@ -98,12 +98,16 @@ def check_one_soup(*, portion_audit, source_frozen, recipe_detail):
         for row in card.get("ingredients", [])
     }
     if (
-        len(source_foods) != 7
-        or source_foods.get("WATER") != Decimal(309)
-        or source_foods.get("VEGETABLE_OIL_REFINED_UNSPECIFIED") != Decimal(6)
-        or any(
-            x["food_code"] == "SOUR_CREAM_20" for x in card["ingredients"]
-        )
+        len(card.get("ingredients", [])) != 7
+        or source_foods != {
+            "CABBAGE_GREEN": Decimal(69),
+            "POTATO": Decimal(35),
+            "CARROT": Decimal(14),
+            "TOMATO": Decimal("15.7"),
+            "ONION_BULB_FRESH": Decimal(7),
+            "VEGETABLE_OIL_REFINED_UNSPECIFIED": Decimal(6),
+            "WATER": Decimal(309),
+        }
     ):
         raise SoupCaseBlocked("Wrong sauce/age/form recipe branch")
 
