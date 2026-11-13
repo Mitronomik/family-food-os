@@ -1,3 +1,15 @@
+# CURRENT — one dinner, two source-backed components (diagnostic) — 2026-11-13
+
+**Accepted main:** `459995c4f7e34aa9bdcd5d32106b421b0a8b31fb`, [PR #288 merged](https://github.com/Mitronomik/family-food-os/pull/288). Earlier #288 premerge focus below is historical.
+
+**Now:** one **functioning deterministic developer-only prototype** for the actual 2026-11-03 `DINNER` from the same immutable frozen three-member week. Compare historic ×5.29/×6.16 all-soup meal to a **hypothetical explicitly chosen** one nominal source portion of vegetarian cabbage soup (350 g, 112 technical kcal) plus source-backed R3-D category-I boiled chicken (110 g, 267 technical kcal per source base), matching the participant's existing allocated technical kcal only through an independently calculated exact Decimal chicken factor and explicitly reported rounding residual. Check source variant/RecipeVersion/RecipeIngredient canonical Food identity and frozen user exclusions. This is **not** a source-backed physically admissible individual meal: soup 1.0 is a test assumption, edible cooked scaled output/physical limits not reviewed, full Nutrition INCOMPLETE. One MealEvent with multiple components is NOT an accepted persisted MealPlan model here.
+
+**NO runtime authorization:** no changes to historical Planner/MealPlans/Serving, Shopping/Pantry, Prep/AI, source recipes/catalogue, API/UI/migrations or product release. `physical_portion_approval=NOT_PROVEN`, `shopping_demand_authority=NONE`, `gate2_pass=false`. Cross-process reproducibility and explicit acceptance for any future multi-component Planner/migration belong to later decisions.
+
+**Next only:** exact-head focused tests, Ruff, immutable original proof, compare readable dinner-composition artifact; independent owner review/merge. Then decide whether reviewed meal-composition authority is justified based on one working case, not another generic preflight.
+
+---
+
 # CURRENT — exact source check: one vegetarian cabbage-soup portion — 2026-11-13
 
 **Accepted main:** `65dba8c73b2a6b6723909e29598e0b656a30bfcd` after merged [#287](https://github.com/Mitronomik/family-food-os/pull/287). Older focus headings below are historical.
