@@ -314,7 +314,8 @@ def witness(output: Path) -> dict:
             lunch_foods = {}
             for _, code, _ in one_lunch.COURSES:
                 selected = [
-                    detail for detail in selected_details.values()
+                    detail
+                    for detail in selected_details.values()
                     if detail.recipe.canonical_code == code
                 ]
                 if len(selected) != 1:
@@ -479,9 +480,9 @@ def compare(output_dir: Path) -> int:
             second.get("one_home_lunch_three_courses_v1"),
         )
         for receipt, lunch in ((first, lunches[0]), (second, lunches[1])):
-            if lunch is None or receipt.get("one_home_lunch_three_courses_sha256") != digest(
-                inputs.canonical_bytes(lunch)
-            ):
+            if lunch is None or receipt.get(
+                "one_home_lunch_three_courses_sha256"
+            ) != digest(inputs.canonical_bytes(lunch)):
                 raise ProofNoGo("Missing, inconsistent 3-course home lunch witness")
             if (
                 lunch.get("status") != "STRUCTURALLY_COMPOSED_DIAGNOSTIC_ONLY"
