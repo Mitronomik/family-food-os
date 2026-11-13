@@ -293,10 +293,18 @@ def witness(output: Path) -> dict:
             if len(one_soup_versions) != 1:
                 raise ProofNoGo("Missing exact one-soup RecipeVersion identity")
             source_frozen, _, _ = inputs.r3d._load_contract()
+            # Bind actual persisted RecipeIngredient.food_ingredient_id UUIDs
+            # to current canonical FoodIngredient readback from this same DB.
+            # Do not re-create identities from the R3-D seed or source card.
+            soup_foods = {
+                row.food_ingredient_id: food.get(row.food_ingredient_id)
+                for row in one_soup_versions[0].ingredients
+            }
             soup_receipt = one_soup.check_one_soup(
                 portion_audit=portion_audit,
                 source_frozen=source_frozen,
                 recipe_detail=one_soup_versions[0],
+                foods_by_id=soup_foods,
             )
             result = {
                 "schema": "PR10_FF_TWO_PROCESS_PROOF_RECEIPT_V1",
