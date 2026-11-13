@@ -9,6 +9,8 @@ from __future__ import annotations
 
 from decimal import Decimal, InvalidOperation, localcontext
 
+from app.domain.units import UnitCode
+
 RECIPE_CODE = "MR2019_1_2A_VEGETARIAN_CABBAGE_SOUP"
 CARD_CODE = "1.2а"
 DATE = "2026-11-03"
@@ -39,12 +41,14 @@ def _decimal(raw, name):
     return value
 
 
-def check_one_soup(*, portion_audit, source_frozen, recipe_detail):
+def check_one_soup(*, portion_audit, source_frozen, recipe_detail, foods_by_id):
     """Use already verified R3-D source bundle + actual persisted portion audit.
 
     Caller must obtain source_frozen through r3d._load_contract(), which checks
     the raw document/card hashes and actual 12+ ingredient/yield extraction.
     Caller must build portion_audit from the *same* persisted MealPlan/Servings.
+    foods_by_id resolves actual persisted RecipeIngredient.food_ingredient_id
+    to current canonical FoodIngredient (not codes reconstructed from the seed).
     """
     if (
         portion_audit.get("schema") != "PR10_FF_PORTION_REALITY_AUDIT_V1"
@@ -104,6 +108,41 @@ def check_one_soup(*, portion_audit, source_frozen, recipe_detail):
         "WATER": Decimal(309),
     }:
         raise SoupCaseBlocked("Wrong sauce/age/form recipe branch")
+
+    # The source card alone cannot prove that the actual persisted
+    # RecipeVersion contains those seven ingredients. Resolve EVERY stored
+    # RecipeIngredient's UUID to a canonical FoodIngredient read back from
+    # the same database; then compare food identity, unit and exact Decimal.
+    # No tolerance, inferred conversions, zero/default quantities or name match.
+    stored_rows = getattr(recipe_detail, "ingredients", None)
+    if not isinstance(stored_rows, (list, tuple)) or len(stored_rows) != 7:
+        raise SoupCaseBlocked("Published RecipeVersion ingredient count differs")
+    stored_foods = {}
+    for ingredient in stored_rows:
+        food_id = ingredient.food_ingredient_id
+        food = foods_by_id.get(food_id)
+        if (
+            food is None
+            or food.id != food_id
+            or not food.is_active
+            or ingredient.recipe_version_id != recipe_detail.version.id
+            or ingredient.optional is not False
+            or ingredient.unit is not UnitCode.GRAM
+            or food.default_unit is not UnitCode.GRAM
+            or not isinstance(ingredient.quantity, Decimal)
+            or not ingredient.quantity.is_finite()
+            or ingredient.quantity <= 0
+        ):
+            raise SoupCaseBlocked("Unresolvable or incompatible stored RecipeIngredient")
+        code = food.canonical_code
+        if code in stored_foods:
+            raise SoupCaseBlocked("Duplicated canonical FoodIngredient in RecipeVersion")
+        stored_foods[code] = (ingredient.unit.value, ingredient.quantity)
+    if stored_foods != {
+        code: (UnitCode.GRAM.value, quantity)
+        for code, quantity in source_foods.items()
+    }:
+        raise SoupCaseBlocked("Published RecipeIngredients differ from archived card")
 
     cases = [
         row
