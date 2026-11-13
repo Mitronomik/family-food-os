@@ -149,9 +149,9 @@ def test_source_or_member_correction_cannot_be_laundered(mutation):
     with pytest.raises(case.SoupCaseBlocked):
         case.check_one_soup(
             portion_audit=audit,
-        source_frozen=frozen,
-        recipe_detail=detail,
-        foods_by_id=foods_by_id,
+            source_frozen=frozen,
+            recipe_detail=detail,
+            foods_by_id=foods_by_id,
         )
 
 
