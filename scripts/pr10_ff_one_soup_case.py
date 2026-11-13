@@ -133,14 +133,17 @@ def check_one_soup(*, portion_audit, source_frozen, recipe_detail, foods_by_id):
             or not ingredient.quantity.is_finite()
             or ingredient.quantity <= 0
         ):
-            raise SoupCaseBlocked("Unresolvable or incompatible stored RecipeIngredient")
+            raise SoupCaseBlocked(
+                "Unresolvable or incompatible stored RecipeIngredient"
+            )
         code = food.canonical_code
         if code in stored_foods:
-            raise SoupCaseBlocked("Duplicated canonical FoodIngredient in RecipeVersion")
+            raise SoupCaseBlocked(
+                "Duplicated canonical FoodIngredient in RecipeVersion"
+            )
         stored_foods[code] = (ingredient.unit.value, ingredient.quantity)
     if stored_foods != {
-        code: (UnitCode.GRAM.value, quantity)
-        for code, quantity in source_foods.items()
+        code: (UnitCode.GRAM.value, quantity) for code, quantity in source_foods.items()
     }:
         raise SoupCaseBlocked("Published RecipeIngredients differ from archived card")
 
