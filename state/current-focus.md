@@ -1,3 +1,13 @@
+# CURRENT — exact source check: one vegetarian cabbage-soup portion — 2026-11-13
+
+**Accepted main:** `65dba8c73b2a6b6723909e29598e0b656a30bfcd` after merged [#287](https://github.com/Mitronomik/family-food-os/pull/287). Older focus headings below are historical.
+
+**Current bounded task:** test one real selected event, not another generic audit: [MR 2.4.0162-19 appendix 5, card 1.2а](https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/supy/tekhnologicheskaia-karta-n-1.2a/), vegetarian cabbage soup, finished ready-food 350 g and 112 kcal for the 12+ institutional branch; repository R3-D archived source/card hashes and RecipeVersion single-base serving must match exactly. Three actual 2026-11-03 DINNER Servings are ~×5.29, ×6.16, ×5.29. A 350 g × factor projection is **linear sensitivity only, not finished household portion mass**. No accepted individual physical feasibility/batch scale policy exists: **SOURCE_REFERENCE_PASS / INDIVIDUAL_PHYSICAL_NO_GO**. Preserve existing Planner v0.5, frozen week/Servings, data, shopping, Prep and Gate2 gates; no unsafe source or automatic portion clipping.
+
+**Next:** targeted single-recipe test, existing two-process evidence, independent review and owner merge. After this, seek a concretely authorized recipe/meal-composition fix rather than another report-only PR. No source publication or automatic Planner rule change.
+
+---
+
 # CURRENT — portion reality: quantify actual 42 Servings, don't infer physical PASS — 2026-11-11
 
 **Accepted main:** `c0bd92d2e671acd6ec5f839b2ca6c769b964acf1` after [PR #286 merged](https://github.com/Mitronomik/family-food-os/pull/286). All earlier headings describing #286 as open are history.
