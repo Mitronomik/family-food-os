@@ -1,9 +1,9 @@
 """One home-lunch composition: positive structural proof and fail-closed inputs."""
 
+import json
 from copy import deepcopy
 from datetime import date
 from decimal import Decimal
-import json
 from pathlib import Path
 from types import SimpleNamespace as Row
 from uuid import UUID, uuid4
