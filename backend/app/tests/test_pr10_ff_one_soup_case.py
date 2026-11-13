@@ -80,7 +80,10 @@ def _source_fixture():
 def test_verified_card_is_finished_350g_112kcal_but_not_sixfold_member_policy():
     frozen, detail, audit, foods_by_id = _source_fixture()
     receipt = case.check_one_soup(
-        portion_audit=audit, source_frozen=frozen, recipe_detail=detail, foods_by_id=foods_by_id
+        portion_audit=audit,
+        source_frozen=frozen,
+        recipe_detail=detail,
+        foods_by_id=foods_by_id,
     )
     assert receipt["source_output_mapping"] == "PASS_EXACT_ONE_BASE_SERVING"
     assert receipt["source_declared_final_output_g_per_portion"] == "350"
@@ -145,14 +148,20 @@ def test_source_or_member_correction_cannot_be_laundered(mutation):
         audit["rows"][1]["physical_feasibility"] = "PASS"
     with pytest.raises(case.SoupCaseBlocked):
         case.check_one_soup(
-            portion_audit=audit, source_frozen=frozen, recipe_detail=detail, foods_by_id=foods_by_id
+            portion_audit=audit,
+        source_frozen=frozen,
+        recipe_detail=detail,
+        foods_by_id=foods_by_id,
         )
 
 
 def test_renderer_must_not_promote_physical_eligibility():
     frozen, detail, audit, foods_by_id = _source_fixture()
     receipt = case.check_one_soup(
-        portion_audit=audit, source_frozen=frozen, recipe_detail=detail, foods_by_id=foods_by_id
+        portion_audit=audit,
+        source_frozen=frozen,
+        recipe_detail=detail,
+        foods_by_id=foods_by_id,
     )
     tampered = deepcopy(receipt)
     tampered["decision"] = "PASS"
