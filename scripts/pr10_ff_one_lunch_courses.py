@@ -51,9 +51,15 @@ def selected_home_lunch(members, weekday):
             raise LunchBlocked("Untrusted accepted meal opportunities")
         daily = [row for row in opportunities if row.get("weekday") == weekday]
         if not daily or any(
-            row.get("role") not in {
-                "BREAKFAST", "LUNCH", "DINNER", "SNACK",
-                "PRE_WORKOUT", "POST_WORKOUT", "OTHER",
+            row.get("role")
+            not in {
+                "BREAKFAST",
+                "LUNCH",
+                "DINNER",
+                "SNACK",
+                "PRE_WORKOUT",
+                "POST_WORKOUT",
+                "OTHER",
             }
             for row in daily
         ):
@@ -102,7 +108,8 @@ def _verified_component(detail, pinned, food_by_id, label, factor):
             or ingredient.recipe_version_id != version.id
             or ingredient.optional is not False
             or ingredient.unit is not food.default_unit
-            or ingredient.unit not in {UnitCode.GRAM, UnitCode.MILLILITER, UnitCode.PIECE}
+            or ingredient.unit
+            not in {UnitCode.GRAM, UnitCode.MILLILITER, UnitCode.PIECE}
             or not isinstance(ingredient.quantity, Decimal)
             or not ingredient.quantity.is_finite()
             or ingredient.quantity <= 0
@@ -149,7 +156,8 @@ def build_lunch(*, plan, member_ordinals, members, candidate_inputs, details, fo
     ):
         raise LunchBlocked("Lunch/member selection differs from accepted fixture")
     events = [
-        event for event in plan.events
+        event
+        for event in plan.events
         if event.local_date == DAY and event.role.value == "LUNCH"
     ]
     if len(events) != 1:
@@ -157,9 +165,7 @@ def build_lunch(*, plan, member_ordinals, members, candidate_inputs, details, fo
     event = events[0]
     if event.source_kind is not MealSourceKind.COOK_RECIPE:
         raise LunchBlocked("Expected pinned recipe-backed lunch")
-    current = [
-        serving for serving in plan.servings if serving.event_id == event.id
-    ]
+    current = [serving for serving in plan.servings if serving.event_id == event.id]
     if len(current) != 1 or member_ordinals.get(current[0].member_id) != 1:
         raise LunchBlocked("Other member was improperly assigned a home lunch")
     old_factor = _decimal(current[0].portion_servings, "persisted lunch Serving")
@@ -196,7 +202,10 @@ def build_lunch(*, plan, member_ordinals, members, candidate_inputs, details, fo
         ctx.prec = 50
         delta = (target - computed).quantize(KCAL_STEP)
         old_computed = (
-            old_factor * _decimal(candidate_codes[COURSES[1][1]]["kcal_per_base_serving"], "old kcal")
+            old_factor
+            * _decimal(
+                candidate_codes[COURSES[1][1]]["kcal_per_base_serving"], "old kcal"
+            )
         ).quantize(KCAL_STEP)
     if abs(target - old_computed) > Decimal("0.001"):
         raise LunchBlocked("Original lunch energy does not reconcile")
@@ -240,9 +249,8 @@ def render_markdown(result):
         or result.get("gate2_pass") is not False
         or result.get("home_participant_ordinals") != [1]
         or len(result.get("courses", [])) != 3
-        or [c.get("course") for c in result["courses"]] != [
-            "FIRST", "SECOND", "DESSERT_STUDY"
-        ]
+        or [c.get("course") for c in result["courses"]]
+        != ["FIRST", "SECOND", "DESSERT_STUDY"]
     ):
         raise LunchBlocked("Provisional lunch cannot claim production authority")
     rows = [
@@ -258,7 +266,11 @@ def render_markdown(result):
         "| Часть обеда | Рецепт | Доля базового рецепта | Технические ккал |",
         "| --- | --- | ---: | ---: |",
     ]
-    names = {"FIRST": "Первое", "SECOND": "Второе", "DESSERT_STUDY": "Десерт (проверка)"}
+    names = {
+        "FIRST": "Первое",
+        "SECOND": "Второе",
+        "DESSERT_STUDY": "Десерт (проверка)",
+    }
     for c in result["courses"]:
         rows.append(
             f"| {names[c['course']]} | {c['recipe_title_ru']} | "
