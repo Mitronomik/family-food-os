@@ -18,6 +18,7 @@ from decimal import Decimal
 from pathlib import Path
 
 from scripts import pr10_ff_mobile_preview as mobile_preview
+from scripts import pr10_ff_one_dinner_composition as one_dinner
 from scripts import pr10_ff_one_soup_case as one_soup
 from scripts import pr10_ff_portion_reality as portion_reality
 from scripts import pr10_ff_pre_generation_inputs as inputs
@@ -306,6 +307,29 @@ def witness(output: Path) -> dict:
                 recipe_detail=one_soup_versions[0],
                 foods_by_id=soup_foods,
             )
+            # One proposed two-component 2026-11-03 dinner: source-backed
+            # soup plus R3-D chicken, with unmodified MealPlan/Shopping.
+            # Only the generation-time frozen explicit member constraints
+            # may authorize exclusion checks; no absent-context defaults.
+            chicken_versions = [
+                detail
+                for detail in selected_details.values()
+                if detail.recipe.canonical_code == one_dinner.CHICKEN_CODE
+            ]
+            if len(chicken_versions) != 1:
+                raise ProofNoGo("Missing exact chicken RecipeVersion for one dinner")
+            chicken_foods = {
+                row.food_ingredient_id: food.get(row.food_ingredient_id)
+                for row in chicken_versions[0].ingredients
+            }
+            dinner_proposal = one_dinner.propose_one_dinner(
+                soup_case=soup_receipt,
+                chicken_detail=chicken_versions[0],
+                chicken_foods=chicken_foods,
+                source_frozen=source_frozen,
+                candidate_inputs=planner_b["candidate_inputs"],
+                members=planner_b["members"],
+            )
             result = {
                 "schema": "PR10_FF_TWO_PROCESS_PROOF_RECEIPT_V1",
                 "status": "TECHNICAL_ENERGY_ONLY_NOT_RELEASE",
@@ -326,6 +350,10 @@ def witness(output: Path) -> dict:
                 "one_soup_source_case_v1": soup_receipt,
                 "one_soup_source_case_sha256": digest(
                     inputs.canonical_bytes(soup_receipt)
+                ),
+                "one_dinner_composition_v1": dinner_proposal,
+                "one_dinner_composition_sha256": digest(
+                    inputs.canonical_bytes(dinner_proposal)
                 ),
                 # V2 supplemental witness: original V1 semantic digest is unchanged.
                 "input_parity_with_B": True,
@@ -444,6 +472,30 @@ def compare(output_dir: Path) -> int:
         (output_dir / "soup-case.json").write_bytes(inputs.canonical_bytes(cases[0]))
         (output_dir / "soup-case.md").write_text(
             one_soup.render_case(cases[0]), encoding="utf-8"
+        )
+        compositions = (
+            first.get("one_dinner_composition_v1"),
+            second.get("one_dinner_composition_v1"),
+        )
+        for receipt, composition in ((first, compositions[0]), (second, compositions[1])):
+            if composition is None or receipt.get("one_dinner_composition_sha256") != digest(
+                inputs.canonical_bytes(composition)
+            ):
+                raise ProofNoGo("Missing or mismatched two-component dinner proposal")
+            if (
+                composition.get("decision") != one_dinner.DECISION
+                or composition.get("physical_portion_approval") != "NOT_PROVEN"
+                or composition.get("shopping_demand_authority") != "NONE"
+                or composition.get("gate2_pass") is not False
+            ):
+                raise ProofNoGo("Composition must not claim released meal plan or Shopping")
+        if compositions[0] != compositions[1]:
+            raise ProofNoGo("One-dinner composition differs across independent processes")
+        (output_dir / "dinner-composition.json").write_bytes(
+            inputs.canonical_bytes(compositions[0])
+        )
+        (output_dir / "dinner-composition.md").write_text(
+            one_dinner.render_markdown(compositions[0]), encoding="utf-8"
         )
         markdown = week_preview.render_markdown(previews[0])
         (output_dir / "week-preview.md").write_text(markdown, encoding="utf-8")
