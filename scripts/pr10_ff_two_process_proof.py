@@ -18,6 +18,7 @@ from decimal import Decimal
 from pathlib import Path
 
 from scripts import pr10_ff_mobile_preview as mobile_preview
+from scripts import pr10_ff_one_soup_case as one_soup
 from scripts import pr10_ff_portion_reality as portion_reality
 from scripts import pr10_ff_pre_generation_inputs as inputs
 from scripts import pr10_ff_proof_evidence as evidence
@@ -281,6 +282,22 @@ def witness(output: Path) -> dict:
                 raise ProofNoGo(
                     "Portion audit may not promote fixture to physical PASS"
                 )
+            # ONE concrete source/portion case, using the accepted R3-D source
+            # archive and actual persisted MealPlan/Serving evidence above.
+            # No physical-PASS or MealPlan rewrite follows from this comparison.
+            one_soup_versions = [
+                detail
+                for detail in selected_details.values()
+                if detail.recipe.canonical_code == one_soup.RECIPE_CODE
+            ]
+            if len(one_soup_versions) != 1:
+                raise ProofNoGo("Missing exact one-soup RecipeVersion identity")
+            source_frozen, _, _ = inputs.r3d._load_contract()
+            soup_receipt = one_soup.check_one_soup(
+                portion_audit=portion_audit,
+                source_frozen=source_frozen,
+                recipe_detail=one_soup_versions[0],
+            )
             result = {
                 "schema": "PR10_FF_TWO_PROCESS_PROOF_RECEIPT_V1",
                 "status": "TECHNICAL_ENERGY_ONLY_NOT_RELEASE",
@@ -298,6 +315,10 @@ def witness(output: Path) -> dict:
                 ),
                 "portion_audit_v1": portion_audit,
                 "portion_audit_sha256": digest(inputs.canonical_bytes(portion_audit)),
+                "one_soup_source_case_v1": soup_receipt,
+                "one_soup_source_case_sha256": digest(
+                    inputs.canonical_bytes(soup_receipt)
+                ),
                 # V2 supplemental witness: original V1 semantic digest is unchanged.
                 "input_parity_with_B": True,
                 "actual_request_normalized_v2": normalized_input,
@@ -395,6 +416,28 @@ def compare(output_dir: Path) -> int:
         )
         (output_dir / "portion-review.md").write_text(
             portion_reality.render_markdown(audits[0]), encoding="utf-8"
+        )
+        cases = (
+            first.get("one_soup_source_case_v1"),
+            second.get("one_soup_source_case_v1"),
+        )
+        for receipt, source_case in ((first, cases[0]), (second, cases[1])):
+            if source_case is None or receipt.get("one_soup_source_case_sha256") != digest(
+                inputs.canonical_bytes(source_case)
+            ):
+                raise ProofNoGo("Missing or corrupt one-soup source evidence")
+            if (
+                source_case.get("decision") != one_soup.NO_GO
+                or source_case.get("physical_portion_approval") != "NOT_PROVEN"
+            ):
+                raise ProofNoGo("One soup has no positive physical portion authority")
+        if cases[0] != cases[1]:
+            raise ProofNoGo("One-soup source evidence differs between processes")
+        (output_dir / "soup-case.json").write_bytes(
+            inputs.canonical_bytes(cases[0])
+        )
+        (output_dir / "soup-case.md").write_text(
+            one_soup.render_case(cases[0]), encoding="utf-8"
         )
         markdown = week_preview.render_markdown(previews[0])
         (output_dir / "week-preview.md").write_text(markdown, encoding="utf-8")
