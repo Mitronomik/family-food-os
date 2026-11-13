@@ -422,9 +422,9 @@ def compare(output_dir: Path) -> int:
             second.get("one_soup_source_case_v1"),
         )
         for receipt, source_case in ((first, cases[0]), (second, cases[1])):
-            if source_case is None or receipt.get("one_soup_source_case_sha256") != digest(
-                inputs.canonical_bytes(source_case)
-            ):
+            if source_case is None or receipt.get(
+                "one_soup_source_case_sha256"
+            ) != digest(inputs.canonical_bytes(source_case)):
                 raise ProofNoGo("Missing or corrupt one-soup source evidence")
             if (
                 source_case.get("decision") != one_soup.NO_GO
@@ -433,9 +433,7 @@ def compare(output_dir: Path) -> int:
                 raise ProofNoGo("One soup has no positive physical portion authority")
         if cases[0] != cases[1]:
             raise ProofNoGo("One-soup source evidence differs between processes")
-        (output_dir / "soup-case.json").write_bytes(
-            inputs.canonical_bytes(cases[0])
-        )
+        (output_dir / "soup-case.json").write_bytes(inputs.canonical_bytes(cases[0]))
         (output_dir / "soup-case.md").write_text(
             one_soup.render_case(cases[0]), encoding="utf-8"
         )
