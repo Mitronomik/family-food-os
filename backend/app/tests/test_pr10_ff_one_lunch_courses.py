@@ -17,7 +17,9 @@ from app.domain.units import UnitCode
 from scripts import pr10_ff_one_lunch_courses as lunch
 
 ROOT = Path(__file__).resolve().parents[3]
-PIN = ROOT / "docs/family-food/evidence/pr10-ff-forward-input-v1/planner-B-PROPOSED.json"
+PIN = (
+    ROOT / "docs/family-food/evidence/pr10-ff-forward-input-v1/planner-B-PROPOSED.json"
+)
 
 
 def _scene():
@@ -47,8 +49,10 @@ def _scene():
         for product_code in pin["ingredient_codes"]:
             fid = uuid4()
             foods[fid] = Row(
-                id=fid, canonical_code=product_code,
-                is_active=True, default_unit=UnitCode.GRAM
+                id=fid,
+                canonical_code=product_code,
+                is_active=True,
+                default_unit=UnitCode.GRAM,
             )
             ingredients.append(
                 Row(
@@ -60,7 +64,9 @@ def _scene():
                 )
             )
         details[vid] = Row(
-            recipe=Row(canonical_code=code, canonical_name="Проверочное блюдо " + label),
+            recipe=Row(
+                canonical_code=code, canonical_name="Проверочное блюдо " + label
+            ),
             version=version,
             ingredients=tuple(ingredients),
         )
@@ -68,14 +74,17 @@ def _scene():
     plan = Row(
         events=(
             Row(
-                id=event_id, local_date=date(2026, 11, 3),
-                role=MealRole.LUNCH, source_kind=MealSourceKind.COOK_RECIPE,
-                recipe_version_id=second_id
+                id=event_id,
+                local_date=date(2026, 11, 3),
+                role=MealRole.LUNCH,
+                source_kind=MealSourceKind.COOK_RECIPE,
+                recipe_version_id=second_id,
             ),
         ),
         servings=(
             Row(
-                event_id=event_id, member_id=member_ids[1],
+                event_id=event_id,
+                member_id=member_ids[1],
                 portion_servings=Decimal("2.031139"),
             ),
         ),
@@ -103,13 +112,19 @@ def test_actual_selected_home_lunch_is_one_member_without_filling_missing_meals(
     assert result["reference_alignment_delta_kcal"] == "158.826500"
     assert result["delta_is_not_deficit_or_reallocation"] is True
     assert [c["course"] for c in result["courses"]] == [
-        "FIRST", "SECOND", "DESSERT_STUDY"
+        "FIRST",
+        "SECOND",
+        "DESSERT_STUDY",
     ]
     assert [c["factor"] for c in result["courses"]] == [
-        "1.000000", "1.000000", "0.500000"
+        "1.000000",
+        "1.000000",
+        "0.500000",
     ]
     assert [c["energy_only_kcal"] for c in result["courses"]] == [
-        "112.000000", "408.700000", "150.600000"
+        "112.000000",
+        "408.700000",
+        "150.600000",
     ]
     assert result["courses"][2]["dessert_role_status"] == (
         "UNREVIEWED_BREAKFAST_RECIPE_REUSE"
@@ -131,10 +146,7 @@ def test_partial_home_schedules_are_not_completed_by_inference():
     assert set(selected) == {1}
     assert selected[1][2] == Decimal("0.90")
     # No outside meal rows, no false at-home breakfast or dinner for member 3.
-    assert not any(
-        row["role"] != "DINNER"
-        for row in members[2]["opportunities"]
-    )
+    assert not any(row["role"] != "DINNER" for row in members[2]["opportunities"])
     # A dinner-only single-member schedule is valid, but has no home lunch.
     assert lunch.selected_home_lunch([members[2]], 2) == {}
     # The member with breakfast+dinner also has no home lunch.
@@ -150,12 +162,22 @@ def test_partial_home_schedules_are_not_completed_by_inference():
 @pytest.mark.parametrize(
     "mutation",
     [
-        "missing_lunch", "extra_home_lunch", "changed_plan_event",
-        "extra_plan_serving", "changed_serving_factor", "wrong_second_recipe",
-        "wrong_candidate_kcal", "wrong_source_hash", "inactive_food",
-        "substitute_food", "changed_ingredient_quantity_to_nan",
-        "member_excluded_beef", "missing_exclusions", "share_over_all",
-        "missing_member_schedule", "duplicate_role",
+        "missing_lunch",
+        "extra_home_lunch",
+        "changed_plan_event",
+        "extra_plan_serving",
+        "changed_serving_factor",
+        "wrong_second_recipe",
+        "wrong_candidate_kcal",
+        "wrong_source_hash",
+        "inactive_food",
+        "substitute_food",
+        "changed_ingredient_quantity_to_nan",
+        "member_excluded_beef",
+        "missing_exclusions",
+        "share_over_all",
+        "missing_member_schedule",
+        "duplicate_role",
         "dessert_cannot_be_called_reviewed",
     ],
 )
@@ -165,7 +187,8 @@ def test_realistic_lunch_prototype_fails_closed_on_untrusted_input(mutation):
     detail = next(iter(s["details"].values()))
     if mutation == "missing_lunch":
         member["opportunities"] = [
-            x for x in member["opportunities"]
+            x
+            for x in member["opportunities"]
             if not (x["weekday"] == 2 and x["role"] == "LUNCH")
         ]
     elif mutation == "extra_home_lunch":
@@ -182,7 +205,8 @@ def test_realistic_lunch_prototype_fails_closed_on_untrusted_input(mutation):
         s["plan"].events[0].recipe_version_id = detail.version.id
     elif mutation == "wrong_candidate_kcal":
         next(
-            row for row in s["candidate_inputs"]
+            row
+            for row in s["candidate_inputs"]
             if row["canonical_code"] == lunch.COURSES[1][1]
         )["kcal_per_base_serving"] = "999"
         s["plan"].servings[0].portion_servings = Decimal("2.031139")
@@ -202,21 +226,24 @@ def test_realistic_lunch_prototype_fails_closed_on_untrusted_input(mutation):
         del member["excluded_food_codes"]
     elif mutation == "share_over_all":
         next(
-            row for row in member["opportunities"]
+            row
+            for row in member["opportunities"]
             if row["weekday"] == 2 and row["role"] == "BREAKFAST"
         )["energy_share"] = "0.95"
     elif mutation == "missing_member_schedule":
         member["opportunities"] = []
     elif mutation == "duplicate_role":
         duplicate = next(
-            x for x in member["opportunities"]
+            x
+            for x in member["opportunities"]
             if x["weekday"] == 2 and x["role"] == "LUNCH"
         )
         member["opportunities"].append(deepcopy(duplicate))
     elif mutation == "dessert_cannot_be_called_reviewed":
         dessert_id = UUID(
             next(
-                row["recipe_version_id"] for row in s["candidate_inputs"]
+                row["recipe_version_id"]
+                for row in s["candidate_inputs"]
                 if row["canonical_code"] == lunch.COURSES[2][1]
             )
         )
