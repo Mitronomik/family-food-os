@@ -475,6 +475,9 @@ class SqlAlchemyMealPlanRepository:
                     item["member_id"].hex,
                 )
             )
+        compositions = self._read_compositions(
+            event_ids, {event["id"]: event for event in events}
+        )
         return MealPlanDetail(
             plan=_plan_from_row(row),
             member_selections=tuple(_pin_from_row(item) for item in pins),
@@ -483,7 +486,99 @@ class SqlAlchemyMealPlanRepository:
             reference_methodology_pins=tuple(
                 _reference_pin_from_row(item) for item in reference_pins
             ),
+            compositions=compositions,
         )
+
+    def _read_compositions(self, event_ids, events):
+        if not event_ids:
+            return ()
+        headers = (
+            self._connection.execute(
+                select(meal_plan_event_compositions_table)
+                .where(meal_plan_event_compositions_table.c.event_id.in_(event_ids))
+                .order_by(meal_plan_event_compositions_table.c.event_id)
+            )
+            .mappings()
+            .all()
+        )
+        result = []
+        for header in headers:
+            parent = events.get(header["event_id"])
+            if parent is None:
+                raise MealPlanPersistenceError("Orphan composed meal header.")
+            try:
+                rule = restore_rule_snapshot(
+                    code=header["structure_rule_code"],
+                    version=header["structure_rule_version"],
+                    meal_role=parent["role_code"],
+                    coverage=header["required_coverage"],
+                    schema_version=header["rule_snapshot_schema_version"],
+                    requirements_json=header["requirements_json"],
+                    sha256_hex=header["rule_snapshot_sha256"],
+                )
+                parts = (
+                    self._connection.execute(
+                        select(meal_plan_event_components_table)
+                        .where(
+                            meal_plan_event_components_table.c.event_id
+                            == header["event_id"]
+                        )
+                        .order_by(meal_plan_event_components_table.c.position)
+                    )
+                    .mappings()
+                    .all()
+                )
+                components = tuple(
+                    PersistedMealComponent(
+                        id=part["id"],
+                        event_id=part["event_id"],
+                        position=part["position"],
+                        course=part["course_kind"],
+                        recipe_version_id=part["recipe_version_id"],
+                        created_at=part["created_at"],
+                    )
+                    for part in parts
+                )
+                ids = [item.id for item in components]
+                raw_servings = (
+                    self._connection.execute(
+                        select(meal_plan_component_servings_table)
+                        .where(
+                            meal_plan_component_servings_table.c.component_id.in_(ids)
+                        )
+                        .order_by(
+                            meal_plan_component_servings_table.c.component_id,
+                            meal_plan_component_servings_table.c.member_id,
+                        )
+                    )
+                    .mappings()
+                    .all()
+                    if ids
+                    else []
+                )
+                result.append(
+                    PersistedMealEventComposition(
+                        event_id=header["event_id"],
+                        rule=rule,
+                        components=components,
+                        servings=tuple(
+                            PersistedMemberComponentServing(
+                                component_id=item["component_id"],
+                                member_id=item["member_id"],
+                                portion_servings=item["portion_servings"],
+                                created_at=item["created_at"],
+                            )
+                            for item in raw_servings
+                        ),
+                        created_at=header["created_at"],
+                        admission_status=header["admission_status"],
+                    )
+                )
+            except (ValueError, TypeError) as exc:
+                raise MealPlanPersistenceError(
+                    "Persisted composition rule/servings cannot be replayed."
+                ) from exc
+        return tuple(result)
 
 
 def _selection_values(value: MemberMealPatternSelection) -> dict[str, object]:
