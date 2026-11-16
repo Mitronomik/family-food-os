@@ -1,3 +1,15 @@
+# CURRENT — one actual home lunch composed from 3 existing source recipes — 2026-11-13
+
+**Accepted main:** `459995c4f7e34aa9bdcd5d32106b421b0a8b31fb` after [#288 merged](https://github.com/Mitronomik/family-food-os/pull/288); earlier focus below is historical. Owner's most recent approved **product direction**: a role-specific meal structure (light one-dish breakfast, light snack, first+second+optional light dessert lunch, single-dish dinner) and member-specific *partial* at-home schedules; unknown meals outside the household are not generated/tracked. Meal-role defaults are proposed product rules, not clinical standards or blanket portions. Existing accepted `energy_share` applies only to explicitly selected opportunities; **never fill daily kcal through larger home portions.**
+
+**Current bounded implementation:** **developer-only**, one real 2026-11-03 LUNCH for synthetic member 1, while members 2 and 3 have **no home LUNCH**. Existing persisted `SCHOOL2022_54_26M_POTATO_BEEF_CASSEROLE` is the *second* course. Test-only FIRST is source-backed `MR2019_1_2A_VEGETARIAN_CABBAGE_SOUP`, and test-only DESSERT is a small factor of `SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE`, **currently classified breakfast; dessert suitability NOT REVIEWED**. Each has independently chosen test scaling factors, verified pinned kcal and canonical ingredient identities. Show energy ledger vs accepted home-lunch energy-share **without** auto-completing a reference target, raising portions or reallocating across other slots. No automatic kcal filling of outside meals.
+
+**Hard boundary:** `MealEvent` cannot yet persist multiple RecipeVersions, no multi-course Shopping calculator/Prep, no validated finished mass, no consumer-ready dessert role/physical portion policy. Return `STRUCTURALLY_COMPOSED_DIAGNOSTIC_ONLY` / `PHYSICAL_NOT_PROVEN`. Frozen A/B + Planner v0.5 and 7-day persisted proof are immutable. No code in production Planner, migrations, API, RecipeVersion, Shopping, Prep, Gate2 or family release. `AI_ENABLED=false`.
+
+**Next:** independent review of actual three-course result, no self-merge. If accepted, separately scope a versioned multi-course MealEvent/Serving/Shopping architecture and reviewed per-role recipe suitability: do not silently treat a breakfast-classified casserole as a production-approved dessert or invent physiological serving bounds.
+
+---
+
 # CURRENT — exact source check: one vegetarian cabbage-soup portion — 2026-11-13
 
 **Accepted main:** `65dba8c73b2a6b6723909e29598e0b656a30bfcd` after merged [#287](https://github.com/Mitronomik/family-food-os/pull/287). Older focus headings below are historical.
