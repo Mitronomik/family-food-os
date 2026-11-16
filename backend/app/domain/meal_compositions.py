@@ -12,10 +12,13 @@ published MealPatternProgram or a medical / universal meal structure standard.
 
 from __future__ import annotations
 
+import json
 from collections import Counter
 from dataclasses import dataclass
+from datetime import datetime
 from decimal import Decimal, InvalidOperation
 from enum import StrEnum
+from hashlib import sha256
 from uuid import UUID
 
 from app.domain.errors import DomainIssue, DomainIssueCode, DomainValidationError
@@ -304,3 +307,194 @@ def validate_composition_draft(
     served_positions = {s.component_position for s in proposal.servings}
     if served_positions != {c.position for c in proposal.components}:
         raise _issue("servings", "Every included recipe component needs a participant.")
+
+
+# 0044 immutable persistence form; intentionally distinct from the ephemeral
+# research proposal above. No source-to-Shopping authority is gained here.
+SNAPSHOT_SCHEMA_VERSION = 1
+COMPOSITION_ADMISSION = "DIAGNOSTIC_ONLY"
+
+
+def _canonical(data: object) -> str:
+    return json.dumps(
+        data, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False
+    )
+
+
+def serialized_requirements(rule: DraftMealStructureRule) -> str:
+    """Rule order is part of immutable identity; do not sort its courses."""
+    return _canonical(
+        [
+            {
+                "kind": requirement.kind.value,
+                "minimum": requirement.minimum,
+                "maximum": requirement.maximum,
+            }
+            for requirement in rule.requirements
+        ]
+    )
+
+
+def rule_snapshot_digest(rule: DraftMealStructureRule) -> str:
+    payload = {
+        "schema_version": SNAPSHOT_SCHEMA_VERSION,
+        "code": rule.code,
+        "version": rule.version,
+        "meal_role": rule.meal_role.value,
+        "coverage": rule.coverage.value,
+        "requirements": json.loads(serialized_requirements(rule)),
+    }
+    return sha256(_canonical(payload).encode("utf-8")).hexdigest()
+
+
+def restore_rule_snapshot(
+    *,
+    code: str,
+    version: int,
+    meal_role: MealRole,
+    coverage: str,
+    schema_version: int,
+    requirements_json: str,
+    sha256_hex: str,
+) -> DraftMealStructureRule:
+    """Fail-closed process-independent reconstruction; no rule catalogue lookup."""
+    if schema_version != SNAPSHOT_SCHEMA_VERSION or type(schema_version) is not int:
+        raise _issue("schema_version", "Unknown course-rule snapshot schema.")
+    if not isinstance(requirements_json, str):
+        raise _issue("requirements_json", "Missing immutable course requirements.")
+    try:
+        parsed = json.loads(requirements_json)
+    except (ValueError, TypeError) as exc:
+        raise _issue("requirements_json", "Malformed immutable course requirements.") from exc
+    if not isinstance(parsed, list) or not 1 <= len(parsed) <= 16:
+        raise _issue("requirements_json", "Course requirements must be a bounded array.")
+    requirements = []
+    for item in parsed:
+        if (
+            not isinstance(item, dict)
+            or set(item) != {"kind", "minimum", "maximum"}
+            or type(item["minimum"]) is not int
+            or type(item["maximum"]) is not int
+        ):
+            raise _issue("requirements_json", "Invalid typed course requirement.")
+        requirements.append(
+            CourseCardinality(
+                kind=item["kind"],
+                minimum=item["minimum"],
+                maximum=item["maximum"],
+            )
+        )
+    rule = DraftMealStructureRule(
+        code=code,
+        version=version,
+        meal_role=meal_role,
+        requirements=tuple(requirements),
+        coverage=coverage,
+    )
+    if (
+        serialized_requirements(rule) != requirements_json
+        or not isinstance(sha256_hex, str)
+        or len(sha256_hex) != 64
+        or sha256_hex != rule_snapshot_digest(rule)
+    ):
+        raise _issue("rule_snapshot_sha256", "Course rule snapshot does not reconcile.")
+    return rule
+
+
+@dataclass(frozen=True)
+class PersistedMealComponent:
+    id: UUID
+    event_id: UUID
+    position: int
+    course: MealCourseKind
+    recipe_version_id: UUID
+    created_at: datetime
+
+    def __post_init__(self) -> None:
+        for name in ("id", "event_id", "recipe_version_id"):
+            _id(getattr(self, name), name)
+        _ordinal(self.position, "position")
+        object.__setattr__(self, "course", _course(self.course))
+
+
+@dataclass(frozen=True)
+class PersistedMemberComponentServing:
+    component_id: UUID
+    member_id: UUID
+    portion_servings: Decimal
+    created_at: datetime
+
+    def __post_init__(self) -> None:
+        _id(self.component_id, "component_id")
+        _id(self.member_id, "member_id")
+        value = self.portion_servings
+        if not isinstance(value, Decimal) or not value.is_finite() or value <= 0:
+            raise _issue("portion_servings", "A finite positive Decimal is required.")
+        if value.as_tuple().exponent < -6 or value > Decimal("999999999999.999999"):
+            raise _issue("portion_servings", "Component portion exceeds exact bounds.")
+
+
+@dataclass(frozen=True)
+class PersistedMealEventComposition:
+    event_id: UUID
+    rule: DraftMealStructureRule
+    components: tuple[PersistedMealComponent, ...]
+    servings: tuple[PersistedMemberComponentServing, ...]
+    created_at: datetime
+    admission_status: str = COMPOSITION_ADMISSION
+
+    def __post_init__(self) -> None:
+        _id(self.event_id, "event_id")
+        if self.admission_status != COMPOSITION_ADMISSION:
+            raise _issue("admission_status", "Composed event has no production authority.")
+        if (
+            not isinstance(self.rule, DraftMealStructureRule)
+            or not isinstance(self.components, tuple)
+            or not isinstance(self.servings, tuple)
+            or not self.components
+            or not self.servings
+        ):
+            raise _issue("compositions", "Complete typed composed meal required.")
+        positions = sorted(c.position for c in self.components)
+        if positions != list(range(1, len(positions) + 1)):
+            raise _issue("components", "Component positions must be contiguous.")
+        if any(c.event_id != self.event_id for c in self.components):
+            raise _issue("event_id", "Component must belong to its composition.")
+        by_id = {c.id: c for c in self.components}
+        if len(by_id) != len(self.components):
+            raise _issue("components", "Component ids must be unique.")
+        seen = set()
+        served = set()
+        member_courses: dict[UUID, Counter[MealCourseKind]] = {}
+        for serving in self.servings:
+            if serving.component_id not in by_id:
+                raise _issue("servings", "Orphan member-component Serving.")
+            key = (serving.component_id, serving.member_id)
+            if key in seen:
+                raise _issue("servings", "Duplicate member-component allocation.")
+            seen.add(key)
+            served.add(serving.component_id)
+            member_courses.setdefault(serving.member_id, Counter())[
+                by_id[serving.component_id].course
+            ] += 1
+        if served != set(by_id):
+            raise _issue("servings", "Each component must have a participant.")
+        event_counts = Counter(c.course for c in self.components)
+        permitted = {entry.kind for entry in self.rule.requirements}
+        if set(event_counts) - permitted:
+            raise _issue("components", "Unrecognized course for this rule.")
+        for requirement in self.rule.requirements:
+            total = event_counts[requirement.kind]
+            if not requirement.minimum <= total <= requirement.maximum:
+                raise _issue("components", "Event-wide course count differs from rule.")
+            if self.rule.coverage is RequiredCourseCoverage.PER_PARTICIPANT:
+                if any(
+                    courses[requirement.kind] < requirement.minimum
+                    for courses in member_courses.values()
+                ):
+                    raise _issue("servings", "A member is missing a required course.")
+        course_order = {item.kind: i for i, item in enumerate(self.rule.requirements)}
+        if [
+            course_order[c.course] for c in sorted(self.components, key=lambda c: c.position)
+        ] != sorted(course_order[c.course] for c in self.components):
+            raise _issue("components", "Course ordering contradicts snapshot.")
