@@ -367,7 +367,9 @@ def test_member_component_serving_requires_supported_decimal(amount):
 def test_missing_or_duplicate_rule_does_not_silently_choose_default_structure():
     with pytest.raises(DomainValidationError):
         DraftMealStructureRule(
-            "", 1, MealRole.LUNCH,
+            "",
+            1,
+            MealRole.LUNCH,
             (CourseCardinality(MealCourseKind.FIRST, 1, 1),),
             RequiredCourseCoverage.PER_PARTICIPANT,
         )
