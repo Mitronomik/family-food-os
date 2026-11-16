@@ -41,6 +41,7 @@ class MealPlanStatus(StrEnum):
 
 class MealSourceKind(StrEnum):
     COOK_RECIPE = "COOK_RECIPE"
+    COOK_COMPOSITION = "COOK_COMPOSITION"
     ASSEMBLY = "ASSEMBLY"
     LEFTOVER = "LEFTOVER"
     PREPARED = "PREPARED"
@@ -594,6 +595,13 @@ class HouseholdMealEvent:
                 field="recipe_version_id",
                 value=self.recipe_version_id,
             )
+        if source_kind is MealSourceKind.COOK_COMPOSITION and self.source_reference is not None:
+            raise _issue(
+                DomainIssueCode.INVALID_CODE,
+                "COOK_COMPOSITION cannot imply an old source reference.",
+                field="source_reference",
+                value=self.source_reference,
+            )
         object.__setattr__(
             self,
             "created_at",
@@ -629,9 +637,21 @@ class MealPlanDetail:
     reference_methodology_pins: tuple[
         MealPlanMemberReferenceMethodologyPin, ...
     ] = ()
+    compositions: tuple[object, ...] = ()  # PersistedMealEventComposition; circular import avoided.
 
     def __post_init__(self) -> None:
+        from app.domain.meal_compositions import PersistedMealEventComposition
+
         plan_id = self.plan.id
+        if not isinstance(self.compositions, tuple) or any(
+            not isinstance(c, PersistedMealEventComposition) for c in self.compositions
+        ):
+            raise _issue(
+                DomainIssueCode.INVALID_CODE,
+                "Composed event details must be typed immutable records.",
+                field="compositions",
+                value="malformed",
+            )
         if any(item.plan_id != plan_id for item in self.member_selections):
             raise _issue(
                 DomainIssueCode.INVALID_IDENTIFIER,
@@ -738,6 +758,44 @@ class MealPlanDetail:
                 )
             seen_servings.add(key)
             participating_event_ids.add(serving.event_id)
+        composition_by_event = {c.event_id: c for c in self.compositions}
+        if len(composition_by_event) != len(self.compositions):
+            raise _issue(
+                DomainIssueCode.INVALID_IDENTIFIER,
+                "Duplicate composed events are not allowed.",
+                field="compositions",
+                value="duplicate",
+            )
+        if self.compositions and self.plan.status is not MealPlanStatus.DRAFT:
+            raise _issue(
+                DomainIssueCode.INVALID_CODE,
+                "Composed MealPlans are diagnostic DRAFT only.",
+                field="status",
+                value=self.plan.status,
+            )
+        for comp in self.compositions:
+            parent = event_by_id.get(comp.event_id)
+            if (
+                parent is None
+                or parent.source_kind is not MealSourceKind.COOK_COMPOSITION
+                or parent.role is not comp.rule.meal_role
+                or any(s.event_id == comp.event_id for s in self.servings)
+            ):
+                raise _issue(
+                    DomainIssueCode.INVALID_IDENTIFIER,
+                    "Composed event cannot carry a legacy Serving or wrong role.",
+                    field="compositions",
+                    value=comp.event_id,
+                )
+            comp_members = {row.member_id for row in comp.servings}
+            if not comp_members or not comp_members <= pinned_members:
+                raise _issue(
+                    DomainIssueCode.INVALID_IDENTIFIER,
+                    "Composed event members must be pinned to this Household plan.",
+                    field="compositions",
+                    value=comp.event_id,
+                )
+            participating_event_ids.add(comp.event_id)
         missing_participation = [
             event.id for event in self.events if event.id not in participating_event_ids
         ]
@@ -804,6 +862,9 @@ def validate_complete_plan(
     participants_by_event: dict[UUID, set[UUID]] = defaultdict(set)
     for serving in detail.servings:
         participants_by_event[serving.event_id].add(serving.member_id)
+    for composition in detail.compositions:
+        for serving in composition.servings:
+            participants_by_event[composition.event_id].add(serving.member_id)
     ordered_events = sorted(
         detail.events, key=lambda event: (event.local_date, event.position)
     )
@@ -852,6 +913,13 @@ def calculate_meal_plan_nutrition(
     recipe_nutrition_by_version_id: dict[UUID, RecipeNutritionConsumption],
 ) -> MealPlanNutrition:
     """Compose existing Nutrition truth; unsupported source nutrition stays unknown."""
+    if detail.compositions:
+        raise _issue(
+            DomainIssueCode.INVALID_CODE,
+            "Nutrition calculation does not support composed events yet.",
+            field="compositions",
+            value="UNSUPPORTED_COMPOSITION",
+        )
     event_by_id = {event.id: event for event in detail.events}
     serving_results: list[ServingNutrition] = []
     for serving in detail.servings:
