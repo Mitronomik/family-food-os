@@ -23,7 +23,7 @@ from uuid import UUID
 
 from app.domain.errors import DomainIssue, DomainIssueCode, DomainValidationError
 from app.domain.meal_patterns import MealRole
-from app.domain.meal_plans import MealPlanDetail, MealSourceKind
+from app.domain.meal_plans import MealPlanDetail, MealPlanStatus, MealSourceKind
 
 _SERVING_STEP = Decimal("0.000001")
 DRAFT_STATUS = "NON_PERSISTENT_RESEARCH_PROPOSAL"
