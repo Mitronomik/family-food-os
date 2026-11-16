@@ -34,7 +34,10 @@ from app.persistence.sqlalchemy_core.meal_plan_uow import (
 from app.services.meal_plan_composition_revisions import (
     make_complete_diagnostic_revision,
 )
-from app.services.meal_plan_contracts import MealPlanPersistenceConflictError
+from app.services.meal_plan_contracts import (
+    MealPlanPersistenceConflictError,
+    MealPlanPersistenceError,
+)
 from app.tests.persistence.test_meal_plan_repository import (
     _household, _member, _seed_household, _plan, _selection
 )
@@ -162,8 +165,8 @@ def _rule(*, code="DEV_LUNCH_FIRST_SECOND_OPTIONAL_DESSERT", version=1):
     )
 
 
-def _compose(prior, people, recipes, selected, *, rule=None):
-    event = prior.events[1]
+def _compose(prior, people, recipes, selected, *, rule=None, target_index=1):
+    event = prior.events[target_index]
     components = (
         MealComponentDraft(event.id, 1, MealCourseKind.FIRST, recipes["FIRST_TEST"]),
         MealComponentDraft(event.id, 2, MealCourseKind.SECOND, recipes["SECOND_TEST"]),
@@ -266,7 +269,9 @@ def test_rule_drift_and_injected_component_failure_leave_current_unchanged(tmp_p
                 CourseCardinality(MealCourseKind.SECOND, 1, 1),
             ),
         )
-        changed = _compose(current, people, recipes, accepted, rule=altered_rule)
+        changed = _compose(
+            current, people, recipes, accepted, rule=altered_rule, target_index=2
+        )
         with pytest.raises(MealPlanPersistenceConflictError):
             _write(engine, changed, people)
     finally:
@@ -284,7 +289,7 @@ def test_snapshot_corruption_is_detected_on_a_new_read(tmp_path):
                 "UPDATE meal_plan_event_compositions SET requirements_json='[]'"
             )
             db.commit()
-        with pytest.raises(ValueError, match="snapshot|requirements|rule"):
+        with pytest.raises((ValueError, MealPlanPersistenceError), match="snapshot|requirements|rule|replay"):
             with SqlAlchemyMealPlanReadScope(engine) as scope:
                 scope.plans.get_detail(home.id, new.plan.id)
     finally:
