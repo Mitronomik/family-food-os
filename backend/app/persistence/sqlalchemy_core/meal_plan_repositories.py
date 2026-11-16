@@ -9,6 +9,15 @@ from sqlalchemy import insert, select
 from sqlalchemy.engine import Connection
 from sqlalchemy.exc import DBAPIError, IntegrityError, OperationalError
 
+from app.domain.meal_compositions import (
+    COMPOSITION_ADMISSION,
+    PersistedMealComponent,
+    PersistedMealEventComposition,
+    PersistedMemberComponentServing,
+    restore_rule_snapshot,
+    rule_snapshot_digest,
+    serialized_requirements,
+)
 from app.domain.meal_plans import (
     HouseholdMealEvent,
     MealPlan,
@@ -22,6 +31,9 @@ from app.domain.meal_plans import (
 )
 from app.persistence.sqlalchemy_core.household_tables import household_members_table
 from app.persistence.sqlalchemy_core.meal_plan_tables import (
+    meal_plan_component_servings_table,
+    meal_plan_event_components_table,
+    meal_plan_event_compositions_table,
     meal_plan_events_table,
     meal_plan_member_reference_methodology_pins_table,
     meal_plan_member_selections_table,
@@ -179,10 +191,21 @@ class SqlAlchemyMemberMealPatternSelectionRepository:
 
 
 class SqlAlchemyMealPlanRepository:
-    def __init__(self, connection: Connection) -> None:
+    def __init__(
+        self, connection: Connection, *, allow_internal_composition_write: bool = False
+    ) -> None:
         self._connection = connection
+        self._allow_composition_write = allow_internal_composition_write
 
-    def add_detail(self, detail: MealPlanDetail) -> None:
+    def add_detail(
+        self, detail: MealPlanDetail, *, _diagnostic_composition: bool = False
+    ) -> None:
+        if detail.compositions and not (
+            _diagnostic_composition and self._allow_composition_write
+        ):
+            raise MealPlanPersistenceConflictError(
+                "Only the explicitly enabled internal diagnostic writer may save a composite."
+            )
         plan = detail.plan
         for pin in detail.member_selections:
             member_household = self._connection.scalar(
@@ -320,6 +343,47 @@ class SqlAlchemyMealPlanRepository:
                     insert(servings_table),
                     [_serving_values(item) for item in detail.servings],
                 )
+            if detail.compositions:
+                for comp in detail.compositions:
+                    self._connection.execute(
+                        insert(meal_plan_event_compositions_table).values(
+                            event_id=comp.event_id,
+                            structure_rule_code=comp.rule.code,
+                            structure_rule_version=comp.rule.version,
+                            required_coverage=comp.rule.coverage.value,
+                            rule_snapshot_schema_version=1,
+                            requirements_json=serialized_requirements(comp.rule),
+                            rule_snapshot_sha256=rule_snapshot_digest(comp.rule),
+                            admission_status=comp.admission_status,
+                            created_at=comp.created_at,
+                        )
+                    )
+                    self._connection.execute(
+                        insert(meal_plan_event_components_table),
+                        [
+                            {
+                                "id": part.id,
+                                "event_id": part.event_id,
+                                "position": part.position,
+                                "course_kind": part.course.value,
+                                "recipe_version_id": part.recipe_version_id,
+                                "created_at": part.created_at,
+                            }
+                            for part in comp.components
+                        ],
+                    )
+                    self._connection.execute(
+                        insert(meal_plan_component_servings_table),
+                        [
+                            {
+                                "component_id": item.component_id,
+                                "member_id": item.member_id,
+                                "portion_servings": item.portion_servings,
+                                "created_at": item.created_at,
+                            }
+                            for item in comp.servings
+                        ],
+                    )
         except IntegrityError as exc:
             raise MealPlanPersistenceConflictError(
                 "MealPlan revision identity, order, source, or Serving conflicts."
