@@ -38,6 +38,13 @@ class MealCourseKind(StrEnum):
     DRINK = "DRINK"
 
 
+class RequiredCourseCoverage(StrEnum):
+    """Whether course minima apply to the event or every home participant."""
+
+    EVENT = "EVENT"
+    PER_PARTICIPANT = "PER_PARTICIPANT"
+
+
 def _issue(field: str, reason: str) -> DomainValidationError:
     return DomainValidationError(
         DomainIssue(
@@ -85,12 +92,19 @@ class CourseCardinality:
 
 @dataclass(frozen=True)
 class DraftMealStructureRule:
-    """An explicitly supplied, unapproved rule; never a default for all users."""
+    """Explicit draft rule: cardinality and who must receive each required course.
+
+    PER_PARTICIPANT means every actual home member gets at least the minimum
+    number of courses of each required kind. An optional kind (minimum=0)
+    remains optional for every member. EVENT checks event-wide counts only.
+    Neither mode grants physical portion, nutritional or role suitability.
+    """
 
     code: str
     version: int
     meal_role: MealRole
     requirements: tuple[CourseCardinality, ...]
+    coverage: RequiredCourseCoverage
 
     def __post_init__(self) -> None:
         if not isinstance(self.code, str) or not self.code.strip():
@@ -101,6 +115,11 @@ class DraftMealStructureRule:
         except (ValueError, TypeError) as exc:
             raise _issue("meal_role", "Unknown meal role.") from exc
         object.__setattr__(self, "meal_role", role)
+        try:
+            coverage = RequiredCourseCoverage(self.coverage)
+        except (ValueError, TypeError) as exc:
+            raise _issue("coverage", "Explicit course coverage scope is required.") from exc
+        object.__setattr__(self, "coverage", coverage)
         if (
             not isinstance(self.requirements, tuple)
             or not self.requirements
@@ -254,6 +273,21 @@ def validate_composition_draft(
         count = counts[requirement.kind]
         if not requirement.minimum <= count <= requirement.maximum:
             raise _issue("course", "Missing, extra or unsupported meal course.")
+
+    if structure.coverage is RequiredCourseCoverage.PER_PARTICIPANT:
+        # Event-wide course counts and total member union alone are insufficient:
+        # two participants could each receive only half of the required lunch.
+        # Count *actual* course Servings for each existing home participant.
+        by_position = {component.position: component.course for component in proposal.components}
+        per_member = {member_id: Counter() for member_id in old_members}
+        for serving in proposal.servings:
+            per_member[serving.member_id][by_position[serving.component_position]] += 1
+        for member_courses in per_member.values():
+            for requirement in structure.requirements:
+                if member_courses[requirement.kind] < requirement.minimum:
+                    raise _issue(
+                        "servings", "An at-home participant is missing a required course."
+                    )
 
     # A rule defines ordering but not universal number of meals or physiological
     # portions. Optional desserts may have their own participant subset.
