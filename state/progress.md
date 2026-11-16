@@ -1,3 +1,11 @@
+# 2026-11-16 — #289 merged; first MealPlan-owned draft component model
+
+- [PR #289](https://github.com/Mitronomik/family-food-os/pull/289) merged at c364eb3f5241bb0b7a3af97108ebe1c5d6f0c448.
+- New bounded implementation: developer-only, non-persistent typed MealComponent/ComponentServing proposal and version-labelled prototype course rule; validates actual at-home participants/source MealEvent, no replacement of legacy persisted Serving.
+- Production multi-component MealPlan, role-suitability, physical portion authority, source Shopping and Gate2 remain explicitly NOT READY; evidence-only bridge from the existing 3-course lunch. No AI or real-family release.
+
+---
+
 # 2026-11-11 — merged #286 and portion feasibility product blocker
 
 - [PR #286](https://github.com/Mitronomik/family-food-os/pull/286) merged to `main@c0bd92d2e671acd6ec5f839b2ca6c769b964acf1`: the water choice remains a local-only prototype, not Pantry/purchase authority.
