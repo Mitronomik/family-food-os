@@ -1,3 +1,9 @@
+# 2026-11-16 — MealPlan component DRAFT after merged #289
+
+Owner reports and GitHub confirms #289 merged at main@c364eb3f5241bb0b7a3af97108ebe1c5d6f0c448. New bounded PR adds only a typed **non-persistent** MealPlan composition proposal: components with source RecipeVersion, per-component member Servings, and supplied prototype role-structure rules (not automatically published policy). Validation anchors to actual source MealPlan and member attendance. The existing accepted single 3-course lunch demonstration now uses this validator; past Plan/Serving semantics, Shopping, Prep and gates unchanged. Next check exact CI two-process evidence and obtain review/owner merge; no self-merge. A separate MealPlan migration and Shopping PR each require explicit scope/approval.
+
+---
+
 # 2026-11-11 — source-based Serving realism audit after merged #286
 
 [PR #286](https://github.com/Mitronomik/family-food-os/pull/286) merged at `c0bd92d2e671acd6ec5f839b2ca6c769b964acf1`. The next product blocker is physical portion plausibility: accepted synthetic frozen forward week has 21 source-recipe MealEvents and 42 Serving factors ranging roughly ×2.03–×6.16, but no independently accepted finished-edible-mass/physical-policy PASS. New developer-only `portion-review.md` and JSON inventory actual verified source RecipeVersion output metadata, compare every factor against exact persisted Serving and authoritative energy-only candidate, and retain `PORTION_RELEASE_READY=NOT_PROVEN`. Do not infer finished mass, clip portions, invent serving bounds, change frozen A/B/Planner/Shopping or authorize real-family Prep. Verify exact-head two-process artifacts; stop for owner merge.
