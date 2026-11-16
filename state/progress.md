@@ -1,3 +1,11 @@
+# 2026-11-16 — PR #291 review P2s resolved in docs gate (not yet merged)
+
+- P2: require immutable **complete** course rule snapshot, canonical JSON, schema version, digest, readback in a different process and rejection of same code/version content drift.
+- P2: require new composed DRAFT plan revision to be a **full seven-day immutable week**, remapping every unaffected event/Serving/pin, preserving already-composed untargeted events or failing closed, and changing only the selected lunch.
+- Acceptance tests are specified for the future MealPlan runtime PR; this contract PR adds no executable migration, persistence tests or Shopping implementation.
+
+---
+
 # 2026-11-16 — merged #290; persistence contract gate drafted
 
 - [PR #290](https://github.com/Mitronomik/family-food-os/pull/290) confirmed merged to `main@e32ae5ef07937ed4ef545e7f9d77801a6757f7b9`. The model remains non-persistent.
