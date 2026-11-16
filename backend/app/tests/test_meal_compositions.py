@@ -85,7 +85,9 @@ def _lunch_draft(original, people, recipes, *, with_dessert=True):
         MealComponentDraft(event_id, 2, MealCourseKind.SECOND, second),
     )
     if with_dessert:
-        components += (MealComponentDraft(event_id, 3, MealCourseKind.DESSERT, dessert),)
+        components += (
+            MealComponentDraft(event_id, 3, MealCourseKind.DESSERT, dessert),
+        )
     servings = (
         MemberComponentServingDraft(event_id, 1, people[0], Decimal("1.000000")),
         MemberComponentServingDraft(event_id, 2, people[0], Decimal("1.000000")),
@@ -150,11 +152,7 @@ def test_breakfast_or_dinner_can_each_use_single_course_without_lunch_policy():
             original.plan.id,
             event_id,
             (MealComponentDraft(event_id, 1, MealCourseKind.MAIN, recipe_id),),
-            (
-                MemberComponentServingDraft(
-                    event_id, 1, people[0], Decimal("1.000000")
-                ),
-            ),
+            (MemberComponentServingDraft(event_id, 1, people[0], Decimal("1.000000")),),
         )
         rule = DraftMealStructureRule(
             code=f"TEST_{role.value}",
@@ -214,14 +212,14 @@ def test_proposal_rejects_invalid_source_or_partial_schedule(mutation):
             draft = replace(draft, servings=())
         elif mutation == "no_serving_for_component":
             draft = replace(
-                draft, servings=tuple(s for s in draft.servings if s.component_position != 3)
+                draft,
+                servings=tuple(s for s in draft.servings if s.component_position != 3),
             )
         elif mutation == "unknown_component":
             draft = replace(
                 draft,
-                servings=draft.servings + (
-                    MemberComponentServingDraft(event_id, 4, people[0], Decimal(1)),
-                ),
+                servings=draft.servings
+                + (MemberComponentServingDraft(event_id, 4, people[0], Decimal(1)),),
             )
         elif mutation == "wrong_course_order":
             draft = replace(
@@ -242,11 +240,13 @@ def test_proposal_rejects_invalid_source_or_partial_schedule(mutation):
         elif mutation == "source_kind_eat_out":
             original = replace(
                 original,
-                events=(replace(
-                    original.events[0],
-                    source_kind=MealSourceKind.EAT_OUT,
-                    recipe_version_id=None,
-                ),),
+                events=(
+                    replace(
+                        original.events[0],
+                        source_kind=MealSourceKind.EAT_OUT,
+                        recipe_version_id=None,
+                    ),
+                ),
             )
         elif mutation == "unexpected_dessert":
             rule = DraftMealStructureRule(
@@ -273,7 +273,15 @@ def test_proposal_rejects_invalid_source_or_partial_schedule(mutation):
 
 @pytest.mark.parametrize(
     "amount",
-    [Decimal(0), Decimal("-1"), Decimal("NaN"), Decimal("Infinity"), Decimal("0.0000001"), 1.0, "1.000000"],
+    [
+        Decimal(0),
+        Decimal("-1"),
+        Decimal("NaN"),
+        Decimal("Infinity"),
+        Decimal("0.0000001"),
+        1.0,
+        "1.000000",
+    ],
 )
 def test_member_component_serving_requires_supported_decimal(amount):
     with pytest.raises(DomainValidationError):
