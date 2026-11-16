@@ -201,7 +201,7 @@ meal_plan_events_table = Table(
     ),
     CheckConstraint(
         "source_kind <> 'COOK_COMPOSITION' OR source_reference IS NULL",
-        name="ck_meal_plan_event_recipe_reference",
+        name="ck_meal_plan_composition_no_reference",
     ),
 )
 
