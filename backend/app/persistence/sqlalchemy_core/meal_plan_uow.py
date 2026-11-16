@@ -33,8 +33,12 @@ from app.services.meal_plan_contracts import (
 
 
 class SqlAlchemyMealPlanUnitOfWork:
-    def __init__(self, engine: Engine) -> None:
+    def __init__(
+        self, engine: Engine, *, enable_internal_composition_writes: bool = False
+    ) -> None:
         self._scope = SqlAlchemyUnitOfWork(engine)
+        # Never enabled in normal API/Planner composition roots.
+        self._allow_internal_compositions = enable_internal_composition_writes
         self._selections: SqlAlchemyMemberMealPatternSelectionRepository | None = None
         self._plans: SqlAlchemyMealPlanRepository | None = None
         self._members: SqlAlchemyHouseholdMemberRepository | None = None
@@ -72,7 +76,10 @@ class SqlAlchemyMealPlanUnitOfWork:
         self._scope.__enter__()
         connection = self._scope.adapter_connection
         self._selections = SqlAlchemyMemberMealPatternSelectionRepository(connection)
-        self._plans = SqlAlchemyMealPlanRepository(connection)
+        self._plans = SqlAlchemyMealPlanRepository(
+            connection,
+            allow_internal_composition_write=self._allow_internal_compositions,
+        )
         self._members = SqlAlchemyHouseholdMemberRepository(connection)
         self._reference_methodologies = (
             SqlAlchemyMemberReferenceMethodologySelectionRepository(connection)
