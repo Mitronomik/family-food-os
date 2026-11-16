@@ -66,6 +66,12 @@ Migration candidate name: **`0044_meal_plan_components`** — verify it remains 
 6. A plan revision cannot be mutated by adding/removing child components after its initial transaction. New choices always create **another** plan revision, not an in-place edit.
 7. Deterministic ordering is `(local_date, event.position, component.position, member UUID)`, preserving Household-local date; no implicit per-day energy redistribution.
 
+### 3.0 Rollout hold: current-plan and Shopping safety
+
+**Critical accepted behavior:** current `SqlAlchemyMealPlanRepository.get_current(household_id, week_start)` returns the **highest revision, regardless of DRAFT/CONFIRMED status**. Thus creating a diagnostic composition revision for an already active household/week would immediately change what existing readers consider `current`, and could make prior Shopping snapshots stale *before* any component-aware Shopping engine exists. This is **not permitted as a routine user write** in the first runtime PR.
+
+Until a separately reviewed activation plan and component-aware Shopping/consumer readers exist, `add_diagnostic_composition_revision` must be **developer/test-only**, without a public API, normal Planner invocation, or production-household enrollment; use a dedicated synthetic Household/isolated test database for the demonstration. Do not silently change `get_current` selection semantics to hide DRAFTs: that would be a different behavior contract and would break existing callers. Tests must prove the old operational plan and Shopping state are unaffected by normal application paths. Any subsequent proposal to enable diagnostic revisions in an active Household/week must revisit this gate and explicitly address current-plan selection, derived-state staleness, and the reader capability matrix. A local prototype is not authorization to deploy or expose the writer.
+
 ### 3.1 Domain / repository / application shape
 
 - Extend `MealPlanDetail` **additively** with typed read-only composition tuples defaulting to `()` for historical callers. Preserve the old tuple-of-legacy-Serving API for `COOK_RECIPE` events; introduce explicit `composed_event_details` / `component_servings` for the new kind, not fictitious legacy Servings. Existing `MealEventCompositionDraft` and validator from #290 can be adapted for the new event source with explicit input references; their current source-anchoring assumption (`COOK_RECIPE` original) cannot be reused blindly.
