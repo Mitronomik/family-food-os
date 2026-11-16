@@ -1,3 +1,9 @@
+# 2026-11-16 — P2 corrections for docs-only MealPlan persistence gate
+
+PR #291 contract review raised two P2 blockers. Within the **same contract PR**, choose a versioned immutable course-rule **snapshot** (ordered requirements min/max/coverage, schema/hash, strict new-process replay and same code/version drift rejection). Define new revision as the **full prior seven-day plan**, with new plan/event/Serving IDs, exact copied member/pattern/reference pins, source facts and portions for every unaffected meal; replace only one lunch with component Servings. If a prior revision already contains another composed event, copy its full rule/components/servings or fail closed. Neither rule-snapshot replay nor full-week migration tests are implemented in the docs-only gate; both are hard acceptance for the *later* separately authorized runtime PR. No Shopping activation.
+
+---
+
 # 2026-11-16 — PR #290 merged; next mandatory MealPlan persistence contract review
 
 Owner reports and GitHub confirms [#290](https://github.com/Mitronomik/family-food-os/pull/290) merged at `main@e32ae5ef07937ed4ef545e7f9d77801a6757f7b9`. Owner explicitly requests versioned persistence for meal components, followed **later** by component-aware Shopping. Root `AGENTS.md` mandates a **docs-only Implementation Contract Gate** before any migration/runtime. Current branch prepares `docs/family-food/mealplan-multicourse-persistence-implementation-contract-2026-11-16.md`. Proposed: new source `COOK_COMPOSITION` with no fake parent RecipeVersion or legacy Serving, append-only DRAFT revision, header+component+member-serving tables, strict per-member FIRST+SECOND when covered, source verification/exclusions, migration 0044 only after runtime HEAD check, FK/table-rebuild fail-injection, old plans unchanged, Shopping/Prep/Nutrition NO_GO. No production code in this gate. After merge independently review runtime MealPlan PR scope and only then tackle Shopping in a separate PR.
