@@ -1,3 +1,11 @@
+# 2026-11-16 — merged #290; persistence contract gate drafted
+
+- [PR #290](https://github.com/Mitronomik/family-food-os/pull/290) confirmed merged to `main@e32ae5ef07937ed4ef545e7f9d77801a6757f7b9`. The model remains non-persistent.
+- User requested **one MealPlan persistence PR then separate Shopping PR**, but the current repository `AGENTS.md` requires a separate **docs-only pre-implementation contract gate** before runtime changes to persistent identities/migrations. Drafted `docs/family-food/mealplan-multicourse-persistence-implementation-contract-2026-11-16.md`, proposing new `COOK_COMPOSITION` source kind, immutable child tables, new diagnostic DRAFT plan revision and hard fail-closed Shopping until later integration.
+- This step changes only documentation/state; no runtime/migrations, existing fixture/Serving/Shopping quantities or release gates.
+
+---
+
 # 2026-11-16 — #289 merged; first MealPlan-owned draft component model
 
 - [PR #289](https://github.com/Mitronomik/family-food-os/pull/289) merged at c364eb3f5241bb0b7a3af97108ebe1c5d6f0c448.
