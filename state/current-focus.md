@@ -16,6 +16,8 @@
 
 **Constraints:** the current HouseholdMealEvent and legacy Serving schema remain unchanged. This is NOT production multi-component MealPlan, course suitability, physical portion feasibility, full Nutrition, authoritative Shopping, Pantry, or Prep. Frozen historical plan and immutable A/B untouched, AI_ENABLED=false, no schema migration, API/UI or Gate2 changes. Required: exact-head focused tests, Ruff, two independent Planner processes, independent review and separate owner merge decision.
 
+**P2 review updates in current contract PR #291:** independently readable immutable rule snapshot (ordered course requirements with schema/hash and drift rejection), plus a full seven-day new MealPlan revision preserving every unrelated event, serving and accepted pin. Both are explicit blocking runtime acceptance gates; contract still docs-only until independent review/merge.
+
 **Next only after approval:** separate explicitly versioned MealPlan persistence/readback architecture (owner decision required); generic Shopping integration later in its **own** PR.
 
 ---
