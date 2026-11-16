@@ -17,6 +17,7 @@ from app.domain.meal_compositions import (
     MealCourseKind,
     MealEventCompositionDraft,
     MemberComponentServingDraft,
+    RequiredCourseCoverage,
     validate_composition_draft,
 )
 from app.domain.meal_patterns import MealRole
@@ -243,6 +244,7 @@ def build_lunch(*, plan, member_ordinals, members, candidate_inputs, details, fo
             CourseCardinality(MealCourseKind.SECOND, 1, 1),
             CourseCardinality(MealCourseKind.DESSERT, 0, 1),
         ),
+        coverage=RequiredCourseCoverage.PER_PARTICIPANT,
     )
     try:
         validate_composition_draft(draft, plan, draft_structure)
