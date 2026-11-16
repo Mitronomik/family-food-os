@@ -118,7 +118,9 @@ class DraftMealStructureRule:
         try:
             coverage = RequiredCourseCoverage(self.coverage)
         except (ValueError, TypeError) as exc:
-            raise _issue("coverage", "Explicit course coverage scope is required.") from exc
+            raise _issue(
+                "coverage", "Explicit course coverage scope is required."
+            ) from exc
         object.__setattr__(self, "coverage", coverage)
         if (
             not isinstance(self.requirements, tuple)
@@ -278,7 +280,9 @@ def validate_composition_draft(
         # Event-wide course counts and total member union alone are insufficient:
         # two participants could each receive only half of the required lunch.
         # Count *actual* course Servings for each existing home participant.
-        by_position = {component.position: component.course for component in proposal.components}
+        by_position = {
+            component.position: component.course for component in proposal.components
+        }
         per_member = {member_id: Counter() for member_id in old_members}
         for serving in proposal.servings:
             per_member[serving.member_id][by_position[serving.component_position]] += 1
@@ -286,7 +290,8 @@ def validate_composition_draft(
             for requirement in structure.requirements:
                 if member_courses[requirement.kind] < requirement.minimum:
                     raise _issue(
-                        "servings", "An at-home participant is missing a required course."
+                        "servings",
+                        "An at-home participant is missing a required course.",
                     )
 
     # A rule defines ordering but not universal number of meals or physiological
