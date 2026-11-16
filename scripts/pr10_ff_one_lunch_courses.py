@@ -9,6 +9,7 @@ from __future__ import annotations
 from datetime import date
 from decimal import Decimal, localcontext
 
+from app.domain.errors import DomainValidationError
 from app.domain.meal_compositions import (
     CourseCardinality,
     DraftMealStructureRule,
@@ -214,7 +215,11 @@ def build_lunch(*, plan, member_ordinals, members, candidate_inputs, details, fo
             MealComponentDraft(
                 event_id=source_event,
                 position=position,
-                course=course,
+                course=(
+                    MealCourseKind.DESSERT
+                    if course == "DESSERT_STUDY"
+                    else MealCourseKind(course)
+                ),
                 recipe_version_id=detail_codes[code].version.id,
             )
             for position, (course, code, _) in enumerate(COURSES, 1)
@@ -239,7 +244,10 @@ def build_lunch(*, plan, member_ordinals, members, candidate_inputs, details, fo
             CourseCardinality(MealCourseKind.DESSERT, 0, 1),
         ),
     )
-    validate_composition_draft(draft, plan, draft_structure)
+    try:
+        validate_composition_draft(draft, plan, draft_structure)
+    except DomainValidationError as exc:
+        raise LunchBlocked("Invalid source-bound MealPlan composition draft") from exc
 
     reference = _decimal(member["reference_energy_kcal"], "reference energy")
     share = _decimal(opportunity["energy_share"], "accepted lunch share")
