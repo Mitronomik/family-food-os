@@ -12,6 +12,35 @@ SQLITE_MIGRATION_MODE = "foreign_key_rebuild"
 def upgrade(db):
     # Called only by the custom runner with an open physical transaction
     # and foreign_keys=OFF. Do not execute executescript or transaction control.
+    # SQLite reparses ALL existing triggers during DROP TABLE. Shopping 0043
+    # has an immutable source-obligation trigger that SELECTs meal_plan_events;
+    # preserve its exact SQL, temporarily drop it, then restore atomically.
+    referencing = db.execute(
+        "SELECT type, name, sql FROM sqlite_master "
+        "WHERE type IN ('trigger','view') "
+        "AND sql LIKE '%meal_plan_events%'"
+    ).fetchall()
+    names = {item[1] for item in referencing}
+    expected = {
+        "trg_meal_plan_events_no_update",
+        "trg_meal_plan_events_no_delete",
+        "trg_shopping_obligation_event",
+    }
+    if names != expected or any(item[0] != "trigger" for item in referencing):
+        raise RuntimeError(
+            "Unreviewed schema trigger/view dependency on meal_plan_events."
+        )
+    shopping_sql = next(
+        item[2] for item in referencing
+        if item[1] == "trg_shopping_obligation_event"
+    )
+    if (
+        not shopping_sql
+        or "BEFORE INSERT ON shopping_unresolved_obligations" not in shopping_sql
+        or "FROM meal_plan_events" not in shopping_sql
+    ):
+        raise RuntimeError("Unexpected Shopping source-obligation trigger definition.")
+    db.execute("DROP TRIGGER trg_shopping_obligation_event")
     db.execute("""
         CREATE TABLE meal_plan_events__0044 (
             id CHAR(32) PRIMARY KEY NOT NULL,
@@ -76,6 +105,8 @@ def upgrade(db):
         BEFORE DELETE ON meal_plan_events
         BEGIN SELECT RAISE(ABORT, 'meal_plan_events are immutable'); END
     """)
+    # Restore the exact historical Shopping trigger, without modifying 0043.
+    db.execute(shopping_sql)
     db.execute("""
         CREATE TABLE meal_plan_event_compositions (
             event_id CHAR(32) PRIMARY KEY NOT NULL
