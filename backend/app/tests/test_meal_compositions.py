@@ -1,12 +1,11 @@
 """MealPlan-only course proposal: membership, source and explicit role structure."""
 
 from dataclasses import replace
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 from decimal import Decimal
 from uuid import uuid4
 
 import pytest
-
 from app.domain.errors import DomainValidationError
 from app.domain.meal_compositions import (
     DRAFT_STATUS,
@@ -29,7 +28,7 @@ from app.domain.meal_plans import (
     Serving,
 )
 
-NOW = datetime(2026, 11, 3, tzinfo=timezone.utc)
+NOW = datetime(2026, 11, 3, tzinfo=UTC)
 
 
 def _case(*, role=MealRole.LUNCH, members=1):
@@ -275,7 +274,7 @@ def test_proposal_rejects_invalid_source_or_partial_schedule(mutation):
     "amount",
     [
         Decimal(0),
-        Decimal("-1"),
+        Decimal(-1),
         Decimal("NaN"),
         Decimal("Infinity"),
         Decimal("0.0000001"),
