@@ -306,7 +306,8 @@ def render_markdown(result):
         or result.get("dessert_course_approval") != "NOT_PROVEN"
         or result.get("authoritative_mealplan") is not False
         or result.get("shopping_authority") != "NONE"
-        or result.get("component_domain_structure_review") != "PASS_NON_PERSISTENT_DRAFT"
+        or result.get("component_domain_structure_review")
+        != "PASS_NON_PERSISTENT_DRAFT"
         or result.get("draft_structure_policy_code")
         != "DEV_LUNCH_FIRST_SECOND_OPTIONAL_DESSERT"
         or result.get("gate2_pass") is not False
