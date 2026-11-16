@@ -1,3 +1,9 @@
+# 2026-11-16 — PR #290 merged; next mandatory MealPlan persistence contract review
+
+Owner reports and GitHub confirms [#290](https://github.com/Mitronomik/family-food-os/pull/290) merged at `main@e32ae5ef07937ed4ef545e7f9d77801a6757f7b9`. Owner explicitly requests versioned persistence for meal components, followed **later** by component-aware Shopping. Root `AGENTS.md` mandates a **docs-only Implementation Contract Gate** before any migration/runtime. Current branch prepares `docs/family-food/mealplan-multicourse-persistence-implementation-contract-2026-11-16.md`. Proposed: new source `COOK_COMPOSITION` with no fake parent RecipeVersion or legacy Serving, append-only DRAFT revision, header+component+member-serving tables, strict per-member FIRST+SECOND when covered, source verification/exclusions, migration 0044 only after runtime HEAD check, FK/table-rebuild fail-injection, old plans unchanged, Shopping/Prep/Nutrition NO_GO. No production code in this gate. After merge independently review runtime MealPlan PR scope and only then tackle Shopping in a separate PR.
+
+---
+
 # 2026-11-16 — MealPlan component DRAFT after merged #289
 
 Owner reports and GitHub confirms #289 merged at main@c364eb3f5241bb0b7a3af97108ebe1c5d6f0c448. New bounded PR adds only a typed **non-persistent** MealPlan composition proposal: components with source RecipeVersion, per-component member Servings, and supplied prototype role-structure rules (not automatically published policy). Validation anchors to actual source MealPlan and member attendance. The existing accepted single 3-course lunch demonstration now uses this validator; past Plan/Serving semantics, Shopping, Prep and gates unchanged. Next check exact CI two-process evidence and obtain review/owner merge; no self-merge. A separate MealPlan migration and Shopping PR each require explicit scope/approval.
