@@ -140,7 +140,10 @@ def test_actual_selected_home_lunch_is_one_member_without_filling_missing_meals(
     assert result["physical_serving_approval"] == "NOT_PROVEN"
     assert result["shopping_authority"] == "NONE"
     assert result["component_domain_structure_review"] == "PASS_NON_PERSISTENT_DRAFT"
-    assert result["draft_structure_policy_code"] == "DEV_LUNCH_FIRST_SECOND_OPTIONAL_DESSERT"
+    assert (
+        result["draft_structure_policy_code"]
+        == "DEV_LUNCH_FIRST_SECOND_OPTIONAL_DESSERT"
+    )
     assert result["authoritative_mealplan"] is False
     assert result["gate2_pass"] is False
     report = lunch.render_markdown(result)
