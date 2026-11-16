@@ -191,83 +191,83 @@ def test_proposal_rejects_invalid_source_or_partial_schedule(mutation):
     draft = _lunch_draft(original, people, recipes)
     rule = _lunch_rule()
     event_id = draft.event_id
-    if mutation == "other_plan":
-        draft = replace(draft, plan_id=uuid4())
-    elif mutation == "missing_source_recipe":
-        draft = replace(
-            draft,
-            components=tuple(
-                replace(c, recipe_version_id=uuid4()) if c.position == 2 else c
-                for c in draft.components
-            ),
-        )
-    elif mutation == "different_event":
-        draft = replace(draft, event_id=uuid4())
-    elif mutation == "phantom_participant":
-        draft = replace(
-            draft,
-            servings=draft.servings
-            + (MemberComponentServingDraft(event_id, 2, uuid4(), Decimal(1)),),
-        )
-    elif mutation == "missing_member":
-        draft = replace(draft, servings=())
-    elif mutation == "no_serving_for_component":
-        draft = replace(
-            draft, servings=tuple(s for s in draft.servings if s.component_position != 3)
-        )
-    elif mutation == "unknown_component":
-        draft = replace(
-            draft,
-            servings=draft.servings + (
-                MemberComponentServingDraft(event_id, 4, people[0], Decimal(1)),
-            ),
-        )
-    elif mutation == "wrong_course_order":
-        draft = replace(
-            draft,
-            components=(
-                replace(draft.components[0], course=MealCourseKind.SECOND),
-                replace(draft.components[1], course=MealCourseKind.FIRST),
-                draft.components[2],
-            ),
-        )
-    elif mutation == "duplicate_component":
-        draft = replace(
-            draft,
-            components=draft.components + (draft.components[0],),
-        )
-    elif mutation == "duplicate_member_serving":
-        draft = replace(draft, servings=draft.servings + (draft.servings[0],))
-    elif mutation == "source_kind_eat_out":
-        original = replace(
-            original,
-            events=(replace(
-                original.events[0],
-                source_kind=MealSourceKind.EAT_OUT,
-                recipe_version_id=None,
-            ),),
-        )
-    elif mutation == "unexpected_dessert":
-        rule = DraftMealStructureRule(
-            code="LUNCH_NO_DESSERT",
-            version=1,
-            meal_role=MealRole.LUNCH,
-            requirements=(
-                CourseCardinality(MealCourseKind.FIRST, 1, 1),
-                CourseCardinality(MealCourseKind.SECOND, 1, 1),
-            ),
-        )
-    elif mutation == "missing_second":
-        draft = replace(
-            draft,
-            components=(
-                draft.components[0],
-                replace(draft.components[1], course=MealCourseKind.DESSERT),
-            ),
-        )
-    elif mutation == "wrong_role_rule":
-        rule = replace(rule, meal_role=MealRole.DINNER)
     with pytest.raises(DomainValidationError):
+        if mutation == "other_plan":
+            draft = replace(draft, plan_id=uuid4())
+        elif mutation == "missing_source_recipe":
+            draft = replace(
+                draft,
+                components=tuple(
+                    replace(c, recipe_version_id=uuid4()) if c.position == 2 else c
+                    for c in draft.components
+                ),
+            )
+        elif mutation == "different_event":
+            draft = replace(draft, event_id=uuid4())
+        elif mutation == "phantom_participant":
+            draft = replace(
+                draft,
+                servings=draft.servings
+                + (MemberComponentServingDraft(event_id, 2, uuid4(), Decimal(1)),),
+            )
+        elif mutation == "missing_member":
+            draft = replace(draft, servings=())
+        elif mutation == "no_serving_for_component":
+            draft = replace(
+                draft, servings=tuple(s for s in draft.servings if s.component_position != 3)
+            )
+        elif mutation == "unknown_component":
+            draft = replace(
+                draft,
+                servings=draft.servings + (
+                    MemberComponentServingDraft(event_id, 4, people[0], Decimal(1)),
+                ),
+            )
+        elif mutation == "wrong_course_order":
+            draft = replace(
+                draft,
+                components=(
+                    replace(draft.components[0], course=MealCourseKind.SECOND),
+                    replace(draft.components[1], course=MealCourseKind.FIRST),
+                    draft.components[2],
+                ),
+            )
+        elif mutation == "duplicate_component":
+            draft = replace(
+                draft,
+                components=draft.components + (draft.components[0],),
+            )
+        elif mutation == "duplicate_member_serving":
+            draft = replace(draft, servings=draft.servings + (draft.servings[0],))
+        elif mutation == "source_kind_eat_out":
+            original = replace(
+                original,
+                events=(replace(
+                    original.events[0],
+                    source_kind=MealSourceKind.EAT_OUT,
+                    recipe_version_id=None,
+                ),),
+            )
+        elif mutation == "unexpected_dessert":
+            rule = DraftMealStructureRule(
+                code="LUNCH_NO_DESSERT",
+                version=1,
+                meal_role=MealRole.LUNCH,
+                requirements=(
+                    CourseCardinality(MealCourseKind.FIRST, 1, 1),
+                    CourseCardinality(MealCourseKind.SECOND, 1, 1),
+                ),
+            )
+        elif mutation == "missing_second":
+            draft = replace(
+                draft,
+                components=(
+                    draft.components[0],
+                    replace(draft.components[1], course=MealCourseKind.DESSERT),
+                ),
+            )
+        elif mutation == "wrong_role_rule":
+            rule = replace(rule, meal_role=MealRole.DINNER)
         validate_composition_draft(draft, original, rule)
 
 
