@@ -191,12 +191,16 @@ meal_plan_events_table = Table(
         name="ck_meal_plan_event_role",
     ),
     CheckConstraint(
-        "source_kind IN ('COOK_RECIPE','ASSEMBLY','LEFTOVER','PREPARED','READY_MEAL','ORDER_OUT','EAT_OUT')",
+        "source_kind IN ('COOK_RECIPE','COOK_COMPOSITION','ASSEMBLY','LEFTOVER','PREPARED','READY_MEAL','ORDER_OUT','EAT_OUT')",
         name="ck_meal_plan_event_source_kind",
     ),
     CheckConstraint(
         "(source_kind = 'COOK_RECIPE' AND recipe_version_id IS NOT NULL) OR "
         "(source_kind <> 'COOK_RECIPE' AND recipe_version_id IS NULL)",
+        name="ck_meal_plan_event_recipe_reference",
+    ),
+    CheckConstraint(
+        "source_kind <> 'COOK_COMPOSITION' OR source_reference IS NULL",
         name="ck_meal_plan_event_recipe_reference",
     ),
 )
@@ -306,3 +310,89 @@ Index(
     meal_plan_events_table.c.position,
 )
 Index("idx_servings_event", servings_table.c.event_id, servings_table.c.member_id)
+
+# 0044: diagnostic multi-course source, never a legacy COOK_RECIPE disguised
+# as a primary recipe. The custom SQLite migration remains schema authority.
+meal_plan_event_compositions_table = Table(
+    "meal_plan_event_compositions",
+    meal_plan_metadata,
+    Column(
+        "event_id",
+        entity_uuid_type(),
+        ForeignKey("meal_plan_events.id", ondelete="RESTRICT"),
+        primary_key=True,
+        nullable=False,
+    ),
+    Column("structure_rule_code", String, nullable=False),
+    Column("structure_rule_version", Integer, nullable=False),
+    Column("required_coverage", String, nullable=False),
+    Column("rule_snapshot_schema_version", Integer, nullable=False),
+    Column("requirements_json", String, nullable=False),
+    Column("rule_snapshot_sha256", String, nullable=False),
+    Column("admission_status", String, nullable=False),
+    Column("created_at", UTCDateTime(), nullable=False),
+    CheckConstraint("structure_rule_version > 0"),
+    CheckConstraint("rule_snapshot_schema_version = 1"),
+    CheckConstraint("required_coverage IN ('EVENT','PER_PARTICIPANT')"),
+    CheckConstraint("admission_status = 'DIAGNOSTIC_ONLY'"),
+)
+
+meal_plan_event_components_table = Table(
+    "meal_plan_event_components",
+    meal_plan_metadata,
+    Column("id", entity_uuid_type(), primary_key=True, nullable=False),
+    Column(
+        "event_id",
+        entity_uuid_type(),
+        ForeignKey("meal_plan_event_compositions.event_id", ondelete="RESTRICT"),
+        nullable=False,
+    ),
+    Column("position", Integer, nullable=False),
+    Column("course_kind", String, nullable=False),
+    Column(
+        "recipe_version_id",
+        entity_uuid_type(),
+        ForeignKey("food_recipe_versions.id", ondelete="RESTRICT"),
+        nullable=False,
+    ),
+    Column("created_at", UTCDateTime(), nullable=False),
+    UniqueConstraint("event_id", "position"),
+    CheckConstraint("position > 0"),
+    CheckConstraint(
+        "course_kind IN ('FIRST','SECOND','DESSERT','MAIN','SIDE','SNACK','DRINK')"
+    ),
+)
+
+meal_plan_component_servings_table = Table(
+    "meal_plan_component_servings",
+    meal_plan_metadata,
+    Column(
+        "component_id",
+        entity_uuid_type(),
+        ForeignKey("meal_plan_event_components.id", ondelete="RESTRICT"),
+        primary_key=True,
+        nullable=False,
+    ),
+    Column(
+        "member_id",
+        entity_uuid_type(),
+        ForeignKey("household_members.id", ondelete="RESTRICT"),
+        primary_key=True,
+        nullable=False,
+    ),
+    Column("portion_servings", DecimalText(), nullable=False),
+    Column("created_at", UTCDateTime(), nullable=False),
+    CheckConstraint("CAST(portion_servings AS NUMERIC) > 0"),
+)
+
+Index(
+    "idx_meal_plan_event_components",
+    meal_plan_event_components_table.c.event_id,
+    meal_plan_event_components_table.c.position,
+)
+Index(
+    "idx_meal_plan_component_servings_member",
+    meal_plan_component_servings_table.c.member_id,
+    meal_plan_component_servings_table.c.component_id,
+)
+
