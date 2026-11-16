@@ -104,10 +104,14 @@ class DraftMealStructureRule:
         if (
             not isinstance(self.requirements, tuple)
             or not self.requirements
-            or any(not isinstance(item, CourseCardinality) for item in self.requirements)
+            or any(
+                not isinstance(item, CourseCardinality) for item in self.requirements
+            )
             or len({item.kind for item in self.requirements}) != len(self.requirements)
         ):
-            raise _issue("requirements", "Course requirements must be unique and typed.")
+            raise _issue(
+                "requirements", "Course requirements must be unique and typed."
+            )
 
 
 @dataclass(frozen=True)
@@ -140,7 +144,9 @@ class MemberComponentServingDraft:
             raise _issue("portion_servings", "A finite positive Decimal is required.")
         try:
             if value.quantize(_SERVING_STEP) != value:
-                raise _issue("portion_servings", "Fraction exceeds supported precision.")
+                raise _issue(
+                    "portion_servings", "Fraction exceeds supported precision."
+                )
         except InvalidOperation as exc:
             raise _issue("portion_servings", "Unsupported Decimal precision.") from exc
 
@@ -163,21 +169,33 @@ class MealEventCompositionDraft:
             or not isinstance(self.servings, tuple)
             or not self.servings
             or any(not isinstance(c, MealComponentDraft) for c in self.components)
-            or any(not isinstance(s, MemberComponentServingDraft) for s in self.servings)
+            or any(
+                not isinstance(s, MemberComponentServingDraft) for s in self.servings
+            )
         ):
-            raise _issue("components", "Non-empty typed component and Serving rows required.")
+            raise _issue(
+                "components", "Non-empty typed component and Serving rows required."
+            )
         positions = [c.position for c in self.components]
         if sorted(positions) != list(range(1, len(positions) + 1)):
-            raise _issue("position", "Component positions must be unique and contiguous.")
+            raise _issue(
+                "position", "Component positions must be unique and contiguous."
+            )
         if any(c.event_id != self.event_id for c in self.components):
             raise _issue("event_id", "Components must refer to the same event.")
         if any(s.event_id != self.event_id for s in self.servings):
-            raise _issue("event_id", "Member component Servings must refer to the event.")
+            raise _issue(
+                "event_id", "Member component Servings must refer to the event."
+            )
         if any(s.component_position not in positions for s in self.servings):
-            raise _issue("component_position", "Serving refers to an unknown component.")
+            raise _issue(
+                "component_position", "Serving refers to an unknown component."
+            )
         pairs = [(s.component_position, s.member_id) for s in self.servings]
         if len(pairs) != len(set(pairs)):
-            raise _issue("servings", "A member has a repeated Serving for one component.")
+            raise _issue(
+                "servings", "A member has a repeated Serving for one component."
+            )
 
 
 def validate_composition_draft(
@@ -201,23 +219,32 @@ def validate_composition_draft(
         raise _issue("plan_id", "Proposal cannot reference another plan revision.")
     matched = [event for event in existing.events if event.id == proposal.event_id]
     if len(matched) != 1:
-        raise _issue("event_id", "Composition must reference one accepted source event.")
+        raise _issue(
+            "event_id", "Composition must reference one accepted source event."
+        )
     event = matched[0]
     if event.source_kind is not MealSourceKind.COOK_RECIPE:
-        raise _issue("source_kind", "Only recipe-backed source events can be projected.")
+        raise _issue(
+            "source_kind", "Only recipe-backed source events can be projected."
+        )
     if event.role is not structure.meal_role:
         raise _issue("meal_role", "Structure rule does not apply to this meal.")
-    if sum(c.recipe_version_id == event.recipe_version_id for c in proposal.components) != 1:
-        raise _issue("recipe_version_id", "Original source recipe must appear exactly once.")
+    if (
+        sum(c.recipe_version_id == event.recipe_version_id for c in proposal.components)
+        != 1
+    ):
+        raise _issue(
+            "recipe_version_id", "Original source recipe must appear exactly once."
+        )
 
     # Member attendance comes exclusively from persisted Serving rows. No
     # outside-food events, phantom guests or zero-kcal stand-ins are created.
-    old_members = {
-        s.member_id for s in existing.servings if s.event_id == event.id
-    }
+    old_members = {s.member_id for s in existing.servings if s.event_id == event.id}
     new_members = {s.member_id for s in proposal.servings}
     if not old_members or new_members != old_members:
-        raise _issue("member_id", "Proposed members must equal actual home participants.")
+        raise _issue(
+            "member_id", "Proposed members must equal actual home participants."
+        )
 
     counts = Counter(c.course for c in proposal.components)
     expected_kinds = {r.kind for r in structure.requirements}
