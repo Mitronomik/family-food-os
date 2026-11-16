@@ -230,6 +230,28 @@ def test_complete_week_source_roundtrip_and_legacy_history(tmp_path):
         assert again == current
         assert serialized_requirements(again.compositions[0].rule) == serialized_requirements(_rule())
         assert rule_snapshot_digest(again.compositions[0].rule) == rule_snapshot_digest(_rule())
+        # Genuine fresh OS process, with NO cached in-memory rule registry.
+        snippet = (
+            "import sys; from pathlib import Path; "
+            "from uuid import UUID; "
+            "from app.db.config import DatabaseConfig; "
+            "from app.persistence.sqlalchemy_core.engine import create_sqlite_engine; "
+            "from app.persistence.sqlalchemy_core.meal_plan_uow import SqlAlchemyMealPlanReadScope; "
+            "from app.domain.meal_compositions import rule_snapshot_digest; "
+            "engine=create_sqlite_engine(DatabaseConfig(path=Path(sys.argv[1]))); "
+            "scope=SqlAlchemyMealPlanReadScope(engine); "
+            "scope.__enter__(); "
+            "result=scope.plans.get_detail(UUID(sys.argv[2]),UUID(sys.argv[3])); "
+            "print(rule_snapshot_digest(result.compositions[0].rule)); "
+            "scope.__exit__(None,None,None);engine.dispose()"
+        )
+        outcome = subprocess.run(
+            [sys.executable, "-c", snippet, str(config.path), str(home.id), str(current.plan.id)],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        assert outcome.stdout.strip() == rule_snapshot_digest(_rule())
     finally:
         engine.dispose()
 
