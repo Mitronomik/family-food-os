@@ -1,3 +1,13 @@
+# CURRENT — Implementation Contract Gate: versioned multi-course MealPlan persistence — 2026-11-16
+
+**Accepted main:** `e32ae5ef07937ed4ef545e7f9d77801a6757f7b9` ([#290 merged](https://github.com/Mitronomik/family-food-os/pull/290)). Earlier headings below are historical. Owner requested separately versioned MealPlan component persistence with backward compatibility, then Shopping component-demand in its own PR.
+
+**Mandatory root `AGENTS.md` boundary:** a persisted identity/migration/cross-context source change requires a **docs-only Implementation Contract Gate reviewed and merged before ANY runtime PR**. Current bounded work is the proposed [MealPlan composition persistence contract](../docs/family-food/mealplan-multicourse-persistence-implementation-contract-2026-11-16.md), including the option analysis and fresh/upgrade/fail/rollback evidence contract. The recommended future runtime stage uses explicit new `COOK_COMPOSITION` source and append-only **DRAFT diagnostic** MealPlan revisions with per-course member Servings and no fabricated legacy Servings. **No schema/DB/domain/service/Shopping code changes in this docs-only PR.**
+
+**Authorization after gate only:** another bounded **MealPlan-only** code PR implements approved migration/typed repositories/UoW/readback; a separate Shopping PR follows with its own review. No physical portion PASS, approved dessert suitability, customer plan, Prep/Gate2 release, AI or retail.
+
+---
+
 # CURRENT — non-persisted multi-course MealPlan draft, after merged #289 — 2026-11-16
 
 **Accepted main:** c364eb3f5241bb0b7a3af97108ebe1c5d6f0c448 ([PR #289 merged](https://github.com/Mitronomik/family-food-os/pull/289)); earlier headings describing #289 pending are historical.
@@ -5,6 +15,8 @@
 **Now:** one bounded MealPlan-domain improvement: add a typed, **in-memory NON-PERSISTENT** composition draft with ordered source-pinned RecipeVersion courses, independent member-per-component Decimal Serving factors, and an explicit version-labelled research-only course structure rule. Validate against the actual MealPlan source event, its original RecipeVersion and its at-home participants. The existing #289 actual single-member 3-course lunch now exercises this domain validator. No unknown outside meals; no redistribution of daily energy to fill missing opportunities.
 
 **Constraints:** the current HouseholdMealEvent and legacy Serving schema remain unchanged. This is NOT production multi-component MealPlan, course suitability, physical portion feasibility, full Nutrition, authoritative Shopping, Pantry, or Prep. Frozen historical plan and immutable A/B untouched, AI_ENABLED=false, no schema migration, API/UI or Gate2 changes. Required: exact-head focused tests, Ruff, two independent Planner processes, independent review and separate owner merge decision.
+
+**P2 review updates in current contract PR #291:** independently readable immutable rule snapshot (ordered course requirements with schema/hash and drift rejection), plus a full seven-day new MealPlan revision preserving every unrelated event, serving and accepted pin. Both are explicit blocking runtime acceptance gates; contract still docs-only until independent review/merge.
 
 **Next only after approval:** separate explicitly versioned MealPlan persistence/readback architecture (owner decision required); generic Shopping integration later in its **own** PR.
 
