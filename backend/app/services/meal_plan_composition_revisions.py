@@ -19,6 +19,7 @@ from app.domain.meal_compositions import (
     PersistedMemberComponentServing,
     DraftMealStructureRule,
     validate_composition_draft,
+    assert_complete_revision_preservation,
 )
 from app.domain.meal_plans import (
     MealPlanDetail,
@@ -180,105 +181,3 @@ def make_complete_diagnostic_revision(
     assert_complete_revision_preservation(prior, detail, proposal.event_id)
     return detail
 
-
-def assert_complete_revision_preservation(
-    prior: MealPlanDetail, new: MealPlanDetail, target_prior_event_id: UUID
-) -> None:
-    """Second line of defense for repository and independently reconstructed reads."""
-    if (
-        new.plan.household_id != prior.plan.household_id
-        or new.plan.week_start != prior.plan.week_start
-        or new.plan.revision_number != prior.plan.revision_number + 1
-        or new.plan.supersedes_plan_id != prior.plan.id
-        or new.plan.id == prior.plan.id
-        or new.plan.status is not MealPlanStatus.DRAFT
-        or len(new.events) != len(prior.events)
-        or {pin.member_id: pin.selection_id for pin in new.member_selections}
-        != {pin.member_id: pin.selection_id for pin in prior.member_selections}
-    ):
-        raise MealPlanPersistenceConflictError("New plan must preserve full week and pins.")
-    old_refs = {
-        pin.member_id: replace(pin, plan_id=new.plan.id)
-        for pin in prior.reference_methodology_pins
-    }
-    if {pin.member_id: pin for pin in new.reference_methodology_pins} != old_refs:
-        raise MealPlanPersistenceConflictError("Reference methodology pins changed.")
-    old_slots = {(e.local_date, e.position): e for e in prior.events}
-    new_slots = {(e.local_date, e.position): e for e in new.events}
-    if set(old_slots) != set(new_slots) or len(old_slots) != len(prior.events):
-        raise MealPlanPersistenceConflictError("Missing or repeated source weekly slot.")
-    old_ids = {e.id for e in prior.events}
-    new_ids = {e.id for e in new.events}
-    if old_ids & new_ids:
-        raise MealPlanPersistenceConflictError("A past event id was reused.")
-    old_servings_by_event = {}
-    new_servings_by_event = {}
-    for row in prior.servings:
-        old_servings_by_event.setdefault(row.event_id, {})[row.member_id] = row
-    for row in new.servings:
-        new_servings_by_event.setdefault(row.event_id, {})[row.member_id] = row
-    old_composed = {c.event_id: c for c in prior.compositions}
-    new_composed = {c.event_id: c for c in new.compositions}
-    target_seen = 0
-    for slot, old in old_slots.items():
-        fresh = new_slots[slot]
-        if old.id == target_prior_event_id:
-            target_seen += 1
-            if (
-                old.source_kind is not MealSourceKind.COOK_RECIPE
-                or fresh.source_kind is not MealSourceKind.COOK_COMPOSITION
-                or fresh.recipe_version_id is not None
-                or fresh.source_reference is not None
-                or fresh.id not in new_composed
-                or fresh.id in new_servings_by_event
-                or {s.member_id for s in new_composed[fresh.id].servings}
-                != set(old_servings_by_event.get(old.id, {}))
-            ):
-                raise MealPlanPersistenceConflictError("Target composite meal changed attendance.")
-            continue
-        if (
-            fresh.role != old.role
-            or fresh.source_kind != old.source_kind
-            or fresh.recipe_version_id != old.recipe_version_id
-            or fresh.source_reference != old.source_reference
-        ):
-            raise MealPlanPersistenceConflictError("An unrelated meal was changed.")
-        old_rows = old_servings_by_event.get(old.id, {})
-        new_rows = new_servings_by_event.get(fresh.id, {})
-        if set(old_rows) != set(new_rows) or any(
-            old_rows[mid].portion_servings != new_rows[mid].portion_servings
-            or old_rows[mid].id == new_rows[mid].id
-            for mid in old_rows
-        ):
-            raise MealPlanPersistenceConflictError("An unrelated Serving was changed.")
-        old_comp = old_composed.get(old.id)
-        new_comp = new_composed.get(fresh.id)
-        if (old_comp is None) != (new_comp is None):
-            raise MealPlanPersistenceConflictError("An unrelated composed meal was lost.")
-        if old_comp is not None:
-            if old_comp.rule != new_comp.rule or len(old_comp.components) != len(
-                new_comp.components
-            ):
-                raise MealPlanPersistenceConflictError("Historical course rule changed.")
-            old_components = sorted(old_comp.components, key=lambda c: c.position)
-            fresh_components = sorted(new_comp.components, key=lambda c: c.position)
-            for former, current in zip(old_components, fresh_components):
-                if (
-                    former.id == current.id
-                    or former.position != current.position
-                    or former.course != current.course
-                    or former.recipe_version_id != current.recipe_version_id
-                ):
-                    raise MealPlanPersistenceConflictError("Historical component changed.")
-                old_member_amounts = {
-                    s.member_id: s.portion_servings
-                    for s in old_comp.servings if s.component_id == former.id
-                }
-                fresh_member_amounts = {
-                    s.member_id: s.portion_servings
-                    for s in new_comp.servings if s.component_id == current.id
-                }
-                if old_member_amounts != fresh_member_amounts:
-                    raise MealPlanPersistenceConflictError("Historical component Serving changed.")
-    if target_seen != 1 or len(new_composed) != len(old_composed) + 1:
-        raise MealPlanPersistenceConflictError("Exactly one event must be replaced.")
