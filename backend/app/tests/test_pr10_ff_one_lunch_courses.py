@@ -11,7 +11,7 @@ from uuid import UUID, uuid4
 import pytest
 from app.domain.food_recipes import RightsReviewStatus, VerificationStatus
 from app.domain.meal_patterns import MealRole
-from app.domain.meal_plans import MealSourceKind
+from app.domain.meal_plans import MealPlanDetail, MealSourceKind
 from app.domain.units import UnitCode
 
 from scripts import pr10_ff_one_lunch_courses as lunch
@@ -71,11 +71,19 @@ def _scene():
             ingredients=tuple(ingredients),
         )
     second_id = UUID(by_code[lunch.COURSES[1][1]]["recipe_version_id"])
-    plan = Row(
+    plan_id = uuid4()
+    plan = MealPlanDetail(
+        plan=Row(id=plan_id, week_start=date(2026, 11, 2), revision_number=1),
+        member_selections=tuple(
+            Row(plan_id=plan_id, member_id=mid, selection_id=uuid4())
+            for mid in member_ids.values()
+        ),
         events=(
             Row(
                 id=event_id,
+                plan_id=plan_id,
                 local_date=date(2026, 11, 3),
+                position=1,
                 role=MealRole.LUNCH,
                 source_kind=MealSourceKind.COOK_RECIPE,
                 recipe_version_id=second_id,
@@ -131,6 +139,11 @@ def test_actual_selected_home_lunch_is_one_member_without_filling_missing_meals(
     )
     assert result["physical_serving_approval"] == "NOT_PROVEN"
     assert result["shopping_authority"] == "NONE"
+    assert result["component_domain_structure_review"] == "PASS_NON_PERSISTENT_DRAFT"
+    assert (
+        result["draft_structure_policy_code"]
+        == "DEV_LUNCH_FIRST_SECOND_OPTIONAL_DESSERT"
+    )
     assert result["authoritative_mealplan"] is False
     assert result["gate2_pass"] is False
     report = lunch.render_markdown(result)
@@ -198,7 +211,10 @@ def test_realistic_lunch_prototype_fails_closed_on_untrusted_input(mutation):
     elif mutation == "changed_plan_event":
         s["plan"].events[0].role = MealRole.DINNER
     elif mutation == "extra_plan_serving":
-        s["plan"].servings += (s["plan"].servings[0],)
+        # Mutate the readback shape adversarially after valid domain construction.
+        object.__setattr__(
+            s["plan"], "servings", s["plan"].servings + (s["plan"].servings[0],)
+        )
     elif mutation == "changed_serving_factor":
         s["plan"].servings[0].portion_servings = Decimal("1.000000")
     elif mutation == "wrong_second_recipe":

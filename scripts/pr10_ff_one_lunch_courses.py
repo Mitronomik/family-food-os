@@ -9,6 +9,18 @@ from __future__ import annotations
 from datetime import date
 from decimal import Decimal, localcontext
 
+from app.domain.errors import DomainValidationError
+from app.domain.meal_compositions import (
+    CourseCardinality,
+    DraftMealStructureRule,
+    MealComponentDraft,
+    MealCourseKind,
+    MealEventCompositionDraft,
+    MemberComponentServingDraft,
+    RequiredCourseCoverage,
+    validate_composition_draft,
+)
+from app.domain.meal_patterns import MealRole
 from app.domain.meal_plans import MealSourceKind
 from app.domain.units import UnitCode
 
@@ -192,6 +204,53 @@ def build_lunch(*, plan, member_ordinals, members, candidate_inputs, details, fo
     if set(member["excluded_food_codes"]) & combined:
         raise LunchBlocked("Hard member exclusion would be violated")
 
+    # First domain-level structure: one persisted MealEvent, three distinct
+    # RecipeVersion components and independent member servings. This rule is a
+    # version-labelled research input, NOT a published MealPattern policy.
+    source_event = event.id
+    source_member = current[0].member_id
+    draft = MealEventCompositionDraft(
+        plan_id=plan.plan.id,
+        event_id=source_event,
+        components=tuple(
+            MealComponentDraft(
+                event_id=source_event,
+                position=position,
+                course=(
+                    MealCourseKind.DESSERT
+                    if course == "DESSERT_STUDY"
+                    else MealCourseKind(course)
+                ),
+                recipe_version_id=detail_codes[code].version.id,
+            )
+            for position, (course, code, _) in enumerate(COURSES, 1)
+        ),
+        servings=tuple(
+            MemberComponentServingDraft(
+                event_id=source_event,
+                component_position=position,
+                member_id=source_member,
+                portion_servings=factor,
+            )
+            for position, (_, _, factor) in enumerate(COURSES, 1)
+        ),
+    )
+    draft_structure = DraftMealStructureRule(
+        code="DEV_LUNCH_FIRST_SECOND_OPTIONAL_DESSERT",
+        version=1,
+        meal_role=MealRole.LUNCH,
+        requirements=(
+            CourseCardinality(MealCourseKind.FIRST, 1, 1),
+            CourseCardinality(MealCourseKind.SECOND, 1, 1),
+            CourseCardinality(MealCourseKind.DESSERT, 0, 1),
+        ),
+        coverage=RequiredCourseCoverage.PER_PARTICIPANT,
+    )
+    try:
+        validate_composition_draft(draft, plan, draft_structure)
+    except DomainValidationError as exc:
+        raise LunchBlocked("Invalid source-bound MealPlan composition draft") from exc
+
     reference = _decimal(member["reference_energy_kcal"], "reference energy")
     share = _decimal(opportunity["energy_share"], "accepted lunch share")
     target = reference * share
@@ -225,6 +284,9 @@ def build_lunch(*, plan, member_ordinals, members, candidate_inputs, details, fo
         "reference_allocated_share": format(share, "f"),
         "planned_daily_share": format(daily_share, "f"),
         "courses": components,
+        "component_domain_structure_review": "PASS_NON_PERSISTENT_DRAFT",
+        "draft_structure_policy_code": draft_structure.code,
+        "source_plan_revision_number": plan.plan.revision_number,
         "hypothetical_energy_only_kcal": format(computed, ".6f"),
         "reference_alignment_delta_kcal": format(delta, ".6f"),
         "delta_is_not_deficit_or_reallocation": True,
@@ -246,6 +308,10 @@ def render_markdown(result):
         or result.get("dessert_course_approval") != "NOT_PROVEN"
         or result.get("authoritative_mealplan") is not False
         or result.get("shopping_authority") != "NONE"
+        or result.get("component_domain_structure_review")
+        != "PASS_NON_PERSISTENT_DRAFT"
+        or result.get("draft_structure_policy_code")
+        != "DEV_LUNCH_FIRST_SECOND_OPTIONAL_DESSERT"
         or result.get("gate2_pass") is not False
         or result.get("home_participant_ordinals") != [1]
         or len(result.get("courses", [])) != 3

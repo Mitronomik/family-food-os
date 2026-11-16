@@ -8,6 +8,7 @@ on:
       - 'scripts/pr10_ff_portion_reality.py'
       - 'scripts/pr10_ff_one_soup_case.py'
       - 'scripts/pr10_ff_one_lunch_courses.py'
+      - 'backend/app/domain/meal_compositions.py'
       - 'scripts/pr10_ff_week_preview.py'
       - 'scripts/pr10_ff_mobile_preview.py'
       - 'scripts/test_pr10_ff_water_choice.js'
@@ -16,6 +17,7 @@ on:
       - 'backend/app/tests/test_pr10_ff_portion_reality.py'
       - 'backend/app/tests/test_pr10_ff_one_soup_case.py'
       - 'backend/app/tests/test_pr10_ff_one_lunch_courses.py'
+      - 'backend/app/tests/test_meal_compositions.py'
       - 'backend/app/tests/test_pr10_ff_week_preview.py'
       - 'backend/app/tests/test_pr10_ff_mobile_preview.py'
       - 'backend/app/tests/test_pr10_ff_shopping_origins.py'
@@ -39,13 +41,13 @@ jobs:
       - name: Focused unit tests
         env:
           PYTHONPATH: backend:.
-        run: python -m pytest -q backend/app/tests/test_pr10_ff_two_process_proof.py backend/app/tests/test_pr10_ff_week_preview.py backend/app/tests/test_pr10_ff_mobile_preview.py backend/app/tests/test_pr10_ff_shopping_origins.py backend/app/tests/test_pr10_ff_portion_reality.py backend/app/tests/test_pr10_ff_one_soup_case.py backend/app/tests/test_pr10_ff_one_lunch_courses.py
+        run: python -m pytest -q backend/app/tests/test_pr10_ff_two_process_proof.py backend/app/tests/test_pr10_ff_week_preview.py backend/app/tests/test_pr10_ff_mobile_preview.py backend/app/tests/test_pr10_ff_shopping_origins.py backend/app/tests/test_pr10_ff_portion_reality.py backend/app/tests/test_pr10_ff_one_soup_case.py backend/app/tests/test_pr10_ff_one_lunch_courses.py backend/app/tests/test_meal_compositions.py
       - name: Ruff format diagnostic diff
-        run: ruff format --diff scripts/pr10_ff_two_process_proof.py scripts/pr10_ff_proof_evidence.py scripts/pr10_ff_one_lunch_courses.py scripts/pr10_ff_one_soup_case.py scripts/pr10_ff_portion_reality.py scripts/pr10_ff_week_preview.py scripts/pr10_ff_mobile_preview.py scripts/pr10_ff_shopping_origins.py backend/app/tests/test_pr10_ff_two_process_proof.py backend/app/tests/test_pr10_ff_week_preview.py backend/app/tests/test_pr10_ff_mobile_preview.py backend/app/tests/test_pr10_ff_shopping_origins.py backend/app/tests/test_pr10_ff_portion_reality.py backend/app/tests/test_pr10_ff_one_soup_case.py backend/app/tests/test_pr10_ff_one_lunch_courses.py
+        run: ruff format --diff scripts/pr10_ff_two_process_proof.py scripts/pr10_ff_proof_evidence.py scripts/pr10_ff_one_lunch_courses.py scripts/pr10_ff_one_soup_case.py scripts/pr10_ff_portion_reality.py scripts/pr10_ff_week_preview.py scripts/pr10_ff_mobile_preview.py scripts/pr10_ff_shopping_origins.py backend/app/tests/test_pr10_ff_two_process_proof.py backend/app/tests/test_pr10_ff_week_preview.py backend/app/tests/test_pr10_ff_mobile_preview.py backend/app/tests/test_pr10_ff_shopping_origins.py backend/app/tests/test_pr10_ff_portion_reality.py backend/app/tests/test_pr10_ff_one_soup_case.py backend/app/tests/test_pr10_ff_one_lunch_courses.py backend/app/domain/meal_compositions.py backend/app/tests/test_meal_compositions.py
       - name: Ruff lint and format
         run: |
-          ruff check scripts/pr10_ff_two_process_proof.py scripts/pr10_ff_proof_evidence.py scripts/pr10_ff_one_lunch_courses.py scripts/pr10_ff_one_soup_case.py scripts/pr10_ff_portion_reality.py scripts/pr10_ff_week_preview.py scripts/pr10_ff_mobile_preview.py scripts/pr10_ff_shopping_origins.py backend/app/tests/test_pr10_ff_two_process_proof.py backend/app/tests/test_pr10_ff_week_preview.py backend/app/tests/test_pr10_ff_mobile_preview.py backend/app/tests/test_pr10_ff_shopping_origins.py backend/app/tests/test_pr10_ff_portion_reality.py backend/app/tests/test_pr10_ff_one_soup_case.py backend/app/tests/test_pr10_ff_one_lunch_courses.py
-          ruff format --check scripts/pr10_ff_two_process_proof.py scripts/pr10_ff_proof_evidence.py scripts/pr10_ff_one_lunch_courses.py scripts/pr10_ff_one_soup_case.py scripts/pr10_ff_portion_reality.py scripts/pr10_ff_week_preview.py scripts/pr10_ff_mobile_preview.py scripts/pr10_ff_shopping_origins.py backend/app/tests/test_pr10_ff_two_process_proof.py backend/app/tests/test_pr10_ff_week_preview.py backend/app/tests/test_pr10_ff_mobile_preview.py backend/app/tests/test_pr10_ff_shopping_origins.py backend/app/tests/test_pr10_ff_portion_reality.py backend/app/tests/test_pr10_ff_one_soup_case.py backend/app/tests/test_pr10_ff_one_lunch_courses.py
+          ruff check scripts/pr10_ff_two_process_proof.py scripts/pr10_ff_proof_evidence.py scripts/pr10_ff_one_lunch_courses.py scripts/pr10_ff_one_soup_case.py scripts/pr10_ff_portion_reality.py scripts/pr10_ff_week_preview.py scripts/pr10_ff_mobile_preview.py scripts/pr10_ff_shopping_origins.py backend/app/tests/test_pr10_ff_two_process_proof.py backend/app/tests/test_pr10_ff_week_preview.py backend/app/tests/test_pr10_ff_mobile_preview.py backend/app/tests/test_pr10_ff_shopping_origins.py backend/app/tests/test_pr10_ff_portion_reality.py backend/app/tests/test_pr10_ff_one_soup_case.py backend/app/tests/test_pr10_ff_one_lunch_courses.py backend/app/domain/meal_compositions.py backend/app/tests/test_meal_compositions.py
+          ruff format --check scripts/pr10_ff_two_process_proof.py scripts/pr10_ff_proof_evidence.py scripts/pr10_ff_one_lunch_courses.py scripts/pr10_ff_one_soup_case.py scripts/pr10_ff_portion_reality.py scripts/pr10_ff_week_preview.py scripts/pr10_ff_mobile_preview.py scripts/pr10_ff_shopping_origins.py backend/app/tests/test_pr10_ff_two_process_proof.py backend/app/tests/test_pr10_ff_week_preview.py backend/app/tests/test_pr10_ff_mobile_preview.py backend/app/tests/test_pr10_ff_shopping_origins.py backend/app/tests/test_pr10_ff_portion_reality.py backend/app/tests/test_pr10_ff_one_soup_case.py backend/app/tests/test_pr10_ff_one_lunch_courses.py backend/app/domain/meal_compositions.py backend/app/tests/test_meal_compositions.py
       - name: One-shot independent processes (no reroll)
         env:
           PYTHONPATH: backend:.

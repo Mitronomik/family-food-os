@@ -1,3 +1,15 @@
+# CURRENT — non-persisted multi-course MealPlan draft, after merged #289 — 2026-11-16
+
+**Accepted main:** c364eb3f5241bb0b7a3af97108ebe1c5d6f0c448 ([PR #289 merged](https://github.com/Mitronomik/family-food-os/pull/289)); earlier headings describing #289 pending are historical.
+
+**Now:** one bounded MealPlan-domain improvement: add a typed, **in-memory NON-PERSISTENT** composition draft with ordered source-pinned RecipeVersion courses, independent member-per-component Decimal Serving factors, and an explicit version-labelled research-only course structure rule. Validate against the actual MealPlan source event, its original RecipeVersion and its at-home participants. The existing #289 actual single-member 3-course lunch now exercises this domain validator. No unknown outside meals; no redistribution of daily energy to fill missing opportunities.
+
+**Constraints:** the current HouseholdMealEvent and legacy Serving schema remain unchanged. This is NOT production multi-component MealPlan, course suitability, physical portion feasibility, full Nutrition, authoritative Shopping, Pantry, or Prep. Frozen historical plan and immutable A/B untouched, AI_ENABLED=false, no schema migration, API/UI or Gate2 changes. Required: exact-head focused tests, Ruff, two independent Planner processes, independent review and separate owner merge decision.
+
+**Next only after approval:** separate explicitly versioned MealPlan persistence/readback architecture (owner decision required); generic Shopping integration later in its **own** PR.
+
+---
+
 # CURRENT — one actual home lunch composed from 3 existing source recipes — 2026-11-13
 
 **Accepted main:** `459995c4f7e34aa9bdcd5d32106b421b0a8b31fb` after [#288 merged](https://github.com/Mitronomik/family-food-os/pull/288); earlier focus below is historical. Owner's most recent approved **product direction**: a role-specific meal structure (light one-dish breakfast, light snack, first+second+optional light dessert lunch, single-dish dinner) and member-specific *partial* at-home schedules; unknown meals outside the household are not generated/tracked. Meal-role defaults are proposed product rules, not clinical standards or blanket portions. Existing accepted `energy_share` applies only to explicitly selected opportunities; **never fill daily kcal through larger home portions.**
