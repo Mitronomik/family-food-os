@@ -1,3 +1,9 @@
+# 2026-11-16 — MealPlan component persistence PR after merged contract gate #291
+
+Accepted `main@4f2a1fbc4b14e336b1bbb44d19183301f0798113`. User authorized MealPlan implementation separately from Shopping; reviewed merged contract requires immutable full ordered rule snapshot + canonical SHA replay and complete seven-day revision retaining all non-target slots, Serving factors and pins. Runtime branch `feat/mealplan-composition-persistence-v1` adds 0044 FK rebuild/new immutable child tables, explicit new source and typed readback, internal-only composition writer behind a **default-off** UoW flag, draft-only complete-week constructor and diagnostic source exclusion checks, migration/integration tests. Do not expose a new composed revision to operational `get_current()` callers until Shopping/consumer activation policy is accepted. Old Shopping must fail closed. Full backend+launcher CI and two-process frozen week are required. Review/owner merge separately; no downstream Shopping PR before this is accepted.
+
+---
+
 # 2026-11-16 — P2 corrections for docs-only MealPlan persistence gate
 
 PR #291 contract review raised two P2 blockers. Within the **same contract PR**, choose a versioned immutable course-rule **snapshot** (ordered requirements min/max/coverage, schema/hash, strict new-process replay and same code/version drift rejection). Define new revision as the **full prior seven-day plan**, with new plan/event/Serving IDs, exact copied member/pattern/reference pins, source facts and portions for every unaffected meal; replace only one lunch with component Servings. If a prior revision already contains another composed event, copy its full rule/components/servings or fail closed. Neither rule-snapshot replay nor full-week migration tests are implemented in the docs-only gate; both are hard acceptance for the *later* separately authorized runtime PR. No Shopping activation.
