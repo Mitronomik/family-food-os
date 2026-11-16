@@ -1,3 +1,12 @@
+# 2026-11-16 — #291 merged; implementation of MealPlan 0044 underway
+
+- Contract gate [#291](https://github.com/Mitronomik/family-food-os/pull/291) merged as `main@4f2a1fbc4b14e336b1bbb44d19183301f0798113`.
+- Implementing exactly MealPlan persistence: append 0044, full weekly immutable revision with independent member-component Servings and complete rule snapshot, typed household-scoped UoW readback. No application/API/consumer writer is enabled by default, no physical portion or recipe-role PASS.
+- Shopping remains **separate later PR**; old Shopping must not count primary-only recipe or generate an incomplete basket for composed events.
+- Verify fresh/replay migration and crash rollback, semantic old-week preservation, exact-head broad tests, then independent review; stop before merge.
+
+---
+
 # 2026-11-16 — PR #291 review P2s resolved in docs gate (not yet merged)
 
 - P2: require immutable **complete** course rule snapshot, canonical JSON, schema version, digest, readback in a different process and rejection of same code/version content drift.
