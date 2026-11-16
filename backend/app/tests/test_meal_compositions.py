@@ -15,6 +15,7 @@ from app.domain.meal_compositions import (
     MealCourseKind,
     MealEventCompositionDraft,
     MemberComponentServingDraft,
+    RequiredCourseCoverage,
     validate_composition_draft,
 )
 from app.domain.meal_patterns import MealRole
@@ -113,6 +114,7 @@ def _lunch_rule():
             CourseCardinality(MealCourseKind.SECOND, 1, 1),
             CourseCardinality(MealCourseKind.DESSERT, 0, 1),
         ),
+        coverage=RequiredCourseCoverage.PER_PARTICIPANT,
     )
 
 
@@ -158,6 +160,7 @@ def test_breakfast_or_dinner_can_each_use_single_course_without_lunch_policy():
             version=1,
             meal_role=role,
             requirements=(CourseCardinality(MealCourseKind.MAIN, 1, 1),),
+            coverage=RequiredCourseCoverage.PER_PARTICIPANT,
         )
         assert validate_composition_draft(draft, original, rule) is None
         with pytest.raises(DomainValidationError):
@@ -256,6 +259,7 @@ def test_proposal_rejects_invalid_source_or_partial_schedule(mutation):
                     CourseCardinality(MealCourseKind.FIRST, 1, 1),
                     CourseCardinality(MealCourseKind.SECOND, 1, 1),
                 ),
+                coverage=RequiredCourseCoverage.PER_PARTICIPANT,
             )
         elif mutation == "missing_second":
             draft = replace(
@@ -290,7 +294,9 @@ def test_member_component_serving_requires_supported_decimal(amount):
 def test_missing_or_duplicate_rule_does_not_silently_choose_default_structure():
     with pytest.raises(DomainValidationError):
         DraftMealStructureRule(
-            "", 1, MealRole.LUNCH, (CourseCardinality(MealCourseKind.FIRST, 1, 1),)
+            "", 1, MealRole.LUNCH,
+            (CourseCardinality(MealCourseKind.FIRST, 1, 1),),
+            RequiredCourseCoverage.PER_PARTICIPANT,
         )
     with pytest.raises(DomainValidationError):
         DraftMealStructureRule(
@@ -301,4 +307,5 @@ def test_missing_or_duplicate_rule_does_not_silently_choose_default_structure():
                 CourseCardinality(MealCourseKind.FIRST, 1, 1),
                 CourseCardinality(MealCourseKind.FIRST, 0, 1),
             ),
+            RequiredCourseCoverage.PER_PARTICIPANT,
         )
