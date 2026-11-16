@@ -9,26 +9,30 @@ from sqlalchemy import insert, select
 from sqlalchemy.engine import Connection
 from sqlalchemy.exc import DBAPIError, IntegrityError, OperationalError
 
+from app.domain.errors import DomainValidationError
 from app.domain.meal_compositions import (
     COMPOSITION_ADMISSION,
     PersistedMealComponent,
     PersistedMealEventComposition,
     PersistedMemberComponentServing,
+    assert_complete_revision_preservation,
     restore_rule_snapshot,
     rule_snapshot_digest,
     serialized_requirements,
-    assert_complete_revision_preservation,
 )
 from app.domain.meal_plans import (
     HouseholdMealEvent,
     MealPlan,
     MealPlanDetail,
+    MealPlanStatus,
+    MealSourceKind,
     MealPlanMemberReferenceMethodologyPin,
     MealPlanMemberSelection,
     MemberMealPatternOpportunitySnapshot,
     MemberMealPatternSelection,
     MemberMealPatternSelectionDetail,
     Serving,
+    validate_complete_plan,
 )
 from app.persistence.sqlalchemy_core.food_ingredient_tables import food_ingredients_table
 from app.persistence.sqlalchemy_core.food_recipe_tables import (
@@ -59,8 +63,6 @@ from app.services.meal_plan_contracts import (
     MealPlanPersistenceConflictError,
     MealPlanPersistenceError,
 )
-from app.domain.meal_plans import validate_complete_plan
-from app.domain.errors import DomainValidationError
 
 
 class SqlAlchemyMemberMealPatternSelectionRepository:
