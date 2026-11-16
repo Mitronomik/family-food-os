@@ -145,6 +145,79 @@ def test_desert_is_optional_and_guest_can_skip_one_component():
     assert validate_composition_draft(no_dessert, original, _lunch_rule()) is None
 
 
+@pytest.mark.parametrize(
+    "distribution",
+    [
+        "split_first_second_across_people",
+        "second_member_receives_only_first",
+        "second_member_receives_only_second",
+    ],
+)
+def test_mandatory_lunch_courses_cannot_be_divided_between_two_members(distribution):
+    """Counterexample: event-wide FIRST+SECOND is not a complete member lunch."""
+    original, people, recipes = _case(members=2)
+    draft = _lunch_draft(original, people, recipes)
+    event_id = draft.event_id
+    first_for_second = MemberComponentServingDraft(
+        event_id, 1, people[1], Decimal("1.000000")
+    )
+    second_for_second = MemberComponentServingDraft(
+        event_id, 2, people[1], Decimal("1.000000")
+    )
+    if distribution == "split_first_second_across_people":
+        # FIRST -> #1, SECOND -> #2, optional DESSERT -> #1.
+        # All event-level minima, source membership and component coverage pass.
+        servings = tuple(s for s in draft.servings if s.component_position != 2)
+        servings += (second_for_second,)
+    elif distribution == "second_member_receives_only_first":
+        servings = draft.servings + (first_for_second,)
+    else:
+        servings = draft.servings + (second_for_second,)
+    draft = replace(draft, servings=servings)
+    assert {serving.member_id for serving in draft.servings} == set(people)
+    assert {
+        draft.components[serving.component_position - 1].course
+        for serving in draft.servings
+    } == {MealCourseKind.FIRST, MealCourseKind.SECOND, MealCourseKind.DESSERT}
+    assert {serving.component_position for serving in draft.servings} == {1, 2, 3}
+
+    with pytest.raises(DomainValidationError, match="missing a required course"):
+        validate_composition_draft(draft, original, _lunch_rule())
+
+
+def test_explicit_event_only_coverage_does_not_claim_per_member_completeness():
+    original, people, recipes = _case(members=2)
+    draft = _lunch_draft(original, people, recipes)
+    draft = replace(
+        draft,
+        servings=tuple(s for s in draft.servings if s.component_position != 2)
+        + (
+            MemberComponentServingDraft(
+                draft.event_id, 2, people[1], Decimal("1.000000")
+            ),
+        ),
+    )
+    event_rule = replace(_lunch_rule(), coverage=RequiredCourseCoverage.EVENT)
+    # EVENT means event-wide cardinalities ONLY, not a valid lunch for each person.
+    assert validate_composition_draft(draft, original, event_rule) is None
+    with pytest.raises(DomainValidationError, match="missing a required course"):
+        validate_composition_draft(draft, original, _lunch_rule())
+
+
+def test_required_course_coverage_must_be_explicit_and_valid():
+    rule = _lunch_rule()
+    assert rule.coverage is RequiredCourseCoverage.PER_PARTICIPANT
+    with pytest.raises(DomainValidationError, match="coverage"):
+        replace(rule, coverage="UNREVIEWED")
+    with pytest.raises(TypeError):
+        DraftMealStructureRule(
+            code="INCOMPLETE_POLICY",
+            version=1,
+            meal_role=MealRole.LUNCH,
+            requirements=rule.requirements,
+        )
+
+
 def test_breakfast_or_dinner_can_each_use_single_course_without_lunch_policy():
     for role in (MealRole.BREAKFAST, MealRole.DINNER):
         original, people, (_, recipe_id, _) = _case(role=role)
