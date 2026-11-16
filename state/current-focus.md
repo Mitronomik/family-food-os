@@ -1,3 +1,13 @@
+# CURRENT — MealPlan 0044 composition persistence, after merged #291 — 2026-11-16
+
+**Accepted main:** `4f2a1fbc4b14e336b1bbb44d19183301f0798113` ([PR #291 merged](https://github.com/Mitronomik/family-food-os/pull/291)). The reviewed, approved [MealPlan persistence implementation contract](../docs/family-food/mealplan-multicourse-persistence-implementation-contract-2026-11-16.md) requires full seven-day revisions and immutable complete course-rule snapshots, no partial meal drafts.
+
+**Current bounded runtime PR:** append only migration `0044_meal_plan_components`, add source kind `COOK_COMPOSITION` with NULL parent recipe and *no fake legacy Serving*, typed immutable rule header/components/member-component Servings, internal developer-only UoW writer default-denied in production composition, source validation and complete-week copy, readback through new DB session. Existing frozen legacy week and Shopping calculation unchanged. New composed DRAFT is NOT authorized for operational households, consumer UI/Planner, Nutrition or Shopping: old Shopping fails closed. Required full backend + launcher/SQLite fault and process tests before owner merge.
+
+**Next separately:** Shopping component-aware demand with provenance, no duplicate ingredient purchase and its own code PR + review. Never merge or promote real-family/Prep/Gate2 autonomously.
+
+---
+
 # CURRENT — Implementation Contract Gate: versioned multi-course MealPlan persistence — 2026-11-16
 
 **Accepted main:** `e32ae5ef07937ed4ef545e7f9d77801a6757f7b9` ([#290 merged](https://github.com/Mitronomik/family-food-os/pull/290)). Earlier headings below are historical. Owner requested separately versioned MealPlan component persistence with backward compatibility, then Shopping component-demand in its own PR.
