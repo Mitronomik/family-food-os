@@ -164,7 +164,7 @@ def test_populated_0032_database_upgrades_without_rewriting_profiles_or_vectors(
               AND name = 'food_composition_versions_complete'
             """
         ).fetchone()[0]
-    assert history[-10:] == [
+    assert history[-11:] == [
         MIGRATION_ID,
         "0035_versioned_nutrient_registry",
         "0036_member_reference_methodology_selection",
