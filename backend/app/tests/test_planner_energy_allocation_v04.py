@@ -302,6 +302,7 @@ def test_0041_upgrade_preserves_history_triggers_and_rolls_back_mid_migration(
         "0041_meal_pattern_energy_allocation",
         "0042_recipe_prepared_output_nutrition",
         "0043_shopping_engine",
+        "0044_meal_plan_components",
     ]
     with sqlite3.connect(config.path) as db:
         assert db.execute(
