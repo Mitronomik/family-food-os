@@ -4,7 +4,6 @@ from types import SimpleNamespace
 from uuid import uuid4
 
 import pytest
-
 from app.db import migrations
 from app.db.config import DatabaseConfig
 from app.domain.food_recipes import MealTypeCode, RightsReviewStatus, VerificationStatus
