@@ -12,15 +12,14 @@ import sys
 from dataclasses import replace
 from datetime import UTC, date, datetime, timedelta
 from decimal import Decimal
-from pathlib import Path
 from uuid import uuid4
 
 import pytest
 
 from app.db.config import DatabaseConfig
 from app.db.migrations import apply_migrations
+from app.domain.errors import DomainValidationError
 from app.domain.meal_patterns import MealRole
-from app.domain.shopping_calculation import ShoppingCalculationError
 from app.domain.meal_plans import (
     HouseholdMealEvent,
     MealPlan,
@@ -32,6 +31,7 @@ from app.domain.meal_plans import (
     MemberMealPatternOpportunitySnapshot,
     Serving,
 )
+from app.domain.shopping_calculation import ShoppingCalculationError
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.meal_plan_uow import (
     SqlAlchemyMealPlanReadScope,
@@ -316,10 +316,10 @@ finally:
 
 
 def test_p2_truncated_new_revision_fails_before_any_write(tmp_path):
-    config, engine, home, people, old, recipes, selections = _week_21_42(tmp_path)
+    _, engine, home, people, old, recipes, selections = _week_21_42(tmp_path)
     try:
         changed = _compose(old, people[:1], recipes, selections, target_index=4)
-        with pytest.raises(Exception):
+        with pytest.raises(DomainValidationError):
             replace(
                 changed,
                 events=tuple(
