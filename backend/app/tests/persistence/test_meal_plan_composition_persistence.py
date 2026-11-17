@@ -294,8 +294,11 @@ def test_rule_drift_and_injected_component_failure_leave_current_unchanged(tmp_p
             requirements=(
                 CourseCardinality(MealCourseKind.FIRST, 1, 1),
                 CourseCardinality(MealCourseKind.SECOND, 1, 1),
+                CourseCardinality(MealCourseKind.DESSERT, 0, 2),
             ),
         )
+        # Both definitions accept the proposal, but the same rule code/version
+        # cannot be rebound to a different immutable requirements snapshot.
         changed = _compose(
             current, people, recipes, accepted, rule=altered_rule, target_index=2
         )
