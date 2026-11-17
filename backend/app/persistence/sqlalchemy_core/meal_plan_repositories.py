@@ -211,11 +211,27 @@ class SqlAlchemyMealPlanRepository:
     def add_detail(
         self, detail: MealPlanDetail, *, _diagnostic_composition: bool = False
     ) -> None:
-        if detail.compositions and not (
+        composite_ids = {
+            event.id for event in detail.events
+            if event.source_kind is MealSourceKind.COOK_COMPOSITION
+        }
+        registered_ids = {composition.event_id for composition in detail.compositions}
+        if composite_ids != registered_ids:
+            raise MealPlanPersistenceConflictError(
+                "Each COOK_COMPOSITION event must have exactly one typed composition."
+            )
+        if composite_ids and not (
             _diagnostic_composition and self._allow_composition_write
         ):
             raise MealPlanPersistenceConflictError(
                 "Only the explicitly enabled internal diagnostic writer may save a composite."
+            )
+        if composite_ids and (
+            detail.plan.status is not MealPlanStatus.DRAFT
+            or any(serving.event_id in composite_ids for serving in detail.servings)
+        ):
+            raise MealPlanPersistenceConflictError(
+                "Composed events must be DRAFT and cannot carry legacy Servings."
             )
         plan = detail.plan
         for pin in detail.member_selections:
