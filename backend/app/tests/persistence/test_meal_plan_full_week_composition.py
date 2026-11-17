@@ -6,6 +6,7 @@ the event being replaced is composed. It is not a substitute for the existing
 separately verified production 2-process Planner semantic receipt.
 """
 
+import sqlite3
 import subprocess
 import sys
 from dataclasses import replace
@@ -43,10 +44,10 @@ from app.persistence.sqlalchemy_core.shopping_uow import (
     SqlAlchemyShoppingReadScope,
     SqlAlchemyShoppingUnitOfWork,
 )
-from app.services.shopping import ShoppingService
 from app.services.meal_plan_composition_revisions import (
     assert_complete_revision_preservation,
 )
+from app.services.shopping import ShoppingService
 from app.tests.persistence.test_meal_plan_composition_persistence import (
     _compose,
     _source_recipes,
@@ -258,8 +259,6 @@ def test_p2_full_persisted_21_event_42_serving_week_survives_one_lunch_edit(tmp_
         )
         with pytest.raises(ShoppingCalculationError, match="привязка"):
             old_shopping.generate(home.id, changed.plan.id)
-        import sqlite3
-
         with sqlite3.connect(config.path) as db:
             assert db.execute("SELECT count(*) FROM shopping_lists").fetchone() == (0,)
         with SqlAlchemyMealPlanReadScope(engine) as scope:
