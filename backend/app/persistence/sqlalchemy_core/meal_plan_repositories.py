@@ -24,17 +24,19 @@ from app.domain.meal_plans import (
     HouseholdMealEvent,
     MealPlan,
     MealPlanDetail,
-    MealPlanStatus,
-    MealSourceKind,
     MealPlanMemberReferenceMethodologyPin,
     MealPlanMemberSelection,
+    MealPlanStatus,
+    MealSourceKind,
     MemberMealPatternOpportunitySnapshot,
     MemberMealPatternSelection,
     MemberMealPatternSelectionDetail,
     Serving,
     validate_complete_plan,
 )
-from app.persistence.sqlalchemy_core.food_ingredient_tables import food_ingredients_table
+from app.persistence.sqlalchemy_core.food_ingredient_tables import (
+    food_ingredients_table,
+)
 from app.persistence.sqlalchemy_core.food_recipe_tables import (
     food_recipe_ingredients_table,
     food_recipe_versions_table,
