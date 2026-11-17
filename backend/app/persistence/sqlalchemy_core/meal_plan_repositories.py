@@ -750,6 +750,15 @@ class SqlAlchemyMealPlanRepository:
                     if ids
                     else []
                 )
+                # Replay canonical course order, not random component UUID order.
+                component_positions = {part.id: part.position for part in components}
+                raw_servings = sorted(
+                    raw_servings,
+                    key=lambda item: (
+                        component_positions[item["component_id"]],
+                        item["member_id"].hex,
+                    ),
+                )
                 result.append(
                     PersistedMealEventComposition(
                         event_id=header["event_id"],
