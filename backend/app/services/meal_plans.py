@@ -279,6 +279,15 @@ class MealPlanService:
         status: MealPlanStatus = MealPlanStatus.CONFIRMED,
         config_version: str = "manual-v1",
     ) -> MealPlanDetail:
+        # Public/manual MealPlanService has no authority to create diagnostic
+        # composed events; only the dedicated internal writer can do that.
+        if any(
+            event.source_kind == MealSourceKind.COOK_COMPOSITION
+            for event in events
+        ):
+            raise MealPlanValidationError(
+                "COOK_COMPOSITION cannot be created through standard MealPlanService."
+            )
         with self._household_read_scope_factory() as scope:
             if scope.households.get_household(household_id) is None:
                 raise MealPlanValidationError("Household was not found.")
