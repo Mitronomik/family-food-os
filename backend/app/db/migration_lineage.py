@@ -26,9 +26,9 @@ new migration added there is picked up here with no second list to update.
 
 from __future__ import annotations
 
+import sqlite3
 from dataclasses import dataclass
 from typing import Literal
-import sqlite3
 
 from app.db.migrations import MIGRATION_TABLE, expected_migration_ids
 from app.identity import WORKSPACE_SOURCE, WORKSPACE_SOURCE_SETTING_KEY
