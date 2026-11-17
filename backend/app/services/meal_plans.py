@@ -8,7 +8,11 @@ from uuid import UUID, uuid4
 from zoneinfo import ZoneInfo
 
 from app.domain.households import HouseholdMember
-from app.domain.meal_patterns import MealPatternEligibilityQuery, MealRole, detail_is_eligible
+from app.domain.meal_patterns import (
+    MealPatternEligibilityQuery,
+    MealRole,
+    detail_is_eligible,
+)
 from app.domain.meal_plans import (
     HouseholdMealEvent,
     MealPlan,
