@@ -180,4 +180,3 @@ def make_complete_diagnostic_revision(
     validate_complete_plan(detail, selection_details)
     assert_complete_revision_preservation(prior, detail, proposal.event_id)
     return detail
-
