@@ -97,15 +97,18 @@ def _service(engine, instant=NOW):
 def test_migration_0043_fresh_upgrade_and_lineage(tmp_path):
     config = DatabaseConfig(path=tmp_path / "upgrade.sqlite")
     original = list(MIGRATION_MODULES)
-    assert original[-1] == "app.migrations.versions.0043_shopping_engine"
+    shopping_index = original.index("app.migrations.versions.0043_shopping_engine")
+    assert shopping_index > 0
+    # Test 0043 independently even when a later 0044 migration is registered.
     try:
-        MIGRATION_MODULES[:] = original[:-1]
+        MIGRATION_MODULES[:] = original[:shopping_index]
         assert apply_migrations(config)[-1] == "0042_recipe_prepared_output_nutrition"
+        MIGRATION_MODULES[:] = original[: shopping_index + 1]
+        assert apply_migrations(config) == ["0043_shopping_engine"]
+        assert apply_migrations(config) == []
+        assert expected_migration_ids()[-1] == "0043_shopping_engine"
     finally:
         MIGRATION_MODULES[:] = original
-    assert apply_migrations(config) == ["0043_shopping_engine"]
-    assert apply_migrations(config) == []
-    assert expected_migration_ids()[-1] == "0043_shopping_engine"
     with sqlite3.connect(config.path) as conn:
         for table in (
             "shopping_lists",
@@ -583,11 +586,14 @@ def test_0043_failure_rolls_back_tables_and_marker(tmp_path, monkeypatch):
 
     config = DatabaseConfig(path=tmp_path / "migration-failure.sqlite")
     original = list(MIGRATION_MODULES)
+    shopping_index = original.index("app.migrations.versions.0043_shopping_engine")
     try:
-        MIGRATION_MODULES[:] = original[:-1]
+        MIGRATION_MODULES[:] = original[:shopping_index]
         apply_migrations(config)
-    finally:
+        MIGRATION_MODULES[:] = original[: shopping_index + 1]
+    except Exception:
         MIGRATION_MODULES[:] = original
+        raise
     module = import_module("app.migrations.versions.0043_shopping_engine")
     upgrade = module.upgrade
 
