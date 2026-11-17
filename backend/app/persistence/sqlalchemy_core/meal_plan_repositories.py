@@ -626,6 +626,13 @@ class SqlAlchemyMealPlanRepository:
                     .mappings()
                     .all()
                 )
+                if any(
+                    not _valid_allergen_code(row["allergen_code"])
+                    for row in allergen_rows
+                ):
+                    raise MealPlanPersistenceConflictError(
+                        "Component ingredient allergen catalogue contains invalid codes."
+                    )
                 present_allergens = {row["allergen_code"] for row in allergen_rows}
                 for serving in comp.servings:
                     if serving.component_id != part.id:

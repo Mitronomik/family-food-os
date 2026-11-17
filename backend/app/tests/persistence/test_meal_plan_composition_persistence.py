@@ -534,6 +534,32 @@ def test_p2_allergen_code_is_distinct_from_food_code_and_blocks_member(tmp_path)
         engine.dispose()
 
 
+def test_p2_malformed_catalogue_allergen_codes_fail_closed(tmp_path):
+    config, engine, home, people, prior, recipes, accepted = _setup(tmp_path)
+    try:
+        draft = _compose(prior, people, recipes, accepted)
+        # SQLite only checks nonblank codes, unlike domain normalization.
+        # No case-insensitive auto-repair may hide unreviewed catalogue data.
+        with sqlite3.connect(config.path) as db:
+            food_id = db.execute(
+                "SELECT id FROM food_ingredients WHERE canonical_code='TEST_POTATO'"
+            ).fetchone()[0]
+            db.execute(
+                "INSERT INTO food_ingredient_allergens "
+                "(food_ingredient_id, allergen_code, created_at) "
+                "VALUES (?, 'milk', CURRENT_TIMESTAMP)",
+                (food_id,),
+            )
+        with pytest.raises(MealPlanPersistenceConflictError, match="invalid codes"):
+            _write(engine, draft, people, excluded_allergens={
+                people[0].id: frozenset({"MILK"})
+            })
+        with SqlAlchemyMealPlanReadScope(engine) as scope:
+            assert scope.plans.get_current(home.id, prior.plan.week_start) == prior
+    finally:
+        engine.dispose()
+
+
 def test_p2_unreviewed_allergens_and_missing_member_map_fail_closed(tmp_path):
     config, engine, home, people, prior, recipes, accepted = _setup(tmp_path)
     try:
