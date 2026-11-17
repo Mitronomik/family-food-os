@@ -335,7 +335,10 @@ def test_r3c_fresh_publication_and_batch_activation(database):
         ).fetchone()
         assert row == (IDENTITY_ONLY_FOOD_CODES[0], 0, 0, 0)
 
-    assert migrations.expected_migration_ids()[-1] == "0043_shopping_engine"
+    assert migrations.expected_migration_ids()[-2:] == [
+        "0043_shopping_engine",
+        "0044_meal_plan_components",
+    ]
 
 
 def test_r3c_publication_phase_keeps_all_recipes_inactive(database):
