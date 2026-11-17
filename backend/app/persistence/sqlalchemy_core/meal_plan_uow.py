@@ -2,6 +2,7 @@
 
 from datetime import datetime
 from types import TracebackType
+from typing import Self
 from uuid import UUID
 
 from sqlalchemy import update
@@ -72,7 +73,7 @@ class SqlAlchemyMealPlanUnitOfWork:
             raise RuntimeError("MealPlan Unit of Work is not active.")
         return self._reference_methodologies
 
-    def __enter__(self) -> "SqlAlchemyMealPlanUnitOfWork":
+    def __enter__(self) -> Self:
         self._scope.__enter__()
         connection = self._scope.adapter_connection
         self._selections = SqlAlchemyMemberMealPatternSelectionRepository(connection)
@@ -188,7 +189,7 @@ class SqlAlchemyMealPlanReadScope:
             raise RuntimeError("MealPlan read scope is not active.")
         return self._reference_methodologies
 
-    def __enter__(self) -> "SqlAlchemyMealPlanReadScope":
+    def __enter__(self) -> Self:
         self._scope.__enter__()
         connection = self._scope.adapter_connection
         self._selections = SqlAlchemyMemberMealPatternSelectionRepository(connection)
