@@ -10,6 +10,7 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.exc import DBAPIError, IntegrityError, OperationalError
 
 from app.domain.errors import DomainValidationError
+from app.domain.food_ingredients import normalize_allergen_code
 from app.domain.meal_compositions import (
     COMPOSITION_ADMISSION,
     PersistedMealComponent,
@@ -35,6 +36,7 @@ from app.domain.meal_plans import (
     validate_complete_plan,
 )
 from app.persistence.sqlalchemy_core.food_ingredient_tables import (
+    food_ingredient_allergens_table,
     food_ingredients_table,
 )
 from app.persistence.sqlalchemy_core.food_recipe_tables import (
@@ -65,6 +67,13 @@ from app.services.meal_plan_contracts import (
     MealPlanPersistenceConflictError,
     MealPlanPersistenceError,
 )
+
+
+def _valid_allergen_code(code: str) -> bool:
+    try:
+        return normalize_allergen_code(code) == code
+    except DomainValidationError:
+        return False
 
 
 class SqlAlchemyMemberMealPatternSelectionRepository:
@@ -208,9 +217,20 @@ class SqlAlchemyMealPlanRepository:
         self._connection = connection
         self._allow_composition_write = allow_internal_composition_write
 
-    def add_detail(
-        self, detail: MealPlanDetail, *, _diagnostic_composition: bool = False
-    ) -> None:
+    def add_detail(self, detail: MealPlanDetail) -> None:
+        # The generic repository method has no authority to persist composites,
+        # even when the test-only UoW write capability is enabled.
+        if detail.compositions or any(
+            event.source_kind is MealSourceKind.COOK_COMPOSITION
+            for event in detail.events
+        ):
+            raise MealPlanPersistenceConflictError(
+                "Use the validated diagnostic composition revision writer."
+            )
+        self._insert_detail(detail)
+
+    def _insert_detail(self, detail: MealPlanDetail) -> None:
+        """Low-level shared insertion; diagnostic caller validates first."""
         composite_ids = {
             event.id
             for event in detail.events
@@ -220,12 +240,6 @@ class SqlAlchemyMealPlanRepository:
         if composite_ids != registered_ids:
             raise MealPlanPersistenceConflictError(
                 "Each COOK_COMPOSITION event must have exactly one typed composition."
-            )
-        if composite_ids and not (
-            _diagnostic_composition and self._allow_composition_write
-        ):
-            raise MealPlanPersistenceConflictError(
-                "Only the explicitly enabled internal diagnostic writer may save a composite."
             )
         if composite_ids and (
             detail.plan.status is not MealPlanStatus.DRAFT
@@ -424,11 +438,12 @@ class SqlAlchemyMealPlanRepository:
         detail: MealPlanDetail,
         *,
         excluded_food_codes_by_member: Mapping[UUID, frozenset[str]],
+        excluded_allergen_codes_by_member: Mapping[UUID, frozenset[str]],
     ) -> None:
         """Internal synthetic-only write; not wired to API or Planner.
 
-        The explicit exclusions map is a diagnostic fixture input, not a
-        substitute for real Household preference / allergy authority.
+        Both explicit exclusion maps are diagnostic fixture inputs, not a
+        substitute for authoritative Household preference/allergy state.
         """
         if not self._allow_composition_write:
             raise MealPlanPersistenceConflictError(
@@ -497,6 +512,19 @@ class SqlAlchemyMealPlanRepository:
             raise MealPlanPersistenceConflictError(
                 "Explicit synthetic participant exclusions are required."
             )
+        if set(excluded_allergen_codes_by_member) != pinned_members or any(
+            not isinstance(codes, frozenset)
+            or any(
+                not isinstance(code, str)
+                or not code
+                or not _valid_allergen_code(code)
+                for code in codes
+            )
+            for codes in excluded_allergen_codes_by_member.values()
+        ):
+            raise MealPlanPersistenceConflictError(
+                "Explicit normalized allergen exclusions are required for every participant."
+            )
         for comp in detail.compositions:
             if comp.admission_status != COMPOSITION_ADMISSION:
                 raise MealPlanPersistenceConflictError("No published composition rule.")
@@ -557,6 +585,7 @@ class SqlAlchemyMealPlanRepository:
                             food_ingredients_table.c.default_unit,
                             food_ingredients_table.c.is_active,
                             food_ingredients_table.c.canonical_code,
+                            food_ingredients_table.c.allergens_reviewed,
                         )
                         .join(
                             food_ingredients_table,
@@ -581,6 +610,21 @@ class SqlAlchemyMealPlanRepository:
                     raise MealPlanPersistenceConflictError(
                         "Component FoodIngredient source/unit is not verified."
                     )
+                if any(not row["allergens_reviewed"] for row in ingredient_rows):
+                    raise MealPlanPersistenceConflictError(
+                        "Component ingredient allergen review is incomplete."
+                    )
+                allergen_rows = self._connection.execute(
+                    select(
+                        food_ingredient_allergens_table.c.food_ingredient_id,
+                        food_ingredient_allergens_table.c.allergen_code,
+                    ).where(
+                        food_ingredient_allergens_table.c.food_ingredient_id.in_(
+                            [row["food_ingredient_id"] for row in ingredient_rows]
+                        )
+                    )
+                ).mappings().all()
+                present_allergens = {row["allergen_code"] for row in allergen_rows}
                 for serving in comp.servings:
                     if serving.component_id != part.id:
                         continue
@@ -591,8 +635,12 @@ class SqlAlchemyMealPlanRepository:
                         raise MealPlanPersistenceConflictError(
                             "Member hard food exclusion violated by a component."
                         )
+                    if present_allergens & excluded_allergen_codes_by_member[serving.member_id]:
+                        raise MealPlanPersistenceConflictError(
+                            "Member hard allergen exclusion violated by a component."
+                        )
         # Actual write is one shared UoW transaction; never commit from repository.
-        self.add_detail(detail, _diagnostic_composition=True)
+        self._insert_detail(detail)
 
     def get_detail(self, household_id: UUID, plan_id: UUID) -> MealPlanDetail | None:
         row = (
