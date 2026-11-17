@@ -1,5 +1,5 @@
-from importlib import import_module
 import sqlite3
+from importlib import import_module
 
 from app.db.config import DatabaseConfig
 from app.db.connection import session
