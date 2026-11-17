@@ -6,7 +6,7 @@ import sys
 from dataclasses import replace
 from datetime import UTC, datetime
 from decimal import Decimal
-from uuid import uuid4
+from uuid import UUID, uuid4
 
 import pytest
 
@@ -74,10 +74,12 @@ def _source_recipes(config):
                 "(id, recipe_id, version_number, base_servings, meal_type_code, "
                 "verification_status, source_name, source_recipe_id, source_url, "
                 "source_version, source_document_sha256, source_original_servings, "
-                "rights_review_status, change_note, created_at) "
+                "rights_review_status, rights_basis, verified_at, "
+                "change_note, created_at) "
                 "VALUES (?, ?, 1, '1.000000', 'main', 'SOURCE_VERIFIED', "
                 "'test-fixture', ?, 'https://example.test/fixture', 'v1', ?, "
-                "'1.000000', 'REVIEWED', 'test only', CURRENT_TIMESTAMP)",
+                "'1.000000', 'REVIEWED', 'synthetic source fixture only', "
+                "CURRENT_TIMESTAMP, 'test only', CURRENT_TIMESTAMP)",
                 (vid, rid, code, "1" * 64),
             )
             db.execute(
@@ -87,7 +89,7 @@ def _source_recipes(config):
                 "VALUES (?, ?, ?, 1, '25.000000', 'g', 'test 25g', 0, CURRENT_TIMESTAMP)",
                 (uuid4().hex, vid, food_id),
             )
-            recipes[code] = __import__("uuid").UUID(hex=vid)
+            recipes[code] = UUID(hex=vid)
         db.commit()
     return recipes
 
