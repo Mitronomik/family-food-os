@@ -759,19 +759,41 @@ class MealPlanDetail:
             seen_servings.add(key)
             participating_event_ids.add(serving.event_id)
         composition_by_event = {c.event_id: c for c in self.compositions}
+        # A composite parent is NEVER a legacy event, even when an attempted
+        # writer omitted its component header entirely. Enforce a strict
+        # bijection before legacy Serving participation is considered.
+        composite_event_ids = {
+            event.id
+            for event in self.events
+            if event.source_kind is MealSourceKind.COOK_COMPOSITION
+        }
+        if composite_event_ids != set(composition_by_event):
+            raise _issue(
+                DomainIssueCode.REQUIRED_FIELD,
+                "Every COOK_COMPOSITION event requires exactly one typed composition.",
+                field="compositions",
+                value="incomplete composed event",
+            )
+        if composite_event_ids and self.plan.status is not MealPlanStatus.DRAFT:
+            raise _issue(
+                DomainIssueCode.INVALID_CODE,
+                "Composed MealPlans are diagnostic DRAFT only.",
+                field="status",
+                value=self.plan.status,
+            )
+        if any(s.event_id in composite_event_ids for s in self.servings):
+            raise _issue(
+                DomainIssueCode.INVALID_CODE,
+                "COOK_COMPOSITION must not carry a legacy Serving.",
+                field="servings",
+                value="invalid component attendance",
+            )
         if len(composition_by_event) != len(self.compositions):
             raise _issue(
                 DomainIssueCode.INVALID_IDENTIFIER,
                 "Duplicate composed events are not allowed.",
                 field="compositions",
                 value="duplicate",
-            )
-        if self.compositions and self.plan.status is not MealPlanStatus.DRAFT:
-            raise _issue(
-                DomainIssueCode.INVALID_CODE,
-                "Composed MealPlans are diagnostic DRAFT only.",
-                field="status",
-                value=self.plan.status,
             )
         for comp in self.compositions:
             parent = event_by_id.get(comp.event_id)
