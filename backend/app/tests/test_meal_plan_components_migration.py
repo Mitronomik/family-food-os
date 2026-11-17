@@ -152,8 +152,14 @@ def test_real_0043_upgrades_to_0044_without_rewriting_legacy_data(
             "VALUES (?, ?, ?, 1, ?, '2026-11-02', 'test-v1', 'test-v1', "
             "?, ?, ?, 'INCOMPLETE', 'UNKNOWN', ?, CURRENT_TIMESTAMP)",
             (
-                shopping_list, household, plan, 'a' * 64, 'b' * 64,
-                'c' * 64, 'd' * 64, '{"fixture":"upgrade-0044"}',
+                shopping_list,
+                household,
+                plan,
+                "a" * 64,
+                "b" * 64,
+                "c" * 64,
+                "d" * 64,
+                '{"fixture":"upgrade-0044"}',
             ),
         )
         db.execute(
@@ -192,17 +198,22 @@ def test_real_0043_upgrades_to_0044_without_rewriting_legacy_data(
     with sqlite3.connect(config.path) as db:
         db.execute("PRAGMA foreign_keys=ON")
         for table, rows in old.items():
-            assert db.execute(f"SELECT * FROM {table} ORDER BY rowid").fetchall() == rows
+            assert (
+                db.execute(f"SELECT * FROM {table} ORDER BY rowid").fetchall() == rows
+            )
         preserved = db.execute(
             "SELECT source_pantry_snapshot_hash, config_fingerprint, "
             "source_fingerprint, content_fingerprint FROM shopping_lists WHERE id=?",
             (shopping_list,),
         ).fetchone()
-        assert preserved == ('a' * 64, 'b' * 64, 'c' * 64, 'd' * 64)
-        assert db.execute(
-            "SELECT sql FROM sqlite_master WHERE type='trigger' "
-            "AND name='trg_shopping_obligation_event'"
-        ).fetchone()[0] == shopping_trigger
+        assert preserved == ("a" * 64, "b" * 64, "c" * 64, "d" * 64)
+        assert (
+            db.execute(
+                "SELECT sql FROM sqlite_master WHERE type='trigger' "
+                "AND name='trg_shopping_obligation_event'"
+            ).fetchone()[0]
+            == shopping_trigger
+        )
         assert db.execute(
             "SELECT meal_event_id FROM shopping_unresolved_obligations WHERE id=?",
             (shopping_obligation,),
@@ -210,7 +221,9 @@ def test_real_0043_upgrades_to_0044_without_rewriting_legacy_data(
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
         # Restored 0043 trigger must still reject an obligation whose source
         # does not match the historical event, rather than merely exist by name.
-        with pytest.raises(sqlite3.IntegrityError, match="shopping obligation event mismatch"):
+        with pytest.raises(
+            sqlite3.IntegrityError, match="shopping obligation event mismatch"
+        ):
             db.execute(
                 "INSERT INTO shopping_unresolved_obligations "
                 "(id, shopping_list_id, household_id, meal_event_id, "

@@ -219,9 +219,11 @@ def _compose(prior, people, recipes, selected, *, rule=None, target_index=1):
 
 
 def _write(engine, new, people, *, excluded_allergens=None):
-    allergen_exclusions = excluded_allergens if excluded_allergens is not None else {
-        p.id: frozenset() for p in people
-    }
+    allergen_exclusions = (
+        excluded_allergens
+        if excluded_allergens is not None
+        else {p.id: frozenset() for p in people}
+    )
     with SqlAlchemyMealPlanUnitOfWork(
         engine, enable_internal_composition_writes=True
     ) as scope:
@@ -504,7 +506,9 @@ def test_p2_allergen_code_is_distinct_from_food_code_and_blocks_member(tmp_path)
                 "VALUES (?, 'MILK', CURRENT_TIMESTAMP)",
                 (food_id,),
             )
-        with pytest.raises(MealPlanPersistenceConflictError, match="allergen exclusion"):
+        with pytest.raises(
+            MealPlanPersistenceConflictError, match="allergen exclusion"
+        ):
             _write(
                 engine,
                 draft,
@@ -537,17 +541,23 @@ def test_p2_unreviewed_allergens_and_missing_member_map_fail_closed(tmp_path):
         with SqlAlchemyMealPlanUnitOfWork(
             engine, enable_internal_composition_writes=True
         ) as scope:
-            with pytest.raises(MealPlanPersistenceConflictError, match="allergen exclusions"):
+            with pytest.raises(
+                MealPlanPersistenceConflictError, match="allergen exclusions"
+            ):
                 scope.plans.add_diagnostic_composition_revision(
                     draft,
                     excluded_food_codes_by_member={people[0].id: frozenset()},
                     excluded_allergen_codes_by_member={},
                 )
-            with pytest.raises(MealPlanPersistenceConflictError, match="normalized allergen"):
+            with pytest.raises(
+                MealPlanPersistenceConflictError, match="normalized allergen"
+            ):
                 scope.plans.add_diagnostic_composition_revision(
                     draft,
                     excluded_food_codes_by_member={people[0].id: frozenset()},
-                    excluded_allergen_codes_by_member={people[0].id: frozenset({"milk"})},
+                    excluded_allergen_codes_by_member={
+                        people[0].id: frozenset({"milk"})
+                    },
                 )
         with sqlite3.connect(config.path) as db:
             db.execute(

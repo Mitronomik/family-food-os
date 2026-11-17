@@ -515,9 +515,7 @@ class SqlAlchemyMealPlanRepository:
         if set(excluded_allergen_codes_by_member) != pinned_members or any(
             not isinstance(codes, frozenset)
             or any(
-                not isinstance(code, str)
-                or not code
-                or not _valid_allergen_code(code)
+                not isinstance(code, str) or not code or not _valid_allergen_code(code)
                 for code in codes
             )
             for codes in excluded_allergen_codes_by_member.values()
@@ -614,16 +612,20 @@ class SqlAlchemyMealPlanRepository:
                     raise MealPlanPersistenceConflictError(
                         "Component ingredient allergen review is incomplete."
                     )
-                allergen_rows = self._connection.execute(
-                    select(
-                        food_ingredient_allergens_table.c.food_ingredient_id,
-                        food_ingredient_allergens_table.c.allergen_code,
-                    ).where(
-                        food_ingredient_allergens_table.c.food_ingredient_id.in_(
-                            [row["food_ingredient_id"] for row in ingredient_rows]
+                allergen_rows = (
+                    self._connection.execute(
+                        select(
+                            food_ingredient_allergens_table.c.food_ingredient_id,
+                            food_ingredient_allergens_table.c.allergen_code,
+                        ).where(
+                            food_ingredient_allergens_table.c.food_ingredient_id.in_(
+                                [row["food_ingredient_id"] for row in ingredient_rows]
+                            )
                         )
                     )
-                ).mappings().all()
+                    .mappings()
+                    .all()
+                )
                 present_allergens = {row["allergen_code"] for row in allergen_rows}
                 for serving in comp.servings:
                     if serving.component_id != part.id:
@@ -635,7 +637,10 @@ class SqlAlchemyMealPlanRepository:
                         raise MealPlanPersistenceConflictError(
                             "Member hard food exclusion violated by a component."
                         )
-                    if present_allergens & excluded_allergen_codes_by_member[serving.member_id]:
+                    if (
+                        present_allergens
+                        & excluded_allergen_codes_by_member[serving.member_id]
+                    ):
                         raise MealPlanPersistenceConflictError(
                             "Member hard allergen exclusion violated by a component."
                         )
