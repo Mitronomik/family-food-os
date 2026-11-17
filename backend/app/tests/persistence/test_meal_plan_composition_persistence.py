@@ -484,6 +484,11 @@ def test_p2_generic_add_detail_denied_even_with_internal_uow_enabled(tmp_path):
 def test_p2_allergen_code_is_distinct_from_food_code_and_blocks_member(tmp_path):
     config, engine, home, people, prior, recipes, accepted = _setup(tmp_path, members=2)
     try:
+        # For two participants, the persisted Serving order is canonical by
+        # event and member UUID; the fixture built its tuple by member.
+        with SqlAlchemyMealPlanReadScope(engine) as scope:
+            prior = scope.plans.get_current(home.id, prior.plan.week_start)
+        assert prior is not None
         draft = _compose(prior, people, recipes, accepted)
         # One shared ingredient is TEST_POTATO, but its separately curated
         # allergen is MILK; excluding a food code does not cover this.
