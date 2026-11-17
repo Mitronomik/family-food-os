@@ -514,12 +514,22 @@ def audit(config: DatabaseConfig) -> dict[str, Any]:
     # additive migrations may extend the live schema without invalidating
     # accepted corpus readiness evidence.
     accepted_head = "0042_recipe_prepared_output_nutrition"
-    migration_ok = migration_ids[-1] == accepted_head
-    if not migration_ok:
-        migration_ok = migration_ids[-2:] == [
-            accepted_head,
-            "0043_shopping_engine",
+    migration_ok = any(
+        migration_ids == [
+            *migration_ids[: len(migration_ids) - len(suffix)],
+            *suffix,
         ]
+        for suffix in (
+            [accepted_head],
+            [accepted_head, "0043_shopping_engine"],
+            [
+                accepted_head,
+                "0043_shopping_engine",
+                "0044_meal_plan_components",
+            ],
+        )
+        if len(migration_ids) >= len(suffix)
+    )
     if not migration_ok:
         blockers.append("MIGRATION_HEAD_DRIFT")
 
