@@ -218,13 +218,17 @@ def _compose(prior, people, recipes, selected, *, rule=None, target_index=1):
     )
 
 
-def _write(engine, new, people):
+def _write(engine, new, people, *, excluded_allergens=None):
+    allergen_exclusions = excluded_allergens if excluded_allergens is not None else {
+        p.id: frozenset() for p in people
+    }
     with SqlAlchemyMealPlanUnitOfWork(
         engine, enable_internal_composition_writes=True
     ) as scope:
         scope.plans.add_diagnostic_composition_revision(
             new,
             excluded_food_codes_by_member={p.id: frozenset() for p in people},
+            excluded_allergen_codes_by_member=allergen_exclusions,
         )
         scope.commit()
 
@@ -243,7 +247,9 @@ def test_complete_week_source_roundtrip_and_legacy_history(tmp_path):
             SqlAlchemyMealPlanUnitOfWork(engine) as scope,
         ):
             scope.plans.add_diagnostic_composition_revision(
-                current, excluded_food_codes_by_member={people[0].id: frozenset()}
+                current,
+                excluded_food_codes_by_member={people[0].id: frozenset()},
+                excluded_allergen_codes_by_member={people[0].id: frozenset()},
             )
         _write(engine, current, people)
         with SqlAlchemyMealPlanReadScope(engine) as scope:
@@ -438,6 +444,111 @@ def test_p1_domain_and_default_sqlite_uow_reject_composition_without_header(tmp_
             SqlAlchemyMealPlanUnitOfWork(engine) as uow,
         ):
             uow.plans.add_detail(draft)
+        with SqlAlchemyMealPlanReadScope(engine) as scope:
+            assert scope.plans.get_current(home.id, prior.plan.week_start) == prior
+    finally:
+        engine.dispose()
+
+
+def test_p2_generic_add_detail_denied_even_with_internal_uow_enabled(tmp_path):
+    config, engine, home, people, prior, recipes, accepted = _setup(tmp_path)
+    try:
+        draft = _compose(prior, people, recipes, accepted)
+        # The internal UoW switch only enables the dedicated validated writer.
+        with (
+            pytest.raises(MealPlanPersistenceConflictError, match="diagnostic"),
+            SqlAlchemyMealPlanUnitOfWork(
+                engine, enable_internal_composition_writes=True
+            ) as scope,
+        ):
+            scope.plans.add_detail(draft)
+        # Legacy private-kw bypass is no longer part of the method signature.
+        with SqlAlchemyMealPlanUnitOfWork(
+            engine, enable_internal_composition_writes=True
+        ) as scope:
+            with pytest.raises(TypeError, match="_diagnostic_composition"):
+                scope.plans.add_detail(draft, _diagnostic_composition=True)
+        with sqlite3.connect(config.path) as db:
+            for table in (
+                "meal_plan_event_compositions",
+                "meal_plan_event_components",
+                "meal_plan_component_servings",
+            ):
+                assert db.execute(f"SELECT COUNT(*) FROM {table}").fetchone() == (0,)
+        with SqlAlchemyMealPlanReadScope(engine) as scope:
+            assert scope.plans.get_current(home.id, prior.plan.week_start) == prior
+    finally:
+        engine.dispose()
+
+
+def test_p2_allergen_code_is_distinct_from_food_code_and_blocks_member(tmp_path):
+    config, engine, home, people, prior, recipes, accepted = _setup(tmp_path, members=2)
+    try:
+        draft = _compose(prior, people, recipes, accepted)
+        # One shared ingredient is TEST_POTATO, but its separately curated
+        # allergen is MILK; excluding a food code does not cover this.
+        with sqlite3.connect(config.path) as db:
+            food_id = db.execute(
+                "SELECT id FROM food_ingredients WHERE canonical_code='TEST_POTATO'"
+            ).fetchone()[0]
+            db.execute(
+                "INSERT INTO food_ingredient_allergens "
+                "(food_ingredient_id, allergen_code, created_at) "
+                "VALUES (?, 'MILK', CURRENT_TIMESTAMP)",
+                (food_id,),
+            )
+        with pytest.raises(MealPlanPersistenceConflictError, match="allergen exclusion"):
+            _write(
+                engine,
+                draft,
+                people,
+                excluded_allergens={
+                    people[0].id: frozenset(),
+                    people[1].id: frozenset({"MILK"}),
+                },
+            )
+        with SqlAlchemyMealPlanReadScope(engine) as scope:
+            assert scope.plans.get_current(home.id, prior.plan.week_start) == prior
+        # No excluded allergen intersects the ingredient: reviewed, safe
+        # synthetic test case should remain writable through the dedicated path.
+        _write(
+            engine,
+            draft,
+            people,
+            excluded_allergens={p.id: frozenset({"PEANUT"}) for p in people},
+        )
+        with SqlAlchemyMealPlanReadScope(engine) as scope:
+            assert scope.plans.get_current(home.id, prior.plan.week_start) == draft
+    finally:
+        engine.dispose()
+
+
+def test_p2_unreviewed_allergens_and_missing_member_map_fail_closed(tmp_path):
+    config, engine, home, people, prior, recipes, accepted = _setup(tmp_path)
+    try:
+        draft = _compose(prior, people, recipes, accepted)
+        with SqlAlchemyMealPlanUnitOfWork(
+            engine, enable_internal_composition_writes=True
+        ) as scope:
+            with pytest.raises(MealPlanPersistenceConflictError, match="allergen exclusions"):
+                scope.plans.add_diagnostic_composition_revision(
+                    draft,
+                    excluded_food_codes_by_member={people[0].id: frozenset()},
+                    excluded_allergen_codes_by_member={},
+                )
+            with pytest.raises(MealPlanPersistenceConflictError, match="normalized allergen"):
+                scope.plans.add_diagnostic_composition_revision(
+                    draft,
+                    excluded_food_codes_by_member={people[0].id: frozenset()},
+                    excluded_allergen_codes_by_member={people[0].id: frozenset({"milk"})},
+                )
+        with sqlite3.connect(config.path) as db:
+            db.execute(
+                "UPDATE food_ingredients SET allergens_reviewed=0 "
+                "WHERE canonical_code='TEST_POTATO'"
+            )
+        with pytest.raises(MealPlanPersistenceConflictError, match="allergen review"):
+            _write(engine, draft, people)
         with SqlAlchemyMealPlanReadScope(engine) as scope:
             assert scope.plans.get_current(home.id, prior.plan.week_start) == prior
     finally:
