@@ -194,6 +194,7 @@ def test_a_database_at_0019_reports_0020_then_0021_pending(tmp_path):
         RECIPE_OUTPUT_MIGRATION_ID,
         "0041_meal_pattern_energy_allocation",
         "0042_recipe_prepared_output_nutrition",
+        "0043_shopping_engine",
         HEAD_MIGRATION_ID,
     ]
 
@@ -228,6 +229,7 @@ def test_upgrading_from_0019_preserves_every_existing_row_and_table(tmp_path):
         RECIPE_OUTPUT_MIGRATION_ID,
         "0041_meal_pattern_energy_allocation",
         "0042_recipe_prepared_output_nutrition",
+        "0043_shopping_engine",
         HEAD_MIGRATION_ID,
     ]
     assert snapshot(database_path) == before
@@ -287,6 +289,9 @@ def test_upgrading_from_0019_preserves_every_existing_row_and_table(tmp_path):
         "shopping_lists",
         "shopping_list_items",
         "shopping_unresolved_obligations",
+        "meal_plan_event_compositions",
+        "meal_plan_event_components",
+        "meal_plan_component_servings",
     }
 
 
@@ -664,6 +669,7 @@ def test_user_mode_startup_backs_up_before_applying_0020(monkeypatch, tmp_path):
         RECIPE_OUTPUT_MIGRATION_ID,
         "0041_meal_pattern_energy_allocation",
         "0042_recipe_prepared_output_nutrition",
+        "0043_shopping_engine",
         HEAD_MIGRATION_ID,
     ]
     assert result.backup is not None
