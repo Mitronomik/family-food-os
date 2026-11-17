@@ -551,9 +551,12 @@ def test_p2_malformed_catalogue_allergen_codes_fail_closed(tmp_path):
                 (food_id,),
             )
         with pytest.raises(MealPlanPersistenceConflictError, match="invalid codes"):
-            _write(engine, draft, people, excluded_allergens={
-                people[0].id: frozenset({"MILK"})
-            })
+            _write(
+                engine,
+                draft,
+                people,
+                excluded_allergens={people[0].id: frozenset({"MILK"})},
+            )
         with SqlAlchemyMealPlanReadScope(engine) as scope:
             assert scope.plans.get_current(home.id, prior.plan.week_start) == prior
     finally:
