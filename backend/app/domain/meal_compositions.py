@@ -365,9 +365,13 @@ def restore_rule_snapshot(
     try:
         parsed = json.loads(requirements_json)
     except (ValueError, TypeError) as exc:
-        raise _issue("requirements_json", "Malformed immutable course requirements.") from exc
+        raise _issue(
+            "requirements_json", "Malformed immutable course requirements."
+        ) from exc
     if not isinstance(parsed, list) or not 1 <= len(parsed) <= 16:
-        raise _issue("requirements_json", "Course requirements must be a bounded array.")
+        raise _issue(
+            "requirements_json", "Course requirements must be a bounded array."
+        )
     requirements = []
     for item in parsed:
         if (
@@ -446,7 +450,9 @@ class PersistedMealEventComposition:
     def __post_init__(self) -> None:
         _id(self.event_id, "event_id")
         if self.admission_status != COMPOSITION_ADMISSION:
-            raise _issue("admission_status", "Composed event has no production authority.")
+            raise _issue(
+                "admission_status", "Composed event has no production authority."
+            )
         if (
             not isinstance(self.rule, DraftMealStructureRule)
             or not isinstance(self.components, tuple)
@@ -495,7 +501,8 @@ class PersistedMealEventComposition:
                     raise _issue("servings", "A member is missing a required course.")
         course_order = {item.kind: i for i, item in enumerate(self.rule.requirements)}
         if [
-            course_order[c.course] for c in sorted(self.components, key=lambda c: c.position)
+            course_order[c.course]
+            for c in sorted(self.components, key=lambda c: c.position)
         ] != sorted(course_order[c.course] for c in self.components):
             raise _issue("components", "Course ordering contradicts snapshot.")
 
@@ -591,11 +598,13 @@ def assert_complete_revision_preservation(
                     raise _issue("revision", "Historical component changed.")
                 old_member_amounts = {
                     s.member_id: s.portion_servings
-                    for s in old_comp.servings if s.component_id == former.id
+                    for s in old_comp.servings
+                    if s.component_id == former.id
                 }
                 fresh_member_amounts = {
                     s.member_id: s.portion_servings
-                    for s in new_comp.servings if s.component_id == current.id
+                    for s in new_comp.servings
+                    if s.component_id == current.id
                 }
                 if old_member_amounts != fresh_member_amounts:
                     raise _issue("revision", "Historical component Serving changed.")
