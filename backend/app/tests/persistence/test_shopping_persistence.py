@@ -621,7 +621,11 @@ def test_0043_failure_rolls_back_tables_and_marker(tmp_path, monkeypatch):
             is None
         )
     monkeypatch.setattr(module, "upgrade", upgrade)
-    assert apply_migrations(config) == ["0043_shopping_engine"]
+    try:
+        assert apply_migrations(config) == ["0043_shopping_engine"]
+    finally:
+        # This regression tests the 0043 boundary, not the current 0044 head.
+        MIGRATION_MODULES[:] = original
 
 
 def test_competing_writer_timeout_is_retryable_and_releases_connection(store):
