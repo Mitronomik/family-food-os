@@ -24,8 +24,9 @@ from app.domain.meal_compositions import (
     rule_snapshot_digest,
     serialized_requirements,
 )
+from app.domain.errors import DomainValidationError
 from app.domain.meal_patterns import MealRole
-from app.domain.meal_plans import MealPlanDetail, MealSourceKind
+from app.domain.meal_plans import MealPlanDetail, MealPlanStatus, MealSourceKind
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.meal_plan_uow import (
     SqlAlchemyMealPlanReadScope,
@@ -38,6 +39,8 @@ from app.services.meal_plan_contracts import (
     MealPlanPersistenceConflictError,
     MealPlanPersistenceError,
 )
+from app.services.meal_plans import MealEventDraft, MealPlanValidationError
+from app.tests.test_meal_plan_application import _service as _public_mealplan_service
 from app.tests.persistence.test_meal_plan_repository import (
     _household, _member, _seed_household, _plan, _selection
 )
@@ -336,3 +339,58 @@ def test_database_rejects_invalid_component_decimal(tmp_path, bad):
             (bad,) * 9,
         ).fetchone()[0]
         assert not result
+
+
+def test_p1_public_service_denies_composed_event_before_creating_any_revision():
+    home = _household()
+    person = _member(home.id)
+    service, _, repository = _public_mealplan_service(home, [person])
+    with pytest.raises(MealPlanValidationError, match="COOK_COMPOSITION"):
+        service.create_plan_revision(
+            household_id=home.id,
+            week_start=prior_week_start(),
+            member_selection_ids={person.id: uuid4()},
+            events=(
+                MealEventDraft(
+                    local_date=prior_week_start(),
+                    position=1,
+                    role=MealRole.LUNCH,
+                    source_kind=MealSourceKind.COOK_COMPOSITION,
+                    recipe_version_id=None,
+                    source_reference=None,
+                    servings={person.id: Decimal("1.000000")},
+                ),
+            ),
+        )
+    assert repository.details == {}
+
+
+def prior_week_start():
+    from datetime import date
+
+    return date(2026, 11, 2)
+
+
+def test_p1_domain_and_default_sqlite_uow_reject_composition_without_header(tmp_path):
+    config, engine, home, people, prior, recipes, accepted = _setup(tmp_path)
+    try:
+        changed = replace(
+            prior.events[0],
+            source_kind=MealSourceKind.COOK_COMPOSITION,
+            recipe_version_id=None,
+            source_reference=None,
+        )
+        # The old event still has a positive legacy Serving. Even a
+        # CONFIRMED plan with no typed composition must be rejected up front.
+        with pytest.raises(DomainValidationError, match="typed composition"):
+            replace(prior, events=(changed, *prior.events[1:]))
+        draft = _compose(prior, people, recipes, accepted)
+        with pytest.raises(DomainValidationError, match="DRAFT"):
+            replace(draft, plan=replace(draft.plan, status=MealPlanStatus.CONFIRMED))
+        with pytest.raises(MealPlanPersistenceConflictError, match="diagnostic"):
+            with SqlAlchemyMealPlanUnitOfWork(engine) as uow:
+                uow.plans.add_detail(draft)
+        with SqlAlchemyMealPlanReadScope(engine) as scope:
+            assert scope.plans.get_current(home.id, prior.plan.week_start) == prior
+    finally:
+        engine.dispose()
