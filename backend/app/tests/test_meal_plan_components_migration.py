@@ -86,6 +86,10 @@ def test_real_0043_upgrades_to_0044_without_rewriting_legacy_data(
     plan = uuid4().hex
     event = uuid4().hex
     serving = uuid4().hex
+    ingredient = uuid4().hex
+    shopping_list = uuid4().hex
+    shopping_item = uuid4().hex
+    shopping_obligation = uuid4().hex
     with sqlite3.connect(config.path) as db:
         db.execute("PRAGMA foreign_keys=ON")
         db.execute(
@@ -119,7 +123,7 @@ def test_real_0043_upgrades_to_0044_without_rewriting_legacy_data(
         db.execute(
             "INSERT INTO meal_plan_events "
             "(id, plan_id, local_date, position, role_code, source_kind, created_at) "
-            "VALUES (?, ?, '2026-11-02', 1, 'DINNER', 'EAT_OUT', CURRENT_TIMESTAMP)",
+            "VALUES (?, ?, '2026-11-02', 1, 'DINNER', 'LEFTOVER', CURRENT_TIMESTAMP)",
             (event, plan),
         )
         db.execute(
@@ -127,22 +131,93 @@ def test_real_0043_upgrades_to_0044_without_rewriting_legacy_data(
             "VALUES (?, ?, ?, '1.250000', CURRENT_TIMESTAMP)",
             (serving, event, member),
         )
+        # 0043 snapshot is populated before the event-table FK rebuild. Both
+        # child tables and an unresolved event-FK must survive byte-for-byte.
+        db.execute(
+            "INSERT INTO food_ingredients "
+            "(id, canonical_code, canonical_name, canonical_name_key, "
+            "category_code, default_unit, allergens_reviewed, is_active, "
+            "created_at, updated_at) "
+            "VALUES (?, 'UPGRADE_SHOPPING_FOOD', 'Тестовый продукт', "
+            "'тестовый продукт', 'vegetables', 'g', 1, 1, "
+            "CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)",
+            (ingredient,),
+        )
+        db.execute(
+            "INSERT INTO shopping_lists "
+            "(id, household_id, meal_plan_id, source_plan_revision_number, "
+            "source_pantry_snapshot_hash, as_of_date, engine_version, "
+            "pantry_policy_version, config_fingerprint, source_fingerprint, "
+            "content_fingerprint, status, price_status, provenance_json, created_at) "
+            "VALUES (?, ?, ?, 1, ?, '2026-11-02', 'test-v1', 'test-v1', "
+            "?, ?, ?, 'INCOMPLETE', 'UNKNOWN', ?, CURRENT_TIMESTAMP)",
+            (
+                shopping_list, household, plan, 'a' * 64, 'b' * 64,
+                'c' * 64, 'd' * 64, '{"fixture":"upgrade-0044"}',
+            ),
+        )
+        db.execute(
+            "INSERT INTO shopping_list_items "
+            "(id, shopping_list_id, household_id, food_ingredient_id, "
+            "form_basis, unit, required_quantity, pantry_available_quantity, "
+            "purchase_quantity, ordinal) "
+            "VALUES (?, ?, ?, ?, 'RAW', 'g', '10.000', '0.000', '10.000', 1)",
+            (shopping_item, shopping_list, household, ingredient),
+        )
+        db.execute(
+            "INSERT INTO shopping_unresolved_obligations "
+            "(id, shopping_list_id, household_id, meal_event_id, "
+            "source_kind, reason, ordinal) "
+            "VALUES (?, ?, ?, ?, 'LEFTOVER', 'LEFTOVER_SUPPLY_UNVERIFIED', 1)",
+            (shopping_obligation, shopping_list, household, event),
+        )
         db.commit()
         old = {
-            table: db.execute(f"SELECT * FROM {table}").fetchall()
+            table: db.execute(f"SELECT * FROM {table} ORDER BY rowid").fetchall()
             for table in (
                 "meal_plans",
                 "meal_plan_events",
                 "servings",
                 "meal_plan_member_selections",
+                "shopping_lists",
+                "shopping_list_items",
+                "shopping_unresolved_obligations",
             )
         }
+        shopping_trigger = db.execute(
+            "SELECT sql FROM sqlite_master WHERE type='trigger' "
+            "AND name='trg_shopping_obligation_event'"
+        ).fetchone()[0]
     assert apply_migrations(config) == [MIGRATION_ID]
     with sqlite3.connect(config.path) as db:
         db.execute("PRAGMA foreign_keys=ON")
         for table, rows in old.items():
-            assert db.execute(f"SELECT * FROM {table}").fetchall() == rows
+            assert db.execute(f"SELECT * FROM {table} ORDER BY rowid").fetchall() == rows
+        preserved = db.execute(
+            "SELECT source_pantry_snapshot_hash, config_fingerprint, "
+            "source_fingerprint, content_fingerprint FROM shopping_lists WHERE id=?",
+            (shopping_list,),
+        ).fetchone()
+        assert preserved == ('a' * 64, 'b' * 64, 'c' * 64, 'd' * 64)
+        assert db.execute(
+            "SELECT sql FROM sqlite_master WHERE type='trigger' "
+            "AND name='trg_shopping_obligation_event'"
+        ).fetchone()[0] == shopping_trigger
+        assert db.execute(
+            "SELECT meal_event_id FROM shopping_unresolved_obligations WHERE id=?",
+            (shopping_obligation,),
+        ).fetchone() == (event,)
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
+        # Restored 0043 trigger must still reject an obligation whose source
+        # does not match the historical event, rather than merely exist by name.
+        with pytest.raises(sqlite3.IntegrityError, match="shopping obligation event mismatch"):
+            db.execute(
+                "INSERT INTO shopping_unresolved_obligations "
+                "(id, shopping_list_id, household_id, meal_event_id, "
+                "source_kind, reason, ordinal) "
+                "VALUES (?, ?, ?, ?, 'READY_MEAL', 'READY_MEAL_UNRESOLVED', 2)",
+                (uuid4().hex, shopping_list, household, event),
+            )
         assert db.execute(
             "SELECT count(*) FROM schema_migrations WHERE migration_id=?",
             (MIGRATION_ID,),
