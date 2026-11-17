@@ -9,9 +9,9 @@ from decimal import Decimal
 from uuid import UUID, uuid4
 
 import pytest
-
 from app.db.config import DatabaseConfig
 from app.db.migrations import apply_migrations
+from app.domain.errors import DomainValidationError
 from app.domain.meal_compositions import (
     CourseCardinality,
     DraftMealStructureRule,
@@ -23,7 +23,6 @@ from app.domain.meal_compositions import (
     rule_snapshot_digest,
     serialized_requirements,
 )
-from app.domain.errors import DomainValidationError
 from app.domain.meal_patterns import MealRole
 from app.domain.meal_plans import MealPlanStatus, MealSourceKind
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine

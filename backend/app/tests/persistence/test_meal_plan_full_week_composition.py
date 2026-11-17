@@ -15,7 +15,6 @@ from decimal import Decimal
 from uuid import uuid4
 
 import pytest
-
 from app.db.config import DatabaseConfig
 from app.db.migrations import apply_migrations
 from app.domain.errors import DomainValidationError
