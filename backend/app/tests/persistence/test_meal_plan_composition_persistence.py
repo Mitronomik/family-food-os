@@ -151,16 +151,20 @@ def _setup(tmp_path, *, members=1):
     if members > 1:
         prior = replace(
             prior,
-            member_selections=prior.member_selections + tuple(
-                __import__("app.domain.meal_plans", fromlist=["MealPlanMemberSelection"])
-                .MealPlanMemberSelection(prior.plan.id, p.id, src)
+            member_selections=prior.member_selections
+            + tuple(
+                __import__(
+                    "app.domain.meal_plans", fromlist=["MealPlanMemberSelection"]
+                ).MealPlanMemberSelection(prior.plan.id, p.id, src)
                 for p, src in zip(people[1:], source_pins[1:])
             ),
-            servings=prior.servings + tuple(
+            servings=prior.servings
+            + tuple(
                 __import__("app.domain.meal_plans", fromlist=["Serving"]).Serving(
                     uuid4(), event.id, p.id, Decimal("1.250000"), TIME
                 )
-                for event in prior.events for p in people[1:]
+                for event in prior.events
+                for p in people[1:]
             ),
         )
     with SqlAlchemyMealPlanUnitOfWork(engine) as scope:
@@ -171,7 +175,9 @@ def _setup(tmp_path, *, members=1):
 
 def _rule(*, code="DEV_LUNCH_FIRST_SECOND_OPTIONAL_DESSERT", version=1):
     return DraftMealStructureRule(
-        code=code, version=version, meal_role=MealRole.LUNCH,
+        code=code,
+        version=version,
+        meal_role=MealRole.LUNCH,
         requirements=(
             CourseCardinality(MealCourseKind.FIRST, 1, 1),
             CourseCardinality(MealCourseKind.SECOND, 1, 1),
@@ -186,17 +192,23 @@ def _compose(prior, people, recipes, selected, *, rule=None, target_index=1):
     components = (
         MealComponentDraft(event.id, 1, MealCourseKind.FIRST, recipes["FIRST_TEST"]),
         MealComponentDraft(event.id, 2, MealCourseKind.SECOND, recipes["SECOND_TEST"]),
-        MealComponentDraft(event.id, 3, MealCourseKind.DESSERT, recipes["DESSERT_TEST"]),
+        MealComponentDraft(
+            event.id, 3, MealCourseKind.DESSERT, recipes["DESSERT_TEST"]
+        ),
     )
     allocations = tuple(
         MemberComponentServingDraft(
-            event.id, position, p.id,
-            Decimal("0.500000") if position == 3 else Decimal("1.000000")
+            event.id,
+            position,
+            p.id,
+            Decimal("0.500000") if position == 3 else Decimal("1.000000"),
         )
         for p in people
         for position in ((1, 2, 3) if p is people[0] else (1, 2))
     )
-    proposal = MealEventCompositionDraft(prior.plan.id, event.id, components, allocations)
+    proposal = MealEventCompositionDraft(
+        prior.plan.id, event.id, components, allocations
+    )
     return make_complete_diagnostic_revision(
         prior=prior,
         proposal=proposal,
@@ -246,8 +258,12 @@ def test_complete_week_source_roundtrip_and_legacy_history(tmp_path):
         with SqlAlchemyMealPlanReadScope(engine) as scope:
             again = scope.plans.get_detail(home.id, current.plan.id)
         assert again == current
-        assert serialized_requirements(again.compositions[0].rule) == serialized_requirements(_rule())
-        assert rule_snapshot_digest(again.compositions[0].rule) == rule_snapshot_digest(_rule())
+        assert serialized_requirements(
+            again.compositions[0].rule
+        ) == serialized_requirements(_rule())
+        assert rule_snapshot_digest(again.compositions[0].rule) == rule_snapshot_digest(
+            _rule()
+        )
         # Genuine fresh OS process, with NO cached in-memory rule registry.
         snippet = (
             "import sys; from pathlib import Path; "
@@ -264,7 +280,14 @@ def test_complete_week_source_roundtrip_and_legacy_history(tmp_path):
             "scope.__exit__(None,None,None);engine.dispose()"
         )
         outcome = subprocess.run(
-            [sys.executable, "-c", snippet, str(config.path), str(home.id), str(current.plan.id)],
+            [
+                sys.executable,
+                "-c",
+                snippet,
+                str(config.path),
+                str(home.id),
+                str(current.plan.id),
+            ],
             capture_output=True,
             text=True,
             check=True,
@@ -289,7 +312,9 @@ def test_rule_drift_and_injected_component_failure_leave_current_unchanged(tmp_p
             _write(engine, new, people)
         with SqlAlchemyMealPlanReadScope(engine) as scope:
             assert scope.plans.get_current(home.id, prior.plan.week_start) == prior
-            assert scope.plans.list_history(home.id, prior.plan.week_start) == [prior.plan]
+            assert scope.plans.list_history(home.id, prior.plan.week_start) == [
+                prior.plan
+            ]
         with sqlite3.connect(config.path) as db:
             db.execute("DROP TRIGGER test_composition_insert_failure")
         _write(engine, new, people)
@@ -330,9 +355,7 @@ def test_snapshot_corruption_is_detected_on_a_new_read(tmp_path):
         _write(engine, new, people)
         with sqlite3.connect(config.path) as db:
             db.execute("DROP TRIGGER trg_meal_plan_event_compositions_no_update")
-            db.execute(
-                "UPDATE meal_plan_event_compositions SET requirements_json='[]'"
-            )
+            db.execute("UPDATE meal_plan_event_compositions SET requirements_json='[]'")
             db.commit()
         with (
             pytest.raises(

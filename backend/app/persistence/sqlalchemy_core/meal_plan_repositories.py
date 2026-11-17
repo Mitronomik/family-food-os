@@ -189,9 +189,7 @@ class SqlAlchemyMemberMealPatternSelectionRepository:
     ) -> MemberMealPatternSelectionDetail:
         opportunities = self._connection.execute(
             select(member_meal_pattern_opportunities_table)
-            .where(
-                member_meal_pattern_opportunities_table.c.selection_id == row["id"]
-            )
+            .where(member_meal_pattern_opportunities_table.c.selection_id == row["id"])
             .order_by(
                 member_meal_pattern_opportunities_table.c.weekday,
                 member_meal_pattern_opportunities_table.c.position,
@@ -214,7 +212,8 @@ class SqlAlchemyMealPlanRepository:
         self, detail: MealPlanDetail, *, _diagnostic_composition: bool = False
     ) -> None:
         composite_ids = {
-            event.id for event in detail.events
+            event.id
+            for event in detail.events
             if event.source_kind is MealSourceKind.COOK_COMPOSITION
         }
         registered_ids = {composition.event_id for composition in detail.compositions}
@@ -450,7 +449,8 @@ class SqlAlchemyMealPlanRepository:
             )
         try:
             target_events = {
-                event.id for event in detail.events
+                event.id
+                for event in detail.events
                 if event.source_kind is MealSourceKind.COOK_COMPOSITION
             }
             old_comp_count = len(previous.compositions)
@@ -461,7 +461,8 @@ class SqlAlchemyMealPlanRepository:
             old_slots = {(e.local_date, e.position): e for e in previous.events}
             new_slots = {(e.local_date, e.position): e for e in detail.events}
             target = [
-                old_slots[slot].id for slot, event in new_slots.items()
+                old_slots[slot].id
+                for slot, event in new_slots.items()
                 if event.source_kind is MealSourceKind.COOK_COMPOSITION
                 and old_slots.get(slot) is not None
                 and old_slots[slot].source_kind is MealSourceKind.COOK_RECIPE
@@ -488,13 +489,10 @@ class SqlAlchemyMealPlanRepository:
             ) from exc
 
         pinned_members = {item.member_id for item in detail.member_selections}
-        if (
-            set(excluded_food_codes_by_member) != pinned_members
-            or any(
-                not isinstance(codes, frozenset)
-                or any(not isinstance(code, str) or not code for code in codes)
-                for codes in excluded_food_codes_by_member.values()
-            )
+        if set(excluded_food_codes_by_member) != pinned_members or any(
+            not isinstance(codes, frozenset)
+            or any(not isinstance(code, str) or not code for code in codes)
+            for codes in excluded_food_codes_by_member.values()
         ):
             raise MealPlanPersistenceConflictError(
                 "Explicit synthetic participant exclusions are required."
@@ -502,15 +500,20 @@ class SqlAlchemyMealPlanRepository:
         for comp in detail.compositions:
             if comp.admission_status != COMPOSITION_ADMISSION:
                 raise MealPlanPersistenceConflictError("No published composition rule.")
-            existing = self._connection.execute(
-                select(meal_plan_event_compositions_table.c.rule_snapshot_sha256)
-                .where(
-                    meal_plan_event_compositions_table.c.structure_rule_code
-                    == comp.rule.code,
-                    meal_plan_event_compositions_table.c.structure_rule_version
-                    == comp.rule.version,
+            existing = (
+                self._connection.execute(
+                    select(
+                        meal_plan_event_compositions_table.c.rule_snapshot_sha256
+                    ).where(
+                        meal_plan_event_compositions_table.c.structure_rule_code
+                        == comp.rule.code,
+                        meal_plan_event_compositions_table.c.structure_rule_version
+                        == comp.rule.version,
+                    )
                 )
-            ).scalars().all()
+                .scalars()
+                .all()
+            )
             current_digest = rule_snapshot_digest(comp.rule)
             if any(sha != current_digest for sha in existing):
                 raise MealPlanPersistenceConflictError(
@@ -519,8 +522,9 @@ class SqlAlchemyMealPlanRepository:
             for part in comp.components:
                 version = (
                     self._connection.execute(
-                        select(food_recipe_versions_table)
-                        .where(food_recipe_versions_table.c.id == part.recipe_version_id)
+                        select(food_recipe_versions_table).where(
+                            food_recipe_versions_table.c.id == part.recipe_version_id
+                        )
                     )
                     .mappings()
                     .one_or_none()
@@ -535,8 +539,9 @@ class SqlAlchemyMealPlanRepository:
                         "Component RecipeVersion is not source/right verified."
                     )
                 active = self._connection.scalar(
-                    select(food_recipes_table.c.is_active)
-                    .where(food_recipes_table.c.id == version["recipe_id"])
+                    select(food_recipes_table.c.is_active).where(
+                        food_recipes_table.c.id == version["recipe_id"]
+                    )
                 )
                 if active is not True:
                     raise MealPlanPersistenceConflictError(
@@ -580,7 +585,9 @@ class SqlAlchemyMealPlanRepository:
                     if serving.component_id != part.id:
                         continue
                     excluded = excluded_food_codes_by_member[serving.member_id]
-                    if any(row["canonical_code"] in excluded for row in ingredient_rows):
+                    if any(
+                        row["canonical_code"] in excluded for row in ingredient_rows
+                    ):
                         raise MealPlanPersistenceConflictError(
                             "Member hard food exclusion violated by a component."
                         )
@@ -639,12 +646,9 @@ class SqlAlchemyMealPlanRepository:
         reference_pins = self._connection.execute(
             select(meal_plan_member_reference_methodology_pins_table)
             .where(
-                meal_plan_member_reference_methodology_pins_table.c.plan_id
-                == plan_id
+                meal_plan_member_reference_methodology_pins_table.c.plan_id == plan_id
             )
-            .order_by(
-                meal_plan_member_reference_methodology_pins_table.c.member_id
-            )
+            .order_by(meal_plan_member_reference_methodology_pins_table.c.member_id)
         ).mappings()
         events = list(
             self._connection.execute(
@@ -661,7 +665,9 @@ class SqlAlchemyMealPlanRepository:
         if event_ids:
             servings = list(
                 self._connection.execute(
-                    select(servings_table).where(servings_table.c.event_id.in_(event_ids))
+                    select(servings_table).where(
+                        servings_table.c.event_id.in_(event_ids)
+                    )
                 ).mappings()
             )
             event_order = {event_id: index for index, event_id in enumerate(event_ids)}
@@ -909,9 +915,7 @@ def _reference_pin_from_row(
     return MealPlanMemberReferenceMethodologyPin(
         plan_id=row["plan_id"],
         member_id=row["member_id"],
-        reference_methodology_selection_id=row[
-            "reference_methodology_selection_id"
-        ],
+        reference_methodology_selection_id=row["reference_methodology_selection_id"],
         birth_date=row["birth_date"],
         sex=row["sex"],
         height_cm=row["height_cm"],

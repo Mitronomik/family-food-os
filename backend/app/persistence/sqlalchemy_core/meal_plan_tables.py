@@ -60,7 +60,9 @@ member_meal_pattern_selections_table = Table(
         "version_number",
         name="uq_member_meal_pattern_selection_version",
     ),
-    CheckConstraint("version_number > 0", name="ck_member_meal_pattern_version_positive"),
+    CheckConstraint(
+        "version_number > 0", name="ck_member_meal_pattern_version_positive"
+    ),
     CheckConstraint(
         "source_kind IN ('PROGRAM','CUSTOM')",
         name="ck_member_meal_pattern_source_kind",
@@ -184,7 +186,9 @@ meal_plan_events_table = Table(
     ),
     Column("source_reference", String),
     Column("created_at", UTCDateTime(), nullable=False),
-    UniqueConstraint("plan_id", "local_date", "position", name="uq_meal_plan_event_position"),
+    UniqueConstraint(
+        "plan_id", "local_date", "position", name="uq_meal_plan_event_position"
+    ),
     CheckConstraint("position > 0", name="ck_meal_plan_event_position"),
     CheckConstraint(
         "role_code IN ('BREAKFAST','LUNCH','DINNER','SNACK','PRE_WORKOUT','POST_WORKOUT','OTHER')",

@@ -188,14 +188,16 @@ REQUIRED_TABLES_BY_MIGRATION: dict[str, frozenset[str]] = {
     "0042_recipe_prepared_output_nutrition": frozenset(
         {"recipe_prepared_nutrition_authorities", "recipe_prepared_nutrient_values"}
     ),
-    "0043_shopping_engine": frozenset({
-        "shopping_lists", "shopping_list_items", "shopping_unresolved_obligations"
-    }),
-    "0044_meal_plan_components": frozenset({
-        "meal_plan_event_compositions",
-        "meal_plan_event_components",
-        "meal_plan_component_servings",
-    }),
+    "0043_shopping_engine": frozenset(
+        {"shopping_lists", "shopping_list_items", "shopping_unresolved_obligations"}
+    ),
+    "0044_meal_plan_components": frozenset(
+        {
+            "meal_plan_event_compositions",
+            "meal_plan_event_components",
+            "meal_plan_component_servings",
+        }
+    ),
 }
 
 # The foundational tables promised by migration `0001`. Stable FamilyFoodOS

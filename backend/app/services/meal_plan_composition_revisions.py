@@ -171,10 +171,13 @@ def make_complete_diagnostic_revision(
             replace(pin, plan_id=plan.id) for pin in prior.reference_methodology_pins
         ),
         compositions=tuple(
-            sorted(composition_rows, key=lambda comp: (
-                next(e.local_date for e in events if e.id == comp.event_id),
-                next(e.position for e in events if e.id == comp.event_id),
-            ))
+            sorted(
+                composition_rows,
+                key=lambda comp: (
+                    next(e.local_date for e in events if e.id == comp.event_id),
+                    next(e.position for e in events if e.id == comp.event_id),
+                ),
+            )
         ),
     )
     validate_complete_plan(detail, selection_details)

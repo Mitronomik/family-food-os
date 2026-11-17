@@ -337,7 +337,9 @@ class MemberMealPatternSelectionDetail:
                 field="opportunities",
                 value=self.selection.id,
             )
-        by_day: dict[int, list[MemberMealPatternOpportunitySnapshot]] = defaultdict(list)
+        by_day: dict[int, list[MemberMealPatternOpportunitySnapshot]] = defaultdict(
+            list
+        )
         for item in self.opportunities:
             by_day[item.weekday].append(item)
         if set(by_day) != set(range(1, 8)):
@@ -595,7 +597,10 @@ class HouseholdMealEvent:
                 field="recipe_version_id",
                 value=self.recipe_version_id,
             )
-        if source_kind is MealSourceKind.COOK_COMPOSITION and self.source_reference is not None:
+        if (
+            source_kind is MealSourceKind.COOK_COMPOSITION
+            and self.source_reference is not None
+        ):
             raise _issue(
                 DomainIssueCode.INVALID_CODE,
                 "COOK_COMPOSITION cannot imply an old source reference.",
@@ -634,10 +639,10 @@ class MealPlanDetail:
     member_selections: tuple[MealPlanMemberSelection, ...]
     events: tuple[HouseholdMealEvent, ...]
     servings: tuple[Serving, ...]
-    reference_methodology_pins: tuple[
-        MealPlanMemberReferenceMethodologyPin, ...
-    ] = ()
-    compositions: tuple[object, ...] = ()  # PersistedMealEventComposition; circular import avoided.
+    reference_methodology_pins: tuple[MealPlanMemberReferenceMethodologyPin, ...] = ()
+    compositions: tuple[
+        object, ...
+    ] = ()  # PersistedMealEventComposition; circular import avoided.
 
     def __post_init__(self) -> None:
         from app.domain.meal_compositions import PersistedMealEventComposition
@@ -674,10 +679,7 @@ class MealPlanDetail:
                 field="member_selections",
                 value=member_ids,
             )
-        if any(
-            item.plan_id != plan_id
-            for item in self.reference_methodology_pins
-        ):
+        if any(item.plan_id != plan_id for item in self.reference_methodology_pins):
             raise _issue(
                 DomainIssueCode.INVALID_IDENTIFIER,
                 "Reference-methodology pins must belong to the MealPlan.",
@@ -831,7 +833,9 @@ class MealPlanDetail:
 
     @property
     def horizon_dates(self) -> tuple[date, ...]:
-        return tuple(self.plan.week_start + timedelta(days=offset) for offset in range(7))
+        return tuple(
+            self.plan.week_start + timedelta(days=offset) for offset in range(7)
+        )
 
 
 @dataclass(frozen=True)
@@ -966,9 +970,7 @@ def calculate_meal_plan_nutrition(
                     nutrition.per_base_serving,
                     serving.portion_servings,
                 )
-                status = aggregate_nutrition_status(
-                    (nutrition.legacy_status,), values
-                )
+                status = aggregate_nutrition_status((nutrition.legacy_status,), values)
         else:
             values = NutritionValues()
             status = NutritionStatus.INCOMPLETE
@@ -982,9 +984,7 @@ def calculate_meal_plan_nutrition(
         grouped_days.items(), key=lambda item: (item[0][0].hex, item[0][1])
     ):
         values = aggregate_nutrition_values(item.values for item in results)
-        status = aggregate_nutrition_status(
-            (item.status for item in results), values
-        )
+        status = aggregate_nutrition_status((item.status for item in results), values)
         member_days.append(MemberDayNutrition(member_id, local_date, values, status))
 
     grouped_weeks: dict[UUID, list[MemberDayNutrition]] = defaultdict(list)
@@ -995,9 +995,7 @@ def calculate_meal_plan_nutrition(
         grouped_weeks.items(), key=lambda item: item[0].hex
     ):
         values = aggregate_nutrition_values(item.values for item in results)
-        status = aggregate_nutrition_status(
-            (item.status for item in results), values
-        )
+        status = aggregate_nutrition_status((item.status for item in results), values)
         member_weeks.append(MemberWeekNutrition(member_id, values, status))
 
     return MealPlanNutrition(

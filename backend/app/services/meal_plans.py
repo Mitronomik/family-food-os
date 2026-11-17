@@ -114,7 +114,9 @@ class MealPlanService:
         try:
             source_kind = MemberMealPatternSourceKind(source_kind)
         except (TypeError, ValueError) as exc:
-            raise MealPlanValidationError("Unsupported meal-pattern selection source kind.") from exc
+            raise MealPlanValidationError(
+                "Unsupported meal-pattern selection source kind."
+            ) from exc
         if has_user_overrides and schedule is None:
             raise MealPlanValidationError(
                 "A selection marked with user overrides requires the resolved override schedule."
@@ -131,7 +133,9 @@ class MealPlanService:
             with self._pattern_read_scope_factory() as scope:
                 program = scope.versions.get_detail(program_version_id)
             if program is None:
-                raise MealPlanValidationError("MealPatternProgramVersion was not found.")
+                raise MealPlanValidationError(
+                    "MealPatternProgramVersion was not found."
+                )
             age_years = _member_age_years(
                 member,
                 local_date=accepted_at.astimezone(ZoneInfo(household.timezone)).date(),
@@ -145,9 +149,7 @@ class MealPlanService:
             template = tuple(item.role for item in program.opportunities)
             template_shares = tuple(item.energy_share for item in program.opportunities)
             canonical_schedule = {weekday: template for weekday in range(1, 8)}
-            canonical_shares = {
-                weekday: template_shares for weekday in range(1, 8)
-            }
+            canonical_shares = {weekday: template_shares for weekday in range(1, 8)}
             if resolved_schedule is None:
                 resolved_schedule = canonical_schedule
             elif not has_user_overrides:
@@ -179,12 +181,13 @@ class MealPlanService:
                     "CUSTOM selection must not reference a MealPatternProgramVersion."
                 )
             if resolved_schedule is None:
-                raise MealPlanValidationError("CUSTOM selection requires a resolved schedule.")
+                raise MealPlanValidationError(
+                    "CUSTOM selection requires a resolved schedule."
+                )
 
         assert resolved_schedule is not None
         if (
-            source_kind is MemberMealPatternSourceKind.CUSTOM
-            or has_user_overrides
+            source_kind is MemberMealPatternSourceKind.CUSTOM or has_user_overrides
         ) and energy_shares is None:
             raise MealPlanValidationError(
                 "CUSTOM and PROGRAM override selections require explicit energy shares."
@@ -235,7 +238,9 @@ class MealPlanService:
                 recommender_version=recommender_version,
                 has_user_overrides=has_user_overrides,
                 accepted_at=accepted_at,
-                supersedes_selection_id=None if current is None else current.selection.id,
+                supersedes_selection_id=None
+                if current is None
+                else current.selection.id,
                 created_at=accepted_at,
             )
             opportunities = tuple(
@@ -286,8 +291,7 @@ class MealPlanService:
         # Public/manual MealPlanService has no authority to create diagnostic
         # composed events; only the dedicated internal writer can do that.
         if any(
-            event.source_kind == MealSourceKind.COOK_COMPOSITION
-            for event in events
+            event.source_kind == MealSourceKind.COOK_COMPOSITION for event in events
         ):
             raise MealPlanValidationError(
                 "COOK_COMPOSITION cannot be created through standard MealPlanService."
@@ -295,20 +299,24 @@ class MealPlanService:
         with self._household_read_scope_factory() as scope:
             if scope.households.get_household(household_id) is None:
                 raise MealPlanValidationError("Household was not found.")
-            members = {item.id: item for item in scope.members.list_members(household_id)}
+            members = {
+                item.id: item for item in scope.members.list_members(household_id)
+            }
         if not member_selection_ids:
-            raise MealPlanValidationError("MealPlan requires at least one Household member.")
+            raise MealPlanValidationError(
+                "MealPlan requires at least one Household member."
+            )
         if not set(member_selection_ids).issubset(members):
-            raise MealPlanValidationError("MealPlan members must belong to the Household.")
+            raise MealPlanValidationError(
+                "MealPlan members must belong to the Household."
+            )
 
         reference_methodology_selection_ids = dict(
             reference_methodology_selection_ids or {}
         )
-        if (
+        if reference_methodology_selection_ids and set(
             reference_methodology_selection_ids
-            and set(reference_methodology_selection_ids)
-            != set(member_selection_ids)
-        ):
+        ) != set(member_selection_ids):
             raise MealPlanValidationError(
                 "Reference-methodology pins must cover all plan members or none."
             )
@@ -325,9 +333,7 @@ class MealPlanService:
                         "MealPlan must pin a valid selection for each Household member."
                     )
                 selection_details[selection_id] = detail
-            for member_id, selection_id in (
-                reference_methodology_selection_ids.items()
-            ):
+            for member_id, selection_id in reference_methodology_selection_ids.items():
                 reference_selection = scope.reference_methodologies.get(
                     household_id, selection_id
                 )
@@ -344,21 +350,15 @@ class MealPlanService:
                         "MealPlan must pin an accepted supported reference "
                         "methodology for each member."
                     )
-                if (
-                    reference_selection.group_reference_methodology_version
-                    is not None
-                ):
+                if reference_selection.group_reference_methodology_version is not None:
                     try:
                         validate_russian_group_reference_applicability(
                             members[member_id],
                             reference_date=week_start,
                             methodology_version=(
-                                reference_selection
-                                .group_reference_methodology_version
+                                reference_selection.group_reference_methodology_version
                             ),
-                            russian_reference_tables=(
-                                self._russian_reference_tables
-                            ),
+                            russian_reference_tables=(self._russian_reference_tables),
                         )
                     except ReferenceMethodologyUnsupportedError as exc:
                         raise MealPlanValidationError(
@@ -488,6 +488,9 @@ def _member_age_years(member: HouseholdMember, *, local_date: date) -> int | Non
     if member.birth_date is None:
         return None
     years = local_date.year - member.birth_date.year
-    if (local_date.month, local_date.day) < (member.birth_date.month, member.birth_date.day):
+    if (local_date.month, local_date.day) < (
+        member.birth_date.month,
+        member.birth_date.day,
+    ):
         years -= 1
     return years

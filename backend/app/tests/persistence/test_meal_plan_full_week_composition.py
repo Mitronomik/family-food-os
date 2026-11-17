@@ -106,7 +106,9 @@ def _week_21_42(tmp_path):
         references[person.id] = reference
         pins.append(
             MealPlanMemberSelection(
-                plan_id=uuid4(), member_id=person.id, selection_id=selection.selection.id
+                plan_id=uuid4(),
+                member_id=person.id,
+                selection_id=selection.selection.id,
             )
         )
     with SqlAlchemyMealPlanUnitOfWork(engine) as uow:
@@ -235,17 +237,13 @@ def test_p2_full_persisted_21_event_42_serving_week_survives_one_lunch_edit(tmp_
             old_event.id != new_event.id
             for old_event, new_event in zip(old.events, changed.events)
         )
-        assert {
-            pin.member_id: pin.selection_id for pin in old.member_selections
-        } == {
+        assert {pin.member_id: pin.selection_id for pin in old.member_selections} == {
             pin.member_id: pin.selection_id for pin in changed.member_selections
         }
         assert {
             pin.member_id: replace(pin, plan_id=changed.plan.id)
             for pin in old.reference_methodology_pins
-        } == {
-            pin.member_id: pin for pin in changed.reference_methodology_pins
-        }
+        } == {pin.member_id: pin for pin in changed.reference_methodology_pins}
 
         _write(engine, changed, people)
         # Old Shopping v1a MUST NOT return a partial basket sourced from
@@ -271,9 +269,9 @@ def test_p2_full_persisted_21_event_42_serving_week_survives_one_lunch_edit(tmp_
             old_reopened = scope.plans.get_detail(home.id, old.plan.id)
         assert reopened == changed
         assert old_reopened == old
-        assert _semantic_rows(old_reopened, exclude_slot=changed_slot) == _semantic_rows(
-            reopened, exclude_slot=changed_slot
-        )
+        assert _semantic_rows(
+            old_reopened, exclude_slot=changed_slot
+        ) == _semantic_rows(reopened, exclude_slot=changed_slot)
         # Reader starts in a separate Python process; no in-memory rule cache.
         script = """
 import sys
@@ -322,7 +320,8 @@ def test_p2_truncated_new_revision_fails_before_any_write(tmp_path):
             replace(
                 changed,
                 events=tuple(
-                    event for event in changed.events
+                    event
+                    for event in changed.events
                     if event.local_date != date(2026, 11, 4)
                 ),
             )

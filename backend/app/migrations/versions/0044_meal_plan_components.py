@@ -31,8 +31,7 @@ def upgrade(db):
             "Unreviewed schema trigger/view dependency on meal_plan_events."
         )
     shopping_sql = next(
-        item[2] for item in referencing
-        if item[1] == "trg_shopping_obligation_event"
+        item[2] for item in referencing if item[1] == "trg_shopping_obligation_event"
     )
     if (
         not shopping_sql

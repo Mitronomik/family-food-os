@@ -130,7 +130,9 @@ class SqlAlchemyMealPlanUnitOfWork:
                 "MealPlan transaction conflicted with persisted state."
             ) from exc
         except DBAPIError as exc:
-            raise MealPlanPersistenceError("MealPlan transaction commit failed.") from exc
+            raise MealPlanPersistenceError(
+                "MealPlan transaction commit failed."
+            ) from exc
         finally:
             self._revoke()
 
@@ -138,7 +140,9 @@ class SqlAlchemyMealPlanUnitOfWork:
         try:
             self._scope.rollback()
         except DBAPIError as exc:
-            raise MealPlanPersistenceError("MealPlan transaction rollback failed.") from exc
+            raise MealPlanPersistenceError(
+                "MealPlan transaction rollback failed."
+            ) from exc
         finally:
             self._revoke()
 

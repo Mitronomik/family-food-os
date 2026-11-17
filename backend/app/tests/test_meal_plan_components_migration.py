@@ -49,26 +49,35 @@ def test_fresh_0044_is_final_and_immutable_component_tables_present(tmp_path):
     with sqlite3.connect(config.path) as db:
         db.execute("PRAGMA foreign_keys=ON")
         names = {
-            row[0] for row in db.execute(
-                "SELECT name FROM sqlite_master WHERE type='table'"
-            )
+            row[0]
+            for row in db.execute("SELECT name FROM sqlite_master WHERE type='table'")
         }
         assert TABLES <= names
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
-        assert db.execute("SELECT count(*) FROM meal_plan_event_compositions").fetchone() == (0,)
         assert db.execute(
-            "SELECT sql FROM sqlite_master WHERE type='table' AND name='meal_plan_events'"
-        ).fetchone()[0].find("COOK_COMPOSITION") >= 0
+            "SELECT count(*) FROM meal_plan_event_compositions"
+        ).fetchone() == (0,)
+        assert (
+            db.execute(
+                "SELECT sql FROM sqlite_master WHERE type='table' AND name='meal_plan_events'"
+            )
+            .fetchone()[0]
+            .find("COOK_COMPOSITION")
+            >= 0
+        )
         for table in TABLES:
             assert {
-                x[0] for x in db.execute(
+                x[0]
+                for x in db.execute(
                     "SELECT name FROM sqlite_master WHERE type='trigger' AND tbl_name=?",
                     (table,),
                 )
             } == {f"trg_{table}_no_update", f"trg_{table}_no_delete"}
 
 
-def test_real_0043_upgrades_to_0044_without_rewriting_legacy_data(tmp_path, monkeypatch):
+def test_real_0043_upgrades_to_0044_without_rewriting_legacy_data(
+    tmp_path, monkeypatch
+):
     config = DatabaseConfig(path=tmp_path / "upgrade.sqlite")
     _through_0043(config, monkeypatch)
     household = uuid4().hex
@@ -121,7 +130,12 @@ def test_real_0043_upgrades_to_0044_without_rewriting_legacy_data(tmp_path, monk
         db.commit()
         old = {
             table: db.execute(f"SELECT * FROM {table}").fetchall()
-            for table in ("meal_plans", "meal_plan_events", "servings", "meal_plan_member_selections")
+            for table in (
+                "meal_plans",
+                "meal_plan_events",
+                "servings",
+                "meal_plan_member_selections",
+            )
         }
     assert apply_migrations(config) == [MIGRATION_ID]
     with sqlite3.connect(config.path) as db:
