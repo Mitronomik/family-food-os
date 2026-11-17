@@ -92,6 +92,15 @@ def _source_recipes(config):
                 "VALUES (?, ?, ?, 1, '25.000000', 'g', 'test 25g', 0, CURRENT_TIMESTAMP)",
                 (uuid4().hex, vid, food_id),
             )
+            # The real read-only Shopping adapter loads a typed
+            # RecipeVersionDetail. Its source-verified fixture needs a
+            # persisted step as well as ingredients; this is test data only.
+            db.execute(
+                "INSERT INTO food_recipe_steps "
+                "(id, recipe_version_id, position, instruction, created_at) "
+                "VALUES (?, ?, 1, 'Технический шаг проверочной фикстуры.', CURRENT_TIMESTAMP)",
+                (uuid4().hex, vid),
+            )
             recipes[code] = UUID(hex=vid)
         db.commit()
     return recipes
