@@ -12,6 +12,8 @@ on:
       - 'backend/app/persistence/sqlalchemy_core/meal_plan_*.py'
       - 'backend/app/tests/test_meal_plan_components_migration.py'
       - 'backend/app/tests/persistence/test_meal_plan_composition_persistence.py'
+      - 'backend/app/tests/persistence/test_meal_plan_full_week_composition.py'
+      - 'backend/app/tests/persistence/test_shopping_persistence.py'
       - 'backend/app/tests/test_meal_plan_migration.py'
       - 'backend/app/tests/test_migration_runner_rebuild.py'
       - '.github/workflows/mealplan-composition-persistence.yml'
@@ -44,6 +46,9 @@ jobs:
             backend/app/tests/test_migration_runner_rebuild.py \
             backend/app/tests/persistence/test_meal_plan_repository.py \
             backend/app/tests/persistence/test_meal_plan_composition_persistence.py \
+            backend/app/tests/persistence/test_meal_plan_full_week_composition.py \
+            backend/app/tests/persistence/test_shopping_persistence.py \
+            backend/app/tests/test_meal_plan_application.py \
             backend/app/tests/test_migration_lineage.py \
             backend/app/tests/test_meal_plan_revision_history.py \
             backend/app/tests/test_shopping_calculation.py
@@ -61,6 +66,9 @@ jobs:
             backend/app/persistence/sqlalchemy_core/meal_plan_uow.py \
             backend/app/tests/test_meal_plan_components_migration.py \
             backend/app/tests/persistence/test_meal_plan_composition_persistence.py \
+            backend/app/tests/persistence/test_meal_plan_full_week_composition.py \
+            backend/app/tests/persistence/test_shopping_persistence.py \
+            backend/app/services/meal_plans.py \
             backend/app/tests/test_meal_plan_migration.py
           python -m ruff format --check \
             backend/app/db/migrations.py \
@@ -74,6 +82,9 @@ jobs:
             backend/app/persistence/sqlalchemy_core/meal_plan_uow.py \
             backend/app/tests/test_meal_plan_components_migration.py \
             backend/app/tests/persistence/test_meal_plan_composition_persistence.py \
+            backend/app/tests/persistence/test_meal_plan_full_week_composition.py \
+            backend/app/tests/persistence/test_shopping_persistence.py \
+            backend/app/services/meal_plans.py \
             backend/app/tests/test_meal_plan_migration.py
       - name: Existing two-process full-week Planner proof
         run: python scripts/pr10_ff_two_process_proof.py --output-dir "$RUNNER_TEMP/mealplan-proof"
