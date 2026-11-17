@@ -7,19 +7,19 @@ Only the target source-recipe event changes into a composed diagnostic event.
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import replace
 from datetime import datetime
-from typing import Callable
 from uuid import UUID, uuid4
 
 from app.domain.meal_compositions import (
+    DraftMealStructureRule,
     MealEventCompositionDraft,
     PersistedMealComponent,
     PersistedMealEventComposition,
     PersistedMemberComponentServing,
-    DraftMealStructureRule,
-    validate_composition_draft,
     assert_complete_revision_preservation,
+    validate_composition_draft,
 )
 from app.domain.meal_plans import (
     MealPlanDetail,
