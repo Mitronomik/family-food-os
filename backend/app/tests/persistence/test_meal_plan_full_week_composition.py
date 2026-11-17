@@ -57,7 +57,7 @@ from app.tests.persistence.test_meal_plan_repository import (
 )
 
 WEEK_START = date(2026, 11, 2)
-CREATED = datetime(2026, 11, 16, 15, 0, tzinfo=UTC)
+CREATED = datetime(2026, 11, 15, 15, 0, tzinfo=UTC)
 ROLES = (
     (MealRole.BREAKFAST, (0, 1)),
     (MealRole.LUNCH, (0,)),
@@ -121,7 +121,12 @@ def _week_21_42(tmp_path):
         supersedes_plan_id=None,
         created_at=CREATED,
     )
-    pins = tuple(replace(pin, plan_id=plan.id) for pin in pins)
+    pins = tuple(
+        sorted(
+            (replace(pin, plan_id=plan.id) for pin in pins),
+            key=lambda item: item.member_id.hex,
+        )
+    )
     for person in people:
         ref = references[person.id]
         reference_pins.append(
@@ -166,6 +171,12 @@ def _week_21_42(tmp_path):
                 )
     assert len(events) == 21
     assert len(servings) == 42
+    # The SQL read-model is deterministic by event slot and member UUID,
+    # not by the test fixture's human ordinal. Build that canonical snapshot
+    # before comparing persisted/reloaded immutable revisions.
+    event_order = {event.id: pos for pos, event in enumerate(events)}
+    servings.sort(key=lambda item: (event_order[item.event_id], item.member_id.hex))
+    reference_pins.sort(key=lambda item: item.member_id.hex)
     old = MealPlanDetail(
         plan=plan,
         member_selections=pins,
