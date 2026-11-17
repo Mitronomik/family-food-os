@@ -493,12 +493,9 @@ class PersistedMealEventComposition:
             total = event_counts[requirement.kind]
             if not requirement.minimum <= total <= requirement.maximum:
                 raise _issue("components", "Event-wide course count differs from rule.")
-            if (
-                self.rule.coverage is RequiredCourseCoverage.PER_PARTICIPANT
-                and any(
-                    courses[requirement.kind] < requirement.minimum
-                    for courses in member_courses.values()
-                )
+            if self.rule.coverage is RequiredCourseCoverage.PER_PARTICIPANT and any(
+                courses[requirement.kind] < requirement.minimum
+                for courses in member_courses.values()
             ):
                 raise _issue("servings", "A member is missing a required course.")
         course_order = {item.kind: i for i, item in enumerate(self.rule.requirements)}
