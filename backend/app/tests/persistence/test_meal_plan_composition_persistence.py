@@ -463,11 +463,13 @@ def test_p2_generic_add_detail_denied_even_with_internal_uow_enabled(tmp_path):
         ):
             scope.plans.add_detail(draft)
         # Legacy private-kw bypass is no longer part of the method signature.
-        with SqlAlchemyMealPlanUnitOfWork(
-            engine, enable_internal_composition_writes=True
-        ) as scope:
-            with pytest.raises(TypeError, match="_diagnostic_composition"):
-                scope.plans.add_detail(draft, _diagnostic_composition=True)
+        with (
+            SqlAlchemyMealPlanUnitOfWork(
+                engine, enable_internal_composition_writes=True
+            ) as scope,
+            pytest.raises(TypeError, match="_diagnostic_composition"),
+        ):
+            scope.plans.add_detail(draft, _diagnostic_composition=True)
         with sqlite3.connect(config.path) as db:
             for table in (
                 "meal_plan_event_compositions",
