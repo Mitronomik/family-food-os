@@ -19,6 +19,7 @@ import pytest
 from app.db.config import DatabaseConfig
 from app.db.migrations import apply_migrations
 from app.domain.meal_patterns import MealRole
+from app.domain.shopping_calculation import ShoppingCalculationError
 from app.domain.meal_plans import (
     HouseholdMealEvent,
     MealPlan,
@@ -38,6 +39,11 @@ from app.persistence.sqlalchemy_core.meal_plan_uow import (
 from app.persistence.sqlalchemy_core.reference_methodology_uow import (
     SqlAlchemyReferenceMethodologyUnitOfWork,
 )
+from app.persistence.sqlalchemy_core.shopping_uow import (
+    SqlAlchemyShoppingReadScope,
+    SqlAlchemyShoppingUnitOfWork,
+)
+from app.services.shopping import ShoppingService
 from app.services.meal_plan_composition_revisions import (
     assert_complete_revision_preservation,
 )
@@ -242,6 +248,20 @@ def test_p2_full_persisted_21_event_42_serving_week_survives_one_lunch_edit(tmp_
         }
 
         _write(engine, changed, people)
+        # Old Shopping v1a MUST NOT return a partial basket sourced from
+        # the other 20 unchanged events or treat this composition as a
+        # single-recipe event. Component demand belongs to a later PR.
+        old_shopping = ShoppingService(
+            lambda: SqlAlchemyShoppingUnitOfWork(engine),
+            lambda: SqlAlchemyShoppingReadScope(engine),
+            clock=lambda: CREATED,
+        )
+        with pytest.raises(ShoppingCalculationError, match="привязка"):
+            old_shopping.generate(home.id, changed.plan.id)
+        import sqlite3
+
+        with sqlite3.connect(config.path) as db:
+            assert db.execute("SELECT count(*) FROM shopping_lists").fetchone() == (0,)
         with SqlAlchemyMealPlanReadScope(engine) as scope:
             assert scope.plans.get_detail(home.id, old.plan.id) == old
             assert scope.plans.get_detail(home.id, changed.plan.id) == changed
