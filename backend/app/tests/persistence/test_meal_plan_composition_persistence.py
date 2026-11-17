@@ -20,13 +20,12 @@ from app.domain.meal_compositions import (
     MealEventCompositionDraft,
     MemberComponentServingDraft,
     RequiredCourseCoverage,
-    restore_rule_snapshot,
     rule_snapshot_digest,
     serialized_requirements,
 )
 from app.domain.errors import DomainValidationError
 from app.domain.meal_patterns import MealRole
-from app.domain.meal_plans import MealPlanDetail, MealPlanStatus, MealSourceKind
+from app.domain.meal_plans import MealPlanStatus, MealSourceKind
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.meal_plan_uow import (
     SqlAlchemyMealPlanReadScope,
@@ -40,10 +39,14 @@ from app.services.meal_plan_contracts import (
     MealPlanPersistenceError,
 )
 from app.services.meal_plans import MealEventDraft, MealPlanValidationError
-from app.tests.test_meal_plan_application import _service as _public_mealplan_service
 from app.tests.persistence.test_meal_plan_repository import (
-    _household, _member, _seed_household, _plan, _selection
+    _household,
+    _member,
+    _plan,
+    _seed_household,
+    _selection,
 )
+from app.tests.test_meal_plan_application import _service as _public_mealplan_service
 
 TIME = datetime(2026, 11, 16, 12, 0, tzinfo=UTC)
 
@@ -224,11 +227,13 @@ def test_complete_week_source_roundtrip_and_legacy_history(tmp_path):
         assert len(current.compositions) == 1
         assert current.compositions[0].rule == _rule()
         assert len(current.compositions[0].servings) == 3
-        with pytest.raises(MealPlanPersistenceConflictError):
-            with SqlAlchemyMealPlanUnitOfWork(engine) as scope:
-                scope.plans.add_diagnostic_composition_revision(
-                    current, excluded_food_codes_by_member={people[0].id: frozenset()}
-                )
+        with (
+            pytest.raises(MealPlanPersistenceConflictError),
+            SqlAlchemyMealPlanUnitOfWork(engine) as scope,
+        ):
+            scope.plans.add_diagnostic_composition_revision(
+                current, excluded_food_codes_by_member={people[0].id: frozenset()}
+            )
         _write(engine, current, people)
         with SqlAlchemyMealPlanReadScope(engine) as scope:
             assert scope.plans.get_detail(home.id, prior.plan.id) == prior
@@ -289,12 +294,14 @@ def test_rule_drift_and_injected_component_failure_leave_current_unchanged(tmp_p
         with sqlite3.connect(config.path) as db:
             db.execute("DROP TRIGGER test_composition_insert_failure")
         _write(engine, new, people)
-        with sqlite3.connect(config.path) as db:
-            # Direct DB tampering is impossible through the ordinary immutable triggers.
-            with pytest.raises(sqlite3.IntegrityError, match="immutable"):
-                db.execute(
-                    "UPDATE meal_plan_event_compositions SET structure_rule_version=2"
-                )
+        # Direct DB tampering is impossible through immutable triggers.
+        with (
+            sqlite3.connect(config.path) as db,
+            pytest.raises(sqlite3.IntegrityError, match="immutable"),
+        ):
+            db.execute(
+                "UPDATE meal_plan_event_compositions SET structure_rule_version=2"
+            )
         current = new
         # A second revision with conflicting meaning under the same code/version
         # is not accepted even if it carries its own recomputed valid digest.
@@ -328,9 +335,14 @@ def test_snapshot_corruption_is_detected_on_a_new_read(tmp_path):
                 "UPDATE meal_plan_event_compositions SET requirements_json='[]'"
             )
             db.commit()
-        with pytest.raises((ValueError, MealPlanPersistenceError), match="snapshot|requirements|rule|replay"):
-            with SqlAlchemyMealPlanReadScope(engine) as scope:
-                scope.plans.get_detail(home.id, new.plan.id)
+        with (
+            pytest.raises(
+                (ValueError, MealPlanPersistenceError),
+                match="snapshot|requirements|rule|replay",
+            ),
+            SqlAlchemyMealPlanReadScope(engine) as scope,
+        ):
+            scope.plans.get_detail(home.id, new.plan.id)
     finally:
         engine.dispose()
 
@@ -384,7 +396,7 @@ def prior_week_start():
 
 
 def test_p1_domain_and_default_sqlite_uow_reject_composition_without_header(tmp_path):
-    config, engine, home, people, prior, recipes, accepted = _setup(tmp_path)
+    _, engine, home, people, prior, recipes, accepted = _setup(tmp_path)
     try:
         changed = replace(
             prior.events[0],
@@ -399,9 +411,11 @@ def test_p1_domain_and_default_sqlite_uow_reject_composition_without_header(tmp_
         draft = _compose(prior, people, recipes, accepted)
         with pytest.raises(DomainValidationError, match="DRAFT"):
             replace(draft, plan=replace(draft.plan, status=MealPlanStatus.CONFIRMED))
-        with pytest.raises(MealPlanPersistenceConflictError, match="diagnostic"):
-            with SqlAlchemyMealPlanUnitOfWork(engine) as uow:
-                uow.plans.add_detail(draft)
+        with (
+            pytest.raises(MealPlanPersistenceConflictError, match="diagnostic"),
+            SqlAlchemyMealPlanUnitOfWork(engine) as uow,
+        ):
+            uow.plans.add_detail(draft)
         with SqlAlchemyMealPlanReadScope(engine) as scope:
             assert scope.plans.get_current(home.id, prior.plan.week_start) == prior
     finally:
