@@ -615,3 +615,104 @@ def test_v1b_replay_rejects_consistently_rehashed_missing_leftover(tmp_path):
             diagnostic.get_diagnostic_detail(home.id, saved.shopping_list.id)
     finally:
         engine.dispose()
+
+
+@pytest.mark.parametrize(
+    "corrupted_source",
+    ("member_selection_pins", "plan_events", "servings", "compositions"),
+)
+def test_v1b_rejects_rehashed_source_that_diverges_from_immutable_meal_plan(
+    tmp_path, corrupted_source
+):
+    """Source/content digests cannot replace independent MealPlan source authority."""
+    config, engine, home, people, old, recipes, selections = _setup(tmp_path)
+    try:
+        draft = _compose(old, people, recipes, selections)
+        _write(engine, draft, people)
+        diagnostic = _internal(engine)
+        saved = diagnostic.generate_diagnostic(home.id, draft.plan.id)
+        assert (
+            diagnostic.get_diagnostic_detail(home.id, saved.shopping_list.id) == saved
+        )
+
+        with sqlite3.connect(config.path) as db:
+            db.execute("DROP TRIGGER trg_shopping_lists_update_immutable")
+            source = json.loads(saved.shopping_list.provenance_json)
+            foreign_id = str(uuid4())
+            if corrupted_source == "member_selection_pins":
+                source["member_selection_pins"][0]["selection_id"] = foreign_id
+            elif corrupted_source == "plan_events":
+                source["plan_events"][0]["source_reference"] = (
+                    "forged event source reference"
+                )
+            elif corrupted_source == "servings":
+                source["servings"][0]["member_id"] = foreign_id
+            else:
+                first = source["compositions"][0]["components"][0]
+                first["member_servings"][0]["member_id"] = foreign_id
+                for contribution in source["component_contributions"]:
+                    if contribution["component_id"] == first["component_id"]:
+                        contribution["member_servings"][0]["member_id"] = foreign_id
+
+            # Recompute BOTH hashes exactly as the V2 serializer does, and
+            # rewrite the matching SQL header. A hash-only replay would trust
+            # these mutually consistent but false facts about the real MealPlan.
+            meta = source["calculation"]
+            base_meta_keys = (
+                "household_id",
+                "plan_id",
+                "plan_revision",
+                "week_start",
+                "config_version",
+                "as_of_date",
+                "timezone",
+            )
+            input_keys = (
+                "plan_events",
+                "member_selection_pins",
+                "servings",
+                "compositions",
+                "recipe_inputs",
+                "foods",
+                "pantry_items",
+            )
+            new_source_hash = _fingerprint(
+                {
+                    "schema": source["schema"],
+                    "engine": source["engine"],
+                    "policy": source["policy"],
+                    "calculation": {key: meta[key] for key in base_meta_keys},
+                    **{key: source[key] for key in input_keys},
+                }
+            )
+            assert new_source_hash != saved.shopping_list.source_fingerprint
+            meta["source_hash"] = new_source_hash
+            new_content_hash = _fingerprint(
+                {
+                    "source_fingerprint": new_source_hash,
+                    "component_contributions": source["component_contributions"],
+                    "event_demands": source["event_demands"],
+                    "items": source["items"],
+                    "unresolved": source["unresolved"],
+                    "warnings": source["warnings"],
+                    "allocations": source["allocations"],
+                }
+            )
+            meta["content_hash"] = new_content_hash
+            db.execute(
+                "UPDATE shopping_lists SET provenance_json=?, "
+                "source_fingerprint=?, content_fingerprint=? WHERE id=?",
+                (
+                    json.dumps(source, ensure_ascii=False, sort_keys=True),
+                    new_source_hash,
+                    new_content_hash,
+                    saved.shopping_list.id.hex,
+                ),
+            )
+
+        # The source MealPlan rows themselves were not changed.
+        # A separate source-read must reject all four coherent forgeries.
+        with pytest.raises(ShoppingPersistenceError, match="не воспроизводится"):
+            diagnostic.get_diagnostic_detail(home.id, saved.shopping_list.id)
+    finally:
+        engine.dispose()
