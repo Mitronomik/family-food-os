@@ -365,13 +365,14 @@ def test_v1b_dated_pantry_fefo_across_composed_and_legacy_events(
             quantity=stock_quantity, unit="g",
             location=PantryLocation.PANTRY,
             estimated=False, purchased_on=None, opened_on=None,
-            expires_on=date(2026, 11, 4),
+            expires_on=date(2026, 9, 16),
             created_at=NOW, updated_at=NOW,
         )
         with SqlAlchemyPantryUnitOfWork(engine) as scope:
             scope.items.add(stock)
             scope.commit()
-        day_before_week = datetime(2026, 11, 1, 12, tzinfo=UTC)
+        # The persisted fixture week is 2026-09-14..20, not November.
+        day_before_week = datetime(2026, 9, 13, 12, tzinfo=UTC)
         diagnostic = DiagnosticCompositionShoppingService(
             lambda: SqlAlchemyShoppingUnitOfWork(engine),
             lambda: SqlAlchemyShoppingReadScope(engine),
