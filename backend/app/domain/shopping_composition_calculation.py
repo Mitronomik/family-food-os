@@ -98,6 +98,106 @@ def _lot_identity(item: PantryItem) -> list[str | None]:
     ]
 
 
+def meal_plan_source_projection(plan: MealPlanDetail) -> dict[str, list[dict]]:
+    """Canonical immutable MealPlan portion of V2 Shopping source provenance.
+
+    Generation and diagnostic readback use the same ordering/field contract;
+    readback derives these facts from the loaded MealPlan, not stored JSON.
+    """
+    events = sorted(plan.events, key=lambda e: (e.local_date, e.position, str(e.id)))
+    event_by_id = {event.id: event for event in events}
+    if len(event_by_id) != len(events):
+        _reject("Невозможно сопоставить события исходного плана.")
+    plan_events = [
+        {
+            "event_id": str(e.id),
+            "local_date": e.local_date.isoformat(),
+            "position": e.position,
+            "role": str(e.role),
+            "source_kind": str(e.source_kind),
+            "recipe_version_id": str(e.recipe_version_id)
+            if e.recipe_version_id
+            else None,
+            "source_reference": e.source_reference,
+        }
+        for e in events
+    ]
+    member_pins = [
+        {"member_id": str(p.member_id), "selection_id": str(p.selection_id)}
+        for p in sorted(plan.member_selections, key=lambda p: p.member_id.hex)
+    ]
+    legacy_servings = [
+        {
+            "event_id": str(s.event_id),
+            "member_id": str(s.member_id),
+            "portion_servings": format(s.portion_servings, ".6f"),
+        }
+        for s in sorted(
+            plan.servings,
+            key=lambda s: (
+                event_by_id[s.event_id].local_date,
+                event_by_id[s.event_id].position,
+                s.member_id.hex,
+            ),
+        )
+    ]
+    compositions = []
+    for comp in sorted(
+        plan.compositions,
+        key=lambda c: (
+            event_by_id[c.event_id].local_date,
+            event_by_id[c.event_id].position,
+        ),
+    ):
+        rule = comp.rule
+        compositions.append(
+            {
+                "meal_event_id": str(comp.event_id),
+                "rule": {
+                    "schema_version": 1,
+                    "code": rule.code,
+                    "version": rule.version,
+                    "meal_role": str(rule.meal_role),
+                    "coverage": str(rule.coverage),
+                    "requirements": [
+                        {
+                            "kind": str(r.kind),
+                            "minimum": r.minimum,
+                            "maximum": r.maximum,
+                        }
+                        for r in rule.requirements
+                    ],
+                    "sha256": rule_snapshot_digest(rule),
+                },
+                "components": [
+                    {
+                        "component_id": str(part.id),
+                        "position": part.position,
+                        "course_kind": str(part.course),
+                        "recipe_version_id": str(part.recipe_version_id),
+                        "member_servings": [
+                            {
+                                "member_id": str(s.member_id),
+                                "portion_servings": format(s.portion_servings, ".6f"),
+                            }
+                            for s in sorted(
+                                (s for s in comp.servings if s.component_id == part.id),
+                                key=lambda s: s.member_id.hex,
+                            )
+                        ],
+                    }
+                    for part in sorted(comp.components, key=lambda p: p.position)
+                ],
+            }
+        )
+    return {
+        "plan_events": plan_events,
+        "member_selection_pins": member_pins,
+        "servings": legacy_servings,
+        "compositions": compositions,
+    }
+
+
 def calculate_shopping_composition(
     *,
     plan: MealPlanDetail,
@@ -319,88 +419,7 @@ def calculate_shopping_composition(
             ),
         )
     ]
-    plan_events = [
-        {
-            "event_id": str(e.id),
-            "local_date": e.local_date.isoformat(),
-            "position": e.position,
-            "role": str(e.role),
-            "source_kind": str(e.source_kind),
-            "recipe_version_id": str(e.recipe_version_id)
-            if e.recipe_version_id
-            else None,
-            "source_reference": e.source_reference,
-        }
-        for e in events
-    ]
-    member_pins = [
-        {"member_id": str(p.member_id), "selection_id": str(p.selection_id)}
-        for p in sorted(plan.member_selections, key=lambda p: p.member_id.hex)
-    ]
-    legacy_servings = [
-        {
-            "event_id": str(s.event_id),
-            "member_id": str(s.member_id),
-            "portion_servings": format(s.portion_servings, ".6f"),
-        }
-        for s in sorted(
-            plan.servings,
-            key=lambda s: (
-                event_by_id[s.event_id].local_date,
-                event_by_id[s.event_id].position,
-                s.member_id.hex,
-            ),
-        )
-    ]
-    compositions = []
-    for comp in sorted(
-        plan.compositions,
-        key=lambda c: (
-            event_by_id[c.event_id].local_date,
-            event_by_id[c.event_id].position,
-        ),
-    ):
-        rule = comp.rule
-        compositions.append(
-            {
-                "meal_event_id": str(comp.event_id),
-                "rule": {
-                    "schema_version": 1,
-                    "code": rule.code,
-                    "version": rule.version,
-                    "meal_role": str(rule.meal_role),
-                    "coverage": str(rule.coverage),
-                    "requirements": [
-                        {
-                            "kind": str(r.kind),
-                            "minimum": r.minimum,
-                            "maximum": r.maximum,
-                        }
-                        for r in rule.requirements
-                    ],
-                    "sha256": rule_snapshot_digest(rule),
-                },
-                "components": [
-                    {
-                        "component_id": str(part.id),
-                        "position": part.position,
-                        "course_kind": str(part.course),
-                        "recipe_version_id": str(part.recipe_version_id),
-                        "member_servings": [
-                            {
-                                "member_id": str(s.member_id),
-                                "portion_servings": format(s.portion_servings, ".6f"),
-                            }
-                            for s in sorted(
-                                (s for s in comp.servings if s.component_id == part.id),
-                                key=lambda s: s.member_id.hex,
-                            )
-                        ],
-                    }
-                    for part in sorted(comp.components, key=lambda p: p.position)
-                ],
-            }
-        )
+    source_plan = meal_plan_source_projection(plan)
     used_recipes = {
         e.recipe_version_id
         for e in events
@@ -477,10 +496,7 @@ def calculate_shopping_composition(
             "as_of_date": as_of.isoformat(),
             "timezone": household_timezone,
         },
-        "plan_events": plan_events,
-        "member_selection_pins": member_pins,
-        "servings": legacy_servings,
-        "compositions": compositions,
+        **source_plan,
         "recipe_inputs": recipe_inputs,
         "foods": food_sources,
         "pantry_items": pantry_sources,
