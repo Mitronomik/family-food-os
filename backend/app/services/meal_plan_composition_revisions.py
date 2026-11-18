@@ -12,13 +12,17 @@ from dataclasses import replace
 from datetime import datetime
 from uuid import UUID, uuid4
 
+from app.domain.errors import DomainValidationError
+from app.domain.food_ingredients import normalize_allergen_code
 from app.domain.meal_compositions import (
+    COMPOSITION_ADMISSION,
     DraftMealStructureRule,
     MealEventCompositionDraft,
     PersistedMealComponent,
     PersistedMealEventComposition,
     PersistedMemberComponentServing,
     assert_complete_revision_preservation,
+    rule_snapshot_digest,
     validate_composition_draft,
 )
 from app.domain.meal_plans import (
@@ -28,9 +32,187 @@ from app.domain.meal_plans import (
     MemberMealPatternSelectionDetail,
     validate_complete_plan,
 )
-from app.services.meal_plan_contracts import MealPlanPersistenceConflictError
+from app.services.meal_plan_contracts import (
+    DiagnosticRecipeFacts,
+    MealPlanPersistenceConflictError,
+    MealPlanUnitOfWork,
+)
 
 IdFactory = Callable[[], UUID]
+
+
+def _is_normalized_allergen(code: object) -> bool:
+    if not isinstance(code, str):
+        return False
+    try:
+        return normalize_allergen_code(code) == code
+    except DomainValidationError:
+        return False
+
+
+def persist_diagnostic_composition_revision(
+    uow: MealPlanUnitOfWork,
+    detail: MealPlanDetail,
+    *,
+    excluded_food_codes_by_member: dict[UUID, frozenset[str]],
+    excluded_allergen_codes_by_member: dict[UUID, frozenset[str]],
+) -> None:
+    """Validate a synthetic complete-week revision and insert in ONE active UoW.
+
+    The repository supplies pinned database facts only. Admission decisions are
+    service/domain-owned; this helper never commits and has no API/Planner route.
+    """
+    if (
+        detail.plan.status is not MealPlanStatus.DRAFT
+        or not detail.compositions
+        or detail.plan.supersedes_plan_id is None
+    ):
+        raise MealPlanPersistenceConflictError(
+            "Only complete diagnostic DRAFT revisions are supported."
+        )
+    previous = uow.plans.get_current(
+        detail.plan.household_id, detail.plan.week_start
+    )
+    if previous is None or previous.plan.id != detail.plan.supersedes_plan_id:
+        raise MealPlanPersistenceConflictError(
+            "Composition revision must supersede exact current plan."
+        )
+    try:
+        target_events = {
+            event.id
+            for event in detail.events
+            if event.source_kind is MealSourceKind.COOK_COMPOSITION
+        }
+        if len(target_events) != len(previous.compositions) + 1:
+            raise MealPlanPersistenceConflictError(
+                "Exactly one additional composed event is required."
+            )
+        old_slots = {
+            (event.local_date, event.position): event for event in previous.events
+        }
+        new_slots = {
+            (event.local_date, event.position): event for event in detail.events
+        }
+        targets = [
+            prior.id
+            for slot, prior in old_slots.items()
+            if prior.source_kind is MealSourceKind.COOK_RECIPE
+            and slot in new_slots
+            and new_slots[slot].source_kind is MealSourceKind.COOK_COMPOSITION
+        ]
+        if len(targets) != 1:
+            raise MealPlanPersistenceConflictError(
+                "Missing exactly one original recipe-backed target."
+            )
+        assert_complete_revision_preservation(previous, detail, targets[0])
+        accepted = {
+            pin.selection_id: uow.selections.get_detail(
+                detail.plan.household_id, pin.selection_id
+            )
+            for pin in detail.member_selections
+        }
+        if any(value is None for value in accepted.values()):
+            raise MealPlanPersistenceConflictError(
+                "Missing accepted pinned member selection."
+            )
+        validate_complete_plan(detail, accepted)
+    except DomainValidationError as exc:
+        raise MealPlanPersistenceConflictError(
+            "Incomplete/changed source week or member meal-pattern coverage."
+        ) from exc
+
+    pinned_members = {pin.member_id for pin in detail.member_selections}
+    if set(excluded_food_codes_by_member) != pinned_members or any(
+        not isinstance(codes, frozenset)
+        or any(not isinstance(code, str) or not code for code in codes)
+        for codes in excluded_food_codes_by_member.values()
+    ):
+        raise MealPlanPersistenceConflictError(
+            "Explicit synthetic participant exclusions are required."
+        )
+    if set(excluded_allergen_codes_by_member) != pinned_members or any(
+        not isinstance(codes, frozenset)
+        or any(not _is_normalized_allergen(code) for code in codes)
+        for codes in excluded_allergen_codes_by_member.values()
+    ):
+        raise MealPlanPersistenceConflictError(
+            "Explicit normalized allergen exclusions are required for every participant."
+        )
+
+    identities = {(comp.rule.code, comp.rule.version) for comp in detail.compositions}
+    rule_hashes = uow.plans.get_diagnostic_rule_digests(identities)
+    source_ids = {
+        part.recipe_version_id
+        for comp in detail.compositions
+        for part in comp.components
+    }
+    recipes = uow.plans.get_diagnostic_recipe_facts(source_ids)
+    for comp in detail.compositions:
+        if comp.admission_status != COMPOSITION_ADMISSION:
+            raise MealPlanPersistenceConflictError("No published composition rule.")
+        digest = rule_snapshot_digest(comp.rule)
+        if any(
+            saved != digest
+            for saved in rule_hashes.get((comp.rule.code, comp.rule.version), ())
+        ):
+            raise MealPlanPersistenceConflictError(
+                "Changed rule requirements under the same code/version."
+            )
+        for part in comp.components:
+            facts: DiagnosticRecipeFacts | None = recipes.get(part.recipe_version_id)
+            if (
+                facts is None
+                or facts.verification_status != "SOURCE_VERIFIED"
+                or facts.rights_review_status != "REVIEWED"
+                or not facts.source_document_sha256
+            ):
+                raise MealPlanPersistenceConflictError(
+                    "Component RecipeVersion is not source/right verified."
+                )
+            if not facts.is_active:
+                raise MealPlanPersistenceConflictError(
+                    "Component source Recipe is not active."
+                )
+            if not facts.ingredients or any(
+                ingredient.optional
+                or not ingredient.is_active
+                or ingredient.unit != ingredient.default_unit
+                or ingredient.quantity <= 0
+                for ingredient in facts.ingredients
+            ):
+                raise MealPlanPersistenceConflictError(
+                    "Component FoodIngredient source/unit is not verified."
+                )
+            if any(not ingredient.allergens_reviewed for ingredient in facts.ingredients):
+                raise MealPlanPersistenceConflictError(
+                    "Component ingredient allergen review is incomplete."
+                )
+            if any(
+                not _is_normalized_allergen(code)
+                for ingredient in facts.ingredients
+                for code in ingredient.allergen_codes
+            ):
+                raise MealPlanPersistenceConflictError(
+                    "Component ingredient allergen catalogue contains invalid codes."
+                )
+            present_foods = {ingredient.canonical_code for ingredient in facts.ingredients}
+            present_allergens = {
+                code
+                for ingredient in facts.ingredients
+                for code in ingredient.allergen_codes
+            }
+            for serving in comp.servings:
+                if serving.component_id != part.id:
+                    continue
+                if present_foods & excluded_food_codes_by_member[serving.member_id]:
+                    raise MealPlanPersistenceConflictError(
+                        "Member hard food exclusion violated by a component."
+                    )
+                if present_allergens & excluded_allergen_codes_by_member[serving.member_id]:
+                    raise MealPlanPersistenceConflictError(
+                        "Member hard allergen exclusion violated by a component."
+                    )
+    uow.plans.add_validated_diagnostic_detail(detail)
 
 
 def make_complete_diagnostic_revision(
