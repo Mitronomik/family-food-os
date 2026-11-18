@@ -14,7 +14,12 @@ from hashlib import sha256
 from uuid import UUID, uuid4
 
 from app.domain.meal_plans import MealSourceKind
+from app.domain.shopping_composition_calculation import (
+    ENGINE_VERSION as COMPOSITION_ENGINE_VERSION,
+    SCHEMA_V2,
+)
 from app.domain.shopping_calculation import (
+    ENGINE_VERSION as LEGACY_ENGINE_VERSION,
     ShoppingCalculation,
     ShoppingCalculationError,
     calculate_shopping,
@@ -72,6 +77,35 @@ def _digest(value: object) -> str:
     return sha256(_json(value).encode("utf-8")).hexdigest()
 
 
+
+LEGACY_SCHEMA = "SHOPPING_SOURCE_SNAPSHOT_V1"
+
+
+def _list_visibility(detail: ShoppingListDetail, plan) -> str:
+    """Strict public read classification, before returning any stored quantity."""
+    try:
+        payload = json.loads(detail.shopping_list.provenance_json)
+        if not isinstance(payload, dict) or not isinstance(payload.get("calculation"), dict):
+            raise ValueError("invalid provenance")
+        schema = payload.get("schema")
+        calc_engine = payload["calculation"].get("engine")
+    except (ValueError, TypeError) as exc:
+        raise ShoppingPersistenceError(
+            "Сохранённое происхождение списка покупок не подтверждено."
+        ) from exc
+    engine = detail.shopping_list.engine_version
+    has_composition = bool(plan.compositions)
+    if engine == LEGACY_ENGINE_VERSION and schema == LEGACY_SCHEMA and calc_engine == engine:
+        if has_composition:
+            raise ShoppingPersistenceError("Несовместимая версия списка покупок.")
+        return "legacy"
+    if engine == COMPOSITION_ENGINE_VERSION and schema == SCHEMA_V2 and calc_engine == engine:
+        if not has_composition:
+            raise ShoppingPersistenceError("Несовместимая диагностическая ревизия.")
+        return "diagnostic"
+    raise ShoppingPersistenceError("Неизвестная версия происхождения списка покупок.")
+
+
 class ShoppingService:
     def __init__(
         self,
@@ -97,6 +131,10 @@ class ShoppingService:
         plan = scope.plans.get_detail(household_id, plan_id)
         if household is None or plan is None:
             raise ShoppingNotFoundError("План питания не найден для этой семьи.")
+        if plan.compositions:
+            raise ShoppingCalculationError(
+                "Диагностическая композиция недоступна в публичном Shopping."
+            )
         current = scope.plans.get_current(household_id, plan.plan.week_start)
         if current is None or current.plan.id != plan.plan.id:
             raise ShoppingPersistenceConflictError(
@@ -168,96 +206,109 @@ class ShoppingService:
 
     def generate(self, household_id: UUID, plan_id: UUID) -> ShoppingListDetail:
         captured = self._clock()
-        # The write UoW obtains a physical SQLite writer reservation before
-        # _calculate reads any source facts or another ShoppingList.
+        # BEGIN IMMEDIATE is acquired before the first authoritative source read.
         with self._write() as scope:
             computed, provenance = self._calculate(
                 scope, household_id, plan_id, captured
             )
-            existing = scope.shopping.get_by_source(
-                household_id, plan_id, computed.source_fingerprint
+            return self._persist_calculated(
+                scope, household_id, plan_id, captured, computed, provenance
             )
-            if existing is not None:
-                if (
-                    existing.shopping_list.content_fingerprint
-                    != computed.content_fingerprint
-                ):
-                    raise ShoppingPersistenceConflictError(
-                        "Повторный Shopping snapshot отличается при тех же входных данных."
-                    )
-                return existing
-            previous = scope.shopping.get_latest_for_plan(household_id, plan_id)
-            detail_id = self._id()
-            header = ShoppingList(
-                id=detail_id,
-                household_id=household_id,
-                meal_plan_id=plan_id,
-                source_plan_revision_number=computed.source_plan_revision_number,
-                source_pantry_snapshot_hash=computed.pantry_snapshot_hash,
-                as_of_date=computed.as_of_date,
-                engine_version=computed.engine_version,
-                pantry_policy_version=computed.pantry_policy_version,
-                config_fingerprint=_digest(
-                    [
-                        plan_id,
-                        provenance["calculation"]["config_version"],
-                        computed.engine_version,
-                        computed.pantry_policy_version,
-                    ]
-                ),
-                source_fingerprint=computed.source_fingerprint,
-                content_fingerprint=computed.content_fingerprint,
-                status=computed.status,
-                price_status=computed.price_status,
-                provenance_json=_json(provenance),
-                supersedes_list_id=previous.shopping_list.id if previous else None,
-                created_at=captured,
-            )
-            items = tuple(
-                ShoppingListItem(
-                    id=self._id(),
-                    shopping_list_id=detail_id,
-                    household_id=household_id,
-                    food_ingredient_id=row.food_ingredient_id,
-                    form_basis=row.form_basis,
-                    unit=row.unit,
-                    required_quantity=row.required_quantity,
-                    pantry_available_quantity=row.pantry_available_quantity,
-                    purchase_quantity=row.purchase_quantity,
-                    ordinal=i,
-                )
-                for i, row in enumerate(computed.items, 1)
-            )
-            obligations = tuple(
-                ShoppingUnresolvedObligation(
-                    id=self._id(),
-                    shopping_list_id=detail_id,
-                    household_id=household_id,
-                    meal_event_id=row.meal_event_id,
-                    source_kind=row.source_kind,
-                    reason=row.reason,
-                    ordinal=i,
-                )
-                for i, row in enumerate(computed.unresolved, 1)
-            )
-            detail = ShoppingListDetail(header, items, obligations)
-            scope.shopping.add_detail(detail)
-            # Validate against same locked source revision before one commit.
-            again = scope.plans.get_detail(household_id, plan_id)
+
+    def _persist_calculated(
+        self, scope: ShoppingUnitOfWork, household_id: UUID, plan_id: UUID,
+        captured: datetime, computed: ShoppingCalculation, provenance: dict,
+    ) -> ShoppingListDetail:
+        """Write one immutable Shopping result within the caller-owned UoW."""
+        existing = scope.shopping.get_by_source(
+            household_id, plan_id, computed.source_fingerprint
+        )
+        if existing is not None:
             if (
-                again is None
-                or again.plan.revision_number != header.source_plan_revision_number
+                existing.shopping_list.content_fingerprint
+                != computed.content_fingerprint
             ):
                 raise ShoppingPersistenceConflictError(
-                    "Ревизия плана изменилась во время сохранения."
+                    "Повторный Shopping snapshot отличается при тех же входных данных."
                 )
-            scope.commit()
-            return detail
+            return existing
+        previous = scope.shopping.get_latest_for_plan(household_id, plan_id)
+        detail_id = self._id()
+        header = ShoppingList(
+            id=detail_id,
+            household_id=household_id,
+            meal_plan_id=plan_id,
+            source_plan_revision_number=computed.source_plan_revision_number,
+            source_pantry_snapshot_hash=computed.pantry_snapshot_hash,
+            as_of_date=computed.as_of_date,
+            engine_version=computed.engine_version,
+            pantry_policy_version=computed.pantry_policy_version,
+            config_fingerprint=_digest(
+                [
+                    plan_id,
+                    provenance["calculation"]["config_version"],
+                    computed.engine_version,
+                    computed.pantry_policy_version,
+                ]
+            ),
+            source_fingerprint=computed.source_fingerprint,
+            content_fingerprint=computed.content_fingerprint,
+            status=computed.status,
+            price_status=computed.price_status,
+            provenance_json=_json(provenance),
+            supersedes_list_id=previous.shopping_list.id if previous else None,
+            created_at=captured,
+        )
+        items = tuple(
+            ShoppingListItem(
+                id=self._id(),
+                shopping_list_id=detail_id,
+                household_id=household_id,
+                food_ingredient_id=row.food_ingredient_id,
+                form_basis=row.form_basis,
+                unit=row.unit,
+                required_quantity=row.required_quantity,
+                pantry_available_quantity=row.pantry_available_quantity,
+                purchase_quantity=row.purchase_quantity,
+                ordinal=i,
+            )
+            for i, row in enumerate(computed.items, 1)
+        )
+        obligations = tuple(
+            ShoppingUnresolvedObligation(
+                id=self._id(),
+                shopping_list_id=detail_id,
+                household_id=household_id,
+                meal_event_id=row.meal_event_id,
+                source_kind=row.source_kind,
+                reason=row.reason,
+                ordinal=i,
+            )
+            for i, row in enumerate(computed.unresolved, 1)
+        )
+        detail = ShoppingListDetail(header, items, obligations)
+        scope.shopping.add_detail(detail)
+        # Validate against same locked source revision before one commit.
+        again = scope.plans.get_detail(household_id, plan_id)
+        if (
+            again is None
+            or again.plan.revision_number != header.source_plan_revision_number
+        ):
+            raise ShoppingPersistenceConflictError(
+                "Ревизия плана изменилась во время сохранения."
+            )
+        scope.commit()
+        return detail
 
     def get_detail(self, household_id: UUID, list_id: UUID) -> ShoppingListDetail:
         with self._read() as scope:
             detail = scope.shopping.get_detail(household_id, list_id)
             if detail is None:
+                raise ShoppingNotFoundError("Список покупок не найден.")
+            plan = scope.plans.get_detail(household_id, detail.shopping_list.meal_plan_id)
+            if plan is None:
+                raise ShoppingNotFoundError("Список покупок не найден.")
+            if _list_visibility(detail, plan) != "legacy":
                 raise ShoppingNotFoundError("Список покупок не найден.")
             return detail
 
@@ -265,9 +316,13 @@ class ShoppingService:
         self, household_id: UUID, plan_id: UUID
     ) -> list[ShoppingListDetail]:
         with self._read() as scope:
-            if scope.plans.get_detail(household_id, plan_id) is None:
+            plan = scope.plans.get_detail(household_id, plan_id)
+            if plan is None:
                 raise ShoppingNotFoundError("План питания не найден.")
-            return scope.shopping.list_history(household_id, plan_id)
+            history = scope.shopping.list_history(household_id, plan_id)
+            return [
+                row for row in history if _list_visibility(row, plan) == "legacy"
+            ]
 
     def get_current(self, household_id: UUID, plan_id: UUID) -> ShoppingCurrent:
         captured = self._clock()
@@ -275,7 +330,15 @@ class ShoppingService:
             plan = scope.plans.get_detail(household_id, plan_id)
             if plan is None:
                 raise ShoppingNotFoundError("План питания не найден.")
-            latest = scope.shopping.get_latest_for_plan(household_id, plan_id)
+            if plan.compositions:
+                raise ShoppingCalculationError(
+                    "Диагностический Shopping не предоставляется публично."
+                )
+            history = scope.shopping.list_history(household_id, plan_id)
+            visible = [
+                row for row in history if _list_visibility(row, plan) == "legacy"
+            ]
+            latest = visible[-1] if visible else None
             if latest is None:
                 return ShoppingCurrent(None, False, "MISSING")
             try:
@@ -293,6 +356,8 @@ class ShoppingService:
                 household_id, plan_id, calculated.source_fingerprint
             )
             if matching is not None:
+                if _list_visibility(matching, plan) != "legacy":
+                    raise ShoppingPersistenceError("Несовместимый текущий список.")
                 stored = matching.shopping_list
                 matches = (
                     stored.source_pantry_snapshot_hash
