@@ -80,7 +80,6 @@ def _digest(value: object) -> str:
     return sha256(_json(value).encode("utf-8")).hexdigest()
 
 
-
 LEGACY_SCHEMA = "SHOPPING_SOURCE_SNAPSHOT_V1"
 
 
