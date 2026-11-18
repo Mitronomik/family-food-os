@@ -794,7 +794,9 @@ def validate_v2_provenance(payload: dict, calculation: ShoppingCalculation) -> N
         if payload["unresolved"] != expected_unresolved:
             raise ValueError("unresolved source obligations differ")
         if calculation.status is not (
-            ShoppingStatus.INCOMPLETE if expected_unresolved else ShoppingStatus.COMPLETE
+            ShoppingStatus.INCOMPLETE
+            if expected_unresolved
+            else ShoppingStatus.COMPLETE
         ):
             raise ValueError("Shopping completeness status differs")
         if [
