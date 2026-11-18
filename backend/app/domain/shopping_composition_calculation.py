@@ -255,9 +255,11 @@ def calculate_shopping_composition(
                 demand[(food.id, ingredient.unit)].append(
                     (event.local_date, event.position, event.id, amount)
                 )
-                dated_demands[(event.id, food.id, FORM_BASIS, ingredient.unit)] += (
-                    amount
-                )
+                with localcontext() as ctx:
+                    ctx.prec = 50
+                    dated_demands[(event.id, food.id, FORM_BASIS, ingredient.unit)] += (
+                        amount
+                    )
                 if part is not None:
                     contributions.append(
                         {
@@ -527,7 +529,9 @@ def calculate_shopping_composition(
         for meal_date, position, event_id, amount in sorted(
             demand[(food_id, unit)], key=lambda row: (row[0], row[1], str(row[2]))
         ):
-            required += amount
+            with localcontext() as ctx:
+                ctx.prec = 50
+                required += amount
             missing = amount
             use_date = max(as_of, meal_date)
             for lot in relevant_lots:
@@ -763,7 +767,9 @@ def validate_v2_provenance(payload: dict, calculation: ShoppingCalculation) -> N
         demands: dict[tuple[str, str, str, str], Decimal] = defaultdict(Decimal)
 
         def add(event: dict, food: str, unit: str, amount: Decimal):
-            demands[(event["event_id"], food, FORM_BASIS, unit)] += amount
+            with localcontext() as ctx:
+                ctx.prec = 50
+                demands[(event["event_id"], food, FORM_BASIS, unit)] += amount
 
         composed_events = set()
         for comp in payload["compositions"]:
@@ -903,7 +909,9 @@ def validate_v2_provenance(payload: dict, calculation: ShoppingCalculation) -> N
             raise ValueError("event sum mismatch")
         totals: dict[tuple[str, str, str], Decimal] = defaultdict(Decimal)
         for (_, food, basis, unit), amount in demands.items():
-            totals[(food, basis, unit)] += amount
+            with localcontext() as ctx:
+                ctx.prec = 50
+                totals[(food, basis, unit)] += amount
         if len(totals) != len(payload["items"]):
             raise ValueError("missing Shopping item")
         for ordinal, row in enumerate(payload["items"], 1):
