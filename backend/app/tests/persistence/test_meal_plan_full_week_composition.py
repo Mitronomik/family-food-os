@@ -46,6 +46,7 @@ from app.persistence.sqlalchemy_core.shopping_uow import (
 from app.services.meal_plan_composition_revisions import (
     assert_complete_revision_preservation,
 )
+from app.services.meal_plan_contracts import MealPlanPersistenceError
 from app.services.shopping import ShoppingService
 from app.tests.persistence.test_meal_plan_composition_persistence import (
     _compose,
@@ -327,5 +328,33 @@ def test_p2_truncated_new_revision_fails_before_any_write(tmp_path):
             )
         with SqlAlchemyMealPlanReadScope(engine) as scope:
             assert scope.plans.get_current(home.id, WEEK_START) == old
+    finally:
+        engine.dispose()
+
+
+def test_p2_composed_readback_rejects_deleted_non_target_slot_same_week(tmp_path):
+    config, engine, home, people, prior, recipes, selections = _week_21_42(tmp_path)
+    try:
+        changed = _compose(prior, people[:1], recipes, selections, target_index=4)
+        _write(engine, changed, people)
+        missing = changed.events[0]
+        assert missing.id != changed.compositions[0].event_id
+        # A deleted Monday BREAKFAST leaves Monday's other events intact.
+        # Seven distinct dates alone cannot prove a complete revision.
+        with sqlite3.connect(config.path) as db:
+            db.execute("DROP TRIGGER trg_servings_no_delete")
+            db.execute("DROP TRIGGER trg_meal_plan_events_no_delete")
+            db.execute("DELETE FROM servings WHERE event_id=?", (missing.id.hex,))
+            db.execute("DELETE FROM meal_plan_events WHERE id=?", (missing.id.hex,))
+            db.commit()
+            assert db.execute(
+                "SELECT count(*) FROM meal_plan_events WHERE plan_id=?",
+                (changed.plan.id.hex,),
+            ).fetchone() == (20,)
+        with SqlAlchemyMealPlanReadScope(engine) as scope:
+            with pytest.raises(MealPlanPersistenceError, match="complete replay"):
+                scope.plans.get_detail(home.id, changed.plan.id)
+            # Old 21/42 evidence remains available and unchanged.
+            assert scope.plans.get_detail(home.id, prior.plan.id) == prior
     finally:
         engine.dispose()
