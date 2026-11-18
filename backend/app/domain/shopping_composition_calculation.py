@@ -154,7 +154,9 @@ def calculate_shopping_composition(
     unresolved: list[ShoppingUnresolved] = []
     composition_by_event = {comp.event_id: comp for comp in plan.compositions}
     contributions: list[dict[str, object]] = []
-    dated_demands: dict[tuple[UUID, UUID, str, UnitCode], Decimal] = defaultdict(Decimal)
+    dated_demands: dict[tuple[UUID, UUID, str, UnitCode], Decimal] = defaultdict(
+        Decimal
+    )
     for event in events:
         if event.plan_id != plan.plan.id:
             _reject("Неполная привязка события к версии плана.")
@@ -174,7 +176,9 @@ def calculate_shopping_composition(
                     (item for item in comp.servings if item.component_id == part.id),
                     key=lambda item: item.member_id.hex,
                 )
-                if not portions or any(item.member_id not in members for item in portions):
+                if not portions or any(
+                    item.member_id not in members for item in portions
+                ):
                     _reject("Отсутствует проверенная порция компонента.")
                 occurrences.append((part, part.recipe_version_id, portions))
         elif not serving_map[event.id]:
@@ -185,9 +189,13 @@ def calculate_shopping_composition(
         elif kind in _NON_GROCERY:
             continue
         elif kind is MealSourceKind.COOK_RECIPE and event.recipe_version_id is not None:
-            occurrences = [(None, event.recipe_version_id, [
-                s for s in plan.servings if s.event_id == event.id
-            ])]
+            occurrences = [
+                (
+                    None,
+                    event.recipe_version_id,
+                    [s for s in plan.servings if s.event_id == event.id],
+                )
+            ]
         else:
             _reject("Источник еды не имеет проверенной рецептурной потребности.")
 
@@ -197,8 +205,10 @@ def calculate_shopping_composition(
                 not isinstance(detail, RecipeVersionDetail)
                 or detail.version.id != version_id
                 or not detail.recipe.is_active
-                or detail.version.verification_status is not VerificationStatus.SOURCE_VERIFIED
-                or detail.version.rights_review_status is not RightsReviewStatus.REVIEWED
+                or detail.version.verification_status
+                is not VerificationStatus.SOURCE_VERIFIED
+                or detail.version.rights_review_status
+                is not RightsReviewStatus.REVIEWED
                 or not detail.version.source_document_sha256
             ):
                 _reject("Закреплённая версия рецепта не подтверждена.")
@@ -209,8 +219,10 @@ def calculate_shopping_composition(
             )
             _decimal(total_servings, positive=True)
             member_portions = [
-                {"member_id": str(s.member_id),
-                 "portion_servings": format(s.portion_servings, ".6f")}
+                {
+                    "member_id": str(s.member_id),
+                    "portion_servings": format(s.portion_servings, ".6f"),
+                }
                 for s in portions
             ]
             for ingredient in detail.ingredients:
@@ -222,11 +234,15 @@ def calculate_shopping_composition(
                     or ingredient.unit != food.default_unit
                     or ingredient.optional
                 ):
-                    _reject("Невозможно достоверно определить продукт, форму или единицу.")
+                    _reject(
+                        "Невозможно достоверно определить продукт, форму или единицу."
+                    )
                 quantity = _decimal(ingredient.quantity, positive=True)
                 food_pins[str(food.id)] = [
-                    food.canonical_code, str(food.default_unit),
-                    food.category_code, food.canonical_name_key,
+                    food.canonical_code,
+                    str(food.default_unit),
+                    food.category_code,
+                    food.canonical_name_key,
                 ]
                 with localcontext() as ctx:
                     ctx.prec = 50
@@ -239,28 +255,33 @@ def calculate_shopping_composition(
                 demand[(food.id, ingredient.unit)].append(
                     (event.local_date, event.position, event.id, amount)
                 )
-                dated_demands[(event.id, food.id, FORM_BASIS, ingredient.unit)] += amount
+                dated_demands[(event.id, food.id, FORM_BASIS, ingredient.unit)] += (
+                    amount
+                )
                 if part is not None:
-                    contributions.append({
-                        "meal_event_id": str(event.id),
-                        "local_date": event.local_date.isoformat(),
-                        "event_position": event.position,
-                        "component_id": str(part.id),
-                        "component_position": part.position,
-                        "course_kind": str(part.course),
-                        "recipe_version_id": str(version_id),
-                        "recipe_ingredient_id": str(ingredient.id),
-                        "food_ingredient_id": str(food.id),
-                        "form_basis": FORM_BASIS, "unit": str(ingredient.unit),
-                        "base_servings": _exact(base),
-                        "member_servings": member_portions,
-                        "total_component_servings": _exact(total_servings),
-                        "input_quantity": _exact(quantity),
-                        "scale_factor": _exact(scale),
-                        "contribution_numerator": _exact(numerator),
-                        "contribution_denominator": _exact(base),
-                        "unrounded_contribution": _exact(amount),
-                    })
+                    contributions.append(
+                        {
+                            "meal_event_id": str(event.id),
+                            "local_date": event.local_date.isoformat(),
+                            "event_position": event.position,
+                            "component_id": str(part.id),
+                            "component_position": part.position,
+                            "course_kind": str(part.course),
+                            "recipe_version_id": str(version_id),
+                            "recipe_ingredient_id": str(ingredient.id),
+                            "food_ingredient_id": str(food.id),
+                            "form_basis": FORM_BASIS,
+                            "unit": str(ingredient.unit),
+                            "base_servings": _exact(base),
+                            "member_servings": member_portions,
+                            "total_component_servings": _exact(total_servings),
+                            "input_quantity": _exact(quantity),
+                            "scale_factor": _exact(scale),
+                            "contribution_numerator": _exact(numerator),
+                            "contribution_denominator": _exact(base),
+                            "unrounded_contribution": _exact(amount),
+                        }
+                    )
 
     pantry_source = [
         str(household_id),
@@ -270,33 +291,45 @@ def calculate_shopping_composition(
     ]
     pantry_hash = _fingerprint(pantry_source)
     event_by_id = {event.id: event for event in events}
-    contributions.sort(key=lambda row: (
-        row["local_date"], row["event_position"],
-        row["component_position"], row["recipe_ingredient_id"],
-    ))
+    contributions.sort(
+        key=lambda row: (
+            row["local_date"],
+            row["event_position"],
+            row["component_position"],
+            row["recipe_ingredient_id"],
+        )
+    )
     event_demands = [
         {
             "meal_event_id": str(event_id),
             "local_date": event_by_id[event_id].local_date.isoformat(),
             "event_position": event_by_id[event_id].position,
-            "food_ingredient_id": str(food_id), "form_basis": basis,
-            "unit": str(unit), "unrounded_required": _exact(amount),
+            "food_ingredient_id": str(food_id),
+            "form_basis": basis,
+            "unit": str(unit),
+            "unrounded_required": _exact(amount),
         }
         for (event_id, food_id, basis, unit), amount in sorted(
             dated_demands.items(),
             key=lambda pair: (
                 event_by_id[pair[0][0]].local_date,
                 event_by_id[pair[0][0]].position,
-                str(pair[0][1]), pair[0][2], str(pair[0][3]),
+                str(pair[0][1]),
+                pair[0][2],
+                str(pair[0][3]),
             ),
         )
     ]
     plan_events = [
         {
-            "event_id": str(e.id), "local_date": e.local_date.isoformat(),
-            "position": e.position, "role": str(e.role),
+            "event_id": str(e.id),
+            "local_date": e.local_date.isoformat(),
+            "position": e.position,
+            "role": str(e.role),
             "source_kind": str(e.source_kind),
-            "recipe_version_id": str(e.recipe_version_id) if e.recipe_version_id else None,
+            "recipe_version_id": str(e.recipe_version_id)
+            if e.recipe_version_id
+            else None,
             "source_reference": e.source_reference,
         }
         for e in events
@@ -306,50 +339,76 @@ def calculate_shopping_composition(
         for p in sorted(plan.member_selections, key=lambda p: p.member_id.hex)
     ]
     legacy_servings = [
-        {"event_id": str(s.event_id), "member_id": str(s.member_id),
-         "portion_servings": format(s.portion_servings, ".6f")}
-        for s in sorted(plan.servings, key=lambda s: (
-            event_by_id[s.event_id].local_date,
-            event_by_id[s.event_id].position, s.member_id.hex,
-        ))
+        {
+            "event_id": str(s.event_id),
+            "member_id": str(s.member_id),
+            "portion_servings": format(s.portion_servings, ".6f"),
+        }
+        for s in sorted(
+            plan.servings,
+            key=lambda s: (
+                event_by_id[s.event_id].local_date,
+                event_by_id[s.event_id].position,
+                s.member_id.hex,
+            ),
+        )
     ]
     compositions = []
-    for comp in sorted(plan.compositions, key=lambda c: (
-        event_by_id[c.event_id].local_date,
-        event_by_id[c.event_id].position,
-    )):
+    for comp in sorted(
+        plan.compositions,
+        key=lambda c: (
+            event_by_id[c.event_id].local_date,
+            event_by_id[c.event_id].position,
+        ),
+    ):
         rule = comp.rule
-        compositions.append({
-            "meal_event_id": str(comp.event_id),
-            "rule": {
-                "schema_version": 1, "code": rule.code, "version": rule.version,
-                "meal_role": str(rule.meal_role), "coverage": str(rule.coverage),
-                "requirements": [
-                    {"kind": str(r.kind), "minimum": r.minimum, "maximum": r.maximum}
-                    for r in rule.requirements
-                ],
-                "sha256": rule_snapshot_digest(rule),
-            },
-            "components": [
-                {
-                    "component_id": str(part.id), "position": part.position,
-                    "course_kind": str(part.course),
-                    "recipe_version_id": str(part.recipe_version_id),
-                    "member_servings": [
-                        {"member_id": str(s.member_id),
-                         "portion_servings": format(s.portion_servings, ".6f")}
-                        for s in sorted(
-                            (s for s in comp.servings if s.component_id == part.id),
-                            key=lambda s: s.member_id.hex,
-                        )
+        compositions.append(
+            {
+                "meal_event_id": str(comp.event_id),
+                "rule": {
+                    "schema_version": 1,
+                    "code": rule.code,
+                    "version": rule.version,
+                    "meal_role": str(rule.meal_role),
+                    "coverage": str(rule.coverage),
+                    "requirements": [
+                        {
+                            "kind": str(r.kind),
+                            "minimum": r.minimum,
+                            "maximum": r.maximum,
+                        }
+                        for r in rule.requirements
                     ],
-                }
-                for part in sorted(comp.components, key=lambda p: p.position)
-            ],
-        })
+                    "sha256": rule_snapshot_digest(rule),
+                },
+                "components": [
+                    {
+                        "component_id": str(part.id),
+                        "position": part.position,
+                        "course_kind": str(part.course),
+                        "recipe_version_id": str(part.recipe_version_id),
+                        "member_servings": [
+                            {
+                                "member_id": str(s.member_id),
+                                "portion_servings": format(s.portion_servings, ".6f"),
+                            }
+                            for s in sorted(
+                                (s for s in comp.servings if s.component_id == part.id),
+                                key=lambda s: s.member_id.hex,
+                            )
+                        ],
+                    }
+                    for part in sorted(comp.components, key=lambda p: p.position)
+                ],
+            }
+        )
     used_recipes = {
-        e.recipe_version_id for e in events if e.source_kind is MealSourceKind.COOK_RECIPE
-    } | {part.recipe_version_id for comp in plan.compositions for part in comp.components}
+        e.recipe_version_id
+        for e in events
+        if e.source_kind is MealSourceKind.COOK_RECIPE
+    } | {
+        part.recipe_version_id for comp in plan.compositions for part in comp.components
+    }
     recipe_inputs = []
     used_foods = set()
     for version_id in sorted(used_recipes, key=str):
@@ -357,25 +416,28 @@ def calculate_shopping_composition(
         if detail is None:
             _reject("Не хватает версии рецепта для полного provenance.")
         used_foods.update(ing.food_ingredient_id for ing in detail.ingredients)
-        recipe_inputs.append({
-            "recipe_version_id": str(version_id),
-            "recipe_version_number": detail.version.version_number,
-            "source_document_sha256": detail.version.source_document_sha256,
-            "source_version": detail.version.source_version,
-            "verification_status": str(detail.version.verification_status),
-            "rights_review_status": str(detail.version.rights_review_status),
-            "recipe_is_active": bool(detail.recipe.is_active),
-            "base_servings": _exact(detail.version.base_servings),
-            "ingredients": [
-                {
-                    "recipe_ingredient_id": str(i.id),
-                    "food_ingredient_id": str(i.food_ingredient_id),
-                    "quantity": _exact(i.quantity), "unit": str(i.unit),
-                    "optional": i.optional,
-                }
-                for i in sorted(detail.ingredients, key=lambda i: str(i.id))
-            ],
-        })
+        recipe_inputs.append(
+            {
+                "recipe_version_id": str(version_id),
+                "recipe_version_number": detail.version.version_number,
+                "source_document_sha256": detail.version.source_document_sha256,
+                "source_version": detail.version.source_version,
+                "verification_status": str(detail.version.verification_status),
+                "rights_review_status": str(detail.version.rights_review_status),
+                "recipe_is_active": bool(detail.recipe.is_active),
+                "base_servings": _exact(detail.version.base_servings),
+                "ingredients": [
+                    {
+                        "recipe_ingredient_id": str(i.id),
+                        "food_ingredient_id": str(i.food_ingredient_id),
+                        "quantity": _exact(i.quantity),
+                        "unit": str(i.unit),
+                        "optional": i.optional,
+                    }
+                    for i in sorted(detail.ingredients, key=lambda i: str(i.id))
+                ],
+            }
+        )
     food_sources = [
         {
             "food_ingredient_id": str(foods[fid].id),
@@ -393,8 +455,10 @@ def calculate_shopping_composition(
             "pantry_item_id": str(lot.id),
             "household_id": str(lot.household_id),
             "food_ingredient_id": str(lot.food_ingredient_id),
-            "quantity": _exact(lot.quantity), "unit": str(lot.unit),
-            "location": str(lot.location), "estimated": lot.estimated,
+            "quantity": _exact(lot.quantity),
+            "unit": str(lot.unit),
+            "location": str(lot.location),
+            "estimated": lot.estimated,
             "purchased_on": lot.purchased_on.isoformat() if lot.purchased_on else None,
             "opened_on": lot.opened_on.isoformat() if lot.opened_on else None,
             "expires_on": lot.expires_on.isoformat() if lot.expires_on else None,
@@ -402,10 +466,12 @@ def calculate_shopping_composition(
         for lot in sorted(lots, key=lambda x: str(x.id))
     ]
     source_inputs = {
-        "schema": SCHEMA_V2, "engine": ENGINE_VERSION,
+        "schema": SCHEMA_V2,
+        "engine": ENGINE_VERSION,
         "policy": PANTRY_POLICY_VERSION,
         "calculation": {
-            "household_id": str(household_id), "plan_id": str(plan.plan.id),
+            "household_id": str(household_id),
+            "plan_id": str(plan.plan.id),
             "plan_revision": plan.plan.revision_number,
             "week_start": plan.plan.week_start.isoformat(),
             "config_version": plan.plan.config_version,
@@ -524,7 +590,8 @@ def calculate_shopping_composition(
     items_source = [
         {
             "food_ingredient_id": str(item.food_ingredient_id),
-            "form_basis": item.form_basis, "unit": str(item.unit),
+            "form_basis": item.form_basis,
+            "unit": str(item.unit),
             "required_quantity": _exact(item.required_quantity),
             "pantry_available_quantity": _exact(item.pantry_available_quantity),
             "purchase_quantity": _exact(item.purchase_quantity),
@@ -533,34 +600,50 @@ def calculate_shopping_composition(
         for i, item in enumerate(items, 1)
     ]
     unresolved_source = [
-        {"meal_event_id": str(item.meal_event_id), "source_kind": str(item.source_kind),
-         "reason": str(item.reason)}
+        {
+            "meal_event_id": str(item.meal_event_id),
+            "source_kind": str(item.source_kind),
+            "reason": str(item.reason),
+        }
         for item in unresolved
     ]
     warnings_source = [
-        {"code": w.code, "pantry_item_id": str(w.pantry_item_id),
-         "meal_event_id": str(w.meal_event_id) if w.meal_event_id else None,
-         "required_date": w.required_date.isoformat() if w.required_date else None}
+        {
+            "code": w.code,
+            "pantry_item_id": str(w.pantry_item_id),
+            "meal_event_id": str(w.meal_event_id) if w.meal_event_id else None,
+            "required_date": w.required_date.isoformat() if w.required_date else None,
+        }
         for w in warnings
     ]
     allocations_source = [
-        {"meal_event_id": str(a.meal_event_id),
-         "pantry_item_id": str(a.pantry_item_id),
-         "food_ingredient_id": str(a.food_ingredient_id),
-         "quantity": _exact(a.quantity)}
+        {
+            "meal_event_id": str(a.meal_event_id),
+            "pantry_item_id": str(a.pantry_item_id),
+            "food_ingredient_id": str(a.food_ingredient_id),
+            "quantity": _exact(a.quantity),
+        }
         for a in allocation_result
     ]
-    content_hash = _fingerprint({
-        "source_fingerprint": source_hash,
-        "component_contributions": contributions,
-        "event_demands": event_demands, "items": items_source,
-        "unresolved": unresolved_source, "warnings": warnings_source,
-        "allocations": allocations_source,
-    })
-    config_hash = _fingerprint([
-        str(plan.plan.id), plan.plan.config_version,
-        ENGINE_VERSION, PANTRY_POLICY_VERSION,
-    ])
+    content_hash = _fingerprint(
+        {
+            "source_fingerprint": source_hash,
+            "component_contributions": contributions,
+            "event_demands": event_demands,
+            "items": items_source,
+            "unresolved": unresolved_source,
+            "warnings": warnings_source,
+            "allocations": allocations_source,
+        }
+    )
+    config_hash = _fingerprint(
+        [
+            str(plan.plan.id),
+            plan.plan.config_version,
+            ENGINE_VERSION,
+            PANTRY_POLICY_VERSION,
+        ]
+    )
     provenance = {
         **source_inputs,
         "calculation": {
@@ -573,16 +656,28 @@ def calculate_shopping_composition(
             "config_fingerprint": config_hash,
         },
         "component_contributions": contributions,
-        "event_demands": event_demands, "items": items_source,
-        "unresolved": unresolved_source, "warnings": warnings_source,
+        "event_demands": event_demands,
+        "items": items_source,
+        "unresolved": unresolved_source,
+        "warnings": warnings_source,
         "allocations": allocations_source,
     }
     calculation = ShoppingCalculation(
-        household_id, plan.plan.id, plan.plan.revision_number, as_of,
-        ENGINE_VERSION, PANTRY_POLICY_VERSION,
+        household_id,
+        plan.plan.id,
+        plan.plan.revision_number,
+        as_of,
+        ENGINE_VERSION,
+        PANTRY_POLICY_VERSION,
         ShoppingStatus.INCOMPLETE if unresolved else ShoppingStatus.COMPLETE,
-        ShoppingPriceStatus.UNKNOWN, items, tuple(unresolved), tuple(warnings),
-        allocation_result, pantry_hash, source_hash, content_hash,
+        ShoppingPriceStatus.UNKNOWN,
+        items,
+        tuple(unresolved),
+        tuple(warnings),
+        allocation_result,
+        pantry_hash,
+        source_hash,
+        content_hash,
     )
     return calculation, provenance
 
@@ -603,7 +698,8 @@ def validate_v2_provenance(payload: dict, calculation: ShoppingCalculation) -> N
             "plan_id": str(calculation.meal_plan_id),
             "plan_revision": calculation.source_plan_revision_number,
             "as_of_date": calculation.as_of_date.isoformat(),
-            "engine": ENGINE_VERSION, "policy": PANTRY_POLICY_VERSION,
+            "engine": ENGINE_VERSION,
+            "policy": PANTRY_POLICY_VERSION,
             "pantry_hash": calculation.pantry_snapshot_hash,
             "source_hash": calculation.source_fingerprint,
             "content_hash": calculation.content_fingerprint,
@@ -611,31 +707,51 @@ def validate_v2_provenance(payload: dict, calculation: ShoppingCalculation) -> N
         if any(meta[key] != val for key, val in expected_meta.items()):
             raise ValueError("V2 header mismatch")
         base_meta_keys = (
-            "household_id", "plan_id", "plan_revision", "week_start",
-            "config_version", "as_of_date", "timezone",
+            "household_id",
+            "plan_id",
+            "plan_revision",
+            "week_start",
+            "config_version",
+            "as_of_date",
+            "timezone",
         )
         source_keys = (
-            "plan_events", "member_selection_pins", "servings",
-            "compositions", "recipe_inputs", "foods", "pantry_items",
+            "plan_events",
+            "member_selection_pins",
+            "servings",
+            "compositions",
+            "recipe_inputs",
+            "foods",
+            "pantry_items",
         )
         sources = {
-            "schema": SCHEMA_V2, "engine": ENGINE_VERSION,
+            "schema": SCHEMA_V2,
+            "engine": ENGINE_VERSION,
             "policy": PANTRY_POLICY_VERSION,
             "calculation": {k: meta[k] for k in base_meta_keys},
             **{k: payload[k] for k in source_keys},
         }
         if _fingerprint(sources) != calculation.source_fingerprint:
             raise ValueError("V2 source fingerprint")
-        if _fingerprint([
-            meta["plan_id"], meta["config_version"],
-            ENGINE_VERSION, PANTRY_POLICY_VERSION,
-        ]) != meta["config_fingerprint"]:
+        if (
+            _fingerprint(
+                [
+                    meta["plan_id"],
+                    meta["config_version"],
+                    ENGINE_VERSION,
+                    PANTRY_POLICY_VERSION,
+                ]
+            )
+            != meta["config_fingerprint"]
+        ):
             raise ValueError("V2 config fingerprint")
         from app.domain.meal_compositions import restore_rule_snapshot
 
         events = {e["event_id"]: e for e in payload["plan_events"]}
         versions = {r["recipe_version_id"]: r for r in payload["recipe_inputs"]}
-        if len(events) != len(payload["plan_events"]) or len(versions) != len(payload["recipe_inputs"]):
+        if len(events) != len(payload["plan_events"]) or len(versions) != len(
+            payload["recipe_inputs"]
+        ):
             raise ValueError("duplicate source identity")
         legacy: dict[str, list[dict]] = defaultdict(list)
         for serving in payload["servings"]:
@@ -656,21 +772,28 @@ def validate_v2_provenance(payload: dict, calculation: ShoppingCalculation) -> N
             composed_events.add(comp["meal_event_id"])
             rule = comp["rule"]
             restore_rule_snapshot(
-                code=rule["code"], version=rule["version"],
-                meal_role=rule["meal_role"], coverage=rule["coverage"],
+                code=rule["code"],
+                version=rule["version"],
+                meal_role=rule["meal_role"],
+                coverage=rule["coverage"],
                 schema_version=rule["schema_version"],
                 requirements_json=json.dumps(
-                    rule["requirements"], sort_keys=True,
-                    separators=(",", ":"), ensure_ascii=False,
+                    rule["requirements"],
+                    sort_keys=True,
+                    separators=(",", ":"),
+                    ensure_ascii=False,
                 ),
                 sha256_hex=rule["sha256"],
             )
             for part in comp["components"]:
                 servings = part["member_servings"]
-                if not servings or len({s["member_id"] for s in servings}) != len(servings):
+                if not servings or len({s["member_id"] for s in servings}) != len(
+                    servings
+                ):
                     raise ValueError("invalid member-component Servings")
                 if any(
-                    s["portion_servings"] != format(Decimal(s["portion_servings"]), ".6f")
+                    s["portion_servings"]
+                    != format(Decimal(s["portion_servings"]), ".6f")
                     or Decimal(s["portion_servings"]) <= 0
                     for s in servings
                 ):
@@ -678,11 +801,17 @@ def validate_v2_provenance(payload: dict, calculation: ShoppingCalculation) -> N
                 recipe = versions[part["recipe_version_id"]]
                 with localcontext() as ctx:
                     ctx.prec = 50
-                    total = sum((Decimal(s["portion_servings"]) for s in servings), Decimal(0))
+                    total = sum(
+                        (Decimal(s["portion_servings"]) for s in servings), Decimal(0)
+                    )
                     base = Decimal(recipe["base_servings"])
                     scale = total / base
                 for ingredient in recipe["ingredients"]:
-                    key = (comp["meal_event_id"], part["component_id"], ingredient["recipe_ingredient_id"])
+                    key = (
+                        comp["meal_event_id"],
+                        part["component_id"],
+                        ingredient["recipe_ingredient_id"],
+                    )
                     if key in contributions:
                         raise ValueError("duplicate component input")
                     with localcontext() as ctx:
@@ -702,7 +831,8 @@ def validate_v2_provenance(payload: dict, calculation: ShoppingCalculation) -> N
                         "recipe_version_id": part["recipe_version_id"],
                         "recipe_ingredient_id": ingredient["recipe_ingredient_id"],
                         "food_ingredient_id": ingredient["food_ingredient_id"],
-                        "form_basis": FORM_BASIS, "unit": ingredient["unit"],
+                        "form_basis": FORM_BASIS,
+                        "unit": ingredient["unit"],
                         "base_servings": _exact(base),
                         "member_servings": servings,
                         "total_component_servings": _exact(total),
@@ -712,15 +842,25 @@ def validate_v2_provenance(payload: dict, calculation: ShoppingCalculation) -> N
                         "contribution_denominator": _exact(base),
                         "unrounded_contribution": _exact(amount),
                     }
-                    add(event, ingredient["food_ingredient_id"], ingredient["unit"], amount)
+                    add(
+                        event,
+                        ingredient["food_ingredient_id"],
+                        ingredient["unit"],
+                        amount,
+                    )
         if composed_events != {
-            e["event_id"] for e in payload["plan_events"]
+            e["event_id"]
+            for e in payload["plan_events"]
             if e["source_kind"] == "COOK_COMPOSITION"
         }:
             raise ValueError("composed parent missing")
         provided = {}
         for item in payload["component_contributions"]:
-            key = (item["meal_event_id"], item["component_id"], item["recipe_ingredient_id"])
+            key = (
+                item["meal_event_id"],
+                item["component_id"],
+                item["recipe_ingredient_id"],
+            )
             if key in provided:
                 raise ValueError("duplicate contribution")
             provided[key] = item
@@ -735,14 +875,26 @@ def validate_v2_provenance(payload: dict, calculation: ShoppingCalculation) -> N
                 raise ValueError("legacy source lost member Servings")
             with localcontext() as ctx:
                 ctx.prec = 50
-                total = sum((Decimal(s["portion_servings"]) for s in portions), Decimal(0))
+                total = sum(
+                    (Decimal(s["portion_servings"]) for s in portions), Decimal(0)
+                )
                 base = Decimal(recipe["base_servings"])
                 for ingredient in recipe["ingredients"]:
                     amount = Decimal(ingredient["quantity"]) * total / base
-                    add(event, ingredient["food_ingredient_id"], ingredient["unit"], amount)
+                    add(
+                        event,
+                        ingredient["food_ingredient_id"],
+                        ingredient["unit"],
+                        amount,
+                    )
         stored_demands = {}
         for row in payload["event_demands"]:
-            key = (row["meal_event_id"], row["food_ingredient_id"], row["form_basis"], row["unit"])
+            key = (
+                row["meal_event_id"],
+                row["food_ingredient_id"],
+                row["form_basis"],
+                row["unit"],
+            )
             if key in stored_demands:
                 raise ValueError("duplicate event demand")
             stored_demands[key] = Decimal(row["unrounded_required"])
@@ -757,7 +909,9 @@ def validate_v2_provenance(payload: dict, calculation: ShoppingCalculation) -> N
             key = (row["food_ingredient_id"], row["form_basis"], row["unit"])
             if key not in totals or row["ordinal"] != ordinal:
                 raise ValueError("unexpected Shopping item")
-            if Decimal(row["required_quantity"]) != _round(totals.pop(key), ROUND_CEILING):
+            if Decimal(row["required_quantity"]) != _round(
+                totals.pop(key), ROUND_CEILING
+            ):
                 raise ValueError("rounded item total differs")
         if totals or len(calculation.items) != len(payload["items"]):
             raise ValueError("Shopping quantity count differs")
@@ -766,7 +920,8 @@ def validate_v2_provenance(payload: dict, calculation: ShoppingCalculation) -> N
                 raw["food_ingredient_id"] != str(stored.food_ingredient_id)
                 or raw["unit"] != str(stored.unit)
                 or raw["required_quantity"] != _exact(stored.required_quantity)
-                or raw["pantry_available_quantity"] != _exact(stored.pantry_available_quantity)
+                or raw["pantry_available_quantity"]
+                != _exact(stored.pantry_available_quantity)
                 or raw["purchase_quantity"] != _exact(stored.purchase_quantity)
             ):
                 raise ValueError("persisted item differs")
@@ -787,17 +942,29 @@ def validate_v2_provenance(payload: dict, calculation: ShoppingCalculation) -> N
             raise ValueError("cross-household or negative Pantry source")
         lot_pins = [
             [
-                lot["pantry_item_id"], lot["food_ingredient_id"],
+                lot["pantry_item_id"],
+                lot["food_ingredient_id"],
                 format(Decimal(lot["quantity"]).quantize(QUANTITY_STEP), ".3f"),
-                lot["unit"], lot["location"], str(lot["estimated"]),
-                lot["purchased_on"], lot["opened_on"], lot["expires_on"],
+                lot["unit"],
+                lot["location"],
+                str(lot["estimated"]),
+                lot["purchased_on"],
+                lot["opened_on"],
+                lot["expires_on"],
             ]
             for lot in sorted(lots, key=lambda lot: lot["pantry_item_id"])
         ]
-        if _fingerprint([
-            str(calculation.household_id), as_of.isoformat(),
-            PANTRY_POLICY_VERSION, lot_pins,
-        ]) != calculation.pantry_snapshot_hash:
+        if (
+            _fingerprint(
+                [
+                    str(calculation.household_id),
+                    as_of.isoformat(),
+                    PANTRY_POLICY_VERSION,
+                    lot_pins,
+                ]
+            )
+            != calculation.pantry_snapshot_hash
+        ):
             raise ValueError("Pantry source hash differs")
         expected_allocations = []
         expected_warnings = []
@@ -815,13 +982,15 @@ def validate_v2_provenance(payload: dict, calculation: ShoppingCalculation) -> N
             ]
             relevant = sorted(
                 (
-                    lot for lot in lots
+                    lot
+                    for lot in lots
                     if lot["food_ingredient_id"] == food_id
                     and Decimal(lot["quantity"]) > 0
                 ),
                 key=lambda lot: (
                     lot["expires_on"] or date.max.isoformat(),
-                    lot["location"], lot["pantry_item_id"],
+                    lot["location"],
+                    lot["pantry_item_id"],
                 ),
             )
             remaining = {
@@ -838,14 +1007,23 @@ def validate_v2_provenance(payload: dict, calculation: ShoppingCalculation) -> N
                 elif lot["unit"] != unit:
                     reason = "INCOMPATIBLE_UNIT"
                 if reason is not None:
-                    expected_warnings.append({
-                        "code": reason, "pantry_item_id": lot["pantry_item_id"],
-                        "meal_event_id": None, "required_date": None,
-                    })
+                    expected_warnings.append(
+                        {
+                            "code": reason,
+                            "pantry_item_id": lot["pantry_item_id"],
+                            "meal_event_id": None,
+                            "required_date": None,
+                        }
+                    )
             covered = Decimal(0)
-            for event, amount in sorted(needed_events, key=lambda row: (
-                row[0]["local_date"], row[0]["position"], row[0]["event_id"],
-            )):
+            for event, amount in sorted(
+                needed_events,
+                key=lambda row: (
+                    row[0]["local_date"],
+                    row[0]["position"],
+                    row[0]["event_id"],
+                ),
+            ):
                 missing = amount
                 use_date = max(as_of, date.fromisoformat(event["local_date"]))
                 for lot in relevant:
@@ -853,8 +1031,10 @@ def validate_v2_provenance(payload: dict, calculation: ShoppingCalculation) -> N
                         break
                     lid = lot["pantry_item_id"]
                     if (
-                        not remaining[lid] or lot["estimated"]
-                        or lot["expires_on"] is None or lot["unit"] != unit
+                        not remaining[lid]
+                        or lot["estimated"]
+                        or lot["expires_on"] is None
+                        or lot["unit"] != unit
                     ):
                         continue
                     expiry = date.fromisoformat(lot["expires_on"])
@@ -873,19 +1053,22 @@ def validate_v2_provenance(payload: dict, calculation: ShoppingCalculation) -> N
                     remaining[lid] -= taken
                     missing -= taken
                     covered += taken
-                    expected_allocations.append({
-                        "meal_event_id": event["event_id"],
-                        "pantry_item_id": lid, "food_ingredient_id": food_id,
-                        "quantity": _exact(taken),
-                    })
+                    expected_allocations.append(
+                        {
+                            "meal_event_id": event["event_id"],
+                            "pantry_item_id": lid,
+                            "food_ingredient_id": food_id,
+                            "quantity": _exact(taken),
+                        }
+                    )
             item = item_by_key[(food_id, unit)]
             required = Decimal(item["required_quantity"])
             available = _round(covered, ROUND_FLOOR)
             shortfall = max(required - available, Decimal(0))
             if unit == str(UnitCode.PIECE):
-                purchase = shortfall.to_integral_value(
-                    rounding=ROUND_CEILING
-                ).quantize(QUANTITY_STEP)
+                purchase = shortfall.to_integral_value(rounding=ROUND_CEILING).quantize(
+                    QUANTITY_STEP
+                )
             else:
                 purchase = _round(shortfall, ROUND_CEILING)
             if (
@@ -896,10 +1079,14 @@ def validate_v2_provenance(payload: dict, calculation: ShoppingCalculation) -> N
         expected_allocations.sort(
             key=lambda row: (row["meal_event_id"], row["pantry_item_id"])
         )
-        expected_warnings.sort(key=lambda row: (
-            row["code"], row["pantry_item_id"],
-            row["meal_event_id"] or "", row["required_date"] or "",
-        ))
+        expected_warnings.sort(
+            key=lambda row: (
+                row["code"],
+                row["pantry_item_id"],
+                row["meal_event_id"] or "",
+                row["required_date"] or "",
+            )
+        )
         if (
             expected_allocations != payload["allocations"]
             or expected_warnings != payload["warnings"]
@@ -920,13 +1107,20 @@ def validate_v2_provenance(payload: dict, calculation: ShoppingCalculation) -> N
         if len(calculation.warnings) != len(expected_warnings):
             raise ValueError("persisted warning count differs")
 
-        if _fingerprint({
-            "source_fingerprint": calculation.source_fingerprint,
-            "component_contributions": payload["component_contributions"],
-            "event_demands": payload["event_demands"],
-            "items": payload["items"], "unresolved": payload["unresolved"],
-            "warnings": payload["warnings"], "allocations": payload["allocations"],
-        }) != calculation.content_fingerprint:
+        if (
+            _fingerprint(
+                {
+                    "source_fingerprint": calculation.source_fingerprint,
+                    "component_contributions": payload["component_contributions"],
+                    "event_demands": payload["event_demands"],
+                    "items": payload["items"],
+                    "unresolved": payload["unresolved"],
+                    "warnings": payload["warnings"],
+                    "allocations": payload["allocations"],
+                }
+            )
+            != calculation.content_fingerprint
+        ):
             raise ValueError("V2 content fingerprint")
     except (KeyError, IndexError, TypeError, ValueError, ArithmeticError) as exc:
         raise ShoppingCalculationError(

@@ -35,14 +35,17 @@ from app.services.shopping_contracts import (
 class DiagnosticCompositionShoppingService(ShoppingService):
     """Explicit internal-only capability. No public dependency ever constructs it."""
 
-    def _calculate_diagnostic(self, scope, household_id: UUID, plan_id: UUID, captured: datetime):
+    def _calculate_diagnostic(
+        self, scope, household_id: UUID, plan_id: UUID, captured: datetime
+    ):
         household = scope.households.get_household(household_id)
         plan = scope.plans.get_detail(household_id, plan_id)
         if household is None or plan is None:
             raise ShoppingNotFoundError("План не найден для диагностического расчёта.")
         current = scope.plans.get_current(household_id, plan.plan.week_start)
         if (
-            current is None or current.plan.id != plan_id
+            current is None
+            or current.plan.id != plan_id
             or not plan.compositions
             or plan.plan.status is not MealPlanStatus.DRAFT
         ):
@@ -65,23 +68,33 @@ class DiagnosticCompositionShoppingService(ShoppingService):
                 raise ShoppingCalculationError("Неполная ссылка на рецепт.")
             detail = scope.recipes.get_detail(vid)
             if detail is None:
-                raise ShoppingCalculationError("Недоступна закреплённая версия рецепта.")
+                raise ShoppingCalculationError(
+                    "Недоступна закреплённая версия рецепта."
+                )
             recipes[vid] = detail
             food_ids.update(i.food_ingredient_id for i in detail.ingredients)
         foods = {}
         for fid in sorted(food_ids, key=str):
             food = scope.foods.get(fid)
             if food is None:
-                raise ShoppingCalculationError("Недоступен канонический FoodIngredient.")
+                raise ShoppingCalculationError(
+                    "Недоступен канонический FoodIngredient."
+                )
             foods[fid] = food
         return calculate_shopping_composition(
-            plan=plan, recipes=recipes, foods=foods,
-            pantry_items=tuple(scope.pantry.list_items(household_id, include_empty=True)),
+            plan=plan,
+            recipes=recipes,
+            foods=foods,
+            pantry_items=tuple(
+                scope.pantry.list_items(household_id, include_empty=True)
+            ),
             household_timezone=household.timezone,
             captured_at=captured,
         )
 
-    def generate_diagnostic(self, household_id: UUID, plan_id: UUID) -> ShoppingListDetail:
+    def generate_diagnostic(
+        self, household_id: UUID, plan_id: UUID
+    ) -> ShoppingListDetail:
         """Synthetic-only atomic source-backed list. No implicit public promotion."""
         captured = self._clock()
         with self._write() as scope:
@@ -93,19 +106,25 @@ class DiagnosticCompositionShoppingService(ShoppingService):
                 scope, household_id, plan_id, captured, calculated, provenance
             )
 
-    def get_diagnostic_detail(self, household_id: UUID, list_id: UUID) -> ShoppingListDetail:
+    def get_diagnostic_detail(
+        self, household_id: UUID, list_id: UUID
+    ) -> ShoppingListDetail:
         """Restricted test/dev reader; public ShoppingService never calls this."""
         with self._read() as scope:
             detail = scope.shopping.get_detail(household_id, list_id)
             if detail is None:
                 raise ShoppingNotFoundError("Диагностический список не найден.")
-            plan = scope.plans.get_detail(household_id, detail.shopping_list.meal_plan_id)
+            plan = scope.plans.get_detail(
+                household_id, detail.shopping_list.meal_plan_id
+            )
             if plan is None or not plan.compositions:
                 raise ShoppingNotFoundError("Диагностический список не найден.")
             try:
                 source = json.loads(detail.shopping_list.provenance_json)
             except (TypeError, ValueError) as exc:
-                raise ShoppingPersistenceError("Повреждён diagnostic provenance.") from exc
+                raise ShoppingPersistenceError(
+                    "Повреждён diagnostic provenance."
+                ) from exc
             if (
                 detail.shopping_list.engine_version != ENGINE_VERSION
                 or not isinstance(source, dict)
@@ -127,22 +146,31 @@ class DiagnosticCompositionShoppingService(ShoppingService):
                     price_status=header.price_status,
                     items=tuple(
                         ShoppingQuantity(
-                            item.food_ingredient_id, item.form_basis, item.unit,
-                            item.required_quantity, item.pantry_available_quantity,
+                            item.food_ingredient_id,
+                            item.form_basis,
+                            item.unit,
+                            item.required_quantity,
+                            item.pantry_available_quantity,
                             item.purchase_quantity,
                         )
                         for item in detail.items
                     ),
                     unresolved=tuple(
-                        ShoppingUnresolved(item.meal_event_id, item.source_kind, item.reason)
+                        ShoppingUnresolved(
+                            item.meal_event_id, item.source_kind, item.reason
+                        )
                         for item in detail.unresolved
                     ),
                     warnings=tuple(
                         ShoppingWarning(
-                            item["code"], UUID(item["pantry_item_id"]),
-                            UUID(item["meal_event_id"]) if item["meal_event_id"] else None,
+                            item["code"],
+                            UUID(item["pantry_item_id"]),
+                            UUID(item["meal_event_id"])
+                            if item["meal_event_id"]
+                            else None,
                             date.fromisoformat(item["required_date"])
-                            if item["required_date"] else None,
+                            if item["required_date"]
+                            else None,
                         )
                         for item in source["warnings"]
                     ),

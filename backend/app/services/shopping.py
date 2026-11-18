@@ -88,7 +88,9 @@ def _list_visibility(detail: ShoppingListDetail, plan) -> str:
     """Strict public read classification, before returning any stored quantity."""
     try:
         payload = json.loads(detail.shopping_list.provenance_json)
-        if not isinstance(payload, dict) or not isinstance(payload.get("calculation"), dict):
+        if not isinstance(payload, dict) or not isinstance(
+            payload.get("calculation"), dict
+        ):
             raise TypeError("invalid provenance")
         schema = payload.get("schema")
         calc_engine = payload["calculation"].get("engine")
@@ -98,11 +100,19 @@ def _list_visibility(detail: ShoppingListDetail, plan) -> str:
         ) from exc
     engine = detail.shopping_list.engine_version
     has_composition = bool(plan.compositions)
-    if engine == LEGACY_ENGINE_VERSION and schema == LEGACY_SCHEMA and calc_engine == engine:
+    if (
+        engine == LEGACY_ENGINE_VERSION
+        and schema == LEGACY_SCHEMA
+        and calc_engine == engine
+    ):
         if has_composition:
             raise ShoppingPersistenceError("Несовместимая версия списка покупок.")
         return "legacy"
-    if engine == COMPOSITION_ENGINE_VERSION and schema == SCHEMA_V2 and calc_engine == engine:
+    if (
+        engine == COMPOSITION_ENGINE_VERSION
+        and schema == SCHEMA_V2
+        and calc_engine == engine
+    ):
         if not has_composition:
             raise ShoppingPersistenceError("Несовместимая диагностическая ревизия.")
         return "diagnostic"
@@ -219,8 +229,13 @@ class ShoppingService:
             )
 
     def _persist_calculated(
-        self, scope: ShoppingUnitOfWork, household_id: UUID, plan_id: UUID,
-        captured: datetime, computed: ShoppingCalculation, provenance: dict,
+        self,
+        scope: ShoppingUnitOfWork,
+        household_id: UUID,
+        plan_id: UUID,
+        captured: datetime,
+        computed: ShoppingCalculation,
+        provenance: dict,
     ) -> ShoppingListDetail:
         """Write one immutable Shopping result within the caller-owned UoW."""
         existing = scope.shopping.get_by_source(
@@ -308,7 +323,9 @@ class ShoppingService:
             detail = scope.shopping.get_detail(household_id, list_id)
             if detail is None:
                 raise ShoppingNotFoundError("Список покупок не найден.")
-            plan = scope.plans.get_detail(household_id, detail.shopping_list.meal_plan_id)
+            plan = scope.plans.get_detail(
+                household_id, detail.shopping_list.meal_plan_id
+            )
             if plan is None:
                 raise ShoppingNotFoundError("Список покупок не найден.")
             if _list_visibility(detail, plan) != "legacy":
@@ -323,9 +340,7 @@ class ShoppingService:
             if plan is None:
                 raise ShoppingNotFoundError("План питания не найден.")
             history = scope.shopping.list_history(household_id, plan_id)
-            return [
-                row for row in history if _list_visibility(row, plan) == "legacy"
-            ]
+            return [row for row in history if _list_visibility(row, plan) == "legacy"]
 
     def get_current(self, household_id: UUID, plan_id: UUID) -> ShoppingCurrent:
         captured = self._clock()

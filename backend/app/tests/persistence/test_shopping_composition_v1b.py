@@ -43,11 +43,16 @@ def _internal(engine):
     )
 
 
-@pytest.mark.parametrize("member_count,expected", [
-    (1, Decimal("250.000")),
-    (2, Decimal("487.500")),
-])
-def test_component_demand_is_exact_deduplicated_and_private(tmp_path, member_count, expected):
+@pytest.mark.parametrize(
+    "member_count,expected",
+    [
+        (1, Decimal("250.000")),
+        (2, Decimal("487.500")),
+    ],
+)
+def test_component_demand_is_exact_deduplicated_and_private(
+    tmp_path, member_count, expected
+):
     config, engine, home, people, old, recipes, selections = _setup(
         tmp_path, members=member_count
     )
@@ -71,7 +76,9 @@ def test_component_demand_is_exact_deduplicated_and_private(tmp_path, member_cou
             Decimal(row["unrounded_contribution"])
             for row in source["component_contributions"]
         ) == (Decimal("62.500") if member_count == 1 else Decimal("112.500"))
-        assert diagnostic.get_diagnostic_detail(home.id, result.shopping_list.id) == result
+        assert (
+            diagnostic.get_diagnostic_detail(home.id, result.shopping_list.id) == result
+        )
         assert diagnostic.generate_diagnostic(home.id, draft.plan.id) == result
 
         public = _service(engine, NOW)
@@ -88,7 +95,9 @@ def test_component_demand_is_exact_deduplicated_and_private(tmp_path, member_cou
             assert scope.shopping.get_detail(home.id, result.shopping_list.id) == result
         with sqlite3.connect(config.path) as db:
             assert db.execute("SELECT count(*) FROM shopping_lists").fetchone() == (1,)
-            assert db.execute("SELECT count(*) FROM pantry_movements").fetchone() == (0,)
+            assert db.execute("SELECT count(*) FROM pantry_movements").fetchone() == (
+                0,
+            )
     finally:
         engine.dispose()
 
@@ -125,9 +134,15 @@ def test_new_shopping_diagnostic_fault_rolls_back_full_snapshot(tmp_path):
         with pytest.raises(ShoppingPersistenceConflictError):
             _internal(engine).generate_diagnostic(home.id, draft.plan.id)
         with sqlite3.connect(config.path) as db:
-            for table in ("shopping_lists", "shopping_list_items", "shopping_unresolved_obligations"):
+            for table in (
+                "shopping_lists",
+                "shopping_list_items",
+                "shopping_unresolved_obligations",
+            ):
                 assert db.execute(f"SELECT count(*) FROM {table}").fetchone() == (0,)
-            assert db.execute("SELECT count(*) FROM pantry_movements").fetchone() == (0,)
+            assert db.execute("SELECT count(*) FROM pantry_movements").fetchone() == (
+                0,
+            )
     finally:
         engine.dispose()
 
@@ -171,7 +186,8 @@ def test_v1b_read_endpoints_protect_contents_even_on_stale_fallback(
         diagnostic = _internal(engine).generate_diagnostic(home.id, draft.plan.id)
         monkeypatch.setenv(DATABASE_PATH_ENV, str(config.path))
         monkeypatch.setattr(
-            main_module, "create_shopping_service",
+            main_module,
+            "create_shopping_service",
             lambda engine: _service(engine, NOW),
         )
         prefix = f"/api/households/{home.id}/meal-plans/{draft.plan.id}/shopping-lists"
@@ -225,9 +241,17 @@ finally:
     engine.dispose()
 """
         outcome = subprocess.run(
-            [sys.executable, "-c", code, str(config.path), str(home.id),
-             str(v2.shopping_list.id)],
-            text=True, capture_output=True, check=True,
+            [
+                sys.executable,
+                "-c",
+                code,
+                str(config.path),
+                str(home.id),
+                str(v2.shopping_list.id),
+            ],
+            text=True,
+            capture_output=True,
+            check=True,
         )
         assert outcome.stdout.strip() == v2.shopping_list.content_fingerprint
 
@@ -239,10 +263,12 @@ finally:
         ).create_sqlite_engine(config)
         with sqlite3.connect(config.path) as db:
             db.execute("DROP TRIGGER trg_shopping_lists_update_immutable")
-            raw = json.loads(db.execute(
-                "SELECT provenance_json FROM shopping_lists WHERE id=?",
-                (v2.shopping_list.id.hex,),
-            ).fetchone()[0])
+            raw = json.loads(
+                db.execute(
+                    "SELECT provenance_json FROM shopping_lists WHERE id=?",
+                    (v2.shopping_list.id.hex,),
+                ).fetchone()[0]
+            )
             raw["component_contributions"][0]["unrounded_contribution"] = "999"
             db.execute(
                 "UPDATE shopping_lists SET provenance_json=? WHERE id=?",
