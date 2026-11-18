@@ -22,6 +22,7 @@ from app.domain.shopping_composition_calculation import (
     ENGINE_VERSION,
     SCHEMA_V2,
     calculate_shopping_composition,
+    meal_plan_source_projection,
     validate_v2_provenance,
 )
 from app.domain.shopping_lists import ShoppingListDetail
@@ -145,6 +146,16 @@ class DiagnosticCompositionShoppingService(ShoppingService):
                     or meta["config_fingerprint"] != header.config_fingerprint
                 ):
                     raise ValueError("V2 persisted header differs from plan/provenance")
+                # Stored SHA-256 is not independent source authority: a local DB
+                # rewrite can alter the JSON and recompute both hashes. Compare
+                # *all* event, member pin, legacy Serving and composition/rule
+                # facts with the immutable MealPlan loaded by the read scope.
+                expected_plan = meal_plan_source_projection(plan)
+                if any(
+                    source.get(name) != values
+                    for name, values in expected_plan.items()
+                ):
+                    raise ValueError("V2 provenance differs from persisted MealPlan")
                 if len(source["items"]) != len(detail.items) or len(
                     source["unresolved"]
                 ) != len(detail.unresolved):
