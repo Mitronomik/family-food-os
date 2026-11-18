@@ -212,7 +212,7 @@ def persist_diagnostic_composition_revision(
                     raise MealPlanPersistenceConflictError(
                         "Member hard allergen exclusion violated by a component."
                     )
-    uow.plans.add_validated_diagnostic_detail(detail)
+    uow.plans._insert_validated_diagnostic_detail(detail)
 
 
 def make_complete_diagnostic_revision(

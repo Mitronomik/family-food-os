@@ -545,7 +545,7 @@ class SqlAlchemyMealPlanRepository:
             )
         return result
 
-    def add_validated_diagnostic_detail(self, detail: MealPlanDetail) -> None:
+    def _insert_validated_diagnostic_detail(self, detail: MealPlanDetail) -> None:
         """Insert only after service validation; same guarded internal UoW."""
         if not self._allow_composition_write:
             raise MealPlanPersistenceConflictError(
