@@ -145,10 +145,9 @@ class DiagnosticCompositionShoppingService(ShoppingService):
                     or meta["config_fingerprint"] != header.config_fingerprint
                 ):
                     raise ValueError("V2 persisted header differs from plan/provenance")
-                if (
-                    len(source["items"]) != len(detail.items)
-                    or len(source["unresolved"]) != len(detail.unresolved)
-                ):
+                if len(source["items"]) != len(detail.items) or len(
+                    source["unresolved"]
+                ) != len(detail.unresolved):
                     raise ValueError("V2 persisted row count differs")
                 for ordinal, (raw, item) in enumerate(
                     zip(source["items"], detail.items, strict=True), 1
