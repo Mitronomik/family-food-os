@@ -151,6 +151,6 @@ def test_v1a_history_and_api_projector_do_not_accept_v2(tmp_path):
                 "SELECT engine_version, count(*) FROM shopping_lists "
                 "GROUP BY engine_version ORDER BY engine_version"
             ).fetchall()
-            assert rows == [(ENGINE_VERSION, 1), ("shopping-v1a", 1)]
+            assert rows == [("shopping-v1a", 1), (ENGINE_VERSION, 1)]
     finally:
         engine.dispose()

@@ -49,7 +49,8 @@ def _exact(value: Decimal) -> str:
         raise ShoppingCalculationError("Некорректное точное количество.")
     if not value:
         return "0"
-    return format(value.normalize(), "f")
+    raw = format(value, "f")
+    return raw.rstrip("0").rstrip(".") if "." in raw else raw
 
 
 def _reject(message: str) -> None:

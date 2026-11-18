@@ -133,7 +133,7 @@ class ShoppingService:
             raise ShoppingNotFoundError("План питания не найден для этой семьи.")
         if plan.compositions:
             raise ShoppingCalculationError(
-                "Диагностическая композиция недоступна в публичном Shopping."
+                "Неполная привязка: диагностическая композиция недоступна в публичном Shopping."
             )
         current = scope.plans.get_current(household_id, plan.plan.week_start)
         if current is None or current.plan.id != plan.plan.id:
