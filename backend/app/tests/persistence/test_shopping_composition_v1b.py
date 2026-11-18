@@ -12,15 +12,15 @@ from uuid import UUID, uuid4
 import app.main as main_module
 import pytest
 from app.db.config import DATABASE_PATH_ENV
+from app.domain.pantry import PantryItem, PantryLocation
 from app.domain.shopping_calculation import ShoppingCalculationError, ShoppingStatus
 from app.domain.shopping_composition_calculation import (
     ENGINE_VERSION,
     SCHEMA_V2,
     calculate_shopping_composition,
 )
-from app.domain.pantry import PantryItem, PantryLocation
-from app.persistence.sqlalchemy_core.pantry_uow import SqlAlchemyPantryUnitOfWork
 from app.main import create_app
+from app.persistence.sqlalchemy_core.pantry_uow import SqlAlchemyPantryUnitOfWork
 from app.persistence.sqlalchemy_core.shopping_uow import (
     SqlAlchemyShoppingReadScope,
     SqlAlchemyShoppingUnitOfWork,
