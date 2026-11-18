@@ -147,9 +147,8 @@ def calculate_shopping_composition(
             _decimal(serving.portion_servings, positive=True)
         )
 
-    demand: dict[tuple[UUID, UnitCode], list[tuple[date, int, UUID, Decimal]]] = (
-        defaultdict(list)
-    )
+    # FEFO must use one exact need per event/ingredient, not one per course.
+    demand: set[tuple[UUID, UnitCode]] = set()
     food_pins: dict[str, list[str]] = {}
     unresolved: list[ShoppingUnresolved] = []
     composition_by_event = {comp.event_id: comp for comp in plan.compositions}
@@ -252,9 +251,7 @@ def calculate_shopping_composition(
                 _decimal(amount, positive=True)
                 if amount > MAX_QUANTITY:
                     _reject("Рецептурная потребность превышает допустимое количество.")
-                demand[(food.id, ingredient.unit)].append(
-                    (event.local_date, event.position, event.id, amount)
-                )
+                demand.add((food.id, ingredient.unit))
                 with localcontext() as ctx:
                     ctx.prec = 50
                     dated_demands[(event.id, food.id, FORM_BASIS, ingredient.unit)] += (
@@ -526,8 +523,24 @@ def calculate_shopping_composition(
                 warnings.append(ShoppingWarning("EXPIRED_STOCK", lot.id))
             elif lot.unit != unit:
                 warnings.append(ShoppingWarning("INCOMPATIBLE_UNIT", lot.id))
+        # Reuse the exact per-event aggregate recorded in V2 provenance.
+        # FIRST/SECOND/DESSERT sharing an ingredient must not create multiple
+        # same-event stock allocations or change the dated FEFO result.
         for meal_date, position, event_id, amount in sorted(
-            demand[(food_id, unit)], key=lambda row: (row[0], row[1], str(row[2]))
+            (
+                (
+                    event_by_id[event_id].local_date,
+                    event_by_id[event_id].position,
+                    event_id,
+                    amount,
+                )
+                for (event_id, ingredient_id, basis, demand_unit), amount
+                in dated_demands.items()
+                if ingredient_id == food_id
+                and basis == FORM_BASIS
+                and demand_unit == unit
+            ),
+            key=lambda row: (row[0], row[1], str(row[2])),
         ):
             with localcontext() as ctx:
                 ctx.prec = 50
