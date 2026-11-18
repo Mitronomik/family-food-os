@@ -14,6 +14,10 @@ from app.domain.meal_plans import (
     MemberMealPatternSelectionDetail,
 )
 from app.services.household_contracts import HouseholdMemberRepository
+from app.services.reference_methodology_contracts import (
+    MemberReferenceMethodologySelectionRepository,
+)
+
 
 
 @dataclass(frozen=True)
@@ -39,10 +43,6 @@ class DiagnosticRecipeFacts:
     source_document_sha256: str | None
     is_active: bool
     ingredients: tuple[DiagnosticIngredientFacts, ...]
-
-from app.services.reference_methodology_contracts import (
-    MemberReferenceMethodologySelectionRepository,
-)
 
 
 class MemberMealPatternSelectionRepository(Protocol):
