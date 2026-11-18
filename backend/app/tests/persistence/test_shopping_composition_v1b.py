@@ -339,7 +339,16 @@ def test_versioned_component_member_factor_and_repeated_recipe_pin_change_hash(t
         engine.dispose()
 
 
-def test_v1b_dated_pantry_fefo_across_composed_and_legacy_events(tmp_path):
+@pytest.mark.parametrize(
+    "stock_quantity,expected_available,expected_purchase,expect_expiry_warning",
+    [
+        (Decimal("100.000"), Decimal("100.000"), Decimal("150.000"), False),
+        (Decimal("140.000"), Decimal("125.000"), Decimal("125.000"), True),
+    ],
+)
+def test_v1b_dated_pantry_fefo_across_composed_and_legacy_events(
+    tmp_path, stock_quantity, expected_available, expected_purchase, expect_expiry_warning
+):
     config, engine, home, people, old, recipes, selections = _setup(tmp_path)
     try:
         draft = _compose(old, people, recipes, selections)
@@ -353,7 +362,7 @@ def test_v1b_dated_pantry_fefo_across_composed_and_legacy_events(tmp_path):
         stock = PantryItem(
             id=uuid4(), household_id=home.id,
             food_ingredient_id=ingredient_id,
-            quantity=Decimal("100.000"), unit="g",
+            quantity=stock_quantity, unit="g",
             location=PantryLocation.PANTRY,
             estimated=False, purchased_on=None, opened_on=None,
             expires_on=date(2026, 11, 4),
@@ -371,20 +380,28 @@ def test_v1b_dated_pantry_fefo_across_composed_and_legacy_events(tmp_path):
         snapshot = diagnostic.generate_diagnostic(home.id, draft.plan.id)
         only = snapshot.items[0]
         assert only.required_quantity == Decimal("250.000")
-        assert only.pantry_available_quantity == Decimal("100.000")
-        assert only.purchase_quantity == Decimal("150.000")
+        assert only.pantry_available_quantity == expected_available
+        assert only.purchase_quantity == expected_purchase
         data = json.loads(snapshot.shopping_list.provenance_json)
         assert len(data["allocations"]) == 3
-        assert sum(Decimal(a["quantity"]) for a in data["allocations"]) == Decimal("100")
-        assert any(
-            w["code"] == "EXPIRES_BEFORE_REQUIRED_DATE"
-            for w in data["warnings"]
+        assert sum(Decimal(a["quantity"]) for a in data["allocations"]) == expected_available
+        # Component demand is combined before FEFO: one allocation per event/lot.
+        assert len({
+            (a["meal_event_id"], a["pantry_item_id"])
+            for a in data["allocations"]
+        }) == len(data["allocations"])
+        assert (
+            any(
+                w["code"] == "EXPIRES_BEFORE_REQUIRED_DATE"
+                for w in data["warnings"]
+            )
+            is expect_expiry_warning
         )
         assert diagnostic.get_diagnostic_detail(home.id, snapshot.shopping_list.id) == snapshot
         with sqlite3.connect(config.path) as db:
             assert db.execute("SELECT count(*) FROM pantry_movements").fetchone() == (0,)
             assert db.execute(
                 "SELECT quantity FROM pantry_items WHERE id=?", (stock.id.hex,)
-            ).fetchone() == ("100.000",)
+            ).fetchone() == (format(stock_quantity, ".3f"),)
     finally:
         engine.dispose()
