@@ -152,8 +152,7 @@ class DiagnosticCompositionShoppingService(ShoppingService):
                 # facts with the immutable MealPlan loaded by the read scope.
                 expected_plan = meal_plan_source_projection(plan)
                 if any(
-                    source.get(name) != values
-                    for name, values in expected_plan.items()
+                    source.get(name) != values for name, values in expected_plan.items()
                 ):
                     raise ValueError("V2 provenance differs from persisted MealPlan")
                 if len(source["items"]) != len(detail.items) or len(
