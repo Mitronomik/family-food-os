@@ -337,9 +337,10 @@ def test_p2_composed_readback_rejects_deleted_non_target_slot_same_week(tmp_path
     try:
         changed = _compose(prior, people[:1], recipes, selections, target_index=4)
         _write(engine, changed, people)
-        missing = changed.events[0]
+        missing = changed.events[2]
         assert missing.id != changed.compositions[0].event_id
-        # A deleted Monday BREAKFAST leaves Monday's other events intact.
+        # Delete Monday DINNER (last position): Monday's positions 1 and 2
+        # remain contiguous, bypassing the basic MealPlanDetail constructor.
         # Seven distinct dates alone cannot prove a complete revision.
         with sqlite3.connect(config.path) as db:
             db.execute("DROP TRIGGER trg_servings_no_delete")
