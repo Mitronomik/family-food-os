@@ -69,7 +69,6 @@ from app.services.meal_plan_contracts import (
 )
 
 
-
 class SqlAlchemyMemberMealPatternSelectionRepository:
     def __init__(self, connection: Connection) -> None:
         self._connection = connection
