@@ -1,3 +1,9 @@
+# 2026-11-18 — Shopping composition demand proposed contract after #292 merge
+
+Confirmed accepted `main@44adc9bf5cc0013c42d05a43fa1f3ed916f4d47e` (PR #292 merged). A **new docs-only** cross-context gate proposes `docs/family-food/shopping-composition-demand-implementation-contract-2026-11-18.md`: preserve `shopping-v1a` legacy fingerprints, derive each composed RecipeVersion ingredient amount from exact per-component member Servings, aggregate shared ingredients once per dated event, keep existing FEFO/0.001 rounding and snapshot atomicity, and fingerprint full ordered source/rule/participant provenance. Internal diagnostic only; normal Shopping API continues fail-closed for composed DRAFT. No new migration assumed, but must prove existing `0043` JSON provenance sufficiency before runtime. After independent review and **owner merge**, one Shopping-owned runtime PR can implement the accepted contract. No `main` changes in docs PR, no downstream activation or automatic merge.
+
+---
+
 # 2026-11-18 — PR #292: composed-readback completeness and validation layering P2 corrections
 
 - A persisted composed DRAFT readback now validates pinned seven-day MealPattern coverage and exact semantic preservation against the prior immutable revision. Corruption regressions delete both an unrelated event and its Servings: a missing entire day (7-event week) or one missing slot while all seven dates remain (21-event week) must fail closed on reread; historical legacy plans keep their previous read behavior.

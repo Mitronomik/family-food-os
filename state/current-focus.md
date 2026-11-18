@@ -1,3 +1,9 @@
+# CURRENT — Shopping composition demand contract gate after merged #292 — 2026-11-18
+
+**Accepted main:** `44adc9bf5cc0013c42d05a43fa1f3ed916f4d47e` ([PR #292 merged](https://github.com/Mitronomik/family-food-os/pull/292), 2026-11-18). Completed 0044 typed multi-course MealPlan persistence remains diagnostic-only. **Now:** docs-only [Shopping composition demand implementation contract](../docs/family-food/shopping-composition-demand-implementation-contract-2026-11-18.md) for independent review/merge before any Shopping runtime PR. Goal: exact member-component ingredient demand, dated read-only Pantry FEFO, source-provenance/fingerprints, strict legacy Shopping v1a compatibility and no public activation. No schema/runtime/UI/AI changes in this contract PR; if a migration becomes necessary, reopen the gate. **Next only after approved merged gate:** bounded Shopping-owned deterministic engine/UoW/test implementation. No automatic merge, real-family activation or Prep/Gate2 claims.
+
+---
+
 # CURRENT — MealPlan 0044 composition persistence, after merged #291 — 2026-11-16
 
 **Accepted main:** `4f2a1fbc4b14e336b1bbb44d19183301f0798113` ([PR #291 merged](https://github.com/Mitronomik/family-food-os/pull/291)). The reviewed, approved [MealPlan persistence implementation contract](../docs/family-food/mealplan-multicourse-persistence-implementation-contract-2026-11-16.md) requires full seven-day revisions and immutable complete course-rule snapshots, no partial meal drafts.
