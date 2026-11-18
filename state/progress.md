@@ -3,6 +3,7 @@
 - Confirmed GitHub `PR #292 merged`, `main@44adc9bf5cc0013c42d05a43fa1f3ed916f4d47e`; accepted 0044 MealPlan source remains synthetic/diagnostic-only.
 - Started **docs-only** next gate for Shopping member-component demand, exact deterministic scaling, V1a historical Shopping preservation, no duplicate Pantry allocation and versioned source provenance. Must be reviewed and merged before runtime.
 - Proposed no new migration, no public API/consumer enablement, no financial/nutrition/physical/Prep authority. If schema parity fails, return to contract review.
+- PR #293 independent review P2s are reflected in the docs: all public reads and stale fallbacks isolate `shopping-v1b-composition`; existing historical V1 reads remain available. A strict V2 provenance schema requires source/recipe/ingredient/member pins, exact Decimal contribution ledger and deterministic event/item reconciliation. This is docs-only; implementation and final independent review remain pending.
 
 ---
 
