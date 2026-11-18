@@ -12,7 +12,10 @@ from uuid import UUID
 
 from fastapi import APIRouter, Body, Depends, HTTPException, Request
 
-from app.domain.shopping_calculation import ShoppingCalculationError
+from app.domain.shopping_calculation import (
+    ENGINE_VERSION as LEGACY_ENGINE_VERSION,
+    ShoppingCalculationError,
+)
 from app.domain.shopping_lists import ShoppingCurrent, ShoppingListDetail
 from app.schemas.shopping import (
     ShoppingAllocationResponse,
@@ -135,7 +138,10 @@ def _provenance(
         source = json.loads(detail.shopping_list.provenance_json)
         if (
             not isinstance(source, dict)
-            or source["schema"] != "SHOPPING_SOURCE_SNAPSHOT_V1"
+            or source.get("schema") != "SHOPPING_SOURCE_SNAPSHOT_V1"
+            or detail.shopping_list.engine_version != LEGACY_ENGINE_VERSION
+            or not isinstance(source.get("calculation"), dict)
+            or source["calculation"].get("engine") != LEGACY_ENGINE_VERSION
         ):
             raise ValueError("Unsupported Shopping source snapshot")
         raw_warnings = source["warnings"]
@@ -183,6 +189,8 @@ def _detail_response(
     detail: ShoppingListDetail,
     current: ShoppingCurrent,
 ) -> ShoppingDetailResponse:
+    # Projection-level defense: V2 must never reach a public detail or STALE.
+    warnings, allocations = _provenance(detail)
     header = detail.shopping_list
     current_id = current.detail.shopping_list.id if current.detail else None
     lifecycle = (
@@ -203,7 +211,6 @@ def _detail_response(
         if reason
         else None
     )
-    warnings, allocations = _provenance(detail)
     return ShoppingDetailResponse(
         id=header.id,
         household_id=header.household_id,
