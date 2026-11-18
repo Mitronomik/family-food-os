@@ -586,3 +586,200 @@ def calculate_shopping_composition(
         allocation_result, pantry_hash, source_hash, content_hash,
     )
     return calculation, provenance
+
+def validate_v2_provenance(payload: dict, calculation: ShoppingCalculation) -> None:
+    """Replay source, component arithmetic and item totals without live catalogue."""
+    try:
+        if (
+            not isinstance(payload, dict)
+            or payload["schema"] != SCHEMA_V2
+            or payload["engine"] != ENGINE_VERSION
+            or payload["policy"] != PANTRY_POLICY_VERSION
+            or calculation.engine_version != ENGINE_VERSION
+        ):
+            raise ValueError("invalid V2 version")
+        meta = payload["calculation"]
+        expected_meta = {
+            "household_id": str(calculation.household_id),
+            "plan_id": str(calculation.meal_plan_id),
+            "plan_revision": calculation.source_plan_revision_number,
+            "as_of_date": calculation.as_of_date.isoformat(),
+            "engine": ENGINE_VERSION, "policy": PANTRY_POLICY_VERSION,
+            "pantry_hash": calculation.pantry_snapshot_hash,
+            "source_hash": calculation.source_fingerprint,
+            "content_hash": calculation.content_fingerprint,
+        }
+        if any(meta[key] != val for key, val in expected_meta.items()):
+            raise ValueError("V2 header mismatch")
+        base_meta_keys = (
+            "household_id", "plan_id", "plan_revision", "week_start",
+            "config_version", "as_of_date", "timezone",
+        )
+        source_keys = (
+            "plan_events", "member_selection_pins", "servings",
+            "compositions", "recipe_inputs", "foods", "pantry_items",
+        )
+        sources = {
+            "schema": SCHEMA_V2, "engine": ENGINE_VERSION,
+            "policy": PANTRY_POLICY_VERSION,
+            "calculation": {k: meta[k] for k in base_meta_keys},
+            **{k: payload[k] for k in source_keys},
+        }
+        if _fingerprint(sources) != calculation.source_fingerprint:
+            raise ValueError("V2 source fingerprint")
+        if _fingerprint([
+            meta["plan_id"], meta["config_version"],
+            ENGINE_VERSION, PANTRY_POLICY_VERSION,
+        ]) != meta["config_fingerprint"]:
+            raise ValueError("V2 config fingerprint")
+        from app.domain.meal_compositions import restore_rule_snapshot
+
+        events = {e["event_id"]: e for e in payload["plan_events"]}
+        versions = {r["recipe_version_id"]: r for r in payload["recipe_inputs"]}
+        if len(events) != len(payload["plan_events"]) or len(versions) != len(payload["recipe_inputs"]):
+            raise ValueError("duplicate source identity")
+        legacy: dict[str, list[dict]] = defaultdict(list)
+        for serving in payload["servings"]:
+            if serving["event_id"] not in events:
+                raise ValueError("orphan Serving")
+            legacy[serving["event_id"]].append(serving)
+        contributions = {}
+        demands: dict[tuple[str, str, str, str], Decimal] = defaultdict(Decimal)
+
+        def add(event: dict, food: str, unit: str, amount: Decimal):
+            demands[(event["event_id"], food, FORM_BASIS, unit)] += amount
+
+        composed_events = set()
+        for comp in payload["compositions"]:
+            event = events[comp["meal_event_id"]]
+            if event["source_kind"] != "COOK_COMPOSITION":
+                raise ValueError("composition source mismatch")
+            composed_events.add(comp["meal_event_id"])
+            rule = comp["rule"]
+            restore_rule_snapshot(
+                code=rule["code"], version=rule["version"],
+                meal_role=rule["meal_role"], coverage=rule["coverage"],
+                schema_version=rule["schema_version"],
+                requirements_json=json.dumps(
+                    rule["requirements"], sort_keys=True,
+                    separators=(",", ":"), ensure_ascii=False,
+                ),
+                sha256_hex=rule["sha256"],
+            )
+            for part in comp["components"]:
+                servings = part["member_servings"]
+                if not servings or len({s["member_id"] for s in servings}) != len(servings):
+                    raise ValueError("invalid member-component Servings")
+                if any(
+                    s["portion_servings"] != format(Decimal(s["portion_servings"]), ".6f")
+                    or Decimal(s["portion_servings"]) <= 0
+                    for s in servings
+                ):
+                    raise ValueError("invalid component amount")
+                recipe = versions[part["recipe_version_id"]]
+                with localcontext() as ctx:
+                    ctx.prec = 50
+                    total = sum((Decimal(s["portion_servings"]) for s in servings), Decimal(0))
+                    base = Decimal(recipe["base_servings"])
+                    scale = total / base
+                for ingredient in recipe["ingredients"]:
+                    key = (comp["meal_event_id"], part["component_id"], ingredient["recipe_ingredient_id"])
+                    if key in contributions:
+                        raise ValueError("duplicate component input")
+                    with localcontext() as ctx:
+                        ctx.prec = 50
+                        quantity = Decimal(ingredient["quantity"])
+                        numerator = quantity * total
+                        amount = numerator / base
+                    if quantity <= 0 or not amount.is_finite() or amount <= 0:
+                        raise ValueError("invalid component ingredient")
+                    contributions[key] = {
+                        "meal_event_id": comp["meal_event_id"],
+                        "local_date": event["local_date"],
+                        "event_position": event["position"],
+                        "component_id": part["component_id"],
+                        "component_position": part["position"],
+                        "course_kind": part["course_kind"],
+                        "recipe_version_id": part["recipe_version_id"],
+                        "recipe_ingredient_id": ingredient["recipe_ingredient_id"],
+                        "food_ingredient_id": ingredient["food_ingredient_id"],
+                        "form_basis": FORM_BASIS, "unit": ingredient["unit"],
+                        "base_servings": _exact(base),
+                        "member_servings": servings,
+                        "total_component_servings": _exact(total),
+                        "input_quantity": _exact(quantity),
+                        "scale_factor": _exact(scale),
+                        "contribution_numerator": _exact(numerator),
+                        "contribution_denominator": _exact(base),
+                        "unrounded_contribution": _exact(amount),
+                    }
+                    add(event, ingredient["food_ingredient_id"], ingredient["unit"], amount)
+        if composed_events != {
+            e["event_id"] for e in payload["plan_events"]
+            if e["source_kind"] == "COOK_COMPOSITION"
+        }:
+            raise ValueError("composed parent missing")
+        provided = {}
+        for item in payload["component_contributions"]:
+            key = (item["meal_event_id"], item["component_id"], item["recipe_ingredient_id"])
+            if key in provided:
+                raise ValueError("duplicate contribution")
+            provided[key] = item
+        if provided != contributions:
+            raise ValueError("component contribution mismatch")
+        for event in payload["plan_events"]:
+            if event["source_kind"] != "COOK_RECIPE":
+                continue
+            recipe = versions[event["recipe_version_id"]]
+            portions = legacy[event["event_id"]]
+            if not portions:
+                raise ValueError("legacy source lost member Servings")
+            with localcontext() as ctx:
+                ctx.prec = 50
+                total = sum((Decimal(s["portion_servings"]) for s in portions), Decimal(0))
+                base = Decimal(recipe["base_servings"])
+                for ingredient in recipe["ingredients"]:
+                    amount = Decimal(ingredient["quantity"]) * total / base
+                    add(event, ingredient["food_ingredient_id"], ingredient["unit"], amount)
+        stored_demands = {}
+        for row in payload["event_demands"]:
+            key = (row["meal_event_id"], row["food_ingredient_id"], row["form_basis"], row["unit"])
+            if key in stored_demands:
+                raise ValueError("duplicate event demand")
+            stored_demands[key] = Decimal(row["unrounded_required"])
+        if demands != stored_demands:
+            raise ValueError("event sum mismatch")
+        totals: dict[tuple[str, str, str], Decimal] = defaultdict(Decimal)
+        for (_, food, basis, unit), amount in demands.items():
+            totals[(food, basis, unit)] += amount
+        if len(totals) != len(payload["items"]):
+            raise ValueError("missing Shopping item")
+        for ordinal, row in enumerate(payload["items"], 1):
+            key = (row["food_ingredient_id"], row["form_basis"], row["unit"])
+            if key not in totals or row["ordinal"] != ordinal:
+                raise ValueError("unexpected Shopping item")
+            if Decimal(row["required_quantity"]) != _round(totals.pop(key), ROUND_CEILING):
+                raise ValueError("rounded item total differs")
+        if totals or len(calculation.items) != len(payload["items"]):
+            raise ValueError("Shopping quantity count differs")
+        for raw, stored in zip(payload["items"], calculation.items, strict=True):
+            if (
+                raw["food_ingredient_id"] != str(stored.food_ingredient_id)
+                or raw["unit"] != str(stored.unit)
+                or raw["required_quantity"] != _exact(stored.required_quantity)
+                or raw["pantry_available_quantity"] != _exact(stored.pantry_available_quantity)
+                or raw["purchase_quantity"] != _exact(stored.purchase_quantity)
+            ):
+                raise ValueError("persisted item differs")
+        if _fingerprint({
+            "source_fingerprint": calculation.source_fingerprint,
+            "component_contributions": payload["component_contributions"],
+            "event_demands": payload["event_demands"],
+            "items": payload["items"], "unresolved": payload["unresolved"],
+            "warnings": payload["warnings"], "allocations": payload["allocations"],
+        }) != calculation.content_fingerprint:
+            raise ValueError("V2 content fingerprint")
+    except (KeyError, IndexError, TypeError, ValueError, ArithmeticError) as exc:
+        raise ShoppingCalculationError(
+            "Невозможно независимо воспроизвести диагностический Shopping V2."
+        ) from exc
