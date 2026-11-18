@@ -1,3 +1,11 @@
+# 2026-11-19 — PR #294 merged; source/role/physical admission preflight proposed
+
+- GitHub confirms [#294](https://github.com/Mitronomik/family-food-os/pull/294) merged 2026-11-18T20:46:28Z; accepted `main@af501e60911be3a393fa0eb3e2c611dc86b4fa28`. Composition-aware Shopping v1b immutable diagnostic source/Decimal/Pantry/FEFO readback and public V1a isolation are implemented. **No consumer or Prep/physical/Nutrition release is established.**
+- Opened bounded docs-only preflight [composed-meal admission readiness](../docs/family-food/composed-meal-admission-readiness-preflight-2026-11-19.md) for independent review: evidence criteria and adversarial tests for pinned source/rights, role/structure, individual physical feasibility, complete Nutrition/downstream contracts. Proposed next operation is **read-only evidence inventory**, not executable activation or source publication; NO_GO unless independent proof exists.
+- Historical accepted source/MealPlan/Shopping, PR10 status and roadmap order unchanged. Review and owner merge separately; do not start the proposed inventory or downstream runtime as an implicit side effect.
+
+---
+
 # 2026-11-18 — PR #293 merged; Shopping v1b diagnostic runtime underway
 
 - Confirmed [PR #293](https://github.com/Mitronomik/family-food-os/pull/293) merged at `main@d6fb30fdaed4babc4019dc7b0d007ab947479337`; its V2 provenance/public isolation contract authorizes a separately scoped Shopping runtime PR.
