@@ -12,14 +12,17 @@ from uuid import UUID, uuid4
 import app.main as main_module
 import pytest
 from app.db.config import DATABASE_PATH_ENV
+from app.domain.meal_plans import MealSourceKind
 from app.domain.pantry import PantryItem, PantryLocation
 from app.domain.shopping_calculation import ShoppingCalculationError, ShoppingStatus
 from app.domain.shopping_composition_calculation import (
     ENGINE_VERSION,
     SCHEMA_V2,
+    _fingerprint,
     calculate_shopping_composition,
 )
 from app.main import create_app
+from app.persistence.sqlalchemy_core.meal_plan_uow import SqlAlchemyMealPlanUnitOfWork
 from app.persistence.sqlalchemy_core.pantry_uow import SqlAlchemyPantryUnitOfWork
 from app.persistence.sqlalchemy_core.shopping_uow import (
     SqlAlchemyShoppingReadScope,
@@ -428,5 +431,185 @@ def test_v1b_dated_pantry_fefo_across_composed_and_legacy_events(
             assert db.execute(
                 "SELECT quantity FROM pantry_items WHERE id=?", (stock.id.hex,)
             ).fetchone() == (format(stock_quantity, ".3f"),)
+    finally:
+        engine.dispose()
+
+
+@pytest.mark.parametrize(
+    "table,trigger,column,value",
+    [
+        (
+            "shopping_list_items",
+            "trg_shopping_list_items_update_immutable",
+            "form_basis",
+            "CORRUPTED_FORM",
+        ),
+        (
+            "shopping_list_items",
+            "trg_shopping_list_items_update_immutable",
+            "ordinal",
+            5,
+        ),
+        (
+            "shopping_lists",
+            "trg_shopping_lists_update_immutable",
+            "config_fingerprint",
+            "0" * 64,
+        ),
+    ],
+)
+def test_v1b_readback_rejects_corrupt_persisted_item_order_form_and_header(
+    tmp_path, table, trigger, column, value
+):
+    config, engine, home, people, old, recipes, selections = _setup(tmp_path)
+    try:
+        draft = _compose(old, people, recipes, selections)
+        _write(engine, draft, people)
+        diagnostic = _internal(engine)
+        saved = diagnostic.generate_diagnostic(home.id, draft.plan.id)
+        assert diagnostic.get_diagnostic_detail(home.id, saved.shopping_list.id) == saved
+        with sqlite3.connect(config.path) as db:
+            db.execute(f"DROP TRIGGER {trigger}")
+            key = "id" if table == "shopping_lists" else "shopping_list_id"
+            db.execute(
+                f"UPDATE {table} SET {column}=? WHERE {key}=?",
+                (value, saved.shopping_list.id.hex),
+            )
+        with pytest.raises(ShoppingPersistenceError):
+            diagnostic.get_diagnostic_detail(home.id, saved.shopping_list.id)
+    finally:
+        engine.dispose()
+
+
+def _compose_with_leftover_obligation(tmp_path):
+    """Persist a genuine legacy source revision before a composed successor."""
+    config, engine, home, people, old, recipes, selections = _setup(tmp_path)
+    next_id = uuid4()
+    prior_plan = replace(
+        old.plan,
+        id=next_id,
+        revision_number=old.plan.revision_number + 1,
+        supersedes_plan_id=old.plan.id,
+        created_at=NOW,
+    )
+    event_ids = {event.id: uuid4() for event in old.events}
+    leftover_id = old.events[4].id
+    prior = replace(
+        old,
+        plan=prior_plan,
+        member_selections=tuple(
+            replace(pin, plan_id=next_id) for pin in old.member_selections
+        ),
+        events=tuple(
+            replace(
+                event,
+                id=event_ids[event.id],
+                plan_id=next_id,
+                source_kind=(
+                    MealSourceKind.LEFTOVER
+                    if event.id == leftover_id
+                    else event.source_kind
+                ),
+                recipe_version_id=(
+                    None if event.id == leftover_id else event.recipe_version_id
+                ),
+                source_reference=(
+                    "synthetic leftover supply not verified"
+                    if event.id == leftover_id
+                    else event.source_reference
+                ),
+                created_at=NOW,
+            )
+            for event in old.events
+        ),
+        servings=tuple(
+            replace(
+                serving,
+                id=uuid4(),
+                event_id=event_ids[serving.event_id],
+                created_at=NOW,
+            )
+            for serving in old.servings
+        ),
+    )
+    with SqlAlchemyMealPlanUnitOfWork(engine) as scope:
+        scope.plans.add_detail(prior)
+        scope.commit()
+    composed = _compose(prior, people, recipes, selections)
+    _write(engine, composed, people)
+    diagnostic = _internal(engine)
+    saved = diagnostic.generate_diagnostic(home.id, composed.plan.id)
+    assert saved.shopping_list.status is ShoppingStatus.INCOMPLETE
+    assert len(saved.unresolved) == 1
+    assert saved.unresolved[0].source_kind is MealSourceKind.LEFTOVER
+    assert diagnostic.get_diagnostic_detail(home.id, saved.shopping_list.id) == saved
+    return config, engine, home, saved, diagnostic
+
+
+def test_v1b_readback_rejects_deleted_leftover_obligation(tmp_path):
+    config, engine, home, saved, diagnostic = _compose_with_leftover_obligation(
+        tmp_path
+    )
+    try:
+        with sqlite3.connect(config.path) as db:
+            db.execute(
+                "DROP TRIGGER trg_shopping_unresolved_obligations_delete_immutable"
+            )
+            db.execute(
+                "DELETE FROM shopping_unresolved_obligations WHERE shopping_list_id=?",
+                (saved.shopping_list.id.hex,),
+            )
+            assert db.execute(
+                "SELECT COUNT(*) FROM shopping_unresolved_obligations "
+                "WHERE shopping_list_id=?",
+                (saved.shopping_list.id.hex,),
+            ).fetchone() == (0,)
+        with pytest.raises(ShoppingPersistenceError):
+            diagnostic.get_diagnostic_detail(home.id, saved.shopping_list.id)
+    finally:
+        engine.dispose()
+
+
+def test_v1b_replay_rejects_consistently_rehashed_missing_leftover(tmp_path):
+    config, engine, home, saved, diagnostic = _compose_with_leftover_obligation(
+        tmp_path
+    )
+    try:
+        with sqlite3.connect(config.path) as db:
+            db.execute("DROP TRIGGER trg_shopping_lists_update_immutable")
+            db.execute(
+                "DROP TRIGGER trg_shopping_unresolved_obligations_delete_immutable"
+            )
+            source = json.loads(saved.shopping_list.provenance_json)
+            assert len(source["unresolved"]) == 1
+            source["unresolved"] = []
+            source["calculation"]["content_hash"] = _fingerprint(
+                {
+                    "source_fingerprint": saved.shopping_list.source_fingerprint,
+                    "component_contributions": source["component_contributions"],
+                    "event_demands": source["event_demands"],
+                    "items": source["items"],
+                    "unresolved": source["unresolved"],
+                    "warnings": source["warnings"],
+                    "allocations": source["allocations"],
+                }
+            )
+            db.execute(
+                "UPDATE shopping_lists SET provenance_json=?, "
+                "content_fingerprint=?, status='COMPLETE' WHERE id=?",
+                (
+                    json.dumps(source, ensure_ascii=False, sort_keys=True),
+                    source["calculation"]["content_hash"],
+                    saved.shopping_list.id.hex,
+                ),
+            )
+            db.execute(
+                "DELETE FROM shopping_unresolved_obligations WHERE shopping_list_id=?",
+                (saved.shopping_list.id.hex,),
+            )
+        # Even matching output rows, hashes and COMPLETE cannot erase a LEFTOVER
+        # obligation determined independently by the immutable source events.
+        with pytest.raises(ShoppingPersistenceError):
+            diagnostic.get_diagnostic_detail(home.id, saved.shopping_list.id)
     finally:
         engine.dispose()
