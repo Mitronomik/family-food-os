@@ -681,6 +681,7 @@ def calculate_shopping_composition(
     )
     return calculation, provenance
 
+
 def validate_v2_provenance(payload: dict, calculation: ShoppingCalculation) -> None:
     """Replay source, component arithmetic and item totals without live catalogue."""
     try:
