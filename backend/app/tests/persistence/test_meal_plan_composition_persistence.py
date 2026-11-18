@@ -32,6 +32,7 @@ from app.persistence.sqlalchemy_core.meal_plan_uow import (
 )
 from app.services.meal_plan_composition_revisions import (
     make_complete_diagnostic_revision,
+    persist_diagnostic_composition_revision,
 )
 from app.services.meal_plan_contracts import (
     MealPlanPersistenceConflictError,
@@ -227,7 +228,8 @@ def _write(engine, new, people, *, excluded_allergens=None):
     with SqlAlchemyMealPlanUnitOfWork(
         engine, enable_internal_composition_writes=True
     ) as scope:
-        scope.plans.add_diagnostic_composition_revision(
+        persist_diagnostic_composition_revision(
+            scope,
             new,
             excluded_food_codes_by_member={p.id: frozenset() for p in people},
             excluded_allergen_codes_by_member=allergen_exclusions,
@@ -248,7 +250,8 @@ def test_complete_week_source_roundtrip_and_legacy_history(tmp_path):
             pytest.raises(MealPlanPersistenceConflictError),
             SqlAlchemyMealPlanUnitOfWork(engine) as scope,
         ):
-            scope.plans.add_diagnostic_composition_revision(
+            persist_diagnostic_composition_revision(
+            scope,
                 current,
                 excluded_food_codes_by_member={people[0].id: frozenset()},
                 excluded_allergen_codes_by_member={people[0].id: frozenset()},
@@ -573,7 +576,8 @@ def test_p2_unreviewed_allergens_and_missing_member_map_fail_closed(tmp_path):
             with pytest.raises(
                 MealPlanPersistenceConflictError, match="allergen exclusions"
             ):
-                scope.plans.add_diagnostic_composition_revision(
+                persist_diagnostic_composition_revision(
+            scope,
                     draft,
                     excluded_food_codes_by_member={people[0].id: frozenset()},
                     excluded_allergen_codes_by_member={},
@@ -581,7 +585,8 @@ def test_p2_unreviewed_allergens_and_missing_member_map_fail_closed(tmp_path):
             with pytest.raises(
                 MealPlanPersistenceConflictError, match="normalized allergen"
             ):
-                scope.plans.add_diagnostic_composition_revision(
+                persist_diagnostic_composition_revision(
+            scope,
                     draft,
                     excluded_food_codes_by_member={people[0].id: frozenset()},
                     excluded_allergen_codes_by_member={
@@ -597,5 +602,35 @@ def test_p2_unreviewed_allergens_and_missing_member_map_fail_closed(tmp_path):
             _write(engine, draft, people)
         with SqlAlchemyMealPlanReadScope(engine) as scope:
             assert scope.plans.get_current(home.id, prior.plan.week_start) == prior
+    finally:
+        engine.dispose()
+
+
+def test_p2_persisted_composition_loses_day_and_fails_closed_readback(tmp_path):
+    config, engine, home, people, prior, recipes, accepted = _setup(tmp_path)
+    try:
+        draft = _compose(prior, people, recipes, accepted)
+        _write(engine, draft, people)
+        # Simulate offline physical DB corruption that bypasses immutable
+        # triggers, deleting an unrelated day AND all its legacy Servings.
+        lost = draft.events[0]
+        assert lost.id != draft.compositions[0].event_id
+        with sqlite3.connect(config.path) as db:
+            db.execute("DROP TRIGGER trg_servings_no_delete")
+            db.execute("DROP TRIGGER trg_meal_plan_events_no_delete")
+            db.execute("DELETE FROM servings WHERE event_id=?", (lost.id.hex,))
+            db.execute("DELETE FROM meal_plan_events WHERE id=?", (lost.id.hex,))
+            db.commit()
+            assert db.execute(
+                "SELECT count(*) FROM meal_plan_events WHERE plan_id=?",
+                (draft.plan.id.hex,),
+            ).fetchone() == (6,)
+        with SqlAlchemyMealPlanReadScope(engine) as scope:
+            with pytest.raises(MealPlanPersistenceError, match="complete replay"):
+                scope.plans.get_detail(home.id, draft.plan.id)
+            with pytest.raises(MealPlanPersistenceError, match="complete replay"):
+                scope.plans.get_current(home.id, prior.plan.week_start)
+            # Historical revision remains independently readable.
+            assert scope.plans.get_detail(home.id, prior.plan.id) == prior
     finally:
         engine.dispose()
