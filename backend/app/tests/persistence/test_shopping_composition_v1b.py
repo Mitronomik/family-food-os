@@ -4,14 +4,22 @@ import json
 import sqlite3
 import subprocess
 import sys
-from datetime import UTC, datetime
+from dataclasses import replace
+from datetime import UTC, date, datetime
 from decimal import Decimal
+from uuid import UUID, uuid4
 
 import app.main as main_module
 import pytest
 from app.db.config import DATABASE_PATH_ENV
 from app.domain.shopping_calculation import ShoppingCalculationError, ShoppingStatus
-from app.domain.shopping_composition_calculation import ENGINE_VERSION, SCHEMA_V2
+from app.domain.shopping_composition_calculation import (
+    ENGINE_VERSION,
+    SCHEMA_V2,
+    calculate_shopping_composition,
+)
+from app.domain.pantry import PantryItem, PantryLocation
+from app.persistence.sqlalchemy_core.pantry_uow import SqlAlchemyPantryUnitOfWork
 from app.main import create_app
 from app.persistence.sqlalchemy_core.shopping_uow import (
     SqlAlchemyShoppingReadScope,
@@ -276,5 +284,107 @@ finally:
             )
         with pytest.raises(ShoppingPersistenceError):
             _internal(engine).get_diagnostic_detail(home.id, v2.shopping_list.id)
+    finally:
+        engine.dispose()
+
+
+def test_versioned_component_member_factor_and_repeated_recipe_pin_change_hash(tmp_path):
+    _, engine, home, people, old, recipes, selections = _setup(tmp_path)
+    try:
+        draft = _compose(old, people, recipes, selections)
+        source_ids = set(recipes.values())
+        with SqlAlchemyShoppingReadScope(engine) as scope:
+            recipe_details = {
+                rid: scope.recipes.get_detail(rid) for rid in source_ids
+            }
+            food_id = next(iter(recipe_details.values())).ingredients[0].food_ingredient_id
+            foods = {food_id: scope.foods.get(food_id)}
+        inputs = {
+            "recipes": recipe_details,
+            "foods": foods,
+            "pantry_items": (),
+            "household_timezone": home.timezone,
+            "captured_at": NOW,
+        }
+        first, source = calculate_shopping_composition(plan=draft, **inputs)
+        comp = draft.compositions[0]
+        changed_servings = tuple(
+            replace(item, portion_servings=Decimal("1.125000"))
+            if item.component_id == comp.components[0].id
+            else item
+            for item in comp.servings
+        )
+        changed = replace(
+            draft, compositions=(replace(comp, servings=changed_servings),)
+        )
+        second, second_source = calculate_shopping_composition(plan=changed, **inputs)
+        assert first.source_fingerprint != second.source_fingerprint
+        assert second.items[0].required_quantity == first.items[0].required_quantity + Decimal("3.125")
+        assert source["component_contributions"] != second_source["component_contributions"]
+        same_recipe_parts = (
+            replace(comp.components[0], recipe_version_id=comp.components[1].recipe_version_id),
+            *comp.components[1:],
+        )
+        repeated = replace(
+            draft, compositions=(replace(comp, components=same_recipe_parts),)
+        )
+        third, third_source = calculate_shopping_composition(plan=repeated, **inputs)
+        assert third.items[0].required_quantity == first.items[0].required_quantity
+        assert third.source_fingerprint != first.source_fingerprint
+        assert third_source["compositions"][0]["components"][0]["recipe_version_id"] == (
+            third_source["compositions"][0]["components"][1]["recipe_version_id"]
+        )
+        assert len(third_source["component_contributions"]) == 3
+    finally:
+        engine.dispose()
+
+
+def test_v1b_dated_pantry_fefo_across_composed_and_legacy_events(tmp_path):
+    config, engine, home, people, old, recipes, selections = _setup(tmp_path)
+    try:
+        draft = _compose(old, people, recipes, selections)
+        _write(engine, draft, people)
+        with sqlite3.connect(config.path) as db:
+            ingredient_id = UUID(
+                hex=db.execute(
+                    "SELECT id FROM food_ingredients WHERE canonical_code='TEST_POTATO'"
+                ).fetchone()[0]
+            )
+        stock = PantryItem(
+            id=uuid4(), household_id=home.id,
+            food_ingredient_id=ingredient_id,
+            quantity=Decimal("100.000"), unit="g",
+            location=PantryLocation.PANTRY,
+            estimated=False, purchased_on=None, opened_on=None,
+            expires_on=date(2026, 11, 4),
+            created_at=NOW, updated_at=NOW,
+        )
+        with SqlAlchemyPantryUnitOfWork(engine) as scope:
+            scope.items.add(stock)
+            scope.commit()
+        day_before_week = datetime(2026, 11, 1, 12, tzinfo=UTC)
+        diagnostic = DiagnosticCompositionShoppingService(
+            lambda: SqlAlchemyShoppingUnitOfWork(engine),
+            lambda: SqlAlchemyShoppingReadScope(engine),
+            clock=lambda: day_before_week,
+        )
+        snapshot = diagnostic.generate_diagnostic(home.id, draft.plan.id)
+        only = snapshot.items[0]
+        assert only.required_quantity == Decimal("250.000")
+        assert only.pantry_available_quantity == Decimal("100.000")
+        assert only.purchase_quantity == Decimal("150.000")
+        data = json.loads(snapshot.shopping_list.provenance_json)
+        assert len(data["allocations"]) == 3
+        assert sum(Decimal(a["quantity"]) for a in data["allocations"]) == Decimal("100")
+        assert any(
+            w["code"] == "EXPIRES_BEFORE_REQUIRED_DATE"
+            for w in data["warnings"]
+        )
+        assert diagnostic.get_diagnostic_detail(home.id, snapshot.shopping_list.id) == snapshot
+        with sqlite3.connect(config.path) as db:
+            assert db.execute("SELECT count(*) FROM pantry_movements").fetchone() == (0,)
+            assert db.execute(
+                "SELECT quantity FROM pantry_items WHERE id=?", (stock.id.hex,)
+            ).fetchone() == ("100.000",)
     finally:
         engine.dispose()
