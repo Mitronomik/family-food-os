@@ -712,6 +712,8 @@ def validate_v2_provenance(payload: dict, calculation: ShoppingCalculation) -> N
             or payload["engine"] != ENGINE_VERSION
             or payload["policy"] != PANTRY_POLICY_VERSION
             or calculation.engine_version != ENGINE_VERSION
+            or calculation.pantry_policy_version != PANTRY_POLICY_VERSION
+            or calculation.price_status is not ShoppingPriceStatus.UNKNOWN
         ):
             raise ValueError("invalid V2 version")
         meta = payload["calculation"]
@@ -775,6 +777,36 @@ def validate_v2_provenance(payload: dict, calculation: ShoppingCalculation) -> N
             payload["recipe_inputs"]
         ):
             raise ValueError("duplicate source identity")
+        # Obligations are derived from immutable event source kinds, never
+        # trusted from the persisted output ledger or its fingerprint.
+        expected_unresolved = sorted(
+            (
+                {
+                    "meal_event_id": event["event_id"],
+                    "source_kind": event["source_kind"],
+                    "reason": str(_UNRESOLVED[MealSourceKind(event["source_kind"])]),
+                }
+                for event in payload["plan_events"]
+                if MealSourceKind(event["source_kind"]) in _UNRESOLVED
+            ),
+            key=lambda row: (row["meal_event_id"], row["reason"]),
+        )
+        if payload["unresolved"] != expected_unresolved:
+            raise ValueError("unresolved source obligations differ")
+        if calculation.status is not (
+            ShoppingStatus.INCOMPLETE if expected_unresolved else ShoppingStatus.COMPLETE
+        ):
+            raise ValueError("Shopping completeness status differs")
+        if [
+            {
+                "meal_event_id": str(item.meal_event_id),
+                "source_kind": str(item.source_kind),
+                "reason": str(item.reason),
+            }
+            for item in calculation.unresolved
+        ] != expected_unresolved:
+            raise ValueError("persisted unresolved obligations differ")
+
         legacy: dict[str, list[dict]] = defaultdict(list)
         for serving in payload["servings"]:
             if serving["event_id"] not in events:
@@ -944,6 +976,7 @@ def validate_v2_provenance(payload: dict, calculation: ShoppingCalculation) -> N
         for raw, stored in zip(payload["items"], calculation.items, strict=True):
             if (
                 raw["food_ingredient_id"] != str(stored.food_ingredient_id)
+                or raw["form_basis"] != stored.form_basis
                 or raw["unit"] != str(stored.unit)
                 or raw["required_quantity"] != _exact(stored.required_quantity)
                 or raw["pantry_available_quantity"]
