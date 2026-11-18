@@ -5,15 +5,24 @@ Existing v1a APIs remain legacy-only; provenance and quantities never leak.
 """
 
 import json
-from datetime import datetime
+from datetime import date, datetime
+from decimal import Decimal
 from uuid import UUID
 
 from app.domain.meal_plans import MealPlanStatus, MealSourceKind
-from app.domain.shopping_calculation import ShoppingCalculationError
+from app.domain.shopping_calculation import (
+    ShoppingCalculation,
+    ShoppingCalculationError,
+    ShoppingLotAllocation,
+    ShoppingQuantity,
+    ShoppingUnresolved,
+    ShoppingWarning,
+)
 from app.domain.shopping_composition_calculation import (
     ENGINE_VERSION,
     SCHEMA_V2,
     calculate_shopping_composition,
+    validate_v2_provenance,
 )
 from app.domain.shopping_lists import ShoppingListDetail
 from app.services.shopping import ShoppingService
@@ -79,6 +88,7 @@ class DiagnosticCompositionShoppingService(ShoppingService):
             calculated, provenance = self._calculate_diagnostic(
                 scope, household_id, plan_id, captured
             )
+            validate_v2_provenance(provenance, calculated)
             return self._persist_calculated(
                 scope, household_id, plan_id, captured, calculated, provenance
             )
@@ -104,4 +114,54 @@ class DiagnosticCompositionShoppingService(ShoppingService):
                 or source["calculation"].get("engine") != ENGINE_VERSION
             ):
                 raise ShoppingPersistenceError("Недопустимая диагностическая версия.")
+            header = detail.shopping_list
+            try:
+                reconstructed = ShoppingCalculation(
+                    household_id=header.household_id,
+                    meal_plan_id=header.meal_plan_id,
+                    source_plan_revision_number=header.source_plan_revision_number,
+                    as_of_date=header.as_of_date,
+                    engine_version=header.engine_version,
+                    pantry_policy_version=header.pantry_policy_version,
+                    status=header.status,
+                    price_status=header.price_status,
+                    items=tuple(
+                        ShoppingQuantity(
+                            item.food_ingredient_id, item.form_basis, item.unit,
+                            item.required_quantity, item.pantry_available_quantity,
+                            item.purchase_quantity,
+                        )
+                        for item in detail.items
+                    ),
+                    unresolved=tuple(
+                        ShoppingUnresolved(item.meal_event_id, item.source_kind, item.reason)
+                        for item in detail.unresolved
+                    ),
+                    warnings=tuple(
+                        ShoppingWarning(
+                            item["code"], UUID(item["pantry_item_id"]),
+                            UUID(item["meal_event_id"]) if item["meal_event_id"] else None,
+                            date.fromisoformat(item["required_date"])
+                            if item["required_date"] else None,
+                        )
+                        for item in source["warnings"]
+                    ),
+                    allocations=tuple(
+                        ShoppingLotAllocation(
+                            UUID(item["meal_event_id"]),
+                            UUID(item["pantry_item_id"]),
+                            UUID(item["food_ingredient_id"]),
+                            Decimal(item["quantity"]),
+                        )
+                        for item in source["allocations"]
+                    ),
+                    pantry_snapshot_hash=header.source_pantry_snapshot_hash,
+                    source_fingerprint=header.source_fingerprint,
+                    content_fingerprint=header.content_fingerprint,
+                )
+                validate_v2_provenance(source, reconstructed)
+            except (ValueError, KeyError, TypeError) as exc:
+                raise ShoppingPersistenceError(
+                    "Диагностический V2 provenance не воспроизводится."
+                ) from exc
             return detail
