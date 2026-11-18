@@ -85,6 +85,9 @@ CURRENT_ALLOWED_TABLES = {
     "shopping_lists",
     "shopping_list_items",
     "shopping_unresolved_obligations",
+    "meal_plan_event_compositions",
+    "meal_plan_event_components",
+    "meal_plan_component_servings",
     "sqlite_sequence",
 }
 

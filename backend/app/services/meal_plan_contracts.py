@@ -1,6 +1,8 @@
 """Driver-independent contracts for Household MealPlan / Serving state."""
 
+from dataclasses import dataclass
 from datetime import date, datetime
+from decimal import Decimal
 from types import TracebackType
 from typing import Protocol, Self
 from uuid import UUID
@@ -15,6 +17,32 @@ from app.services.household_contracts import HouseholdMemberRepository
 from app.services.reference_methodology_contracts import (
     MemberReferenceMethodologySelectionRepository,
 )
+
+
+
+@dataclass(frozen=True)
+class DiagnosticIngredientFacts:
+    """Database facts, not an admission verdict, for one recipe ingredient."""
+
+    canonical_code: str
+    quantity: Decimal
+    unit: str
+    default_unit: str
+    optional: bool
+    is_active: bool
+    allergens_reviewed: bool
+    allergen_codes: tuple[str, ...]
+
+
+@dataclass(frozen=True)
+class DiagnosticRecipeFacts:
+    """One pinned RecipeVersion and its ingredient facts in the active UoW."""
+
+    verification_status: str | None
+    rights_review_status: str | None
+    source_document_sha256: str | None
+    is_active: bool
+    ingredients: tuple[DiagnosticIngredientFacts, ...]
 
 
 class MemberMealPatternSelectionRepository(Protocol):
@@ -32,6 +60,13 @@ class MemberMealPatternSelectionRepository(Protocol):
 
 class MealPlanRepository(Protocol):
     def add_detail(self, detail: MealPlanDetail) -> None: ...
+    def get_diagnostic_recipe_facts(
+        self, version_ids: set[UUID]
+    ) -> dict[UUID, DiagnosticRecipeFacts]: ...
+    def get_diagnostic_rule_digests(
+        self, identities: set[tuple[str, int]]
+    ) -> dict[tuple[str, int], tuple[str, ...]]: ...
+    def _insert_validated_diagnostic_detail(self, detail: MealPlanDetail) -> None: ...
     def get_detail(self, household_id: UUID, plan_id: UUID) -> MealPlanDetail | None: ...
     def get_current(
         self, household_id: UUID, week_start: date

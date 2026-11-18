@@ -261,7 +261,10 @@ def test_r2b_fresh_publication_adds_fish_mains_without_rewriting_accepted_corpus
         )
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
 
-    assert migrations.expected_migration_ids()[-1] == "0043_shopping_engine"
+    assert migrations.expected_migration_ids()[-2:] == [
+        "0043_shopping_engine",
+        "0044_meal_plan_components",
+    ]
     assert accepted_snapshot(database) == before
 
 

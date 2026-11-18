@@ -1,0 +1,118 @@
+name: MealPlan composed-event persistence 0044
+
+on:
+  pull_request:
+    paths:
+      - 'backend/app/db/migrations.py'
+      - 'backend/app/db/migration_lineage.py'
+      - 'backend/app/migrations/versions/0044_meal_plan_components.py'
+      - 'backend/app/domain/meal_plans.py'
+      - 'backend/app/domain/meal_compositions.py'
+      - 'backend/app/services/meal_plan_composition_revisions.py'
+      - 'backend/app/persistence/sqlalchemy_core/meal_plan_*.py'
+      - 'backend/app/tests/test_meal_plan_components_migration.py'
+      - 'backend/app/tests/persistence/test_meal_plan_composition_persistence.py'
+      - 'backend/app/tests/persistence/test_meal_plan_full_week_composition.py'
+      - 'backend/app/tests/persistence/test_shopping_persistence.py'
+      - 'backend/app/tests/test_meal_plan_migration.py'
+      - 'backend/app/tests/test_migration_runner_rebuild.py'
+      - '.github/workflows/mealplan-composition-persistence.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      AI_ENABLED: 'false'
+      PYTHONPATH: 'backend:.'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install backend and pinned Ruff
+        run: python -m pip install -e './backend[test]' 'ruff==0.16.8'
+      - name: Domain, migration and real SQLite persistence acceptance
+        run: |
+          python -m pytest -q --tb=short --maxfail=3 \
+            backend/app/tests/test_meal_compositions.py \
+            backend/app/tests/test_meal_plans.py \
+            backend/app/tests/test_meal_plan_migration.py \
+            backend/app/tests/test_meal_plan_components_migration.py \
+            backend/app/tests/test_migration_runner_rebuild.py \
+            backend/app/tests/persistence/test_meal_plan_repository.py \
+            backend/app/tests/persistence/test_meal_plan_composition_persistence.py \
+            backend/app/tests/persistence/test_meal_plan_full_week_composition.py \
+            backend/app/tests/persistence/test_shopping_persistence.py \
+            backend/app/tests/test_meal_plan_application.py \
+            backend/app/tests/test_migration_lineage.py \
+            backend/app/tests/test_meal_plan_revision_history.py \
+            backend/app/tests/test_shopping_calculation.py
+      - name: Lint changed runtime and acceptance tests
+        run: |
+          python -m ruff check \
+            backend/app/db/migrations.py \
+            backend/app/db/migration_lineage.py \
+            backend/app/migrations/versions/0044_meal_plan_components.py \
+            backend/app/domain/meal_plans.py \
+            backend/app/domain/meal_compositions.py \
+            backend/app/services/meal_plan_composition_revisions.py \
+            backend/app/persistence/sqlalchemy_core/meal_plan_tables.py \
+            backend/app/persistence/sqlalchemy_core/meal_plan_repositories.py \
+            backend/app/persistence/sqlalchemy_core/meal_plan_uow.py \
+            backend/app/tests/test_meal_plan_components_migration.py \
+            backend/app/tests/persistence/test_meal_plan_composition_persistence.py \
+            backend/app/tests/persistence/test_meal_plan_full_week_composition.py \
+            backend/app/tests/persistence/test_shopping_persistence.py \
+            backend/app/services/meal_plans.py \
+            backend/app/tests/test_meal_plan_migration.py
+          python -m ruff format --check \
+            backend/app/db/migrations.py \
+            backend/app/db/migration_lineage.py \
+            backend/app/migrations/versions/0044_meal_plan_components.py \
+            backend/app/domain/meal_plans.py \
+            backend/app/domain/meal_compositions.py \
+            backend/app/services/meal_plan_composition_revisions.py \
+            backend/app/persistence/sqlalchemy_core/meal_plan_tables.py \
+            backend/app/persistence/sqlalchemy_core/meal_plan_repositories.py \
+            backend/app/persistence/sqlalchemy_core/meal_plan_uow.py \
+            backend/app/tests/test_meal_plan_components_migration.py \
+            backend/app/tests/persistence/test_meal_plan_composition_persistence.py \
+            backend/app/tests/persistence/test_meal_plan_full_week_composition.py \
+            backend/app/tests/persistence/test_shopping_persistence.py \
+            backend/app/services/meal_plans.py \
+            backend/app/tests/test_meal_plan_migration.py
+      - name: Existing two-process full-week Planner proof
+        run: python scripts/pr10_ff_two_process_proof.py --output-dir "$RUNNER_TEMP/mealplan-proof"
+      - name: Diff whitespace
+        run: git diff --check "${{ github.event.pull_request.base.sha }}"...HEAD
+      - name: Retain Planner evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mealplan-0044-frozen-planner-receipt
+          path: ${{ runner.temp }}/mealplan-proof/*.json
+          if-no-files-found: warn
+
+  broad:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    env:
+      AI_ENABLED: 'false'
+      PYTHONPATH: 'backend:.'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e './backend[test]'
+      - name: Full backend + launcher regression
+        run: python -m pytest -q backend/app/tests launcher/tests --tb=short --maxfail=3

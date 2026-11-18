@@ -1,5 +1,5 @@
-from importlib import import_module
 import sqlite3
+from importlib import import_module
 
 from app.db.config import DatabaseConfig
 from app.db.connection import session
@@ -50,6 +50,7 @@ MIGRATION_MODULES = [
     "app.migrations.versions.0041_meal_pattern_energy_allocation",
     "app.migrations.versions.0042_recipe_prepared_output_nutrition",
     "app.migrations.versions.0043_shopping_engine",
+    "app.migrations.versions.0044_meal_plan_components",
 ]
 MIGRATION_TABLE = "schema_migrations"
 

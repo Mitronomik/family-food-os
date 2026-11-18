@@ -311,7 +311,10 @@ def test_r2e_fresh_publication_adds_casserole_without_rewriting_existing_corpus(
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
 
     assert food_ids(database, REUSED_FOOD_CODES) == before_reused
-    assert migrations.expected_migration_ids()[-1] == "0043_shopping_engine"
+    assert migrations.expected_migration_ids()[-2:] == [
+        "0043_shopping_engine",
+        "0044_meal_plan_components",
+    ]
     assert accepted_recipe_snapshot(database) == before_recipes
 
 

@@ -269,7 +269,8 @@ def test_r1c_catalogue_metrics_match_durable_receipt(database):
     assert main_rows["USSR82-364"]["current_blockers"]
     assert main_rows["USSR82-208"]["current_blockers"]
 
-    assert migrations.expected_migration_ids()[-1] == "0043_shopping_engine"
+    assert "0043_shopping_engine" in migrations.expected_migration_ids()
+    assert migrations.expected_migration_ids()[-1] == "0044_meal_plan_components"
 
 
 def test_r1c_persists_complete_week_and_replays_semantically(database):

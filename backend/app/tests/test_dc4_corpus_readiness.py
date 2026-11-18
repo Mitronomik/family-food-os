@@ -3,11 +3,26 @@ from pathlib import Path
 from types import SimpleNamespace
 from uuid import uuid4
 
+import pytest
+from app.db import migrations
 from app.db.config import DatabaseConfig
 from app.domain.food_recipes import MealTypeCode, RightsReviewStatus, VerificationStatus
 from app.services.recipe_nutrition_v2 import RecipeNutritionV2UnavailableError
 
 from scripts.audit_dc4_corpus_readiness import _audit_active_catalogue, audit
+
+
+@pytest.fixture(autouse=True)
+def _replay_frozen_dc4_migration_prefix(monkeypatch):
+    # The accepted DC4 audit implementation is PR10-FF source-hash pinned.
+    # Replay it against the historical 0043 schema; 0044 is verified in its
+    # own current-head migration/persistence suite, not silently here.
+    modules = migrations.MIGRATION_MODULES
+    assert modules[-2:] == [
+        "app.migrations.versions.0043_shopping_engine",
+        "app.migrations.versions.0044_meal_plan_components",
+    ]
+    monkeypatch.setattr(migrations, "MIGRATION_MODULES", modules[:-1])
 
 
 def test_dc4_reproducible_corpus_and_gate1_evidence(tmp_path: Path) -> None:

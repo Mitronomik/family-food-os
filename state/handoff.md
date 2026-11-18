@@ -1,3 +1,25 @@
+# 2026-11-18 — PR #292: composed-readback completeness and validation layering P2 corrections
+
+- A persisted composed DRAFT readback now validates pinned seven-day MealPattern coverage and exact semantic preservation against the prior immutable revision. Corruption regressions delete both an unrelated event and its Servings: a missing entire day (7-event week) or one missing slot while all seven dates remain (21-event week) must fail closed on reread; historical legacy plans keep their previous read behavior.
+- Diagnostic admission is now a service use case, `persist_diagnostic_composition_revision(uow, ...)` in `services/meal_plan_composition_revisions.py`. The adapter provides typed source/ingredient/allergen facts and stored rule hashes through driver-independent contracts, and performs a private guarded insert in the same transaction. Domain/service owns source, member selection, rule drift, allergen and hard-exclusion decisions; no SQL imports in services/domain.
+- Internal synthetic UoW capability stays default-off; Shopping, Nutrition, Prep, consumer API/UI, and historical frozen Planner evidence are unchanged. Exact-head CI and independent PR review still gate merge; do not merge automatically.
+
+---
+
+# 2026-11-17 — PR #292 independent P2 corrections (review pending)
+
+Within the authorized MealPlan-only 0044 persistence PR, generic `SqlAlchemyMealPlanRepository.add_detail()` now unconditionally rejects composed records, including when internal UoW is enabled; only `add_diagnostic_composition_revision()` may call the private insertion helper after full-week, pin, recipe, exclusion and rule-revision validation. Its internal test/fixture contract requires **both** complete member-keyed `excluded_food_codes_by_member` and `excluded_allergen_codes_by_member` maps, with normalized allergen codes; source FoodIngredient `allergens_reviewed` must be true and allergen rows must be normalized. A member allergen conflict, missing map, unreviewed or malformed source fails closed before any write. This is **not** a Household allergy/preferences authority or consumer activation.
+
+0043→0044 migration regression now starts with a populated historical ShoppingList, ShoppingItem and unresolved obligation FK to a pre-0044 MealEvent. It checks unchanged rows/fingerprints and that the original Shopping event-source trigger still enforces mismatches after the event-table rebuild. Keep historical source/Gate1/D4 frozen receipts untouched. **Acceptance remains pending exact-head focused/broad/launcher CI and independent review**. No Shopping component-demand implementation, AI, API/UI, Gate2 or merge authorized.
+
+---
+
+# 2026-11-16 — MealPlan component persistence PR after merged contract gate #291
+
+Accepted `main@4f2a1fbc4b14e336b1bbb44d19183301f0798113`. User authorized MealPlan implementation separately from Shopping; reviewed merged contract requires immutable full ordered rule snapshot + canonical SHA replay and complete seven-day revision retaining all non-target slots, Serving factors and pins. Runtime branch `feat/mealplan-composition-persistence-v1` adds 0044 FK rebuild/new immutable child tables, explicit new source and typed readback, internal-only composition writer behind a **default-off** UoW flag, draft-only complete-week constructor and diagnostic source exclusion checks, migration/integration tests. Do not expose a new composed revision to operational `get_current()` callers until Shopping/consumer activation policy is accepted. Old Shopping must fail closed. Full backend+launcher CI and two-process frozen week are required. Review/owner merge separately; no downstream Shopping PR before this is accepted.
+
+---
+
 # 2026-11-16 — P2 corrections for docs-only MealPlan persistence gate
 
 PR #291 contract review raised two P2 blockers. Within the **same contract PR**, choose a versioned immutable course-rule **snapshot** (ordered requirements min/max/coverage, schema/hash, strict new-process replay and same code/version drift rejection). Define new revision as the **full prior seven-day plan**, with new plan/event/Serving IDs, exact copied member/pattern/reference pins, source facts and portions for every unaffected meal; replace only one lunch with component Servings. If a prior revision already contains another composed event, copy its full rule/components/servings or fail closed. Neither rule-snapshot replay nor full-week migration tests are implemented in the docs-only gate; both are hard acceptance for the *later* separately authorized runtime PR. No Shopping activation.
