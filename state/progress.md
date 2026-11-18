@@ -1,3 +1,11 @@
+# 2026-11-18 — PR #293 merged; Shopping v1b diagnostic runtime underway
+
+- Confirmed [PR #293](https://github.com/Mitronomik/family-food-os/pull/293) merged at `main@d6fb30fdaed4babc4019dc7b0d007ab947479337`; its V2 provenance/public isolation contract authorizes a separately scoped Shopping runtime PR.
+- Draft [PR #294](https://github.com/Mitronomik/family-food-os/pull/294): composed RecipeVersion×exact per-member Serving ingredient scaling, shared-date FEFO and one-time rounding, V2 source/contribution/aggregate ledger, separate guarded diagnostic writer/readback. No migration or production API enablement. Legacy Shopping v1a computation untouched; standard reads and API projectors gate V2 rows.
+- Focused seven-day and 21-event SQLite demonstrations, fault rollback, API public read isolation and independent-process replay added. **Exact-head focused/broad/backend+launcher and independent code review remain required; no PASS claimed before final CI.**
+
+---
+
 # 2026-11-18 — #292 merged; next Shopping composition contract gate proposed
 
 - Confirmed GitHub `PR #292 merged`, `main@44adc9bf5cc0013c42d05a43fa1f3ed916f4d47e`; accepted 0044 MealPlan source remains synthetic/diagnostic-only.
