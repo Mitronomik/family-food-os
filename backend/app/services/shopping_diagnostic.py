@@ -135,6 +135,50 @@ class DiagnosticCompositionShoppingService(ShoppingService):
                 raise ShoppingPersistenceError("Недопустимая диагностическая версия.")
             header = detail.shopping_list
             try:
+                meta = source["calculation"]
+                if (
+                    header.household_id != household_id
+                    or header.meal_plan_id != plan.plan.id
+                    or header.source_plan_revision_number != plan.plan.revision_number
+                    or meta["week_start"] != plan.plan.week_start.isoformat()
+                    or meta["config_version"] != plan.plan.config_version
+                    or meta["config_fingerprint"] != header.config_fingerprint
+                ):
+                    raise ValueError("V2 persisted header differs from plan/provenance")
+                if (
+                    len(source["items"]) != len(detail.items)
+                    or len(source["unresolved"]) != len(detail.unresolved)
+                ):
+                    raise ValueError("V2 persisted row count differs")
+                for ordinal, (raw, item) in enumerate(
+                    zip(source["items"], detail.items, strict=True), 1
+                ):
+                    if (
+                        item.shopping_list_id != header.id
+                        or item.household_id != household_id
+                        or item.ordinal != ordinal
+                        or raw["ordinal"] != ordinal
+                        or raw["food_ingredient_id"] != str(item.food_ingredient_id)
+                        or raw["form_basis"] != item.form_basis
+                        or raw["unit"] != str(item.unit)
+                        or Decimal(raw["required_quantity"]) != item.required_quantity
+                        or Decimal(raw["pantry_available_quantity"])
+                        != item.pantry_available_quantity
+                        or Decimal(raw["purchase_quantity"]) != item.purchase_quantity
+                    ):
+                        raise ValueError("V2 persisted Shopping item differs")
+                for ordinal, (raw, item) in enumerate(
+                    zip(source["unresolved"], detail.unresolved, strict=True), 1
+                ):
+                    if (
+                        item.shopping_list_id != header.id
+                        or item.household_id != household_id
+                        or item.ordinal != ordinal
+                        or raw["meal_event_id"] != str(item.meal_event_id)
+                        or raw["source_kind"] != str(item.source_kind)
+                        or raw["reason"] != str(item.reason)
+                    ):
+                        raise ValueError("V2 persisted unresolved obligation differs")
                 reconstructed = ShoppingCalculation(
                     household_id=header.household_id,
                     meal_plan_id=header.meal_plan_id,
