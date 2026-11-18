@@ -467,7 +467,9 @@ def test_v1b_readback_rejects_corrupt_persisted_item_order_form_and_header(
         _write(engine, draft, people)
         diagnostic = _internal(engine)
         saved = diagnostic.generate_diagnostic(home.id, draft.plan.id)
-        assert diagnostic.get_diagnostic_detail(home.id, saved.shopping_list.id) == saved
+        assert (
+            diagnostic.get_diagnostic_detail(home.id, saved.shopping_list.id) == saved
+        )
         with sqlite3.connect(config.path) as db:
             db.execute(f"DROP TRIGGER {trigger}")
             key = "id" if table == "shopping_lists" else "shopping_list_id"
