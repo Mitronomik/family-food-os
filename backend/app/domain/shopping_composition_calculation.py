@@ -534,8 +534,12 @@ def calculate_shopping_composition(
                     event_id,
                     amount,
                 )
-                for (event_id, ingredient_id, basis, demand_unit), amount
-                in dated_demands.items()
+                for (
+                    event_id,
+                    ingredient_id,
+                    basis,
+                    demand_unit,
+                ), amount in dated_demands.items()
                 if ingredient_id == food_id
                 and basis == FORM_BASIS
                 and demand_unit == unit
