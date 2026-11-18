@@ -23,6 +23,8 @@ from app.domain.meal_compositions import rule_snapshot_digest
 from app.domain.meal_plans import MealPlanDetail, MealPlanStatus, MealSourceKind
 from app.domain.pantry import MAX_QUANTITY, PantryItem
 from app.domain.shopping_calculation import (
+    _NON_GROCERY,
+    _UNRESOLVED,
     FORM_BASIS,
     PANTRY_POLICY_VERSION,
     QUANTITY_STEP,
@@ -35,7 +37,6 @@ from app.domain.shopping_calculation import (
     ShoppingUnresolved,
     ShoppingWarning,
 )
-from app.domain.shopping_calculation import _NON_GROCERY, _UNRESOLVED
 from app.domain.units import UnitCode
 
 ENGINE_VERSION = "shopping-v1b-composition"

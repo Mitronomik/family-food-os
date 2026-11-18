@@ -7,13 +7,12 @@ import sys
 from datetime import UTC, datetime
 from decimal import Decimal
 
-import pytest
-from app.domain.shopping_calculation import ShoppingCalculationError, ShoppingStatus
-from app.db.config import DATABASE_PATH_ENV
-from app.main import create_app
 import app.main as main_module
-from fastapi.testclient import TestClient
+import pytest
+from app.db.config import DATABASE_PATH_ENV
+from app.domain.shopping_calculation import ShoppingCalculationError, ShoppingStatus
 from app.domain.shopping_composition_calculation import ENGINE_VERSION, SCHEMA_V2
+from app.main import create_app
 from app.persistence.sqlalchemy_core.shopping_uow import (
     SqlAlchemyShoppingReadScope,
     SqlAlchemyShoppingUnitOfWork,
@@ -31,6 +30,7 @@ from app.tests.persistence.test_meal_plan_composition_persistence import (
 )
 from app.tests.persistence.test_meal_plan_full_week_composition import _week_21_42
 from app.tests.persistence.test_shopping_persistence import _service
+from fastapi.testclient import TestClient
 
 NOW = datetime(2026, 11, 16, 12, 0, tzinfo=UTC)
 
