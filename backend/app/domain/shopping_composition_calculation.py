@@ -770,6 +770,156 @@ def validate_v2_provenance(payload: dict, calculation: ShoppingCalculation) -> N
                 or raw["purchase_quantity"] != _exact(stored.purchase_quantity)
             ):
                 raise ValueError("persisted item differs")
+        # Reconstruct the original V1 Pantry snapshot identity (three-place
+        # canonical Pantry quantities) and date-aware FEFO from V2 sources.
+        # Neither the stored allocation list nor item purchase quantities are
+        # trusted as inputs to their own verification.
+        as_of = date.fromisoformat(meta["as_of_date"])
+        lots = payload["pantry_items"]
+        lots_by_id = {item["pantry_item_id"]: item for item in lots}
+        if len(lots_by_id) != len(lots):
+            raise ValueError("duplicate pantry lot")
+        if any(
+            item["household_id"] != str(calculation.household_id)
+            or Decimal(item["quantity"]) < 0
+            for item in lots
+        ):
+            raise ValueError("cross-household or negative Pantry source")
+        lot_pins = [
+            [
+                lot["pantry_item_id"], lot["food_ingredient_id"],
+                format(Decimal(lot["quantity"]).quantize(QUANTITY_STEP), ".3f"),
+                lot["unit"], lot["location"], str(lot["estimated"]),
+                lot["purchased_on"], lot["opened_on"], lot["expires_on"],
+            ]
+            for lot in sorted(lots, key=lambda lot: lot["pantry_item_id"])
+        ]
+        if _fingerprint([
+            str(calculation.household_id), as_of.isoformat(),
+            PANTRY_POLICY_VERSION, lot_pins,
+        ]) != calculation.pantry_snapshot_hash:
+            raise ValueError("Pantry source hash differs")
+        expected_allocations = []
+        expected_warnings = []
+        item_by_key = {
+            (item["food_ingredient_id"], item["unit"]): item
+            for item in payload["items"]
+        }
+        if len(item_by_key) != len(payload["items"]):
+            raise ValueError("duplicate canonical item")
+        for food_id, unit in sorted(item_by_key):
+            needed_events = [
+                (events[event_id], amount)
+                for (event_id, fid, _basis, u), amount in demands.items()
+                if fid == food_id and u == unit
+            ]
+            relevant = sorted(
+                (
+                    lot for lot in lots
+                    if lot["food_ingredient_id"] == food_id
+                    and Decimal(lot["quantity"]) > 0
+                ),
+                key=lambda lot: (
+                    lot["expires_on"] or date.max.isoformat(),
+                    lot["location"], lot["pantry_item_id"],
+                ),
+            )
+            remaining = {
+                lot["pantry_item_id"]: Decimal(lot["quantity"]) for lot in relevant
+            }
+            for lot in relevant:
+                reason = None
+                if lot["estimated"]:
+                    reason = "ESTIMATED_STOCK"
+                elif lot["expires_on"] is None:
+                    reason = "EXPIRY_UNKNOWN"
+                elif date.fromisoformat(lot["expires_on"]) < as_of:
+                    reason = "EXPIRED_STOCK"
+                elif lot["unit"] != unit:
+                    reason = "INCOMPATIBLE_UNIT"
+                if reason is not None:
+                    expected_warnings.append({
+                        "code": reason, "pantry_item_id": lot["pantry_item_id"],
+                        "meal_event_id": None, "required_date": None,
+                    })
+            covered = Decimal(0)
+            for event, amount in sorted(needed_events, key=lambda row: (
+                row[0]["local_date"], row[0]["position"], row[0]["event_id"],
+            )):
+                missing = amount
+                use_date = max(as_of, date.fromisoformat(event["local_date"]))
+                for lot in relevant:
+                    if missing <= 0:
+                        break
+                    lid = lot["pantry_item_id"]
+                    if (
+                        not remaining[lid] or lot["estimated"]
+                        or lot["expires_on"] is None or lot["unit"] != unit
+                    ):
+                        continue
+                    expiry = date.fromisoformat(lot["expires_on"])
+                    if expiry < use_date:
+                        if expiry >= as_of:
+                            warning = {
+                                "code": "EXPIRES_BEFORE_REQUIRED_DATE",
+                                "pantry_item_id": lid,
+                                "meal_event_id": event["event_id"],
+                                "required_date": use_date.isoformat(),
+                            }
+                            if warning not in expected_warnings:
+                                expected_warnings.append(warning)
+                        continue
+                    taken = min(missing, remaining[lid])
+                    remaining[lid] -= taken
+                    missing -= taken
+                    covered += taken
+                    expected_allocations.append({
+                        "meal_event_id": event["event_id"],
+                        "pantry_item_id": lid, "food_ingredient_id": food_id,
+                        "quantity": _exact(taken),
+                    })
+            item = item_by_key[(food_id, unit)]
+            required = Decimal(item["required_quantity"])
+            available = _round(covered, ROUND_FLOOR)
+            shortfall = max(required - available, Decimal(0))
+            if unit == str(UnitCode.PIECE):
+                purchase = shortfall.to_integral_value(
+                    rounding=ROUND_CEILING
+                ).quantize(QUANTITY_STEP)
+            else:
+                purchase = _round(shortfall, ROUND_CEILING)
+            if (
+                Decimal(item["pantry_available_quantity"]) != available
+                or Decimal(item["purchase_quantity"]) != purchase
+            ):
+                raise ValueError("Pantry allocation/Shopping shortfall mismatch")
+        expected_allocations.sort(
+            key=lambda row: (row["meal_event_id"], row["pantry_item_id"])
+        )
+        expected_warnings.sort(key=lambda row: (
+            row["code"], row["pantry_item_id"],
+            row["meal_event_id"] or "", row["required_date"] or "",
+        ))
+        if (
+            expected_allocations != payload["allocations"]
+            or expected_warnings != payload["warnings"]
+        ):
+            raise ValueError("FEFO allocations or warnings cannot be replayed")
+        if len(calculation.allocations) != len(expected_allocations):
+            raise ValueError("persisted allocation count differs")
+        if any(
+            row["meal_event_id"] != str(item.meal_event_id)
+            or row["pantry_item_id"] != str(item.pantry_item_id)
+            or row["food_ingredient_id"] != str(item.food_ingredient_id)
+            or Decimal(row["quantity"]) != item.quantity
+            for row, item in zip(
+                expected_allocations, calculation.allocations, strict=True
+            )
+        ):
+            raise ValueError("persisted allocations differ")
+        if len(calculation.warnings) != len(expected_warnings):
+            raise ValueError("persisted warning count differs")
+
         if _fingerprint({
             "source_fingerprint": calculation.source_fingerprint,
             "component_contributions": payload["component_contributions"],
