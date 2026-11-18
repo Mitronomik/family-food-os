@@ -1,3 +1,11 @@
+# 2026-11-18 — PR #292: composed-readback completeness and validation layering P2 corrections
+
+- A persisted composed DRAFT readback now validates pinned seven-day MealPattern coverage and exact semantic preservation against the prior immutable revision. Corruption regressions delete both an unrelated event and its Servings: a missing entire day (7-event week) or one missing slot while all seven dates remain (21-event week) must fail closed on reread; historical legacy plans keep their previous read behavior.
+- Diagnostic admission is now a service use case, `persist_diagnostic_composition_revision(uow, ...)` in `services/meal_plan_composition_revisions.py`. The adapter provides typed source/ingredient/allergen facts and stored rule hashes through driver-independent contracts, and performs a private guarded insert in the same transaction. Domain/service owns source, member selection, rule drift, allergen and hard-exclusion decisions; no SQL imports in services/domain.
+- Internal synthetic UoW capability stays default-off; Shopping, Nutrition, Prep, consumer API/UI, and historical frozen Planner evidence are unchanged. Exact-head CI and independent PR review still gate merge; do not merge automatically.
+
+---
+
 # 2026-11-16 — #291 merged; implementation of MealPlan 0044 underway
 
 - Contract gate [#291](https://github.com/Mitronomik/family-food-os/pull/291) merged as `main@4f2a1fbc4b14e336b1bbb44d19183301f0798113`.

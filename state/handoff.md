@@ -1,3 +1,11 @@
+# 2026-11-18 — PR #292: composed-readback completeness and validation layering P2 corrections
+
+- A persisted composed DRAFT readback now validates pinned seven-day MealPattern coverage and exact semantic preservation against the prior immutable revision. Corruption regressions delete both an unrelated event and its Servings: a missing entire day (7-event week) or one missing slot while all seven dates remain (21-event week) must fail closed on reread; historical legacy plans keep their previous read behavior.
+- Diagnostic admission is now a service use case, `persist_diagnostic_composition_revision(uow, ...)` in `services/meal_plan_composition_revisions.py`. The adapter provides typed source/ingredient/allergen facts and stored rule hashes through driver-independent contracts, and performs a private guarded insert in the same transaction. Domain/service owns source, member selection, rule drift, allergen and hard-exclusion decisions; no SQL imports in services/domain.
+- Internal synthetic UoW capability stays default-off; Shopping, Nutrition, Prep, consumer API/UI, and historical frozen Planner evidence are unchanged. Exact-head CI and independent PR review still gate merge; do not merge automatically.
+
+---
+
 # 2026-11-17 — PR #292 independent P2 corrections (review pending)
 
 Within the authorized MealPlan-only 0044 persistence PR, generic `SqlAlchemyMealPlanRepository.add_detail()` now unconditionally rejects composed records, including when internal UoW is enabled; only `add_diagnostic_composition_revision()` may call the private insertion helper after full-week, pin, recipe, exclusion and rule-revision validation. Its internal test/fixture contract requires **both** complete member-keyed `excluded_food_codes_by_member` and `excluded_allergen_codes_by_member` maps, with normalized allergen codes; source FoodIngredient `allergens_reviewed` must be true and allergen rows must be normalized. A member allergen conflict, missing map, unreviewed or malformed source fails closed before any write. This is **not** a Household allergy/preferences authority or consumer activation.
