@@ -466,8 +466,7 @@ class SqlAlchemyMealPlanRepository:
                         == food_ingredients_table.c.id,
                     )
                     .where(
-                        food_recipe_ingredients_table.c.recipe_version_id
-                        == version_id
+                        food_recipe_ingredients_table.c.recipe_version_id == version_id
                     )
                 )
                 .mappings()
@@ -674,8 +673,7 @@ class SqlAlchemyMealPlanRepository:
                         "Persisted composition previous week is unavailable."
                     )
                 new_slots = {
-                    (event.local_date, event.position): event
-                    for event in detail.events
+                    (event.local_date, event.position): event for event in detail.events
                 }
                 targets = [
                     event.id

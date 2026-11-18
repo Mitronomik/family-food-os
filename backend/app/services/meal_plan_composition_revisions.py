@@ -70,9 +70,7 @@ def persist_diagnostic_composition_revision(
         raise MealPlanPersistenceConflictError(
             "Only complete diagnostic DRAFT revisions are supported."
         )
-    previous = uow.plans.get_current(
-        detail.plan.household_id, detail.plan.week_start
-    )
+    previous = uow.plans.get_current(detail.plan.household_id, detail.plan.week_start)
     if previous is None or previous.plan.id != detail.plan.supersedes_plan_id:
         raise MealPlanPersistenceConflictError(
             "Composition revision must supersede exact current plan."
@@ -183,7 +181,9 @@ def persist_diagnostic_composition_revision(
                 raise MealPlanPersistenceConflictError(
                     "Component FoodIngredient source/unit is not verified."
                 )
-            if any(not ingredient.allergens_reviewed for ingredient in facts.ingredients):
+            if any(
+                not ingredient.allergens_reviewed for ingredient in facts.ingredients
+            ):
                 raise MealPlanPersistenceConflictError(
                     "Component ingredient allergen review is incomplete."
                 )
@@ -195,7 +195,9 @@ def persist_diagnostic_composition_revision(
                 raise MealPlanPersistenceConflictError(
                     "Component ingredient allergen catalogue contains invalid codes."
                 )
-            present_foods = {ingredient.canonical_code for ingredient in facts.ingredients}
+            present_foods = {
+                ingredient.canonical_code for ingredient in facts.ingredients
+            }
             present_allergens = {
                 code
                 for ingredient in facts.ingredients
@@ -208,7 +210,10 @@ def persist_diagnostic_composition_revision(
                     raise MealPlanPersistenceConflictError(
                         "Member hard food exclusion violated by a component."
                     )
-                if present_allergens & excluded_allergen_codes_by_member[serving.member_id]:
+                if (
+                    present_allergens
+                    & excluded_allergen_codes_by_member[serving.member_id]
+                ):
                     raise MealPlanPersistenceConflictError(
                         "Member hard allergen exclusion violated by a component."
                     )
