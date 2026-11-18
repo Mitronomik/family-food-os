@@ -2,12 +2,18 @@
 
 import json
 import sqlite3
+import subprocess
+import sys
 from datetime import UTC, datetime
 from decimal import Decimal
 from uuid import uuid4
 
 import pytest
 from app.domain.shopping_calculation import ShoppingCalculationError, ShoppingStatus
+from app.db.config import DATABASE_PATH_ENV
+from app.main import create_app
+import app.main as main_module
+from fastapi.testclient import TestClient
 from app.domain.shopping_composition_calculation import ENGINE_VERSION, SCHEMA_V2
 from app.persistence.sqlalchemy_core.shopping_uow import (
     SqlAlchemyShoppingReadScope,
@@ -152,5 +158,98 @@ def test_v1a_history_and_api_projector_do_not_accept_v2(tmp_path):
                 "GROUP BY engine_version ORDER BY engine_version"
             ).fetchall()
             assert rows == [("shopping-v1a", 1), (ENGINE_VERSION, 1)]
+    finally:
+        engine.dispose()
+
+
+def test_v1b_read_endpoints_protect_contents_even_on_stale_fallback(
+    tmp_path, monkeypatch
+):
+    config, engine, home, people, old, recipes, selections = _setup(tmp_path)
+    try:
+        draft = _compose(old, people, recipes, selections)
+        _write(engine, draft, people)
+        diagnostic = _internal(engine).generate_diagnostic(home.id, draft.plan.id)
+        monkeypatch.setenv(DATABASE_PATH_ENV, str(config.path))
+        monkeypatch.setattr(
+            main_module, "create_shopping_service",
+            lambda engine: _service(engine, NOW),
+        )
+        prefix = f"/api/households/{home.id}/meal-plans/{draft.plan.id}/shopping-lists"
+        with TestClient(create_app()) as client:
+            direct = client.get(
+                f"/api/households/{home.id}/shopping-lists/{diagnostic.shopping_list.id}"
+            )
+            assert direct.status_code == 404
+            assert direct.json()["detail"]["code"] == "SHOPPING_NOT_FOUND"
+            history = client.get(prefix)
+            assert history.status_code == 200
+            assert history.json() == {"shopping_lists": []}
+            current = client.get(prefix + "/current")
+            assert current.status_code == 409
+            for url in (prefix, prefix + "/regenerate"):
+                response = client.post(url, json={})
+                assert response.status_code == 409
+                assert "items" not in response.json()
+            for response in (direct, history, current):
+                assert "component_contributions" not in response.text
+                assert "source_fingerprint" not in response.text
+                assert str(diagnostic.shopping_list.id) not in response.text
+    finally:
+        engine.dispose()
+
+
+def test_v1b_new_process_replay_and_tamper_rejection(tmp_path):
+    config, engine, home, people, old, recipes, selections = _setup(tmp_path)
+    try:
+        draft = _compose(old, people, recipes, selections)
+        _write(engine, draft, people)
+        v2 = _internal(engine).generate_diagnostic(home.id, draft.plan.id)
+        engine.dispose()
+        code = """
+import sys
+from pathlib import Path
+from uuid import UUID
+from app.db.config import DatabaseConfig
+from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
+from app.persistence.sqlalchemy_core.shopping_uow import SqlAlchemyShoppingReadScope, SqlAlchemyShoppingUnitOfWork
+from app.services.shopping_diagnostic import DiagnosticCompositionShoppingService
+engine = create_sqlite_engine(DatabaseConfig(path=Path(sys.argv[1])))
+try:
+    service = DiagnosticCompositionShoppingService(
+        lambda: SqlAlchemyShoppingUnitOfWork(engine),
+        lambda: SqlAlchemyShoppingReadScope(engine),
+    )
+    result = service.get_diagnostic_detail(UUID(sys.argv[2]), UUID(sys.argv[3]))
+    print(result.shopping_list.content_fingerprint)
+finally:
+    engine.dispose()
+"""
+        outcome = subprocess.run(
+            [sys.executable, "-c", code, str(config.path), str(home.id),
+             str(v2.shopping_list.id)],
+            text=True, capture_output=True, check=True,
+        )
+        assert outcome.stdout.strip() == v2.shopping_list.content_fingerprint
+
+        # A malicious local DB rewrite bypassing immutable triggers must still
+        # fail deterministic arithmetic/source replay in a new reader.
+        engine = __import__(
+            "app.persistence.sqlalchemy_core.engine",
+            fromlist=["create_sqlite_engine"],
+        ).create_sqlite_engine(config)
+        with sqlite3.connect(config.path) as db:
+            db.execute("DROP TRIGGER trg_shopping_lists_update_immutable")
+            raw = json.loads(db.execute(
+                "SELECT provenance_json FROM shopping_lists WHERE id=?",
+                (v2.shopping_list.id.hex,),
+            ).fetchone()[0])
+            raw["component_contributions"][0]["unrounded_contribution"] = "999"
+            db.execute(
+                "UPDATE shopping_lists SET provenance_json=? WHERE id=?",
+                (json.dumps(raw, ensure_ascii=False), v2.shopping_list.id.hex),
+            )
+        with pytest.raises(ShoppingCalculationError):
+            _internal(engine).get_diagnostic_detail(home.id, v2.shopping_list.id)
     finally:
         engine.dispose()
