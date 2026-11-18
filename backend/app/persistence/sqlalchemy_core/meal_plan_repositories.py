@@ -10,9 +10,7 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.exc import DBAPIError, IntegrityError, OperationalError
 
 from app.domain.errors import DomainValidationError
-from app.domain.food_ingredients import normalize_allergen_code
 from app.domain.meal_compositions import (
-    COMPOSITION_ADMISSION,
     PersistedMealComponent,
     PersistedMealEventComposition,
     PersistedMemberComponentServing,
@@ -64,16 +62,12 @@ from app.persistence.sqlalchemy_core.sqlite_errors import (
     is_sqlite_concurrency_conflict,
 )
 from app.services.meal_plan_contracts import (
+    DiagnosticIngredientFacts,
+    DiagnosticRecipeFacts,
     MealPlanPersistenceConflictError,
     MealPlanPersistenceError,
 )
 
-
-def _valid_allergen_code(code: str) -> bool:
-    try:
-        return normalize_allergen_code(code) == code
-    except DomainValidationError:
-        return False
 
 
 class SqlAlchemyMemberMealPatternSelectionRepository:
@@ -433,225 +427,130 @@ class SqlAlchemyMealPlanRepository:
         except DBAPIError as exc:
             raise MealPlanPersistenceError("MealPlan persistence failed.") from exc
 
-    def add_diagnostic_composition_revision(
-        self,
-        detail: MealPlanDetail,
-        *,
-        excluded_food_codes_by_member: Mapping[UUID, frozenset[str]],
-        excluded_allergen_codes_by_member: Mapping[UUID, frozenset[str]],
-    ) -> None:
-        """Internal synthetic-only write; not wired to API or Planner.
+    def get_diagnostic_recipe_facts(
+        self, version_ids: set[UUID]
+    ) -> dict[UUID, DiagnosticRecipeFacts]:
+        """Fetch source/ingredient/allergen facts without deciding admission."""
+        facts = {}
+        for version_id in sorted(version_ids, key=lambda value: value.hex):
+            version = (
+                self._connection.execute(
+                    select(food_recipe_versions_table).where(
+                        food_recipe_versions_table.c.id == version_id
+                    )
+                )
+                .mappings()
+                .one_or_none()
+            )
+            if version is None:
+                continue
+            active = self._connection.scalar(
+                select(food_recipes_table.c.is_active).where(
+                    food_recipes_table.c.id == version["recipe_id"]
+                )
+            )
+            rows = (
+                self._connection.execute(
+                    select(
+                        food_recipe_ingredients_table.c.food_ingredient_id,
+                        food_recipe_ingredients_table.c.unit,
+                        food_recipe_ingredients_table.c.quantity,
+                        food_recipe_ingredients_table.c.optional,
+                        food_ingredients_table.c.default_unit,
+                        food_ingredients_table.c.is_active,
+                        food_ingredients_table.c.canonical_code,
+                        food_ingredients_table.c.allergens_reviewed,
+                    )
+                    .join(
+                        food_ingredients_table,
+                        food_recipe_ingredients_table.c.food_ingredient_id
+                        == food_ingredients_table.c.id,
+                    )
+                    .where(
+                        food_recipe_ingredients_table.c.recipe_version_id
+                        == version_id
+                    )
+                )
+                .mappings()
+                .all()
+            )
+            ingredient_ids = [row["food_ingredient_id"] for row in rows]
+            allergen_rows = (
+                self._connection.execute(
+                    select(
+                        food_ingredient_allergens_table.c.food_ingredient_id,
+                        food_ingredient_allergens_table.c.allergen_code,
+                    ).where(
+                        food_ingredient_allergens_table.c.food_ingredient_id.in_(
+                            ingredient_ids
+                        )
+                    )
+                )
+                .mappings()
+                .all()
+                if ingredient_ids
+                else []
+            )
+            allergens_by_ingredient: dict[UUID, list[str]] = {}
+            for allergen in allergen_rows:
+                allergens_by_ingredient.setdefault(
+                    allergen["food_ingredient_id"], []
+                ).append(allergen["allergen_code"])
+            facts[version_id] = DiagnosticRecipeFacts(
+                verification_status=version["verification_status"],
+                rights_review_status=version["rights_review_status"],
+                source_document_sha256=version["source_document_sha256"],
+                is_active=active is True,
+                ingredients=tuple(
+                    DiagnosticIngredientFacts(
+                        canonical_code=row["canonical_code"],
+                        quantity=row["quantity"],
+                        unit=row["unit"],
+                        default_unit=row["default_unit"],
+                        optional=row["optional"],
+                        is_active=row["is_active"],
+                        allergens_reviewed=row["allergens_reviewed"],
+                        allergen_codes=tuple(
+                            sorted(
+                                allergens_by_ingredient.get(
+                                    row["food_ingredient_id"], []
+                                )
+                            )
+                        ),
+                    )
+                    for row in rows
+                ),
+            )
+        return facts
 
-        Both explicit exclusion maps are diagnostic fixture inputs, not a
-        substitute for authoritative Household preference/allergy state.
-        """
-        if not self._allow_composition_write:
-            raise MealPlanPersistenceConflictError(
-                "Composition writes are disabled outside internal test UoW."
-            )
-        if (
-            detail.plan.status is not MealPlanStatus.DRAFT
-            or not detail.compositions
-            or detail.plan.supersedes_plan_id is None
-        ):
-            raise MealPlanPersistenceConflictError(
-                "Only complete diagnostic DRAFT revisions are supported."
-            )
-        previous = self.get_current(detail.plan.household_id, detail.plan.week_start)
-        if previous is None or previous.plan.id != detail.plan.supersedes_plan_id:
-            raise MealPlanPersistenceConflictError(
-                "Composition revision must supersede exact current plan."
-            )
-        try:
-            target_events = {
-                event.id
-                for event in detail.events
-                if event.source_kind is MealSourceKind.COOK_COMPOSITION
-            }
-            old_comp_count = len(previous.compositions)
-            if len(target_events) != old_comp_count + 1:
-                raise MealPlanPersistenceConflictError(
-                    "Exactly one additional composed event is required."
-                )
-            old_slots = {(e.local_date, e.position): e for e in previous.events}
-            new_slots = {(e.local_date, e.position): e for e in detail.events}
-            target = [
-                old_slots[slot].id
-                for slot, event in new_slots.items()
-                if event.source_kind is MealSourceKind.COOK_COMPOSITION
-                and old_slots.get(slot) is not None
-                and old_slots[slot].source_kind is MealSourceKind.COOK_RECIPE
-            ]
-            if len(target) != 1:
-                raise MealPlanPersistenceConflictError(
-                    "Missing exactly one original recipe-backed target."
-                )
-            assert_complete_revision_preservation(previous, detail, target[0])
-            accepted = {
-                pin.selection_id: SqlAlchemyMemberMealPatternSelectionRepository(
-                    self._connection
-                ).get_detail(detail.plan.household_id, pin.selection_id)
-                for pin in detail.member_selections
-            }
-            if any(value is None for value in accepted.values()):
-                raise MealPlanPersistenceConflictError(
-                    "Missing accepted pinned member selection."
-                )
-            validate_complete_plan(detail, accepted)
-        except DomainValidationError as exc:
-            raise MealPlanPersistenceConflictError(
-                "Incomplete/changed source week or member meal-pattern coverage."
-            ) from exc
-
-        pinned_members = {item.member_id for item in detail.member_selections}
-        if set(excluded_food_codes_by_member) != pinned_members or any(
-            not isinstance(codes, frozenset)
-            or any(not isinstance(code, str) or not code for code in codes)
-            for codes in excluded_food_codes_by_member.values()
-        ):
-            raise MealPlanPersistenceConflictError(
-                "Explicit synthetic participant exclusions are required."
-            )
-        if set(excluded_allergen_codes_by_member) != pinned_members or any(
-            not isinstance(codes, frozenset)
-            or any(
-                not isinstance(code, str) or not code or not _valid_allergen_code(code)
-                for code in codes
-            )
-            for codes in excluded_allergen_codes_by_member.values()
-        ):
-            raise MealPlanPersistenceConflictError(
-                "Explicit normalized allergen exclusions are required for every participant."
-            )
-        for comp in detail.compositions:
-            if comp.admission_status != COMPOSITION_ADMISSION:
-                raise MealPlanPersistenceConflictError("No published composition rule.")
-            existing = (
+    def get_diagnostic_rule_digests(
+        self, identities: set[tuple[str, int]]
+    ) -> dict[tuple[str, int], tuple[str, ...]]:
+        """Read persisted rule fingerprints in the same write transaction."""
+        result = {}
+        for code, version in sorted(identities):
+            result[(code, version)] = tuple(
                 self._connection.execute(
                     select(
                         meal_plan_event_compositions_table.c.rule_snapshot_sha256
                     ).where(
                         meal_plan_event_compositions_table.c.structure_rule_code
-                        == comp.rule.code,
+                        == code,
                         meal_plan_event_compositions_table.c.structure_rule_version
-                        == comp.rule.version,
+                        == version,
                     )
                 )
                 .scalars()
                 .all()
             )
-            current_digest = rule_snapshot_digest(comp.rule)
-            if any(sha != current_digest for sha in existing):
-                raise MealPlanPersistenceConflictError(
-                    "Changed rule requirements under the same code/version."
-                )
-            for part in comp.components:
-                version = (
-                    self._connection.execute(
-                        select(food_recipe_versions_table).where(
-                            food_recipe_versions_table.c.id == part.recipe_version_id
-                        )
-                    )
-                    .mappings()
-                    .one_or_none()
-                )
-                if (
-                    version is None
-                    or version["verification_status"] != "SOURCE_VERIFIED"
-                    or version["rights_review_status"] != "REVIEWED"
-                    or not version["source_document_sha256"]
-                ):
-                    raise MealPlanPersistenceConflictError(
-                        "Component RecipeVersion is not source/right verified."
-                    )
-                active = self._connection.scalar(
-                    select(food_recipes_table.c.is_active).where(
-                        food_recipes_table.c.id == version["recipe_id"]
-                    )
-                )
-                if active is not True:
-                    raise MealPlanPersistenceConflictError(
-                        "Component source Recipe is not active."
-                    )
-                ingredient_rows = (
-                    self._connection.execute(
-                        select(
-                            food_recipe_ingredients_table.c.food_ingredient_id,
-                            food_recipe_ingredients_table.c.unit,
-                            food_recipe_ingredients_table.c.quantity,
-                            food_recipe_ingredients_table.c.optional,
-                            food_ingredients_table.c.default_unit,
-                            food_ingredients_table.c.is_active,
-                            food_ingredients_table.c.canonical_code,
-                            food_ingredients_table.c.allergens_reviewed,
-                        )
-                        .join(
-                            food_ingredients_table,
-                            food_recipe_ingredients_table.c.food_ingredient_id
-                            == food_ingredients_table.c.id,
-                        )
-                        .where(
-                            food_recipe_ingredients_table.c.recipe_version_id
-                            == part.recipe_version_id
-                        )
-                    )
-                    .mappings()
-                    .all()
-                )
-                if not ingredient_rows or any(
-                    row["optional"]
-                    or not row["is_active"]
-                    or row["unit"] != row["default_unit"]
-                    or row["quantity"] <= 0
-                    for row in ingredient_rows
-                ):
-                    raise MealPlanPersistenceConflictError(
-                        "Component FoodIngredient source/unit is not verified."
-                    )
-                if any(not row["allergens_reviewed"] for row in ingredient_rows):
-                    raise MealPlanPersistenceConflictError(
-                        "Component ingredient allergen review is incomplete."
-                    )
-                allergen_rows = (
-                    self._connection.execute(
-                        select(
-                            food_ingredient_allergens_table.c.food_ingredient_id,
-                            food_ingredient_allergens_table.c.allergen_code,
-                        ).where(
-                            food_ingredient_allergens_table.c.food_ingredient_id.in_(
-                                [row["food_ingredient_id"] for row in ingredient_rows]
-                            )
-                        )
-                    )
-                    .mappings()
-                    .all()
-                )
-                if any(
-                    not _valid_allergen_code(row["allergen_code"])
-                    for row in allergen_rows
-                ):
-                    raise MealPlanPersistenceConflictError(
-                        "Component ingredient allergen catalogue contains invalid codes."
-                    )
-                present_allergens = {row["allergen_code"] for row in allergen_rows}
-                for serving in comp.servings:
-                    if serving.component_id != part.id:
-                        continue
-                    excluded = excluded_food_codes_by_member[serving.member_id]
-                    if any(
-                        row["canonical_code"] in excluded for row in ingredient_rows
-                    ):
-                        raise MealPlanPersistenceConflictError(
-                            "Member hard food exclusion violated by a component."
-                        )
-                    if (
-                        present_allergens
-                        & excluded_allergen_codes_by_member[serving.member_id]
-                    ):
-                        raise MealPlanPersistenceConflictError(
-                            "Member hard allergen exclusion violated by a component."
-                        )
-        # Actual write is one shared UoW transaction; never commit from repository.
+        return result
+
+    def add_validated_diagnostic_detail(self, detail: MealPlanDetail) -> None:
+        """Insert only after service validation; same guarded internal UoW."""
+        if not self._allow_composition_write:
+            raise MealPlanPersistenceConflictError(
+                "Composition writes are disabled outside internal test UoW."
+            )
         self._insert_detail(detail)
 
     def get_detail(self, household_id: UUID, plan_id: UUID) -> MealPlanDetail | None:
@@ -740,7 +639,7 @@ class SqlAlchemyMealPlanRepository:
         compositions = self._read_compositions(
             event_ids, {event["id"]: event for event in events}
         )
-        return MealPlanDetail(
+        detail = MealPlanDetail(
             plan=_plan_from_row(row),
             member_selections=tuple(_pin_from_row(item) for item in pins),
             events=tuple(_event_from_row(item) for item in events),
@@ -750,6 +649,53 @@ class SqlAlchemyMealPlanRepository:
             ),
             compositions=compositions,
         )
+        # Historical legacy plans keep their original read contract. An
+        # explicitly composed DRAFT, however, must replay as the entire pinned
+        # seven-day revision, never as just the remaining surviving rows.
+        if detail.compositions:
+            try:
+                selections = SqlAlchemyMemberMealPatternSelectionRepository(
+                    self._connection
+                )
+                accepted = {
+                    pin.selection_id: selections.get_detail(
+                        detail.plan.household_id, pin.selection_id
+                    )
+                    for pin in detail.member_selections
+                }
+                validate_complete_plan(detail, accepted)
+                prior_id = detail.plan.supersedes_plan_id
+                if prior_id is None:
+                    raise MealPlanPersistenceError(
+                        "Persisted composition revision has no previous week."
+                    )
+                prior = self.get_detail(detail.plan.household_id, prior_id)
+                if prior is None:
+                    raise MealPlanPersistenceError(
+                        "Persisted composition previous week is unavailable."
+                    )
+                new_slots = {
+                    (event.local_date, event.position): event
+                    for event in detail.events
+                }
+                targets = [
+                    event.id
+                    for event in prior.events
+                    if event.source_kind is MealSourceKind.COOK_RECIPE
+                    and (event.local_date, event.position) in new_slots
+                    and new_slots[(event.local_date, event.position)].source_kind
+                    is MealSourceKind.COOK_COMPOSITION
+                ]
+                if len(targets) != 1:
+                    raise MealPlanPersistenceError(
+                        "Persisted composition revision has no unique target."
+                    )
+                assert_complete_revision_preservation(prior, detail, targets[0])
+            except DomainValidationError as exc:
+                raise MealPlanPersistenceError(
+                    "Persisted diagnostic composition week failed complete replay."
+                ) from exc
+        return detail
 
     def _read_compositions(self, event_ids, events):
         if not event_ids:
