@@ -20,6 +20,7 @@ from app.domain.shopping_composition_calculation import (
     SCHEMA_V2,
     _fingerprint,
     calculate_shopping_composition,
+    validate_v2_provenance,
 )
 from app.main import create_app
 from app.persistence.sqlalchemy_core.meal_plan_uow import SqlAlchemyMealPlanUnitOfWork
@@ -634,6 +635,11 @@ def test_v1b_rejects_rehashed_source_that_diverges_from_immutable_meal_plan(
         assert (
             diagnostic.get_diagnostic_detail(home.id, saved.shopping_list.id) == saved
         )
+        with SqlAlchemyShoppingUnitOfWork(engine) as scope:
+            original, _ = diagnostic._calculate_diagnostic(
+                scope, home.id, draft.plan.id, NOW
+            )
+        assert original.source_fingerprint == saved.shopping_list.source_fingerprint
 
         with sqlite3.connect(config.path) as db:
             db.execute("DROP TRIGGER trg_shopping_lists_update_immutable")
@@ -699,6 +705,16 @@ def test_v1b_rejects_rehashed_source_that_diverges_from_immutable_meal_plan(
                 }
             )
             meta["content_hash"] = new_content_hash
+            # Demonstrate the gap: even the full V2 self-replay verifies
+            # forged, self-consistent hashes without looking at the MealPlan.
+            validate_v2_provenance(
+                source,
+                replace(
+                    original,
+                    source_fingerprint=new_source_hash,
+                    content_fingerprint=new_content_hash,
+                ),
+            )
             db.execute(
                 "UPDATE shopping_lists SET provenance_json=?, "
                 "source_fingerprint=?, content_fingerprint=? WHERE id=?",
