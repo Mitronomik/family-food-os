@@ -6,7 +6,6 @@ import subprocess
 import sys
 from datetime import UTC, datetime
 from decimal import Decimal
-from uuid import uuid4
 
 import pytest
 from app.domain.shopping_calculation import ShoppingCalculationError, ShoppingStatus
@@ -19,9 +18,9 @@ from app.persistence.sqlalchemy_core.shopping_uow import (
     SqlAlchemyShoppingReadScope,
     SqlAlchemyShoppingUnitOfWork,
 )
-from app.services.shopping import ShoppingService
 from app.services.shopping_contracts import (
     ShoppingNotFoundError,
+    ShoppingPersistenceConflictError,
     ShoppingPersistenceError,
 )
 from app.services.shopping_diagnostic import DiagnosticCompositionShoppingService
@@ -31,7 +30,7 @@ from app.tests.persistence.test_meal_plan_composition_persistence import (
     _write,
 )
 from app.tests.persistence.test_meal_plan_full_week_composition import _week_21_42
-from app.tests.persistence.test_shopping_persistence import _prepare, _service
+from app.tests.persistence.test_shopping_persistence import _service
 
 NOW = datetime(2026, 11, 16, 12, 0, tzinfo=UTC)
 
@@ -123,7 +122,7 @@ def test_new_shopping_diagnostic_fault_rolls_back_full_snapshot(tmp_path):
                 "CREATE TRIGGER test_v1b_item_failure BEFORE INSERT ON shopping_list_items "
                 "BEGIN SELECT RAISE(ABORT, 'injected item fault'); END"
             )
-        with pytest.raises(Exception):
+        with pytest.raises(ShoppingPersistenceConflictError):
             _internal(engine).generate_diagnostic(home.id, draft.plan.id)
         with sqlite3.connect(config.path) as db:
             for table in ("shopping_lists", "shopping_list_items", "shopping_unresolved_obligations"):
@@ -249,7 +248,7 @@ finally:
                 "UPDATE shopping_lists SET provenance_json=? WHERE id=?",
                 (json.dumps(raw, ensure_ascii=False), v2.shopping_list.id.hex),
             )
-        with pytest.raises(ShoppingCalculationError):
+        with pytest.raises(ShoppingPersistenceError):
             _internal(engine).get_diagnostic_detail(home.id, v2.shopping_list.id)
     finally:
         engine.dispose()

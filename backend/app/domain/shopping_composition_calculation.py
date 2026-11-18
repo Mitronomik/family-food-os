@@ -34,9 +34,8 @@ from app.domain.shopping_calculation import (
     ShoppingStatus,
     ShoppingUnresolved,
     ShoppingWarning,
-    _NON_GROCERY,
-    _UNRESOLVED,
 )
+from app.domain.shopping_calculation import _NON_GROCERY, _UNRESOLVED
 from app.domain.units import UnitCode
 
 ENGINE_VERSION = "shopping-v1b-composition"
@@ -151,7 +150,6 @@ def calculate_shopping_composition(
         defaultdict(list)
     )
     food_pins: dict[str, list[str]] = {}
-    recipe_pins: list[object] = []
     unresolved: list[ShoppingUnresolved] = []
     composition_by_event = {comp.event_id: comp for comp in plan.compositions}
     contributions: list[dict[str, object]] = []

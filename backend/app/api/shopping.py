@@ -14,8 +14,8 @@ from fastapi import APIRouter, Body, Depends, HTTPException, Request
 
 from app.domain.shopping_calculation import (
     ENGINE_VERSION as LEGACY_ENGINE_VERSION,
-    ShoppingCalculationError,
 )
+from app.domain.shopping_calculation import ShoppingCalculationError
 from app.domain.shopping_lists import ShoppingCurrent, ShoppingListDetail
 from app.schemas.shopping import (
     ShoppingAllocationResponse,

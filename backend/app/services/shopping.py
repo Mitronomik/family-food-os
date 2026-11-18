@@ -14,16 +14,18 @@ from hashlib import sha256
 from uuid import UUID, uuid4
 
 from app.domain.meal_plans import MealSourceKind
-from app.domain.shopping_composition_calculation import (
-    ENGINE_VERSION as COMPOSITION_ENGINE_VERSION,
-    SCHEMA_V2,
-)
 from app.domain.shopping_calculation import (
     ENGINE_VERSION as LEGACY_ENGINE_VERSION,
+)
+from app.domain.shopping_calculation import (
     ShoppingCalculation,
     ShoppingCalculationError,
     calculate_shopping,
 )
+from app.domain.shopping_composition_calculation import (
+    ENGINE_VERSION as COMPOSITION_ENGINE_VERSION,
+)
+from app.domain.shopping_composition_calculation import SCHEMA_V2
 from app.domain.shopping_lists import (
     ShoppingCurrent,
     ShoppingList,
@@ -34,6 +36,7 @@ from app.domain.shopping_lists import (
 from app.services.shopping_contracts import (
     ShoppingNotFoundError,
     ShoppingPersistenceConflictError,
+    ShoppingPersistenceError,
     ShoppingReadScope,
     ShoppingUnitOfWork,
 )
@@ -86,7 +89,7 @@ def _list_visibility(detail: ShoppingListDetail, plan) -> str:
     try:
         payload = json.loads(detail.shopping_list.provenance_json)
         if not isinstance(payload, dict) or not isinstance(payload.get("calculation"), dict):
-            raise ValueError("invalid provenance")
+            raise TypeError("invalid provenance")
         schema = payload.get("schema")
         calc_engine = payload["calculation"].get("engine")
     except (ValueError, TypeError) as exc:
