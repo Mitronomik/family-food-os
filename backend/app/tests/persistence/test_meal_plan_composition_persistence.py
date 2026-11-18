@@ -251,7 +251,7 @@ def test_complete_week_source_roundtrip_and_legacy_history(tmp_path):
             SqlAlchemyMealPlanUnitOfWork(engine) as scope,
         ):
             persist_diagnostic_composition_revision(
-            scope,
+                scope,
                 current,
                 excluded_food_codes_by_member={people[0].id: frozenset()},
                 excluded_allergen_codes_by_member={people[0].id: frozenset()},
@@ -577,7 +577,7 @@ def test_p2_unreviewed_allergens_and_missing_member_map_fail_closed(tmp_path):
                 MealPlanPersistenceConflictError, match="allergen exclusions"
             ):
                 persist_diagnostic_composition_revision(
-            scope,
+                    scope,
                     draft,
                     excluded_food_codes_by_member={people[0].id: frozenset()},
                     excluded_allergen_codes_by_member={},
@@ -586,7 +586,7 @@ def test_p2_unreviewed_allergens_and_missing_member_map_fail_closed(tmp_path):
                 MealPlanPersistenceConflictError, match="normalized allergen"
             ):
                 persist_diagnostic_composition_revision(
-            scope,
+                    scope,
                     draft,
                     excluded_food_codes_by_member={people[0].id: frozenset()},
                     excluded_allergen_codes_by_member={
