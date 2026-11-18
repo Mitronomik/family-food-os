@@ -288,16 +288,18 @@ finally:
         engine.dispose()
 
 
-def test_versioned_component_member_factor_and_repeated_recipe_pin_change_hash(tmp_path):
+def test_versioned_component_member_factor_and_repeated_recipe_pin_change_hash(
+    tmp_path,
+):
     _, engine, home, people, old, recipes, selections = _setup(tmp_path)
     try:
         draft = _compose(old, people, recipes, selections)
         source_ids = set(recipes.values())
         with SqlAlchemyShoppingReadScope(engine) as scope:
-            recipe_details = {
-                rid: scope.recipes.get_detail(rid) for rid in source_ids
-            }
-            food_id = next(iter(recipe_details.values())).ingredients[0].food_ingredient_id
+            recipe_details = {rid: scope.recipes.get_detail(rid) for rid in source_ids}
+            food_id = (
+                next(iter(recipe_details.values())).ingredients[0].food_ingredient_id
+            )
             foods = {food_id: scope.foods.get(food_id)}
         inputs = {
             "recipes": recipe_details,
@@ -319,10 +321,18 @@ def test_versioned_component_member_factor_and_repeated_recipe_pin_change_hash(t
         )
         second, second_source = calculate_shopping_composition(plan=changed, **inputs)
         assert first.source_fingerprint != second.source_fingerprint
-        assert second.items[0].required_quantity == first.items[0].required_quantity + Decimal("3.125")
-        assert source["component_contributions"] != second_source["component_contributions"]
+        assert second.items[0].required_quantity == first.items[
+            0
+        ].required_quantity + Decimal("3.125")
+        assert (
+            source["component_contributions"]
+            != second_source["component_contributions"]
+        )
         same_recipe_parts = (
-            replace(comp.components[0], recipe_version_id=comp.components[1].recipe_version_id),
+            replace(
+                comp.components[0],
+                recipe_version_id=comp.components[1].recipe_version_id,
+            ),
             *comp.components[1:],
         )
         repeated = replace(
@@ -331,8 +341,9 @@ def test_versioned_component_member_factor_and_repeated_recipe_pin_change_hash(t
         third, third_source = calculate_shopping_composition(plan=repeated, **inputs)
         assert third.items[0].required_quantity == first.items[0].required_quantity
         assert third.source_fingerprint != first.source_fingerprint
-        assert third_source["compositions"][0]["components"][0]["recipe_version_id"] == (
-            third_source["compositions"][0]["components"][1]["recipe_version_id"]
+        assert (
+            third_source["compositions"][0]["components"][0]["recipe_version_id"]
+            == (third_source["compositions"][0]["components"][1]["recipe_version_id"])
         )
         assert len(third_source["component_contributions"]) == 3
     finally:
@@ -347,7 +358,11 @@ def test_versioned_component_member_factor_and_repeated_recipe_pin_change_hash(t
     ],
 )
 def test_v1b_dated_pantry_fefo_across_composed_and_legacy_events(
-    tmp_path, stock_quantity, expected_available, expected_purchase, expect_expiry_warning
+    tmp_path,
+    stock_quantity,
+    expected_available,
+    expected_purchase,
+    expect_expiry_warning,
 ):
     config, engine, home, people, old, recipes, selections = _setup(tmp_path)
     try:
@@ -360,13 +375,18 @@ def test_v1b_dated_pantry_fefo_across_composed_and_legacy_events(
                 ).fetchone()[0]
             )
         stock = PantryItem(
-            id=uuid4(), household_id=home.id,
+            id=uuid4(),
+            household_id=home.id,
             food_ingredient_id=ingredient_id,
-            quantity=stock_quantity, unit="g",
+            quantity=stock_quantity,
+            unit="g",
             location=PantryLocation.PANTRY,
-            estimated=False, purchased_on=None, opened_on=None,
+            estimated=False,
+            purchased_on=None,
+            opened_on=None,
             expires_on=date(2026, 9, 16),
-            created_at=NOW, updated_at=NOW,
+            created_at=NOW,
+            updated_at=NOW,
         )
         with SqlAlchemyPantryUnitOfWork(engine) as scope:
             scope.items.add(stock)
@@ -385,22 +405,26 @@ def test_v1b_dated_pantry_fefo_across_composed_and_legacy_events(
         assert only.purchase_quantity == expected_purchase
         data = json.loads(snapshot.shopping_list.provenance_json)
         assert len(data["allocations"]) == 3
-        assert sum(Decimal(a["quantity"]) for a in data["allocations"]) == expected_available
-        # Component demand is combined before FEFO: one allocation per event/lot.
-        assert len({
-            (a["meal_event_id"], a["pantry_item_id"])
-            for a in data["allocations"]
-        }) == len(data["allocations"])
         assert (
-            any(
-                w["code"] == "EXPIRES_BEFORE_REQUIRED_DATE"
-                for w in data["warnings"]
-            )
+            sum(Decimal(a["quantity"]) for a in data["allocations"])
+            == expected_available
+        )
+        # Component demand is combined before FEFO: one allocation per event/lot.
+        assert len(
+            {(a["meal_event_id"], a["pantry_item_id"]) for a in data["allocations"]}
+        ) == len(data["allocations"])
+        assert (
+            any(w["code"] == "EXPIRES_BEFORE_REQUIRED_DATE" for w in data["warnings"])
             is expect_expiry_warning
         )
-        assert diagnostic.get_diagnostic_detail(home.id, snapshot.shopping_list.id) == snapshot
+        assert (
+            diagnostic.get_diagnostic_detail(home.id, snapshot.shopping_list.id)
+            == snapshot
+        )
         with sqlite3.connect(config.path) as db:
-            assert db.execute("SELECT count(*) FROM pantry_movements").fetchone() == (0,)
+            assert db.execute("SELECT count(*) FROM pantry_movements").fetchone() == (
+                0,
+            )
             assert db.execute(
                 "SELECT quantity FROM pantry_items WHERE id=?", (stock.id.hex,)
             ).fetchone() == (format(stock_quantity, ".3f"),)
