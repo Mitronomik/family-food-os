@@ -215,11 +215,19 @@ def test_complete_21_event_three_member_composed_week_is_visible_without_phantom
         assert len(events) == 21
         multi = [e for e in events if e["source_kind"] == "COOK_COMPOSITION"]
         assert len(multi) == 1
-        assert {s["member_id"] for part in multi[0]["courses"] for s in part["servings"]} == {
-            str(people[0].id)
+        composition_members = {
+            s["member_id"]
+            for part in multi[0]["courses"]
+            for s in part["servings"]
         }
+        assert composition_members == {str(people[0].id)}
         # Every original other course/attendance stays in the complete week.
-        assert sum(len(course["servings"]) for event in events for course in event["courses"]) == 44
+        served = sum(
+            len(course["servings"])
+            for event in events
+            for course in event["courses"]
+        )
+        assert served == 44
         assert preview["grocery"][0]["required"] == "1343.750"
         assert preview["grocery"][0]["to_buy"] == "1343.750"
         assert "Первое" in render_html(preview)
