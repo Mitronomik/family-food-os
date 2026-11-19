@@ -169,9 +169,13 @@ def test_inventory_reads_complete_21_event_heterogeneous_household_without_phant
         assert len(result["non_composition_events"]) == 20
         assert result["summary"]["non_composition_by_kind"] == {"COOK_RECIPE": 20}
         assert result["summary"]["all_plan_events_accounted"] is True
-        assert sum(
-            len(event["member_servings"]) for event in result["non_composition_events"]
-        ) == 41
+        assert (
+            sum(
+                len(event["member_servings"])
+                for event in result["non_composition_events"]
+            )
+            == 41
+        )
         assert len(result["components"]) == 3
         assert {
             s["member_id"]
