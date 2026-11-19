@@ -96,18 +96,29 @@ def _nutrition_unavailable_reason(scope, version_id):
     return "BOUND_AUTHORITY_INVALID_OR_INAPPLICABLE"
 
 
+def _nutrition_unavailable_result(reason):
+    return {
+        "status": "UNAVAILABLE",
+        "unavailable_reason": reason,
+        "available_nutrients": 0,
+        "total_nutrients": len(NUTRIENT_CODES),
+        "unknown_codes": list(NUTRIENT_CODES),
+    }
+
+
 def _nutrition_observation(scope, service, version_id):
     """Report actual V2 source coverage and stable, fail-closed error codes."""
     try:
         result = service.calculate_in_scope(scope, version_id)
     except RecipeNutritionV2UnavailableError:
-        return {
-            "status": "UNAVAILABLE",
-            "unavailable_reason": _nutrition_unavailable_reason(scope, version_id),
-            "available_nutrients": 0,
-            "total_nutrients": len(NUTRIENT_CODES),
-            "unknown_codes": list(NUTRIENT_CODES),
-        }
+        return _nutrition_unavailable_result(
+            _nutrition_unavailable_reason(scope, version_id)
+        )
+    # The V2 composition calculator alone does not inspect prepared-output
+    # authority. Never report COMPLETE if the repository also has a competing
+    # prepared-output authority for the same pinned RecipeVersion.
+    if _nutrition_unavailable_reason(scope, version_id) == "CONFLICTING_AUTHORITIES":
+        return _nutrition_unavailable_result("CONFLICTING_AUTHORITIES")
     unknown = [entry.code for entry in result.per_base_serving if entry.amount is None]
     return {
         "status": str(result.status),
