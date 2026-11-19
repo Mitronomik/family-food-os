@@ -16,6 +16,7 @@ from app.tests.persistence.test_meal_plan_composition_persistence import (
     _setup,
     _write,
 )
+
 from scripts.composed_week_preview import (
     SCHEMA,
     ComposedWeekPreviewBlocked,
