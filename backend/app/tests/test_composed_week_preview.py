@@ -256,7 +256,9 @@ def _run_cli(config, home, composed, out):
     )
 
 
-@pytest.mark.parametrize("alias", ("same_path", "relative_alias", "symlink", "hardlink"))
+@pytest.mark.parametrize(
+    "alias", ("same_path", "relative_alias", "symlink", "hardlink")
+)
 def test_cli_refuses_sqlite_output_alias_without_modifying_source(tmp_path, alias):
     config, engine, home, composed = _persist_composed_week(tmp_path)
     try:
@@ -280,9 +282,7 @@ def test_cli_refuses_sqlite_output_alias_without_modifying_source(tmp_path, alia
         assert sha256(source.read_bytes()).hexdigest() == before
         with sqlite3.connect(source) as db:
             assert db.execute("PRAGMA quick_check").fetchone() == ("ok",)
-            assert db.execute("SELECT COUNT(*) FROM shopping_lists").fetchone() == (
-                0,
-            )
+            assert db.execute("SELECT COUNT(*) FROM shopping_lists").fetchone() == (0,)
         assert not tuple(source.parent.glob(".*.tmp"))
     finally:
         engine.dispose()
