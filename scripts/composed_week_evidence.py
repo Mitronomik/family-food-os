@@ -189,8 +189,7 @@ def build_inventory(*, plan, recipes, foods, preview, nutrition):
     if not components:
         _reject("У составной недели не найдено ни одного компонента.")
     source_blocked = sum(
-        x["source_rights"]["recorded_status"] != "VERIFIED_METADATA"
-        for x in components
+        x["source_rights"]["recorded_status"] != "VERIFIED_METADATA" for x in components
     )
     nutrition_missing = sum(x["nutrition"]["status"] != "COMPLETE" for x in components)
     return {
@@ -272,7 +271,9 @@ def inventory_from_database(*, database_path, household_id, plan_id, captured_at
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Internal read-only composed week audit")
+    parser = argparse.ArgumentParser(
+        description="Internal read-only composed week audit"
+    )
     parser.add_argument("--sqlite", type=Path, required=True)
     parser.add_argument("--household", type=UUID, required=True)
     parser.add_argument("--plan", type=UUID, required=True)
