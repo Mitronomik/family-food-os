@@ -1,3 +1,9 @@
+# 2026-11-19 — #296 active internal composed-week product preview
+
+Accepted `main@b6af6a851cf1b56aa10a84a5347160574d0f96b7`, [#295 merged](https://github.com/Mitronomik/family-food-os/pull/295). Owner requested implementation output over further docs-only sequencing. New [PR #296](https://github.com/Mitronomik/family-food-os/pull/296) is a runnable internal, read-only, mobile-first HTML demonstration from persisted composed MealPlan + actual deterministic Shopping v1b. It maps complete seven-day cards, FIRST/SECOND/DESSERT exact component/member factors, canonical groceries, unknown-price and unreviewed physical/Nutrition/Prep warnings. CLI accepts explicit SQLite path, Household ID, plan ID and timezone-aware capture instant. Focused process/quantity/SQL nonwrite/cross-household/XSS tests and existing shopping-gate workflow require **exact-head CI**, independent code review and owner merge. No public API, migration, data publication or real-family admission. If this task is complete, next measurable product problem is getting genuine meal-course/source/portion/Nutrition proof, not writing a gate about writing a gate.
+
+---
+
 # 2026-11-19 — source/role/physical readiness docs gate after merged #294
 
 Confirmed `main@af501e60911be3a393fa0eb3e2c611dc86b4fa28`, [PR #294 merged](https://github.com/Mitronomik/family-food-os/pull/294). Shopping `shopping-v1b-composition` with immutable V2 source+content replay and public V1a read isolation is **diagnostic-only**. The latest owner request was to continue after #294. Current bounded task is **docs-only** [composed-meal admission readiness preflight](../docs/family-food/composed-meal-admission-readiness-preflight-2026-11-19.md), independent review and owner merge pending.
