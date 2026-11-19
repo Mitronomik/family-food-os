@@ -1,0 +1,65 @@
+name: School2022 goulash primary-card crosscheck
+
+on:
+  pull_request:
+    paths:
+      - 'data/curation/school2022-goulash-primary-crosscheck/**'
+      - 'scripts/verify_school2022_goulash_source.py'
+      - 'backend/app/tests/test_school2022_goulash_primary_crosscheck.py'
+      - '.github/workflows/school2022-goulash-primary-crosscheck.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-crosscheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      AI_ENABLED: 'false'
+      PYTHONPATH: 'backend:.'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install focused test tooling
+        run: python -m pip install -e './backend[test]' 'ruff==0.16.8'
+      - name: Reconcile real primary-card facts and negative authority controls
+        run: >
+          python -m pytest -q --tb=short
+          backend/app/tests/test_school2022_goulash_primary_crosscheck.py
+      - name: Capture explicit non-release, non-binary source receipt
+        run: |
+          python -m scripts.verify_school2022_goulash_source > /tmp/school2022-goulash-source-crosscheck.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('/tmp/school2022-goulash-source-crosscheck.json')
+          obj = json.loads(p.read_text(encoding='utf-8'))
+          assert obj['ingredient_rows_reconciled'] == 7
+          assert obj['original_primary_card_portion_g'] == '80'
+          assert obj['source_card_energy_kcal'] == '185.6'
+          assert obj['customer_release'] == 'NOT_APPROVED_FOR_FAMILY_MULTI_COURSE_USE'
+          assert obj['current_pdf_binary_independently_verified'] is False
+          assert obj['family_course_suitability'] == 'UNKNOWN'
+          assert obj['family_scaled_edible_mass'] == 'UNKNOWN'
+          assert obj['prepared_nutrition_unknown_codes'] == 53
+          PY
+      - name: Ruff and whitespace
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          python -m ruff check scripts/verify_school2022_goulash_source.py backend/app/tests/test_school2022_goulash_primary_crosscheck.py
+          python -m ruff format --check scripts/verify_school2022_goulash_source.py backend/app/tests/test_school2022_goulash_primary_crosscheck.py
+          git diff --check "$BASE_SHA"...HEAD
+          test "$AI_ENABLED" = false
+      - uses: actions/upload-artifact@v4
+        with:
+          name: school2022-goulash-primary-text-crosscheck-research-only
+          path: /tmp/school2022-goulash-source-crosscheck.json
+          if-no-files-found: error
+          retention-days: 30
