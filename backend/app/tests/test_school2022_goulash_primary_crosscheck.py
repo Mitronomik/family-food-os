@@ -45,7 +45,10 @@ def test_original_primary_pdf_card_numeric_facts_match_frozen_manifest(sources):
     assert discrepancy["possible_causes"] == "NOT_DETERMINED"
     assert discrepancy["recipe_error_conclusion"] == "NOT_DETERMINED"
     assert discrepancy["nutrition_publication_changed"] is False
-    assert report["ci_verification_scope"] == "LOCAL_PINNED_MANIFEST_AND_RESEARCH_WITNESS_ONLY"
+    assert (
+        report["ci_verification_scope"]
+        == "LOCAL_PINNED_MANIFEST_AND_RESEARCH_WITNESS_ONLY"
+    )
     assert report["external_pdf_fetched_in_ci"] is False
     assert report["external_pdf_sha256_checked_in_ci"] is False
     assert report["external_pdf_visually_verified_in_ci"] is False
