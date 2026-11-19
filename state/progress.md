@@ -1,3 +1,18 @@
+# 2026-11-19 — Option A approved for PR #296; internal UX before inventory
+
+- **Owner decision:** explicitly selected **Option A** after P2-2 review. [PR #296](https://github.com/Mitronomik/family-food-os/pull/296) is permitted as an internal/offline composed-week UX proof before the four-axis read-only evidence inventory defined in merged [#295](https://github.com/Mitronomik/family-food-os/pull/295). The inventory and independent review/owner merge authorization are **not waived**. No public API, real-family admission, new portion/nutrition/Prep authority or product release is authorized.
+- P2-1 database-overwrite risk fixed on the same PR branch; direct/relative/symlink/hardlink `--out` collisions fail closed and HTML publication uses temp+fsync+atomic replace. Security/adversarial tests and Ruff passed on runtime-frozen `2fe8b74930d38ac62d6f6c1f399d292ee7c1fafc` (88 focused PASS); broad CI status must be checked before review-ready. No independent review or merge is claimed.
+
+---
+
+# 2026-11-19 — #295 merged; runnable multi-course internal week UX PR #296
+
+- Confirmed [#295](https://github.com/Mitronomik/family-food-os/pull/295) merged into `main@b6af6a851cf1b56aa10a84a5347160574d0f96b7`; docs-only assessment phase complete. Owner directs concrete implementation PRs instead of serial assessment/gate paperwork.
+- [#296](https://github.com/Mitronomik/family-food-os/pull/296) implements an executable internal Russian mobile week HTML preview from true persisted 0044 composed MealPlan source and deterministic Shopping V2 quantities, preserving V1 public read isolation. Synthetic 7-day fixture demonstrates ingredient reconciliation and cross-process replay; no real-family source/portion/nutrition claims.
+- Focused test/run and broad CI pending at final HEAD; independently review before owner merge. Missing role/physical/complete Nutrition still NO_GO for consumer activation; do not reinterpret preview as accepted full meal week.
+
+---
+
 # 2026-11-19 — PR #294 merged; source/role/physical admission preflight proposed
 
 - GitHub confirms [#294](https://github.com/Mitronomik/family-food-os/pull/294) merged 2026-11-18T20:46:28Z; accepted `main@af501e60911be3a393fa0eb3e2c611dc86b4fa28`. Composition-aware Shopping v1b immutable diagnostic source/Decimal/Pantry/FEFO readback and public V1a isolation are implemented. **No consumer or Prep/physical/Nutrition release is established.**

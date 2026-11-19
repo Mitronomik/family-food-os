@@ -1,3 +1,17 @@
+# 2026-11-19 — owner selects OPTION A for PR #296; safety P2 fixed
+
+Owner explicitly approved **Option A** in the project conversation after the P2-2 review: [PR #296](https://github.com/Mitronomik/family-food-os/pull/296) may be delivered as **internal/offline, synthetic diagnostic composed-week HTML preview before** the read-only four-axis inventory from merged [#295](https://github.com/Mitronomik/family-food-os/pull/295). This resolves the **sequencing choice only**; it does **not** authorize consumer or real-family activation, changing any source/role/physical/Nutrition safety authority, waiving the inventory, nor merging #296 without independent review and separate post-review owner approval.
+
+P2-1 has been corrected in the same branch: reject `--out` aliasing the SQLite source via `Path.resolve()/samefile()` (direct/relative/symlink/hardlink), protect unrelated existing files, use fsynced same-directory temp + atomic `os.replace`, clean up on failure. New adversarial tests verify unchanged database bytes/`PRAGMA quick_check`, failures and successful reruns. On the preceding runtime-frozen exact HEAD `2fe8b74930d38ac62d6f6c1f399d292ee7c1fafc`, focused CI: **88 tests PASS, Ruff check PASS, 7 files already formatted**; broad final result requires checking before readiness. State/PR metadata updates do not change runtime bytes. Continue exact-head CI and independent review, then owner merge decision; **next** real source/rights + role/structure + physical feasibility + Nutrition/downstream evidence inventory.
+
+---
+
+# 2026-11-19 — #296 active internal composed-week product preview
+
+Accepted `main@b6af6a851cf1b56aa10a84a5347160574d0f96b7`, [#295 merged](https://github.com/Mitronomik/family-food-os/pull/295). Owner requested implementation output over further docs-only sequencing. New [PR #296](https://github.com/Mitronomik/family-food-os/pull/296) is a runnable internal, read-only, mobile-first HTML demonstration from persisted composed MealPlan + actual deterministic Shopping v1b. It maps complete seven-day cards, FIRST/SECOND/DESSERT exact component/member factors, canonical groceries, unknown-price and unreviewed physical/Nutrition/Prep warnings. CLI accepts explicit SQLite path, Household ID, plan ID and timezone-aware capture instant. Focused process/quantity/SQL nonwrite/cross-household/XSS tests and existing shopping-gate workflow require **exact-head CI**, independent code review and owner merge. No public API, migration, data publication or real-family admission. If this task is complete, next measurable product problem is getting genuine meal-course/source/portion/Nutrition proof, not writing a gate about writing a gate.
+
+---
+
 # 2026-11-19 — source/role/physical readiness docs gate after merged #294
 
 Confirmed `main@af501e60911be3a393fa0eb3e2c611dc86b4fa28`, [PR #294 merged](https://github.com/Mitronomik/family-food-os/pull/294). Shopping `shopping-v1b-composition` with immutable V2 source+content replay and public V1a read isolation is **diagnostic-only**. The latest owner request was to continue after #294. Current bounded task is **docs-only** [composed-meal admission readiness preflight](../docs/family-food/composed-meal-admission-readiness-preflight-2026-11-19.md), independent review and owner merge pending.
