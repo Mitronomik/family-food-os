@@ -1,3 +1,10 @@
+# 2026-11-19 — PR #296 review P2: SQLite path overwrite fix and scope decision blocker
+
+- Found and corrected data-loss path: `--out` previously used unconditional `write_text`, capable of truncating its own SQLite input. Exact/relative/symlink/hardlink aliases now fail closed, existing unrelated files are protected, HTML is fsynced to a same-directory temporary file and published with `os.replace`, with cleanup on errors. New subprocess/SQLite integrity/atomic-failure regression tests. Exact-head CI requires rerun after fixes.
+- Scope finding remains: merged #295 specifies read-only four-axis source/rights, role/structure, physical, Nutrition/downstream inventory as next step. Earlier owner request for working implementation rather than docs did not explicitly authorize internal UX **before** this inventory. #296 stays **Draft** until a narrow owner choice is recorded or the branch is re-scoped. No contract or source authority silently changed.
+
+---
+
 # 2026-11-19 — #295 merged; runnable multi-course internal week UX PR #296
 
 - Confirmed [#295](https://github.com/Mitronomik/family-food-os/pull/295) merged into `main@b6af6a851cf1b56aa10a84a5347160574d0f96b7`; docs-only assessment phase complete. Owner directs concrete implementation PRs instead of serial assessment/gate paperwork.
