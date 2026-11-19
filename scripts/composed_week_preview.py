@@ -8,6 +8,8 @@ All grocery math is delegated to the already accepted Shopping v1b engine.
 from __future__ import annotations
 
 import argparse
+import os
+import tempfile
 from datetime import datetime
 from html import escape
 from pathlib import Path
@@ -362,6 +364,71 @@ def preview_from_database(*, database_path, household_id, plan_id, captured_at):
         engine.dispose()
 
 
+def _assert_distinct_output(*, database_path: Path, output_path: Path) -> None:
+    """Refuse aliases of the source SQLite file, including symlinks/hard links.
+
+    Check before reading the source *and* just before publishing the HTML.
+    A generated HTML destination may be replaced; an unrelated file may not.
+    """
+    database = Path(database_path)
+    output = Path(output_path)
+    try:
+        if database.resolve() == output.resolve() or (
+            database.exists() and output.exists() and database.samefile(output)
+        ):
+            _block("Выходной HTML не может совпадать с исходной SQLite-базой.")
+        if output.is_symlink():
+            _block("Символическая ссылка не допускается как выходной HTML-файл.")
+        if output.exists():
+            if not output.is_file():
+                _block("Выходной путь должен быть обычным HTML-файлом.")
+            with output.open("rb") as existing:
+                if not existing.read(64).startswith(b"<!doctype html><html lang='ru'>"):
+                    _block("Запрещено перезаписывать файл, не являющийся этим HTML.")
+    except (OSError, RuntimeError) as exc:
+        raise ComposedWeekPreviewBlocked(
+            "Не удалось безопасно проверить выходной путь."
+        ) from exc
+
+
+def write_preview_html(*, preview: dict, database_path: Path, output_path: Path) -> None:
+    """Publish validated internal HTML atomically, never truncate the source DB.
+
+    Temporary file is created in the destination directory so os.replace is
+    atomic on the same filesystem. Failure cleans up the temporary artifact.
+    """
+    database = Path(database_path)
+    output = Path(output_path)
+    _assert_distinct_output(database_path=database, output_path=output)
+    html = render_html(preview)
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w",
+            encoding="utf-8",
+            prefix=f".{output.name}.",
+            suffix=".tmp",
+            dir=output.parent,
+            delete=False,
+        ) as stream:
+            temporary = Path(stream.name)
+            stream.write(html)
+            stream.flush()
+            os.fsync(stream.fileno())
+        # The path can change while a large week is rendered; recheck at the
+        # last possible moment. Replacing a symlink is prohibited above.
+        _assert_distinct_output(database_path=database, output_path=output)
+        os.replace(temporary, output)
+        temporary = None
+    except OSError as exc:
+        raise ComposedWeekPreviewBlocked(
+            "Не удалось атомарно сохранить внутренний HTML."
+        ) from exc
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Internal composed-week HTML preview")
     parser.add_argument("--sqlite", type=Path, required=True)
@@ -373,13 +440,16 @@ def main() -> None:
     captured = datetime.fromisoformat(args.captured_at)
     if captured.tzinfo is None or captured.utcoffset() is None:
         parser.error("--captured-at requires an explicit timezone")
+    _assert_distinct_output(database_path=args.sqlite, output_path=args.out)
     preview = preview_from_database(
         database_path=args.sqlite,
         household_id=args.household,
         plan_id=args.plan,
         captured_at=captured,
     )
-    args.out.write_text(render_html(preview), encoding="utf-8")
+    write_preview_html(
+        preview=preview, database_path=args.sqlite, output_path=args.out
+    )
     print(f"Saved internal diagnostic preview: {args.out}")
 
 
