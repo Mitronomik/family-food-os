@@ -16,6 +16,7 @@ from app.tests.persistence.test_meal_plan_composition_persistence import (
     _setup,
     _write,
 )
+from app.tests.persistence.test_meal_plan_full_week_composition import _week_21_42
 
 from scripts.composed_week_preview import (
     SCHEMA,
@@ -189,3 +190,39 @@ def test_missing_sqlite_path_does_not_create_a_database(tmp_path):
             captured_at=CAPTURED,
         )
     assert not absent.exists()
+
+
+def test_complete_21_event_three_member_composed_week_is_visible_without_phantom_meals(
+    tmp_path,
+):
+    config, engine, home, people, old, recipes, selections = _week_21_42(tmp_path)
+    try:
+        # Only the first member is actually at home for Tuesday lunch;
+        # the other two must not acquire invented composed portions.
+        composed = _compose(
+            old, people[:1], recipes, selections, target_index=4
+        )
+        _write(engine, composed, people)
+        preview = preview_from_database(
+            database_path=config.path,
+            household_id=home.id,
+            plan_id=composed.plan.id,
+            captured_at=CAPTURED,
+        )
+        assert len(preview["days"]) == 7
+        assert [len(day["events"]) for day in preview["days"]] == [3] * 7
+        events = [e for day in preview["days"] for e in day["events"]]
+        assert len(events) == 21
+        multi = [e for e in events if e["source_kind"] == "COOK_COMPOSITION"]
+        assert len(multi) == 1
+        assert {s["member_id"] for part in multi[0]["courses"] for s in part["servings"]} == {
+            str(people[0].id)
+        }
+        # Every original other course/attendance stays in the complete week.
+        assert sum(len(course["servings"]) for event in events for course in event["courses"]) == 44
+        assert preview["grocery"][0]["required"] == "1343.750"
+        assert preview["grocery"][0]["to_buy"] == "1343.750"
+        assert "Первое" in render_html(preview)
+        assert preview["physical_portions"] == "NOT_PROVEN"
+    finally:
+        engine.dispose()
