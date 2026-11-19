@@ -199,9 +199,7 @@ def test_complete_21_event_three_member_composed_week_is_visible_without_phantom
     try:
         # Only the first member is actually at home for Tuesday lunch;
         # the other two must not acquire invented composed portions.
-        composed = _compose(
-            old, people[:1], recipes, selections, target_index=4
-        )
+        composed = _compose(old, people[:1], recipes, selections, target_index=4)
         _write(engine, composed, people)
         preview = preview_from_database(
             database_path=config.path,
