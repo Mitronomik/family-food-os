@@ -1,3 +1,11 @@
+# 2026-11-19 — #295 merged; runnable multi-course internal week UX PR #296
+
+- Confirmed [#295](https://github.com/Mitronomik/family-food-os/pull/295) merged into `main@b6af6a851cf1b56aa10a84a5347160574d0f96b7`; docs-only assessment phase complete. Owner directs concrete implementation PRs instead of serial assessment/gate paperwork.
+- [#296](https://github.com/Mitronomik/family-food-os/pull/296) implements an executable internal Russian mobile week HTML preview from true persisted 0044 composed MealPlan source and deterministic Shopping V2 quantities, preserving V1 public read isolation. Synthetic 7-day fixture demonstrates ingredient reconciliation and cross-process replay; no real-family source/portion/nutrition claims.
+- Focused test/run and broad CI pending at final HEAD; independently review before owner merge. Missing role/physical/complete Nutrition still NO_GO for consumer activation; do not reinterpret preview as accepted full meal week.
+
+---
+
 # 2026-11-19 — PR #294 merged; source/role/physical admission preflight proposed
 
 - GitHub confirms [#294](https://github.com/Mitronomik/family-food-os/pull/294) merged 2026-11-18T20:46:28Z; accepted `main@af501e60911be3a393fa0eb3e2c611dc86b4fa28`. Composition-aware Shopping v1b immutable diagnostic source/Decimal/Pantry/FEFO readback and public V1a isolation are implemented. **No consumer or Prep/physical/Nutrition release is established.**
