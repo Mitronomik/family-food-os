@@ -43,6 +43,15 @@ jobs:
           assert obj['ingredient_rows_reconciled'] == 7
           assert obj['original_primary_card_portion_g'] == '80'
           assert obj['source_card_energy_kcal'] == '185.6'
+          assert obj['source_internal_discrepancy']['status'] == 'SOURCE_INTERNAL_DISCREPANCY'
+          assert obj['source_internal_discrepancy']['typical_menu_energy_kcal'] == '185.7'
+          assert obj['source_internal_discrepancy']['difference_kcal'] == '0.1'
+          assert obj['source_internal_discrepancy']['nutrition_publication_changed'] is False
+          assert obj['ci_verification_scope'] == 'LOCAL_PINNED_MANIFEST_AND_RESEARCH_WITNESS_ONLY'
+          assert obj['external_pdf_fetched_in_ci'] is False
+          assert obj['external_pdf_sha256_checked_in_ci'] is False
+          assert obj['external_pdf_visually_verified_in_ci'] is False
+          assert obj['external_source_authority_proven_by_ci'] is False
           assert obj['customer_release'] == 'NOT_APPROVED_FOR_FAMILY_MULTI_COURSE_USE'
           assert obj['current_pdf_binary_independently_verified'] is False
           assert obj['family_course_suitability'] == 'UNKNOWN'
