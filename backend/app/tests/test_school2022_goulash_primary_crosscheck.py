@@ -35,6 +35,21 @@ def test_original_primary_pdf_card_numeric_facts_match_frozen_manifest(sources):
         report["finished_sauce_g"]
     ) == Decimal(report["original_primary_card_portion_g"])
     assert report["source_card_energy_kcal"] == "185.6"
+    discrepancy = report["source_internal_discrepancy"]
+    assert discrepancy["status"] == "SOURCE_INTERNAL_DISCREPANCY"
+    assert discrepancy["recipe_card_energy_kcal"] == "185.6"
+    assert discrepancy["typical_menu_energy_kcal"] == "185.7"
+    assert discrepancy["difference_kcal"] == "0.1"
+    assert discrepancy["recipe_id"] == "54-2м"
+    assert discrepancy["typical_menu_serving_g"] == "80"
+    assert discrepancy["possible_causes"] == "NOT_DETERMINED"
+    assert discrepancy["recipe_error_conclusion"] == "NOT_DETERMINED"
+    assert discrepancy["nutrition_publication_changed"] is False
+    assert report["ci_verification_scope"] == "LOCAL_PINNED_MANIFEST_AND_RESEARCH_WITNESS_ONLY"
+    assert report["external_pdf_fetched_in_ci"] is False
+    assert report["external_pdf_sha256_checked_in_ci"] is False
+    assert report["external_pdf_visually_verified_in_ci"] is False
+    assert report["external_source_authority_proven_by_ci"] is False
     assert report["ingredient_rows_reconciled"] == 7
     assert all(row["amount_matches"] for row in report["ingredient_rows"])
     assert report["source_age_context"] == "7–11 лет"
@@ -143,3 +158,37 @@ def test_manifest_payload_must_retain_accepted_exact_git_blob_sha(sources, tmp_p
 
     with pytest.raises(SourceCrosscheckBlocked, match="Git blob"):
         load_sources(manifest_path=path)
+
+
+@pytest.mark.parametrize(
+    ("field", "replacement"),
+    [
+        ("typical_menu_energy_kcal", "185.6"),
+        ("typical_menu_serving_g", "100"),
+        ("difference_kcal", "0"),
+        ("recipe_error_conclusion", "RECIPE_IS_WRONG"),
+        ("nutrition_publication_changed", True),
+        ("unresolved_external_document_binary_verification", False),
+        ("independent_visual_comparison_completed", True),
+        ("independent_reviewer_signoff_completed", True),
+    ],
+)
+def test_internal_discrepancy_cannot_be_erased_or_used_as_new_authority(
+    sources, field, replacement
+):
+    manifest, witness = copy.deepcopy(sources)
+    witness["source_internal_discrepancy"][field] = replacement
+    with pytest.raises(SourceCrosscheckBlocked):
+        crosscheck(manifest=manifest, witness=witness)
+
+
+def test_ci_receipt_does_not_claim_external_pdf_byte_or_visual_verification(sources):
+    manifest, witness = sources
+    report = crosscheck(manifest=manifest, witness=witness)
+    assert report["current_pdf_binary_independently_verified"] is False
+    assert report["external_pdf_fetched_in_ci"] is False
+    assert report["external_pdf_sha256_checked_in_ci"] is False
+    assert report["external_pdf_visually_verified_in_ci"] is False
+    assert report["external_source_authority_proven_by_ci"] is False
+    assert report["source_card_energy_kcal"] == "185.6"
+    assert report["prepared_nutrition_available_codes"] == ["ENERGY_KCAL"]
