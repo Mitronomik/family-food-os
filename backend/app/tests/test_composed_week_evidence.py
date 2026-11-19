@@ -26,9 +26,9 @@ from app.tests.persistence.test_shopping_composition_v1b import (
 )
 
 from scripts.composed_week_evidence import (
-    _nutrition_observation,
     NO_GO,
     SCHEMA,
+    _nutrition_observation,
     build_inventory,
     inventory_from_database,
 )
