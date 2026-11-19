@@ -108,9 +108,9 @@ def test_fails_if_publication_version_original_base_or_hash_changes(sources):
         crosscheck(manifest=manifest, witness=witness)
 
     manifest, witness = copy.deepcopy(sources)
-    manifest["recipes"][RECIPE_CODE]["source_receipt"][
-        "exact_source_card_sha256"
-    ] = "0" * 64
+    manifest["recipes"][RECIPE_CODE]["source_receipt"]["exact_source_card_sha256"] = (
+        "0" * 64
+    )
     with pytest.raises(SourceCrosscheckBlocked):
         crosscheck(manifest=manifest, witness=witness)
 
