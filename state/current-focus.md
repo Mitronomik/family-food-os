@@ -1,3 +1,11 @@
+# CURRENT — runnable composed-week menu + Shopping V2 internal preview — 2026-11-19
+
+**Accepted main:** `b6af6a851cf1b56aa10a84a5347160574d0f96b7` ([#295 merged](https://github.com/Mitronomik/family-food-os/pull/295)). Owner explicitly requested to stop serial docs-only gates and make measurable product progress; approved boundary remains source/role/physical evidence-first, with **no consumer/real-family admission**.
+
+**Current bounded implementation:** [PR #296](https://github.com/Mitronomik/family-food-os/pull/296) delivers a runnable **internal, read-only, mobile-first composed-week HTML view** of the persisted seven-day `0044` DRAFT, exact per-member per-component factors and `shopping-v1b-composition` canonical Pantry-net groceries. A subprocess accepts explicit local DB/Household/MealPlan/as-of; new tests prove full-week cards, arithmetic, read isolation, source HTML escaping and no SQLite/Shopping mutation. No new source/physical/nutrition/Prep authority, no public HTTP/UI activation or migration. Next: exact-head focused/broad CI, independent review and owner merge; no new docs gate between source-backed execution tests and product experiments.
+
+---
+
 # CURRENT — after merged #294: composed-meal readiness assessment gate — 2026-11-19
 
 **Accepted `main`:** `af501e60911be3a393fa0eb3e2c611dc86b4fa28` ([Shopping v1b PR #294 merged](https://github.com/Mitronomik/family-food-os/pull/294) 2026-11-18). Exact Decimal multi-course demand, V2 MealPlan source provenance/readback, dated Pantry FEFO and V1a public read isolation are **internal diagnostic-only**; they do **not** approve course/meal-role suitability, physical portion feasibility, complete Nutrition, safe Prep or consumer use.
