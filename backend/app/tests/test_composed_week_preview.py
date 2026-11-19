@@ -4,10 +4,12 @@ Test against persisted MealPlan 0044 and exact source-pinned RecipeVersions;
 the synthetic fixture is NOT a source-approved real family menu.
 """
 
+import os
 import sqlite3
 import subprocess
 import sys
 from datetime import UTC, datetime
+from hashlib import sha256
 from uuid import uuid4
 
 import pytest
@@ -23,6 +25,7 @@ from scripts.composed_week_preview import (
     ComposedWeekPreviewBlocked,
     preview_from_database,
     render_html,
+    write_preview_html,
 )
 
 CAPTURED = datetime(2026, 11, 16, 12, 0, tzinfo=UTC)
@@ -226,5 +229,124 @@ def test_complete_21_event_three_member_composed_week_is_visible_without_phantom
         assert preview["grocery"][0]["to_buy"] == "1343.750"
         assert "Первое" in render_html(preview)
         assert preview["physical_portions"] == "NOT_PROVEN"
+    finally:
+        engine.dispose()
+
+
+def _run_cli(config, home, composed, out):
+    return subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "scripts.composed_week_preview",
+            "--sqlite",
+            str(config.path),
+            "--household",
+            str(home.id),
+            "--plan",
+            str(composed.plan.id),
+            "--captured-at",
+            CAPTURED.isoformat(),
+            "--out",
+            str(out),
+        ],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+
+@pytest.mark.parametrize("alias", ("same_path", "relative_alias", "symlink", "hardlink"))
+def test_cli_refuses_sqlite_output_alias_without_modifying_source(tmp_path, alias):
+    config, engine, home, composed = _persist_composed_week(tmp_path)
+    try:
+        source = config.path
+        if alias == "same_path":
+            output = source
+        elif alias == "relative_alias":
+            output = source.parent / "alias-directory" / ".." / source.name
+            (source.parent / "alias-directory").mkdir()
+        elif alias == "symlink":
+            output = tmp_path / "linked.html"
+            output.symlink_to(source)
+        else:
+            output = tmp_path / "hardlinked.html"
+            os.link(source, output)
+
+        before = sha256(source.read_bytes()).hexdigest()
+        outcome = _run_cli(config, home, composed, output)
+        assert outcome.returncode != 0
+        assert "SQLite-базой" in outcome.stderr
+        assert sha256(source.read_bytes()).hexdigest() == before
+        with sqlite3.connect(source) as db:
+            assert db.execute("PRAGMA quick_check").fetchone() == ("ok",)
+            assert db.execute("SELECT COUNT(*) FROM shopping_lists").fetchone() == (
+                0,
+            )
+        assert not tuple(source.parent.glob(".*.tmp"))
+    finally:
+        engine.dispose()
+
+
+def test_atomic_html_publication_preserves_previous_file_on_replace_failure(
+    tmp_path, monkeypatch
+):
+    config, engine, home, composed = _persist_composed_week(tmp_path)
+    try:
+        preview = preview_from_database(
+            database_path=config.path,
+            household_id=home.id,
+            plan_id=composed.plan.id,
+            captured_at=CAPTURED,
+        )
+        output = tmp_path / "week.html"
+        output.write_text(render_html(preview), encoding="utf-8")
+        original = output.read_bytes()
+        database_before = sha256(config.path.read_bytes()).hexdigest()
+
+        def fail_replace(_from, _to):
+            raise OSError("simulated storage failure")
+
+        monkeypatch.setattr("scripts.composed_week_preview.os.replace", fail_replace)
+        with pytest.raises(ComposedWeekPreviewBlocked, match="атомарно"):
+            write_preview_html(
+                preview=preview, database_path=config.path, output_path=output
+            )
+        assert output.read_bytes() == original
+        assert sha256(config.path.read_bytes()).hexdigest() == database_before
+        assert not tuple(tmp_path.glob(".week.html.*.tmp"))
+    finally:
+        engine.dispose()
+
+
+def test_atomic_writer_refuses_unrelated_existing_file_and_can_replace_own_html(
+    tmp_path,
+):
+    config, engine, home, composed = _persist_composed_week(tmp_path)
+    try:
+        preview = preview_from_database(
+            database_path=config.path,
+            household_id=home.id,
+            plan_id=composed.plan.id,
+            captured_at=CAPTURED,
+        )
+        output = tmp_path / "week.html"
+        output.write_text("do not replace this", encoding="utf-8")
+        with pytest.raises(ComposedWeekPreviewBlocked, match="не являющийся"):
+            write_preview_html(
+                preview=preview, database_path=config.path, output_path=output
+            )
+        assert output.read_text(encoding="utf-8") == "do not replace this"
+
+        output.unlink()
+        write_preview_html(
+            preview=preview, database_path=config.path, output_path=output
+        )
+        first = output.read_bytes()
+        write_preview_html(
+            preview=preview, database_path=config.path, output_path=output
+        )
+        assert output.read_bytes() == first
+        assert not tuple(tmp_path.glob(".week.html.*.tmp"))
     finally:
         engine.dispose()
