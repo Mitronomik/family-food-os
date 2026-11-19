@@ -1,3 +1,11 @@
+# CURRENT — actual School2022 54-2м original-card reconciliation — 2026-11-19
+
+**Accepted main:** `73b1628bf2c8cc824cd991e366016f0a38301d7d` ([#297 merged](https://github.com/Mitronomik/family-food-os/pull/297), 2026-11-19). The developer-only four-axis inventory now makes missing source/role/physical/Nutrition authority explicit; no family activation.
+
+**Now:** one bounded **actual source-data comparison**, not another docs gate: reconcile the existing pinned R1-G School2022 54-2м beef goulash RecipeVersion source specification with the original School2022 primary PDF's published ingredient net amounts, 80 g meat+sauce output and 185.6 kcal card value. Deliver source-text witness + read-only deterministic `scripts/verify_school2022_goulash_source.py` + adversarial tests/CI. **Caveat:** public PDF text extraction is not fresh full-PDF binary SHA or independent qualified reviewer approval; the previously accepted document/card hashes remain historical pins, not new proofs. The source is institutional for ages 7–11 and does **not** approve adult/household portion limits, the SECOND course, scaled cooked yield, storage/freezer safety, complete Nutrition (historical prepared-spec energy only) or real-family release. Keep source, RecipeVersion, Pantry, Planner, Shopping, Nutrition, Prep and API unchanged. Next: exact-head focused CI, independent review/owner merge; then target real role/portion authority with exact data gap evidence.
+
+---
+
 # CURRENT — source-backed composed-week evidence inventory after merged #296 — 2026-11-19
 
 **Accepted main:** `6885c0ee90c97be6f24fe771c2d0a7962525d256` ([#296 merged](https://github.com/Mitronomik/family-food-os/pull/296), 2026-11-19). The internal, offline composed-week HTML and deterministic Shopping V2 grocery projection are accepted as developer-only diagnostics, **not** consumer/physical/Nutrition/Prep approval.
