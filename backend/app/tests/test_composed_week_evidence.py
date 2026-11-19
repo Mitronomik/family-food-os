@@ -8,11 +8,13 @@ import sqlite3
 import subprocess
 import sys
 from datetime import UTC, datetime
+from decimal import Decimal
 from hashlib import sha256
 from types import SimpleNamespace
 from uuid import uuid4
 
 import pytest
+from app.domain.recipe_nutrition_v2 import NUTRIENT_CODES
 from app.persistence.sqlalchemy_core.shopping_uow import SqlAlchemyShoppingReadScope
 from app.services.recipe_nutrition_v2 import RecipeNutritionV2UnavailableError
 from app.tests.persistence.test_meal_plan_composition_persistence import (
@@ -357,3 +359,40 @@ def test_nutrition_unexpected_source_corruption_does_not_get_silenced():
             SimpleNamespace(calculate_in_scope=corrupt),
             uuid4(),
         )
+
+
+@pytest.mark.parametrize(
+    ("has_prepared", "status", "reason"),
+    [
+        (False, "COMPLETE", None),
+        (True, "UNAVAILABLE", "CONFLICTING_AUTHORITIES"),
+    ],
+)
+def test_nutrition_observation_rejects_conflict_even_after_successful_v2_calculation(
+    has_prepared, status, reason
+):
+    """Composition V2's success alone cannot override competing prepared authority."""
+    version_id = uuid4()
+    ingredient_id = uuid4()
+    scope = SimpleNamespace(
+        versions=SimpleNamespace(
+            get_detail=lambda _version: SimpleNamespace(
+                ingredients=(SimpleNamespace(id=ingredient_id, optional=False),)
+            )
+        ),
+        bindings=SimpleNamespace(get=lambda _ingredient: object()),
+        prepared=SimpleNamespace(
+            get_authority=lambda _version: object() if has_prepared else None
+        ),
+    )
+    result = SimpleNamespace(
+        status="COMPLETE",
+        per_base_serving=tuple(
+            SimpleNamespace(code=code, amount=Decimal("1")) for code in NUTRIENT_CODES
+        ),
+    )
+    service = SimpleNamespace(calculate_in_scope=lambda _scope, _version: result)
+    observed = _nutrition_observation(scope, service, version_id)
+    assert observed["status"] == status
+    assert observed["unavailable_reason"] == reason
+    assert observed["available_nutrients"] == (0 if has_prepared else 54)
