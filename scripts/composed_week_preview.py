@@ -96,7 +96,9 @@ def build_preview(
     for serving in plan.servings:
         servings_by_event.setdefault(serving.event_id, []).append(serving)
     cards_by_date = {day.isoformat(): [] for day in plan.horizon_dates}
-    for event in sorted(plan.events, key=lambda x: (x.local_date, x.position, str(x.id))):
+    for event in sorted(
+        plan.events, key=lambda x: (x.local_date, x.position, str(x.id))
+    ):
         role = _ROLES.get(str(event.role), "Приём пищи")
         card = {
             "role_ru": role,
@@ -239,11 +241,7 @@ def render_html(preview: dict) -> str:
                 else "<ul>" + "".join(courses) + "</ul>"
             )
             meals.append(
-                "<article><h3>"
-                + e(event["role_ru"])
-                + "</h3>"
-                + source
-                + "</article>"
+                "<article><h3>" + e(event["role_ru"]) + "</h3>" + source + "</article>"
             )
         days_html.append(
             "<section class='day'><h2>"
