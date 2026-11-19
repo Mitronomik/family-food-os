@@ -142,7 +142,10 @@ def build_inventory(*, plan, recipes, foods, preview, nutrition):
     if (
         len(composition_ids) != len(plan.compositions)
         or not composition_ids <= set(events)
-        or any(events[eid].source_kind is not MealSourceKind.COOK_COMPOSITION for eid in composition_ids)
+        or any(
+            events[eid].source_kind is not MealSourceKind.COOK_COMPOSITION
+            for eid in composition_ids
+        )
         or any(
             event.source_kind is MealSourceKind.COOK_COMPOSITION
             and event.id not in composition_ids
