@@ -16,7 +16,7 @@
     "fresh_pdf_binary_downloaded": false,
     "fresh_pdf_sha256_verified": false,
     "visual_pdf_screenshot_verified": false,
-    "evidence_method": "Original publisher-hosted PDF content identified through text extraction; independent browser PDF image screenshot unavailable (cache miss). Not a new byte-for-byte document receipt."
+    "evidence_method": "Original publisher-hosted PDF content identified through text extraction; independent browser PDF image screenshot unavailable (cache miss). Not a new byte-for-byte document receipt. A separate 185.7 kcal typical-menu entry in the same document was observed through source PDF searchable text, not through fresh binary verification."
   },
   "recipe": {
     "name_ru": "Гуляш из говядины",
@@ -83,5 +83,23 @@
     "finished_cooked_batch_storage_freezing_reheat_is_authorized": false,
     "independent_qualified_source_review_completed_in_this_operation": false,
     "scope": "Original recipe-card factual crosscheck against one existing immutable publication manifest only; no new recipe publication or safety/portion release."
+  },
+  "source_internal_discrepancy": {
+    "status": "SOURCE_INTERNAL_DISCREPANCY",
+    "observation_scope": "Recipe card 54-2м versus one-or-more typical-menu rows for the same 54-2м and 80 g within the same School2022 2022 collection",
+    "recipe_card_energy_kcal": "185.6",
+    "typical_menu_energy_kcal": "185.7",
+    "difference_kcal": "0.1",
+    "typical_menu_recipe_id": "54-2м",
+    "typical_menu_serving_g": "80",
+    "source_document_url": "https://niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+    "observation_method": "Publisher-hosted source PDF searchable text shows 185,6 in card and 185,7 in typified menus; menu source fact is independent of frozen R1-G prepared energy",
+    "possible_causes": "NOT_DETERMINED",
+    "recipe_error_conclusion": "NOT_DETERMINED",
+    "recipe_card_is_selected_value": true,
+    "nutrition_publication_changed": false,
+    "unresolved_external_document_binary_verification": true,
+    "independent_visual_comparison_completed": false,
+    "independent_reviewer_signoff_completed": false
   }
 }
