@@ -48,7 +48,9 @@ def _amount(value: object, field: str) -> Decimal:
 
 
 def _blob_sha(raw: bytes) -> str:
-    return hashlib.sha1(b"blob " + str(len(raw)).encode("ascii") + b"\0" + raw).hexdigest()
+    return hashlib.sha1(
+        b"blob " + str(len(raw)).encode("ascii") + b"\0" + raw
+    ).hexdigest()
 
 
 def load_sources(
@@ -71,7 +73,8 @@ def crosscheck(*, manifest: dict, witness: dict) -> dict:
         "Неподдерживаемая версия текстового свидетельства.",
     )
     _require(
-        witness.get("status") == "RESEARCH_ONLY_TEXT_TRANSCRIPTION_NOT_A_FRESH_BINARY_HASH",
+        witness.get("status")
+        == "RESEARCH_ONLY_TEXT_TRANSCRIPTION_NOT_A_FRESH_BINARY_HASH",
         "Текстовое свидетельство ошибочно представлено как авторитетный источник.",
     )
     publication = witness["publication_context"]
@@ -156,7 +159,8 @@ def crosscheck(*, manifest: dict, witness: dict) -> dict:
     meat = _amount(source["finished_meat_g"], "meat output")
     sauce = _amount(source["finished_sauce_g"], "sauce output")
     _require(
-        meat + sauce == output
+        meat + sauce
+        == output
         == _amount(version["source_output_g"], "RecipeVersion source output")
         == _amount(prepared["output_mass_g"], "prepared authority output"),
         "Выход блюда не совпадает с суммой готовых компонентов и публикацией.",
@@ -165,9 +169,7 @@ def crosscheck(*, manifest: dict, witness: dict) -> dict:
     _require(
         len(prepared["expected_available_amounts"]) == 1
         and prepared["expected_available_amounts"][0][0] == "ENERGY_KCAL"
-        and _amount(
-            prepared["expected_available_amounts"][0][1], "prepared energy"
-        )
+        and _amount(prepared["expected_available_amounts"][0][1], "prepared energy")
         == energy,
         "Энергетическая ценность из карты и подготовленной публикации расходятся.",
     )
@@ -183,7 +185,9 @@ def crosscheck(*, manifest: dict, witness: dict) -> dict:
 
     card_inputs = source["input_quantities"]
     seed_inputs = version["ingredients"]
-    _require(len(card_inputs) == len(seed_inputs) == 7, "Ожидалось семь исходных строк.")
+    _require(
+        len(card_inputs) == len(seed_inputs) == 7, "Ожидалось семь исходных строк."
+    )
     _require(
         len({r["canonical_food_code"] for r in card_inputs}) == len(card_inputs)
         and len({r["food_ingredient_code"] for r in seed_inputs}) == len(seed_inputs),
@@ -201,7 +205,11 @@ def crosscheck(*, manifest: dict, witness: dict) -> dict:
         net = _amount(item["net_g"], f"{code} net")
         _require(net <= gross, f"{code} net не может превышать gross.")
         normalized = _amount(stored["quantity"], f"{code} published quantity")
-        if stored["unit"] != "g" or stored["optional"] is not False or net != normalized:
+        if (
+            stored["unit"] != "g"
+            or stored["optional"] is not False
+            or net != normalized
+        ):
             discrepancies.append(code)
         row_results.append(
             {
@@ -213,7 +221,10 @@ def crosscheck(*, manifest: dict, witness: dict) -> dict:
             }
         )
         net_mass += net
-    _require(not discrepancies, "RecipeIngredient rows contradict card: " + ",".join(discrepancies))
+    _require(
+        not discrepancies,
+        "RecipeIngredient rows contradict card: " + ",".join(discrepancies),
+    )
     _require(
         net_mass > output,
         "Сумма входного сырья не доказывает выход готового блюда.",
