@@ -391,7 +391,9 @@ def _assert_distinct_output(*, database_path: Path, output_path: Path) -> None:
         ) from exc
 
 
-def write_preview_html(*, preview: dict, database_path: Path, output_path: Path) -> None:
+def write_preview_html(
+    *, preview: dict, database_path: Path, output_path: Path
+) -> None:
     """Publish validated internal HTML atomically, never truncate the source DB.
 
     Temporary file is created in the destination directory so os.replace is
@@ -447,9 +449,7 @@ def main() -> None:
         plan_id=args.plan,
         captured_at=captured,
     )
-    write_preview_html(
-        preview=preview, database_path=args.sqlite, output_path=args.out
-    )
+    write_preview_html(preview=preview, database_path=args.sqlite, output_path=args.out)
     print(f"Saved internal diagnostic preview: {args.out}")
 
 
