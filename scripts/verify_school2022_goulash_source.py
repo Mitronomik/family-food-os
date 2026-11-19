@@ -166,6 +166,31 @@ def crosscheck(*, manifest: dict, witness: dict) -> dict:
         "Выход блюда не совпадает с суммой готовых компонентов и публикацией.",
     )
     energy = _amount(source["energy_kcal_per_source_card"], "source energy")
+    discrepancy = witness["source_internal_discrepancy"]
+    _require(
+        discrepancy["status"] == "SOURCE_INTERNAL_DISCREPANCY"
+        and discrepancy["typical_menu_recipe_id"] == "54-2м"
+        and _amount(discrepancy["typical_menu_serving_g"], "menu serving") == output,
+        "Расхождение в меню должно ссылаться на ту же карту и массу блюда.",
+    )
+    menu_energy = _amount(discrepancy["typical_menu_energy_kcal"], "menu energy")
+    _require(
+        _amount(discrepancy["recipe_card_energy_kcal"], "card energy") == energy
+        and _amount(discrepancy["difference_kcal"], "energy discrepancy")
+        == menu_energy - energy
+        == Decimal("0.1"),
+        "Нельзя скрыть или переинтерпретировать расхождение энергии в источнике.",
+    )
+    _require(
+        discrepancy["recipe_card_is_selected_value"] is True
+        and discrepancy["nutrition_publication_changed"] is False
+        and discrepancy["recipe_error_conclusion"] == "NOT_DETERMINED"
+        and discrepancy["possible_causes"] == "NOT_DETERMINED"
+        and discrepancy["unresolved_external_document_binary_verification"] is True
+        and discrepancy["independent_visual_comparison_completed"] is False
+        and discrepancy["independent_reviewer_signoff_completed"] is False,
+        "Расхождение не может автоматически изменить Nutrition authority.",
+    )
     _require(
         len(prepared["expected_available_amounts"]) == 1
         and prepared["expected_available_amounts"][0][0] == "ENERGY_KCAL"
@@ -238,6 +263,17 @@ def crosscheck(*, manifest: dict, witness: dict) -> dict:
         "finished_meat_g": str(meat),
         "finished_sauce_g": str(sauce),
         "source_card_energy_kcal": str(energy),
+        "source_internal_discrepancy": {
+            "status": discrepancy["status"],
+            "recipe_card_energy_kcal": str(energy),
+            "typical_menu_energy_kcal": str(menu_energy),
+            "difference_kcal": str(menu_energy - energy),
+            "recipe_id": discrepancy["typical_menu_recipe_id"],
+            "typical_menu_serving_g": discrepancy["typical_menu_serving_g"],
+            "possible_causes": "NOT_DETERMINED",
+            "recipe_error_conclusion": "NOT_DETERMINED",
+            "nutrition_publication_changed": False,
+        },
         "input_net_sum_g": str(net_mass),
         "ingredient_rows": row_results,
         "ingredient_rows_reconciled": len(row_results),
@@ -245,6 +281,11 @@ def crosscheck(*, manifest: dict, witness: dict) -> dict:
         "historical_source_pdf_sha256": receipt["source_document_sha256"],
         "historical_source_card_sha256": receipt["exact_source_card_sha256"],
         "current_pdf_binary_independently_verified": False,
+        "external_pdf_fetched_in_ci": False,
+        "external_pdf_sha256_checked_in_ci": False,
+        "external_pdf_visually_verified_in_ci": False,
+        "ci_verification_scope": "LOCAL_PINNED_MANIFEST_AND_RESEARCH_WITNESS_ONLY",
+        "external_source_authority_proven_by_ci": False,
         "current_persisted_recipe_version_id_verified": False,
         "current_household_meal_plan_id_verified": False,
         "source_role_classification": "main",
@@ -258,6 +299,8 @@ def crosscheck(*, manifest: dict, witness: dict) -> dict:
         "notes": [
             "Текстовые количественные факты первичной школьной карточки совпадают с R1-G manifest.",
             "Актуальный бинарный PDF не был повторно загружен и захеширован.",
+            "CI сверяет только зафиксированный Git blob и локальное исследовательское текстовое свидетельство, а не внешний PDF.",
+            "В самом сборнике для 54-2м карта указывает 185,6 ккал, а типовое меню — 185,7 ккал; это SOURCE_INTERNAL_DISCREPANCY, не автоматическая ошибка или новая Nutrition authority.",
             "80 г — выход исходной школьной рецептуры, не доказанная подходящая масса семейной порции.",
             "Классификация main не подтверждает автоматически курс SECOND для любого члена семьи.",
             "Профиль Prepared Nutrition в данном manifest содержит только ENERGY_KCAL; прочие нутриенты остаются UNKNOWN.",
