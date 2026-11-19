@@ -1,3 +1,11 @@
+# CURRENT — after merged #294: composed-meal readiness assessment gate — 2026-11-19
+
+**Accepted `main`:** `af501e60911be3a393fa0eb3e2c611dc86b4fa28` ([Shopping v1b PR #294 merged](https://github.com/Mitronomik/family-food-os/pull/294) 2026-11-18). Exact Decimal multi-course demand, V2 MealPlan source provenance/readback, dated Pantry FEFO and V1a public read isolation are **internal diagnostic-only**; they do **not** approve course/meal-role suitability, physical portion feasibility, complete Nutrition, safe Prep or consumer use.
+
+**Current bounded task:** [composed-meal admission readiness preflight](../docs/family-food/composed-meal-admission-readiness-preflight-2026-11-19.md) — **docs-only review proposal** defining one next read-only source/role/physical/Nutrition evidence inventory for an immutable seven-day composed revision, with explicit NO_GO on missing authority. No runtime, schema, source publication, API/UI, Pantry or Shopping behavior changes; no PR10 executable tasks, Gate2 or real-family activation. Independently review/merge this docs gate before requesting the distinct inventory operation. **No autonomous merge.**
+
+---
+
 # CURRENT — Shopping v1b composed demand runtime after merged #293 — 2026-11-18
 
 **Accepted main:** `d6fb30fdaed4babc4019dc7b0d007ab947479337` ([PR #293 merged](https://github.com/Mitronomik/family-food-os/pull/293), approved V2 provenance and public read-isolation gate). **Current bounded runtime:** draft [PR #294](https://github.com/Mitronomik/family-food-os/pull/294), version-isolated deterministic `shopping-v1b-composition` internal synthetic calculation from full 0044 MealPlan component/member Servings, same `0043` Shopping tables, V2 full source/ingredient/serving ledger, independently recomputed source/content fingerprint and Pantry FEFO; public `ShoppingService` and all existing Shopping HTTP detail/history/current/generate/regenerate/projections must remain V1a-only. **No new migration/API/UI**, real-family activation, Nutrition/Prep/physical safety or Gate2; `AI_ENABLED=false`. Runtime PR requires focused and full backend+launcher exact-head CI, source/failure/concurrency replay, independent review and separate owner merge. **Next only after acceptance:** separately reviewed source/role/physical and consumer activation gates; do not start Retail/Prep here.
