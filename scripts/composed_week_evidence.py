@@ -28,6 +28,7 @@ from app.services.recipe_nutrition_v2 import (
     RecipeNutritionV2Service,
     RecipeNutritionV2UnavailableError,
 )
+
 from scripts.composed_week_preview import (
     ComposedWeekPreviewBlocked,
     build_preview,
