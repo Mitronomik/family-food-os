@@ -353,9 +353,14 @@ def inventory_from_database(*, database_path, household_id, plan_id, captured_at
                     lambda: SqlAlchemyRecipeNutritionV2ReadScope(engine),
                     lambda: None,
                 )
+                component_versions = {
+                    part.recipe_version_id
+                    for composition in plan.compositions
+                    for part in composition.components
+                }
                 coverage = {
                     vid: _nutrition_observation(nutrition_scope, service, vid)
-                    for vid in sorted(recipes, key=str)
+                    for vid in sorted(component_versions, key=str)
                 }
             return build_inventory(
                 plan=plan,
