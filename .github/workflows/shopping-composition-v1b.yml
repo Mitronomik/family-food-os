@@ -10,6 +10,8 @@ on:
       - 'backend/app/tests/persistence/test_shopping_composition_v1b.py'
       - 'backend/app/tests/test_composed_week_preview.py'
       - 'scripts/composed_week_preview.py'
+      - 'scripts/composed_week_evidence.py'
+      - 'backend/app/tests/test_composed_week_evidence.py'
       - '.github/workflows/shopping-composition-v1b.yml'
   workflow_dispatch:
 
@@ -36,6 +38,7 @@ jobs:
           python -m pytest -q --tb=short --maxfail=3 \
             backend/app/tests/persistence/test_shopping_composition_v1b.py \
             backend/app/tests/test_composed_week_preview.py \
+            backend/app/tests/test_composed_week_evidence.py \
             backend/app/tests/persistence/test_meal_plan_full_week_composition.py \
             backend/app/tests/persistence/test_shopping_persistence.py \
             backend/app/tests/test_shopping_api.py \
@@ -49,7 +52,9 @@ jobs:
             backend/app/api/shopping.py \
             backend/app/tests/persistence/test_shopping_composition_v1b.py \
             backend/app/tests/test_composed_week_preview.py \
-            scripts/composed_week_preview.py
+            backend/app/tests/test_composed_week_evidence.py \
+            scripts/composed_week_preview.py \
+            scripts/composed_week_evidence.py
           python -m ruff format --check \
             backend/app/domain/shopping_composition_calculation.py \
             backend/app/services/shopping_diagnostic.py \
@@ -57,7 +62,9 @@ jobs:
             backend/app/api/shopping.py \
             backend/app/tests/persistence/test_shopping_composition_v1b.py \
             backend/app/tests/test_composed_week_preview.py \
-            scripts/composed_week_preview.py
+            backend/app/tests/test_composed_week_evidence.py \
+            scripts/composed_week_preview.py \
+            scripts/composed_week_evidence.py
       - name: Source whitespace and AI gate
         run: |
           git diff --check "${{ github.event.pull_request.base.sha }}"...HEAD

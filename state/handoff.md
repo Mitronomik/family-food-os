@@ -1,3 +1,17 @@
+# 2026-11-19 — PR #297 three P2 review findings addressed in same branch
+
+On `feat/composed-week-source-evidence-inventory-v1` (base merged #296), review asked for (1) explicit weekly obligations beyond composition-only evidence rows, (2) machine-readable Nutrition V2 `UNAVAILABLE` cause and authority conflicts, (3) independently sourced recipe comparison. **Implemented (1)-(2) in existing PR #297**, with full sorted non-composed MealEvent rows and `NOT_IN_SCOPE` detailed assessment, whole-week/by-kind counts, specific binding/authority reason codes and protection against Prepared+Composition conflicts even if Nutrition calculation succeeds. Focused tests include heterogeneous 21-event source and LEFTOVER, stable diagnostics and no exception-text scraping; AI disabled. Await exact-head focused/Ruff/broad CI and independent review; PR remains Draft, no autonomous merge.
+
+**(3) is explicitly deferred as recommended:** existing RecipeVersion metadata is source evidence only; `independent_source_review=NOT_PERFORMED`. Do not fabricate a real-source comparison in this PR. Next after accepted merge is one concrete bounded source/rights, recipe-role and finished-edible/output applicability review, using pinned identities and real external evidence, with explicit gaps and NO_GO until independently proven. No new intermediate docs-only gate or consumer activation.
+
+---
+
+# 2026-11-19 — #296 merged, actual four-axis source audit implementation underway
+
+Accepted `main@6885c0ee90c97be6f24fe771c2d0a7962525d256`, [PR #296 merged](https://github.com/Mitronomik/family-food-os/pull/296). The next approved task is **read-only source/rights, role/structure, physical, Nutrition/downstream evidence inventory** from merged #295 — no serial docs-only gate. Branch `feat/composed-week-source-evidence-inventory-v1` adds developer CLI `scripts/composed_week_evidence.py` plus focused tests and Shopping-gate CI. Reuses one Household-scoped Shopping read scope, canonical `build_preview` V2 source replay, and separately reads existing RecipeNutrition V2 bindings; no DB writes, migration, public API, Nutrition policy or publication. Report source metadata as **recorded, not independently reviewed**; structural rule PASS never grants role suitability; raw `source_output_g` never becomes edible portion; nutrition missing facts remain UNKNOWN; final decision always `NO_GO_TO_CONSUMER_COMPOSED_MEALS`. Existing synthetic 0044 fixtures only prove tooling, **not a real approved week**. Run exact-head focused + broad CI, fix Ruff/test defects, independent review and owner merge separately. Next concrete source/portion research should target exact missing recipe/component authority listed in the inventory.
+
+---
+
 # 2026-11-19 — owner selects OPTION A for PR #296; safety P2 fixed
 
 Owner explicitly approved **Option A** in the project conversation after the P2-2 review: [PR #296](https://github.com/Mitronomik/family-food-os/pull/296) may be delivered as **internal/offline, synthetic diagnostic composed-week HTML preview before** the read-only four-axis inventory from merged [#295](https://github.com/Mitronomik/family-food-os/pull/295). This resolves the **sequencing choice only**; it does **not** authorize consumer or real-family activation, changing any source/role/physical/Nutrition safety authority, waiving the inventory, nor merging #296 without independent review and separate post-review owner approval.

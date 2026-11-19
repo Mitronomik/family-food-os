@@ -1,3 +1,19 @@
+# 2026-11-19 — PR #297 review P2 corrections: full week ledger and Nutrition reasons
+
+- Added per-event `non_composition_events` with immutable event ID/date/role/source kind/RecipeVersion pin/actual legacy member Servings, explicitly `NOT_IN_SCOPE` for detailed source/physical/Nutrition assessment; added by-kind counts and full-week accounting. Tests cover 6/7 legacy events, 20/21 heterogeneous legacy events and a genuine persisted `LEFTOVER` obligation.
+- Nutrition V2 `UNAVAILABLE` now carries stable `unavailable_reason` codes, distinguishing missing/partial Composition bindings, Prepared-only authority, prepared+composition conflicts and bound authority that is invalid/inapplicable. The conflicting-authority category also blocks a superficially successful Composition calculation. Unexpected repository/data errors still fail closed; no exception string parsing or invented availability. New failure/positive controls.
+- Independent external RecipeVersion/source applicability comparison remains `NOT_PERFORMED` and is **deliberately out of scope** here; complete it as next separately bounded data/evidence task after review and owner merge. Tests and exact-head CI re-run required; no source publication or family readiness claim.
+
+---
+
+# 2026-11-19 — merged #296; executable four-axis evidence inventory underway
+
+- GitHub confirmed [PR #296](https://github.com/Mitronomik/family-food-os/pull/296) merged at `main@6885c0ee90c97be6f24fe771c2d0a7962525d256`. No consumer activation; local HTML preview and immutable Shopping V2 arithmetic remain internal diagnostics.
+- Current bounded runtime change adds **read-only CLI JSON evidence inventory** of an immutable composed week: source verification/rights/allergen metadata, course-rule structure vs suitability gap, source output mass applicability vs final edible portion unknown, actual RecipeNutrition V2 status/missing nutrient set and exact Shopping provenance. Integration tests include 7-event and 21-event persisted weeks, subprocess replay, household isolation, immutable database and fake-complete-nutrition rejection.
+- No real externally reviewed composed week was available in the repository fixture; synthetic tests do not change `NO_GO_TO_CONSUMER_COMPOSED_MEALS`. Await exact-head CI and independent PR review, then owner merge decision; next source remediation must follow the actual inventory evidence, not assumptions.
+
+---
+
 # 2026-11-19 — Option A approved for PR #296; internal UX before inventory
 
 - **Owner decision:** explicitly selected **Option A** after P2-2 review. [PR #296](https://github.com/Mitronomik/family-food-os/pull/296) is permitted as an internal/offline composed-week UX proof before the four-axis read-only evidence inventory defined in merged [#295](https://github.com/Mitronomik/family-food-os/pull/295). The inventory and independent review/owner merge authorization are **not waived**. No public API, real-family admission, new portion/nutrition/Prep authority or product release is authorized.

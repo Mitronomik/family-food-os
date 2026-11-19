@@ -1,3 +1,11 @@
+# CURRENT — source-backed composed-week evidence inventory after merged #296 — 2026-11-19
+
+**Accepted main:** `6885c0ee90c97be6f24fe771c2d0a7962525d256` ([#296 merged](https://github.com/Mitronomik/family-food-os/pull/296), 2026-11-19). The internal, offline composed-week HTML and deterministic Shopping V2 grocery projection are accepted as developer-only diagnostics, **not** consumer/physical/Nutrition/Prep approval.
+
+**Now authorized:** one bounded **executable, read-only four-axis evidence inventory** as proposed in merged [#295](https://github.com/Mitronomik/family-food-os/pull/295). Current branch `feat/composed-week-source-evidence-inventory-v1` implements `scripts/composed_week_evidence.py` and tests: independent persisted RecipeVersion verification/rights metadata observations, rule/role structure vs role-suitability UNKNOWN, source raw output vs unreviewed final-portion mass, actual RecipeNutrition V2 availability, plus existing Shopping V2 replay. No source publication, role-policy invention, physical readiness claim, DB writes/migrations, public API/UI, Prep, Retail/AI or real-family activation. The existing synthetic 0044 week proves the tooling, **not** real source readiness; if no genuine persisted composed MealPlan is available, explicitly report that evidence gap. Next: exact-head focused CI and broad checks, independent review and separate owner merge. **No docs-only preflight PR.**
+
+---
+
 # CURRENT — owner-approved internal preview before evidence inventory — 2026-11-19
 
 **Accepted main:** `b6af6a851cf1b56aa10a84a5347160574d0f96b7` ([#295 merged](https://github.com/Mitronomik/family-food-os/pull/295)). **Latest explicit owner decision: OPTION A APPROVED** — complete [PR #296](https://github.com/Mitronomik/family-food-os/pull/296) as a strictly internal/offline, developer-only composed-week HTML/Shopping V2 preview **before** the four-axis read-only evidence inventory agreed in #295. This is a narrow sequencing exception, not permission to activate consumer APIs or to skip the inventory.
