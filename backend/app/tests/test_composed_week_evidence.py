@@ -9,18 +9,24 @@ import subprocess
 import sys
 from datetime import UTC, datetime
 from hashlib import sha256
+from types import SimpleNamespace
 from uuid import uuid4
 
 import pytest
 from app.persistence.sqlalchemy_core.shopping_uow import SqlAlchemyShoppingReadScope
+from app.services.recipe_nutrition_v2 import RecipeNutritionV2UnavailableError
 from app.tests.persistence.test_meal_plan_composition_persistence import (
     _compose,
     _setup,
     _write,
 )
 from app.tests.persistence.test_meal_plan_full_week_composition import _week_21_42
+from app.tests.persistence.test_shopping_composition_v1b import (
+    _compose_with_leftover_obligation,
+)
 
 from scripts.composed_week_evidence import (
+    _nutrition_observation,
     NO_GO,
     SCHEMA,
     build_inventory,
@@ -81,9 +87,25 @@ def test_persisted_composed_week_inventory_reports_real_gaps_without_invention(
             assert component["physical"]["status"] == "UNKNOWN"
             assert component["physical"]["output_evidence"] == "MISSING_SOURCE_OUTPUT"
             assert component["nutrition"]["status"] == "UNAVAILABLE"
+            assert (
+                component["nutrition"]["unavailable_reason"]
+                == "MISSING_COMPOSITION_BINDINGS"
+            )
             assert component["nutrition"]["available_nutrients"] == 0
             assert component["nutrition"]["total_nutrients"] == 54
             assert len(component["nutrition"]["unknown_codes"]) == 54
+        assert result["composition_events"] == 1
+        assert len(result["non_composition_events"]) == 6
+        assert result["summary"]["non_composition_events"] == 6
+        assert result["summary"]["non_composition_by_kind"] == {"COOK_RECIPE": 6}
+        assert result["summary"]["all_plan_events_accounted"] is True
+        assert all(
+            event["detailed_evidence_assessment"] == "NOT_IN_SCOPE"
+            and event["shopping_source_replay"] == "INCLUDED"
+            and event["recipe_version_id"] is not None
+            and len(event["member_servings"]) == 1
+            for event in result["non_composition_events"]
+        )
         assert result["summary"]["source_metadata_blocked"] == 0
         assert result["summary"]["nutrition_v2_unavailable_or_partial"] == 3
         assert result["summary"]["consumer_activation"] == "BLOCKED"
@@ -141,6 +163,13 @@ def test_inventory_reads_complete_21_event_heterogeneous_household_without_phant
             captured_at=CAPTURED,
         )
         assert result["plan_events"] == 21
+        assert result["composition_events"] == 1
+        assert len(result["non_composition_events"]) == 20
+        assert result["summary"]["non_composition_by_kind"] == {"COOK_RECIPE": 20}
+        assert result["summary"]["all_plan_events_accounted"] is True
+        assert sum(
+            len(event["member_servings"]) for event in result["non_composition_events"]
+        ) == 41
         assert len(result["components"]) == 3
         assert {
             s["member_id"]
@@ -237,3 +266,94 @@ def test_inventory_never_promotes_complete_nutrition_without_physical_role_sourc
         assert audited["verdict"] == NO_GO
     finally:
         engine.dispose()
+
+
+def test_inventory_lists_nonrecipe_leftover_as_unassessed_weekly_obligation(tmp_path):
+    config, engine, home, saved, _diagnostic = _compose_with_leftover_obligation(
+        tmp_path
+    )
+    try:
+        before = sha256(config.path.read_bytes()).hexdigest()
+        result = inventory_from_database(
+            database_path=config.path,
+            household_id=home.id,
+            plan_id=saved.shopping_list.meal_plan_id,
+            captured_at=CAPTURED,
+        )
+        assert result["verdict"] == NO_GO
+        assert result["plan_events"] == 7
+        assert result["shopping_status"] == "INCOMPLETE"
+        assert result["summary"]["non_composition_events"] == 6
+        assert result["summary"]["non_composition_by_kind"] == {
+            "COOK_RECIPE": 5,
+            "LEFTOVER": 1,
+        }
+        leftover = next(
+            event
+            for event in result["non_composition_events"]
+            if event["source_kind"] == "LEFTOVER"
+        )
+        assert leftover["recipe_version_id"] is None
+        assert leftover["source_reference_present"] is True
+        assert leftover["detailed_evidence_assessment"] == "NOT_IN_SCOPE"
+        assert leftover["shopping_source_replay"] == "INCLUDED"
+        assert sha256(config.path.read_bytes()).hexdigest() == before
+    finally:
+        engine.dispose()
+
+
+@pytest.mark.parametrize(
+    ("row_count", "bound_count", "prepared", "reason"),
+    [
+        (1, 0, False, "MISSING_COMPOSITION_BINDINGS"),
+        (2, 1, False, "PARTIAL_COMPOSITION_BINDINGS"),
+        (1, 1, True, "CONFLICTING_AUTHORITIES"),
+        (1, 0, True, "PREPARED_AUTHORITY_ONLY"),
+        (1, 1, False, "BOUND_AUTHORITY_INVALID_OR_INAPPLICABLE"),
+    ],
+)
+def test_nutrition_unavailable_reason_is_derived_from_authoritative_read_state(
+    row_count, bound_count, prepared, reason
+):
+    """Do not parse human error messages or mistake corrupt authority for absent."""
+    version_id = uuid4()
+    ingredient_ids = tuple(uuid4() for _ in range(row_count))
+    required = tuple(
+        SimpleNamespace(id=ingredient_id, optional=False)
+        for ingredient_id in ingredient_ids
+    )
+    bound_ids = frozenset(ingredient_ids[:bound_count])
+    scope = SimpleNamespace(
+        versions=SimpleNamespace(
+            get_detail=lambda _version: SimpleNamespace(ingredients=required)
+        ),
+        bindings=SimpleNamespace(
+            get=lambda ingredient_id: object() if ingredient_id in bound_ids else None
+        ),
+        prepared=SimpleNamespace(
+            get_authority=lambda _version: object() if prepared else None
+        ),
+    )
+
+    def fail_calculation(_scope, _version_id):
+        raise RecipeNutritionV2UnavailableError("message must not be parsed")
+
+    result = _nutrition_observation(
+        scope, SimpleNamespace(calculate_in_scope=fail_calculation), version_id
+    )
+    assert result["status"] == "UNAVAILABLE"
+    assert result["unavailable_reason"] == reason
+    assert result["available_nutrients"] == 0
+    assert len(result["unknown_codes"]) == 54
+
+
+def test_nutrition_unexpected_source_corruption_does_not_get_silenced():
+    def corrupt(_scope, _version_id):
+        raise RuntimeError("unexpected repository/decoder corruption")
+
+    with pytest.raises(RuntimeError, match="corruption"):
+        _nutrition_observation(
+            SimpleNamespace(),
+            SimpleNamespace(calculate_in_scope=corrupt),
+            uuid4(),
+        )
