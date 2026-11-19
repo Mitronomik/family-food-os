@@ -388,7 +388,7 @@ def test_nutrition_observation_rejects_conflict_even_after_successful_v2_calcula
     result = SimpleNamespace(
         status="COMPLETE",
         per_base_serving=tuple(
-            SimpleNamespace(code=code, amount=Decimal("1")) for code in NUTRIENT_CODES
+            SimpleNamespace(code=code, amount=Decimal(1)) for code in NUTRIENT_CODES
         ),
     )
     service = SimpleNamespace(calculate_in_scope=lambda _scope, _version: result)
