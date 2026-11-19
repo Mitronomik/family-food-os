@@ -7,6 +7,7 @@ import sys
 from decimal import Decimal
 
 import pytest
+
 from scripts.verify_school2022_goulash_source import (
     BLOCKED,
     RECIPE_CODE,
