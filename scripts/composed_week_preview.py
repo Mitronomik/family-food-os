@@ -315,7 +315,10 @@ def render_html(preview: dict) -> str:
 
 def preview_from_database(*, database_path, household_id, plan_id, captured_at):
     """Read-only single-scope source acquisition, with Household access filtering."""
-    engine = create_sqlite_engine(DatabaseConfig(path=Path(database_path)))
+    path = Path(database_path)
+    if not path.is_file():
+        _block("Локальная SQLite-база не найдена; новый файл не создаётся.")
+    engine = create_sqlite_engine(DatabaseConfig(path=path))
     try:
         with SqlAlchemyShoppingReadScope(engine) as scope:
             household = scope.households.get_household(household_id)
