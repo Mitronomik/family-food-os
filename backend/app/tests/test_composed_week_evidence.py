@@ -200,7 +200,9 @@ def test_inventory_never_promotes_complete_nutrition_without_physical_role_sourc
             }
             recipes = {vid: scope.recipes.get_detail(vid) for vid in versions}
             food_ids = {
-                i.food_ingredient_id for detail in recipes.values() for i in detail.ingredients
+                i.food_ingredient_id
+                for detail in recipes.values()
+                for i in detail.ingredients
             }
             foods = {fid: scope.foods.get(fid) for fid in food_ids}
         # Deliberately fabricated *test-only* coverage, never persisted or used
