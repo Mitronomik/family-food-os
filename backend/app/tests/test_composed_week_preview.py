@@ -177,3 +177,15 @@ def test_composed_week_preview_escapes_untrusted_source_display_and_denies_promo
             render_html(data)
     finally:
         engine.dispose()
+
+
+def test_missing_sqlite_path_does_not_create_a_database(tmp_path):
+    absent = tmp_path / "must-not-be-created.sqlite"
+    with pytest.raises(ComposedWeekPreviewBlocked, match="не найдена"):
+        preview_from_database(
+            database_path=absent,
+            household_id=uuid4(),
+            plan_id=uuid4(),
+            captured_at=CAPTURED,
+        )
+    assert not absent.exists()
