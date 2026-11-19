@@ -1,3 +1,11 @@
+# CURRENT — PR #296 P2 review: safe atomic output, owner scope decision pending — 2026-11-19
+
+**Accepted `main`:** `b6af6a851cf1b56aa10a84a5347160574d0f96b7` ([#295 merged](https://github.com/Mitronomik/family-food-os/pull/295)). **#295 still defines the next accepted work as a source/rights, role/structure, physical and Nutrition/downstream read-only evidence inventory.** The subsequent owner's instruction to deliver working software instead of serial paperwork did **not** explicitly approve reversing that inventory/UX order.
+
+**Current limited action:** correct [PR #296](https://github.com/Mitronomik/family-food-os/pull/296) P2-1 data-loss hazard on its existing branch: forbid `--out` being the SQLite source via resolved path and samefile (incl. symlinks and hard links), publish HTML from an fsynced temporary file by atomic replacement, run corruption/atomic-failure adversarial tests and exact-head CI. **P2-2 OWNER DECISION STILL REQUIRED:** an internal HTML UX preview before the accepted four-axis inventory is a proposed sequencing exception, **not approved by this state update**. Keep #296 Draft and do not merge or start real-family activation; if owner declines, re-scope #296 to the accepted read-only evidence inventory. No new docs-only PR, schema, public API or source/physical/Nutrition safety authority.
+
+---
+
 # CURRENT — runnable composed-week menu + Shopping V2 internal preview — 2026-11-19
 
 **Accepted main:** `b6af6a851cf1b56aa10a84a5347160574d0f96b7` ([#295 merged](https://github.com/Mitronomik/family-food-os/pull/295)). Owner explicitly requested to stop serial docs-only gates and make measurable product progress; approved boundary remains source/role/physical evidence-first, with **no consumer/real-family admission**.
