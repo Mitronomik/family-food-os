@@ -1,3 +1,11 @@
+# 2026-11-19 — #297 merged; one actual School2022 goulash primary-card check underway
+
+- GitHub confirms [PR #297](https://github.com/Mitronomik/family-food-os/pull/297) merged into `main@73b1628bf2c8cc824cd991e366016f0a38301d7d`. The complete-week evidence inventory remains diagnostic-only.
+- Next bounded source/data implementation compares `SCHOOL2022_54_2M_BEEF_GOULASH` R1-G pinned manifest with the published primary School2022 card `54-2м` (printed page 115) using seven actual net ingredient amounts, beef+sauce 80 g output and 185.6 kcal. Includes explicit primary-PDF text provenance, tests against drift/false readiness and reproducible JSON receipt. No rehash of newly downloaded PDF was possible; original PDF/card SHA are prior accepted archive evidence, not newly independently verified bytes.
+- Positive numeric crosscheck, if CI confirms it, does not prove scaled family servings, course suitability, safe freezer/Prep or complete 54-code Nutrition; those remain explicit follow-up source/policy gaps. No new production code/schema, source publication, retained PDF, consumer UX or Gate2 authority.
+
+---
+
 # 2026-11-19 — PR #297 review P2 corrections: full week ledger and Nutrition reasons
 
 - Added per-event `non_composition_events` with immutable event ID/date/role/source kind/RecipeVersion pin/actual legacy member Servings, explicitly `NOT_IN_SCOPE` for detailed source/physical/Nutrition assessment; added by-kind counts and full-week accounting. Tests cover 6/7 legacy events, 20/21 heterogeneous legacy events and a genuine persisted `LEFTOVER` obligation.
