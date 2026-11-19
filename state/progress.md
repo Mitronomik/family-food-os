@@ -1,3 +1,11 @@
+# 2026-11-19 — PR #298 reviewer P2: School2022 internal kcal discrepancy recorded
+
+- Verified through publicly searchable text of the same School2022 collection: the exact `54-2м` 80 g goulash **recipe card** reports `185.6` kcal, while its **typical-menu tables** report `185.7` kcal. Record `SOURCE_INTERNAL_DISCREPANCY` with `0.1` kcal difference, cause/reconciliation `NOT_DETERMINED`; preserve existing frozen R1-G `185.6` and do not publish Nutrition change or declare a recipe error.
+- Source-check CLI/witness and dedicated CI now explicitly state `LOCAL_PINNED_MANIFEST_AND_RESEARCH_WITNESS_ONLY`, external PDF fetched/hashed/visually verified = false and external source authority proven by CI = false. Independent fresh full-PDF hash and visual comparison remain a **separate optional evidence operation**, not silently assumed from local CI. Negative tests block erasure/relabeling of discrepancy or false source authority.
+- No schema, public API, recipe publication, physical/role/Prep authorization or nutrition values modified. Await exact-head focused tests/Ruff and independent review of PR #298.
+
+---
+
 # 2026-11-19 — #297 merged; one actual School2022 goulash primary-card check underway
 
 - GitHub confirms [PR #297](https://github.com/Mitronomik/family-food-os/pull/297) merged into `main@73b1628bf2c8cc824cd991e366016f0a38301d7d`. The complete-week evidence inventory remains diagnostic-only.
