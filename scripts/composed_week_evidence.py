@@ -69,13 +69,41 @@ def _recipe_details(scope, plan):
     return recipes, foods
 
 
+def _nutrition_unavailable_reason(scope, version_id):
+    """Classify existing authority state, not localized exception wording.
+
+    This is an observational diagnostic, not a substitute for RecipeNutrition
+    authority validation. Unexpected persistence/decoder errors still propagate.
+    """
+    detail = scope.versions.get_detail(version_id)
+    if detail is None:
+        return "RECIPE_VERSION_NOT_FOUND"
+    required = tuple(row for row in detail.ingredients if not row.optional)
+    bound = sum(scope.bindings.get(row.id) is not None for row in required)
+    prepared = scope.prepared.get_authority(version_id) is not None
+    if prepared and bound:
+        return "CONFLICTING_AUTHORITIES"
+    if prepared:
+        return "PREPARED_AUTHORITY_ONLY"
+    if not required:
+        return "NO_REQUIRED_RECIPE_INGREDIENTS"
+    if bound == 0:
+        return "MISSING_COMPOSITION_BINDINGS"
+    if bound < len(required):
+        return "PARTIAL_COMPOSITION_BINDINGS"
+    # Complete binding count is not proof that versions, food forms or the
+    # underlying composition source can actually be applied successfully.
+    return "BOUND_AUTHORITY_INVALID_OR_INAPPLICABLE"
+
+
 def _nutrition_observation(scope, service, version_id):
-    """Report actual V2 source coverage, never invent unknown nutrients."""
+    """Report actual V2 source coverage and stable, fail-closed error codes."""
     try:
         result = service.calculate_in_scope(scope, version_id)
     except RecipeNutritionV2UnavailableError:
         return {
             "status": "UNAVAILABLE",
+            "unavailable_reason": _nutrition_unavailable_reason(scope, version_id),
             "available_nutrients": 0,
             "total_nutrients": len(NUTRIENT_CODES),
             "unknown_codes": list(NUTRIENT_CODES),
@@ -83,6 +111,7 @@ def _nutrition_observation(scope, service, version_id):
     unknown = [entry.code for entry in result.per_base_serving if entry.amount is None]
     return {
         "status": str(result.status),
+        "unavailable_reason": None,
         "available_nutrients": len(NUTRIENT_CODES) - len(unknown),
         "total_nutrients": len(NUTRIENT_CODES),
         "unknown_codes": unknown,
@@ -98,6 +127,56 @@ def build_inventory(*, plan, recipes, foods, preview, nutrition):
     if preview["revision"] != plan.plan.revision_number:
         _reject("Ревизия источника и Shopping V2 расходится.")
     events = {e.id: e for e in plan.events}
+    composition_ids = {comp.event_id for comp in plan.compositions}
+    if (
+        len(composition_ids) != len(plan.compositions)
+        or not composition_ids <= set(events)
+        or any(events[eid].source_kind is not MealSourceKind.COOK_COMPOSITION for eid in composition_ids)
+        or any(
+            event.source_kind is MealSourceKind.COOK_COMPOSITION
+            and event.id not in composition_ids
+            for event in plan.events
+        )
+    ):
+        _reject("Полнота составных MealEvent в исходной неделе нарушена.")
+    servings_by_event = {}
+    for serving in plan.servings:
+        servings_by_event.setdefault(serving.event_id, []).append(serving)
+    non_composition_events = [
+        {
+            "event_id": str(event.id),
+            "date": event.local_date.isoformat(),
+            "position": event.position,
+            "meal_role": str(event.role),
+            "source_kind": str(event.source_kind),
+            "recipe_version_id": (
+                str(event.recipe_version_id) if event.recipe_version_id else None
+            ),
+            "source_reference_present": event.source_reference is not None,
+            "member_servings": [
+                {
+                    "member_id": str(serving.member_id),
+                    "factor": format(serving.portion_servings, ".6f"),
+                }
+                for serving in sorted(
+                    servings_by_event.get(event.id, ()),
+                    key=lambda row: row.member_id.hex,
+                )
+            ],
+            "detailed_evidence_assessment": "NOT_IN_SCOPE",
+            "shopping_source_replay": "INCLUDED",
+        }
+        for event in sorted(
+            plan.events, key=lambda row: (row.local_date, row.position, str(row.id))
+        )
+        if event.id not in composition_ids
+    ]
+    if len(non_composition_events) + len(composition_ids) != len(plan.events):
+        _reject("Нельзя сверить все обязательства исходной недели.")
+    by_kind = {
+        kind: sum(item["source_kind"] == kind for item in non_composition_events)
+        for kind in sorted({item["source_kind"] for item in non_composition_events})
+    }
     components = []
     for comp in sorted(
         plan.compositions,
@@ -203,9 +282,16 @@ def build_inventory(*, plan, recipes, foods, preview, nutrition):
         "shopping_status": preview["shopping_status"],
         "shopping_price_status": preview["price_status"],
         "plan_events": len(plan.events),
+        "composition_events": len(composition_ids),
+        "non_composition_events": non_composition_events,
         "components": components,
         "summary": {
             "components": len(components),
+            "composition_events": len(composition_ids),
+            "non_composition_events": len(non_composition_events),
+            "non_composition_by_kind": by_kind,
+            "non_composition_detailed_assessment": "NOT_IN_SCOPE",
+            "all_plan_events_accounted": True,
             "source_metadata_blocked": source_blocked,
             "nutrition_v2_unavailable_or_partial": nutrition_missing,
             "source_independent_review": "NOT_PERFORMED",
@@ -221,6 +307,7 @@ def build_inventory(*, plan, recipes, foods, preview, nutrition):
             "source_output_g не является проверенной массой готовой порции.",
             "Nutrition V2 — наблюдение покрытия, не полное питание семьи.",
             "Shopping COMPLETE не означает готовность семейного меню или Prep.",
+            "Некомпозиционные события учтены поштучно, но не прошли отдельную source/role/physical/Nutrition оценку.",
         ],
     }
 
