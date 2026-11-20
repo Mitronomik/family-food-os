@@ -35,6 +35,7 @@ from app.domain.meal_plans import MealSourceKind
 from app.domain.planner import PlannerSuccess
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.meal_plan_uow import SqlAlchemyMealPlanUnitOfWork
+from app.persistence.sqlalchemy_core.shopping_uow import SqlAlchemyShoppingReadScope
 from app.seed.dc4_a3_russian_step_corrections import (
     seed_dc4_a3_russian_step_corrections,
 )
@@ -127,6 +128,82 @@ def build_research_proof() -> dict:
             source = tuple(
                 (_recipe_pin(recipes, code), kind) for code, kind in SOURCE_CODES
             )
+            source_rows = [
+                {
+                    "course": kind.value,
+                    "recipe_code": detail.recipe.canonical_code,
+                    "recipe_name_ru": detail.recipe.canonical_name,
+                    "source_name": detail.version.source_name,
+                    "source_recipe_id": detail.version.source_recipe_id,
+                    "source_document_sha256": detail.version.source_document_sha256,
+                    "source_original_servings": format(
+                        detail.version.source_original_servings, "f"
+                    ),
+                    "source_output_g_raw": (
+                        format(detail.version.source_output_g, "f")
+                        if detail.version.source_output_g is not None
+                        else None
+                    ),
+                    "portion_servings": "1.000000",
+                }
+                for detail, kind in source
+            ]
+            # Real source review is a hard admission gate. Observe exact
+            # unresolved FoodIngredient status, do NOT flip reviewed flags to
+            # make the research week pass.
+            blocking_foods = []
+            with SqlAlchemyShoppingReadScope(engine) as read:
+                for detail, kind in source:
+                    for ingredient in detail.ingredients:
+                        food = read.foods.get(ingredient.food_ingredient_id)
+                        if food is None:
+                            raise ValueError("Missing canonical ingredient")
+                        if not food.is_active or not food.allergens_reviewed:
+                            blocking_foods.append(
+                                {
+                                    "recipe_code": detail.recipe.canonical_code,
+                                    "course": kind.value,
+                                    "food_code": food.canonical_code,
+                                    "food_name_ru": food.canonical_name,
+                                    "active": food.is_active,
+                                    "allergens_reviewed": food.allergens_reviewed,
+                                    "allergen_codes_observed": list(food.allergen_codes),
+                                }
+                            )
+            if blocking_foods:
+                semantic = {
+                    "baseline_events": len(old),
+                    "source_courses": source_rows,
+                    "blocking_ingredients": sorted(
+                        blocking_foods, key=lambda row: (
+                            row["recipe_code"], row["food_code"]
+                        )
+                    ),
+                }
+                return {
+                    "schema": SCHEMA,
+                    "scope": "ISOLATED_SYNTHETIC_MEMBER_REAL_CURATED_RECIPES",
+                    "decision": "BLOCKED_UNREVIEWED_CANONICAL_FOOD_ALLERGENS",
+                    "source_pairing": "MANUAL_CROSS_SOURCE_RESEARCH_NOT_PUBLISHED_MENU",
+                    "core_ai_enabled": False,
+                    "semantic_sha256": _hash(semantic),
+                    "evidence": {
+                        **semantic,
+                        "composed_event_count": 0,
+                        "shopping_status": "NOT_RUN_SOURCE_ADMISSION_BLOCKED",
+                        "price_status": "UNKNOWN",
+                    },
+                    "limitations": {
+                        "reviewed_source_provenance": True,
+                        "canonical_allergen_review_complete": False,
+                        "course_suitability_independently_approved": False,
+                        "member_portion_mass_validated": False,
+                        "nutrition_fully_complete": False,
+                        "safe_prep_approved": False,
+                        "customer_activation": False,
+                        "no_production_data_modified": True,
+                    },
+                }
             # The immutable 0044 composition contract requires the original
             # target RecipeVersion to appear exactly once. First create an
             # explicit normal manual revision with goulash pinned at the target
@@ -249,26 +326,7 @@ def build_research_proof() -> dict:
                 or preview["price_status"] != "UNKNOWN"
             ):
                 raise ValueError("Composed MealPlan, Shopping or evidence mismatch")
-            source_rows = [
-                {
-                    "course": kind.value,
-                    "recipe_code": detail.recipe.canonical_code,
-                    "recipe_name_ru": detail.recipe.canonical_name,
-                    "source_name": detail.version.source_name,
-                    "source_recipe_id": detail.version.source_recipe_id,
-                    "source_document_sha256": detail.version.source_document_sha256,
-                    "source_original_servings": format(
-                        detail.version.source_original_servings, "f"
-                    ),
-                    "source_output_g_raw": (
-                        format(detail.version.source_output_g, "f")
-                        if detail.version.source_output_g is not None
-                        else None
-                    ),
-                    "portion_servings": "1.000000",
-                }
-                for detail, kind in source
-            ]
+
             shopping = [
                 {
                     "food_ru": item["food_ru"],
