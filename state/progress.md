@@ -1,3 +1,20 @@
+# 2026-11-20 — PR #299 real-source composed-lunch test exposed allergen-source blocker
+
+- [PR #298](https://github.com/Mitronomik/family-food-os/pull/298) merged into `main@4b634febcbda5f8364ed25a0f3ee1132871854d2`.
+- Running actual MR2019 cabbage soup + School2022 beef goulash through accepted Planner/0044 composition revealed **14 ingredient entries / 12 unique canonical FoodIngredients with `allergens_reviewed=false`**. Initial test revealed the immutable original-recipe preservation rule; fixed without weakening its validator via normal preceding anchored MealPlan revision. The next guard correctly rejects incomplete canonical allergen reviews before composition persistence.
+- Research CLI now produces deterministic `BLOCKED_UNREVIEWED_CANONICAL_FOOD_ALLERGENS` evidence with exact source code/food code pairs; Shopping remains `NOT_RUN_SOURCE_ADMISSION_BLOCKED`, no production/user DB is touched. Exact-head focused CI and independent review pending; no invented FoodIngredient review or unapproved production source publication.
+- Next meaningful implementation target: source-backed canonical allergen review for those exact foods, then repeat end-to-end real composition and Shopping V2 test. Meal-role suitability, edible mass and full Nutrition still unproved.
+
+---
+
+# 2026-11-20 — #298 merged; real-catalogue composed lunch core-loop proof
+
+- Confirmed [PR #298](https://github.com/Mitronomik/family-food-os/pull/298) merged into `main@4b634febcbda5f8364ed25a0f3ee1132871854d2`.
+- Bounded runnable research script `scripts/real_catalogue_composed_lunch.py`: isolated seeded SQLite with genuine current curated RecipeVersions (MR2019 cabbage soup + School2022 beef goulash), deterministic Planner baseline, one real persisted `COOK_COMPOSITION` 0044 revision, exact component/member Servings, Pantry-aware Shopping v1b, and source/role/physical/Nutrition audit. Unit/CI, deterministic semantic fingerprint and isolated JSON receipt. A cross-source research lunch is not a published school menu, finished-scaled physical serving, complete nutrient profile or user-ready consumer plan.
+- No schema/public API/catalogue publication/runtime engine modifications, real user data or admission policy. Need exact-head focused CI and independent review, do not merge autonomously.
+
+---
+
 # 2026-11-19 — PR #298 reviewer P2: School2022 internal kcal discrepancy recorded
 
 - Verified through publicly searchable text of the same School2022 collection: the exact `54-2м` 80 g goulash **recipe card** reports `185.6` kcal, while its **typical-menu tables** report `185.7` kcal. Record `SOURCE_INTERNAL_DISCREPANCY` with `0.1` kcal difference, cause/reconciliation `NOT_DETERMINED`; preserve existing frozen R1-G `185.6` and do not publish Nutrition change or declare a recipe error.

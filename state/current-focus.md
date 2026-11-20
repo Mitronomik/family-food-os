@@ -1,3 +1,19 @@
+# CURRENT — real composed-lunch source gate blocked by 12 unreviewed canonical foods — 2026-11-20
+
+**Accepted main:** `4b634febcbda5f8364ed25a0f3ee1132871854d2` ([#298 merged](https://github.com/Mitronomik/family-food-os/pull/298)). [PR #299](https://github.com/Mitronomik/family-food-os/pull/299) intentionally exercises **actual** DC4-A3 curated RecipeVersions (MR2019 vegetarian cabbage soup and School2022 beef goulash), an isolated seven-day lunch Planner baseline and the guarded 0044 composed-event path. **Actual source-data finding:** 14 source-ingredient rows / 12 unique canonical FoodIngredient codes (including water, beef, cabbage, flour and onion) have `allergens_reviewed=false`. The existing domain guard correctly BLOCKS persistence of a composed lunch; Shopping V2 must **not** be reported complete or run under an unverified source. The research CLI now emits machine-readable named blockers and `BLOCKED_UNREVIEWED_CANONICAL_FOOD_ALLERGENS`; no canonical statuses altered. This is a real product data dependency, not a Planner or Shopping arithmetic defect.
+
+**Current task:** complete #299 exact-head focused CI and review as a concrete real-data admission blocker receipt; do not claim a functioning composed week. Next bounded source/data work must establish independently reviewed FoodIngredient allergen identity/status for the exact 12 canonical foods (not blanket automatic `reviewed=true`), using the accepted publication path/rights and adversarial negatives. Only afterwards rerun this exact real-source composed-week/Shopping proof. Still NO_GO on menu role, physical portions, full Nutrition, Prep and consumer activation. No separate docs-only preflight or autonomous merge.
+
+---
+
+# CURRENT — real curated RecipeVersion composed lunch across a complete 7-day MealPlan — 2026-11-20
+
+**Accepted main:** `4b634febcbda5f8364ed25a0f3ee1132871854d2` ([#298 merged](https://github.com/Mitronomik/family-food-os/pull/298), 2026-11-20). The goulash source-card and typical-menu `185.6`/`185.7` kcal discrepancy remain frozen as research only; no new Nutrition authority.
+
+**Current narrow implementation:** `feat/real-catalogue-composed-lunch-diagnostic` demonstrates a *source-backed actual platform* end-to-end research case, not another preflight document. Create fresh **disposable** SQLite with accepted DC4-A3 seed, deterministic 7-day/1-member Planner source week, append immutable diagnostic `0044` composed lunch `FIRST=MR2019_1_2A_VEGETARIAN_CABBAGE_SOUP` and `SECOND=SCHOOL2022_54_2M_BEEF_GOULASH` using **pinned active, rights/source-verified RecipeVersions** and exact 1.000000 reference scaling, then read real `shopping-v1b-composition` Pantry-aware groceries and four-axis evidence via accepted #296/#297 utilities. Source pair is manually chosen across **different primary sources** for research and not asserted to be an authentic School2022 menu or approved meal-role/physical combination. No real-user DB, source publication, production Planner/runtime alteration, API/consumer UX, complete Nutrition, prices or safe Prep. Acceptance requires real persisted source/event IDs in temp DB, 7-day invariant, exact Shopping, fail-closed source checks, independent-process semantic repeatability and CI. Next: independent review, owner merge, then an actual curated course/portion suitability and nutrient completeness data closure as needed.
+
+---
+
 # CURRENT — actual School2022 54-2м original-card reconciliation — 2026-11-19
 
 **Accepted main:** `73b1628bf2c8cc824cd991e366016f0a38301d7d` ([#297 merged](https://github.com/Mitronomik/family-food-os/pull/297), 2026-11-19). The developer-only four-axis inventory now makes missing source/role/physical/Nutrition authority explicit; no family activation.
