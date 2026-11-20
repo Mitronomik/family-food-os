@@ -182,6 +182,9 @@ def build_research_proof() -> dict:
                         blocking_foods,
                         key=lambda row: (row["recipe_code"], row["food_code"]),
                     ),
+                    "unique_blocking_food_codes": sorted(
+                        {row["food_code"] for row in blocking_foods}
+                    ),
                 }
                 evidence = {
                     **semantic,
