@@ -118,7 +118,9 @@ def build_research_proof() -> dict:
             )
             if not isinstance(generated, PlannerSuccess) or prior is None:
                 raise ValueError("Real-catalogue lunch Planner baseline failed")
-            old = sorted(prior.events, key=lambda event: (event.local_date, event.position))
+            old = sorted(
+                prior.events, key=lambda event: (event.local_date, event.position)
+            )
             if (
                 len(old) != 7
                 or len(prior.servings) != 7
@@ -167,7 +169,9 @@ def build_research_proof() -> dict:
                                     "food_name_ru": food.canonical_name,
                                     "active": food.is_active,
                                     "allergens_reviewed": food.allergens_reviewed,
-                                    "allergen_codes_observed": list(food.allergen_codes),
+                                    "allergen_codes_observed": list(
+                                        food.allergen_codes
+                                    ),
                                 }
                             )
             if blocking_foods:
@@ -175,9 +179,8 @@ def build_research_proof() -> dict:
                     "baseline_events": len(old),
                     "source_courses": source_rows,
                     "blocking_ingredients": sorted(
-                        blocking_foods, key=lambda row: (
-                            row["recipe_code"], row["food_code"]
-                        )
+                        blocking_foods,
+                        key=lambda row: (row["recipe_code"], row["food_code"]),
                     ),
                 }
                 evidence = {
@@ -211,7 +214,9 @@ def build_research_proof() -> dict:
             # lunch, retaining the six other Planner events/Serving factors.
             original_servings = {
                 event.id: tuple(
-                    serving for serving in prior.servings if serving.event_id == event.id
+                    serving
+                    for serving in prior.servings
+                    if serving.event_id == event.id
                 )
                 for event in old
             }
@@ -261,15 +266,11 @@ def build_research_proof() -> dict:
                 anchored.plan.id,
                 target.id,
                 tuple(
-                    MealComponentDraft(
-                        target.id, index, kind, detail.version.id
-                    )
+                    MealComponentDraft(target.id, index, kind, detail.version.id)
                     for index, (detail, kind) in enumerate(source, 1)
                 ),
                 tuple(
-                    MemberComponentServingDraft(
-                        target.id, index, member.id, Decimal(1)
-                    )
+                    MemberComponentServingDraft(target.id, index, member.id, Decimal(1))
                     for index in range(1, len(source) + 1)
                 ),
             )
@@ -376,7 +377,9 @@ def build_research_proof() -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Real-source diagnostic week proof")
     parser.parse_args()
-    print(json.dumps(build_research_proof(), ensure_ascii=False, sort_keys=True, indent=2))
+    print(
+        json.dumps(build_research_proof(), ensure_ascii=False, sort_keys=True, indent=2)
+    )
 
 
 if __name__ == "__main__":
