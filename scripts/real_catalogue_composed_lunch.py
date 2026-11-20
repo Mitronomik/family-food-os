@@ -180,19 +180,20 @@ def build_research_proof() -> dict:
                         )
                     ),
                 }
+                evidence = {
+                    **semantic,
+                    "composed_event_count": 0,
+                    "shopping_status": "NOT_RUN_SOURCE_ADMISSION_BLOCKED",
+                    "price_status": "UNKNOWN",
+                }
                 return {
                     "schema": SCHEMA,
                     "scope": "ISOLATED_SYNTHETIC_MEMBER_REAL_CURATED_RECIPES",
                     "decision": "BLOCKED_UNREVIEWED_CANONICAL_FOOD_ALLERGENS",
                     "source_pairing": "MANUAL_CROSS_SOURCE_RESEARCH_NOT_PUBLISHED_MENU",
                     "core_ai_enabled": False,
-                    "semantic_sha256": _hash(semantic),
-                    "evidence": {
-                        **semantic,
-                        "composed_event_count": 0,
-                        "shopping_status": "NOT_RUN_SOURCE_ADMISSION_BLOCKED",
-                        "price_status": "UNKNOWN",
-                    },
+                    "semantic_sha256": _hash(evidence),
+                    "evidence": evidence,
                     "limitations": {
                         "reviewed_source_provenance": True,
                         "canonical_allergen_review_complete": False,
