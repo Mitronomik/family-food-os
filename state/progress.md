@@ -1,3 +1,11 @@
+# 2026-11-20 — #298 merged; real-catalogue composed lunch core-loop proof
+
+- Confirmed [PR #298](https://github.com/Mitronomik/family-food-os/pull/298) merged into `main@4b634febcbda5f8364ed25a0f3ee1132871854d2`.
+- Bounded runnable research script `scripts/real_catalogue_composed_lunch.py`: isolated seeded SQLite with genuine current curated RecipeVersions (MR2019 cabbage soup + School2022 beef goulash), deterministic Planner baseline, one real persisted `COOK_COMPOSITION` 0044 revision, exact component/member Servings, Pantry-aware Shopping v1b, and source/role/physical/Nutrition audit. Unit/CI, deterministic semantic fingerprint and isolated JSON receipt. A cross-source research lunch is not a published school menu, finished-scaled physical serving, complete nutrient profile or user-ready consumer plan.
+- No schema/public API/catalogue publication/runtime engine modifications, real user data or admission policy. Need exact-head focused CI and independent review, do not merge autonomously.
+
+---
+
 # 2026-11-19 — PR #298 reviewer P2: School2022 internal kcal discrepancy recorded
 
 - Verified through publicly searchable text of the same School2022 collection: the exact `54-2м` 80 g goulash **recipe card** reports `185.6` kcal, while its **typical-menu tables** report `185.7` kcal. Record `SOURCE_INTERNAL_DISCREPANCY` with `0.1` kcal difference, cause/reconciliation `NOT_DETERMINED`; preserve existing frozen R1-G `185.6` and do not publish Nutrition change or declare a recipe error.
