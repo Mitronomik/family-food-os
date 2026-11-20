@@ -35,13 +35,14 @@ jobs:
           import json
           from pathlib import Path
           obj=json.loads(Path('/tmp/real-source-composed-week.json').read_text(encoding='utf-8'))
-          assert obj['decision']=='NO_GO_FOR_CONSUMER_OR_PHYSICAL_SERVING'
-          assert obj['evidence']['event_count']==7
-          assert obj['evidence']['composed_event_count']==1
-          assert obj['evidence']['individual_component_servings']==2
-          assert obj['evidence']['shopping_status']=='COMPLETE'
+          assert obj['decision']=='BLOCKED_UNREVIEWED_CANONICAL_FOOD_ALLERGENS'
+          assert obj['evidence']['baseline_events']==7
+          assert obj['evidence']['composed_event_count']==0
+          assert len(obj['evidence']['source_courses'])==2
+          assert obj['evidence']['blocking_ingredients']
+          assert obj['evidence']['shopping_status']=='NOT_RUN_SOURCE_ADMISSION_BLOCKED'
           assert obj['evidence']['price_status']=='UNKNOWN'
-          assert len(obj['evidence']['shopping'])>=1
+          assert obj['limitations']['canonical_allergen_review_complete'] is False
           assert obj['limitations']['customer_activation'] is False
           PY
       - name: Ruff and source whitespace
