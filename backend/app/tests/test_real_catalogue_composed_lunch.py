@@ -46,7 +46,23 @@ def test_real_catalogue_lunch_source_gate_reports_real_unreviewed_foods(receipt)
     )
     assert Decimal(e["source_courses"][1]["source_original_servings"]) == 1
     assert Decimal(e["source_courses"][1]["source_output_g_raw"]) == 80
-    assert e["blocking_ingredients"]
+    assert len(e["blocking_ingredients"]) == 14
+    assert e["unique_blocking_food_codes"] == sorted(
+        {
+            "BEEF_CATEGORY_1_RAW",
+            "BUTTER_PEASANT_72_5_UNSALTED",
+            "CABBAGE_GREEN",
+            "CARROT",
+            "FLOUR_WHEAT_HIGH_GRADE",
+            "ONION_BULB_FRESH",
+            "POTATO",
+            "SALT_IODIZED",
+            "TOMATO",
+            "TOMATO_PUREE_PASTE",
+            "VEGETABLE_OIL_REFINED_UNSPECIFIED",
+            "WATER",
+        }
+    )
     assert all(
         item["recipe_code"] in [c for c, _ in SOURCE_CODES]
         and item["food_code"]
