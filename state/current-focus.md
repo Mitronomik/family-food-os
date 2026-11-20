@@ -1,3 +1,11 @@
+# CURRENT — real composed-lunch source gate blocked by 12 unreviewed canonical foods — 2026-11-20
+
+**Accepted main:** `4b634febcbda5f8364ed25a0f3ee1132871854d2` ([#298 merged](https://github.com/Mitronomik/family-food-os/pull/298)). [PR #299](https://github.com/Mitronomik/family-food-os/pull/299) intentionally exercises **actual** DC4-A3 curated RecipeVersions (MR2019 vegetarian cabbage soup and School2022 beef goulash), an isolated seven-day lunch Planner baseline and the guarded 0044 composed-event path. **Actual source-data finding:** 14 source-ingredient rows / 12 unique canonical FoodIngredient codes (including water, beef, cabbage, flour and onion) have `allergens_reviewed=false`. The existing domain guard correctly BLOCKS persistence of a composed lunch; Shopping V2 must **not** be reported complete or run under an unverified source. The research CLI now emits machine-readable named blockers and `BLOCKED_UNREVIEWED_CANONICAL_FOOD_ALLERGENS`; no canonical statuses altered. This is a real product data dependency, not a Planner or Shopping arithmetic defect.
+
+**Current task:** complete #299 exact-head focused CI and review as a concrete real-data admission blocker receipt; do not claim a functioning composed week. Next bounded source/data work must establish independently reviewed FoodIngredient allergen identity/status for the exact 12 canonical foods (not blanket automatic `reviewed=true`), using the accepted publication path/rights and adversarial negatives. Only afterwards rerun this exact real-source composed-week/Shopping proof. Still NO_GO on menu role, physical portions, full Nutrition, Prep and consumer activation. No separate docs-only preflight or autonomous merge.
+
+---
+
 # CURRENT — real curated RecipeVersion composed lunch across a complete 7-day MealPlan — 2026-11-20
 
 **Accepted main:** `4b634febcbda5f8364ed25a0f3ee1132871854d2` ([#298 merged](https://github.com/Mitronomik/family-food-os/pull/298), 2026-11-20). The goulash source-card and typical-menu `185.6`/`185.7` kcal discrepancy remain frozen as research only; no new Nutrition authority.
