@@ -44,6 +44,10 @@ jobs:
           assert obj['evidence']['price_status']=='UNKNOWN'
           assert obj['limitations']['canonical_allergen_review_complete'] is False
           assert obj['limitations']['customer_activation'] is False
+          print('ACTUAL_SOURCE_ALLERGEN_REVIEW_BLOCKERS:', [
+              (item['recipe_code'], item['food_code'], item['allergens_reviewed'])
+              for item in obj['evidence']['blocking_ingredients']
+          ])
           PY
       - name: Ruff and source whitespace
         env:
