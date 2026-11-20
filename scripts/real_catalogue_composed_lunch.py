@@ -31,6 +31,7 @@ from app.domain.meal_compositions import (
     RequiredCourseCoverage,
 )
 from app.domain.meal_patterns import MealRole
+from app.domain.meal_plans import MealSourceKind
 from app.domain.planner import PlannerSuccess
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.meal_plan_uow import SqlAlchemyMealPlanUnitOfWork
@@ -41,6 +42,7 @@ from app.services.meal_plan_composition_revisions import (
     make_complete_diagnostic_revision,
     persist_diagnostic_composition_revision,
 )
+from app.services.meal_plans import MealEventDraft
 from app.services.planner import (
     AuthoritativeGenerationRequest,
     GenerationMemberConstraints,
@@ -125,9 +127,60 @@ def build_research_proof() -> dict:
             source = tuple(
                 (_recipe_pin(recipes, code), kind) for code, kind in SOURCE_CODES
             )
-            target = old[0]
+            # The immutable 0044 composition contract requires the original
+            # target RecipeVersion to appear exactly once. First create an
+            # explicit normal manual revision with goulash pinned at the target
+            # lunch, retaining the six other Planner events/Serving factors.
+            original_servings = {
+                event.id: tuple(
+                    serving for serving in prior.servings if serving.event_id == event.id
+                )
+                for event in old
+            }
+            goulash_version_id = source[1][0].version.id
+            manual_events = [
+                MealEventDraft(
+                    local_date=event.local_date,
+                    position=event.position,
+                    role=event.role,
+                    source_kind=MealSourceKind.COOK_RECIPE,
+                    servings={
+                        serving.member_id: (
+                            Decimal(1)
+                            if event.id == old[0].id
+                            else serving.portion_servings
+                        )
+                        for serving in original_servings[event.id]
+                    },
+                    recipe_version_id=(
+                        goulash_version_id
+                        if event.id == old[0].id
+                        else event.recipe_version_id
+                    ),
+                    source_reference=None,
+                )
+                for event in old
+            ]
+            anchored = meal_plans.create_plan_revision(
+                household_id=household.id,
+                week_start=WEEK_START,
+                member_selection_ids={member.id: selection.selection.id},
+                events=manual_events,
+                status=prior.plan.status,
+                config_version="REAL_CATALOGUE_RESEARCH_BASE_V1",
+            )
+            anchored_events = sorted(
+                anchored.events, key=lambda event: (event.local_date, event.position)
+            )
+            target = anchored_events[0]
+            if (
+                anchored.plan.supersedes_plan_id != prior.plan.id
+                or target.recipe_version_id != goulash_version_id
+                or len(anchored_events) != len(old)
+            ):
+                raise ValueError("Original recipe source anchor was not preserved")
             proposal = MealEventCompositionDraft(
-                prior.plan.id,
+                anchored.plan.id,
                 target.id,
                 tuple(
                     MealComponentDraft(
@@ -154,12 +207,14 @@ def build_research_proof() -> dict:
                 coverage=RequiredCourseCoverage.PER_PARTICIPANT,
             )
             draft = make_complete_diagnostic_revision(
-                prior=prior,
+                prior=anchored,
                 proposal=proposal,
                 rule=rule,
                 selection_details={selection.selection.id: selection},
                 created_at=CREATED,
             )
+            if draft.plan.supersedes_plan_id != anchored.plan.id:
+                raise ValueError("Diagnostic composition lost manual anchor")
             with SqlAlchemyMealPlanUnitOfWork(
                 engine, enable_internal_composition_writes=True
             ) as scope:
