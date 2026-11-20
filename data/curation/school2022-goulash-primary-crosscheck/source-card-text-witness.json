@@ -1,0 +1,105 @@
+{
+  "schema": "SCHOOL2022_PRIMARY_CARD_TEXT_WITNESS_V1",
+  "status": "RESEARCH_ONLY_TEXT_TRANSCRIPTION_NOT_A_FRESH_BINARY_HASH",
+  "observed_on": "2026-11-19",
+  "publication_context": {
+    "title": "Сборник рецептур блюд и типовых меню для организации питания обучающихся 1–4-х классов в общеобразовательных организациях",
+    "publisher": "Федеральный центр гигиены и эпидемиологии Роспотребнадзора",
+    "edition_year": 2022,
+    "card_identifier": "54-2м",
+    "printed_page": 115,
+    "pdf_text_url": "https://cas.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+    "source_card_age_context": "7–11 лет",
+    "section": "2.7. Блюда из мяса",
+    "source_card_sha256_from_existing_review": "d48a9461e98d4d2df0056c379722dc9e6ed248dc74ce65a4a118a1165565209d",
+    "retained_pdf_sha256_from_prior_review": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+    "fresh_pdf_binary_downloaded": false,
+    "fresh_pdf_sha256_verified": false,
+    "visual_pdf_screenshot_verified": false,
+    "evidence_method": "Original publisher-hosted PDF content identified through text extraction; independent browser PDF image screenshot unavailable (cache miss). Not a new byte-for-byte document receipt. A separate 185.7 kcal typical-menu entry in the same document was observed through source PDF searchable text, not through fresh binary verification."
+  },
+  "recipe": {
+    "name_ru": "Гуляш из говядины",
+    "identity_code": "SCHOOL2022_54_2M_BEEF_GOULASH",
+    "source_recipe_id": "ru-school2022:recipe:54-2м",
+    "original_base_servings": "1",
+    "source_output_g": "80",
+    "finished_meat_g": "46.6",
+    "finished_sauce_g": "33.4",
+    "energy_kcal_per_source_card": "185.6",
+    "input_quantities": [
+      {
+        "source_label": "говядина 1 категории",
+        "canonical_food_code": "BEEF_CATEGORY_1_RAW",
+        "gross_g": "83.6",
+        "net_g": "74"
+      },
+      {
+        "source_label": "лук репчатый",
+        "canonical_food_code": "ONION_BULB_FRESH",
+        "gross_g": "11.6",
+        "net_g": "9.3"
+      },
+      {
+        "source_label": "томатное пюре",
+        "canonical_food_code": "TOMATO_PUREE_PASTE",
+        "gross_g": "7.3",
+        "net_g": "7.3"
+      },
+      {
+        "source_label": "масло сливочное",
+        "canonical_food_code": "BUTTER_PEASANT_72_5_UNSALTED",
+        "gross_g": "4.3",
+        "net_g": "4.3"
+      },
+      {
+        "source_label": "мука пшеничная высший сорт",
+        "canonical_food_code": "FLOUR_WHEAT_HIGH_GRADE",
+        "gross_g": "2.5",
+        "net_g": "2.5"
+      },
+      {
+        "source_label": "соль поваренная йодированная",
+        "canonical_food_code": "SALT_IODIZED",
+        "gross_g": "0.2",
+        "net_g": "0.2"
+      },
+      {
+        "source_label": "вода",
+        "canonical_food_code": "WATER",
+        "gross_g": "107",
+        "net_g": "107"
+      }
+    ],
+    "process_scope": "Тушение мяса с луком, томатным пюре и соусом из бульона",
+    "source_process_has_institutional_thawing_and_serving_context": true,
+    "source_document_has_recipe_specific_freezing_permission": false
+  },
+  "interpretation_limits": {
+    "school_source_portion_output_g_is_supported": true,
+    "scaled_family_ready_edible_mass_is_verified": false,
+    "course_SECOND_for_family_is_authorized": false,
+    "individual_age_or_goal_portion_policy_is_verified": false,
+    "finished_cooked_batch_storage_freezing_reheat_is_authorized": false,
+    "independent_qualified_source_review_completed_in_this_operation": false,
+    "scope": "Original recipe-card factual crosscheck against one existing immutable publication manifest only; no new recipe publication or safety/portion release."
+  },
+  "source_internal_discrepancy": {
+    "status": "SOURCE_INTERNAL_DISCREPANCY",
+    "observation_scope": "Recipe card 54-2м versus one-or-more typical-menu rows for the same 54-2м and 80 g within the same School2022 2022 collection",
+    "recipe_card_energy_kcal": "185.6",
+    "typical_menu_energy_kcal": "185.7",
+    "difference_kcal": "0.1",
+    "typical_menu_recipe_id": "54-2м",
+    "typical_menu_serving_g": "80",
+    "source_document_url": "https://niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+    "observation_method": "Publisher-hosted source PDF searchable text shows 185,6 in card and 185,7 in typified menus; menu source fact is independent of frozen R1-G prepared energy",
+    "possible_causes": "NOT_DETERMINED",
+    "recipe_error_conclusion": "NOT_DETERMINED",
+    "recipe_card_is_selected_value": true,
+    "nutrition_publication_changed": false,
+    "unresolved_external_document_binary_verification": true,
+    "independent_visual_comparison_completed": false,
+    "independent_reviewer_signoff_completed": false
+  }
+}
