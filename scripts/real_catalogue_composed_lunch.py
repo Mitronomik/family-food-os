@@ -191,9 +191,7 @@ def build_research_proof() -> dict:
                 or inventory["verdict"] != "NO_GO_TO_CONSUMER_COMPOSED_MEALS"
                 or inventory["shopping_source_fingerprint"]
                 != preview["source_fingerprint"]
-                or preview["shopping_price_status"]
-                if "shopping_price_status" in preview
-                else False
+                or preview["price_status"] != "UNKNOWN"
             ):
                 raise ValueError("Composed MealPlan, Shopping or evidence mismatch")
             source_rows = [
