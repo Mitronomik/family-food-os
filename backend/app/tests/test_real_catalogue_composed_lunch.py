@@ -25,7 +25,9 @@ def test_real_catalogue_lunch_source_gate_reports_real_unreviewed_foods(receipt)
     assert receipt["schema"] == SCHEMA
     assert receipt["scope"] == "ISOLATED_SYNTHETIC_MEMBER_REAL_CURATED_RECIPES"
     assert receipt["decision"] == "BLOCKED_UNREVIEWED_CANONICAL_FOOD_ALLERGENS"
-    assert receipt["source_pairing"] == "MANUAL_CROSS_SOURCE_RESEARCH_NOT_PUBLISHED_MENU"
+    assert (
+        receipt["source_pairing"] == "MANUAL_CROSS_SOURCE_RESEARCH_NOT_PUBLISHED_MENU"
+    )
     assert receipt["core_ai_enabled"] is False
     e = receipt["evidence"]
     assert e["baseline_events"] == 7
