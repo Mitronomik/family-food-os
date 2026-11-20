@@ -103,6 +103,7 @@ def test_research_cli_cannot_accept_an_arbitrary_user_database_path(tmp_path):
         ],
         capture_output=True,
         text=True,
+        check=False,
     )
     assert result.returncode != 0
     assert not path.exists()
