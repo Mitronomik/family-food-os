@@ -2,6 +2,7 @@
 
 import copy
 import json
+import sqlite3
 import subprocess
 import sys
 
@@ -232,3 +233,35 @@ def test_missing_input_database_must_not_create_sqlite(tmp_path):
     with pytest.raises(AllergenReadinessBlocked, match="уже существовать"):
         audit_catalogue(sqlite_path=missing)
     assert not missing.exists()
+
+
+@pytest.mark.parametrize("bad_codes", [[["MILK"]], [{"code": "MILK"}], [12], [None]])
+def test_malformed_allergen_codes_fail_closed_without_type_error(report, bad_codes):
+    entry = _entry(report["foods"][0], codes=bad_codes)
+    with pytest.raises(AllergenReadinessBlocked, match="нормализованным"):
+        validate_review_proposals(
+            report, {"schema": PACKAGE_SCHEMA, "entries": [entry]}
+        )
+
+
+def test_existing_sqlite_is_opened_at_driver_level_read_only(tmp_path, monkeypatch):
+    """Even a buggy later inventory write must fail for an explicit database."""
+    database = tmp_path / "existing.sqlite"
+    with sqlite3.connect(database) as connection:
+        connection.execute("CREATE TABLE sentinel (value INTEGER)")
+        connection.execute("INSERT INTO sentinel VALUES (1)")
+
+    from sqlalchemy import text
+    import scripts.audit_food_allergen_readiness as module
+
+    def probe(engine):
+        with engine.connect() as connection:
+            assert connection.scalar(text("SELECT value FROM sentinel")) == 1
+            with pytest.raises(sqlite3.OperationalError, match="readonly|read-only"):
+                connection.execute(text("INSERT INTO sentinel VALUES (2)"))
+        return {"read_only": True}
+
+    monkeypatch.setattr(module, "inventory_from_engine", probe)
+    assert audit_catalogue(sqlite_path=database) == {"read_only": True}
+    with sqlite3.connect(database) as connection:
+        assert connection.execute("SELECT value FROM sentinel").fetchall() == [(1,)]
