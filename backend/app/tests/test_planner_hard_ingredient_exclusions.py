@@ -28,6 +28,7 @@ from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
 )
 from app.persistence.sqlalchemy_core.shopping_uow import SqlAlchemyShoppingReadScope
 from app.services.planner import PlannerService
+from app.tests.test_r2c_breakfast_grain_diversity import meal_plan_service
 from app.tests.test_prep_read_only_integration import (
     WEEK,
     _db_dump,
@@ -88,10 +89,7 @@ def test_excluding_all_canonical_foods_returns_typed_failure_without_writes(
         ),
     )
     planner = PlannerService(
-        __import__(
-            "app.tests.test_r2c_breakfast_grain_diversity",
-            fromlist=["meal_plan_service"],
-        ).meal_plan_service(engine),
+        meal_plan_service(engine),
         create_household_service(engine),
         create_food_recipe_catalogue_service(engine),
         create_nutrition_service(engine),
