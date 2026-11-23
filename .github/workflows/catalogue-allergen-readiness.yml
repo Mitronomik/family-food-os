@@ -8,6 +8,12 @@ on:
       - 'backend/app/seed/**'
       - 'data/curation/**'
       - 'backend/app/services/food_ingredients.py'
+      - 'backend/app/services/food_recipes.py'
+      - 'backend/app/persistence/sqlalchemy_core/food_ingredient_*.py'
+      - 'backend/app/persistence/sqlalchemy_core/food_recipe_*.py'
+      - 'backend/app/domain/food_recipes.py'
+      - 'backend/app/domain/food_ingredients.py'
+      - 'backend/app/db/migrations/**'
       - '.github/workflows/catalogue-allergen-readiness.yml'
   workflow_dispatch:
 
@@ -45,7 +51,8 @@ jobs:
           summary = data['summary']
           assert data['schema'] == 'FOOD_ALLERGEN_CATALOGUE_READINESS_V1'
           assert summary['food_ingredients_total'] == len(data['foods'])
-          assert summary['active_food_ingredients_unknown'] == len(data['unresolved_queue'])
+          assert summary['food_ingredients_unknown'] == len(data['unresolved_queue'])
+          assert summary['active_food_ingredients_unknown'] == len(data['active_unresolved_queue'])
           assert summary['recipes_active_total'] == len(data['active_recipes'])
           assert data['limitations']['ready_for_bulk_publication'] is False
           assert data['limitations']['family_admission_granted'] is False
