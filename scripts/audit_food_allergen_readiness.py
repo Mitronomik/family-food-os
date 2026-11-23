@@ -162,8 +162,14 @@ def inventory_from_engine(engine) -> dict:
                     "active_recipe_codes": sorted(used_by_active[food.id]),
                     "historical_recipe_codes": sorted(used_by_any_version[food.id]),
                     "historical_recipe_versions": [
-                        {"recipe_code": code, "version_number": number, "version_id": version_id}
-                        for code, number, version_id in sorted(set(historical_version_refs[food.id]))
+                        {
+                            "recipe_code": code,
+                            "version_number": number,
+                            "version_id": version_id,
+                        }
+                        for code, number, version_id in sorted(
+                            set(historical_version_refs[food.id])
+                        )
                     ],
                 }
             )
@@ -200,8 +206,12 @@ def inventory_from_engine(engine) -> dict:
             for row in unknown
         ],
         "active_unresolved_queue": [
-            {"canonical_code": row["canonical_code"], "canonical_name_ru": row["canonical_name_ru"],
-             "active_recipe_codes": row["active_recipe_codes"], "reason": "ALLERGEN_REVIEW_NOT_RECORDED"}
+            {
+                "canonical_code": row["canonical_code"],
+                "canonical_name_ru": row["canonical_name_ru"],
+                "active_recipe_codes": row["active_recipe_codes"],
+                "reason": "ALLERGEN_REVIEW_NOT_RECORDED",
+            }
             for row in active_unknown
         ],
         "limitations": {
