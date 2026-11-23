@@ -5,9 +5,22 @@ The trusted generation input is not a persisted Household preference contract.
 """
 
 from dataclasses import replace
+from datetime import date
+from decimal import Decimal
 
+from app.domain.food_recipes import MealTypeCode
+from app.domain.meal_patterns import MealRole
 from app.domain.meal_plans import MealSourceKind
-from app.domain.planner import PlannerConfig, PlannerFailure, PlannerFailureCode
+from app.domain.planner import (
+    MemberPlannerConstraints,
+    PlannerConfig,
+    PlannerFailure,
+    PlannerFailureCode,
+    PlannerRejectionCode,
+    PlannerRequest,
+    PlannerSuccess,
+    generate_week,
+)
 from app.persistence.sqlalchemy_core.food_ingredient_tables import (
     food_ingredients_table,
 )
@@ -27,6 +40,7 @@ from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
 from app.persistence.sqlalchemy_core.shopping_uow import SqlAlchemyShoppingReadScope
 from app.services.planner import PlannerService
 from app.tests.test_prep_read_only_integration import WEEK, _db_dump
+from app.tests.test_planner import candidate, selection, uid
 from app.tests.test_r2c_breakfast_grain_diversity import meal_plan_service
 from sqlalchemy import select
 
@@ -100,3 +114,71 @@ def test_excluding_all_canonical_foods_returns_typed_failure_without_writes(
     assert result.code is PlannerFailureCode.NO_ELIGIBLE_CANDIDATE
     assert persisted is None
     assert _db_dump(config) == before
+
+
+def test_exclusion_changes_selection_of_proven_eligible_candidate():
+    """Adversarial A/B: favored source is chosen unless its ingredient is excluded."""
+    member_id = uid(2)
+    forbidden_food_id = uid(50)
+    favored = replace(
+        candidate(
+            11,
+            MealTypeCode.MAIN,
+            ingredients=frozenset({forbidden_food_id}),
+        ),
+        exact_energy_ready=True,
+    )
+    alternative = replace(
+        candidate(12, MealTypeCode.MAIN, ingredients=frozenset({uid(51)})),
+        exact_energy_ready=True,
+    )
+    member = MemberPlannerConstraints(
+        member_id,
+        selection(member_id, (MealRole.DINNER,)),
+        Decimal("2000"),
+        preferred_recipe_version_ids=frozenset({favored.recipe_version_id}),
+    )
+    request = PlannerRequest(
+        uid(1),
+        date(2026, 9, 14),
+        (member,),
+        (favored, alternative),
+    )
+    config = PlannerConfig(version="planner-v0.3", max_recipe_repetitions=7)
+
+    baseline = generate_week(request, config)
+    assert isinstance(baseline, PlannerSuccess)
+    assert len(baseline.events) == 7
+    assert {event.recipe_version_id for event in baseline.events} == {
+        favored.recipe_version_id
+    }
+
+    excluded = generate_week(
+        replace(
+            request,
+            members=(
+                replace(
+                    member,
+                    excluded_food_ingredient_ids=frozenset({forbidden_food_id}),
+                ),
+            ),
+        ),
+        config,
+    )
+    assert isinstance(excluded, PlannerSuccess)
+    assert len(excluded.events) == 7
+    assert {event.recipe_version_id for event in excluded.events} == {
+        alternative.recipe_version_id
+    }
+    rejected = [
+        trace
+        for trace in excluded.trace.candidates
+        if trace.recipe_version_id == favored.recipe_version_id
+    ]
+    assert rejected
+    assert all(
+        PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT in trace.rejection_codes
+        and not trace.selected
+        for trace in rejected
+    )
+    assert excluded.trace.fingerprint != baseline.trace.fingerprint
