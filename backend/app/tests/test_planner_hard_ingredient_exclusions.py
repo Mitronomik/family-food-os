@@ -6,8 +6,6 @@ The trusted generation input is not a persisted Household preference contract.
 
 from dataclasses import replace
 
-from sqlalchemy import select
-
 from app.domain.meal_plans import MealSourceKind
 from app.domain.planner import PlannerConfig, PlannerFailure, PlannerFailureCode
 from app.persistence.sqlalchemy_core.food_ingredient_tables import (
@@ -28,18 +26,16 @@ from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
 )
 from app.persistence.sqlalchemy_core.shopping_uow import SqlAlchemyShoppingReadScope
 from app.services.planner import PlannerService
+from app.tests.test_prep_read_only_integration import WEEK, _db_dump
 from app.tests.test_r2c_breakfast_grain_diversity import meal_plan_service
-from app.tests.test_prep_read_only_integration import (
-    WEEK,
-    _db_dump,
-    scenario,
-    trusted_catalogue,
-)
+from sqlalchemy import select
+
+pytest_plugins = ("app.tests.test_prep_read_only_integration",)
 
 
 def test_persisted_recipe_participants_respect_exact_member_exclusions(scenario):
     """Actual version ingredient IDs, not names, are checked for each serving."""
-    config, engine, households, witness, _ = scenario
+    config, engine, _, witness, _ = scenario
     before = _db_dump(config)
     accepted = {
         member.member_id: member.excluded_food_ingredient_ids
