@@ -259,6 +259,7 @@ def test_existing_sqlite_is_opened_at_driver_level_read_only(tmp_path, monkeypat
 
     from sqlalchemy import text
     from sqlalchemy.exc import OperationalError
+
     import scripts.audit_food_allergen_readiness as module
 
     def probe(engine):
