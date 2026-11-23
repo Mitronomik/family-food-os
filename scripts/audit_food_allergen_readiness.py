@@ -15,6 +15,7 @@ import argparse
 import hashlib
 import json
 import re
+import sqlite3
 import tempfile
 from collections import defaultdict
 from datetime import datetime
@@ -36,7 +37,7 @@ from app.persistence.sqlalchemy_core.uow import SqlAlchemyReadOnlyScope
 from app.seed.dc4_a3_russian_step_corrections import (
     seed_dc4_a3_russian_step_corrections,
 )
-from sqlalchemy import select
+from sqlalchemy import create_engine, select
 
 SCHEMA = "FOOD_ALLERGEN_CATALOGUE_READINESS_V1"
 PACKAGE_SCHEMA = "FOOD_ALLERGEN_REVIEW_PROPOSAL_V1"
@@ -89,6 +90,7 @@ def inventory_from_engine(engine) -> dict:
         by_id = {food.id: food for food in foods}
         used_by_active = defaultdict(set)
         used_by_any_version = defaultdict(set)
+        historical_version_refs = defaultdict(list)
         recipe_rows = []
         for recipe in sorted(recipes.list_all(), key=lambda x: x.canonical_code):
             historical = versions.list_for_recipe(recipe.id)
@@ -102,6 +104,9 @@ def inventory_from_engine(engine) -> dict:
                     )
                     used_by_any_version[ingredient.food_ingredient_id].add(
                         recipe.canonical_code
+                    )
+                    historical_version_refs[ingredient.food_ingredient_id].append(
+                        (recipe.canonical_code, version.version_number, str(version.id))
                     )
             if not recipe.is_active:
                 continue
@@ -156,6 +161,10 @@ def inventory_from_engine(engine) -> dict:
                     "review_provenance_in_db": "NOT_STORED",
                     "active_recipe_codes": sorted(used_by_active[food.id]),
                     "historical_recipe_codes": sorted(used_by_any_version[food.id]),
+                    "historical_recipe_versions": [
+                        {"recipe_code": code, "version_number": number, "version_id": version_id}
+                        for code, number, version_id in sorted(set(historical_version_refs[food.id]))
+                    ],
                 }
             )
     unknown = [row for row in items if row["status"] == "UNKNOWN"]
@@ -171,6 +180,7 @@ def inventory_from_engine(engine) -> dict:
             "food_ingredients_active": sum(row["is_active"] for row in items),
             "food_ingredients_unknown": len(unknown),
             "active_food_ingredients_unknown": len(active_unknown),
+            "unresolved_food_ingredients_total": len(unknown),
             "food_ingredients_with_recorded_review": len(items) - len(unknown),
             "recipes_active_total": len(recipe_rows),
             "active_recipes_blocked_for_composition": len(blocked),
@@ -187,6 +197,11 @@ def inventory_from_engine(engine) -> dict:
                 "active_recipe_codes": row["active_recipe_codes"],
                 "reason": "ALLERGEN_REVIEW_NOT_RECORDED",
             }
+            for row in unknown
+        ],
+        "active_unresolved_queue": [
+            {"canonical_code": row["canonical_code"], "canonical_name_ru": row["canonical_name_ru"],
+             "active_recipe_codes": row["active_recipe_codes"], "reason": "ALLERGEN_REVIEW_NOT_RECORDED"}
             for row in active_unknown
         ],
         "limitations": {
@@ -242,8 +257,8 @@ def validate_review_proposals(report: dict, payload: dict) -> dict:
         codes = entry.get("allergen_codes")
         _require(
             isinstance(codes, list)
-            and len(set(codes)) == len(codes)
-            and all(isinstance(c, str) and CODE_RE.fullmatch(c) for c in codes),
+            and all(isinstance(c, str) and CODE_RE.fullmatch(c) for c in codes)
+            and len(set(codes)) == len(codes),
             "Аллергенные коды не являются точным нормализованным набором.",
         )
         _require(
@@ -319,7 +334,13 @@ def audit_catalogue(*, sqlite_path: Path | None = None) -> dict:
                 engine.dispose()
     path = Path(sqlite_path)
     _require(path.is_file(), "Указанная SQLite-база должна уже существовать.")
-    engine = create_sqlite_engine(DatabaseConfig(path=path))
+    # Enforce read-only in the SQLite driver, not merely by avoiding explicit writes.
+    # The normal project engine creates directories and opens a writable connection.
+    uri = path.resolve().as_uri() + "?mode=ro"
+    engine = create_engine(
+        "sqlite+pysqlite://",
+        creator=lambda: sqlite3.connect(uri, uri=True, autocommit=False),
+    )
     try:
         return inventory_from_engine(engine)
     finally:
