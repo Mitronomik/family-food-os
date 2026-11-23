@@ -261,8 +261,7 @@ def validate_review_proposals(report: dict, payload: dict) -> dict:
                     "Не хватает действительной даты решения reviewer."
                 ) from exc
             _require(
-                reviewed_at.tzinfo is not None
-                and reviewed_at.utcoffset() is not None,
+                reviewed_at.tzinfo is not None and reviewed_at.utcoffset() is not None,
                 "Решение reviewer должно содержать часовой пояс.",
             )
             _require(
