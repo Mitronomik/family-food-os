@@ -4,6 +4,13 @@
 **Decision date:** 2026-09-13
 **Applies to:** Planner, MealPlan/Serving, Shopping, Prep, consumer UX, validation and product metrics
 
+> **Latest owner-approved 2026-11-23 direction:** FamilyFoodOS MVP supports
+> [ingredient exclusion preferences](ingredient-exclusions-product-decision-2026-11-23.md),
+> not medical allergy profiles or allergen-free guarantees. The 2026-11-23
+> allergen attestation/taxonomy programme is not an MVP prerequisite. Keep
+> hard ingredient exclusions; all other provenance, nutrition, physical and
+> food-preparation evidence rules remain in force.
+
 ## 1. Authority and purpose
 
 This document integrates the useful product decisions from the September 2026
