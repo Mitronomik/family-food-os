@@ -49,7 +49,10 @@ def test_full_catalogue_is_not_truncated_to_list_active_limit(report):
     assert summary["food_ingredients_unknown"] == sum(
         food["status"] == "UNKNOWN" for food in report["foods"]
     )
-    assert summary["active_food_ingredients_unknown"] == len(report["unresolved_queue"])
+    assert summary["food_ingredients_unknown"] == len(report["unresolved_queue"])
+    assert summary["active_food_ingredients_unknown"] == len(
+        report["active_unresolved_queue"]
+    )
     assert summary["recipes_active_total"] == len(report["active_recipes"])
     assert summary["active_recipes_blocked_for_composition"] == sum(
         row["allergen_readiness"] == "BLOCKED" for row in report["active_recipes"]
@@ -296,3 +299,10 @@ def test_inactive_unknown_food_remains_in_full_review_backlog(tmp_path):
     assert "WATER" not in {
         row["canonical_code"] for row in report["active_unresolved_queue"]
     }
+    assert report["summary"]["food_ingredients_unknown"] == len(
+        report["unresolved_queue"]
+    )
+    assert report["summary"]["active_food_ingredients_unknown"] == len(
+        report["active_unresolved_queue"]
+    )
+    assert len(report["unresolved_queue"]) == len(report["active_unresolved_queue"]) + 1
