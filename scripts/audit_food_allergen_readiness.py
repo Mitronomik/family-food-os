@@ -90,7 +90,7 @@ def inventory_from_engine(engine) -> dict:
         by_id = {food.id: food for food in foods}
         used_by_active = defaultdict(set)
         used_by_any_version = defaultdict(set)
-        historical_version_refs = defaultdict(list)
+        # Recipe code + version number is the stable logical identity.\n        # Seeded RecipeVersion UUIDs are random across fresh databases.\n        historical_version_refs = defaultdict(list)
         recipe_rows = []
         for recipe in sorted(recipes.list_all(), key=lambda x: x.canonical_code):
             historical = versions.list_for_recipe(recipe.id)
@@ -106,7 +106,7 @@ def inventory_from_engine(engine) -> dict:
                         recipe.canonical_code
                     )
                     historical_version_refs[ingredient.food_ingredient_id].append(
-                        (recipe.canonical_code, version.version_number, str(version.id))
+                        (recipe.canonical_code, version.version_number)
                     )
             if not recipe.is_active:
                 continue
@@ -165,9 +165,8 @@ def inventory_from_engine(engine) -> dict:
                         {
                             "recipe_code": code,
                             "version_number": number,
-                            "version_id": version_id,
                         }
-                        for code, number, version_id in sorted(
+                        for code, number in sorted(
                             set(historical_version_refs[food.id])
                         )
                     ],
