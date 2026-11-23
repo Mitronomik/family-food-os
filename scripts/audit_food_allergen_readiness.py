@@ -19,8 +19,6 @@ import tempfile
 from collections import defaultdict
 from pathlib import Path
 
-from sqlalchemy import select
-
 from app.db.config import DatabaseConfig
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_ingredient_repositories import (
@@ -37,6 +35,7 @@ from app.persistence.sqlalchemy_core.uow import SqlAlchemyReadOnlyScope
 from app.seed.dc4_a3_russian_step_corrections import (
     seed_dc4_a3_russian_step_corrections,
 )
+from sqlalchemy import select
 
 SCHEMA = "FOOD_ALLERGEN_CATALOGUE_READINESS_V1"
 PACKAGE_SCHEMA = "FOOD_ALLERGEN_REVIEW_PROPOSAL_V1"
