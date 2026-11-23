@@ -17,6 +17,7 @@ import json
 import re
 import tempfile
 from collections import defaultdict
+from datetime import datetime
 from pathlib import Path
 
 from app.db.config import DatabaseConfig
@@ -253,6 +254,17 @@ def validate_review_proposals(report: dict, payload: dict) -> dict:
         if state != "UNKNOWN":
             proof = entry.get("evidence")
             _require(isinstance(proof, dict), "Проверенный статус требует evidence.")
+            try:
+                reviewed_at = datetime.fromisoformat(proof.get("reviewed_at", ""))
+            except (TypeError, ValueError) as exc:
+                raise AllergenReadinessBlocked(
+                    "Не хватает действительной даты решения reviewer."
+                ) from exc
+            _require(
+                reviewed_at.tzinfo is not None
+                and reviewed_at.utcoffset() is not None,
+                "Решение reviewer должно содержать часовой пояс.",
+            )
             _require(
                 isinstance(proof.get("source_name"), str)
                 and bool(proof["source_name"].strip())
@@ -260,6 +272,10 @@ def validate_review_proposals(report: dict, payload: dict) -> dict:
                 and proof["source_locator"].startswith(
                     ("https://", "http://", "private-library:")
                 )
+                and isinstance(proof.get("taxonomy_code"), str)
+                and bool(proof["taxonomy_code"].strip())
+                and isinstance(proof.get("taxonomy_version"), str)
+                and bool(proof["taxonomy_version"].strip())
                 and isinstance(proof.get("source_version"), str)
                 and bool(proof["source_version"].strip())
                 and isinstance(proof.get("source_sha256"), str)
