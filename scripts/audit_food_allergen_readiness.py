@@ -54,9 +54,9 @@ def _require(condition: bool, reason: str) -> None:
 
 def _digest(payload: dict) -> str:
     return hashlib.sha256(
-        json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode(
-            "utf-8"
-        )
+        json.dumps(
+            payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+        ).encode("utf-8")
     ).hexdigest()
 
 
@@ -67,13 +67,20 @@ def inventory_from_engine(engine) -> dict:
         food_repo = SqlAlchemyFoodIngredientRepository(db)
         recipes = SqlAlchemyRecipeRepository(db)
         versions = SqlAlchemyRecipeVersionRepository(db)
-        rows = db.execute(
-            select(food_ingredients_table.c.id).order_by(
-                food_ingredients_table.c.canonical_code
+        rows = (
+            db.execute(
+                select(food_ingredients_table.c.id).order_by(
+                    food_ingredients_table.c.canonical_code
+                )
             )
-        ).scalars().all()
+            .scalars()
+            .all()
+        )
         foods = [food_repo.get(food_id) for food_id in rows]
-        _require(all(food is not None for food in foods), "Каталог содержит потерянный FoodIngredient.")
+        _require(
+            all(food is not None for food in foods),
+            "Каталог содержит потерянный FoodIngredient.",
+        )
         _require(
             len({food.canonical_code for food in foods}) == len(foods),
             "Canonical FoodIngredient identity конфликтует.",
@@ -114,13 +121,16 @@ def inventory_from_engine(engine) -> dict:
             blockers = sorted(
                 by_id[identity].canonical_code
                 for identity in ids
-                if not by_id[identity].is_active or not by_id[identity].allergens_reviewed
+                if not by_id[identity].is_active
+                or not by_id[identity].allergens_reviewed
             )
             recipe_rows.append(
                 {
                     "recipe_code": recipe.canonical_code,
                     "source_status": "CURRENT_SOURCE_VERIFIED",
-                    "allergen_readiness": "BLOCKED" if blockers else "RECORDED_REVIEW_COMPLETE",
+                    "allergen_readiness": "BLOCKED"
+                    if blockers
+                    else "RECORDED_REVIEW_COMPLETE",
                     "missing_food_codes": blockers,
                 }
             )
@@ -163,7 +173,8 @@ def inventory_from_engine(engine) -> dict:
             "food_ingredients_with_recorded_review": len(items) - len(unknown),
             "recipes_active_total": len(recipe_rows),
             "active_recipes_blocked_for_composition": len(blocked),
-            "active_recipes_with_recorded_allergen_coverage": len(recipe_rows) - len(blocked),
+            "active_recipes_with_recorded_allergen_coverage": len(recipe_rows)
+            - len(blocked),
             "historical_food_dependencies_included": True,
         },
         "foods": items,
@@ -205,11 +216,17 @@ def validate_review_proposals(report: dict, payload: dict) -> dict:
     for entry in entries:
         _require(isinstance(entry, dict), "Review entry должен быть объектом.")
         code = entry.get("canonical_code")
-        _require(isinstance(code, str) and CODE_RE.fullmatch(code) is not None, "Недопустимый canonical_code.")
+        _require(
+            isinstance(code, str) and CODE_RE.fullmatch(code) is not None,
+            "Недопустимый canonical_code.",
+        )
         _require(code not in seen, "Повторяющийся canonical_code в review package.")
         seen.add(code)
         food = existing.get(code)
-        _require(food is not None, "Неизвестный FoodIngredient: сначала проверенная публикация identity.")
+        _require(
+            food is not None,
+            "Неизвестный FoodIngredient: сначала проверенная публикация identity.",
+        )
         _require(
             food["canonical_name_ru"] == entry.get("canonical_name_ru")
             and food["category_code"] == entry.get("category_code")
@@ -240,7 +257,9 @@ def validate_review_proposals(report: dict, payload: dict) -> dict:
                 isinstance(proof.get("source_name"), str)
                 and bool(proof["source_name"].strip())
                 and isinstance(proof.get("source_locator"), str)
-                and proof["source_locator"].startswith(("https://", "http://", "private-library:"))
+                and proof["source_locator"].startswith(
+                    ("https://", "http://", "private-library:")
+                )
                 and isinstance(proof.get("source_version"), str)
                 and bool(proof["source_version"].strip())
                 and isinstance(proof.get("source_sha256"), str)
