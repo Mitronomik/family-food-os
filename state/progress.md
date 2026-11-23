@@ -1,3 +1,11 @@
+# 2026-11-23 — owner expands allergen remediation to entire canonical catalogue
+
+- Owner explicitly rejected a never-ending sequence of 12-food fixes and approved a **systemic complete-catalogue + future-ingestion allergen readiness capability**. Root architecture requires a separate reviewed contract before any new durable attestation identity/migration or publication/revocation behavior; avoid silent source authority updates.
+- Phase 1 runtime PR implements **read-only full FoodIngredient inventory**, ALL historical RecipeVersion dependencies and active recipe blocker index with a stable report SHA and review backlog (not capped by list_active). For future proposed review batches, adds generic deterministic **structural preflight** of exact source/form/version/SHA/reviewer scope, but produces `STRUCTURALLY_CHECKED_NOT_APPROVED` and never publishes. On every relevant data/seed change, CI generates a research-only whole-catalogue JSON receipt.
+- #299 remains unmerged and its 12 observed blockers are only a subset of the catalogue debt. A reviewed versioned attestation/publisher contract, source-specific review, trust policy, revocation and batch apply are still necessary to actually resolve the problem. No automatic allergen-free claims, no permission to bypass composed MealPlan admission.
+
+---
+
 # 2026-11-19 — PR #298 reviewer P2: School2022 internal kcal discrepancy recorded
 
 - Verified through publicly searchable text of the same School2022 collection: the exact `54-2м` 80 g goulash **recipe card** reports `185.6` kcal, while its **typical-menu tables** report `185.7` kcal. Record `SOURCE_INTERNAL_DISCREPANCY` with `0.1` kcal difference, cause/reconciliation `NOT_DETERMINED`; preserve existing frozen R1-G `185.6` and do not publish Nutrition change or declare a recipe error.
