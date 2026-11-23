@@ -252,12 +252,13 @@ def test_existing_sqlite_is_opened_at_driver_level_read_only(tmp_path, monkeypat
         connection.execute("INSERT INTO sentinel VALUES (1)")
 
     from sqlalchemy import text
+    from sqlalchemy.exc import OperationalError
     import scripts.audit_food_allergen_readiness as module
 
     def probe(engine):
         with engine.connect() as connection:
             assert connection.scalar(text("SELECT value FROM sentinel")) == 1
-            with pytest.raises(sqlite3.OperationalError, match="readonly|read-only"):
+            with pytest.raises(OperationalError, match="readonly|read-only"):
                 connection.execute(text("INSERT INTO sentinel VALUES (2)"))
         return {"read_only": True}
 
