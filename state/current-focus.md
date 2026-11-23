@@ -1,3 +1,13 @@
+# CURRENT — owner-approved catalogue-wide allergen readiness (phase 1: complete executable inventory) — 2026-11-23
+
+**Accepted main:** `4b634febcbda5f8364ed25a0f3ee1132871854d2` ([#298 merged](https://github.com/Mitronomik/family-food-os/pull/298)). [PR #299](https://github.com/Mitronomik/family-food-os/pull/299) is independent review-ready research on the concrete 12-food allergen blocker, **not merged**. Owner explicitly approved replacing per-recipe/12-food repairs with a **whole-catalogue and future-ingestion allergen readiness solution**. No blanket `allergens_reviewed=true` or inference that empty codes means allergen-free.
+
+**Current bounded PR:** `feat/catalogue-wide-allergen-readiness-inventory` adds executable whole-catalogue FoodIngredient and all historical/current RecipeVersion dependency audit on **fresh canonical DC4-A3 seed or supplied existing SQLite**. It covers every ingredient without `list_active` truncation, records positive/empty/unknown observed states, source-review provenance currently **NOT_STORED**, complete recipe/active participation and priority backlog. A generic source-pinned review-package validator is **dry-run and explicitly not a publisher**: it enforces exact canonical identity, ingredient form, well-formed codes and source/version/SHA/applicability/review reference, without assigning authority. CI automatically refreshes full audit on source/seed changes; JSON artifact is research-only. Existing data/API/Planner/Shopping remain unchanged.
+
+**Next required cross-context change AFTER reviewed inventory:** a separately accepted **docs-only Implementation Contract Gate** for durable versioned FoodIngredient allergen attestations, idempotent transactional publisher, conflict/anti-rollback/revocation, exact scope and existing-recipe re-evaluation. This is mandated by root `AGENTS.md` before adding migration/immutable authority. Then implement publisher and source-reviewed batches for the **entire** catalogue, not 12-food one-offs. No source statuses or consumer availability promoted before that contract and independent evidence; NO_GO remains. Keep main working; owner merge only after review.
+
+---
+
 # CURRENT — actual School2022 54-2м original-card reconciliation — 2026-11-19
 
 **Accepted main:** `73b1628bf2c8cc824cd991e366016f0a38301d7d` ([#297 merged](https://github.com/Mitronomik/family-food-os/pull/297), 2026-11-19). The developer-only four-axis inventory now makes missing source/role/physical/Nutrition authority explicit; no family activation.
