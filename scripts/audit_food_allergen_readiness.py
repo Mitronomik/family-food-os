@@ -90,7 +90,9 @@ def inventory_from_engine(engine) -> dict:
         by_id = {food.id: food for food in foods}
         used_by_active = defaultdict(set)
         used_by_any_version = defaultdict(set)
-        # Recipe code + version number is the stable logical identity.\n        # Seeded RecipeVersion UUIDs are random across fresh databases.\n        historical_version_refs = defaultdict(list)
+        # Recipe code + version number is the stable logical identity.
+        # Seeded RecipeVersion UUIDs are random across fresh databases.
+        historical_version_refs = defaultdict(list)
         recipe_rows = []
         for recipe in sorted(recipes.list_all(), key=lambda x: x.canonical_code):
             historical = versions.list_for_recipe(recipe.id)
