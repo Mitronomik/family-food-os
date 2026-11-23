@@ -149,9 +149,13 @@ def test_exclusion_changes_selection_of_proven_eligible_candidate():
     baseline = generate_week(request, config)
     assert isinstance(baseline, PlannerSuccess)
     assert len(baseline.events) == 7
-    assert {event.recipe_version_id for event in baseline.events} == {
-        favored.recipe_version_id
-    }
+    # Baseline must prove that the forbidden candidate is genuinely selectable.
+    # Later meals may use the alternative due to ordinary repetition penalties.
+    assert baseline.events[0].recipe_version_id == favored.recipe_version_id
+    assert any(
+        event.recipe_version_id == favored.recipe_version_id
+        for event in baseline.events
+    )
 
     excluded = generate_week(
         replace(
