@@ -65,22 +65,38 @@ def test_full_catalogue_is_not_truncated_to_list_active_limit(report):
     )
 
 
-def test_actual_source_recipe_dependencies_expose_all_unreviewed_foods(report):
+def test_actual_source_recipe_dependencies_follow_current_review_data(report):
+    """The audit must remain valid AFTER real ingredient reviews are published."""
     foods = {food["canonical_code"]: food for food in report["foods"]}
     for code in ACTUAL_FOOD_BLOCKERS:
-        assert foods[code]["status"] == "UNKNOWN"
-        assert foods[code]["recorded_allergen_codes"] == []
-        assert foods[code]["review_provenance_in_db"] == "NOT_STORED"
+        food = foods[code]
+        assert food["status"] in (
+            "UNKNOWN",
+            "RECORDED_REVIEWED_WITH_CODES",
+            "RECORDED_REVIEWED_EMPTY_SET",
+        )
+        if food["status"] == "UNKNOWN":
+            assert food["recorded_allergen_codes"] == []
+        assert food["review_provenance_in_db"] == "NOT_STORED"
     soup = "MR2019_1_2A_VEGETARIAN_CABBAGE_SOUP"
     goulash = "SCHOOL2022_54_2M_BEEF_GOULASH"
-    recipes = {r["recipe_code"]: r for r in report["active_recipes"]}
+    recipes = {row["recipe_code"]: row for row in report["active_recipes"]}
     assert {soup, goulash} <= set(recipes)
-    assert recipes[soup]["allergen_readiness"] == "BLOCKED"
-    assert recipes[goulash]["allergen_readiness"] == "BLOCKED"
-    assert "CABBAGE_GREEN" in recipes[soup]["missing_food_codes"]
-    assert "BEEF_CATEGORY_1_RAW" in recipes[goulash]["missing_food_codes"]
+    assert soup in foods["CABBAGE_GREEN"]["active_recipe_codes"]
+    assert goulash in foods["BEEF_CATEGORY_1_RAW"]["active_recipe_codes"]
     assert soup in foods["WATER"]["active_recipe_codes"]
     assert goulash in foods["WATER"]["active_recipe_codes"]
+    for code in (soup, goulash):
+        missing = recipes[code]["missing_food_codes"]
+        assert missing == sorted(
+            food["canonical_code"]
+            for food in report["foods"]
+            if code in food["active_recipe_codes"]
+            and (not food["is_active"] or food["status"] == "UNKNOWN")
+        )
+        assert recipes[code]["allergen_readiness"] == (
+            "BLOCKED" if missing else "RECORDED_REVIEW_COMPLETE"
+        )
     assert report["limitations"]["family_admission_granted"] is False
     assert report["limitations"]["review_source_provenance_verified"] is False
     assert report["limitations"]["ready_for_bulk_publication"] is False
@@ -116,7 +132,7 @@ def _source_evidence():
 
 
 def test_proposed_review_does_not_silently_publish_or_clear_allergens(report):
-    food = next(x for x in report["foods"] if x["status"] == "UNKNOWN")
+    food = report["foods"][0]
     for state, codes in [
         ("UNKNOWN", []),
         ("REVIEWED_EMPTY_SET", []),
@@ -134,7 +150,7 @@ def test_proposed_review_does_not_silently_publish_or_clear_allergens(report):
         assert preview["publication_performed"] is False
         assert preview["mutation_performed"] is False
         assert preview["entries"][0]["publication"] == "NOT_AUTHORIZED_REVIEW_ONLY"
-    assert food["status"] == "UNKNOWN"
+    assert food["status"] == report["foods"][0]["status"]
 
 
 @pytest.mark.parametrize(
@@ -156,7 +172,7 @@ def test_proposed_review_does_not_silently_publish_or_clear_allergens(report):
     ],
 )
 def test_unsupported_or_unreviewed_source_cannot_pass_proposal_gate(report, change):
-    food = next(x for x in report["foods"] if x["status"] == "UNKNOWN")
+    food = report["foods"][0]
     entry = _entry(food)
     change(entry)
     with pytest.raises(AllergenReadinessBlocked):
@@ -166,7 +182,7 @@ def test_unsupported_or_unreviewed_source_cannot_pass_proposal_gate(report, chan
 
 
 def test_proposed_review_must_pin_actual_source_hash_and_applicability(report):
-    food = next(x for x in report["foods"] if x["status"] == "UNKNOWN")
+    food = report["foods"][0]
     entry = _entry(
         food,
         review_state="REVIEWED_EMPTY_SET",
@@ -192,7 +208,7 @@ def test_proposed_review_must_pin_actual_source_hash_and_applicability(report):
 
 
 def test_duplicate_entries_are_rejected_without_any_publication(report):
-    food = next(x for x in report["foods"] if x["status"] == "UNKNOWN")
+    food = report["foods"][0]
     entry = _entry(food)
     with pytest.raises(AllergenReadinessBlocked, match="Повторяющийся"):
         validate_review_proposals(
