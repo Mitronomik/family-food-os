@@ -33,6 +33,7 @@ from app.tests.test_prep_read_only_integration import (
     WEEK,
     _db_dump,
     scenario,
+    trusted_catalogue,
 )
 
 
