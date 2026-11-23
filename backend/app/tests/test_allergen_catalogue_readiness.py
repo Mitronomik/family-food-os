@@ -266,3 +266,26 @@ def test_existing_sqlite_is_opened_at_driver_level_read_only(tmp_path, monkeypat
     assert audit_catalogue(sqlite_path=database) == {"read_only": True}
     with sqlite3.connect(database) as connection:
         assert connection.execute("SELECT value FROM sentinel").fetchall() == [(1,)]
+
+
+def test_inactive_unknown_food_remains_in_full_review_backlog(tmp_path):
+    from app.db.config import DatabaseConfig
+    from app.seed.dc4_a3_russian_step_corrections import (
+        seed_dc4_a3_russian_step_corrections,
+    )
+
+    database = tmp_path / "catalogue.sqlite"
+    seed_dc4_a3_russian_step_corrections(DatabaseConfig(path=database))
+    with sqlite3.connect(database) as connection:
+        connection.execute(
+            "UPDATE food_ingredients SET is_active = 0 WHERE canonical_code = ?",
+            ("WATER",),
+        )
+    report = audit_catalogue(sqlite_path=database)
+    food = next(row for row in report["foods"] if row["canonical_code"] == "WATER")
+    assert food["is_active"] is False
+    assert food["status"] == "UNKNOWN"
+    assert "WATER" in {row["canonical_code"] for row in report["unresolved_queue"]}
+    assert "WATER" not in {
+        row["canonical_code"] for row in report["active_unresolved_queue"]
+    }
