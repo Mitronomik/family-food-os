@@ -48,7 +48,7 @@ This table transcribes the structure of article 4, §4.4, point 14 from the offi
 | 14 | Соя и продукты её переработки | `SOY` | Processing and any legally applicable exceptions require per-version evidence |
 | 15 | Яйца и продукты их переработки | `EGG` | Exact source/form |
 
-**Candidate codes are not an approved taxonomy registry.** In particular, asp﻿artame/sulfites/gluten/lactose involve different mechanisms; the product cannot present all 15 as equivalent clinical allergens. Do not import candidate codes into current `allergen_codes`, whose current validation merely enforces normalized strings, not taxonomy authority.
+**Candidate codes are not an approved taxonomy registry.** In particular, aspartame/sulfites/gluten/lactose involve different mechanisms; the product cannot present all 15 as equivalent clinical allergens. Do not import candidate codes into current `allergen_codes`, whose current validation merely enforces normalized strings, not taxonomy authority.
 
 ## 4. Proposed decision — semantic model, not implementation authorization
 
