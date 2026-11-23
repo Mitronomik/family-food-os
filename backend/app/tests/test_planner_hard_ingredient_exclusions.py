@@ -39,8 +39,8 @@ from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
 )
 from app.persistence.sqlalchemy_core.shopping_uow import SqlAlchemyShoppingReadScope
 from app.services.planner import PlannerService
-from app.tests.test_prep_read_only_integration import WEEK, _db_dump
 from app.tests.test_planner import candidate, selection, uid
+from app.tests.test_prep_read_only_integration import WEEK, _db_dump
 from app.tests.test_r2c_breakfast_grain_diversity import meal_plan_service
 from sqlalchemy import select
 
@@ -135,7 +135,7 @@ def test_exclusion_changes_selection_of_proven_eligible_candidate():
     member = MemberPlannerConstraints(
         member_id,
         selection(member_id, (MealRole.DINNER,)),
-        Decimal("2000"),
+        Decimal(2000),
         preferred_recipe_version_ids=frozenset({favored.recipe_version_id}),
     )
     request = PlannerRequest(
