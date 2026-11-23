@@ -1,3 +1,13 @@
+# CURRENT — owner pivot: non-medical ingredient exclusions — 2026-11-23
+
+**LATEST APPROVED PRODUCT DIRECTION (supersedes the historical allergen publication plan below):** FamilyFoodOS is **not** an allergy recommendation/certification service. The MVP captures only FoodIngredient exclusions **without medical reasons**, applies them as hard deterministic Planner constraints, and makes no claims of allergen-free/therapeutically safe meals. See [canonical decision](../docs/family-food/ingredient-exclusions-product-decision-2026-11-23.md).
+
+**Accepted baseline:** `main@66bcaafc600e3a12e2041fcc04fdc4c20f30cad9` (merged #300/#301). #300 remains historical read-only research tooling; #301 attestation publisher and #302 proposed regulatory taxonomy are **not MVP prerequisites**, and must not trigger further source-attestation PRs absent a new owner decision. Their prohibition of *allergen-attestation runtime* does **not** prevent ordinary non-medical ingredient exclusion work. Existing independent source/role/physical/Nutrition/Prep/admission rules remain intact; no consumer admission is granted merely by this pivot.
+
+**Next bounded implementation:** audit and test current `GenerationMemberConstraints.excluded_food_ingredient_ids` → `MemberPlannerConstraints` → deterministic candidate filtering across per-member/shared meals, then fix any actual gaps with focused regression tests. Do not add a medical field, full-catalogue allergen review or unrelated migration. Consumer API/UI later only when necessary.
+
+---
+
 # CURRENT — owner-approved catalogue-wide allergen readiness (phase 1: complete executable inventory) — 2026-11-23
 
 **Accepted main:** `4b634febcbda5f8364ed25a0f3ee1132871854d2` ([#298 merged](https://github.com/Mitronomik/family-food-os/pull/298)). [PR #299](https://github.com/Mitronomik/family-food-os/pull/299) is independent review-ready research on the concrete 12-food allergen blocker, **not merged**. Owner explicitly approved replacing per-recipe/12-food repairs with a **whole-catalogue and future-ingestion allergen readiness solution**. No blanket `allergens_reviewed=true` or inference that empty codes means allergen-free.
