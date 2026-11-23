@@ -4,7 +4,6 @@ import copy
 import json
 import subprocess
 import sys
-from hashlib import sha256
 
 import pytest
 
