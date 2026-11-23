@@ -157,7 +157,9 @@ def test_unsupported_or_unreviewed_source_cannot_pass_proposal_gate(report, chan
     entry = _entry(food)
     change(entry)
     with pytest.raises(AllergenReadinessBlocked):
-        validate_review_proposals(report, {"schema": PACKAGE_SCHEMA, "entries": [entry]})
+        validate_review_proposals(
+            report, {"schema": PACKAGE_SCHEMA, "entries": [entry]}
+        )
 
 
 def test_proposed_review_must_pin_actual_source_hash_and_applicability(report):
