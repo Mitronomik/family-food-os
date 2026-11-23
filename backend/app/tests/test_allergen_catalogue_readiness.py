@@ -61,6 +61,12 @@ def test_full_catalogue_is_not_truncated_to_list_active_limit(report):
     assert report["foods"] == sorted(
         report["foods"], key=lambda food: food["canonical_code"]
     )
+    # No random seed UUIDs may enter semantic lineage or the report hash.
+    for food in report["foods"]:
+        for historical in food["historical_recipe_versions"]:
+            assert set(historical) == {"recipe_code", "version_number"}
+            assert historical["recipe_code"] in food["historical_recipe_codes"]
+            assert isinstance(historical["version_number"], int)
     assert report["semantic_sha256"] == _digest(
         {key: value for key, value in report.items() if key != "semantic_sha256"}
     )
