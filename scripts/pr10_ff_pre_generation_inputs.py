@@ -133,9 +133,7 @@ def _assert_source_integrity() -> None:
         if (
             actual != expected_sha1
             and actual
-            != COMPATIBLE_PLANNER_INPUT_BOUNDARY_BLOBS.get(
-                (relative, expected_sha1)
-            )
+            != COMPATIBLE_PLANNER_INPUT_BOUNDARY_BLOBS.get((relative, expected_sha1))
         ):
             raise PreflightNoGo(f"source Git blob drift: {relative}")
 
