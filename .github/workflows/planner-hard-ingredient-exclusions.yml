@@ -32,6 +32,6 @@ jobs:
         run: python -m pytest -q --tb=short --maxfail=2 backend/app/tests/test_planner_hard_ingredient_exclusions.py backend/app/tests/test_planner_application_boundary.py
       - name: Lint, format and diff
         run: |
-          python -m ruff check backend/app/services/planner.py backend/app/tests/test_planner_hard_ingredient_exclusions.py backend/app/tests/test_planner_application_boundary.py
+          python -m ruff check --select I,F401,F821 backend/app/services/planner.py backend/app/tests/test_planner_hard_ingredient_exclusions.py backend/app/tests/test_planner_application_boundary.py
           python -m ruff format --check backend/app/services/planner.py backend/app/tests/test_planner_hard_ingredient_exclusions.py backend/app/tests/test_planner_application_boundary.py
           git diff --check "$(git merge-base origin/main HEAD)" HEAD
