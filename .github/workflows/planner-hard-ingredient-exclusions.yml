@@ -1,0 +1,36 @@
+name: Planner hard ingredient exclusions
+
+on:
+  pull_request:
+    paths:
+      - 'backend/app/tests/test_planner_hard_ingredient_exclusions.py'
+      - 'backend/app/services/planner.py'
+      - 'backend/app/domain/planner.py'
+      - '.github/workflows/planner-hard-ingredient-exclusions.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exclusions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      AI_ENABLED: 'false'
+      PYTHONPATH: 'backend:.'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e './backend[test]' 'ruff==0.16.8'
+      - name: Focused persisted Planner integration
+        run: python -m pytest -q --tb=short --maxfail=2 backend/app/tests/test_planner_hard_ingredient_exclusions.py
+      - name: Lint, format and diff
+        run: |
+          python -m ruff check backend/app/tests/test_planner_hard_ingredient_exclusions.py
+          python -m ruff format --check backend/app/tests/test_planner_hard_ingredient_exclusions.py
+          git diff --check "$(git merge-base origin/main HEAD)" HEAD
