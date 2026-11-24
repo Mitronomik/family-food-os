@@ -21,6 +21,8 @@ jobs:
       PYTHONPATH: 'backend:.'
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -31,4 +33,4 @@ jobs:
         run: |
           python -m ruff check backend/app/tests/test_planner_hard_ingredient_exclusions.py
           python -m ruff format --check backend/app/tests/test_planner_hard_ingredient_exclusions.py
-          git diff --check
+          git diff --check "$(git merge-base origin/main HEAD)" HEAD
