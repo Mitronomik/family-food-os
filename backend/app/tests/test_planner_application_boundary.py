@@ -293,16 +293,20 @@ def test_caller_cannot_supply_stale_recipe_or_fabricated_kcal() -> None:
 @pytest.mark.parametrize(
     "field,value",
     [
-        ("excluded_food_ingredient_ids", frozenset({"00000000-0000-4000-8000-000000000050"})),
+        (
+            "excluded_food_ingredient_ids",
+            frozenset({"00000000-0000-4000-8000-000000000050"}),
+        ),
         ("excluded_food_ingredient_ids", {uid(50)}),
         ("excluded_food_ingredient_ids", frozenset({uid(50), "BEEF_CATEGORY_1_RAW"})),
-        ("preferred_recipe_version_ids", frozenset({"00000000-0000-4000-8000-000000000020"})),
+        (
+            "preferred_recipe_version_ids",
+            frozenset({"00000000-0000-4000-8000-000000000020"}),
+        ),
         ("preferred_recipe_version_ids", [uid(20)]),
     ],
 )
-def test_generation_member_constraints_reject_loosely_typed_ids(
-    field, value
-) -> None:
+def test_generation_member_constraints_reject_loosely_typed_ids(field, value) -> None:
     """Malformed UI adapter inputs must never silently bypass hard exclusion."""
     with pytest.raises(PlannerAuthoritativeInputError, match=field):
         GenerationMemberConstraints(uid(2), **{field: value})
@@ -316,9 +320,7 @@ def test_generation_member_constraints_preserve_canonical_exclusions() -> None:
     )
     assert member.excluded_food_ingredient_ids == frozenset({uid(50)})
     planner, command, *_ = service()
-    request = planner.compose_authoritative_request(
-        replace(command, members=(member,))
-    )
+    request = planner.compose_authoritative_request(replace(command, members=(member,)))
     assert request.members[0].excluded_food_ingredient_ids == frozenset({uid(50)})
 
 
