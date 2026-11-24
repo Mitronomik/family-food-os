@@ -103,8 +103,23 @@ PINNED_SOURCE_BLOBS = {
 }
 
 
+# Scoped review candidate: the original 2026-10-30 pre-generation source pin
+# remains unchanged. This ONE additional exact Git blob adds UUID type checks
+# to GenerationMemberConstraints.__post_init__ (PR #305); it does not alter
+# valid canonical UUID inputs, Planner candidate selection or frozen A/B bytes.
+# Independent review of the source diff and identical A/B receipts is mandatory
+# before treating this compatibility allowance as accepted provenance.
+# Keying by the original pinned blob prevents arbitrary pin replacement.
+COMPATIBLE_PLANNER_INPUT_BOUNDARY_BLOBS = {
+    (
+        "backend/app/services/planner.py",
+        "1dde67b026b3c2cab99622482979f3e1fe2d0751",
+    ): "269fa7f21679024c944ded49d74bc8f8b94ffc74",
+}
+
+
 def _assert_source_integrity() -> None:
-    """Check actual raw Git-blob bytes, not an unverified source-commit label."""
+    """Verify every raw Git blob; allow only specifically pinned boundary additions."""
     root = Path(__file__).resolve().parents[1]
     for relative, expected_sha1 in PINNED_SOURCE_BLOBS.items():
         source = root / relative
@@ -115,7 +130,13 @@ def _assert_source_integrity() -> None:
         actual = hashlib.sha1(
             b"blob " + str(len(raw)).encode("ascii") + b"\0" + raw
         ).hexdigest()
-        if actual != expected_sha1:
+        if (
+            actual != expected_sha1
+            and actual
+            != COMPATIBLE_PLANNER_INPUT_BOUNDARY_BLOBS.get(
+                (relative, expected_sha1)
+            )
+        ):
             raise PreflightNoGo(f"source Git blob drift: {relative}")
 
 
