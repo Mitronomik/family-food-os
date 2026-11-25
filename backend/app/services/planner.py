@@ -82,6 +82,23 @@ class GenerationMemberConstraints:
     excluded_food_ingredient_ids: frozenset[UUID] = frozenset()
     preferred_recipe_version_ids: frozenset[UUID] = frozenset()
 
+    def __post_init__(self) -> None:
+        # A string or loosely typed iterable would silently miss canonical UUID
+        # comparisons in the deterministic Planner. Reject it at the boundary.
+        if not isinstance(self.member_id, UUID):
+            raise PlannerAuthoritativeInputError("member_id must be a UUID")
+        for field in (
+            "excluded_food_ingredient_ids",
+            "preferred_recipe_version_ids",
+        ):
+            ids = getattr(self, field)
+            if not isinstance(ids, frozenset) or any(
+                not isinstance(value, UUID) for value in ids
+            ):
+                raise PlannerAuthoritativeInputError(
+                    f"{field} must be a frozenset of canonical UUIDs"
+                )
+
 
 @dataclass(frozen=True)
 class AuthoritativeGenerationRequest:
