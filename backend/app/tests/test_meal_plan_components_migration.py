@@ -20,7 +20,8 @@ TABLES = {
 def _through_0043(config, monkeypatch):
     original = list(migrations.MIGRATION_MODULES)
     cutoff = next(
-        index for index, name in enumerate(original)
+        index
+        for index, name in enumerate(original)
         if name.endswith("0043_shopping_engine")
     )
     monkeypatch.setattr(migrations, "MIGRATION_MODULES", original[: cutoff + 1])
@@ -49,7 +50,10 @@ def test_fresh_0044_remains_immutable_after_following_0045(tmp_path):
         MIGRATION_ID,
         "0045_household_member_food_exclusions",
     ]
-    assert apply_migrations(config)[-2:] == [MIGRATION_ID, "0045_household_member_food_exclusions"]
+    assert apply_migrations(config)[-2:] == [
+        MIGRATION_ID,
+        "0045_household_member_food_exclusions",
+    ]
     assert apply_migrations(config) == []
     with sqlite3.connect(config.path) as db:
         db.execute("PRAGMA foreign_keys=ON")
