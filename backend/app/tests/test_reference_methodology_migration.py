@@ -104,6 +104,7 @@ def test_0036_is_appended_after_0035_and_0033_remains_reserved():
         "0043_shopping_engine",
         "0044_meal_plan_components",
         "0045_household_member_food_exclusions",
+        "0045_household_member_food_exclusions",
     ]
     assert not any(value.startswith("0033_") for value in expected)
 
@@ -130,6 +131,7 @@ def test_populated_0035_upgrade_preserves_existing_state_and_restore_reupgrades(
         "0042_recipe_prepared_output_nutrition",
         "0043_shopping_engine",
         "0044_meal_plan_components",
+        "0045_household_member_food_exclusions",
         "0045_household_member_food_exclusions",
     ]
     assert existing_rows(database) == before
@@ -158,6 +160,7 @@ def test_populated_0035_upgrade_preserves_existing_state_and_restore_reupgrades(
         "0043_shopping_engine",
         "0044_meal_plan_components",
         "0045_household_member_food_exclusions",
+        "0045_household_member_food_exclusions",
     ]
 
     shutil.copy2(backup, database)
@@ -175,6 +178,7 @@ def test_populated_0035_upgrade_preserves_existing_state_and_restore_reupgrades(
         "0042_recipe_prepared_output_nutrition",
         "0043_shopping_engine",
         "0044_meal_plan_components",
+        "0045_household_member_food_exclusions",
         "0045_household_member_food_exclusions",
     ]
     assert existing_rows(database) == before
