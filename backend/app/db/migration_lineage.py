@@ -198,6 +198,9 @@ REQUIRED_TABLES_BY_MIGRATION: dict[str, frozenset[str]] = {
             "meal_plan_component_servings",
         }
     ),
+    "0045_household_member_food_exclusions": frozenset(
+        {"household_member_excluded_food_ingredients"}
+    ),
 }
 
 # The foundational tables promised by migration `0001`. Stable FamilyFoodOS
