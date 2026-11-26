@@ -123,7 +123,14 @@ jobs:
           from app.db import migrations
           ids = migrations.expected_migration_ids()
           assert '0042_recipe_prepared_output_nutrition' in ids
-          if '0044_meal_plan_components' in ids:
+          if '0045_household_member_food_exclusions' in ids:
+              assert ids[-4:] == [
+                  '0042_recipe_prepared_output_nutrition',
+                  '0043_shopping_engine',
+                  '0044_meal_plan_components',
+                  '0045_household_member_food_exclusions',
+              ]
+          elif '0044_meal_plan_components' in ids:
               assert ids[-3:] == [
                   '0042_recipe_prepared_output_nutrition',
                   '0043_shopping_engine',
