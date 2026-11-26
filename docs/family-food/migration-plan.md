@@ -40,6 +40,9 @@ Household
 
 Master Roadmap отвечает за текущий implementation order, delivery gates и
 момент, когда разрешены PWA, Auth, Retail, AI и Billing.
+[ADR 0033](../decisions/0033-early-consumer-exclusions-ui-development.md)
+разрешает единственный ранний внутренний срез PWA и исключений до Gate 2;
+после него возвращаемся к backend roadmap. Остальные gates неизменны.
 
 ---
 
@@ -2136,7 +2139,7 @@ canonical milestones и gates из `docs/family-food/master-roadmap.md` без
 `docs/family-food/master-roadmap.md`. В частности:
 
 - Planner implementation ждёт canonical PR8;
-- Consumer PWA ждёт Gate 2 и PR11;
+- Consumer PWA ждёт Gate 2 и PR11, кроме ограниченного среза ADR 0033;
 - Retail ждёт позднюю Retail Program;
 - AI остаётся optional и поздним.
 

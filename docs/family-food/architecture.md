@@ -109,6 +109,8 @@ The target consumer product is hosted, responsive, mobile-first and installable
 as a PWA. Normal end users do not manage Python, Node, Git, launcher processes,
 database files or migrations.
 
+The bounded early development sequence in [ADR 0033](../decisions/0033-early-consumer-exclusions-ui-development.md) does not change this target, authorization model or release gates.
+
 The target remains one modular application until scale or operational evidence
 justifies another topology. Context boundaries below are code and ownership
 boundaries; they do not imply network services.

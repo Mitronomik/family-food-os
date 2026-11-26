@@ -29,6 +29,8 @@
 > execution scope and preservation of D2/D3. Historical PR10 text below remains
 > useful context but does not silently override that later accepted amendment.
 
+> **Owner-approved limited sequencing exception — 2026-11-26:** [ADR 0033](../decisions/0033-early-consumer-exclusions-ui-development.md) permits one internal target PWA shell + member exclusions slice before Gate 2, after this governance changeset merges. Then return strictly to remaining backend PR10, PR10-PDF and Gate 2. No release gate or acceptance criterion changes.
+
 ## 1. Authority
 
 This document is the repository-local source of truth for FamilyFoodOS product
@@ -869,7 +871,7 @@ PR14.
 
 ### GATE 2 — MVP0 Backend
 
-The complete backend vertical slice works before consumer-PWA implementation:
+The complete backend vertical slice remains mandatory before further consumer-PWA implementation beyond the single internal [ADR 0033 exception](../decisions/0033-early-consumer-exclusions-ui-development.md):
 
 ```text
 Household
@@ -924,8 +926,10 @@ real-family testing. That distinct **mandatory release gate** is described in
 
 ### PR11 — Consumer PWA Shell
 
-**Goal:** establish the mobile-first installable consumer shell only after the
-MVP0 backend gate is real.
+**Goal:** establish the mobile-first installable consumer shell after the
+MVP0 backend gate is real, except for the bounded early shell/editor in
+[ADR 0033](../decisions/0033-early-consumer-exclusions-ui-development.md).
+That exception does not complete PR11.
 
 **Capabilities:** app routing/navigation, loading/error/empty/offline-aware
 states, API integration boundary, accessibility baseline and the primary
@@ -1351,7 +1355,7 @@ Parallel agents may work only inside the current authorized milestone/gate or
 on explicitly bounded research, QA, fixture/data preparation and supporting
 work that does not implement a future product milestone. Parallel capacity is
 not authorization to skip sequence: Planner implementation waits for PR8,
-Consumer PWA for Gate 2/PR11, Retail for its later program and AI remains
+Consumer PWA for Gate 2/PR11 (except the single ADR 0033 slice), Retail for its later program and AI remains
 optional and later.
 
 A documentation/governance PR such as PR2-DOCS may occur between milestones to

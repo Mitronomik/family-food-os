@@ -23,7 +23,8 @@ If instructions conflict, the higher-priority source wins. Canonical project doc
 may be consulted for historical or transitional-frontend behavior context, but
 it is not the active FamilyFoodOS consumer UI contract and cannot define the
 future consumer product. A FamilyFoodOS consumer UI contract belongs to its
-later migration/frontend gate.
+later migration/frontend gate, except the bounded internal slice in
+[ADR 0033](decisions/0033-early-consumer-exclusions-ui-development.md).
 
 ## Third-party skill boundaries
 
