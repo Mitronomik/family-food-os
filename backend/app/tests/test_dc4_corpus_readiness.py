@@ -7,6 +7,7 @@ import pytest
 from app.db import migrations
 from app.db.config import DatabaseConfig
 from app.domain.food_recipes import MealTypeCode, RightsReviewStatus, VerificationStatus
+from app.services.households import HouseholdService
 from app.services.recipe_nutrition_v2 import RecipeNutritionV2UnavailableError
 
 from scripts.audit_dc4_corpus_readiness import _audit_active_catalogue, audit
@@ -29,6 +30,20 @@ def _replay_frozen_dc4_migration_prefix(monkeypatch):
         if module.endswith("0043_shopping_engine")
     )
     monkeypatch.setattr(migrations, "MIGRATION_MODULES", modules[: cutoff + 1])
+
+    # This *historical* DC4 evidence fixture intentionally migrates only to
+    # 0043, which predates stored member exclusions (0045). Only the test's
+    # frozen input adapter supplies the known empty preference snapshot. The
+    # production repository still fails closed when its 0045 table is missing.
+    def frozen_0043_member_exclusions(self, household_id):
+        state = self.get_household(household_id)
+        return state, {member.id: frozenset() for member in state.members}
+
+    monkeypatch.setattr(
+        HouseholdService,
+        "get_household_with_exclusions",
+        frozen_0043_member_exclusions,
+    )
 
 
 def test_dc4_reproducible_corpus_and_gate1_evidence(tmp_path: Path) -> None:
