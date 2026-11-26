@@ -4,7 +4,9 @@ from datetime import date, datetime
 from decimal import Decimal
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, StrictBool, field_validator
+from pydantic import UUID4, BaseModel, ConfigDict, Field, StrictBool, field_validator
+
+from app.services.households import MAX_MEMBER_EXCLUDED_FOODS
 
 DecimalInput = Decimal | int | str
 
@@ -123,3 +125,31 @@ class HouseholdStateResponse(HouseholdResponse):
 
 class HouseholdMembersResponse(BaseModel):
     members: list[HouseholdMemberResponse]
+
+
+class HouseholdMemberExclusionsReplaceRequest(BaseModel):
+    expected_excluded_food_ingredient_ids: list[UUID4] = Field(
+        max_length=MAX_MEMBER_EXCLUDED_FOODS
+    )
+    excluded_food_ingredient_ids: list[UUID4] = Field(
+        max_length=MAX_MEMBER_EXCLUDED_FOODS
+    )
+
+    model_config = ConfigDict(extra="forbid")
+
+    @field_validator(
+        "expected_excluded_food_ingredient_ids", "excluded_food_ingredient_ids"
+    )
+    @classmethod
+    def reject_duplicates(cls, value: list[UUID]) -> list[UUID]:
+        if len(value) != len(set(value)):
+            raise ValueError("Duplicate food ingredient identifiers.")
+        return value
+
+
+class HouseholdMemberExclusionsResponse(BaseModel):
+    excluded_food_ingredient_ids: list[UUID]
+
+
+class HouseholdMemberExclusionsWriteResponse(HouseholdMemberExclusionsResponse):
+    changed: bool

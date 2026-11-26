@@ -1,3 +1,27 @@
+# 2026-11-26 — PR #308 second CI correction
+
+PR #308 second CI correction: 5e0de59 passed focused 49+23 tests, import lint and Shopping API workflow; remaining Ruff diff consists of two assert formatting changes. Partial nutrition broad shard 0: 918 passed, one obsolete catalogue architecture guard rejected existence of the newly authorized read-only API module. Replace file-absence proxy with exact mounted GET-only route allowlist and service read-call/adapter-import guards, retaining prohibition of catalogue mutation. No runtime behavior change, no test deletion, no CI bypass. Exact-head rerun required.
+
+---
+
+# 2026-11-26 — PR #308 CI formatting correction
+
+PR #308 CI correction: on 3c942bdfdda50a5d6a30539cbf64a4271b9f75e2, Household exclusions workflow passed 49 focused and 23 migration/source tests before Ruff I001; Shopping API workflow passed 12 + 42 + 81 tests before Ruff format main.py. Correct import order and formatting only, no changed business behavior or weakened tests. Exact-head rerun required.
+
+---
+
+# 2026-11-26 — PR #308 P2 review correction
+
+PR #308 P2 correction: GET/PUT map typed non-conflict HouseholdPersistenceError to a safe Russian 503 (no-store), with reread-before-retry guidance; conflicts remain 409. Tests inject a DBAPI commit failure in the real write UoW and assert rollback/readback, plus typed read failure. Unexpected exceptions are not caught as CAS conflicts. Retaining inactive IDs while adding active IDs remains a proposed separately authorized persistence follow-up (validate selected minus existing); do not change #307 semantics in this API PR. Exact-head verification pending.
+
+---
+
+# 2026-11-26 — Member Food Exclusions API after #307
+
+Accepted base: `main@634d193a161b2b678102b7075eb58bba1223b813` ([#307](https://github.com/Mitronomik/family-food-os/pull/307) merged). Owner authorized the thin API slice. Branch `feat/member-food-exclusions-api` adds scoped GET/PUT member exclusions and read-only canonical food search/detail, explicit expected-set CAS, bounded UUIDv4 arrays and safe Russian errors. Existing migration 0045, Household service, repository and Planner unchanged. API integration tests cover real persisted selection and next-week RecipeVersion checks, previous-plan preservation, validation, cross-Household scope and rollback. CI and independent review pending; not release-ready. Local no-auth only; shared deployment authorization and ABA limitation remain. No UI, new schema or composed-meal release.
+
+---
+
 # 2026-11-23 — whole-catalogue allergen readiness, first executable PR underway
 
 Latest explicit owner choice: address FoodIngredient allergen-readiness for **all current and future catalogue inputs** instead of repairing the 12 identified in PR #299 individually. Base `main@4b634febcbda5f8364ed25a0f3ee1132871854d2`; #299 remains review-ready but unmerged. Current branch `feat/catalogue-wide-allergen-readiness-inventory` creates `scripts/audit_food_allergen_readiness.py`: fresh owned DC4-A3-seeded SQLite by default, or read-only existing SQLite, all FoodIngredient identities including inactive, all RecipeVersion dependencies (active/old), exact unknowns and review status/provenance gaps, deterministic queue and semantic receipt. Review proposal validation is only structural `NOT_AUTHORIZED_REVIEW_ONLY`; an untrusted review string/URL/SHA cannot publish authority. Dedicated CI runs on food-data seed/curation changes. Tests check real soup/goulash blocker subset, unknown/positive/empty semantics, source identity mismatches, missing source evidence, duplicates, no new SQLite from missing path and fresh-process repeatability.

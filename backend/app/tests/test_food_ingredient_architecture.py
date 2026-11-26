@@ -75,5 +75,43 @@ def test_food_catalogue_repositories_never_open_or_complete_transactions():
 
 
 def test_no_public_catalogue_mutation_api_was_added():
-    assert not (APP_ROOT / "api" / "food_ingredients.py").exists()
-    assert not (APP_ROOT / "schemas" / "food_ingredients.py").exists()
+    from app.main import create_app
+    from fastapi.routing import APIRoute
+
+    app = create_app()
+    try:
+        catalogue_routes = [
+            route
+            for route in app.routes
+            if isinstance(route, APIRoute)
+            and (
+                route.path == "/api/food-ingredients"
+                or route.path.startswith("/api/food-ingredients/")
+            )
+        ]
+        assert len(catalogue_routes) == 2
+        assert {route.path: route.methods for route in catalogue_routes} == {
+            "/api/food-ingredients": {"GET"},
+            "/api/food-ingredients/{ingredient_id}": {"GET"},
+        }
+        api_path = APP_ROOT / "api" / "food_ingredients.py"
+        modules = imported_modules(api_path)
+        assert not any(
+            module == "sqlite3"
+            or module.startswith("sqlalchemy")
+            or module.startswith("app.persistence")
+            for module in modules
+        )
+        tree = ast.parse(api_path.read_text(encoding="utf-8"))
+        service_calls = {
+            node.func.attr
+            for node in ast.walk(tree)
+            if isinstance(node, ast.Call)
+            and isinstance(node.func, ast.Attribute)
+            and isinstance(node.func.value, ast.Call)
+            and isinstance(node.func.value.func, ast.Name)
+            and node.func.value.func.id == "service_provider"
+        }
+        assert service_calls == {"search", "get"}
+    finally:
+        app.state.household_engine.dispose()

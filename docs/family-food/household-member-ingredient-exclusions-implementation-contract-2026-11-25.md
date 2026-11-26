@@ -88,3 +88,20 @@ If this contract is rejected, no runtime code is authorized. If accepted but the
 **Planner boundary:** HouseholdService reads Household members and all persisted selections in a single read scope, and Planner unions these sets with any additional request-scoped exclusions. An absent/invalid entry for an existing member blocks planning, not interprets it as an empty set. Historical MealPlans are unchanged; old plan freshness/promotion remains outside this PR.
 
 **Review status:** Implementation-specific decision offered for independent architecture/QA review in PR #307, **not automatically accepted by passing CI**. Validate concurrent CAS races, source-pin compatibility, FK scope, restore prefixes, and exact-head full backend+launcher checks before owner merge.
+
+
+## HTTP slice after accepted PR #307 (2026-11-26)
+
+Local-first API only, no new schema or Planner/persistence changes:
+
+- `GET /api/households/{household_id}/members/{member_id}/food-exclusions` returns `excluded_food_ingredient_ids` (sorted canonical UUIDs, including previously selected inactive foods).
+- `PUT` at the same path requires both `expected_excluded_food_ingredient_ids` and `excluded_food_ingredient_ids`: arrays of distinct UUIDv4, at most 128 each. Explicit empty selected array clears; omission is invalid. Returns committed selection and `changed`. No-op requires expected=current=selected; retry with stale expected is conflict, not an automatic overwrite.
+- `GET /api/food-ingredients?q=...&limit=20` uses existing active canonical name/alias search (limit 1–200); `GET /api/food-ingredients/{ingredient_id}` resolves one canonical identity including inactive records. Only id, canonical_name, is_active are projected. No new catalogue authority.
+- Scoped missing member/household: 404; malformed/oversized/duplicate request: 422; existing service persistence conflict (including stale set, unknown or inactive selected food, contention): 409 with a generic Russian action message. Existing service does not expose distinct typed conflict causes; no exception-text parsing. Preference responses are no-store; invalid payloads and driver exception details are not echoed. Search uses stored canonical names; missing Russian data is a catalogue issue, not a translation mandate for this API.
+- A previously selected inactive ingredient remains visible; the existing service may reject a changed set that still contains an inactive ingredient. Set-CAS ABA limitation remains. Historical plans are not recalculated. No shared deployment authorization: raw Household UUID is not access control. Future UI and authenticated membership enforcement are separate.
+
+Verification: API integration tests against real migrated SQLite and the existing deterministic Planner fixture, plus affected CI. No acceptance or review-ready claim before exact-head checks and independent review.
+
+### PR #308 review correction
+
+PR #308 P2 correction: GET/PUT map typed non-conflict HouseholdPersistenceError to a safe Russian 503 (no-store), with reread-before-retry guidance; conflicts remain 409. Tests inject a DBAPI commit failure in the real write UoW and assert rollback/readback, plus typed read failure. Unexpected exceptions are not caught as CAS conflicts. Retaining inactive IDs while adding active IDs remains a proposed separately authorized persistence follow-up (validate selected minus existing); do not change #307 semantics in this API PR. Exact-head verification pending.
