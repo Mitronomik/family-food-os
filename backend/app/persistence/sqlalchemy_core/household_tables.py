@@ -6,6 +6,7 @@ from sqlalchemy import (
     Column,
     Date,
     ForeignKey,
+    ForeignKeyConstraint,
     Index,
     MetaData,
     String,
@@ -83,5 +84,23 @@ household_member_excluded_food_ingredients_table = Table(
     household_metadata,
     Column("household_id", entity_uuid_type(), primary_key=True, nullable=False),
     Column("member_id", entity_uuid_type(), primary_key=True, nullable=False),
-    Column("food_ingredient_id", entity_uuid_type(), primary_key=True, nullable=False),
+    Column(
+        "food_ingredient_id",
+        entity_uuid_type(),
+        ForeignKey("food_ingredients.id", ondelete="RESTRICT"),
+        primary_key=True,
+        nullable=False,
+    ),
+    ForeignKeyConstraint(
+        ["household_id", "member_id"],
+        ["household_members.household_id", "household_members.id"],
+        ondelete="RESTRICT",
+    ),
+)
+
+Index(
+    "idx_household_excluded_food_member",
+    household_member_excluded_food_ingredients_table.c.household_id,
+    household_member_excluded_food_ingredients_table.c.member_id,
+    household_member_excluded_food_ingredients_table.c.food_ingredient_id,
 )
