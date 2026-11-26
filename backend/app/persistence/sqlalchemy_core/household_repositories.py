@@ -146,9 +146,7 @@ class SqlAlchemyHouseholdMemberRepository:
                     food_ingredients_table.c.id, food_ingredients_table.c.is_active
                 ).where(food_ingredients_table.c.id.in_(newly_added))
             ).all()
-            if len(rows) != len(newly_added) or any(
-                not row.is_active for row in rows
-            ):
+            if len(rows) != len(newly_added) or any(not row.is_active for row in rows):
                 raise HouseholdPersistenceConflictError(
                     "Selected canonical food is missing or inactive."
                 )
