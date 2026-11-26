@@ -104,6 +104,7 @@ def test_0033_remains_reserved_while_partial_profiles_use_0034():
         "0043_shopping_engine",
         "0044_meal_plan_components",
         "0045_household_member_food_exclusions",
+        "0045_household_member_food_exclusions",
     ]
     assert not any(value.startswith("0033_") for value in expected)
 
@@ -137,6 +138,7 @@ def test_populated_0032_database_upgrades_without_rewriting_profiles_or_vectors(
         "0042_recipe_prepared_output_nutrition",
         "0043_shopping_engine",
         "0044_meal_plan_components",
+        "0045_household_member_food_exclusions",
         "0045_household_member_food_exclusions",
     ]
 
@@ -179,6 +181,7 @@ def test_populated_0032_database_upgrades_without_rewriting_profiles_or_vectors(
         "0043_shopping_engine",
         "0044_meal_plan_components",
         "0045_household_member_food_exclusions",
+        "0045_household_member_food_exclusions",
     ]
     assert "food_nutrition_profiles" in trigger_sql
     assert "food_composition_versions" in trigger_sql
@@ -204,6 +207,7 @@ def test_populated_0032_database_upgrades_without_rewriting_profiles_or_vectors(
         "0042_recipe_prepared_output_nutrition",
         "0043_shopping_engine",
         "0044_meal_plan_components",
+        "0045_household_member_food_exclusions",
         "0045_household_member_food_exclusions",
     ]
     assert profile_rows(database) == before_profiles
