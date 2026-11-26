@@ -349,9 +349,10 @@ def test_migration_0042_is_registered_and_required_tables_exist(database):
     assert (
         "0042_recipe_prepared_output_nutrition" in migrations.expected_migration_ids()
     )
-    assert migrations.expected_migration_ids()[-2:] == [
+    assert migrations.expected_migration_ids()[-3:] == [
         "0043_shopping_engine",
         "0044_meal_plan_components",
+        "0045_household_member_food_exclusions",
     ]
     with sqlite3.connect(database.path) as db:
         tables = {
@@ -386,6 +387,11 @@ def test_r1f_authoritative_planner_boundary_loads_pilot_candidates_and_exclusion
                     household=SimpleNamespace(id=household_id),
                     members=(SimpleNamespace(id=self.member_id, active=True),),
                 )
+
+            def get_household_with_exclusions(self, requested_household_id):
+                return self.get_household(requested_household_id), {
+                    self.member_id: frozenset()
+                }
 
         class MealPlans:
             def __init__(self, member_id, role):
