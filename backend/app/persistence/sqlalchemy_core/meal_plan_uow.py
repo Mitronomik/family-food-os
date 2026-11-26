@@ -122,7 +122,10 @@ class SqlAlchemyMealPlanUnitOfWork:
                     raise MealPlanPersistenceConflictError(
                         "Household member changed before MealPlan publication."
                     )
-                if self.members.list_excluded_food_ids(household_id, member_id) != values:
+                if (
+                    self.members.list_excluded_food_ids(household_id, member_id)
+                    != values
+                ):
                     raise MealPlanPersistenceConflictError(
                         "Member exclusions changed during MealPlan generation."
                     )
