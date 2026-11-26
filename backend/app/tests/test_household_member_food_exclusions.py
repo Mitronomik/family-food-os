@@ -1,6 +1,8 @@
 """Persisted non-medical member ingredient exclusions and Planner admission."""
 
+import sqlite3
 from dataclasses import replace
+from importlib import import_module
 from uuid import uuid4
 
 import pytest
@@ -72,31 +74,44 @@ def test_persisted_exclusions_are_automatic_and_caller_can_only_add(scenario):
     other_engine = create_sqlite_engine(config)
     try:
         reopened = create_household_service(other_engine)
-        assert reopened.list_member_excluded_food_ids(
-            household, a
-        ) == frozenset({food.id})
+        assert reopened.list_member_excluded_food_ids(household, a) == frozenset(
+            {food.id}
+        )
     finally:
         other_engine.dispose()
 
     plain = replace(
         witness.command,
-        members=tuple(replace(member, excluded_food_ingredient_ids=empty)
-                      for member in witness.command.members),
+        members=tuple(
+            replace(member, excluded_food_ingredient_ids=empty)
+            for member in witness.command.members
+        ),
     )
     composed = _planner(engine).compose_authoritative_request(plain)
-    assert all(food.id in member.excluded_food_ingredient_ids for member in composed.members
-               if member.member_id == a)
-    assert any(not member.excluded_food_ingredient_ids for member in composed.members
-               if member.member_id == b)
+    assert all(
+        food.id in member.excluded_food_ingredient_ids
+        for member in composed.members
+        if member.member_id == a
+    )
+    assert any(
+        not member.excluded_food_ingredient_ids
+        for member in composed.members
+        if member.member_id == b
+    )
     more = create_food_catalogue_service(engine).get_by_code("CARROT")
     supplemented = replace(
         plain,
-        members=tuple(replace(member, excluded_food_ingredient_ids=frozenset({more.id}))
-                      if member.member_id == a else member
-                      for member in plain.members),
+        members=tuple(
+            replace(member, excluded_food_ingredient_ids=frozenset({more.id}))
+            if member.member_id == a
+            else member
+            for member in plain.members
+        ),
     )
     result = _planner(engine).compose_authoritative_request(supplemented)
-    assert next(member for member in result.members if member.member_id == a).excluded_food_ingredient_ids == frozenset({food.id, more.id})
+    assert next(
+        member for member in result.members if member.member_id == a
+    ).excluded_food_ingredient_ids == frozenset({food.id, more.id})
 
 
 def test_atomic_replace_replay_stale_snapshot_and_cross_household(scenario):
@@ -124,7 +139,9 @@ def test_atomic_replace_replay_stale_snapshot_and_cross_household(scenario):
         )
     with pytest.raises(HouseholdNotFoundError):
         service.list_member_excluded_food_ids(uuid4(), member)
-    other = households.create_household(name="Другая семья", timezone_name="Europe/Moscow")
+    other = households.create_household(
+        name="Другая семья", timezone_name="Europe/Moscow"
+    )
     with pytest.raises(HouseholdMemberNotFoundError):
         service.replace_member_excluded_food_ids(
             other.id, member, expected=frozenset(), selected=frozenset({food})
@@ -224,15 +241,28 @@ def test_upgrade_0044_to_0045_only_adds_preferences(tmp_path):
         db.execute(
             "INSERT INTO households "
             "(id, name, timezone, created_at, updated_at) VALUES (?, ?, ?, ?, ?)",
-            (household_id, "Историческая семья", "Europe/Moscow",
-             "2026-11-01T00:00:00Z", "2026-11-01T00:00:00Z"),
+            (
+                household_id,
+                "Историческая семья",
+                "Europe/Moscow",
+                "2026-11-01T00:00:00Z",
+                "2026-11-01T00:00:00Z",
+            ),
         )
         db.execute(
             "INSERT INTO household_members "
             "(id, household_id, name, active, activity_level, goal, "
             "created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-            (member_id, household_id, "Исторический участник", 1, "active",
-             "maintain", "2026-11-01T00:00:00Z", "2026-11-01T00:00:00Z"),
+            (
+                member_id,
+                household_id,
+                "Исторический участник",
+                1,
+                "active",
+                "maintain",
+                "2026-11-01T00:00:00Z",
+                "2026-11-01T00:00:00Z",
+            ),
         )
 
     with sqlite3.connect(config.path) as db:
@@ -240,9 +270,9 @@ def test_upgrade_0044_to_0045_only_adds_preferences(tmp_path):
             db.execute("SELECT * FROM households").fetchall(),
             db.execute("SELECT * FROM household_members").fetchall(),
         )
-        old_history = tuple(db.execute(
-            "SELECT migration_id FROM schema_migrations ORDER BY rowid"
-        ).fetchall())
+        old_history = tuple(
+            db.execute("SELECT migration_id FROM schema_migrations ORDER BY rowid").fetchall()
+        )
         old_household_sql = db.execute(
             "SELECT sql FROM sqlite_master WHERE name='household_members'"
         ).fetchone()[0]
@@ -250,9 +280,9 @@ def test_upgrade_0044_to_0045_only_adds_preferences(tmp_path):
     assert apply_migrations(config) == []
     with sqlite3.connect(config.path) as db:
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
-        assert tuple(db.execute(
-            "SELECT migration_id FROM schema_migrations ORDER BY rowid"
-        ).fetchall()) == (*old_history, ("0045_household_member_food_exclusions",))
+        assert tuple(
+            db.execute("SELECT migration_id FROM schema_migrations ORDER BY rowid").fetchall()
+        ) == (*old_history, ("0045_household_member_food_exclusions",))
         assert db.execute(
             "SELECT sql FROM sqlite_master WHERE name='household_members'"
         ).fetchone()[0] == old_household_sql
@@ -270,9 +300,6 @@ def test_0045_migration_failure_rolls_back_index_and_schema_marker(
     tmp_path, monkeypatch
 ):
     """The failed schema half-step cannot leave an unmarked composite index."""
-    import sqlite3
-    from importlib import import_module
-
     config = DatabaseConfig(path=tmp_path / "migration-injection.sqlite")
     modules = list(MIGRATION_MODULES)
     try:
