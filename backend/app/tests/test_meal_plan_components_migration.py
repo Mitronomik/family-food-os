@@ -19,7 +19,11 @@ TABLES = {
 
 def _through_0043(config, monkeypatch):
     original = list(migrations.MIGRATION_MODULES)
-    monkeypatch.setattr(migrations, "MIGRATION_MODULES", original[:-1])
+    cutoff = next(
+        index for index, name in enumerate(original)
+        if name.endswith("0043_shopping_engine")
+    )
+    monkeypatch.setattr(migrations, "MIGRATION_MODULES", original[: cutoff + 1])
     try:
         applied = apply_migrations(config)
         assert applied[-1] == "0043_shopping_engine"
