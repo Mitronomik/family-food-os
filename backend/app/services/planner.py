@@ -288,7 +288,9 @@ class PlannerService:
         self, command: AuthoritativeGenerationRequest
     ) -> PlannerRequest:
         """Resolve caller constraints against current Household-scoped truth."""
-        state = self._households.get_household(command.household_id)
+        state, stored_exclusions = self._households.get_household_with_exclusions(
+            command.household_id
+        )
         if state.household.id != command.household_id:
             raise PlannerAuthoritativeInputError("Household scope mismatch")
         active = {member.id: member for member in state.members if member.active}
@@ -317,12 +319,25 @@ class PlannerService:
                 command.household_id, member_id, as_of_date=command.week_start
             )
             constraints = requested[member_id]
+            # A missing source entry is a persistence inconsistency, never
+            # permission to interpret an existing hard preference as empty.
+            if member_id not in stored_exclusions:
+                raise PlannerAuthoritativeInputError(
+                    "Stored HouseholdMember exclusions are unavailable."
+                )
+            persisted = stored_exclusions[member_id]
+            if not isinstance(persisted, frozenset) or any(
+                not isinstance(food_id, UUID) for food_id in persisted
+            ):
+                raise PlannerAuthoritativeInputError(
+                    "Stored HouseholdMember exclusions are invalid."
+                )
             members.append(
                 MemberPlannerConstraints(
                     member_id,
                     selection,
                     target.reference_energy_kcal,
-                    constraints.excluded_food_ingredient_ids,
+                    persisted | constraints.excluded_food_ingredient_ids,
                     constraints.preferred_recipe_version_ids,
                 )
             )
