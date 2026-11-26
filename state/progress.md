@@ -1,3 +1,9 @@
+# 2026-11-26 — Retain inactive member exclusions during edits
+
+Accepted base: main@ec1edce5a1f0baa1c86e184dda89b307cdc83802 (PR #308 merged). Owner authorized the deferred P2 correction before selector UI. Branch `fix/retain-inactive-member-food-exclusions` validates only newly added IDs after the existing scoped CAS check, permitting retained inactive selections without allowing new/re-added inactive IDs. Same migration 0045, UoW, full-set replacement, API and Planner. Regression covers retained inactive editing, replay, stale/unknown/other-member rejection, removal/re-addition, rollback with retained inactive ID. Exact-head focused/broad backend and launcher verification and independent review pending. No autonomous merge. ABA and shared deployment authorization remain open; UI follows only after acceptance.
+
+---
+
 # 2026-11-26 — PR #308 second CI correction
 
 PR #308 second CI correction: 5e0de59 passed focused 49+23 tests, import lint and Shopping API workflow; remaining Ruff diff consists of two assert formatting changes. Partial nutrition broad shard 0: 918 passed, one obsolete catalogue architecture guard rejected existence of the newly authorized read-only API module. Replace file-absence proxy with exact mounted GET-only route allowlist and service read-call/adapter-import guards, retaining prohibition of catalogue mutation. No runtime behavior change, no test deletion, no CI bypass. Exact-head rerun required.

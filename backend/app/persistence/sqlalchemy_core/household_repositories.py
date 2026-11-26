@@ -137,13 +137,16 @@ class SqlAlchemyHouseholdMemberRepository:
             )
         if existing == selected:
             return False
-        if selected:
+        # Retained exclusions remain authoritative even after catalogue
+        # deactivation. Only newly selected canonical foods must be active.
+        newly_added = selected - existing
+        if newly_added:
             rows = self._connection.execute(
                 select(
                     food_ingredients_table.c.id, food_ingredients_table.c.is_active
-                ).where(food_ingredients_table.c.id.in_(selected))
+                ).where(food_ingredients_table.c.id.in_(newly_added))
             ).all()
-            if len(rows) != len(selected) or any(not row.is_active for row in rows):
+            if len(rows) != len(newly_added) or any(not row.is_active for row in rows):
                 raise HouseholdPersistenceConflictError(
                     "Selected canonical food is missing or inactive."
                 )
