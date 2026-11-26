@@ -288,7 +288,10 @@ def test_r1h_fresh_publication_activates_exact_school2022_mains(database):
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
 
     assert "0043_shopping_engine" in migrations.expected_migration_ids()
-    assert migrations.expected_migration_ids()[-1] == "0045_household_member_food_exclusions"
+    assert (
+        migrations.expected_migration_ids()[-1]
+        == "0045_household_member_food_exclusions"
+    )
     assert r1f_snapshot(database) == r1f_before
 
 
