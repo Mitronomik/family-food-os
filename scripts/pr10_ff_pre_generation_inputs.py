@@ -114,10 +114,12 @@ COMPATIBLE_PLANNER_INPUT_BOUNDARY_BLOBS = {
     (
         "backend/app/services/planner.py",
         "1dde67b026b3c2cab99622482979f3e1fe2d0751",
-    ): frozenset({
-        "269fa7f21679024c944ded49d74bc8f8b94ffc74",
-        "c6a59ba3d6dd5eca0ddf02eb05999eebdc4c23dd",
-    }),
+    ): frozenset(
+        {
+            "269fa7f21679024c944ded49d74bc8f8b94ffc74",
+            "c6a59ba3d6dd5eca0ddf02eb05999eebdc4c23dd",
+        }
+    ),
 }
 
 
