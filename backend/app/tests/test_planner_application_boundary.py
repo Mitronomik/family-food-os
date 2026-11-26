@@ -34,6 +34,9 @@ class Households:
             members=(SimpleNamespace(id=self.member_id, active=True),),
         )
 
+    def get_household_with_exclusions(self, household_id):
+        return self.get_household(household_id), {self.member_id: frozenset()}
+
 
 class Recipes:
     def __init__(self):
