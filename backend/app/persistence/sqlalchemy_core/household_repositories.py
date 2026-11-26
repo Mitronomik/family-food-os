@@ -139,8 +139,9 @@ class SqlAlchemyHouseholdMemberRepository:
             return False
         if selected:
             rows = self._connection.execute(
-                select(food_ingredients_table.c.id, food_ingredients_table.c.is_active)
-                .where(food_ingredients_table.c.id.in_(selected))
+                select(
+                    food_ingredients_table.c.id, food_ingredients_table.c.is_active
+                ).where(food_ingredients_table.c.id.in_(selected))
             ).all()
             if len(rows) != len(selected) or any(not row.is_active for row in rows):
                 raise HouseholdPersistenceConflictError(
