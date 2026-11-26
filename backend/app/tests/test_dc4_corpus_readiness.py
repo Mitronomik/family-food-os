@@ -7,6 +7,7 @@ import pytest
 from app.db import migrations
 from app.db.config import DatabaseConfig
 from app.domain.food_recipes import MealTypeCode, RightsReviewStatus, VerificationStatus
+from app.persistence.sqlalchemy_core.meal_plan_uow import SqlAlchemyMealPlanUnitOfWork
 from app.services.households import HouseholdService
 from app.services.recipe_nutrition_v2 import RecipeNutritionV2UnavailableError
 
@@ -43,6 +44,20 @@ def _replay_frozen_dc4_migration_prefix(monkeypatch):
         HouseholdService,
         "get_household_with_exclusions",
         frozen_0043_member_exclusions,
+    )
+
+    # The frozen DC4 fixture predates migration 0045. Emulate precisely
+    # that historical writer contract *only here*, after asserting that its
+    # injected persisted-preference snapshot is empty. Production UoW always
+    # locks and revalidates the real 0045 relation before publishing a plan.
+    def frozen_0043_write_guard(self, *, household_id, expected):
+        assert household_id is not None
+        assert expected and all(not excluded for excluded in expected.values())
+
+    monkeypatch.setattr(
+        SqlAlchemyMealPlanUnitOfWork,
+        "guard_member_exclusions",
+        frozen_0043_write_guard,
     )
 
 
