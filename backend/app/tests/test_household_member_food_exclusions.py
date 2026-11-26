@@ -120,17 +120,26 @@ def test_atomic_replace_replay_stale_snapshot_and_cross_household(scenario):
     food = create_food_catalogue_service(engine).get_by_code("CARROT").id
     service = create_household_service(engine)
     original = _db_dump(config)
-    assert service.replace_member_excluded_food_ids(
-        hid, member, expected=frozenset(), selected=frozenset()
-    ) is False
+    assert (
+        service.replace_member_excluded_food_ids(
+            hid, member, expected=frozenset(), selected=frozenset()
+        )
+        is False
+    )
     assert _db_dump(config) == original
-    assert service.replace_member_excluded_food_ids(
-        hid, member, expected=frozenset(), selected=frozenset({food})
-    ) is True
+    assert (
+        service.replace_member_excluded_food_ids(
+            hid, member, expected=frozenset(), selected=frozenset({food})
+        )
+        is True
+    )
     current = _db_dump(config)
-    assert service.replace_member_excluded_food_ids(
-        hid, member, expected=frozenset({food}), selected=frozenset({food})
-    ) is False
+    assert (
+        service.replace_member_excluded_food_ids(
+            hid, member, expected=frozenset({food}), selected=frozenset({food})
+        )
+        is False
+    )
     assert _db_dump(config) == current
     with pytest.raises(HouseholdPersistenceConflictError, match="changed"):
         service.replace_member_excluded_food_ids(
@@ -270,7 +279,9 @@ def test_upgrade_0044_to_0045_only_adds_preferences(tmp_path):
             db.execute("SELECT * FROM household_members").fetchall(),
         )
         old_history = tuple(
-            db.execute("SELECT migration_id FROM schema_migrations ORDER BY rowid").fetchall()
+            db.execute(
+                "SELECT migration_id FROM schema_migrations ORDER BY rowid"
+            ).fetchall()
         )
         old_household_sql = db.execute(
             "SELECT sql FROM sqlite_master WHERE name='household_members'"
@@ -280,14 +291,22 @@ def test_upgrade_0044_to_0045_only_adds_preferences(tmp_path):
     with sqlite3.connect(config.path) as db:
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
         assert tuple(
-            db.execute("SELECT migration_id FROM schema_migrations ORDER BY rowid").fetchall()
+            db.execute(
+                "SELECT migration_id FROM schema_migrations ORDER BY rowid"
+            ).fetchall()
         ) == (*old_history, ("0045_household_member_food_exclusions",))
-        assert db.execute(
-            "SELECT sql FROM sqlite_master WHERE name='household_members'"
-        ).fetchone()[0] == old_household_sql
-        assert db.execute(
-            "SELECT COUNT(*) FROM household_member_excluded_food_ingredients"
-        ).fetchone()[0] == 0
+        assert (
+            db.execute(
+                "SELECT sql FROM sqlite_master WHERE name='household_members'"
+            ).fetchone()[0]
+            == old_household_sql
+        )
+        assert (
+            db.execute(
+                "SELECT COUNT(*) FROM household_member_excluded_food_ingredients"
+            ).fetchone()[0]
+            == 0
+        )
         assert (
             db.execute("SELECT * FROM households").fetchall(),
             db.execute("SELECT * FROM household_members").fetchall(),
@@ -323,17 +342,26 @@ def test_0045_migration_failure_rolls_back_index_and_schema_marker(
     with pytest.raises(RuntimeError, match="injected migration failure"):
         apply_migrations(config)
     with sqlite3.connect(config.path) as db:
-        assert db.execute(
-            "SELECT name FROM sqlite_master WHERE name='uq_household_member_scope'"
-        ).fetchone() is None
-        assert db.execute(
-            "SELECT name FROM sqlite_master "
-            "WHERE name='household_member_excluded_food_ingredients'"
-        ).fetchone() is None
-        assert db.execute(
-            "SELECT migration_id FROM schema_migrations "
-            "WHERE migration_id='0045_household_member_food_exclusions'"
-        ).fetchone() is None
+        assert (
+            db.execute(
+                "SELECT name FROM sqlite_master WHERE name='uq_household_member_scope'"
+            ).fetchone()
+            is None
+        )
+        assert (
+            db.execute(
+                "SELECT name FROM sqlite_master "
+                "WHERE name='household_member_excluded_food_ingredients'"
+            ).fetchone()
+            is None
+        )
+        assert (
+            db.execute(
+                "SELECT migration_id FROM schema_migrations "
+                "WHERE migration_id='0045_household_member_food_exclusions'"
+            ).fetchone()
+            is None
+        )
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
 
     monkeypatch.setattr(module, "upgrade", original_upgrade)
