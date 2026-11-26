@@ -9,7 +9,7 @@ from threading import Barrier
 from uuid import uuid4
 
 import pytest
-from app.db.config import DatabaseConfig
+from app.db.config import DATABASE_PATH_ENV, DatabaseConfig
 from app.db.migrations import (
     MIGRATION_MODULES,
     apply_migrations,
@@ -17,6 +17,7 @@ from app.db.migrations import (
 )
 from app.domain.meal_plans import MealSourceKind
 from app.domain.planner import PlannerSuccess
+from app.main import create_app
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_ingredient_composition import (
     create_food_catalogue_service,
@@ -46,6 +47,7 @@ from app.services.meal_plans import MealPlanValidationError
 from app.services.planner import PlannerService
 from app.tests.test_prep_read_only_integration import WEEK, _db_dump
 from app.tests.test_r2c_breakfast_grain_diversity import meal_plan_service
+from fastapi.testclient import TestClient
 
 pytest_plugins = ("app.tests.test_prep_read_only_integration",)
 
@@ -520,3 +522,196 @@ def test_0045_migration_failure_rolls_back_index_and_schema_marker(
 
     monkeypatch.setattr(module, "upgrade", original_upgrade)
     assert apply_migrations(config) == ["0045_household_member_food_exclusions"]
+
+
+@pytest.fixture
+def exclusions_api(scenario, monkeypatch):
+    config, _, _, _, _ = scenario
+    monkeypatch.setenv(DATABASE_PATH_ENV, str(config.path))
+    monkeypatch.setenv("AI_ENABLED", "false")
+    with TestClient(create_app()) as client:
+        yield client
+
+
+def _exclusions_url(household, member):
+    return f"/api/households/{household}/members/{member}/food-exclusions"
+
+
+def _selection_payload(expected, selected):
+    return {
+        "expected_excluded_food_ingredient_ids": [str(item) for item in expected],
+        "excluded_food_ingredient_ids": [str(item) for item in selected],
+    }
+
+
+def test_exclusions_http_catalogue_and_persisted_next_week(scenario, exclusions_api):
+    config, engine, _, witness, _ = scenario
+    household = witness.command.household_id
+    member_a, member_b = (entry.member_id for entry in witness.command.members)
+    foods = create_food_catalogue_service(engine)
+    beef = foods.get_by_code("BEEF_CATEGORY_1_RAW")
+    foods.add_alias(beef.id, alias="Тестовый мясной продукт")
+    search = exclusions_api.get(
+        "/api/food-ingredients", params={"q": "ТЕСТОВЫЙ МЯСНОЙ ПРОДУКТ"}
+    )
+    assert search.status_code == 200, search.text
+    assert [item["id"] for item in search.json()["items"]] == [str(beef.id)]
+    assert exclusions_api.get(f"/api/food-ingredients/{beef.id}").json() == {
+        "id": str(beef.id),
+        "canonical_name": beef.canonical_name,
+        "is_active": True,
+    }
+    with SqlAlchemyShoppingReadScope(engine) as scope:
+        previous = scope.plans.get_current(household, WEEK)
+    url = _exclusions_url(household, member_a)
+    response = exclusions_api.get(url)
+    assert response.status_code == 200
+    assert response.headers["Cache-Control"] == "no-store"
+    assert response.json() == {"excluded_food_ingredient_ids": []}
+    response = exclusions_api.put(url, json=_selection_payload([], [beef.id]))
+    assert response.status_code == 200, response.text
+    assert response.json() == {
+        "excluded_food_ingredient_ids": [str(beef.id)],
+        "changed": True,
+    }
+    assert exclusions_api.get(url).json() == {
+        "excluded_food_ingredient_ids": [str(beef.id)]
+    }
+    assert exclusions_api.get(_exclusions_url(household, member_b)).json() == {
+        "excluded_food_ingredient_ids": []
+    }
+    before = _db_dump(config)
+    replay = exclusions_api.put(
+        url, json=_selection_payload([beef.id], [beef.id])
+    )
+    assert replay.status_code == 200
+    assert replay.json()["changed"] is False
+    assert _db_dump(config) == before
+    stale = exclusions_api.put(url, json=_selection_payload([], []))
+    assert stale.status_code == 409
+    assert stale.json()["detail"]["code"] == "MEMBER_EXCLUSIONS_CONFLICT"
+    assert _db_dump(config) == before
+
+    next_week = WEEK + timedelta(days=7)
+    command = replace(
+        witness.command,
+        week_start=next_week,
+        fixed_events=(),
+        members=tuple(
+            replace(member, excluded_food_ingredient_ids=frozenset())
+            for member in witness.command.members
+        ),
+    )
+    result, saved = _planner(engine).generate_authoritative(command)
+    assert isinstance(result, PlannerSuccess)
+    assert saved is not None
+    with SqlAlchemyShoppingReadScope(engine) as scope:
+        assert scope.plans.get_current(household, WEEK) == previous
+        persisted = scope.plans.get_current(household, next_week)
+        assert persisted == saved
+        assigned = {
+            serving.event_id
+            for serving in persisted.servings
+            if serving.member_id == member_a
+        }
+        checked = 0
+        for event in persisted.events:
+            if event.id not in assigned or event.source_kind != MealSourceKind.COOK_RECIPE:
+                continue
+            detail = scope.recipes.get_detail(event.recipe_version_id)
+            assert detail is not None
+            assert beef.id not in {row.food_ingredient_id for row in detail.ingredients}
+            checked += 1
+        assert checked > 0
+
+
+def test_exclusions_http_invalid_scope_and_input(scenario, exclusions_api):
+    config, engine, households, witness, _ = scenario
+    household = witness.command.household_id
+    member = witness.command.members[0].member_id
+    other = households.create_household(name="Другая семья", timezone_name="UTC")
+    url = _exclusions_url(household, member)
+    foods = create_food_catalogue_service(engine)
+    carrot = foods.get_by_code("CARROT")
+    foods.deactivate(carrot.id)
+    before = _db_dump(config)
+    for wrong in (
+        _exclusions_url(other.id, member),
+        _exclusions_url(uuid4(), member),
+        _exclusions_url(household, uuid4()),
+    ):
+        assert exclusions_api.get(wrong).status_code == 404
+        assert exclusions_api.put(wrong, json=_selection_payload([], [])).status_code == 404
+
+    invalid_payloads = [
+        {},
+        {"excluded_food_ingredient_ids": []},
+        {"expected_excluded_food_ingredient_ids": []},
+        _selection_payload([], ["private-invalid-input"]),
+        _selection_payload([], ["00000000-0000-1000-8000-000000000001"]),
+        _selection_payload([], [carrot.id, carrot.id]),
+        _selection_payload([carrot.id, carrot.id], []),
+        _selection_payload([], [uuid4() for _ in range(129)]),
+        _selection_payload([uuid4() for _ in range(129)], []),
+        {**_selection_payload([], []), "reason": "private-invalid-input"},
+    ]
+    for payload in invalid_payloads:
+        response = exclusions_api.put(url, json=payload)
+        assert response.status_code == 422, response.text
+        assert response.json()["detail"]["code"] == "FOOD_SELECTION_INVALID_REQUEST"
+        assert "private-invalid-input" not in response.text
+
+    for food_id in (uuid4(), carrot.id):
+        response = exclusions_api.put(url, json=_selection_payload([], [food_id]))
+        assert response.status_code == 409
+        assert response.json()["detail"]["code"] == "MEMBER_EXCLUSIONS_CONFLICT"
+        assert str(food_id) not in response.text
+    assert exclusions_api.get(f"/api/food-ingredients/{carrot.id}").json()[
+        "is_active"
+    ] is False
+    assert exclusions_api.get(f"/api/food-ingredients/{uuid4()}").status_code == 404
+    assert exclusions_api.get(
+        "/api/food-ingredients", params={"q": "морковь", "limit": 201}
+    ).status_code == 422
+    assert all(
+        item["id"] != str(carrot.id)
+        for item in exclusions_api.get(
+            "/api/food-ingredients", params={"q": carrot.canonical_name}
+        ).json()["items"]
+    )
+    assert _db_dump(config) == before
+
+
+def test_exclusions_http_failed_write_and_inactive_history(scenario, exclusions_api):
+    config, engine, _, witness, _ = scenario
+    household = witness.command.household_id
+    member = witness.command.members[0].member_id
+    foods = create_food_catalogue_service(engine)
+    carrot = foods.get_by_code("CARROT")
+    beef = foods.get_by_code("BEEF_CATEGORY_1_RAW")
+    url = _exclusions_url(household, member)
+    assert exclusions_api.put(
+        url, json=_selection_payload([], [carrot.id])
+    ).status_code == 200
+    foods.deactivate(carrot.id)
+    assert exclusions_api.get(url).json()["excluded_food_ingredient_ids"] == [
+        str(carrot.id)
+    ]
+    with sqlite3.connect(config.path) as connection:
+        connection.execute("""
+            CREATE TRIGGER reject_http_exclusion_insert
+            BEFORE INSERT ON household_member_excluded_food_ingredients
+            BEGIN SELECT RAISE(ABORT, 'private injected failure'); END
+        """)
+    before = _db_dump(config)
+    failed = exclusions_api.put(url, json=_selection_payload([carrot.id], [beef.id]))
+    assert failed.status_code == 409
+    assert "private injected failure" not in failed.text
+    assert _db_dump(config) == before
+    assert exclusions_api.get(url).json()["excluded_food_ingredient_ids"] == [
+        str(carrot.id)
+    ]
+    # An explicit empty selection clears the set; omitted fields cannot.
+    cleared = exclusions_api.put(url, json=_selection_payload([carrot.id], []))
+    assert cleared.status_code == 200
+    assert cleared.json() == {"excluded_food_ingredient_ids": [], "changed": True}

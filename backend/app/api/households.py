@@ -3,13 +3,16 @@
 from collections.abc import Callable
 from uuid import UUID
 
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, Response, status
 
 from app.domain.errors import DomainValidationError
 from app.domain.households import Household, HouseholdMember, HouseholdState
 from app.schemas.households import (
     HouseholdCreateRequest,
     HouseholdMemberCreateRequest,
+    HouseholdMemberExclusionsReplaceRequest,
+    HouseholdMemberExclusionsResponse,
+    HouseholdMemberExclusionsWriteResponse,
     HouseholdMemberResponse,
     HouseholdMembersResponse,
     HouseholdMemberUpdateRequest,
@@ -19,6 +22,7 @@ from app.schemas.households import (
 )
 from app.services.household_contracts import HouseholdPersistenceConflictError
 from app.services.households import (
+    HouseholdExclusionInputError,
     HouseholdMemberNotFoundError,
     HouseholdNotFoundError,
     HouseholdService,
@@ -141,7 +145,89 @@ def create_households_router(
             raise HTTPException(status.HTTP_409_CONFLICT, detail=str(exc)) from exc
         return _member_response(member)
 
+    @router.get(
+        "/{household_id}/members/{member_id}/food-exclusions",
+        response_model=HouseholdMemberExclusionsResponse,
+    )
+    def get_member_food_exclusions(
+        household_id: UUID, member_id: UUID, response: Response
+    ) -> HouseholdMemberExclusionsResponse:
+        response.headers["Cache-Control"] = "no-store"
+        try:
+            selected = service_provider().list_member_excluded_food_ids(
+                household_id, member_id
+            )
+        except (HouseholdNotFoundError, HouseholdMemberNotFoundError) as exc:
+            raise _exclusions_not_found() from exc
+        except HouseholdPersistenceConflictError as exc:
+            raise _exclusions_conflict() from exc
+        return HouseholdMemberExclusionsResponse(
+            excluded_food_ingredient_ids=sorted(selected)
+        )
+
+    @router.put(
+        "/{household_id}/members/{member_id}/food-exclusions",
+        response_model=HouseholdMemberExclusionsWriteResponse,
+    )
+    def replace_member_food_exclusions(
+        household_id: UUID,
+        member_id: UUID,
+        payload: HouseholdMemberExclusionsReplaceRequest,
+        response: Response,
+    ) -> HouseholdMemberExclusionsWriteResponse:
+        response.headers["Cache-Control"] = "no-store"
+        selected = frozenset(payload.excluded_food_ingredient_ids)
+        try:
+            changed = service_provider().replace_member_excluded_food_ids(
+                household_id,
+                member_id,
+                expected=frozenset(payload.expected_excluded_food_ingredient_ids),
+                selected=selected,
+            )
+        except (HouseholdNotFoundError, HouseholdMemberNotFoundError) as exc:
+            raise _exclusions_not_found() from exc
+        except HouseholdExclusionInputError as exc:
+            raise HTTPException(
+                422,
+                detail={
+                    "code": "MEMBER_EXCLUSIONS_INVALID",
+                    "message": "Нельзя изменить исключения для этого участника.",
+                    "next_action": "Проверьте данные участника и повторите запрос.",
+                },
+                headers={"Cache-Control": "no-store"},
+            ) from exc
+        except HouseholdPersistenceConflictError as exc:
+            raise _exclusions_conflict() from exc
+        # Return the committed selection, not a second potentially racing read.
+        return HouseholdMemberExclusionsWriteResponse(
+            excluded_food_ingredient_ids=sorted(selected), changed=changed
+        )
+
     return router
+
+
+def _exclusions_not_found() -> HTTPException:
+    return HTTPException(
+        404,
+        detail={
+            "code": "MEMBER_EXCLUSIONS_NOT_FOUND",
+            "message": "Участник семьи не найден.",
+            "next_action": "Откройте актуальный список членов семьи.",
+        },
+        headers={"Cache-Control": "no-store"},
+    )
+
+
+def _exclusions_conflict() -> HTTPException:
+    return HTTPException(
+        409,
+        detail={
+            "code": "MEMBER_EXCLUSIONS_CONFLICT",
+            "message": "Не удалось сохранить или прочитать исключения.",
+            "next_action": "Обновите список исключений и проверьте доступность продуктов.",
+        },
+        headers={"Cache-Control": "no-store"},
+    )
 
 
 def _validation_http_error(exc: DomainValidationError) -> HTTPException:

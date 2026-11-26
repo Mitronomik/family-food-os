@@ -17,6 +17,7 @@ from app.api.clients import router as clients_router
 from app.api.database import router as database_router
 from app.api.demo_data import router as demo_data_router
 from app.api.exports import router as exports_router
+from app.api.food_ingredients import create_food_ingredients_router
 from app.api.health import router as health_router
 from app.api.households import create_households_router
 from app.api.imports import router as imports_router
@@ -46,6 +47,9 @@ from app.domain.production_tax_context import (
 )
 from app.identity import APP_SLUG, PRODUCT_NAME
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
+from app.persistence.sqlalchemy_core.food_ingredient_composition import (
+    create_food_catalogue_service,
+)
 from app.persistence.sqlalchemy_core.household_composition import (
     create_household_service,
 )
@@ -94,6 +98,24 @@ async def _validation_error_response(request: Request, exc: RequestValidationErr
                     "next_action": "Проверьте идентификаторы и формат запроса.",
                 }
             },
+        )
+    path = request.url.path
+    if (
+        path.startswith("/api/households/")
+        and path.endswith("/food-exclusions")
+    ) or path == "/api/food-ingredients" or path.startswith(
+        "/api/food-ingredients/"
+    ):
+        return JSONResponse(
+            status_code=422,
+            content={
+                "detail": {
+                    "code": "FOOD_SELECTION_INVALID_REQUEST",
+                    "message": "Некорректные параметры выбора продуктов.",
+                    "next_action": "Проверьте идентификаторы и формат запроса.",
+                }
+            },
+            headers={"Cache-Control": "no-store"},
         )
     if not _omits_tax_rate_context(exc):
         return await request_validation_exception_handler(request, exc)
@@ -152,6 +174,10 @@ def create_app() -> FastAPI:
     household_engine = create_sqlite_engine()
     app.state.household_engine = household_engine
     household_service = create_household_service(household_engine)
+    food_catalogue_service = create_food_catalogue_service(household_engine)
+    app.include_router(
+        create_food_ingredients_router(lambda: food_catalogue_service), prefix="/api"
+    )
     pantry_service = create_pantry_service(household_engine)
     shopping_service = create_shopping_service(household_engine)
     app.include_router(create_pantry_router(lambda: pantry_service), prefix="/api")

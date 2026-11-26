@@ -1,3 +1,9 @@
+# 2026-11-26 — Member Food Exclusions API after #307
+
+Accepted base: `main@634d193a161b2b678102b7075eb58bba1223b813` ([#307](https://github.com/Mitronomik/family-food-os/pull/307) merged). Owner authorized the thin API slice. Branch `feat/member-food-exclusions-api` adds scoped GET/PUT member exclusions and read-only canonical food search/detail, explicit expected-set CAS, bounded UUIDv4 arrays and safe Russian errors. Existing migration 0045, Household service, repository and Planner unchanged. API integration tests cover real persisted selection and next-week RecipeVersion checks, previous-plan preservation, validation, cross-Household scope and rollback. CI and independent review pending; not release-ready. Local no-auth only; shared deployment authorization and ABA limitation remain. No UI, new schema or composed-meal release.
+
+---
+
 # 2026-11-23 — owner expands allergen remediation to entire canonical catalogue
 
 - Owner explicitly rejected a never-ending sequence of 12-food fixes and approved a **systemic complete-catalogue + future-ingestion allergen readiness capability**. Root architecture requires a separate reviewed contract before any new durable attestation identity/migration or publication/revocation behavior; avoid silent source authority updates.
