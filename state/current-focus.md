@@ -1,3 +1,9 @@
+# 2026-11-26 — PR #308 CI formatting correction
+
+PR #308 CI correction: on 3c942bdfdda50a5d6a30539cbf64a4271b9f75e2, Household exclusions workflow passed 49 focused and 23 migration/source tests before Ruff I001; Shopping API workflow passed 12 + 42 + 81 tests before Ruff format main.py. Correct import order and formatting only, no changed business behavior or weakened tests. Exact-head rerun required.
+
+---
+
 # 2026-11-26 — PR #308 P2 review correction
 
 PR #308 P2 correction: GET/PUT map typed non-conflict HouseholdPersistenceError to a safe Russian 503 (no-store), with reread-before-retry guidance; conflicts remain 409. Tests inject a DBAPI commit failure in the real write UoW and assert rollback/readback, plus typed read failure. Unexpected exceptions are not caught as CAS conflicts. Retaining inactive IDs while adding active IDs remains a proposed separately authorized persistence follow-up (validate selected minus existing); do not change #307 semantics in this API PR. Exact-head verification pending.

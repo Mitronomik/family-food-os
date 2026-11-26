@@ -9,8 +9,6 @@ from threading import Barrier
 from uuid import uuid4
 
 import pytest
-from fastapi.testclient import TestClient
-from sqlalchemy.exc import OperationalError
 from app.db.config import DATABASE_PATH_ENV, DatabaseConfig
 from app.db.migrations import (
     MIGRATION_MODULES,
@@ -54,6 +52,8 @@ from app.services.meal_plans import MealPlanValidationError
 from app.services.planner import PlannerService
 from app.tests.test_prep_read_only_integration import WEEK, _db_dump
 from app.tests.test_r2c_breakfast_grain_diversity import meal_plan_service
+from fastapi.testclient import TestClient
+from sqlalchemy.exc import OperationalError
 
 pytest_plugins = ("app.tests.test_prep_read_only_integration",)
 
@@ -587,9 +587,7 @@ def test_exclusions_http_catalogue_and_persisted_next_week(scenario, exclusions_
         "excluded_food_ingredient_ids": []
     }
     before = _db_dump(config)
-    replay = exclusions_api.put(
-        url, json=_selection_payload([beef.id], [beef.id])
-    )
+    replay = exclusions_api.put(url, json=_selection_payload([beef.id], [beef.id]))
     assert replay.status_code == 200
     assert replay.json()["changed"] is False
     assert _db_dump(config) == before
@@ -622,7 +620,10 @@ def test_exclusions_http_catalogue_and_persisted_next_week(scenario, exclusions_
         }
         checked = 0
         for event in persisted.events:
-            if event.id not in assigned or event.source_kind != MealSourceKind.COOK_RECIPE:
+            if (
+                event.id not in assigned
+                or event.source_kind != MealSourceKind.COOK_RECIPE
+            ):
                 continue
             detail = scope.recipes.get_detail(event.recipe_version_id)
             assert detail is not None
@@ -647,7 +648,10 @@ def test_exclusions_http_invalid_scope_and_input(scenario, exclusions_api):
         _exclusions_url(household, uuid4()),
     ):
         assert exclusions_api.get(wrong).status_code == 404
-        assert exclusions_api.put(wrong, json=_selection_payload([], [])).status_code == 404
+        assert (
+            exclusions_api.put(wrong, json=_selection_payload([], [])).status_code
+            == 404
+        )
 
     invalid_payloads = [
         {},
@@ -696,9 +700,10 @@ def test_exclusions_http_failed_write_and_inactive_history(scenario, exclusions_
     carrot = foods.get_by_code("CARROT")
     beef = foods.get_by_code("BEEF_CATEGORY_1_RAW")
     url = _exclusions_url(household, member)
-    assert exclusions_api.put(
-        url, json=_selection_payload([], [carrot.id])
-    ).status_code == 200
+    assert (
+        exclusions_api.put(url, json=_selection_payload([], [carrot.id])).status_code
+        == 200
+    )
     foods.deactivate(carrot.id)
     assert exclusions_api.get(url).json()["excluded_food_ingredient_ids"] == [
         str(carrot.id)
@@ -733,9 +738,10 @@ def test_exclusions_http_commit_failure_is_not_cas_conflict(
     carrot = foods.get_by_code("CARROT")
     beef = foods.get_by_code("BEEF_CATEGORY_1_RAW")
     url = _exclusions_url(household, member)
-    assert exclusions_api.put(
-        url, json=_selection_payload([], [carrot.id])
-    ).status_code == 200
+    assert (
+        exclusions_api.put(url, json=_selection_payload([], [carrot.id])).status_code
+        == 200
+    )
     before = _db_dump(config)
     observed = []
 
@@ -764,9 +770,7 @@ def test_exclusions_http_commit_failure_is_not_cas_conflict(
     assert exclusions_api.get(url).json()["excluded_food_ingredient_ids"] == [
         str(carrot.id)
     ]
-    retry = exclusions_api.put(
-        url, json=_selection_payload([carrot.id], [beef.id])
-    )
+    retry = exclusions_api.put(url, json=_selection_payload([carrot.id], [beef.id]))
     assert retry.status_code == 200
 
 

@@ -101,10 +101,9 @@ async def _validation_error_response(request: Request, exc: RequestValidationErr
         )
     path = request.url.path
     if (
-        path.startswith("/api/households/")
-        and path.endswith("/food-exclusions")
-    ) or path == "/api/food-ingredients" or path.startswith(
-        "/api/food-ingredients/"
+        (path.startswith("/api/households/") and path.endswith("/food-exclusions"))
+        or path == "/api/food-ingredients"
+        or path.startswith("/api/food-ingredients/")
     ):
         return JSONResponse(
             status_code=422,
