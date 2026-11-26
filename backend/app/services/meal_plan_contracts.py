@@ -19,7 +19,6 @@ from app.services.reference_methodology_contracts import (
 )
 
 
-
 @dataclass(frozen=True)
 class DiagnosticIngredientFacts:
     """Database facts, not an admission verdict, for one recipe ingredient."""
