@@ -138,6 +138,63 @@ def test_missing_inactive_and_malformed_food_ids_cannot_publish(scenario):
     assert _db_dump(config) == before
 
 
+def test_failed_insert_rolls_back_deleted_preferences(scenario):
+    """An insertion failure after DELETE cannot publish a half-empty set."""
+    import sqlite3
+
+    config, engine, _, witness, _ = scenario
+    household = witness.command.household_id
+    member = witness.command.members[0].member_id
+    food = create_food_catalogue_service(engine)
+    carrot = food.get_by_code("CARROT").id
+    beef = food.get_by_code("BEEF_CATEGORY_1_RAW").id
+    service = create_household_service(engine)
+    assert service.replace_member_excluded_food_ids(
+        household, member, expected=frozenset(), selected=frozenset({carrot})
+    )
+    with sqlite3.connect(config.path) as connection:
+        connection.execute("""
+            CREATE TRIGGER reject_exclusion_insert
+            BEFORE INSERT ON household_member_excluded_food_ingredients
+            BEGIN SELECT RAISE(ABORT, 'injected insert failure'); END
+        """)
+    before = _db_dump(config)
+    with pytest.raises(HouseholdPersistenceConflictError):
+        service.replace_member_excluded_food_ids(
+            household,
+            member,
+            expected=frozenset({carrot}),
+            selected=frozenset({beef}),
+        )
+    assert service.list_member_excluded_food_ids(household, member) == frozenset(
+        {carrot}
+    )
+    assert _db_dump(config) == before
+
+
+def test_inactive_selected_food_stays_recorded_but_cannot_be_newly_added(scenario):
+    config, engine, _, witness, _ = scenario
+    household = witness.command.household_id
+    member = witness.command.members[0].member_id
+    service = create_household_service(engine)
+    foods = create_food_catalogue_service(engine)
+    carrot = foods.get_by_code("CARROT")
+    service.replace_member_excluded_food_ids(
+        household, member, expected=frozenset(), selected=frozenset({carrot.id})
+    )
+    foods.deactivate(carrot.id)
+    assert service.list_member_excluded_food_ids(household, member) == frozenset(
+        {carrot.id}
+    )
+    with pytest.raises(HouseholdPersistenceConflictError, match="inactive"):
+        service.replace_member_excluded_food_ids(
+            household,
+            witness.command.members[1].member_id,
+            expected=frozenset(),
+            selected=frozenset({carrot.id}),
+        )
+
+
 def test_upgrade_0044_to_0045_only_adds_preferences(tmp_path):
     config = DatabaseConfig(path=tmp_path / "upgrade.sqlite")
     modules = list(MIGRATION_MODULES)
