@@ -6,7 +6,7 @@ from uuid import UUID
 
 from sqlalchemy import delete, insert, select, update
 from sqlalchemy.engine import Connection
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import IntegrityError, OperationalError
 
 from app.domain.households import Household, HouseholdMember
 from app.persistence.sqlalchemy_core.food_ingredient_tables import (
@@ -168,6 +168,12 @@ class SqlAlchemyHouseholdMemberRepository:
         except IntegrityError as exc:
             raise HouseholdPersistenceConflictError(
                 "Concurrent exclusion update or invalid canonical reference."
+            ) from exc
+        except OperationalError as exc:
+            # An SQLite writer racing with this compare-and-swap may report
+            # BUSY/SNAPSHOT instead of an ordinary stale-set conflict.
+            raise HouseholdPersistenceConflictError(
+                "Exclusion replacement could not obtain the write transaction."
             ) from exc
         return True
 
