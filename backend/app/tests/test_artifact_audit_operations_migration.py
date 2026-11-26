@@ -43,7 +43,7 @@ REFERENCE_PINS_MIGRATION_ID = "0037_meal_plan_reference_methodology_pins"
 TRANSFORMATION_APPLICABILITY_MIGRATION_ID = "0038_transformation_applicability"
 COMPOSITION_BINDING_MIGRATION_ID = "0039_recipe_ingredient_composition_binding"
 RECIPE_OUTPUT_MIGRATION_ID = "0040_recipe_version_source_output"
-HEAD_MIGRATION_ID = "0044_meal_plan_components"
+HEAD_MIGRATION_ID = "0045_household_member_food_exclusions"
 TABLE = "artifact_audit_operations"
 
 
