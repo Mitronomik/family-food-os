@@ -294,6 +294,7 @@ def test_upgrading_from_0019_preserves_every_existing_row_and_table(tmp_path):
         "meal_plan_event_compositions",
         "meal_plan_event_components",
         "meal_plan_component_servings",
+        "household_member_excluded_food_ingredients",
     }
 
 
