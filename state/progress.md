@@ -1,3 +1,9 @@
+# 2026-11-26 — PR #308 P2 review correction
+
+PR #308 P2 correction: GET/PUT map typed non-conflict HouseholdPersistenceError to a safe Russian 503 (no-store), with reread-before-retry guidance; conflicts remain 409. Tests inject a DBAPI commit failure in the real write UoW and assert rollback/readback, plus typed read failure. Unexpected exceptions are not caught as CAS conflicts. Retaining inactive IDs while adding active IDs remains a proposed separately authorized persistence follow-up (validate selected minus existing); do not change #307 semantics in this API PR. Exact-head verification pending.
+
+---
+
 # 2026-11-26 — Member Food Exclusions API after #307
 
 Accepted base: `main@634d193a161b2b678102b7075eb58bba1223b813` ([#307](https://github.com/Mitronomik/family-food-os/pull/307) merged). Owner authorized the thin API slice. Branch `feat/member-food-exclusions-api` adds scoped GET/PUT member exclusions and read-only canonical food search/detail, explicit expected-set CAS, bounded UUIDv4 arrays and safe Russian errors. Existing migration 0045, Household service, repository and Planner unchanged. API integration tests cover real persisted selection and next-week RecipeVersion checks, previous-plan preservation, validation, cross-Household scope and rollback. CI and independent review pending; not release-ready. Local no-auth only; shared deployment authorization and ABA limitation remain. No UI, new schema or composed-meal release.

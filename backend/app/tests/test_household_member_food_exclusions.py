@@ -9,6 +9,8 @@ from threading import Barrier
 from uuid import uuid4
 
 import pytest
+from fastapi.testclient import TestClient
+from sqlalchemy.exc import OperationalError
 from app.db.config import DATABASE_PATH_ENV, DatabaseConfig
 from app.db.migrations import (
     MIGRATION_MODULES,
@@ -37,17 +39,21 @@ from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
     create_recipe_nutrition_v2_service,
 )
 from app.persistence.sqlalchemy_core.shopping_uow import SqlAlchemyShoppingReadScope
-from app.services.household_contracts import HouseholdPersistenceConflictError
+from app.persistence.sqlalchemy_core.uow import SqlAlchemyUnitOfWork
+from app.services.household_contracts import (
+    HouseholdPersistenceConflictError,
+    HouseholdPersistenceError,
+)
 from app.services.households import (
     HouseholdExclusionInputError,
     HouseholdMemberNotFoundError,
     HouseholdNotFoundError,
+    HouseholdService,
 )
 from app.services.meal_plans import MealPlanValidationError
 from app.services.planner import PlannerService
 from app.tests.test_prep_read_only_integration import WEEK, _db_dump
 from app.tests.test_r2c_breakfast_grain_diversity import meal_plan_service
-from fastapi.testclient import TestClient
 
 pytest_plugins = ("app.tests.test_prep_read_only_integration",)
 
@@ -715,3 +721,71 @@ def test_exclusions_http_failed_write_and_inactive_history(scenario, exclusions_
     cleared = exclusions_api.put(url, json=_selection_payload([carrot.id], []))
     assert cleared.status_code == 200
     assert cleared.json() == {"excluded_food_ingredient_ids": [], "changed": True}
+
+
+def test_exclusions_http_commit_failure_is_not_cas_conflict(
+    scenario, exclusions_api, monkeypatch
+):
+    config, engine, _, witness, _ = scenario
+    household = witness.command.household_id
+    member = witness.command.members[0].member_id
+    foods = create_food_catalogue_service(engine)
+    carrot = foods.get_by_code("CARROT")
+    beef = foods.get_by_code("BEEF_CATEGORY_1_RAW")
+    url = _exclusions_url(household, member)
+    assert exclusions_api.put(
+        url, json=_selection_payload([], [carrot.id])
+    ).status_code == 200
+    before = _db_dump(config)
+    observed = []
+
+    def fail_commit(scope):
+        # The real Household UoW translates DBAPIError; its context manager
+        # rolls back the actual uncommitted replacement on exit.
+        observed.append(True)
+        raise OperationalError(
+            "private SQL", {}, sqlite3.OperationalError("private commit failure")
+        )
+
+    with monkeypatch.context() as patch:
+        patch.setattr(SqlAlchemyUnitOfWork, "commit", fail_commit)
+        response = exclusions_api.put(
+            url, json=_selection_payload([carrot.id], [beef.id])
+        )
+    assert observed == [True]
+    assert response.status_code == 503
+    assert response.headers["Cache-Control"] == "no-store"
+    assert response.json()["detail"]["code"] == (
+        "MEMBER_EXCLUSIONS_PERSISTENCE_FAILURE"
+    )
+    assert response.json()["detail"]["next_action"]
+    assert "private" not in response.text
+    assert _db_dump(config) == before
+    assert exclusions_api.get(url).json()["excluded_food_ingredient_ids"] == [
+        str(carrot.id)
+    ]
+    retry = exclusions_api.put(
+        url, json=_selection_payload([carrot.id], [beef.id])
+    )
+    assert retry.status_code == 200
+
+
+def test_exclusions_http_read_persistence_failure_is_safe(
+    scenario, exclusions_api, monkeypatch
+):
+    _, _, _, witness, _ = scenario
+    url = _exclusions_url(
+        witness.command.household_id, witness.command.members[0].member_id
+    )
+
+    def fail_read(*args, **kwargs):
+        raise HouseholdPersistenceError("private storage details")
+
+    monkeypatch.setattr(HouseholdService, "list_member_excluded_food_ids", fail_read)
+    response = exclusions_api.get(url)
+    assert response.status_code == 503
+    assert response.headers["Cache-Control"] == "no-store"
+    assert response.json()["detail"]["code"] == (
+        "MEMBER_EXCLUSIONS_PERSISTENCE_FAILURE"
+    )
+    assert "private" not in response.text

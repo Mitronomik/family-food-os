@@ -20,7 +20,10 @@ from app.schemas.households import (
     HouseholdStateResponse,
     HouseholdUpdateRequest,
 )
-from app.services.household_contracts import HouseholdPersistenceConflictError
+from app.services.household_contracts import (
+    HouseholdPersistenceConflictError,
+    HouseholdPersistenceError,
+)
 from app.services.households import (
     HouseholdExclusionInputError,
     HouseholdMemberNotFoundError,
@@ -161,6 +164,8 @@ def create_households_router(
             raise _exclusions_not_found() from exc
         except HouseholdPersistenceConflictError as exc:
             raise _exclusions_conflict() from exc
+        except HouseholdPersistenceError as exc:
+            raise _exclusions_persistence_failure() from exc
         return HouseholdMemberExclusionsResponse(
             excluded_food_ingredient_ids=sorted(selected)
         )
@@ -198,6 +203,8 @@ def create_households_router(
             ) from exc
         except HouseholdPersistenceConflictError as exc:
             raise _exclusions_conflict() from exc
+        except HouseholdPersistenceError as exc:
+            raise _exclusions_persistence_failure() from exc
         # Return the committed selection, not a second potentially racing read.
         return HouseholdMemberExclusionsWriteResponse(
             excluded_food_ingredient_ids=sorted(selected), changed=changed
@@ -225,6 +232,18 @@ def _exclusions_conflict() -> HTTPException:
             "code": "MEMBER_EXCLUSIONS_CONFLICT",
             "message": "Не удалось сохранить или прочитать исключения.",
             "next_action": "Обновите список исключений и проверьте доступность продуктов.",
+        },
+        headers={"Cache-Control": "no-store"},
+    )
+
+
+def _exclusions_persistence_failure() -> HTTPException:
+    return HTTPException(
+        503,
+        detail={
+            "code": "MEMBER_EXCLUSIONS_PERSISTENCE_FAILURE",
+            "message": "Не удалось выполнить операцию с исключениями.",
+            "next_action": "Обновите список исключений перед повторной попыткой.",
         },
         headers={"Cache-Control": "no-store"},
     )

@@ -101,3 +101,7 @@ Local-first API only, no new schema or Planner/persistence changes:
 - A previously selected inactive ingredient remains visible; the existing service may reject a changed set that still contains an inactive ingredient. Set-CAS ABA limitation remains. Historical plans are not recalculated. No shared deployment authorization: raw Household UUID is not access control. Future UI and authenticated membership enforcement are separate.
 
 Verification: API integration tests against real migrated SQLite and the existing deterministic Planner fixture, plus affected CI. No acceptance or review-ready claim before exact-head checks and independent review.
+
+### PR #308 review correction
+
+PR #308 P2 correction: GET/PUT map typed non-conflict HouseholdPersistenceError to a safe Russian 503 (no-store), with reread-before-retry guidance; conflicts remain 409. Tests inject a DBAPI commit failure in the real write UoW and assert rollback/readback, plus typed read failure. Unexpected exceptions are not caught as CAS conflicts. Retaining inactive IDs while adding active IDs remains a proposed separately authorized persistence follow-up (validate selected minus existing); do not change #307 semantics in this API PR. Exact-head verification pending.
