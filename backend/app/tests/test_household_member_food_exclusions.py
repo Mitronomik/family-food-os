@@ -6,12 +6,20 @@ from uuid import uuid4
 import pytest
 
 from app.db.config import DatabaseConfig
-from app.db.migrations import MIGRATION_MODULES, apply_migrations, expected_migration_ids
+from app.db.migrations import (
+    MIGRATION_MODULES,
+    apply_migrations,
+    expected_migration_ids,
+)
 from app.persistence.sqlalchemy_core.food_ingredient_composition import (
     create_food_catalogue_service,
 )
-from app.persistence.sqlalchemy_core.household_composition import create_household_service
-from app.persistence.sqlalchemy_core.household_uow import SqlAlchemyHouseholdReadScope
+from app.persistence.sqlalchemy_core.food_recipe_composition import (
+    create_food_recipe_catalogue_service,
+)
+from app.persistence.sqlalchemy_core.household_composition import (
+    create_household_service,
+)
 from app.services.household_contracts import HouseholdPersistenceConflictError
 from app.services.households import (
     HouseholdExclusionInputError,
@@ -19,12 +27,11 @@ from app.services.households import (
     HouseholdNotFoundError,
 )
 from app.services.planner import PlannerService
-from app.tests.test_prep_read_only_integration import WEEK, _db_dump
+from app.tests.test_prep_read_only_integration import _db_dump
 from app.tests.test_r2c_breakfast_grain_diversity import meal_plan_service
-from app.persistence.sqlalchemy_core.food_recipe_composition import (
-    create_food_recipe_catalogue_service,
+from app.persistence.sqlalchemy_core.nutrition_composition import (
+    create_nutrition_service,
 )
-from app.persistence.sqlalchemy_core.nutrition_composition import create_nutrition_service
 from app.persistence.sqlalchemy_core.pantry_composition import create_pantry_service
 from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
     create_recipe_nutrition_v2_service,
