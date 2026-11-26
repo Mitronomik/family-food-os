@@ -682,6 +682,11 @@ class _Households:
             members=(SimpleNamespace(id=self.member_id, active=True),),
         )
 
+    def get_household_with_exclusions(self, household_id):
+        return self.get_household(household_id), {
+            self.member_id: frozenset()
+        }
+
 
 class _MealPlans:
     def __init__(self, household_id, member_id):

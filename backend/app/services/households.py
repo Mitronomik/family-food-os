@@ -33,6 +33,25 @@ class HouseholdUpdateRequiredError(ValueError):
     pass
 
 
+MAX_MEMBER_EXCLUDED_FOODS = 128
+
+
+class HouseholdExclusionInputError(ValueError):
+    pass
+
+
+def _exclusion_ids(value: object, *, field: str) -> frozenset[UUID]:
+    if not isinstance(value, frozenset) or len(value) > MAX_MEMBER_EXCLUDED_FOODS:
+        raise HouseholdExclusionInputError(
+            f"{field} must be a bounded frozenset of canonical UUIDs"
+        )
+    if any(not isinstance(item, UUID) or item.version != 4 for item in value):
+        raise HouseholdExclusionInputError(
+            f"{field} must contain only canonical UUIDv4 identifiers"
+        )
+    return value
+
+
 class HouseholdService:
     """Coordinates Household repositories without seeing adapter connections."""
 
@@ -148,6 +167,59 @@ class HouseholdService:
             if scope.households.get_household(household_id) is None:
                 raise HouseholdNotFoundError(household_id)
             return scope.members.list_members(household_id)
+
+    def get_household_with_exclusions(
+        self, household_id: UUID
+    ) -> tuple[HouseholdState, dict[UUID, frozenset[UUID]]]:
+        """One read UoW for member identities and persistent exclusion truth."""
+        with self._read_scope_factory() as scope:
+            household = scope.households.get_household(household_id)
+            if household is None:
+                raise HouseholdNotFoundError(household_id)
+            members = tuple(scope.members.list_members(household_id))
+            excluded = {
+                member.id: scope.members.list_excluded_food_ids(household_id, member.id)
+                for member in members
+            }
+            return HouseholdState(household=household, members=members), excluded
+
+    def list_member_excluded_food_ids(
+        self, household_id: UUID, member_id: UUID
+    ) -> frozenset[UUID]:
+        with self._read_scope_factory() as scope:
+            if scope.households.get_household(household_id) is None:
+                raise HouseholdNotFoundError(household_id)
+            if scope.members.get_member(household_id, member_id) is None:
+                raise HouseholdMemberNotFoundError(member_id)
+            return scope.members.list_excluded_food_ids(household_id, member_id)
+
+    def replace_member_excluded_food_ids(
+        self,
+        household_id: UUID,
+        member_id: UUID,
+        *,
+        expected: frozenset[UUID],
+        selected: frozenset[UUID],
+    ) -> bool:
+        """CAS with explicit expected set; stale clients must retry after reread."""
+        expected = _exclusion_ids(expected, field="expected")
+        selected = _exclusion_ids(selected, field="selected")
+        with self._write_scope_factory() as scope:
+            if scope.households.get_household(household_id) is None:
+                raise HouseholdNotFoundError(household_id)
+            member = scope.members.get_member(household_id, member_id)
+            if member is None:
+                raise HouseholdMemberNotFoundError(member_id)
+            if not member.active:
+                raise HouseholdExclusionInputError(
+                    "Inactive HouseholdMember cannot change exclusions."
+                )
+            changed = scope.members.replace_excluded_food_ids(
+                household_id, member_id, expected=expected, selected=selected
+            )
+            if changed:
+                scope.commit()
+            return changed
 
     def update_household_member(
         self,

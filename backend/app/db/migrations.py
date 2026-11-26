@@ -51,6 +51,7 @@ MIGRATION_MODULES = [
     "app.migrations.versions.0042_recipe_prepared_output_nutrition",
     "app.migrations.versions.0043_shopping_engine",
     "app.migrations.versions.0044_meal_plan_components",
+    "app.migrations.versions.0045_household_member_food_exclusions",
 ]
 MIGRATION_TABLE = "schema_migrations"
 

@@ -123,7 +123,15 @@ def test_exact_planner_boundary_compatibility_keeps_original_source_pin(monkeypa
     frozen = "1dde67b026b3c2cab99622482979f3e1fe2d0751"
     boundary = "269fa7f21679024c944ded49d74bc8f8b94ffc74"
     assert inputs.PINNED_SOURCE_BLOBS[path] == frozen
-    assert inputs.COMPATIBLE_PLANNER_INPUT_BOUNDARY_BLOBS == {(path, frozen): boundary}
+    assert inputs.COMPATIBLE_PLANNER_INPUT_BOUNDARY_BLOBS == {
+        (path, frozen): frozenset(
+            {
+                boundary,
+                "c6a59ba3d6dd5eca0ddf02eb05999eebdc4c23dd",
+                "33f8ceccd45c7135e1b9932af32727da744b998b",
+            }
+        )
+    }
     # Check the *real current* blob with full non-optional source coverage.
     inputs._assert_source_integrity()
 

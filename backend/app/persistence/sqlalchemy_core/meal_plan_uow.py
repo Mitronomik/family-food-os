@@ -1,5 +1,6 @@
 """Household MealPlan scopes over the shared SQLAlchemy transaction foundation."""
 
+from collections.abc import Mapping
 from datetime import datetime
 from types import TracebackType
 from typing import Self
@@ -86,6 +87,60 @@ class SqlAlchemyMealPlanUnitOfWork:
             SqlAlchemyMemberReferenceMethodologySelectionRepository(connection)
         )
         return self
+
+    def guard_member_exclusions(
+        self,
+        *,
+        household_id: UUID,
+        expected: Mapping[UUID, frozenset[UUID]],
+    ) -> None:
+        """Acquire SQLite writer lock, then verify exact snapshot before insert.
+
+        A concurrent preference writer can commit before this lock, in which case
+        the comparison fails, or after MealPlan commit. Never validate on an
+        independent read transaction: that would reopen the same TOCTOU race.
+        """
+        connection = self._scope.adapter_connection
+        for member_id in sorted(expected, key=lambda value: value.hex):
+            values = expected[member_id]
+            if not isinstance(values, frozenset) or any(
+                not isinstance(value, UUID) for value in values
+            ):
+                raise MealPlanPersistenceConflictError(
+                    "Invalid persisted exclusion snapshot."
+                )
+            try:
+                acquired = connection.execute(
+                    update(household_members_table)
+                    .where(
+                        household_members_table.c.household_id == household_id,
+                        household_members_table.c.id == member_id,
+                    )
+                    .values(updated_at=household_members_table.c.updated_at)
+                )
+                if acquired.rowcount != 1:
+                    raise MealPlanPersistenceConflictError(
+                        "Household member changed before MealPlan publication."
+                    )
+                if (
+                    self.members.list_excluded_food_ids(household_id, member_id)
+                    != values
+                ):
+                    raise MealPlanPersistenceConflictError(
+                        "Member exclusions changed during MealPlan generation."
+                    )
+            except OperationalError as exc:
+                if is_sqlite_concurrency_conflict(exc):
+                    raise MealPlanPersistenceConflictError(
+                        "Member exclusions concurrently changed during MealPlan publication."
+                    ) from exc
+                raise MealPlanPersistenceError(
+                    "MealPlan exclusion revalidation failed."
+                ) from exc
+            except DBAPIError as exc:
+                raise MealPlanPersistenceError(
+                    "MealPlan exclusion revalidation failed."
+                ) from exc
 
     def guard_member_state(
         self,

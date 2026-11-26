@@ -109,12 +109,18 @@ PINNED_SOURCE_BLOBS = {
 # valid canonical UUID inputs, Planner candidate selection or frozen A/B bytes.
 # Independent review of the source diff and identical A/B receipts is mandatory
 # before treating this compatibility allowance as accepted provenance.
-# Keying by the original pinned blob prevents arbitrary pin replacement.
+# Additional exact blob for #307 combines strict UUID input with persisted\n# Household member exclusions. Frozen fixture input remains empty and is\n# independently rematerialized in CI; no new A/B bytes are approved.\n# Keying by the original pinned blob prevents arbitrary pin replacement.
 COMPATIBLE_PLANNER_INPUT_BOUNDARY_BLOBS = {
     (
         "backend/app/services/planner.py",
         "1dde67b026b3c2cab99622482979f3e1fe2d0751",
-    ): "269fa7f21679024c944ded49d74bc8f8b94ffc74",
+    ): frozenset(
+        {
+            "269fa7f21679024c944ded49d74bc8f8b94ffc74",
+            "c6a59ba3d6dd5eca0ddf02eb05999eebdc4c23dd",
+            "33f8ceccd45c7135e1b9932af32727da744b998b",
+        }
+    ),
 }
 
 
@@ -133,7 +139,9 @@ def _assert_source_integrity() -> None:
         if (
             actual != expected_sha1
             and actual
-            != COMPATIBLE_PLANNER_INPUT_BOUNDARY_BLOBS.get((relative, expected_sha1))
+            not in COMPATIBLE_PLANNER_INPUT_BOUNDARY_BLOBS.get(
+                (relative, expected_sha1), frozenset()
+            )
         ):
             raise PreflightNoGo(f"source Git blob drift: {relative}")
 

@@ -7,6 +7,8 @@ import pytest
 from app.db import migrations
 from app.db.config import DatabaseConfig
 from app.domain.food_recipes import MealTypeCode, RightsReviewStatus, VerificationStatus
+from app.persistence.sqlalchemy_core.meal_plan_uow import SqlAlchemyMealPlanUnitOfWork
+from app.services.households import HouseholdService
 from app.services.recipe_nutrition_v2 import RecipeNutritionV2UnavailableError
 
 from scripts.audit_dc4_corpus_readiness_rerun import _audit_active_catalogue, audit
@@ -18,11 +20,45 @@ def _replay_frozen_dc4_migration_prefix(monkeypatch):
     # Replay it against the historical 0043 schema; 0044 is verified in its
     # own current-head migration/persistence suite, not silently here.
     modules = migrations.MIGRATION_MODULES
-    assert modules[-2:] == [
+    assert modules[-3:] == [
         "app.migrations.versions.0043_shopping_engine",
         "app.migrations.versions.0044_meal_plan_components",
+        "app.migrations.versions.0045_household_member_food_exclusions",
     ]
-    monkeypatch.setattr(migrations, "MIGRATION_MODULES", modules[:-1])
+    cutoff = next(
+        index
+        for index, module in enumerate(modules)
+        if module.endswith("0043_shopping_engine")
+    )
+    monkeypatch.setattr(migrations, "MIGRATION_MODULES", modules[: cutoff + 1])
+
+    # This *historical* DC4 evidence fixture intentionally migrates only to
+    # 0043, which predates stored member exclusions (0045). Only the test's
+    # frozen input adapter supplies the known empty preference snapshot. The
+    # production repository still fails closed when its 0045 table is missing.
+    def frozen_0043_member_exclusions(self, household_id):
+        state = self.get_household(household_id)
+        return state, {member.id: frozenset() for member in state.members}
+
+    monkeypatch.setattr(
+        HouseholdService,
+        "get_household_with_exclusions",
+        frozen_0043_member_exclusions,
+    )
+
+    # The frozen DC4 fixture predates migration 0045. Emulate precisely
+    # that historical writer contract *only here*, after asserting that its
+    # injected persisted-preference snapshot is empty. Production UoW always
+    # locks and revalidates the real 0045 relation before publishing a plan.
+    def frozen_0043_write_guard(self, *, household_id, expected):
+        assert household_id is not None
+        assert expected and all(not excluded for excluded in expected.values())
+
+    monkeypatch.setattr(
+        SqlAlchemyMealPlanUnitOfWork,
+        "guard_member_exclusions",
+        frozen_0043_write_guard,
+    )
 
 
 def test_dc4_rerun_reproducible_corpus_and_gate1_evidence(tmp_path: Path) -> None:

@@ -288,7 +288,10 @@ def test_r1h_fresh_publication_activates_exact_school2022_mains(database):
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
 
     assert "0043_shopping_engine" in migrations.expected_migration_ids()
-    assert migrations.expected_migration_ids()[-1] == "0044_meal_plan_components"
+    assert (
+        migrations.expected_migration_ids()[-1]
+        == "0045_household_member_food_exclusions"
+    )
     assert r1f_snapshot(database) == r1f_before
 
 
@@ -346,6 +349,11 @@ def test_r1h_authoritative_planner_loads_new_mains_exclusions_and_week_capacity(
                     household=SimpleNamespace(id=household_id),
                     members=(SimpleNamespace(id=member_id, active=True),),
                 )
+
+            def get_household_with_exclusions(self, requested_household_id):
+                return self.get_household(requested_household_id), {
+                    member_id: frozenset()
+                }
 
         class MealPlans:
             def get_current_member_pattern(

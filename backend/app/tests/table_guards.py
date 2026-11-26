@@ -34,6 +34,7 @@ CURRENT_ALLOWED_TABLES = {
     "artifact_audit_operations",
     "households",
     "household_members",
+    "household_member_excluded_food_ingredients",
     "food_ingredients",
     "food_ingredient_aliases",
     "food_nutrition_profiles",

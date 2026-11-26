@@ -255,6 +255,9 @@ class _Households:
             },
         )()
 
+    def get_household_with_exclusions(self, household_id: UUID):
+        return self.get_household(household_id), {self.member_id: frozenset()}
+
 
 class _Recipes:
     def __init__(self, recipe_version_id: UUID) -> None:

@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from datetime import date, datetime
 from decimal import Decimal
 from types import TracebackType
-from typing import Protocol, Self
+from typing import Mapping, Protocol, Self
 from uuid import UUID
 
 from app.domain.meal_plans import (
@@ -17,7 +17,6 @@ from app.services.household_contracts import HouseholdMemberRepository
 from app.services.reference_methodology_contracts import (
     MemberReferenceMethodologySelectionRepository,
 )
-
 
 
 @dataclass(frozen=True)
@@ -88,6 +87,13 @@ class MealPlanUnitOfWork(Protocol):
         household_id: UUID,
         member_id: UUID,
         member_updated_at: datetime,
+    ) -> None: ...
+
+    def guard_member_exclusions(
+        self,
+        *,
+        household_id: UUID,
+        expected: Mapping[UUID, frozenset[UUID]],
     ) -> None: ...
 
     def commit(self) -> None: ...

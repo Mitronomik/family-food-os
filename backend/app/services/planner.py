@@ -288,7 +288,16 @@ class PlannerService:
         self, command: AuthoritativeGenerationRequest
     ) -> PlannerRequest:
         """Resolve caller constraints against current Household-scoped truth."""
-        state = self._households.get_household(command.household_id)
+        request, _ = self._compose_authoritative_with_snapshot(command)
+        return request
+
+    def _compose_authoritative_with_snapshot(
+        self, command: AuthoritativeGenerationRequest
+    ) -> tuple[PlannerRequest, dict[UUID, frozenset[UUID]]]:
+        """Keep the exact persisted snapshot used in planning for commit-time CAS."""
+        state, stored_exclusions = self._households.get_household_with_exclusions(
+            command.household_id
+        )
         if state.household.id != command.household_id:
             raise PlannerAuthoritativeInputError("Household scope mismatch")
         active = {member.id: member for member in state.members if member.active}
@@ -317,12 +326,25 @@ class PlannerService:
                 command.household_id, member_id, as_of_date=command.week_start
             )
             constraints = requested[member_id]
+            # A missing source entry is a persistence inconsistency, never
+            # permission to interpret an existing hard preference as empty.
+            if member_id not in stored_exclusions:
+                raise PlannerAuthoritativeInputError(
+                    "Stored HouseholdMember exclusions are unavailable."
+                )
+            persisted = stored_exclusions[member_id]
+            if not isinstance(persisted, frozenset) or any(
+                not isinstance(food_id, UUID) for food_id in persisted
+            ):
+                raise PlannerAuthoritativeInputError(
+                    "Stored HouseholdMember exclusions are invalid."
+                )
             members.append(
                 MemberPlannerConstraints(
                     member_id,
                     selection,
                     target.reference_energy_kcal,
-                    constraints.excluded_food_ingredient_ids,
+                    persisted | constraints.excluded_food_ingredient_ids,
                     constraints.preferred_recipe_version_ids,
                 )
             )
@@ -381,22 +403,25 @@ class PlannerService:
                 for event in prior.events
                 if event.recipe_version_id is not None
             )
-        return PlannerRequest(
-            command.household_id,
-            command.week_start,
-            tuple(members),
-            tuple(candidates),
-            pantry_ids,
-            command.fixed_events,
-            recent_plan_ids,
-            recent_recipe_ids,
+        return (
+            PlannerRequest(
+                command.household_id,
+                command.week_start,
+                tuple(members),
+                tuple(candidates),
+                pantry_ids,
+                command.fixed_events,
+                recent_plan_ids,
+                recent_recipe_ids,
+            ),
+            {member_id: stored_exclusions[member_id] for member_id in requested},
         )
 
     def generate_authoritative(
         self, command: AuthoritativeGenerationRequest
     ) -> tuple[PlannerResult, MealPlanDetail | None]:
         started = perf_counter_ns()
-        request = self.compose_authoritative_request(command)
+        request, persisted_snapshot = self._compose_authoritative_with_snapshot(command)
         result = generate_week(request, self._config)
         duration = (Decimal(perf_counter_ns() - started) / Decimal(1_000_000)).quantize(
             Decimal("0.001")
@@ -425,5 +450,6 @@ class PlannerService:
                 for event in result.events
             ],
             config_version=self._config.version,
+            expected_member_exclusions=persisted_snapshot,
         )
         return result, detail

@@ -19,7 +19,12 @@ TABLES = {
 
 def _through_0043(config, monkeypatch):
     original = list(migrations.MIGRATION_MODULES)
-    monkeypatch.setattr(migrations, "MIGRATION_MODULES", original[:-1])
+    cutoff = next(
+        index
+        for index, name in enumerate(original)
+        if name.endswith("0043_shopping_engine")
+    )
+    monkeypatch.setattr(migrations, "MIGRATION_MODULES", original[: cutoff + 1])
     try:
         applied = apply_migrations(config)
         assert applied[-1] == "0043_shopping_engine"
@@ -38,13 +43,17 @@ def _schema(config):
         }
 
 
-def test_fresh_0044_is_final_and_immutable_component_tables_present(tmp_path):
+def test_fresh_0044_remains_immutable_after_following_0045(tmp_path):
     config = DatabaseConfig(path=tmp_path / "fresh.sqlite")
-    assert expected_migration_ids()[-2:] == [
+    assert expected_migration_ids()[-3:] == [
         "0043_shopping_engine",
         MIGRATION_ID,
+        "0045_household_member_food_exclusions",
     ]
-    assert apply_migrations(config)[-1] == MIGRATION_ID
+    assert apply_migrations(config)[-2:] == [
+        MIGRATION_ID,
+        "0045_household_member_food_exclusions",
+    ]
     assert apply_migrations(config) == []
     with sqlite3.connect(config.path) as db:
         db.execute("PRAGMA foreign_keys=ON")
@@ -194,7 +203,10 @@ def test_real_0043_upgrades_to_0044_without_rewriting_legacy_data(
             "SELECT sql FROM sqlite_master WHERE type='trigger' "
             "AND name='trg_shopping_obligation_event'"
         ).fetchone()[0]
-    assert apply_migrations(config) == [MIGRATION_ID]
+    assert apply_migrations(config) == [
+        MIGRATION_ID,
+        "0045_household_member_food_exclusions",
+    ]
     with sqlite3.connect(config.path) as db:
         db.execute("PRAGMA foreign_keys=ON")
         for table, rows in old.items():
@@ -262,4 +274,7 @@ def test_0044_injected_failed_rebuild_restores_schema_and_marker(tmp_path, monke
             (MIGRATION_ID,),
         ).fetchone() == (0,)
     monkeypatch.setattr(module, "upgrade", real_upgrade)
-    assert apply_migrations(config) == [MIGRATION_ID]
+    assert apply_migrations(config) == [
+        MIGRATION_ID,
+        "0045_household_member_food_exclusions",
+    ]

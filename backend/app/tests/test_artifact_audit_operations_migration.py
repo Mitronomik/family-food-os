@@ -43,7 +43,7 @@ REFERENCE_PINS_MIGRATION_ID = "0037_meal_plan_reference_methodology_pins"
 TRANSFORMATION_APPLICABILITY_MIGRATION_ID = "0038_transformation_applicability"
 COMPOSITION_BINDING_MIGRATION_ID = "0039_recipe_ingredient_composition_binding"
 RECIPE_OUTPUT_MIGRATION_ID = "0040_recipe_version_source_output"
-HEAD_MIGRATION_ID = "0044_meal_plan_components"
+HEAD_MIGRATION_ID = "0045_household_member_food_exclusions"
 TABLE = "artifact_audit_operations"
 
 
@@ -195,6 +195,7 @@ def test_a_database_at_0019_reports_0020_then_0021_pending(tmp_path):
         "0041_meal_pattern_energy_allocation",
         "0042_recipe_prepared_output_nutrition",
         "0043_shopping_engine",
+        "0044_meal_plan_components",
         HEAD_MIGRATION_ID,
     ]
 
@@ -230,6 +231,7 @@ def test_upgrading_from_0019_preserves_every_existing_row_and_table(tmp_path):
         "0041_meal_pattern_energy_allocation",
         "0042_recipe_prepared_output_nutrition",
         "0043_shopping_engine",
+        "0044_meal_plan_components",
         HEAD_MIGRATION_ID,
     ]
     assert snapshot(database_path) == before
@@ -292,6 +294,7 @@ def test_upgrading_from_0019_preserves_every_existing_row_and_table(tmp_path):
         "meal_plan_event_compositions",
         "meal_plan_event_components",
         "meal_plan_component_servings",
+        "household_member_excluded_food_ingredients",
     }
 
 
@@ -670,6 +673,7 @@ def test_user_mode_startup_backs_up_before_applying_0020(monkeypatch, tmp_path):
         "0041_meal_pattern_energy_allocation",
         "0042_recipe_prepared_output_nutrition",
         "0043_shopping_engine",
+        "0044_meal_plan_components",
         HEAD_MIGRATION_ID,
     ]
     assert result.backup is not None

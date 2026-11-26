@@ -37,7 +37,7 @@ def through_0037(path, *, seed=False):
 
 def test_0038_appends_after_0037_without_consuming_reserved_0033():
     expected = expected_migration_ids()
-    assert expected[-8:] == [
+    assert expected[-9:] == [
         PREVIOUS_HEAD,
         MIGRATION_ID,
         "0039_recipe_ingredient_composition_binding",
@@ -46,6 +46,7 @@ def test_0038_appends_after_0037_without_consuming_reserved_0033():
         "0042_recipe_prepared_output_nutrition",
         "0043_shopping_engine",
         "0044_meal_plan_components",
+        "0045_household_member_food_exclusions",
     ]
     assert not any(value.startswith("0033_") for value in expected)
 
@@ -62,6 +63,7 @@ def test_populated_0037_upgrade_preserves_every_existing_row(tmp_path):
         "0042_recipe_prepared_output_nutrition",
         "0043_shopping_engine",
         "0044_meal_plan_components",
+        "0045_household_member_food_exclusions",
     ]
 
     after = snapshot(config)
@@ -160,6 +162,7 @@ def test_backup_restore_and_reupgrade_are_deterministic(tmp_path):
         "0042_recipe_prepared_output_nutrition",
         "0043_shopping_engine",
         "0044_meal_plan_components",
+        "0045_household_member_food_exclusions",
     ]
     after = snapshot(config)
     assert_snapshot_preserved(before, after)
@@ -174,6 +177,7 @@ def test_backup_restore_and_reupgrade_are_deterministic(tmp_path):
         "0042_recipe_prepared_output_nutrition",
         "0043_shopping_engine",
         "0044_meal_plan_components",
+        "0045_household_member_food_exclusions",
     ]
     restored = snapshot(config)
     assert_snapshot_preserved(before, restored)
