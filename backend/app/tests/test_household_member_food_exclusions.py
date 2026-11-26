@@ -16,6 +16,7 @@ from app.services.household_contracts import HouseholdPersistenceConflictError
 from app.services.households import (
     HouseholdExclusionInputError,
     HouseholdMemberNotFoundError,
+    HouseholdNotFoundError,
 )
 from app.services.planner import PlannerService
 from app.tests.test_prep_read_only_integration import WEEK, _db_dump
@@ -102,7 +103,7 @@ def test_atomic_replace_replay_stale_snapshot_and_cross_household(scenario):
         service.replace_member_excluded_food_ids(
             hid, member, expected=frozenset(), selected=frozenset()
         )
-    with pytest.raises(HouseholdMemberNotFoundError):
+    with pytest.raises(HouseholdNotFoundError):
         service.list_member_excluded_food_ids(uuid4(), member)
     other = households.create_household(name="Другая семья", timezone_name="Europe/Moscow")
     with pytest.raises(HouseholdMemberNotFoundError):
