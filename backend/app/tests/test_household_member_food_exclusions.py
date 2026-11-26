@@ -1,7 +1,10 @@
 """Persisted non-medical member ingredient exclusions and Planner admission."""
 
 import sqlite3
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import replace
+from datetime import timedelta
+from threading import Barrier
 from importlib import import_module
 from uuid import uuid4
 
@@ -22,6 +25,7 @@ from app.persistence.sqlalchemy_core.food_recipe_composition import (
 from app.persistence.sqlalchemy_core.household_composition import (
     create_household_service,
 )
+from app.persistence.sqlalchemy_core.household_uow import SqlAlchemyHouseholdUnitOfWork
 from app.persistence.sqlalchemy_core.nutrition_composition import (
     create_nutrition_service,
 )
@@ -35,8 +39,12 @@ from app.services.households import (
     HouseholdMemberNotFoundError,
     HouseholdNotFoundError,
 )
+from app.services.meal_plans import MealPlanValidationError
 from app.services.planner import PlannerService
-from app.tests.test_prep_read_only_integration import _db_dump
+from app.domain.meal_plans import MealSourceKind
+from app.domain.planner import PlannerSuccess
+from app.persistence.sqlalchemy_core.shopping_uow import SqlAlchemyShoppingReadScope
+from app.tests.test_prep_read_only_integration import WEEK, _db_dump
 from app.tests.test_r2c_breakfast_grain_diversity import meal_plan_service
 
 pytest_plugins = ("app.tests.test_prep_read_only_integration",)
@@ -112,6 +120,150 @@ def test_persisted_exclusions_are_automatic_and_caller_can_only_add(scenario):
         member for member in result.members if member.member_id == a
     ).excluded_food_ingredient_ids == frozenset({food.id, more.id})
 
+
+
+def test_next_week_persisted_mealplan_excludes_selected_food_in_every_serving(
+    scenario,
+):
+    """Prove the saved second-week RecipeVersion ingredients, not just request."""
+    config, engine, _, witness, _ = scenario
+    household = witness.command.household_id
+    member_a, member_b = (member.member_id for member in witness.command.members)
+    beef = create_food_catalogue_service(engine).get_by_code("BEEF_CATEGORY_1_RAW")
+    assert beef is not None
+    household_service = create_household_service(engine)
+    assert household_service.replace_member_excluded_food_ids(
+        household, member_a, expected=frozenset(), selected=frozenset({beef.id})
+    )
+    next_week = WEEK + timedelta(days=7)
+    command = replace(
+        witness.command,
+        week_start=next_week,
+        fixed_events=(),
+        members=tuple(
+            replace(member, excluded_food_ingredient_ids=frozenset())
+            for member in witness.command.members
+        ),
+    )
+    result, saved = _planner(engine).generate_authoritative(command)
+    assert isinstance(result, PlannerSuccess)
+    assert saved is not None
+    assert saved.plan.week_start == next_week
+    with SqlAlchemyShoppingReadScope(engine) as scope:
+        persisted = scope.plans.get_current(household, next_week)
+        assert persisted == saved
+        assigned = {}
+        for serving in persisted.servings:
+            assigned.setdefault(serving.event_id, set()).add(serving.member_id)
+        checked = 0
+        for event in persisted.events:
+            if event.source_kind != MealSourceKind.COOK_RECIPE:
+                continue
+            detail = scope.recipes.get_detail(event.recipe_version_id)
+            assert detail is not None
+            ingredients = {row.food_ingredient_id for row in detail.ingredients}
+            if member_a in assigned.get(event.id, ()):
+                assert beef.id not in ingredients
+                checked += 1
+        assert checked > 0
+    assert household_service.list_member_excluded_food_ids(household, member_b) == frozenset()
+
+
+def test_changed_exclusions_after_planning_abort_new_revision_atomically(
+    scenario, monkeypatch
+):
+    """Recreate the P1 interleaving exactly between generate_week and commit."""
+    import app.services.planner as planner_module
+
+    config, engine, _, witness, _ = scenario
+    household = witness.command.household_id
+    member = witness.command.members[0].member_id
+    food = create_food_catalogue_service(engine).get_by_code("BEEF_CATEGORY_1_RAW")
+    assert food is not None
+    households = create_household_service(engine)
+    next_week = WEEK + timedelta(days=7)
+    command = replace(
+        witness.command,
+        week_start=next_week,
+        fixed_events=(),
+        members=tuple(
+            replace(item, excluded_food_ingredient_ids=frozenset())
+            for item in witness.command.members
+        ),
+    )
+    original_generate = planner_module.generate_week
+    observed = []
+
+    def concurrent_preference_save(request, config):
+        result = original_generate(request, config)
+        assert isinstance(result, PlannerSuccess)
+        observed.append("planned")
+        assert households.replace_member_excluded_food_ids(
+            household, member,
+            expected=frozenset(), selected=frozenset({food.id})
+        )
+        observed.append("preference_committed")
+        return result
+
+    monkeypatch.setattr(planner_module, "generate_week", concurrent_preference_save)
+    before = _db_dump(config)
+    with pytest.raises(MealPlanValidationError, match="exclusions changed"):
+        _planner(engine).generate_authoritative(command)
+    assert observed == ["planned", "preference_committed"]
+    assert households.list_member_excluded_food_ids(household, member) == frozenset(
+        {food.id}
+    )
+    with SqlAlchemyShoppingReadScope(engine) as scope:
+        assert scope.plans.get_current(household, next_week) is None
+        assert scope.plans.get_current(household, WEEK) is not None
+    assert before != _db_dump(config)
+
+
+def test_two_independent_transactions_same_snapshot_only_one_cas_wins(scenario):
+    """Both readers see empty; separate SQLite connections race to write."""
+    config, engine, _, witness, _ = scenario
+    household = witness.command.household_id
+    member = witness.command.members[0].member_id
+    food = create_food_catalogue_service(engine)
+    foods = (
+        food.get_by_code("CARROT").id,
+        food.get_by_code("BEEF_CATEGORY_1_RAW").id,
+    )
+    with sqlite3.connect(config.path) as connection:
+        assert connection.execute("PRAGMA journal_mode=WAL").fetchone()[0] == "wal"
+    barrier = Barrier(2, timeout=10)
+
+    def contender(selected_id):
+        separate_engine = create_sqlite_engine(config)
+        try:
+            with SqlAlchemyHouseholdUnitOfWork(separate_engine) as scope:
+                original = scope.members.list_excluded_food_ids(household, member)
+                assert original == frozenset()
+                barrier.wait()
+                try:
+                    scope.members.replace_excluded_food_ids(
+                        household,
+                        member,
+                        expected=original,
+                        selected=frozenset({selected_id}),
+                    )
+                    scope.commit()
+                    return ("committed", selected_id)
+                except HouseholdPersistenceConflictError:
+                    return ("conflict", selected_id)
+        finally:
+            separate_engine.dispose()
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        first = pool.submit(contender, foods[0])
+        second = pool.submit(contender, foods[1])
+        outcomes = (first.result(), second.result())
+    winners = [food_id for state, food_id in outcomes if state == "committed"]
+    assert len(winners) == 1
+    assert sorted(state for state, _ in outcomes) == ["committed", "conflict"]
+    assert create_household_service(engine).list_member_excluded_food_ids(
+        household, member
+    ) == frozenset(winners)
 
 def test_atomic_replace_replay_stale_snapshot_and_cross_household(scenario):
     config, engine, households, witness, _ = scenario
