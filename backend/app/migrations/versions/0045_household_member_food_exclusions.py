@@ -3,6 +3,10 @@
 Purely additive: old Household, MealPlan, Recipe, Shopping and Food rows are untouched.
 """
 MIGRATION_ID = "0045_household_member_food_exclusions"
+# Reuse the runner's only explicit transactional DDL/marker path. Although
+# additive, two dependent DDL statements must roll back atomically on failure.
+# This mode also checks FK integrity and restores foreign_keys=ON.
+SQLITE_MIGRATION_MODE = "foreign_key_rebuild"
 
 
 def upgrade(db):
