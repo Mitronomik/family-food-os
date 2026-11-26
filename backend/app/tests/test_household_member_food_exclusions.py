@@ -4,8 +4,8 @@ import sqlite3
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import replace
 from datetime import timedelta
-from threading import Barrier
 from importlib import import_module
+from threading import Barrier
 from uuid import uuid4
 
 import pytest
@@ -15,6 +15,8 @@ from app.db.migrations import (
     apply_migrations,
     expected_migration_ids,
 )
+from app.domain.meal_plans import MealSourceKind
+from app.domain.planner import PlannerSuccess
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_ingredient_composition import (
     create_food_catalogue_service,
@@ -33,6 +35,7 @@ from app.persistence.sqlalchemy_core.pantry_composition import create_pantry_ser
 from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
     create_recipe_nutrition_v2_service,
 )
+from app.persistence.sqlalchemy_core.shopping_uow import SqlAlchemyShoppingReadScope
 from app.services.household_contracts import HouseholdPersistenceConflictError
 from app.services.households import (
     HouseholdExclusionInputError,
@@ -41,9 +44,6 @@ from app.services.households import (
 )
 from app.services.meal_plans import MealPlanValidationError
 from app.services.planner import PlannerService
-from app.domain.meal_plans import MealSourceKind
-from app.domain.planner import PlannerSuccess
-from app.persistence.sqlalchemy_core.shopping_uow import SqlAlchemyShoppingReadScope
 from app.tests.test_prep_read_only_integration import WEEK, _db_dump
 from app.tests.test_r2c_breakfast_grain_diversity import meal_plan_service
 
