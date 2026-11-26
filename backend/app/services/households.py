@@ -168,6 +168,21 @@ class HouseholdService:
                 raise HouseholdNotFoundError(household_id)
             return scope.members.list_members(household_id)
 
+    def get_household_with_exclusions(
+        self, household_id: UUID
+    ) -> tuple[HouseholdState, dict[UUID, frozenset[UUID]]]:
+        """One read UoW for member identities and persistent exclusion truth."""
+        with self._read_scope_factory() as scope:
+            household = scope.households.get_household(household_id)
+            if household is None:
+                raise HouseholdNotFoundError(household_id)
+            members = tuple(scope.members.list_members(household_id))
+            excluded = {
+                member.id: scope.members.list_excluded_food_ids(household_id, member.id)
+                for member in members
+            }
+            return HouseholdState(household=household, members=members), excluded
+
     def list_member_excluded_food_ids(
         self, household_id: UUID, member_id: UUID
     ) -> frozenset[UUID]:
