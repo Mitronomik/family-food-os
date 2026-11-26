@@ -128,7 +128,7 @@ def test_exact_planner_boundary_compatibility_keeps_original_source_pin(monkeypa
             {
                 boundary,
                 "c6a59ba3d6dd5eca0ddf02eb05999eebdc4c23dd",
-            "33f8ceccd45c7135e1b9932af32727da744b998b",
+                "33f8ceccd45c7135e1b9932af32727da744b998b",
             }
         )
     }
