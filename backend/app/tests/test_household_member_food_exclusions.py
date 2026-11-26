@@ -719,7 +719,9 @@ def test_exclusions_http_failed_write_and_inactive_history(scenario, exclusions_
             BEGIN SELECT RAISE(ABORT, 'private injected failure'); END
         """)
     before = _db_dump(config)
-    failed = exclusions_api.put(url, json=_selection_payload([carrot.id], [beef.id]))
+    failed = exclusions_api.put(
+        url, json=_selection_payload([carrot.id], [carrot.id, beef.id])
+    )
     assert failed.status_code == 409
     assert "private injected failure" not in failed.text
     assert _db_dump(config) == before
@@ -730,6 +732,45 @@ def test_exclusions_http_failed_write_and_inactive_history(scenario, exclusions_
     cleared = exclusions_api.put(url, json=_selection_payload([carrot.id], []))
     assert cleared.status_code == 200
     assert cleared.json() == {"excluded_food_ingredient_ids": [], "changed": True}
+
+
+def test_exclusions_http_retains_inactive_food_while_editing(scenario, exclusions_api):
+    config, engine, _, witness, _ = scenario
+    household = witness.command.household_id
+    member, other_member = (item.member_id for item in witness.command.members)
+    foods = create_food_catalogue_service(engine)
+    carrot = foods.get_by_code("CARROT")
+    beef = foods.get_by_code("BEEF_CATEGORY_1_RAW")
+    url = _exclusions_url(household, member)
+
+    def put(expected, selected):
+        return exclusions_api.put(url, json=_selection_payload(expected, selected))
+
+    assert put([], [carrot.id]).status_code == 200
+    foods.deactivate(carrot.id)
+    assert put([carrot.id], [carrot.id, beef.id]).status_code == 200
+    both = sorted([str(carrot.id), str(beef.id)])
+    assert exclusions_api.get(url).json()["excluded_food_ingredient_ids"] == both
+    before = _db_dump(config)
+
+    replay = put([carrot.id, beef.id], [beef.id, carrot.id])
+    assert replay.status_code == 200
+    assert replay.json()["changed"] is False
+    assert put([carrot.id], [carrot.id]).status_code == 409
+    assert put([carrot.id, beef.id], [carrot.id, beef.id, uuid4()]).status_code == 409
+    other_url = _exclusions_url(household, other_member)
+    assert (
+        exclusions_api.put(
+            other_url, json=_selection_payload([], [carrot.id])
+        ).status_code
+        == 409
+    )
+    assert _db_dump(config) == before
+
+    assert put([carrot.id, beef.id], [carrot.id]).status_code == 200
+    assert put([carrot.id], []).status_code == 200
+    assert put([], [carrot.id]).status_code == 409
+    assert exclusions_api.get(url).json()["excluded_food_ingredient_ids"] == []
 
 
 def test_exclusions_http_commit_failure_is_not_cas_conflict(
