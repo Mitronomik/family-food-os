@@ -4,12 +4,14 @@ from collections.abc import Mapping
 from typing import Any
 from uuid import UUID
 
-from sqlalchemy import insert, select, update
+from sqlalchemy import delete, insert, select, update
 from sqlalchemy.engine import Connection
 from sqlalchemy.exc import IntegrityError
 
 from app.domain.households import Household, HouseholdMember
+from app.persistence.sqlalchemy_core.food_ingredient_tables import food_ingredients_table
 from app.persistence.sqlalchemy_core.household_tables import (
+    household_member_excluded_food_ingredients_table,
     household_members_table,
     households_table,
 )
@@ -97,6 +99,75 @@ class SqlAlchemyHouseholdMemberRepository:
             )
         ).mappings()
         return [_member_from_row(row) for row in rows]
+
+    def list_excluded_food_ids(
+        self, household_id: UUID, member_id: UUID
+    ) -> frozenset[UUID]:
+        if self.get_member(household_id, member_id) is None:
+            raise HouseholdPersistenceConflictError(
+                "Household-scoped member does not exist."
+            )
+        table = household_member_excluded_food_ingredients_table
+        ids = self._connection.scalars(
+            select(table.c.food_ingredient_id)
+            .where(
+                table.c.household_id == household_id,
+                table.c.member_id == member_id,
+            )
+            .order_by(table.c.food_ingredient_id)
+        ).all()
+        return frozenset(ids)
+
+    def replace_excluded_food_ids(
+        self,
+        household_id: UUID,
+        member_id: UUID,
+        *,
+        expected: frozenset[UUID],
+        selected: frozenset[UUID],
+    ) -> bool:
+        """Compare-and-swap the entire set inside the caller-owned UoW."""
+        table = household_member_excluded_food_ingredients_table
+        existing = self.list_excluded_food_ids(household_id, member_id)
+        if existing != expected:
+            raise HouseholdPersistenceConflictError(
+                "Member exclusion set changed since the supplied snapshot."
+            )
+        if existing == selected:
+            return False
+        if selected:
+            rows = self._connection.execute(
+                select(food_ingredients_table.c.id, food_ingredients_table.c.is_active)
+                .where(food_ingredients_table.c.id.in_(selected))
+            ).all()
+            if len(rows) != len(selected) or any(not row.is_active for row in rows):
+                raise HouseholdPersistenceConflictError(
+                    "Selected canonical food is missing or inactive."
+                )
+        try:
+            self._connection.execute(
+                delete(table).where(
+                    table.c.household_id == household_id,
+                    table.c.member_id == member_id,
+                )
+            )
+            if selected:
+                self._connection.execute(
+                    insert(table),
+                    [
+                        {
+                            "household_id": household_id,
+                            "member_id": member_id,
+                            "food_ingredient_id": food_id,
+                        }
+                        for food_id in sorted(selected, key=lambda value: value.hex)
+                    ],
+                )
+        except IntegrityError as exc:
+            raise HouseholdPersistenceConflictError(
+                "Concurrent exclusion update or invalid canonical reference."
+            ) from exc
+        return True
 
     def update_member(self, member: HouseholdMember) -> None:
         try:
