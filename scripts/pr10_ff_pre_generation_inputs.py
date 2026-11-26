@@ -118,6 +118,7 @@ COMPATIBLE_PLANNER_INPUT_BOUNDARY_BLOBS = {
         {
             "269fa7f21679024c944ded49d74bc8f8b94ffc74",
             "c6a59ba3d6dd5eca0ddf02eb05999eebdc4c23dd",
+            "33f8ceccd45c7135e1b9932af32727da744b998b",
         }
     ),
 }
