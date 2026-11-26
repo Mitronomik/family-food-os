@@ -327,6 +327,42 @@ def test_generation_member_constraints_preserve_canonical_exclusions() -> None:
     assert request.members[0].excluded_food_ingredient_ids == frozenset({uid(50)})
 
 
+def test_missing_persisted_exclusion_snapshot_is_not_interpreted_as_empty() -> None:
+    planner, command, *_ = service()
+
+    class MissingExclusions(Households):
+        def get_household_with_exclusions(self, household_id):
+            return self.get_household(household_id), {}
+
+    planner._households = MissingExclusions(command.household_id, uid(2))
+    with pytest.raises(PlannerAuthoritativeInputError, match="unavailable"):
+        planner.compose_authoritative_request(command)
+
+
+def test_persisted_exclusions_cannot_be_cleared_by_request_override() -> None:
+    planner, command, *_ = service()
+
+    class PersistedExclusions(Households):
+        def get_household_with_exclusions(self, household_id):
+            return self.get_household(household_id), {
+                self.member_id: frozenset({uid(50)})
+            }
+
+    planner._households = PersistedExclusions(command.household_id, uid(2))
+    command = replace(
+        command,
+        members=(
+            GenerationMemberConstraints(
+                uid(2), excluded_food_ingredient_ids=frozenset({uid(51)})
+            ),
+        ),
+    )
+    result = planner.compose_authoritative_request(command)
+    assert result.members[0].excluded_food_ingredient_ids == frozenset(
+        {uid(50), uid(51)}
+    )
+
+
 def test_wrong_household_member_and_selection_fail_closed() -> None:
     planner, command, meals, *_ = service()
     with pytest.raises(PlannerAuthoritativeInputError):
