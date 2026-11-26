@@ -267,4 +267,7 @@ def test_0044_injected_failed_rebuild_restores_schema_and_marker(tmp_path, monke
             (MIGRATION_ID,),
         ).fetchone() == (0,)
     monkeypatch.setattr(module, "upgrade", real_upgrade)
-    assert apply_migrations(config) == [MIGRATION_ID]
+    assert apply_migrations(config) == [
+        MIGRATION_ID,
+        "0045_household_member_food_exclusions",
+    ]
