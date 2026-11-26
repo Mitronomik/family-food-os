@@ -203,7 +203,10 @@ def test_real_0043_upgrades_to_0044_without_rewriting_legacy_data(
             "SELECT sql FROM sqlite_master WHERE type='trigger' "
             "AND name='trg_shopping_obligation_event'"
         ).fetchone()[0]
-    assert apply_migrations(config) == [MIGRATION_ID, "0045_household_member_food_exclusions"]
+    assert apply_migrations(config) == [
+        MIGRATION_ID,
+        "0045_household_member_food_exclusions",
+    ]
     with sqlite3.connect(config.path) as db:
         db.execute("PRAGMA foreign_keys=ON")
         for table, rows in old.items():
