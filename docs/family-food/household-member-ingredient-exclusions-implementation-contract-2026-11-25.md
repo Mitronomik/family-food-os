@@ -77,3 +77,14 @@ Consumer text: «Не используем» / «Исключённые прод
 No invented source data, allergen attestations, medical logic, food safety claims, arbitrary retailer ingestion, Auth/PostgreSQL migration, Prep activation, or UI navigation restructuring.
 
 If this contract is rejected, no runtime code is authorized. If accepted but the persistence plan proves incompatible with existing Household keys/UoW or release constraints, stop and revise this contract rather than silently changing schema or dropping a hard exclusion.
+
+
+## Proposed bounded runtime choice — PR #307 (pending independent acceptance)
+
+**Exact migration:** `0045_household_member_food_exclusions`, following the accepted `0044_meal_plan_components`. Two additive schema objects: the member-scoped food-exclusion relation and a unique composite member/Household index needed for SQLite FK enforcement. No old Household/Member fields or rows are rewritten.
+
+**Concurrency policy:** optimistic *expected-set compare-and-swap* in the existing Household Unit of Work. Every replacement must supply the previously read complete canonical UUID set; a changed set fails with a typed conflict, an identical replay performs no writes, and a failing delete/insert transaction rolls back. Concurrent SQLite write contention is also failed closed; no last-write-wins fallback is allowed. This avoids adding a separate preference revision table. **Limitation:** the set itself is the concurrency token, so an ABA change (A → B → A) is not independently detectable; future multi-user editing requiring stronger revision semantics must return for a separately reviewed persistence extension, not silently claim this CAS solves ABA.
+
+**Planner boundary:** HouseholdService reads Household members and all persisted selections in a single read scope, and Planner unions these sets with any additional request-scoped exclusions. An absent/invalid entry for an existing member blocks planning, not interprets it as an empty set. Historical MealPlans are unchanged; old plan freshness/promotion remains outside this PR.
+
+**Review status:** Implementation-specific decision offered for independent architecture/QA review in PR #307, **not automatically accepted by passing CI**. Validate concurrent CAS races, source-pin compatibility, FK scope, restore prefixes, and exact-head full backend+launcher checks before owner merge.
