@@ -264,3 +264,51 @@ def test_upgrade_0044_to_0045_only_adds_preferences(tmp_path):
             db.execute("SELECT * FROM household_members").fetchall(),
         ) == original_rows
     assert expected_migration_ids()[-1] == "0045_household_member_food_exclusions"
+
+
+def test_0045_migration_failure_rolls_back_index_and_schema_marker(
+    tmp_path, monkeypatch
+):
+    """The failed schema half-step cannot leave an unmarked composite index."""
+    import sqlite3
+    from importlib import import_module
+
+    config = DatabaseConfig(path=tmp_path / "migration-injection.sqlite")
+    modules = list(MIGRATION_MODULES)
+    try:
+        MIGRATION_MODULES[:] = modules[:-1]
+        apply_migrations(config)
+    finally:
+        MIGRATION_MODULES[:] = modules
+
+    module = import_module(
+        "app.migrations.versions.0045_household_member_food_exclusions"
+    )
+    original_upgrade = module.upgrade
+
+    def fail_after_index(db):
+        db.execute(
+            "CREATE UNIQUE INDEX uq_household_member_scope "
+            "ON household_members (household_id, id)"
+        )
+        raise RuntimeError("injected migration failure before association table")
+
+    monkeypatch.setattr(module, "upgrade", fail_after_index)
+    with pytest.raises(RuntimeError, match="injected migration failure"):
+        apply_migrations(config)
+    with sqlite3.connect(config.path) as db:
+        assert db.execute(
+            "SELECT name FROM sqlite_master WHERE name='uq_household_member_scope'"
+        ).fetchone() is None
+        assert db.execute(
+            "SELECT name FROM sqlite_master "
+            "WHERE name='household_member_excluded_food_ingredients'"
+        ).fetchone() is None
+        assert db.execute(
+            "SELECT migration_id FROM schema_migrations "
+            "WHERE migration_id='0045_household_member_food_exclusions'"
+        ).fetchone() is None
+        assert db.execute("PRAGMA foreign_key_check").fetchall() == []
+
+    monkeypatch.setattr(module, "upgrade", original_upgrade)
+    assert apply_migrations(config) == ["0045_household_member_food_exclusions"]
