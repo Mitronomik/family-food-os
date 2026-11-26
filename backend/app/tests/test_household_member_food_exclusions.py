@@ -205,7 +205,29 @@ def test_upgrade_0044_to_0045_only_adds_preferences(tmp_path):
         MIGRATION_MODULES[:] = modules
     import sqlite3
 
+    household_id = "1" * 32
+    member_id = "2" * 32
     with sqlite3.connect(config.path) as db:
+        db.execute("PRAGMA foreign_keys=ON")
+        db.execute(
+            "INSERT INTO households "
+            "(id, name, timezone, created_at, updated_at) VALUES (?, ?, ?, ?, ?)",
+            (household_id, "Историческая семья", "Europe/Moscow",
+             "2026-11-01T00:00:00Z", "2026-11-01T00:00:00Z"),
+        )
+        db.execute(
+            "INSERT INTO household_members "
+            "(id, household_id, name, active, activity_level, goal, "
+            "created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+            (member_id, household_id, "Исторический участник", 1, "active",
+             "maintain", "2026-11-01T00:00:00Z", "2026-11-01T00:00:00Z"),
+        )
+
+    with sqlite3.connect(config.path) as db:
+        original_rows = (
+            db.execute("SELECT * FROM households").fetchall(),
+            db.execute("SELECT * FROM household_members").fetchall(),
+        )
         old_history = tuple(db.execute(
             "SELECT migration_id FROM schema_migrations ORDER BY rowid"
         ).fetchall())
@@ -225,4 +247,8 @@ def test_upgrade_0044_to_0045_only_adds_preferences(tmp_path):
         assert db.execute(
             "SELECT COUNT(*) FROM household_member_excluded_food_ingredients"
         ).fetchone()[0] == 0
+        assert (
+            db.execute("SELECT * FROM households").fetchall(),
+            db.execute("SELECT * FROM household_members").fetchall(),
+        ) == original_rows
     assert expected_migration_ids()[-1] == "0045_household_member_food_exclusions"
