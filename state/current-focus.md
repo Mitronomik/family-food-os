@@ -1,3 +1,13 @@
+# CURRENT — persisted non-medical member exclusions preflight — 2026-11-25
+
+**Accepted main:** `c74f4d9996f6e2a4a788ceada88b1d9972437ee2` (PR #305 merged 2026-11-25). Hard deterministic Planner exclusions and typed UUID input are implemented and tested; **persisted HouseholdMember exclusions are NOT implemented yet**.
+
+**Now:** one bounded docs-only [Household member exclusion implementation contract](../docs/family-food/household-member-ingredient-exclusions-implementation-contract-2026-11-25.md) for storing exact canonical FoodIngredient selections once, reading them in future Planner generations and never allowing omitted request inputs to bypass a persisted hard exclusion. No medical reasons, taxonomy, allergen certification, runtime schema/API/UI changes in this PR.
+
+**Next only after independently reviewed/merged contract:** small Household persistence + deterministic Planner read/union runtime PR with migration fresh/upgrade, transaction failure/concurrency, cross-Household, exact-id and full backend+launcher tests. Then separately thin API and Russian mobile-first selector. No autonomous merge or hidden source/food-safety gate waiver.
+
+---
+
 # CURRENT — owner pivot: non-medical ingredient exclusions — 2026-11-23
 
 **LATEST APPROVED PRODUCT DIRECTION (supersedes the historical allergen publication plan below):** FamilyFoodOS is **not** an allergy recommendation/certification service. The MVP captures only FoodIngredient exclusions **without medical reasons**, applies them as hard deterministic Planner constraints, and makes no claims of allergen-free/therapeutically safe meals. See [canonical decision](../docs/family-food/ingredient-exclusions-product-decision-2026-11-23.md).
