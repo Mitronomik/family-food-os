@@ -273,9 +273,10 @@ def test_r3b_fresh_publication_and_batch_activation(database):
             ).fetchone()
             assert row == (code, 0, 0)
 
-    assert migrations.expected_migration_ids()[-2:] == [
+    assert migrations.expected_migration_ids()[-3:] == [
         "0043_shopping_engine",
         "0044_meal_plan_components",
+        "0045_household_member_food_exclusions",
     ]
 
 
