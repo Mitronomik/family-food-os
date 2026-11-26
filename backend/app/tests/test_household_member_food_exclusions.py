@@ -11,6 +11,7 @@ from app.db.migrations import (
     apply_migrations,
     expected_migration_ids,
 )
+from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_ingredient_composition import (
     create_food_catalogue_service,
 )
@@ -65,6 +66,17 @@ def test_persisted_exclusions_are_automatic_and_caller_can_only_add(scenario):
     )
     assert service.list_member_excluded_food_ids(household, a) == frozenset({food.id})
     assert service.list_member_excluded_food_ids(household, b) == empty
+
+    # A new engine/scope on the same persisted SQLite file sees the same
+    # canonical UUID selection; it is not memory on the Planner object.
+    other_engine = create_sqlite_engine(config)
+    try:
+        reopened = create_household_service(other_engine)
+        assert reopened.list_member_excluded_food_ids(
+            household, a
+        ) == frozenset({food.id})
+    finally:
+        other_engine.dispose()
 
     plain = replace(
         witness.command,
