@@ -1,3 +1,9 @@
+# 2026-11-26 — PR #308 second CI correction
+
+PR #308 second CI correction: 5e0de59 passed focused 49+23 tests, import lint and Shopping API workflow; remaining Ruff diff consists of two assert formatting changes. Partial nutrition broad shard 0: 918 passed, one obsolete catalogue architecture guard rejected existence of the newly authorized read-only API module. Replace file-absence proxy with exact mounted GET-only route allowlist and service read-call/adapter-import guards, retaining prohibition of catalogue mutation. No runtime behavior change, no test deletion, no CI bypass. Exact-head rerun required.
+
+---
+
 # 2026-11-26 — PR #308 CI formatting correction
 
 PR #308 CI correction: on 3c942bdfdda50a5d6a30539cbf64a4271b9f75e2, Household exclusions workflow passed 49 focused and 23 migration/source tests before Ruff I001; Shopping API workflow passed 12 + 42 + 81 tests before Ruff format main.py. Correct import order and formatting only, no changed business behavior or weakened tests. Exact-head rerun required.

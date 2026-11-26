@@ -676,13 +676,17 @@ def test_exclusions_http_invalid_scope_and_input(scenario, exclusions_api):
         assert response.status_code == 409
         assert response.json()["detail"]["code"] == "MEMBER_EXCLUSIONS_CONFLICT"
         assert str(food_id) not in response.text
-    assert exclusions_api.get(f"/api/food-ingredients/{carrot.id}").json()[
-        "is_active"
-    ] is False
+    assert (
+        exclusions_api.get(f"/api/food-ingredients/{carrot.id}").json()["is_active"]
+        is False
+    )
     assert exclusions_api.get(f"/api/food-ingredients/{uuid4()}").status_code == 404
-    assert exclusions_api.get(
-        "/api/food-ingredients", params={"q": "морковь", "limit": 201}
-    ).status_code == 422
+    assert (
+        exclusions_api.get(
+            "/api/food-ingredients", params={"q": "морковь", "limit": 201}
+        ).status_code
+        == 422
+    )
     assert all(
         item["id"] != str(carrot.id)
         for item in exclusions_api.get(
