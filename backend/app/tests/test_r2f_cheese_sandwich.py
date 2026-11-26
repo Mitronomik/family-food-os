@@ -285,9 +285,10 @@ def test_r2f_fresh_publication_adds_cheese_sandwich_with_exact_prepared_authorit
         )
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
 
-    assert migrations.expected_migration_ids()[-2:] == [
+    assert migrations.expected_migration_ids()[-3:] == [
         "0043_shopping_engine",
         "0044_meal_plan_components",
+        "0045_household_member_food_exclusions",
     ]
 
 
