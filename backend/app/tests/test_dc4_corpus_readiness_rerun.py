@@ -18,9 +18,10 @@ def _replay_frozen_dc4_migration_prefix(monkeypatch):
     # Replay it against the historical 0043 schema; 0044 is verified in its
     # own current-head migration/persistence suite, not silently here.
     modules = migrations.MIGRATION_MODULES
-    assert modules[-2:] == [
+    assert modules[-3:] == [
         "app.migrations.versions.0043_shopping_engine",
         "app.migrations.versions.0044_meal_plan_components",
+        "app.migrations.versions.0045_household_member_food_exclusions",
     ]
     monkeypatch.setattr(migrations, "MIGRATION_MODULES", modules[:-1])
 
