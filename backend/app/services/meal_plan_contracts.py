@@ -90,6 +90,13 @@ class MealPlanUnitOfWork(Protocol):
         member_updated_at: datetime,
     ) -> None: ...
 
+    def guard_member_exclusions(
+        self,
+        *,
+        household_id: UUID,
+        expected: Mapping[UUID, frozenset[UUID]],
+    ) -> None: ...
+
     def commit(self) -> None: ...
     def rollback(self) -> None: ...
     def __exit__(
