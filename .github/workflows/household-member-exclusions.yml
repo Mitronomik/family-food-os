@@ -1,0 +1,44 @@
+name: Household member food exclusions
+
+on:
+  pull_request:
+    paths:
+      - 'backend/app/migrations/versions/0045_household_member_food_exclusions.py'
+      - 'backend/app/db/migrations.py'
+      - 'backend/app/db/migration_lineage.py'
+      - 'backend/app/services/household*.py'
+      - 'backend/app/services/planner.py'
+      - 'backend/app/persistence/sqlalchemy_core/household*.py'
+      - 'backend/app/tests/test_household_member_food_exclusions.py'
+      - 'backend/app/tests/test_pr10_ff_pre_generation_inputs.py'
+      - 'scripts/pr10_ff_pre_generation_inputs.py'
+      - '.github/workflows/household-member-exclusions.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  member-exclusions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      AI_ENABLED: 'false'
+      PYTHONPATH: 'backend:.'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e './backend[test]' 'ruff==0.16.8'
+      - name: Focused Household member exclusions and persisted Planner
+        run: python -m pytest -q --tb=short --maxfail=2 backend/app/tests/test_household_member_food_exclusions.py backend/app/tests/test_planner_hard_ingredient_exclusions.py
+      - name: Focused source pin and migration consistency
+        run: python -m pytest -q --tb=short --maxfail=2 backend/app/tests/test_household_migration.py backend/app/tests/test_pr10_ff_pre_generation_inputs.py
+      - name: Ruff and source whitespace
+        run: |
+          python -m ruff check --select I,F401,F821 backend/app/services/households.py backend/app/services/household_contracts.py backend/app/services/planner.py backend/app/persistence/sqlalchemy_core/household_repositories.py backend/app/persistence/sqlalchemy_core/household_tables.py backend/app/tests/test_household_member_food_exclusions.py backend/app/tests/test_pr10_ff_pre_generation_inputs.py scripts/pr10_ff_pre_generation_inputs.py
+          python -m ruff format --check backend/app/services/households.py backend/app/services/household_contracts.py backend/app/services/planner.py backend/app/persistence/sqlalchemy_core/household_repositories.py backend/app/persistence/sqlalchemy_core/household_tables.py backend/app/tests/test_household_member_food_exclusions.py backend/app/tests/test_pr10_ff_pre_generation_inputs.py scripts/pr10_ff_pre_generation_inputs.py
+          git diff --check "$(git merge-base origin/main HEAD)" HEAD
