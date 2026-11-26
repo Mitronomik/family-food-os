@@ -44,12 +44,13 @@ def test_0032_remains_in_current_chain_and_fresh_migration_is_repeat_safe(tmp_pa
 
     applied = apply_migrations(config)
 
-    assert applied[-3:] == [
+    assert applied[-4:] == [
         "0042_recipe_prepared_output_nutrition",
         "0043_shopping_engine",
         "0044_meal_plan_components",
+        "0045_household_member_food_exclusions",
     ]
-    assert expected_migration_ids()[-13:] == [
+    assert expected_migration_ids()[-14:] == [
         "0031_meal_pattern_catalogue",
         MIGRATION_ID,
         PARTIAL_PROFILE_MIGRATION_ID,
@@ -63,6 +64,7 @@ def test_0032_remains_in_current_chain_and_fresh_migration_is_repeat_safe(tmp_pa
         "0042_recipe_prepared_output_nutrition",
         "0043_shopping_engine",
         "0044_meal_plan_components",
+        "0045_household_member_food_exclusions",
     ]
     assert apply_migrations(config) == []
     with sqlite3.connect(config.path) as connection:
@@ -122,6 +124,7 @@ def test_populated_0031_upgrade_preserves_existing_rows(tmp_path):
         "0042_recipe_prepared_output_nutrition",
         "0043_shopping_engine",
         "0044_meal_plan_components",
+        "0045_household_member_food_exclusions",
     ]
 
     with sqlite3.connect(config.path) as connection:
