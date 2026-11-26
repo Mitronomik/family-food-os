@@ -106,6 +106,7 @@ def test_0037_appends_after_0036_without_consuming_0033():
         "0043_shopping_engine",
         "0044_meal_plan_components",
         "0045_household_member_food_exclusions",
+        "0045_household_member_food_exclusions",
     ]
     assert not any(value.startswith("0033_") for value in expected)
 
@@ -128,6 +129,7 @@ def test_populated_0036_upgrade_preserves_legacy_plan_without_backfill(tmp_path)
         "0043_shopping_engine",
         "0044_meal_plan_components",
         "0045_household_member_food_exclusions",
+        "0045_household_member_food_exclusions",
     ]
     with sqlite3.connect(database) as db:
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
@@ -149,6 +151,7 @@ def test_populated_0036_upgrade_preserves_legacy_plan_without_backfill(tmp_path)
         "0042_recipe_prepared_output_nutrition",
         "0043_shopping_engine",
         "0044_meal_plan_components",
+        "0045_household_member_food_exclusions",
         "0045_household_member_food_exclusions",
     ]
 
