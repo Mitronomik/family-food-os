@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from datetime import date, datetime
 from decimal import Decimal
 from types import TracebackType
-from typing import Protocol, Self
+from typing import Mapping, Protocol, Self
 from uuid import UUID
 
 from app.domain.meal_plans import (
