@@ -285,6 +285,7 @@ class MealPlanService:
         member_selection_ids: Mapping[UUID, UUID],
         events: Sequence[MealEventDraft],
         reference_methodology_selection_ids: Mapping[UUID, UUID] | None = None,
+        expected_member_exclusions: Mapping[UUID, frozenset[UUID]] | None = None,
         status: MealPlanStatus = MealPlanStatus.CONFIRMED,
         config_version: str = "manual-v1",
     ) -> MealPlanDetail:
@@ -438,6 +439,15 @@ class MealPlanService:
         validate_complete_plan(detail, selection_details)
         try:
             with self._write_scope_factory() as scope:
+                if expected_member_exclusions is not None:
+                    if set(expected_member_exclusions) != set(member_selection_ids):
+                        raise MealPlanValidationError(
+                            "Stored exclusion snapshot must cover all planned members."
+                        )
+                    scope.guard_member_exclusions(
+                        household_id=household_id,
+                        expected=expected_member_exclusions,
+                    )
                 for pin in reference_pins:
                     scope.guard_member_state(
                         household_id=household_id,
