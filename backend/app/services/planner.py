@@ -288,6 +288,13 @@ class PlannerService:
         self, command: AuthoritativeGenerationRequest
     ) -> PlannerRequest:
         """Resolve caller constraints against current Household-scoped truth."""
+        request, _ = self._compose_authoritative_with_snapshot(command)
+        return request
+
+    def _compose_authoritative_with_snapshot(
+        self, command: AuthoritativeGenerationRequest
+    ) -> tuple[PlannerRequest, dict[UUID, frozenset[UUID]]]:
+        """Keep the exact persisted snapshot used in planning for commit-time CAS."""
         state, stored_exclusions = self._households.get_household_with_exclusions(
             command.household_id
         )
@@ -396,22 +403,25 @@ class PlannerService:
                 for event in prior.events
                 if event.recipe_version_id is not None
             )
-        return PlannerRequest(
-            command.household_id,
-            command.week_start,
-            tuple(members),
-            tuple(candidates),
-            pantry_ids,
-            command.fixed_events,
-            recent_plan_ids,
-            recent_recipe_ids,
+        return (
+            PlannerRequest(
+                command.household_id,
+                command.week_start,
+                tuple(members),
+                tuple(candidates),
+                pantry_ids,
+                command.fixed_events,
+                recent_plan_ids,
+                recent_recipe_ids,
+            ),
+            {member_id: stored_exclusions[member_id] for member_id in requested},
         )
 
     def generate_authoritative(
         self, command: AuthoritativeGenerationRequest
     ) -> tuple[PlannerResult, MealPlanDetail | None]:
         started = perf_counter_ns()
-        request = self.compose_authoritative_request(command)
+        request, persisted_snapshot = self._compose_authoritative_with_snapshot(command)
         result = generate_week(request, self._config)
         duration = (Decimal(perf_counter_ns() - started) / Decimal(1_000_000)).quantize(
             Decimal("0.001")
@@ -440,5 +450,6 @@ class PlannerService:
                 for event in result.events
             ],
             config_version=self._config.version,
+            expected_member_exclusions=persisted_snapshot,
         )
         return result, detail
