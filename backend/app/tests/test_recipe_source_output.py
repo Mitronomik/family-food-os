@@ -183,6 +183,7 @@ def test_0040_adds_nullable_output_columns_and_preserves_historical_row(tmp_path
         "0042_recipe_prepared_output_nutrition",
         "0043_shopping_engine",
         "0044_meal_plan_components",
+        "0045_household_member_food_exclusions",
     ]
 
     with sqlite3.connect(database) as connection:
@@ -221,6 +222,7 @@ def test_0040_adds_nullable_output_columns_and_preserves_historical_row(tmp_path
         "0042_recipe_prepared_output_nutrition",
         "0043_shopping_engine",
         "0044_meal_plan_components",
+        "0045_household_member_food_exclusions",
     ]
     with sqlite3.connect(database) as connection:
         restored = connection.execute(
