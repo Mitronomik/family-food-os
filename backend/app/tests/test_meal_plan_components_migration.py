@@ -38,13 +38,14 @@ def _schema(config):
         }
 
 
-def test_fresh_0044_is_final_and_immutable_component_tables_present(tmp_path):
+def test_fresh_0044_remains_immutable_after_following_0045(tmp_path):
     config = DatabaseConfig(path=tmp_path / "fresh.sqlite")
-    assert expected_migration_ids()[-2:] == [
+    assert expected_migration_ids()[-3:] == [
         "0043_shopping_engine",
         MIGRATION_ID,
+        "0045_household_member_food_exclusions",
     ]
-    assert apply_migrations(config)[-1] == MIGRATION_ID
+    assert apply_migrations(config)[-2:] == [MIGRATION_ID, "0045_household_member_food_exclusions"]
     assert apply_migrations(config) == []
     with sqlite3.connect(config.path) as db:
         db.execute("PRAGMA foreign_keys=ON")
@@ -194,7 +195,7 @@ def test_real_0043_upgrades_to_0044_without_rewriting_legacy_data(
             "SELECT sql FROM sqlite_master WHERE type='trigger' "
             "AND name='trg_shopping_obligation_event'"
         ).fetchone()[0]
-    assert apply_migrations(config) == [MIGRATION_ID]
+    assert apply_migrations(config) == [MIGRATION_ID, "0045_household_member_food_exclusions"]
     with sqlite3.connect(config.path) as db:
         db.execute("PRAGMA foreign_keys=ON")
         for table, rows in old.items():
