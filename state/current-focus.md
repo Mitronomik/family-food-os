@@ -1,3 +1,13 @@
+# CURRENT — PR #307 persisted member food exclusions implementation — 2026-11-26
+
+**Accepted main:** `3858923ed074e935acad64a64018ccf97247e2c2` ([#306 merged](https://github.com/Mitronomik/family-food-os/pull/306)), docs-only [implementation contract](../docs/family-food/household-member-ingredient-exclusions-implementation-contract-2026-11-25.md) accepted.
+
+**Authorized bounded runtime:** [PR #307](https://github.com/Mitronomik/family-food-os/pull/307) adds SQLite forward `0045` member→canonical FoodIngredient preferences, Household-scoped transactional CAS replace/read, one read-scope Household+exclusions snapshot and persisted-plus-request union in deterministic Planner. No medical reasons, allergens publisher, API, UI or consumer release. Existing `AI_ENABLED=false` remains.
+
+**Next:** exact-head focused migration/Household/Planner tests, failure-injection and conflict tests, PR10 original frozen A/B byte-compatible explicit Planner-blob review, full backend + launcher and independent reviewer approval. **Do not merge autonomously or proceed to API/UI until this bounded persistence seam is accepted.**
+
+---
+
 # CURRENT — persisted non-medical member exclusions preflight — 2026-11-25
 
 **Accepted main:** `c74f4d9996f6e2a4a788ceada88b1d9972437ee2` (PR #305 merged 2026-11-25). Hard deterministic Planner exclusions and typed UUID input are implemented and tested; **persisted HouseholdMember exclusions are NOT implemented yet**.
