@@ -26,6 +26,19 @@ class HouseholdMemberRepository(Protocol):
 
     def update_member(self, member: HouseholdMember) -> None: ...
 
+    def list_excluded_food_ids(
+        self, household_id: UUID, member_id: UUID
+    ) -> frozenset[UUID]: ...
+
+    def replace_excluded_food_ids(
+        self,
+        household_id: UUID,
+        member_id: UUID,
+        *,
+        expected: frozenset[UUID],
+        selected: frozenset[UUID],
+    ) -> bool: ...
+
 
 class HouseholdUnitOfWork(Protocol):
     households: HouseholdRepository
