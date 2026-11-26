@@ -121,7 +121,6 @@ def test_persisted_exclusions_are_automatic_and_caller_can_only_add(scenario):
     ).excluded_food_ingredient_ids == frozenset({food.id, more.id})
 
 
-
 def test_next_week_persisted_mealplan_excludes_selected_food_in_every_serving(
     scenario,
 ):
@@ -166,7 +165,10 @@ def test_next_week_persisted_mealplan_excludes_selected_food_in_every_serving(
                 assert beef.id not in ingredients
                 checked += 1
         assert checked > 0
-    assert household_service.list_member_excluded_food_ids(household, member_b) == frozenset()
+    assert (
+        household_service.list_member_excluded_food_ids(household, member_b)
+        == frozenset()
+    )
 
 
 def test_changed_exclusions_after_planning_abort_new_revision_atomically(
@@ -199,8 +201,7 @@ def test_changed_exclusions_after_planning_abort_new_revision_atomically(
         assert isinstance(result, PlannerSuccess)
         observed.append("planned")
         assert households.replace_member_excluded_food_ids(
-            household, member,
-            expected=frozenset(), selected=frozenset({food.id})
+            household, member, expected=frozenset(), selected=frozenset({food.id})
         )
         observed.append("preference_committed")
         return result
@@ -264,6 +265,7 @@ def test_two_independent_transactions_same_snapshot_only_one_cas_wins(scenario):
     assert create_household_service(engine).list_member_excluded_food_ids(
         household, member
     ) == frozenset(winners)
+
 
 def test_atomic_replace_replay_stale_snapshot_and_cross_household(scenario):
     config, engine, households, witness, _ = scenario
