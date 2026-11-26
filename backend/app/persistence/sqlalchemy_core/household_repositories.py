@@ -9,7 +9,9 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.exc import IntegrityError
 
 from app.domain.households import Household, HouseholdMember
-from app.persistence.sqlalchemy_core.food_ingredient_tables import food_ingredients_table
+from app.persistence.sqlalchemy_core.food_ingredient_tables import (
+    food_ingredients_table,
+)
 from app.persistence.sqlalchemy_core.household_tables import (
     household_member_excluded_food_ingredients_table,
     household_members_table,
