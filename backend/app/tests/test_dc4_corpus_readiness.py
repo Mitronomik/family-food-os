@@ -24,7 +24,8 @@ def _replay_frozen_dc4_migration_prefix(monkeypatch):
         "app.migrations.versions.0045_household_member_food_exclusions",
     ]
     cutoff = next(
-        index for index, module in enumerate(modules)
+        index
+        for index, module in enumerate(modules)
         if module.endswith("0043_shopping_engine")
     )
     monkeypatch.setattr(migrations, "MIGRATION_MODULES", modules[: cutoff + 1])
