@@ -3,9 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev --hostname 127.0.0.1 --port 3100",
-    "build": "next build",
-    "start": "next start --hostname 127.0.0.1 --port 3100",
+    "dev": "node run-next.mjs dev --hostname 127.0.0.1 --port 3100",
+    "build": "node run-next.mjs build",
+    "start": "node run-next.mjs start --hostname 127.0.0.1 --port 3100",
     "typecheck": "tsc --noEmit",
     "lint": "tsc --noEmit --noUnusedLocals --noUnusedParameters",
     "test": "node --test test/*.test.mjs",

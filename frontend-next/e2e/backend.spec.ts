@@ -1,4 +1,4 @@
-import { devices, expect, test, type APIResponse } from "@playwright/test";
+import { devices, expect, test, type APIRequestContext, type APIResponse } from "@playwright/test";
 
 const householdId = "11111111-1111-4111-8111-111111111111";
 const backend = "http://127.0.0.1:8000";
@@ -119,4 +119,119 @@ test("real FastAPI persists isolated member exclusions and rejects stale saves",
   expect(await selection(borisApi)).toEqual([]);
   await search.fill("морковь");
   await expect(page.getByRole("status").filter({ hasText: "Ничего не найдено" })).toBeVisible();
+});
+
+async function createReviewHousehold(request: APIRequestContext) {
+  const { id } = await readJson<{ id: string }>(await request.post(backend + "/api/households", {
+    data: { name: "Тестовая семья", timezone: "Europe/Moscow" },
+  }));
+  const api = backend + "/api/households/" + id;
+  const addMember = async (name: string) => {
+    const member = await readJson<Member>(await request.post(api + "/members", {
+      data: { name, activity_level: "moderate", goal: "maintain" },
+    }));
+    return api + "/members/" + member.id;
+  };
+  const anna = await addMember("Анна");
+  const boris = await addMember("Борис");
+  return { path: "/?household=" + id, anna, boris };
+}
+
+test("a lost response after a real commit requires review before further edits", async ({ page, request }) => {
+  const { path, anna } = await createReviewHousehold(request);
+  const endpoint = anna + "/food-exclusions";
+  const readSelection = async () =>
+    (await readJson<Selection>(await request.get(endpoint))).excluded_food_ingredient_ids;
+  let putCount = 0;
+  let committedStatus: number | undefined;
+  await page.route(url => url.pathname === new URL(endpoint).pathname, async route => {
+    if (route.request().method() !== "PUT" || ++putCount !== 1) {
+      await route.continue();
+      return;
+    }
+    // Deliver the original PUT to the real API and lose only the browser's response.
+    const response = await route.fetch({ maxRetries: 0 });
+    committedStatus = response.status();
+    await route.abort("failed");
+  });
+
+  await page.goto(path);
+  await page.getByRole("button", { name: "Анна", exact: true }).click();
+  await page.getByRole("searchbox").fill("говядина");
+  await page.getByRole("button", { name: "Добавить: Говядина" }).click();
+  const save = page.getByRole("button", { name: "Сохранить", exact: true });
+  const remove = page.getByRole("button", { name: "Удалить: Говядина" });
+  await save.click();
+  await expect(page.getByRole("main").getByRole("alert")).toContainText("Не удалось связаться");
+  expect(committedStatus).toBe(200);
+  const committed = await readSelection();
+  expect(committed).toHaveLength(1);
+  await expect(remove).toBeDisabled();
+  await expect(page.getByRole("searchbox")).toBeDisabled();
+  await expect(save).toBeDisabled();
+
+  await page.getByRole("button", { name: "Обновить актуальный список" }).click();
+  await expect(page.getByRole("region", { name: "Проверка актуального списка" }))
+    .toContainText("Говядина");
+  await page.getByRole("button", { name: "Перенести мои изменения" }).click();
+  await expect(remove).toBeEnabled();
+  await expect(save).toBeDisabled();
+  expect(putCount).toBe(1);
+  expect(await readSelection()).toEqual(committed);
+
+  await remove.click();
+  const saved = page.waitForResponse(response =>
+    response.url().endsWith("/food-exclusions") && response.request().method() === "PUT");
+  await save.click();
+  const response = await saved;
+  expect(response.status()).toBe(200);
+  expect(response.request().postDataJSON()).toEqual({
+    expected_excluded_food_ingredient_ids: committed,
+    excluded_food_ingredient_ids: [],
+  });
+  await expect(page.getByRole("status")).toContainText("Изменения сохранены");
+  expect(putCount).toBe(2);
+  expect(await readSelection()).toEqual([]);
+});
+
+test("a real deactivation makes the stale draft read-only after 422", async ({ page, request }) => {
+  const { path, anna, boris } = await createReviewHousehold(request);
+  const endpoint = anna + "/food-exclusions";
+  const save = page.getByRole("button", { name: "Сохранить", exact: true });
+  let annaWrites = 0;
+  page.on("request", incoming => {
+    if (incoming.method() === "PUT" && new URL(incoming.url()).pathname === new URL(endpoint).pathname) {
+      annaWrites++;
+    }
+  });
+  await page.goto(path);
+  await page.getByRole("button", { name: "Борис", exact: true }).click();
+  await page.getByRole("searchbox").fill("свёкла");
+  await page.getByRole("button", { name: "Добавить: Свёкла" }).click();
+  await page.getByRole("button", { name: "Анна", exact: true }).click();
+  await page.getByRole("searchbox").fill("говядина");
+  await page.getByRole("button", { name: "Добавить: Говядина" }).click();
+
+  expect(await readJson<{ active: boolean }>(await request.patch(anna, {
+    data: { active: false },
+  }))).toMatchObject({ active: false });
+  const failed = page.waitForResponse(response =>
+    new URL(response.url()).pathname === new URL(endpoint).pathname && response.request().method() === "PUT");
+  await save.click();
+  expect((await failed).status()).toBe(422);
+  await expect(page.getByRole("status").filter({ hasText: "Участник неактивен" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Удалить: Говядина" })).toBeDisabled();
+  await expect(page.getByRole("searchbox")).toBeDisabled();
+  await expect(save).toBeDisabled();
+
+  await page.getByRole("button", { name: /^Борис/ }).click();
+  await expect(page.getByRole("button", { name: "Удалить: Свёкла" })).toBeEnabled();
+  await expect(save).toBeEnabled();
+  await page.getByRole("button", { name: /^Анна.*Неактивен/ }).click();
+  await expect(page.getByRole("button", { name: "Удалить: Говядина" })).toBeDisabled();
+  await expect(save).toBeDisabled();
+  expect(annaWrites).toBe(1);
+  for (const url of [endpoint, boris + "/food-exclusions"]) {
+    expect(await readJson<Selection>(await request.get(url))).toEqual({ excluded_food_ingredient_ids: [] });
+  }
 });

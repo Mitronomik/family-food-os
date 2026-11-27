@@ -112,14 +112,16 @@ test("conflict requires explicit review, no blind overwrite",async({page})=>{
   expect(f.sets[A]).toEqual([C,D,E]);
 });
 for(const code of [404,422,503,-1])test("safe save failure "+code,async({page})=>{
-  const f=await fixture(page);
+  let failStatusRead = false;
+  const f = await fixture(page, { household: () => failStatusRead ? 503 : undefined });
   await page.getByRole("button",{name:"Удалить: Морковь"}).click();
   f.fail(code);
+  failStatusRead = code === 422;
   await page.getByRole("button",{name:"Сохранить",exact:true}).click();
-  await expect(page.getByRole("main").getByRole("alert")).toContainText(
-    ({ 404: "не найден", 422: "Не удалось проверить", 503: "временно недоступно",
-      [-1]: "Не удалось связаться" })[code]!,
-  );
+  const failureText = ({ 404: "не найден", 422: "Не удалось проверить",
+    503: "временно недоступно", [-1]: "Не удалось связаться" })[code]!;
+  const alerts = page.getByRole("main").getByRole("alert");
+  await expect(alerts.filter({ hasText: failureText })).toBeVisible();
   await expect(page.getByText("Не сохранено",{exact:true}).first()).toBeVisible();
   await expect(page.getByText(/Изменения сохранены/)).toHaveCount(0);
   expect(f.sets[A]).toEqual([C]);
@@ -129,6 +131,15 @@ for(const code of [404,422,503,-1])test("safe save failure "+code,async({page})=
     await expect(save).toBeDisabled();
     await page.getByRole("button", { name: "Обновить актуальный список" }).click();
     await page.getByRole("button", { name: "Перенести мои изменения" }).click();
+    expect(f.writes).toHaveLength(1);
+  }
+  if (code === 422) {
+    await expect(alerts.filter({ hasText: "Загрузка временно недоступна" })).toBeVisible();
+    await expect(save).toBeDisabled();
+    await expect(page.getByRole("searchbox")).toBeDisabled();
+    failStatusRead = false;
+    await page.getByRole("button", { name: "Проверить статус участника" }).click();
+    await expect(save).toBeEnabled();
     expect(f.writes).toHaveLength(1);
   }
   f.fail(0);
