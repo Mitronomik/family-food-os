@@ -1,3 +1,48 @@
+# 2026-11-27 — Регрессия удаления неизвестного продукта в PR #311
+
+Проверены два случая. При недоступных сведениях и отсутствующем русском
+названии строки защищены от удаления, остальные правки сохраняются вместе
+с исходными ID. Повторная загрузка открывает удаление только для опознанных
+строк и сама запись не выполняет. После конфликта можно явно отменить
+неуточнённые новые добавления, сохранив остальные правки и прежние ID.
+
+6 тестов Node.js, 22 Playwright-теста, typecheck, lint и сборка прошли
+локально. [Порядок проверки](../frontend-next/README.md).
+
+---
+
+# 2026-11-27 — Исправления по независимому ревью PR #311
+
+Регрессии воспроизводят потерю ответа после реального PUT 200 и деактивацию
+участника с реальным 422. После согласования редактор сохраняет отмену
+исключения отдельным CAS-запросом. При подтверждённой деактивации черновик
+остаётся доступен для просмотра, черновики остальных участников сохраняются.
+При недоступности проверки статуса повторный PUT блокируется.
+
+Отключение телеметрии проверено в отдельном тесте запуска и production build
+без внешней переменной отключения. Оба браузерных сценария прошли после
+исправления. Общий локальный результат — 21 Playwright, 5 тестов Node.js и
+50 backend-регрессий. [Порядок проверки](../frontend-next/README.md).
+
+---
+
+# 2026-11-27 — Локальная проверка Consumer PWA для PR #311
+
+В [PR #311](https://github.com/Mitronomik/family-food-os/pull/311) обновлены
+производственные зависимости и восстановление редактора после гонок и
+конфликтов. При повторном чтении проверяется доступность новых продуктов,
+а сохранённые исключения с недоступными карточками остаются в выборе.
+Действующие backend, миграции, legacy frontend и ADR 0033 сохранены.
+
+Локально прошли 4 unit-теста, 19 Playwright-тестов (включая настоящую
+запись в FastAPI/SQLite) и 50 backend-регрессий. `npm ci`, типы, lint и
+production build прошли, оба npm-аудита показали 0 уязвимостей.
+Chromium проверил 375, 390, 430, 768, 1024 и 1440 px, клавиатурный фокус и
+состояния редактора. Сняты настольный и эмулированный телефонный скриншоты.
+[README](../frontend-next/README.md) описывает запуск и артефакты CI.
+
+---
+
 # 2026-11-26 — Owner-approved early consumer UI exception
 
 Accepted base: `main@e7cd319d238a4a759ed6a594623079123f255fbf` (PR #309 merged). Owner approved Option B: one internal target PWA shell and adaptive member food exclusions editor before Gate 2, followed by strict return to backend roadmap. See [ADR 0033](../docs/decisions/0033-early-consumer-exclusions-ui-development.md). Current operation is governance documentation only; independent review and owner merge required before runtime. No gate pass, no release, no backend change. After governance acceptance, implement only the approved slice in `frontend-next/`; after its acceptance resume PR10/PR10-PDF/Gate2. No autonomous merge.

@@ -1,0 +1,32 @@
+{
+  "name": "family-food-os-consumer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node run-next.mjs dev --hostname 127.0.0.1 --port 3100",
+    "build": "node run-next.mjs build",
+    "start": "node run-next.mjs start --hostname 127.0.0.1 --port 3100",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit --noUnusedLocals --noUnusedParameters",
+    "test": "node --test test/*.test.mjs",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "next": "15.5.29",
+    "react": "19.1.10",
+    "react-dom": "19.1.10"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1",
+    "@types/node": "22.15.3",
+    "@types/react": "19.1.2",
+    "@types/react-dom": "19.1.2",
+    "typescript": "5.8.3"
+  },
+  "overrides": {
+    "next": {
+      "postcss": "8.5.34",
+      "sharp": "0.35.5"
+    }
+  }
+}

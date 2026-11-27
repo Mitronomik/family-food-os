@@ -1,3 +1,54 @@
+# 2026-11-27 — Защита неидентифицированных исключений в PR #311
+
+В [PR #311](https://github.com/Mitronomik/family-food-os/pull/311) исправлено
+оставшееся замечание P2 на `74c8e4e5`. Редактор различает ошибку загрузки
+сведений и отсутствие русского названия, предлагает повторную загрузку
+и разрешает удаление только после идентификации. Сохранённые ID входят
+в оба набора CAS при сохранении остальных изменений.
+
+Браузерные регрессии выявили доступное удаление на исходном HEAD и прошли
+с исправлением. Локально прошли typecheck, lint, production build, 6 тестов
+Node.js и 22 Playwright-теста. Перед приёмкой проверяется CI нового HEAD.
+
+---
+
+# 2026-11-27 — Повторная приёмка Consumer PWA в PR #311
+
+В [PR #311](https://github.com/Mitronomik/family-food-os/pull/311) исправлены три
+замечания к ревизии `f65b480e`. При неопределённом сохранении редактор
+блокирует правки до согласования с прочитанным списком. При 422 он читает
+актуальный статус участника и сохраняет черновики в памяти. Команды Next.js
+отключают телеметрию при запуске.
+
+Локально прошли `npm ci`, оба npm-аудита (0 уязвимостей), typecheck, lint,
+production build, 5 тестов Node.js, 21 тест Playwright и 50 backend-регрессий.
+Два новых сценария на реальном FastAPI сначала выявили дефекты на
+`f65b480e`, затем прошли с исправлениями.
+
+Перед приёмкой владельцем нужны зелёный CI на HEAD и повторное независимое
+ревью этого коммита. После приёмки продолжается PR10 → PR10-PDF → Gate 2.
+
+---
+
+# 2026-11-27 — Передача PR #311 по ADR 0033
+
+[PR #311](https://github.com/Mitronomik/family-food-os/pull/311), ветка
+`feat/consumer-pwa-member-exclusions`, baseline
+`09df02510070439366f2c73483aa1d7ae55ec8aa`. На исходном HEAD `fdf5d794`
+[проверка Consumer PWA](https://github.com/Mitronomik/family-food-os/actions/runs/45981699376)
+остановилась на аудите npm. На исправленном дереве успешно выполнены
+`npm ci`, оба аудита (0 уязвимостей), проверка типов, lint, production build,
+4 unit-теста, 19 Playwright-тестов и 50 backend-регрессий с `AI_ENABLED=false`.
+Настоящий FastAPI использовал отдельную мигрированную синтетическую SQLite.
+
+В CI проверьте HEAD PR, результаты обоих заданий Consumer PWA и наличие
+артефактов `consumer-pwa-browser-evidence` и `consumer-pwa-backend-report`.
+Сравнение наборов не обнаруживает ABA. Для многопользовательского
+развёртывания нужна отдельная авторизация. Следующий этап после независимого
+ревью и приёмки владельцем — PR10 → PR10-PDF → Gate 2.
+
+---
+
 # 2026-11-26 — Owner-approved early consumer UI exception
 
 Accepted base: `main@e7cd319d238a4a759ed6a594623079123f255fbf` (PR #309 merged). Owner approved Option B: one internal target PWA shell and adaptive member food exclusions editor before Gate 2, followed by strict return to backend roadmap. See [ADR 0033](../docs/decisions/0033-early-consumer-exclusions-ui-development.md). Current operation is governance documentation only; independent review and owner merge required before runtime. No gate pass, no release, no backend change. After governance acceptance, implement only the approved slice in `frontend-next/`; after its acceptance resume PR10/PR10-PDF/Gate2. No autonomous merge.

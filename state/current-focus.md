@@ -1,3 +1,16 @@
+# 2026-11-27 — Проверка PR #311 по ADR 0033
+
+Принятый baseline `09df02510070439366f2c73483aa1d7ae55ec8aa` (PR #310).
+Текущая задача — довести [PR #311](https://github.com/Mitronomik/family-food-os/pull/311)
+в ветке `feat/consumer-pwa-member-exclusions` до зелёного CI на HEAD и независимого
+ревью. Редактор и локальные проверки готовы. Порядок запуска и проверенные
+сценарии описаны в [README](../frontend-next/README.md).
+
+После приёмки владельцем продолжить серверную дорожную карту PR10 → PR10-PDF →
+Gate 2. Разрешение ADR 0033 ограничено этим внутренним срезом.
+
+---
+
 # 2026-11-26 — Owner-approved early consumer UI exception
 
 Accepted base: `main@e7cd319d238a4a759ed6a594623079123f255fbf` (PR #309 merged). Owner approved Option B: one internal target PWA shell and adaptive member food exclusions editor before Gate 2, followed by strict return to backend roadmap. See [ADR 0033](../docs/decisions/0033-early-consumer-exclusions-ui-development.md). Current operation is governance documentation only; independent review and owner merge required before runtime. No gate pass, no release, no backend change. After governance acceptance, implement only the approved slice in `frontend-next/`; after its acceptance resume PR10/PR10-PDF/Gate2. No autonomous merge.
