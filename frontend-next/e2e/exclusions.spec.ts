@@ -6,6 +6,7 @@ const C="44444444-4444-4444-8444-444444444444";
 const D="55555555-5555-4555-8555-555555555555";
 const E="66666666-6666-4666-8666-666666666666";
 const F="77777777-7777-4777-8777-777777777777";
+const G="88888888-8888-4888-8888-888888888888";
 const foods=[{id:C,canonical_name:"Морковь",is_active:false},{id:D,canonical_name:"Говядина",is_active:true},{id:E,canonical_name:"Свёкла",is_active:true}];
 type Hook = (resource: string) => number | void | Promise<number | void>;
 type FixtureOptions = {
@@ -284,22 +285,118 @@ test("reconciliation keeps unavailable additions visible and blocks their save",
   expect(f.writes).toHaveLength(2);
 });
 
-test("unreadable catalogue metadata stays selected and inactive members are read-only", async ({ page }) => {
+test("unidentified exclusions survive saves and can be removed only after metadata retry", async ({ page }) => {
+  let mode: "initial" | "partial" | "resolved" = "initial";
+  const release = deferred();
   const f = await fixture(page, {
-    start: false, includeInactiveMember: true, food: id => id === C ? 404 : undefined,
+    start: false,
+    includeInactiveMember: true,
+    food: async id => {
+      if (![C, E, G].includes(id)) return;
+      if (mode === "initial" && id !== G) return id === C ? 503 : 404;
+      if (mode === "partial") {
+        await release.promise;
+        if (id === E) return 503;
+      }
+    },
   });
+  f.sets[A] = [C, E, G];
+  const foreign = { id: G, canonical_name: "Bell pepper", is_active: true };
+  f.catalogue.push(foreign);
+
   await page.goto("/?household=" + H);
-  await expect(page.getByRole("button", { name: "Удалить: Название недоступно" })).toBeVisible();
-  await expect(page.getByText(C)).toHaveCount(0);
-  await page.getByRole("searchbox").fill("говядина");
+  const selected = page.getByRole("region", { name: /Выбрано/ });
+  const unavailable = selected.getByRole("button", { name: "Удалить: Сведения о продукте недоступны" });
+  const untranslated = selected.getByRole("button", { name: "Удалить: Нет названия на русском" });
+  const retry = selected.getByRole("button", { name: "Повторить загрузку сведений" });
+  const removeButtons = selected.getByRole("button", { name: /^Удалить:/ });
+  await expect(removeButtons).toHaveCount(3);
+  for (const button of await removeButtons.all()) await expect(button).toBeDisabled();
+  await expect(unavailable).toHaveCount(2);
+  await expect(untranslated).toBeDisabled();
+  for (const text of [C, E, G, foreign.canonical_name]) {
+    await expect(page.getByText(text, { exact: true })).toHaveCount(0);
+  }
+
+  const search = page.getByRole("searchbox");
+  const save = page.getByRole("button", { name: "Сохранить", exact: true });
+  await search.fill("говядина");
   await page.getByRole("button", { name: "Добавить: Говядина" }).click();
-  await page.getByRole("button", { name: "Сохранить", exact: true }).click();
+  await save.click();
   await expect(page.getByText(/Изменения сохранены/)).toBeVisible();
-  expect(f.sets[A]).toEqual([C, D]);
+  expect(f.writes).toEqual([{
+    expected_excluded_food_ingredient_ids: [C, E, G],
+    excluded_food_ingredient_ids: [C, D, E, G],
+  }]);
+
+  mode = "partial";
+  await retry.click();
+  await expect(selected.getByRole("status")).toHaveText("Загружаем сведения о продуктах…");
+  await expect(retry).toBeDisabled();
+  release.resolve();
+  const removeCarrot = selected.getByRole("button", { name: "Удалить: Морковь" });
+  await expect(removeCarrot).toBeEnabled();
+  await expect(unavailable).toHaveCount(1);
+  await expect(unavailable).toBeDisabled();
+  await expect(untranslated).toBeDisabled();
+  expect(f.writes).toHaveLength(1);
+  await removeCarrot.click();
+  await save.click();
+  await expect(page.getByText(/Изменения сохранены/)).toBeVisible();
+  expect(f.writes[1]).toEqual({
+    expected_excluded_food_ingredient_ids: [C, D, E, G],
+    excluded_food_ingredient_ids: [D, E, G],
+  });
+
+  mode = "resolved";
+  foreign.canonical_name = "Сладкий перец";
+  await retry.click();
+  await expect(selected.getByRole("button", { name: "Удалить: Свёкла" })).toBeEnabled();
+  await expect(selected.getByRole("button", { name: "Удалить: Сладкий перец" })).toBeEnabled();
+  await expect(retry).toHaveCount(0);
+  await expect(save).toBeDisabled();
+  expect(f.writes).toHaveLength(2);
+
   await page.getByRole("button", { name: /Вера/ }).click();
   await expect(page.getByRole("status").filter({ hasText: "Участник неактивен" })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Удалить: Название недоступно" })).toBeDisabled();
-  await expect(page.getByRole("searchbox")).toBeDisabled();
+  await expect(removeCarrot).toBeDisabled();
+  await expect(search).toBeDisabled();
+});
+
+test("unidentified draft additions can be abandoned after a conflict while saved ids stay protected", async ({ page }) => {
+  let missing = false;
+  const f = await fixture(page, { food: id => missing && (id === D || id === C) ? 503 : undefined });
+  const search = page.getByRole("searchbox");
+  await search.fill("говядина");
+  await page.getByRole("button", { name: "Добавить: Говядина" }).click();
+  await search.fill("свёкла");
+  await page.getByRole("button", { name: "Добавить: Свёкла" }).click();
+  missing = true;
+  f.fail(409);
+  const save = page.getByRole("button", { name: "Сохранить", exact: true });
+  await save.click();
+  await page.getByRole("button", { name: "Обновить актуальный список" }).click();
+  await page.getByRole("button", { name: "Перенести мои изменения" }).click();
+  const selected = page.getByRole("region", { name: /Выбрано/ });
+  const unresolved = selected.getByRole("button", { name: "Удалить: Сведения о продукте недоступны" });
+  const removeButtons = selected.getByRole("button", { name: /^Удалить: (?!Свёкла$)/ });
+  await expect(removeButtons).toHaveCount(2);
+  for (const button of await removeButtons.all()) await expect(button).toBeDisabled();
+  await expect(unresolved).toHaveCount(2);
+  await expect(save).toBeDisabled();
+  await page.getByRole("button", { name: "Отменить неуточнённые добавления" }).click();
+  await expect(unresolved).toHaveCount(1);
+  await expect(unresolved).toBeDisabled();
+  await expect(save).toBeEnabled();
+  expect(f.writes).toHaveLength(1);
+  f.fail(0);
+  await save.click();
+  await expect(page.getByText(/Изменения сохранены/)).toBeVisible();
+  expect(f.writes[1]).toEqual({
+    expected_excluded_food_ingredient_ids: [C],
+    excluded_food_ingredient_ids: [C, E],
+  });
+  expect(f.sets[A]).toEqual([C, E]);
 });
 
 test("leaving with unsaved changes warns and keeps the draft", async ({ page }) => {

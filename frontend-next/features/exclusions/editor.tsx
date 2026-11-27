@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { api, ApiError, type Food, type Household } from "./api";
-import { MAX, add, remove, equal, sorted, reconcile, message, mustRefresh, displayName } from "./model.mjs";
+import { MAX, add, remove, equal, sorted, reconcile, message, mustRefresh, describeFood } from "./model.mjs";
 type KnownFoods = Record<string, Food | undefined>;
 type Draft = {
   base: string[];
@@ -13,7 +13,8 @@ type Draft = {
 };
 type Review = { member: string; latest: string[]; foods: KnownFoods };
 const unavailableAddition = (draft: Draft, id: string) =>
-  !draft.base.includes(id) && !draft.foods[id]?.is_active;
+  !draft.base.includes(id) &&
+  (!draft.foods[id]?.is_active || describeFood(draft.foods[id]).kind !== "identified");
 const status = (error: unknown) => error instanceof ApiError ? error.status : 0;
 
 function readFailure(error: unknown, missing: string) {
@@ -37,13 +38,14 @@ export default function Editor({householdId}:{householdId:string}) {
   const [retry,setRetry]=useState(0);
   const [familyRetry,setFamilyRetry]=useState(0);
   const [review, setReview] = useState<Review>();
-  const [refreshing,setRefreshing]=useState(false);
+  const [refreshing, setRefreshing] = useState<"selection" | "metadata">();
+  const [metadataNotice, setMetadataNotice] = useState("");
   const saveGuard=useRef(false);
   const refreshGuard=useRef(false);
   const searchSeq=useRef(0);
   const draft=drafts[member];
   const dirty=Object.values(drafts).some(d=>!equal(d.base,d.selected)||d.recovery);
-  const busy=Boolean(saving)||refreshing;
+  const busy = Boolean(saving || refreshing);
   useEffect(()=>{
     if(!householdId)return;
     const abort=new AbortController();
@@ -107,6 +109,7 @@ export default function Editor({householdId}:{householdId:string}) {
     changeQuery("");
     setMemberRead(undefined);
     setRefreshError("");
+    setMetadataNotice("");
     setReview(undefined);
     setMember(id);
   }
@@ -157,7 +160,7 @@ export default function Editor({householdId}:{householdId:string}) {
     if (!draft?.recovery || saveGuard.current || refreshGuard.current) return;
     const id = member;
     refreshGuard.current = true;
-    setRefreshing(true);
+    setRefreshing("selection");
     setRefreshError("");
     try{
       if (draft.recovery === "member") {
@@ -173,7 +176,7 @@ export default function Editor({householdId}:{householdId:string}) {
     } catch (error) {
       setRefreshError(readFailure(error, "Участник не найден. Проверьте, доступен ли он для редактирования."));
     }
-    finally{refreshGuard.current=false;setRefreshing(false);}
+    finally{refreshGuard.current=false;setRefreshing(undefined);}
   }
   function acceptLatest(keep:boolean){
     if(!review||review.member!==member||!draft)return;
@@ -186,11 +189,35 @@ export default function Editor({householdId}:{householdId:string}) {
       recovery: undefined, saveFailed: false, notice,
     }));
     changeQuery("");
+    setMetadataNotice("");
     setReview(undefined);
   }
+
+  async function retryMetadata() {
+    if (!draft || draft.recovery || !unresolved.length || saveGuard.current || refreshGuard.current) return;
+    refreshGuard.current = true;
+    setRefreshing("metadata");
+    setMetadataNotice("");
+    try {
+      const foods = await resolveFoods(unresolved);
+      setDrafts(old => ({
+        ...old, [member]: { ...old[member], foods: { ...old[member].foods, ...foods } },
+      }));
+      const restored = unresolved.filter(id => describeFood(foods[id]).kind === "identified").length;
+      setMetadataNotice(restored === unresolved.length
+        ? "Сведения о продуктах обновлены."
+        : restored > 0 ? "Сведения о продуктах обновлены частично." : "Уточнить продукты пока не удалось.");
+    } finally {
+      refreshGuard.current = false;
+      setRefreshing(undefined);
+    }
+  }
+
   const current=family?.members.find(m=>m.id===member);
   const memberError = memberRead?.member === member ? memberRead.message : "";
   const editable = Boolean(draft && current?.active && !busy && !draft.recovery);
+  const unresolved = draft?.selected.filter(id => describeFood(draft.foods[id]).kind !== "identified") ?? [];
+  const unknownAdditions = unresolved.filter(id => !draft?.base.includes(id));
   const hasUnavailable = Boolean(draft?.selected.some(id => unavailableAddition(draft, id)));
   const overLimit = (draft?.selected.length ?? 0) > MAX;
   const canSave = Boolean(editable && draft && !hasUnavailable
@@ -219,21 +246,63 @@ export default function Editor({householdId}:{householdId:string}) {
           setRetry(value => value + 1);
         }}>Повторить загрузку исключений</button></div> : null}
         {draft?<><div className="columns"><section className="selected" aria-labelledby="selected-food-heading"><h3 id="selected-food-heading">Выбрано · {draft.selected.length}</h3>
-          {draft.selected.length===0?<p className="muted">Нет исключённых продуктов. Добавьте нужные через поиск.</p>:<ul>{draft.selected.map(id=><li key={id}><div><strong>{displayName(draft.foods[id])}</strong>{unavailableAddition(draft, id) ? <small>Нельзя добавить в исключения</small>
-            : draft.foods[id]?.is_active === false ? <small>Больше не в каталоге · исключение сохранено</small>
-            : !draft.foods[id] ? <small>Не удалось получить сведения о продукте</small> : null}</div><button disabled={!editable} aria-label={"Удалить: "+displayName(draft.foods[id])} onClick={()=>update(d=>({...d,selected:remove(d.selected,id),notice:"",saveFailed:false}))}>Удалить</button></li>)}</ul>}
+          {draft.selected.length === 0
+            ? <p className="muted">Нет исключённых продуктов. Добавьте нужные через поиск.</p>
+            : <ul>{draft.selected.map(id => {
+              const food = draft.foods[id];
+              const identity = describeFood(food);
+              return <li key={id}>
+                <div>
+                  <strong>{identity.label}</strong>
+                  {identity.kind !== "identified"
+                    ? <small>{draft.base.includes(id) ? "Сохранённое исключение" : "Новое добавление"} · удаление доступно после уточнения</small>
+                    : unavailableAddition(draft, id) ? <small>Нельзя добавить в исключения</small>
+                    : food?.is_active === false ? <small>Больше не в каталоге · исключение сохранено</small> : null}
+                </div>
+                <button disabled={!editable || identity.kind !== "identified"} aria-label={"Удалить: " + identity.label}
+                  onClick={() => update(d => ({ ...d, selected: remove(d.selected, id, d.foods[id]), notice: "", saveFailed: false }))}>
+                  Удалить
+                </button>
+              </li>;
+            })}</ul>}
+          {unresolved.length > 0
+            ? <button disabled={busy || Boolean(draft.recovery)} onClick={retryMetadata}>Повторить загрузку сведений</button>
+            : null}
+          {refreshing === "metadata"
+            ? <p role="status">Загружаем сведения о продуктах…</p>
+            : metadataNotice ? <p role="status">{metadataNotice}</p> : null}
         </section><section className="search"><h3>Добавить продукт</h3><label htmlFor="food-search">Название продукта</label><input id="food-search" type="search" value={query} maxLength={240} disabled={!editable} placeholder="Например, морковь" onChange={event => changeQuery(event.target.value)}/>
-          {searchState==="idle"?<p className="muted">Введите название или синоним.</p>:searchState==="loading"?<p role="status">Ищем продукты…</p>:searchState==="error"?<p role="alert">Не удалось выполнить поиск. Измените запрос и попробуйте снова.</p>:results.length===0?<p role="status">Ничего не найдено. Попробуйте другое название.</p>:<ul>{results.map(food=><li key={food.id}><span>{displayName(food)}</span><button disabled={!editable||!food.is_active||draft.selected.includes(food.id)||draft.selected.length>=MAX||displayName(food)==="Название недоступно"} aria-label={"Добавить: "+displayName(food)} onClick={()=>update(d=>({...d,selected:add(d.selected,food),foods:{...d.foods,[food.id]:food},notice:"",saveFailed:false}))}>{draft.selected.includes(food.id)?"Добавлено":"Добавить"}</button></li>)}</ul>}
+          {searchState === "idle" ? <p className="muted">Введите название или синоним.</p>
+            : searchState === "loading" ? <p role="status">Ищем продукты…</p>
+            : searchState === "error" ? <p role="alert">Не удалось выполнить поиск. Измените запрос и попробуйте снова.</p>
+            : results.length === 0 ? <p role="status">Ничего не найдено. Попробуйте другое название.</p>
+            : <ul>{results.map(food => {
+              const identity = describeFood(food);
+              const selected = draft.selected.includes(food.id);
+              return <li key={food.id}>
+                <span>{identity.label}</span>
+                <button disabled={!editable || !food.is_active || selected || draft.selected.length >= MAX || identity.kind !== "identified"}
+                  aria-label={"Добавить: " + identity.label}
+                  onClick={() => update(d => ({
+                    ...d, selected: add(d.selected, food), foods: { ...d.foods, [food.id]: food }, notice: "", saveFailed: false,
+                  }))}>
+                  {selected ? "Добавлено" : "Добавить"}
+                </button>
+              </li>;
+            })}</ul>}
         </section></div>
         {draft.notice?<p role={draft.saveFailed?"alert":"status"} className={draft.saveFailed?"alert":"notice"}>{draft.notice}</p>:null}
         {refreshError ? <p role="alert" className="alert">{refreshError}</p> : null}
-        {refreshing ? <p role="status">{draft.recovery === "member" ? "Проверяем статус участника…" : "Обновляем список…"}</p> : null}
-        {hasUnavailable ? <p role="status">Удалите недоступные продукты, чтобы сохранить выбор.</p> : null}
+        {refreshing === "selection" ? <p role="status">{draft.recovery === "member" ? "Проверяем статус участника…" : "Обновляем список…"}</p> : null}
+        {hasUnavailable ? <p role="status">Чтобы сохранить выбор, уточните или отмените недоступные добавления.</p> : null}
+        {unknownAdditions.length > 0 ? <button disabled={!editable} onClick={() => update(d => ({
+          ...d, selected: d.selected.filter(id => !unknownAdditions.includes(id)), notice: "", saveFailed: false,
+        }))}>Отменить неуточнённые добавления</button> : null}
         {overLimit ? <p role="status">Сократите список до {MAX} продуктов, чтобы сохранить выбор.</p> : null}
         {draft.recovery ? <button disabled={busy || Boolean(review)} onClick={refresh}>
           {draft.recovery === "member" ? "Проверить статус участника" : "Обновить актуальный список"}
         </button> : null}
-        {review?.member===member?<section className="review" aria-label="Проверка актуального списка"><h3>Актуальные исключения</h3>{review.latest.length ? <ul>{review.latest.map(id => <li key={id}>{displayName(review.foods[id])}</li>)}</ul> : <p>Сохранённых исключений нет.</p>}<p>Можно перенести ваши изменения в актуальный список или оставить только сохранённый выбор. Запись произойдёт только после отдельного сохранения.</p><button onClick={()=>acceptLatest(true)}>Перенести мои изменения</button> <button onClick={()=>acceptLatest(false)}>Оставить актуальный список</button></section>:null}
+        {review?.member===member?<section className="review" aria-label="Проверка актуального списка"><h3>Актуальные исключения</h3>{review.latest.length ? <ul>{review.latest.map(id => <li key={id}>{describeFood(review.foods[id]).label}</li>)}</ul> : <p>Сохранённых исключений нет.</p>}<p>Можно перенести ваши изменения в актуальный список или оставить только сохранённый выбор. Запись произойдёт только после отдельного сохранения.</p><button onClick={()=>acceptLatest(true)}>Перенести мои изменения</button> <button onClick={()=>acceptLatest(false)}>Оставить актуальный список</button></section>:null}
         <footer className="save"><p className="muted">Изменения действуют при следующей генерации меню. Уже составленная неделя не изменится.</p><button className="primary" disabled={!canSave} onClick={save}>{saving?"Сохраняем…":"Сохранить"}</button></footer>
         </>:null}
       </section>:null}
@@ -242,7 +311,13 @@ export default function Editor({householdId}:{householdId:string}) {
 }
 async function resolveFoods(ids: string[], signal?: AbortSignal): Promise<KnownFoods> {
   const entries=await Promise.all(ids.map(async id=>{
-    try{return [id,await api.food(id,signal)] as const;}catch{return [id,undefined] as const;}
+    try {
+      const food = await api.food(id, signal);
+      return [id, food?.id === id ? food : undefined] as const;
+    } catch {
+      // Keep the selection by ID even if its catalogue details cannot be read.
+      return [id, undefined] as const;
+    }
   }));
   return Object.fromEntries(entries);
 }
