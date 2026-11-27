@@ -1,3 +1,9 @@
+# 2026-11-27 — Early consumer PWA and exclusions editor
+
+Accepted main: `09df02510070439366f2c73483aa1d7ae55ec8aa` (PR #310 merged). Owner authorized ADR 0033 runtime slice. Branch `feat/consumer-pwa-member-exclusions` introduces target Next.js app in frontend-next, scoped API client, responsive Russian member editor, local drafts, CAS review and readback, inactive retention and model tests. No backend or legacy changes. Dependency lockfile, actual build/typecheck/browser evidence, comprehensive async integration tests and exact-head CI remain acceptance blockers until verified; no release or gate pass. After acceptance return to PR10/PR10-PDF/Gate2.
+
+---
+
 # 2026-11-26 — Owner-approved early consumer UI exception
 
 Accepted base: `main@e7cd319d238a4a759ed6a594623079123f255fbf` (PR #309 merged). Owner approved Option B: one internal target PWA shell and adaptive member food exclusions editor before Gate 2, followed by strict return to backend roadmap. See [ADR 0033](../docs/decisions/0033-early-consumer-exclusions-ui-development.md). Current operation is governance documentation only; independent review and owner merge required before runtime. No gate pass, no release, no backend change. After governance acceptance, implement only the approved slice in `frontend-next/`; after its acceptance resume PR10/PR10-PDF/Gate2. No autonomous merge.
