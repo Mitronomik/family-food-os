@@ -1,3 +1,9 @@
+# 2026-11-26 — Owner-approved early consumer UI exception
+
+Accepted base: `main@e7cd319d238a4a759ed6a594623079123f255fbf` (PR #309 merged). Owner approved Option B: one internal target PWA shell and adaptive member food exclusions editor before Gate 2, followed by strict return to backend roadmap. See [ADR 0033](../docs/decisions/0033-early-consumer-exclusions-ui-development.md). Current operation is governance documentation only; independent review and owner merge required before runtime. No gate pass, no release, no backend change. After governance acceptance, implement only the approved slice in `frontend-next/`; after its acceptance resume PR10/PR10-PDF/Gate2. No autonomous merge.
+
+---
+
 # 2026-11-26 — Retain inactive member exclusions during edits
 
 Accepted base: main@ec1edce5a1f0baa1c86e184dda89b307cdc83802 (PR #308 merged). Owner authorized the deferred P2 correction before selector UI. Branch `fix/retain-inactive-member-food-exclusions` validates only newly added IDs after the existing scoped CAS check, permitting retained inactive selections without allowing new/re-added inactive IDs. Same migration 0045, UoW, full-set replacement, API and Planner. Regression covers retained inactive editing, replay, stale/unknown/other-member rejection, removal/re-addition, rollback with retained inactive ID. Exact-head focused/broad backend and launcher verification and independent review pending. No autonomous merge. ABA and shared deployment authorization remain open; UI follows only after acceptance.

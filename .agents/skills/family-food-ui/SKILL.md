@@ -44,7 +44,10 @@ legacy product documents to reconstruct the FamilyFoodOS product.
   concepts. Preserve them until their bounded contexts are deliberately
   replaced under the migration plan.
 - Do not implement future consumer screens, navigation, onboarding, or food
-  workflows before their migration gate authorizes them.
+  workflows before their migration gate authorizes them. The sole early exception
+  is the internal target PWA shell and member exclusions slice in
+  [ADR 0033](../../../docs/decisions/0033-early-consumer-exclusions-ui-development.md).
+  Stop further UI expansion after acceptance and return to backend roadmap.
 - Do not infer a visual identity, color palette, component library, or detailed
   information architecture that has not been approved.
 

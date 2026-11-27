@@ -17,6 +17,8 @@ Frontend-wide rules:
 - The inherited vanilla frontend and its cosmetic-domain workflows are
   transitional migration scaffolding. Do not mechanically relabel them as food
   workflows or build the future consumer PWA before its migration gate.
+  The single early target PWA slice authorized by [ADR 0033](../docs/decisions/0033-early-consumer-exclusions-ui-development.md)
+  belongs in `frontend-next/`, not this legacy directory.
 
 UI/UX contract references:
 
