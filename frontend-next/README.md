@@ -1,25 +1,72 @@
-# Internal Consumer PWA slice
+# Внутренний Consumer PWA FamilyFoodOS
 
-ADR 0033 only. No public deployment, real family data, Auth or Gate 2 claim.
-Use the existing migrated **synthetic** backend on loopback port 8000 and run
-the frontend on loopback port 3100. The Household API has no list/discovery
-endpoint; the developer must supply an existing synthetic Household UUID via
-`http://127.0.0.1:3100/?household=<synthetic-uuid>`. No UUID entry is exposed
-in the UI. No backend changes. No service worker or personal data caching.
+[ADR 0033](../docs/decisions/0033-early-consumer-exclusions-ui-development.md)
+разрешает локальную проверку редактора «Не используем» на синтетических
+данных. Для ручной проверки откройте
+`http://127.0.0.1:3100/?household=<synthetic-uuid>` с существующей тестовой
+семьёй. Приложение и API слушают только loopback, на портах 3100 и 8000.
+Для редактирования нужен активный участник семьи.
 
-Commands: `npm install`, `npm run typecheck`, `npm run lint`,
-`npm test`, `npm run build`, `npm run dev`. The dependency lockfile must be
-generated and reviewed with actual npm registry access before acceptance.
-Node 22 is the intended runtime. Next 15 / React 19 / TypeScript 5 are the
-minimal target stack; verify exact package availability/security before merge.
+## Установка и проверка
 
-The editor retains drafts per member in memory and disables member switching
-during a save/refresh. Conflict/uncertain commit requires explicit readback and
-user review before retry; no automatic write. Search debounce 300 ms and
-abort/sequence guards. Existing exclusions without readable catalogue metadata
-remain selected. No medical data, no localStorage, no telemetry. Set CAS ABA
-and shared authorization remain unresolved.
+Требуются Node.js 22, npm и Python 3.12. Из корня репозитория:
 
-Acceptance still requires actual browser screenshots and responsive checks at
-375/390/430/768/1024/1440 px, keyboard smoke, API/race integration tests and
-exact-head CI; unit model tests alone do not prove the full flow.
+```sh
+python3 -m venv .local/consumer-venv
+. .local/consumer-venv/bin/activate
+python3 -m pip install -e './backend[test]'
+cd frontend-next
+export AI_ENABLED=false NEXT_TELEMETRY_DISABLED=1
+npm ci
+npm audit --omit=dev --audit-level=high
+npm audit --audit-level=high
+npm run typecheck
+npm run lint
+npm test
+npm run build
+npx playwright install chromium
+npm run test:e2e
+```
+
+Playwright запускает production-сборку Next.js и настоящий FastAPI.
+Тестовая база создаётся во временном каталоге, проходит существующие миграции
+и заполняется синтетическими записями через сервисы приложения. При остановке
+тестового сервера временный каталог удаляется. Оба порта должны быть свободны.
+Для Linux CI командой `npx playwright install --with-deps chromium` также
+устанавливаются системные зависимости браузера.
+
+Next.js 15.5.29 остаётся в [ветке Maintenance LTS](https://nextjs.org/support-policy)
+и совместим с Node.js 22 и React 19.1.10. Точные версии задаёт
+`package-lock.json`. Переопределения PostCSS 8.5.34 и sharp 0.35.5
+применяются только внутри дерева Next.js и закрывают замечания к его
+транзитивным зависимостям. Аудит выполняется для полного дерева и для
+production-зависимостей.
+
+## Редактор и доказательства
+
+Выбор можно менять отдельно для каждого участника. Черновики хранятся
+в памяти вкладки. Неотправленные изменения сопровождаются предупреждением
+браузера при уходе со страницы. Изменения применяются при следующей
+генерации меню. Сохранённые исключения из неактивного каталога видны и могут
+быть удалены. Запрос сохранения передаёт прежний и новый перечни целиком.
+При конфликте или неопределённом результате пользователь сначала считывает
+актуальный список и выбирает, переносить ли черновик. Следующая запись
+требует явного нажатия «Сохранить».
+
+Браузерный сценарий с FastAPI проверяет поиск по русскому синониму,
+изолированные черновики, конфликт на реальной записи, согласование,
+явное сохранение, чтение после перезагрузки и очистку списка.
+Управляемые ответы API покрывают запоздалые ответы, состояния загрузки,
+ошибки и восстановление. Ширины 375, 390, 430, 768, 1024 и 1440 px
+проверяются на горизонтальное переполнение и клавиатурный фокус.
+
+Скриншоты реального сценария сделаны в Chromium в настольном и эмулируемом
+мобильном режимах. Скриншоты и JUnit лежат в `test-results/`, HTML-отчёт —
+в `playwright-report/`. GitHub Actions публикует их как
+`consumer-pwa-browser-evidence`, а JUnit backend-проверок как
+`consumer-pwa-backend-report`.
+
+Срез предназначен для внутренней проверки. Для многопользовательского
+развёртывания остаётся отдельная авторизация. Сравнение наборов не
+обнаруживает изменение, если набор успел вернуться к исходному значению
+между чтением и записью (ABA).

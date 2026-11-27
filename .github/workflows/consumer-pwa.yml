@@ -6,56 +6,92 @@ on:
       - '.github/workflows/consumer-pwa.yml'
       - 'backend/app/api/households.py'
       - 'backend/app/api/food_ingredients.py'
+      - 'backend/app/services/households.py'
+      - 'backend/app/services/food_ingredients.py'
+      - 'backend/app/persistence/sqlalchemy_core/household*.py'
+      - 'backend/app/persistence/sqlalchemy_core/food_ingredient*.py'
+      - 'backend/app/tests/test_household*'
+      - 'backend/app/tests/test_food_ingredient_application.py'
+      - 'backend/app/tests/test_planner_hard_ingredient_exclusions.py'
+      - 'backend/pyproject.toml'
 permissions:
   contents: read
+env:
+  AI_ENABLED: 'false'
+  NEXT_TELEMETRY_DISABLED: '1'
 jobs:
   frontend:
     runs-on: ubuntu-latest
     timeout-minutes: 25
-    env:
-      AI_ENABLED: 'false'
-      NEXT_TELEMETRY_DISABLED: '1'
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - name: Install exact dependencies
         working-directory: frontend-next
         run: npm ci
-      - name: Audit production dependencies
+      - name: Audit production and development dependencies
         working-directory: frontend-next
-        run: npm audit --omit=dev --audit-level=high
-      - name: Build and verify
+        run: |
+          npm audit --omit=dev --audit-level=high
+          npm audit --audit-level=high
+      - name: Verify types, lint, unit tests and production build
         working-directory: frontend-next
         run: |
           npm run typecheck
           npm run lint
           npm test
           npm run build
-      - name: Browser tests
-        working-directory: frontend-next
+      - name: Install real backend and Chromium
         run: |
+          python -m pip install -e './backend[test]'
+          cd frontend-next
           npx playwright install --with-deps chromium
-          npm run test:e2e
+      - name: Browser tests with controlled races and real FastAPI
+        id: browser
+        working-directory: frontend-next
+        run: npm run test:e2e
       - uses: actions/upload-artifact@v4
-        if: always()
+        if: ${{ always() && steps.browser.outcome != 'skipped' }}
         with:
           name: consumer-pwa-browser-evidence
           path: |
             frontend-next/test-results/
             frontend-next/playwright-report/
-          if-no-files-found: warn
+          if-no-files-found: error
   backend-api:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      AI_ENABLED: 'false'
       PYTHONPATH: backend:.
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - run: python -m pip install -e './backend[test]'
-      - run: python -m pytest -q backend/app/tests/test_household_member_food_exclusions.py backend/app/tests/test_households_api.py --tb=short
+      - name: Verify Household, catalogue, migration and Planner regressions
+        id: regression
+        run: |
+          python -m pytest -q --tb=short --junitxml=consumer-pwa-backend.xml \
+            backend/app/tests/test_household_member_food_exclusions.py \
+            backend/app/tests/test_households_api.py \
+            backend/app/tests/test_food_ingredient_application.py \
+            backend/app/tests/test_planner_hard_ingredient_exclusions.py \
+            backend/app/tests/test_household_migration.py
+      - uses: actions/upload-artifact@v4
+        if: ${{ always() && steps.regression.outcome != 'skipped' }}
+        with:
+          name: consumer-pwa-backend-report
+          path: consumer-pwa-backend.xml
+          if-no-files-found: error

@@ -1,6 +1,13 @@
-# 2026-11-27 — Early consumer PWA and exclusions editor
+# 2026-11-27 — Проверка PR #311 по ADR 0033
 
-Accepted main: `09df02510070439366f2c73483aa1d7ae55ec8aa` (PR #310 merged). Owner authorized ADR 0033 runtime slice. Branch `feat/consumer-pwa-member-exclusions` introduces target Next.js app in frontend-next, scoped API client, responsive Russian member editor, local drafts, CAS review and readback, inactive retention and model tests. No backend or legacy changes. Dependency lockfile, actual build/typecheck/browser evidence, comprehensive async integration tests and exact-head CI remain acceptance blockers until verified; no release or gate pass. After acceptance return to PR10/PR10-PDF/Gate2.
+Принятый baseline `09df02510070439366f2c73483aa1d7ae55ec8aa` (PR #310).
+Текущая задача — довести [PR #311](https://github.com/Mitronomik/family-food-os/pull/311)
+в ветке `feat/consumer-pwa-member-exclusions` до зелёного CI на HEAD и независимого
+ревью. Редактор и локальные проверки готовы. Порядок запуска и проверенные
+сценарии описаны в [README](../frontend-next/README.md).
+
+После приёмки владельцем продолжить серверную дорожную карту PR10 → PR10-PDF →
+Gate 2. Разрешение ADR 0033 ограничено этим внутренним срезом.
 
 ---
 

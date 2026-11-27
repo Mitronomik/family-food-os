@@ -1,6 +1,19 @@
-# 2026-11-27 — Early consumer PWA and exclusions editor
+# 2026-11-27 — Передача PR #311 по ADR 0033
 
-Accepted main: `09df02510070439366f2c73483aa1d7ae55ec8aa` (PR #310 merged). Owner authorized ADR 0033 runtime slice. Branch `feat/consumer-pwa-member-exclusions` introduces target Next.js app in frontend-next, scoped API client, responsive Russian member editor, local drafts, CAS review and readback, inactive retention and model tests. No backend or legacy changes. Dependency lockfile, actual build/typecheck/browser evidence, comprehensive async integration tests and exact-head CI remain acceptance blockers until verified; no release or gate pass. After acceptance return to PR10/PR10-PDF/Gate2.
+[PR #311](https://github.com/Mitronomik/family-food-os/pull/311), ветка
+`feat/consumer-pwa-member-exclusions`, baseline
+`09df02510070439366f2c73483aa1d7ae55ec8aa`. На исходном HEAD `fdf5d794`
+[проверка Consumer PWA](https://github.com/Mitronomik/family-food-os/actions/runs/45981699376)
+остановилась на аудите npm. На исправленном дереве успешно выполнены
+`npm ci`, оба аудита (0 уязвимостей), проверка типов, lint, production build,
+4 unit-теста, 19 Playwright-тестов и 50 backend-регрессий с `AI_ENABLED=false`.
+Настоящий FastAPI использовал отдельную мигрированную синтетическую SQLite.
+
+В CI проверьте HEAD PR, результаты обоих заданий Consumer PWA и наличие
+артефактов `consumer-pwa-browser-evidence` и `consumer-pwa-backend-report`.
+Сравнение наборов не обнаруживает ABA. Для многопользовательского
+развёртывания нужна отдельная авторизация. Следующий этап после независимого
+ревью и приёмки владельцем — PR10 → PR10-PDF → Gate 2.
 
 ---
 
