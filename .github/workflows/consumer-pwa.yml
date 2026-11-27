@@ -21,7 +21,8 @@ env:
   NEXT_TELEMETRY_DISABLED: '1'
 jobs:
   frontend:
-    runs-on: ubuntu-latest
+    # Keep the runner on an OS supported by the locked Playwright release.
+    runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
