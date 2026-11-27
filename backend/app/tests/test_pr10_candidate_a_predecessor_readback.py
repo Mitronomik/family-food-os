@@ -94,7 +94,7 @@ def test_reads_persisted_lineage_children_and_authority_without_writes(baseline)
         report["prepared"]["authority"]["recipe_version_id"]
         == predecessor["version"]["id"]
     )
-    assert report["prepared"]["authority"]["output_mass_g"] == Decimal("200")
+    assert report["prepared"]["authority"]["output_mass_g"] == Decimal(200)
     assert report["prepared"]["available"] == {"ENERGY_KCAL": Decimal("187.3")}
     assert len(report["prepared"]["unknown"]) == 53
     assert baseline.read_bytes() == before
