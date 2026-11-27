@@ -11,8 +11,13 @@ from hashlib import sha256
 from pathlib import Path
 from uuid import UUID
 
-from app.db.migration_lineage import inspect_migration_lineage
+from app.db.migration_lineage import (
+    has_family_food_workspace_identity,
+    inspect_migration_lineage,
+    missing_required_tables,
+)
 from app.domain.food_recipes import RecipeVersion, RecipeVersionDetail
+from app.domain.nutrient_vector_backfill_v1 import canonical_json
 from app.persistence.sqlalchemy_core.food_recipe_tables import (
     food_recipe_equipment_table,
     food_recipe_ingredients_table,
@@ -100,18 +105,22 @@ def _prepared_readback(
     except (DecimalException, RecipeNutritionV2UnavailableError) as exc:
         raise ReadbackBlocked("PREPARED_AUTHORITY_INVALID") from exc
     values = scope.prepared.list_values(version_id)
-    value_provenance = {
-        "schema_version": "R1F_PREPARED_OUTPUT_VALUE_V1",
-        "recipe_code": spec.recipe_code,
-        "source_name": spec.source_name,
-        "source_id": spec.source_recipe_id,
-        "source_version": spec.source_version,
-        "source_locator": spec.source_locator,
-        "source_document_sha256": spec.source_document_sha256,
-        "review_reference": spec.review_reference,
-    }
+    # The publisher seals canonical JSON. Compare the stored text so duplicate
+    # keys cannot disappear during parsing and the reported seal stays verifiable.
+    value_provenance = canonical_json(
+        {
+            "schema_version": "R1F_PREPARED_OUTPUT_VALUE_V1",
+            "recipe_code": spec.recipe_code,
+            "source_name": spec.source_name,
+            "source_id": spec.source_recipe_id,
+            "source_version": spec.source_version,
+            "source_locator": spec.source_locator,
+            "source_document_sha256": spec.source_document_sha256,
+            "review_reference": spec.review_reference,
+        }
+    )
     _require(
-        all(json.loads(value.provenance_json) == value_provenance for value in values),
+        all(value.provenance_json == value_provenance for value in values),
         "PREPARED_NUTRIENT_PROVENANCE_MISMATCH",
     )
     available = {
@@ -194,12 +203,22 @@ def _read_snapshot(engine: Engine, report: dict) -> None:
     with SqlAlchemyRecipeNutritionV2ReadScope(engine) as scope:
         conn = scope.adapter_connection.connection.driver_connection
         lineage = inspect_migration_lineage(conn)
-        report["target"]["schema_lineage"] = lineage.status
+        target = report["target"]
+        target["schema_lineage"] = lineage.status
         if lineage.rejection:
-            report["target"]["schema_rejection"] = lineage.rejection
+            target["schema_rejection"] = lineage.rejection
         if lineage.applied_ids:
-            report["target"]["schema_revision"] = lineage.applied_ids[-1]
+            target["recorded_schema_revision"] = lineage.applied_ids[-1]
         _require(lineage.is_current_head, "SCHEMA_NOT_AT_ACCEPTED_REVISION")
+        missing = missing_required_tables(conn, lineage.applied_ids)
+        if missing:
+            target["missing_required_tables"] = sorted(missing)
+            raise ReadbackBlocked("REQUIRED_SCHEMA_TABLES_MISSING")
+        _require(
+            has_family_food_workspace_identity(conn, lineage.applied_ids),
+            "WORKSPACE_IDENTITY_MISMATCH",
+        )
+        target["schema_revision"] = lineage.applied_ids[-1]
 
         recipe = scope.recipes.get_by_code(BUCKWHEAT_RECIPE_CODE)
         _require(recipe is not None, "RECIPE_MISSING")
@@ -255,6 +274,12 @@ def _read_snapshot(engine: Engine, report: dict) -> None:
             ],
             "equipment": [asdict(item) for item in current.equipment],
             "process_sha256": process_sha,
+            "source_card": {
+                "evidence": "R2C_PUBLICATION_MANIFEST",
+                "exact_source_card_sha256": pinned["source_receipt"][
+                    "exact_source_card_sha256"
+                ],
+            },
         }
         report["prepared"] = _prepared_readback(engine, scope, current, prepared_spec)
 
@@ -287,9 +312,9 @@ def readback(*, sqlite_path: Path, target_id: str, context: str) -> dict:
         "publication_spec_git_blob": PUBLICATION_SPECS_GIT_BLOB_SHA,
         "publication_gate": "NO_GO_TO_CORRECTION_PUBLICATION",
     }
-    if not sqlite_path.is_file():
-        return {**report, "reason": "SQLITE_FILE_MISSING"}
     try:
+        if not sqlite_path.is_file():
+            return {**report, "reason": "SQLITE_FILE_MISSING"}
         path = sqlite_path.resolve(strict=True)
         initial = _snapshot_identity(path)
     except ReadbackBlocked as exc:

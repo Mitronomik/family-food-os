@@ -9,10 +9,13 @@ import sys
 from contextlib import closing
 from dataclasses import replace
 from decimal import Decimal
+from pathlib import Path
 
 import pytest
 from app.db.config import DatabaseConfig
 from app.db.migrations import expected_migration_ids
+from app.domain.nutrient_vector_backfill_v1 import canonical_json, value_set_digest
+from app.identity import WORKSPACE_SOURCE_SETTING_KEY
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_recipe_composition import (
     create_food_recipe_catalogue_service,
@@ -134,6 +137,23 @@ def test_cli_serializes_version_linked_receipt(baseline):
         "ENERGY_KCAL",
         "187.3",
     )
+    assert value["provenance_json"] == canonical_json(
+        json.loads(value["provenance_json"])
+    )
+
+
+def test_reports_exact_card_hash_as_manifest_evidence(baseline):
+    result = run_cli(baseline)
+    assert result.returncode == 0, result.stderr
+    predecessor = json.loads(result.stdout)["predecessor"]
+    assert predecessor["source_card"] == {
+        "evidence": "R2C_PUBLICATION_MANIFEST",
+        "exact_source_card_sha256": "4e7e2a8086ec8b94cbeb8e21861b4623d0e76daba0da67af080b8c2ad4787b83",
+    }
+    assert (
+        predecessor["source_card"]["exact_source_card_sha256"]
+        != predecessor["version"]["source_document_sha256"]
+    )
 
 
 def test_missing_snapshot_returns_machine_readable_blocker_without_creating_file(
@@ -147,6 +167,40 @@ def test_missing_snapshot_returns_machine_readable_blocker_without_creating_file
     assert not missing.exists()
 
 
+def test_cli_masks_an_inaccessible_snapshot_path(snapshot, monkeypatch, capsys):
+    is_file = Path.is_file
+
+    def denied_for_snapshot(path):
+        if path == snapshot:
+            raise PermissionError(f"Cannot traverse {path}")
+        return is_file(path)
+
+    monkeypatch.setattr(Path, "is_file", denied_for_snapshot)
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "read_pr10_candidate_a_predecessor",
+            "--sqlite",
+            str(snapshot),
+            "--target-id",
+            "test-r2c",
+            "--context",
+            "disposable-test",
+        ],
+    )
+    with pytest.raises(SystemExit) as exc:
+        predecessor_reader.main()
+
+    assert exc.value.code == 2
+    result = capsys.readouterr()
+    assert result.err == ""
+    assert str(snapshot) not in result.out
+    report = json.loads(result.out)
+    assert report["status"] == "BLOCKED"
+    assert report["reason"] == "READBACK_INVALID_OR_UNAVAILABLE"
+
+
 def test_blocks_stale_schema_without_migrating(snapshot):
     with sqlite3.connect(snapshot) as conn:
         conn.execute(
@@ -154,7 +208,41 @@ def test_blocks_stale_schema_without_migrating(snapshot):
             (expected_migration_ids()[-1],),
         )
     report = assert_blocked_unchanged(snapshot, "SCHEMA_NOT_AT_ACCEPTED_REVISION")
-    assert report["target"]["schema_revision"] == expected_migration_ids()[-2]
+    assert report["target"]["recorded_schema_revision"] == expected_migration_ids()[-2]
+    assert "schema_revision" not in report["target"]
+
+
+def test_blocks_missing_schema_table_despite_current_migration_history(snapshot):
+    with sqlite3.connect(snapshot) as conn:
+        conn.execute("DROP TABLE household_member_excluded_food_ingredients")
+
+    report = assert_blocked_unchanged(snapshot, "REQUIRED_SCHEMA_TABLES_MISSING")
+    assert report["target"]["recorded_schema_revision"] == expected_migration_ids()[-1]
+    assert report["target"]["missing_required_tables"] == [
+        "household_member_excluded_food_ingredients"
+    ]
+    assert "schema_revision" not in report["target"]
+    assert "recipe" not in report
+
+
+@pytest.mark.parametrize("marker", [None, "synthetic-other-workspace"])
+def test_blocks_missing_or_incorrect_workspace_marker(snapshot, marker):
+    with sqlite3.connect(snapshot) as conn:
+        if marker is None:
+            conn.execute(
+                "DELETE FROM app_settings WHERE key = ?",
+                (WORKSPACE_SOURCE_SETTING_KEY,),
+            )
+        else:
+            conn.execute(
+                "UPDATE app_settings SET value = ? WHERE key = ?",
+                (marker, WORKSPACE_SOURCE_SETTING_KEY),
+            )
+
+    report = assert_blocked_unchanged(snapshot, "WORKSPACE_IDENTITY_MISMATCH")
+    assert report["target"]["recorded_schema_revision"] == expected_migration_ids()[-1]
+    assert "schema_revision" not in report["target"]
+    assert "recipe" not in report
 
 
 def test_closed_wal_snapshot_does_not_create_sidecar_files(snapshot):
@@ -266,6 +354,51 @@ def test_corrupt_decimal_is_reported_without_traceback(snapshot):
     assert result.stderr == ""
     assert "invalid-test-value" not in result.stdout
     assert json.loads(result.stdout)["reason"] == "PREPARED_AUTHORITY_INVALID"
+    assert snapshot.read_bytes() == before
+
+
+def test_blocks_resealed_provenance_with_duplicate_key_without_exposing_value(snapshot):
+    marker = "synthetic-unapproved-value"
+    with sqlite3.connect(snapshot) as conn:
+        version_id, nutrient_code, amount, provenance = conn.execute(
+            "SELECT recipe_version_id, nutrient_code, amount, provenance_json "
+            "FROM recipe_prepared_nutrient_values "
+            f"WHERE recipe_version_id IN ({CANDIDATE_VERSION_SQL})",
+            (BUCKWHEAT_RECIPE_CODE,),
+        ).fetchone()
+        duplicate = '{"source_id":' + json.dumps(marker) + "," + provenance[1:]
+        assert json.loads(duplicate) == json.loads(provenance)
+        digest = value_set_digest(
+            [
+                {
+                    "nutrient_code": nutrient_code,
+                    "amount": Decimal(amount),
+                    "provenance_json": duplicate,
+                }
+            ]
+        )
+        conn.execute("DROP TRIGGER recipe_prepared_nutrient_values_no_update")
+        conn.execute("DROP TRIGGER recipe_prepared_nutrition_authorities_no_update")
+        conn.execute(
+            "UPDATE recipe_prepared_nutrient_values SET provenance_json = ? "
+            "WHERE recipe_version_id = ? AND nutrient_code = ?",
+            (duplicate, version_id, nutrient_code),
+        )
+        conn.execute(
+            "UPDATE recipe_prepared_nutrition_authorities SET value_sha256 = ? "
+            "WHERE recipe_version_id = ?",
+            (digest, version_id),
+        )
+
+    before = snapshot.read_bytes()
+    result = run_cli(snapshot)
+    assert result.returncode == 2
+    assert result.stderr == ""
+    assert marker not in result.stdout
+    report = json.loads(result.stdout)
+    assert report["status"] == "BLOCKED"
+    assert report["reason"] == "PREPARED_NUTRIENT_PROVENANCE_MISMATCH"
+    assert "prepared" not in report
     assert snapshot.read_bytes() == before
 
 
