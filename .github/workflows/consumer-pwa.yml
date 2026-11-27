@@ -20,16 +20,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Resolve missing lockfile for review (fails until committed)
-        working-directory: frontend-next
-        run: |
-          if [ ! -f package-lock.json ]; then
-            npm install --package-lock-only --ignore-scripts
-            echo 'LOCKFILE_BEGIN'
-            node -e 'console.log(JSON.stringify(require("./package-lock.json")))'
-            echo 'LOCKFILE_END'
-            exit 1
-          fi
       - name: Install exact dependencies
         working-directory: frontend-next
         run: npm ci
