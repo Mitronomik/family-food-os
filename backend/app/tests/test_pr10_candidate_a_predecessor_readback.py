@@ -9,6 +9,7 @@ import sys
 from contextlib import closing
 from dataclasses import replace
 from decimal import Decimal
+from hashlib import sha256
 from pathlib import Path
 
 import pytest
@@ -103,7 +104,7 @@ def test_reads_persisted_lineage_children_and_authority_without_writes(baseline)
     assert baseline.read_bytes() == before
 
 
-def run_cli(path):
+def run_cli(path, *extra):
     return subprocess.run(
         [
             sys.executable,
@@ -115,6 +116,7 @@ def run_cli(path):
             "test-r2c",
             "--context",
             "disposable-test",
+            *map(str, extra),
         ],
         capture_output=True,
         text=True,
@@ -419,3 +421,129 @@ def test_report_includes_later_version_and_blocks_instead_of_selecting_it(snapsh
     assert [ref["version_number"] for ref in report["recipe"]["versions"]] == [1, 2]
     assert report["recipe"]["current_verified_version_id"] == str(later.version.id)
     assert "prepared" not in report
+
+
+def test_seal_binds_verified_content_not_capture_metadata(baseline):
+    observed = audit(baseline)
+    first = predecessor_reader.seal_report(observed, "a" * 40)
+    second = predecessor_reader.seal_report(
+        {
+            **observed,
+            "target": {
+                **observed["target"],
+                "id": "another-snapshot",
+                "observed_at": "2026-01-01T00:00:00+00:00",
+                "operator_declared_context": "target-snapshot",
+            },
+        },
+        "b" * 40,
+    )
+    assert first["content_sha256"] == second["content_sha256"]
+    assert first["receipt_scope"] == "DISPOSABLE_TEST"
+    assert second["receipt_scope"] == "OPERATOR_DECLARED_TARGET_SNAPSHOT"
+    assert set(second["review_decisions"].values()) == {"NOT_PROVIDED"}
+    assert second["publication_gate"] == "NO_GO_TO_CORRECTION_PUBLICATION"
+    changed = {
+        **observed,
+        "recipe": {**observed["recipe"], "is_active": False},
+    }
+    assert (
+        predecessor_reader.seal_report(changed)["content_sha256"]
+        != first["content_sha256"]
+    )
+
+
+def test_cli_artifact_pair_and_marker(baseline, tmp_path):
+    output = tmp_path / "receipt"
+    before = baseline.read_bytes()
+    result = run_cli(baseline, "--output-dir", output, "--source-revision", "a" * 40)
+    assert result.returncode == 0, result.stderr
+    report = json.loads(result.stdout)
+    assert report["content_sha256"]
+    assert report["tool"]["operator_declared_source_revision"] == "a" * 40
+    assert (output / "snapshot.json").read_text(encoding="utf-8") == result.stdout
+    markdown = (output / "review.md").read_text(encoding="utf-8")
+    assert report["content_sha256"] in markdown
+    assert "187.3 ккал" in markdown
+    assert "не предоставлено" in markdown
+    assert str(baseline) not in markdown + result.stdout
+    marker = json.loads((output / "complete.json").read_text(encoding="utf-8"))
+    assert marker["files"] == {
+        name: sha256((output / name).read_bytes()).hexdigest()
+        for name in ("snapshot.json", "review.md")
+    }
+    content = {
+        "schema": report["content_schema"],
+        "schema_revision": report["target"]["schema_revision"],
+        "recipe_code": report["recipe_code"],
+        "publication_spec_git_blob": report["publication_spec_git_blob"],
+        "recipe": report["recipe"],
+        "predecessor": report["predecessor"],
+        "prepared": report["prepared"],
+    }
+    encoded = json.dumps(
+        content, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    assert report["content_sha256"] == sha256(encoded).hexdigest()
+    original = {path.name: path.read_bytes() for path in output.iterdir()}
+    repeat = run_cli(baseline, "--output-dir", output)
+    assert repeat.returncode == 2
+    assert json.loads(repeat.stdout)["reason"] == "OUTPUT_ARTIFACT_UNAVAILABLE"
+    assert {path.name: path.read_bytes() for path in output.iterdir()} == original
+    assert baseline.read_bytes() == before
+
+
+def test_blocked_export_never_seals_content(tmp_path):
+    missing = tmp_path / "missing.sqlite"
+    output = tmp_path / "blocked"
+    result = run_cli(missing, "--output-dir", output)
+    assert result.returncode == 2
+    report = json.loads(result.stdout)
+    assert report["content_sha256"] is None
+    assert report["reason"] == "SQLITE_FILE_MISSING"
+    assert "SQLITE_FILE_MISSING" in (output / "review.md").read_text(encoding="utf-8")
+    assert (output / "complete.json").exists()
+    assert not missing.exists()
+
+
+def test_partial_artifacts_never_get_completion_marker(baseline, tmp_path, monkeypatch):
+    output = tmp_path / "partial"
+    write_private = predecessor_reader._write_private
+
+    def fail_on_markdown(path, content):
+        if path.name == "review.md":
+            raise OSError("synthetic write failure")
+        write_private(path, content)
+
+    monkeypatch.setattr(predecessor_reader, "_write_private", fail_on_markdown)
+    with pytest.raises(OSError):
+        predecessor_reader.write_artifacts(
+            output, predecessor_reader.seal_report(audit(baseline))
+        )
+    assert (output / "snapshot.json").exists()
+    assert not (output / "complete.json").exists()
+
+
+def test_cli_rejects_non_sha_source_revision(baseline):
+    result = run_cli(baseline, "--source-revision", "not-a-commit")
+    assert result.returncode == 2
+    assert result.stdout == ""
+
+
+@pytest.mark.parametrize("suffix", ["", "-wal", "-shm", "-journal"])
+def test_artifact_destination_never_overlaps_input_or_sidecars(snapshot, suffix):
+    before = snapshot.read_bytes()
+    output = Path(f"{snapshot}{suffix}")
+    result = run_cli(snapshot, "--output-dir", output)
+    assert result.returncode == 2
+    assert json.loads(result.stdout)["reason"] == "OUTPUT_ARTIFACT_UNAVAILABLE"
+    assert set(snapshot.parent.iterdir()) == {snapshot}
+    assert snapshot.read_bytes() == before
+
+
+def test_artifact_destination_does_not_create_missing_input(tmp_path):
+    missing = tmp_path / "receipt" / "snapshot.json"
+    result = run_cli(missing, "--output-dir", missing.parent)
+    assert result.returncode == 2
+    assert json.loads(result.stdout)["reason"] == "OUTPUT_ARTIFACT_UNAVAILABLE"
+    assert not missing.parent.exists()

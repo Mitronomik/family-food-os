@@ -1,3 +1,9 @@
+# 2026-11-27 — PR #312 / Issue #313: Candidate A read-only receipt
+
+PR #311 merged at `a8fceb774ec7e53aee9bed824cd4457ddf0402c8`. Owner authorized Catalogue Quality Automation, first bounded receipt operation only. Continue existing [draft PR #312](https://github.com/Mitronomik/family-food-os/pull/312) / [Issue #313](https://github.com/Mitronomik/family-food-os/issues/313) on `audit/pr10-candidate-a-predecessor`, not another PR. See [operator procedure](../docs/family-food/pr10-candidate-a-receipt-operation.md). Verify new JSON/content SHA, Russian report, safe exclusive artifacts and adversarial tests on exact HEAD; independent review and owner merge required. Actual target receipt NOT_CAPTURED; subject/owner decisions NOT_PROVIDED. No publication, schema, runtime planning/Prep, D3 or release promotion. PR10 → PR10-PDF → Gate 2 remains the order.
+
+---
+
 # 2026-11-27 — Проверка PR #311 по ADR 0033
 
 Принятый baseline `09df02510070439366f2c73483aa1d7ae55ec8aa` (PR #310).

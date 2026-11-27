@@ -2,6 +2,7 @@
 
 import argparse
 import json
+import os
 import re
 import sqlite3
 from dataclasses import asdict
@@ -45,7 +46,8 @@ from sqlalchemy import create_engine, select
 from sqlalchemy.engine import Connection, Engine
 from sqlalchemy.exc import SQLAlchemyError
 
-SCHEMA = "PR10_CANDIDATE_A_PREDECESSOR_READBACK_V1"
+SCHEMA = "PR10_CANDIDATE_A_PREDECESSOR_READBACK_V2"
+CONTENT_SCHEMA = "PR10_CANDIDATE_A_PREDECESSOR_CONTENT_V1"
 PROCESS_SHA256 = "d6340081a54597250753ef81de33af980212098c7e3a6ba292ac4710fe8af20b"
 STEP4_SHA256 = "b800669831dec3f3bed61959c1c4fa300e14b163e308f389c8d53e93c10f135d"
 CONTEXTS = ("target-snapshot", "disposable-test")
@@ -365,6 +367,183 @@ def _json_value(value: object) -> str:
     raise TypeError(f"Unsupported receipt value type: {type(value).__name__}")
 
 
+def _json_text(report: dict) -> str:
+    return (
+        json.dumps(
+            report,
+            ensure_ascii=False,
+            sort_keys=True,
+            indent=2,
+            default=_json_value,
+            allow_nan=False,
+        )
+        + "\n"
+    )
+
+
+def seal_report(report: dict, source_revision: str | None = None) -> dict:
+    """Bind verified stored facts, not operator declarations or capture time."""
+    if source_revision is not None and not re.fullmatch(
+        r"[0-9a-f]{40}", source_revision
+    ):
+        raise ValueError("Укажите полный SHA коммита (40 строчных hex-символов).")
+    sealed = {
+        **report,
+        "tool": {
+            "receipt_schema": SCHEMA,
+            "operator_declared_source_revision": source_revision,
+        },
+        "receipt_scope": (
+            "DISPOSABLE_TEST"
+            if report["target"]["operator_declared_context"] == "disposable-test"
+            else "OPERATOR_DECLARED_TARGET_SNAPSHOT"
+        ),
+        "review_decisions": {
+            "source_process": "NOT_PROVIDED",
+            "successor_nutrition_output": "NOT_PROVIDED",
+            "owner_current_version_consent": "NOT_PROVIDED",
+        },
+        "content_schema": CONTENT_SCHEMA,
+        "content_sha256": None,
+    }
+    if report["status"] == "PREDECESSOR_MATCH":
+        content = {
+            "schema": CONTENT_SCHEMA,
+            "schema_revision": report["target"]["schema_revision"],
+            "recipe_code": report["recipe_code"],
+            "publication_spec_git_blob": report["publication_spec_git_blob"],
+            "recipe": report["recipe"],
+            "predecessor": report["predecessor"],
+            "prepared": report["prepared"],
+        }
+        encoded = json.dumps(
+            content,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+            default=_json_value,
+            allow_nan=False,
+        ).encode("utf-8")
+        sealed["content_sha256"] = sha256(encoded).hexdigest()
+    return sealed
+
+
+def render_markdown(report: dict) -> str:
+    """Render a review aid; JSON remains the exact evidence."""
+    target = report["target"]
+    revision = report["tool"]["operator_declared_source_revision"] or "Не указана"
+    lines = [
+        "# Снимок предшествующей версии рецепта Candidate A",
+        "",
+        f"- Метка снимка: `{target['id']}` (указана оператором)",
+        f"- Контекст: `{report['receipt_scope']}`",
+        f"- Время наблюдения (UTC): {target['observed_at']}",
+        f"- Заявленная ревизия исходного кода: {revision}",
+        f"- Результат чтения: `{report['status']}`",
+        "",
+        "Чтение не подтверждает происхождение самого файла или полномочия оператора.",
+        "Публикация исправленной версии не разрешена.",
+        "",
+    ]
+    if report["status"] != "PREDECESSOR_MATCH":
+        lines.append(f"Причина блокировки: `{report['reason']}`.")
+    else:
+        predecessor = report["predecessor"]
+        version = predecessor["version"]
+        prepared = report["prepared"]
+        lines.extend(
+            [
+                "## Проверенные сохранённые данные",
+                "",
+                f"- Ревизия схемы: `{target['schema_revision']}`",
+                f"- Рецепт: `{report['recipe_code']}`",
+                f"- ID рецепта: `{report['recipe']['id']}`",
+                f"- Версия: {version['version_number']} (`{version['id']}`)",
+                f"- Источник: {version['source_name']}, {version['source_recipe_id']}",
+                f"- Версия источника: {version['source_version']}",
+                f"- Основание использования: {version['rights_basis']}",
+                f"- SHA-256 содержимого: `{report['content_sha256']}`",
+                f"- SHA-256 процесса: `{predecessor['process_sha256']}`",
+                "",
+                "### Состав",
+                "",
+            ]
+        )
+        for row in predecessor["ingredients"]:
+            lines.append(
+                f"- {row['position']}. {row['source_amount_text']} — "
+                f"{_json_value(row['quantity'])} {row['unit']}"
+            )
+        lines.extend(["", "### Приготовление", ""])
+        for step in predecessor["steps"]:
+            lines.append(f"{step['position']}. {step['instruction']}")
+        lines.extend(
+            [
+                "",
+                "### Пищевая ценность предшественника",
+                "",
+                f"- Выход по источнику: {prepared['authority']['output_mass_g']} г",
+                f"- Энергия по источнику: {prepared['available']['ENERGY_KCAL']} ккал",
+                f"- Неизвестных показателей: {len(prepared['unknown'])}",
+                "",
+                "Это значения старой версии, а не утверждение о новой версии.",
+                "Точные идентификаторы, хеши и все записи находятся в snapshot.json.",
+            ]
+        )
+    lines.extend(
+        [
+            "",
+            "## Отдельные решения перед публикацией",
+            "",
+            "- Независимое согласование технологии: не предоставлено.",
+            "- Применимость выхода и пищевой ценности: не предоставлено.",
+            "- Согласие владельца на смену текущей версии: не предоставлено.",
+            "",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def _write_private(path: Path, content: bytes) -> None:
+    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    with os.fdopen(fd, "wb") as stream:
+        stream.write(content)
+        stream.flush()
+        os.fsync(stream.fileno())
+
+
+def _validate_artifact_destination(output_dir: Path, sqlite_path: Path) -> None:
+    target = sqlite_path.resolve()
+    destination = output_dir.resolve()
+    forbidden = [target]
+    forbidden.extend(Path(f"{target}{s}") for s in ("-wal", "-shm", "-journal"))
+    if any(
+        destination.is_relative_to(path) or path.is_relative_to(destination)
+        for path in forbidden
+    ):
+        raise OSError("Output directory overlaps the input or its SQLite sidecars.")
+
+
+def write_artifacts(output_dir: Path, report: dict) -> None:
+    """Use a new private directory; a final checksum marker seals the pair."""
+    payloads = {
+        "snapshot.json": _json_text(report).encode("utf-8"),
+        "review.md": render_markdown(report).encode("utf-8"),
+    }
+    marker = _json_text(
+        {
+            "schema": "PR10_CANDIDATE_A_RECEIPT_ARTIFACTS_V1",
+            "files": {
+                name: sha256(content).hexdigest() for name, content in payloads.items()
+            },
+        }
+    ).encode("utf-8")
+    output_dir.mkdir(mode=0o700)
+    for name, content in payloads.items():
+        _write_private(output_dir / name, content)
+    _write_private(output_dir / "complete.json", marker)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -377,18 +556,42 @@ def main() -> None:
         "--target-id", required=True, help="Нечувствительная метка снимка без пути."
     )
     parser.add_argument("--context", choices=CONTEXTS, required=True)
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        help="Новый закрытый каталог для JSON и отчёта. Не перезаписывается.",
+    )
+    parser.add_argument(
+        "--source-revision", help="Заявленный полный SHA исходного кода."
+    )
     args = parser.parse_args()
     try:
-        report = readback(
-            sqlite_path=args.sqlite, target_id=args.target_id, context=args.context
+        report = seal_report(
+            readback(
+                sqlite_path=args.sqlite, target_id=args.target_id, context=args.context
+            ),
+            args.source_revision,
         )
     except ValueError as exc:
         parser.error(str(exc))
-    print(
-        json.dumps(
-            report, ensure_ascii=False, sort_keys=True, indent=2, default=_json_value
-        )
-    )
+    if args.output_dir is not None:
+        try:
+            _validate_artifact_destination(args.output_dir, args.sqlite)
+            write_artifacts(args.output_dir, report)
+        except (OSError, RuntimeError):
+            report = seal_report(
+                {
+                    "schema": SCHEMA,
+                    "status": "BLOCKED",
+                    "target": report["target"],
+                    "recipe_code": BUCKWHEAT_RECIPE_CODE,
+                    "publication_spec_git_blob": PUBLICATION_SPECS_GIT_BLOB_SHA,
+                    "publication_gate": "NO_GO_TO_CORRECTION_PUBLICATION",
+                    "reason": "OUTPUT_ARTIFACT_UNAVAILABLE",
+                },
+                args.source_revision,
+            )
+    print(_json_text(report), end="")
     if report["status"] == "BLOCKED":
         raise SystemExit(2)
 

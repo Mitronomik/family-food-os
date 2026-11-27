@@ -1,3 +1,9 @@
+# 2026-11-27 — Candidate A receipt follow-up in draft PR #312
+
+Existing [PR #312](https://github.com/Mitronomik/family-food-os/pull/312) is the implementation of [Issue #313](https://github.com/Mitronomik/family-food-os/issues/313), not a new branch. Review changed exporter/test/docs/state paths; run exact-head focused R2-C/affected regressions, Ruff and docs checks as selected by verification policy. Fix failures in same PR. [Operator procedure](../docs/family-food/pr10-candidate-a-receipt-operation.md) explains offline snapshot, content SHA and complete.json. Artifact marker is completeness, not authenticity. A real receipt requires owner-provided target SQLite snapshot; current NOT_CAPTURED. Independent source/process, successor nutrition/output applicability, owner current-version approval, historical replay and D3/Prep release gates remain separate. No merge or next milestone automatically.
+
+---
+
 # 2026-11-27 — Защита неидентифицированных исключений в PR #311
 
 В [PR #311](https://github.com/Mitronomik/family-food-os/pull/311) исправлено
