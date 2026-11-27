@@ -1,6 +1,6 @@
 # PR10 — получение снимка предшествующей версии Candidate A
 
-**Статус:** реализация в черновике [PR #312](https://github.com/Mitronomik/family-food-os/pull/312), [Issue #313](https://github.com/Mitronomik/family-food-os/issues/313). Настоящая операция не публикует исправления.
+Операторская инструкция для экспортёра Candidate A из [PR #312](https://github.com/Mitronomik/family-food-os/pull/312) по [Issue #313](https://github.com/Mitronomik/family-food-os/issues/313).
 
 Контракт: [условия публикации, §3](pr10-candidate-a-successor-publication-contract-gate-2026-11-03.md). Одобренное направление: автоматизация снимков и проверок каталога; сравнение версий, реестр доказательств, валидатор публикации и очередь исключений — отдельные последующие задачи, не разрешение на автоматическую публикацию. PR10 → PR10-PDF → Gate 2 сохраняется.
 
@@ -18,9 +18,9 @@ AI_ENABLED=false python -m scripts.read_pr10_candidate_a_predecessor \
   --output-dir /path/to/new-private-receipt
 ```
 
-Контекст и SHA исходного кода заявляет оператор, а не подтверждает инструмент. Использовать чистый проверенный checkout. Режим `disposable-test` предназначен исключительно для синтетических тестов. Без реального снимка статус свидетельства остаётся NOT_CAPTURED.
+До запуска сравнить `git rev-parse HEAD` с согласованной ревизией и убедиться, что `git status --porcelain` пуст. Для `--source-revision` инструмент проверяет формат SHA. Соответствие указанного SHA запущенному коду подтверждает оператор. Контекст снимка также заявляет оператор. Режим `disposable-test` предназначен исключительно для синтетических тестов. Без реального снимка статус свидетельства остаётся NOT_CAPTURED.
 
-3. Проверить exit code и JSON. `0` / `PREDECESSOR_MATCH` подтверждает совпадение сохранённых данных с закреплёнными сведениями, **не разрешение публикации**. `2` / `BLOCKED` означает остановку; исправлять базу этой командой нельзя. Существующий каталог не перезаписывается; каталог вывода не может пересекаться с входным файлом или его SQLite sidecars. Если запись прервана, использовать новый каталог; неполный набор файлов не считается свидетельством.
+3. Проверить код выхода и JSON. `0` / `PREDECESSOR_MATCH` подтверждает совпадение сохранённых данных с закреплёнными сведениями. Решение о публикации требует отдельных согласований. `2` / `BLOCKED` означает остановку. Код `PERSISTED_DECIMAL_MISMATCH` указывает на расхождение точного количества, числа порций или выхода до округления доменной моделью. Использовать новый каталог вывода за пределами входного файла и его служебных файлов SQLite. При прерванной записи повторить экспорт в новый каталог.
 
 ## Артефакты
 
@@ -30,7 +30,39 @@ AI_ENABLED=false python -m scripts.read_pr10_candidate_a_predecessor \
 
 `content_sha256` существует только при `PREDECESSOR_MATCH`. Он вычисляется из UTF-8 JSON (сортировка ключей, без пробелов, Decimal — строки) со схемой `PR10_CANDIDATE_A_PREDECESSOR_CONTENT_V1`, полями schema_revision, recipe_code, publication_spec_git_blob, recipe, predecessor, prepared. Время наблюдения, метка и заявленный контекст/ревизия исключены. Это хеш конкретных сохранённых ID и содержимого, не хеш всего файла SQLite и не подпись. Любое сравнение с более поздним снимком должно заново проверять исходные данные.
 
-Не отправлять реальные базы и отчёты в публичный GitHub/CI; хранить локально, передавать специалисту только согласованный минимальный набор. Операция не читает данные семей и не создаёт/мигрирует/заполняет целевую базу.
+## Проверка и передача
+
+Перед отправкой и после получения проверить `complete.json`, хеш каждого файла и `content_sha256` успешного отчёта. Следующая команда проверяет комплект в приватном каталоге.
+
+```sh
+python - /path/to/new-private-receipt <<'PY'
+import hashlib
+import json
+import sys
+from pathlib import Path
+
+folder = Path(sys.argv[1])
+marker = json.loads((folder / "complete.json").read_bytes())
+names = ("snapshot.json", "review.md")
+if marker.get("schema") != "PR10_CANDIDATE_A_RECEIPT_ARTIFACTS_V1" or set(marker["files"]) != set(names):
+    raise SystemExit("Несовместимый или неполный комплект")
+for name in names:
+    if hashlib.sha256((folder / name).read_bytes()).hexdigest() != marker["files"][name]:
+        raise SystemExit(f"SHA-256 не совпадает: {name}")
+
+report = json.loads((folder / "snapshot.json").read_bytes())
+if report["status"] != "PREDECESSOR_MATCH":
+    raise SystemExit(f"Комплект цел, чтение заблокировано: {report['reason']}")
+content = {key: report[key] for key in ("recipe_code", "publication_spec_git_blob", "recipe", "predecessor", "prepared")}
+content.update(schema=report["content_schema"], schema_revision=report["target"]["schema_revision"])
+encoded = json.dumps(content, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf-8")
+if hashlib.sha256(encoded).hexdigest() != report["content_sha256"]:
+    raise SystemExit("SHA-256 содержимого не совпадает")
+print("Контрольные суммы файлов и содержимого совпадают")
+PY
+```
+
+Передавать полный комплект только согласованному специалисту через одобренный приватный канал. Снимок SQLite, абсолютные пути и данные семей остаются в исходном контуре. При передаче сокращённой копии обозначить её как производную, перечислить исключённые поля и вычислить контрольную сумму копии отдельно. Сохранить исходный комплект локально. Контрольные суммы проверяют целостность, полномочия отправителя и согласования проверяются отдельно. В публичном GitHub и CI допустимы только синтетические свидетельства.
 
 ## Условия, которые не сняты
 

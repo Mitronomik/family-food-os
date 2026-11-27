@@ -146,9 +146,10 @@ def _prepared_readback(
     }
 
 
-def _verify_persisted_text(conn: Connection, detail: RecipeVersionDetail) -> None:
-    # The domain adapters normalize text. The evidence must match the stored text.
-    for table, selector, fields, expected in (
+def _verify_persisted_fields(conn: Connection, detail: RecipeVersionDetail) -> None:
+    # SQLAlchemy's DecimalText returns exact Decimals before domain quantization.
+    # The receipt must match stored values before text or Decimal normalization.
+    for table, selector, text_fields, decimal_fields, expected in (
         (
             food_recipe_versions_table,
             "id",
@@ -163,38 +164,47 @@ def _verify_persisted_text(conn: Connection, detail: RecipeVersionDetail) -> Non
                 "change_note",
                 "source_output_text",
             ),
+            ("base_servings", "source_original_servings", "source_output_g"),
             (detail.version,),
         ),
         (
             food_recipe_ingredients_table,
             "recipe_version_id",
             ("source_amount_text", "normalization_note", "prep_note"),
+            ("quantity",),
             detail.ingredients,
         ),
         (
             food_recipe_steps_table,
             "recipe_version_id",
             ("instruction", "stage_code"),
+            (),
             detail.steps,
         ),
         (
             food_recipe_equipment_table,
             "recipe_version_id",
             ("equipment_code",),
+            (),
             detail.equipment,
         ),
     ):
-        query = select(*(table.c[field] for field in fields)).where(
-            table.c[selector] == detail.version.id
-        )
+        query = select(
+            *(table.c[field] for field in (*text_fields, *decimal_fields))
+        ).where(table.c[selector] == detail.version.id)
         if "position" in table.c:
             query = query.order_by(table.c.position)
-        rows = conn.execute(query).all()
-        _require(
-            [tuple(row) for row in rows]
-            == [tuple(getattr(item, field) for field in fields) for item in expected],
-            "PERSISTED_TEXT_MISMATCH",
-        )
+        rows = conn.execute(query).mappings().all()
+        _require(len(rows) == len(expected), "PERSISTED_ROWS_MISMATCH")
+        for row, item in zip(rows, expected, strict=True):
+            _require(
+                all(row[field] == getattr(item, field) for field in text_fields),
+                "PERSISTED_TEXT_MISMATCH",
+            )
+            _require(
+                all(row[field] == getattr(item, field) for field in decimal_fields),
+                "PERSISTED_DECIMAL_MISMATCH",
+            )
 
 
 def _read_snapshot(engine: Engine, report: dict) -> None:
@@ -251,7 +261,7 @@ def _read_snapshot(engine: Engine, report: dict) -> None:
             and all(step.stage_code is None for step in current.steps),
             "PINNED_R2C_CONTENT_MISMATCH",
         )
-        _verify_persisted_text(scope.adapter_connection, current)
+        _verify_persisted_fields(scope.adapter_connection, current)
 
         for rows in (current.ingredients, current.steps, current.equipment):
             _require(

@@ -14,8 +14,14 @@ from pathlib import Path
 
 import pytest
 from app.db.config import DatabaseConfig
-from app.db.migrations import expected_migration_ids
+from app.db.migrations import apply_migrations, expected_migration_ids
 from app.domain.nutrient_vector_backfill_v1 import canonical_json, value_set_digest
+from app.domain.recipe_nutrition_v2 import (
+    COMPOSITION_CALCULATION_VERSION,
+    NUTRIENT_SET_VERSION,
+    RECIPE_CALCULATION_VERSION,
+    REGISTRY_VERSION,
+)
 from app.identity import WORKSPACE_SOURCE_SETTING_KEY
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_recipe_composition import (
@@ -67,6 +73,7 @@ def assert_blocked_unchanged(path, reason):
     assert report["status"] == "BLOCKED"
     assert report["reason"] == reason
     assert report["publication_gate"] == "NO_GO_TO_CORRECTION_PUBLICATION"
+    assert predecessor_reader.seal_report(report)["content_sha256"] is None
     assert path.read_bytes() == before
     return report
 
@@ -310,6 +317,169 @@ def test_blocks_text_drift_hidden_by_domain_whitespace_normalization(snapshot):
         )
     report = assert_blocked_unchanged(snapshot, "PERSISTED_TEXT_MISMATCH")
     assert "predecessor" not in report
+    assert "prepared" not in report
+
+
+def test_blocks_migrated_snapshot_without_candidate(tmp_path):
+    path = tmp_path / "empty-catalogue.sqlite"
+    apply_migrations(DatabaseConfig(path=path))
+
+    report = assert_blocked_unchanged(path, "RECIPE_MISSING")
+    assert "recipe" not in report
+
+
+def test_blocks_inactive_candidate(snapshot):
+    with sqlite3.connect(snapshot) as conn:
+        conn.execute(
+            "UPDATE food_recipes SET is_active = 0 WHERE canonical_code = ?",
+            (BUCKWHEAT_RECIPE_CODE,),
+        )
+
+    report = assert_blocked_unchanged(snapshot, "RECIPE_INACTIVE")
+    assert report["recipe"]["is_active"] is False
+
+
+def test_blocks_predecessor_with_unexpected_parent(snapshot):
+    with sqlite3.connect(snapshot) as conn:
+        conn.execute("DROP TRIGGER trg_food_recipe_versions_no_update")
+        conn.execute(
+            "UPDATE food_recipe_versions SET created_from_version_id = id "
+            f"WHERE id IN ({CANDIDATE_VERSION_SQL})",
+            (BUCKWHEAT_RECIPE_CODE,),
+        )
+
+    report = assert_blocked_unchanged(snapshot, "PREDECESSOR_PARENT_UNEXPECTED")
+    (version,) = report["recipe"]["versions"]
+    assert version["created_from_version_id"] == version["id"]
+
+
+@pytest.mark.parametrize(
+    ("table", "column", "selector"),
+    [
+        ("food_recipe_ingredients", "quantity", "position = 1 AND recipe_version_id"),
+        ("food_recipe_versions", "base_servings", "id"),
+        ("food_recipe_versions", "source_original_servings", "id"),
+        ("food_recipe_versions", "source_output_g", "id"),
+    ],
+    ids=["ingredient-quantity", "base-servings", "source-servings", "source-output"],
+)
+def test_cli_blocks_decimal_drift_hidden_by_domain_quantization(
+    snapshot, tmp_path, table, column, selector
+):
+    predicate = f"{selector} IN ({CANDIDATE_VERSION_SQL})"
+    with sqlite3.connect(snapshot) as conn:
+        (stored,) = conn.execute(
+            f"SELECT {column} FROM {table} WHERE {predicate}", (BUCKWHEAT_RECIPE_CODE,)
+        ).fetchone()
+        drift = format(Decimal(stored) + Decimal("0.0000001"), "f")
+        conn.execute(f"DROP TRIGGER trg_{table}_no_update")
+        changed = conn.execute(
+            f"UPDATE {table} SET {column} = ? WHERE {predicate}",
+            (drift, BUCKWHEAT_RECIPE_CODE),
+        )
+        assert changed.rowcount == 1
+
+    before = snapshot.read_bytes()
+    output = tmp_path / "blocked-decimal"
+    result = run_cli(snapshot, "--output-dir", output)
+    assert result.returncode == 2, result.stderr
+    assert result.stderr == ""
+    report = json.loads(result.stdout)
+    assert report["status"] == "BLOCKED"
+    assert report["reason"] == "PERSISTED_DECIMAL_MISMATCH"
+    assert report["content_sha256"] is None
+    assert "predecessor" not in report
+    assert "prepared" not in report
+    assert (output / "snapshot.json").read_text(encoding="utf-8") == result.stdout
+    assert "PERSISTED_DECIMAL_MISMATCH" in (output / "review.md").read_text(
+        encoding="utf-8"
+    )
+    assert snapshot.read_bytes() == before
+
+
+@pytest.mark.parametrize(
+    ("column", "value", "position", "reason"),
+    [
+        ("quantity", "39.000000", 1, "PINNED_R2C_CONTENT_MISMATCH"),
+        ("unit", "ml", 1, "PINNED_R2C_CONTENT_MISMATCH"),
+        ("position", 9, 6, "READBACK_INVALID_OR_UNAVAILABLE"),
+    ],
+    ids=["quantity", "unit", "gap"],
+)
+def test_blocks_changed_ingredient_rows(snapshot, column, value, position, reason):
+    with sqlite3.connect(snapshot) as conn:
+        conn.execute("DROP TRIGGER trg_food_recipe_ingredients_no_update")
+        changed = conn.execute(
+            f"UPDATE food_recipe_ingredients SET {column} = ? WHERE position = ? "
+            f"AND recipe_version_id IN ({CANDIDATE_VERSION_SQL})",
+            (value, position, BUCKWHEAT_RECIPE_CODE),
+        )
+        assert changed.rowcount == 1
+
+    report = assert_blocked_unchanged(snapshot, reason)
+    assert "predecessor" not in report
+
+
+def test_blocks_reordered_ingredients_with_contiguous_positions(snapshot):
+    with sqlite3.connect(snapshot) as conn:
+        conn.execute("DROP TRIGGER trg_food_recipe_ingredients_no_update")
+        for previous, new in ((1, 9), (2, 1), (9, 2)):
+            changed = conn.execute(
+                "UPDATE food_recipe_ingredients SET position = ? WHERE position = ? "
+                f"AND recipe_version_id IN ({CANDIDATE_VERSION_SQL})",
+                (new, previous, BUCKWHEAT_RECIPE_CODE),
+            )
+            assert changed.rowcount == 1
+
+    report = assert_blocked_unchanged(snapshot, "PINNED_R2C_CONTENT_MISMATCH")
+    assert "predecessor" not in report
+
+
+@pytest.mark.parametrize(
+    ("column", "value"),
+    [
+        ("source_recipe_id", "synthetic-other-source"),
+        ("rights_basis", "Синтетическое основание использования."),
+        ("source_document_sha256", "a" * 64),
+    ],
+)
+def test_blocks_changed_source_or_rights(snapshot, column, value):
+    with sqlite3.connect(snapshot) as conn:
+        conn.execute("DROP TRIGGER trg_food_recipe_versions_no_update")
+        conn.execute(
+            f"UPDATE food_recipe_versions SET {column} = ? "
+            f"WHERE id IN ({CANDIDATE_VERSION_SQL})",
+            (value, BUCKWHEAT_RECIPE_CODE),
+        )
+
+    report = assert_blocked_unchanged(snapshot, "PINNED_R2C_CONTENT_MISMATCH")
+    assert "predecessor" not in report
+
+
+def test_blocks_conflicting_prepared_and_composition_authority(snapshot):
+    with sqlite3.connect(snapshot) as conn:
+        conn.execute("PRAGMA foreign_keys = ON")
+        inserted = conn.execute(
+            "INSERT INTO recipe_ingredient_composition_bindings "
+            "(recipe_ingredient_id, composition_version_id, registry_version, "
+            "nutrient_set_version, composition_calculation_version, "
+            "recipe_calculation_version, created_at) "
+            "SELECT i.id, c.id, ?, ?, ?, ?, i.created_at "
+            "FROM food_recipe_ingredients i JOIN food_composition_versions c "
+            "ON c.food_ingredient_id = i.food_ingredient_id "
+            f"WHERE i.optional = 0 AND i.recipe_version_id IN ({CANDIDATE_VERSION_SQL}) "
+            "ORDER BY i.position, c.id LIMIT 1",
+            (
+                REGISTRY_VERSION,
+                NUTRIENT_SET_VERSION,
+                COMPOSITION_CALCULATION_VERSION,
+                RECIPE_CALCULATION_VERSION,
+                BUCKWHEAT_RECIPE_CODE,
+            ),
+        )
+        assert inserted.rowcount == 1
+
+    report = assert_blocked_unchanged(snapshot, "PREPARED_AUTHORITY_INVALID")
     assert "prepared" not in report
 
 
