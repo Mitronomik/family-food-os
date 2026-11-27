@@ -1,0 +1,71 @@
+name: Consumer PWA acceptance
+on:
+  pull_request:
+    paths:
+      - 'frontend-next/**'
+      - '.github/workflows/consumer-pwa.yml'
+      - 'backend/app/api/households.py'
+      - 'backend/app/api/food_ingredients.py'
+permissions:
+  contents: read
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      AI_ENABLED: 'false'
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Resolve missing lockfile for review (fails until committed)
+        working-directory: frontend-next
+        run: |
+          if [ ! -f package-lock.json ]; then
+            npm install --package-lock-only --ignore-scripts
+            echo 'LOCKFILE_BEGIN'
+            node -e 'console.log(JSON.stringify(require("./package-lock.json")))'
+            echo 'LOCKFILE_END'
+            exit 1
+          fi
+      - name: Install exact dependencies
+        working-directory: frontend-next
+        run: npm ci
+      - name: Audit production dependencies
+        working-directory: frontend-next
+        run: npm audit --omit=dev --audit-level=high
+      - name: Build and verify
+        working-directory: frontend-next
+        run: |
+          npm run typecheck
+          npm run lint
+          npm test
+          npm run build
+      - name: Browser tests
+        working-directory: frontend-next
+        run: |
+          npx playwright install --with-deps chromium
+          npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: consumer-pwa-browser-evidence
+          path: |
+            frontend-next/test-results/
+            frontend-next/playwright-report/
+          if-no-files-found: warn
+  backend-api:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      AI_ENABLED: 'false'
+      PYTHONPATH: backend:.
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e './backend[test]'
+      - run: python -m pytest -q backend/app/tests/test_household_member_food_exclusions.py backend/app/tests/test_households_api.py --tb=short
