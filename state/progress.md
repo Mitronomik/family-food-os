@@ -1,6 +1,6 @@
-# 2026-11-27 — PR #312 receipt export follow-up (verification pending)
+# 2026-11-27 — PR #312 receipt export and regression coverage
 
-Implemented receipt-format V2 on existing draft PR #312 for [Issue #313](https://github.com/Mitronomik/family-food-os/issues/313): deterministic verified-content SHA, separate operator-declared metadata, missing human approvals, Russian review report and exclusive private artifact directory with final checksums. Added tests for seal, artifact pair, no overwrite, blocked output and partial artifacts; added [operator procedure](../docs/family-food/pr10-candidate-a-receipt-operation.md). Prior HEAD `806bee02c3c8b2b1af060d06c08edeceed6f802a` had successful R2-C and Russian nutrition methodologies workflows. New changes are not locally executed or CI-verified in this chat; no actual target DB or qualified approvals received. Do not equate synthetic tests with actual receipt.
+[PR #312](https://github.com/Mitronomik/family-food-os/pull/312) is open for review. Receipt V2 and the stored-Decimal fix passed 24 GitHub Actions workflows on `3f0d8840`, including 192 R2-C tests. Added separate regressions for an active recipe without a current `SOURCE_VERIFIED` version and for an unexpected value on a previously `UNKNOWN` nutrient. Both checks exercise the existing exporter behavior and preserve the snapshot bytes. The focused suite passed 47 tests locally. See [current PR checks](https://github.com/Mitronomik/family-food-os/pull/312/checks). The target receipt remains `NOT_CAPTURED`.
 
 ---
 

@@ -339,6 +339,27 @@ def test_blocks_inactive_candidate(snapshot):
     assert report["recipe"]["is_active"] is False
 
 
+def test_blocks_active_candidate_without_current_source_verified_version(snapshot):
+    with sqlite3.connect(snapshot) as conn:
+        conn.execute("DROP TRIGGER trg_food_recipe_versions_no_update")
+        changed = conn.execute(
+            "UPDATE food_recipe_versions "
+            "SET verification_status = 'UNVERIFIED', verified_at = NULL "
+            f"WHERE id IN ({CANDIDATE_VERSION_SQL})",
+            (BUCKWHEAT_RECIPE_CODE,),
+        )
+        assert changed.rowcount == 1
+
+    report = assert_blocked_unchanged(snapshot, "PREDECESSOR_NOT_CURRENT")
+    assert report["recipe"]["is_active"] is True
+    assert report["recipe"]["current_verified_version_id"] is None
+    (version,) = report["recipe"]["versions"]
+    assert version["version_number"] == 1
+    assert version["verification_status"] == "UNVERIFIED"
+    assert "predecessor" not in report
+    assert "prepared" not in report
+
+
 def test_blocks_predecessor_with_unexpected_parent(snapshot):
     with sqlite3.connect(snapshot) as conn:
         conn.execute("DROP TRIGGER trg_food_recipe_versions_no_update")
@@ -508,6 +529,43 @@ def test_blocks_prepared_authority_loss_or_drift_without_repair(
             (BUCKWHEAT_RECIPE_CODE,),
         )
     report = assert_blocked_unchanged(snapshot, reason)
+    assert "prepared" not in report
+
+
+def test_blocks_resealed_prepared_value_for_previously_unknown_nutrient(snapshot):
+    nutrient = "CALCIUM"
+    baseline_report = audit(snapshot)
+    assert baseline_report["status"] == "PREDECESSOR_MATCH"
+    assert nutrient in baseline_report["prepared"]["unknown"]
+    (energy,) = baseline_report["prepared"]["values"]
+    added_value = {**energy, "nutrient_code": nutrient, "amount": Decimal(0)}
+    values = [energy, added_value]
+    digest = value_set_digest(values)
+
+    with sqlite3.connect(snapshot) as conn:
+        conn.execute("PRAGMA foreign_keys = ON")
+        conn.execute("DROP TRIGGER recipe_prepared_nutrient_values_no_late_insert")
+        conn.execute("DROP TRIGGER recipe_prepared_nutrition_authorities_no_update")
+        inserted = conn.execute(
+            "INSERT INTO recipe_prepared_nutrient_values "
+            "(recipe_version_id, registry_version, nutrient_code, amount, provenance_json) "
+            "VALUES (?, ?, ?, ?, ?)",
+            (
+                added_value["recipe_version_id"].hex,
+                added_value["registry_version"],
+                nutrient,
+                str(added_value["amount"]),
+                added_value["provenance_json"],
+            ),
+        )
+        assert inserted.rowcount == 1
+        conn.execute(
+            "UPDATE recipe_prepared_nutrition_authorities "
+            "SET value_count = ?, value_sha256 = ? WHERE recipe_version_id = ?",
+            (len(values), digest, energy["recipe_version_id"].hex),
+        )
+
+    report = assert_blocked_unchanged(snapshot, "PREPARED_NUTRIENT_PARTITION_MISMATCH")
     assert "prepared" not in report
 
 
