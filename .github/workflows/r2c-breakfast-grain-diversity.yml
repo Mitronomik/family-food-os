@@ -6,6 +6,8 @@ on:
       - 'backend/app/seed/r2c_breakfast_grain_diversity.py'
       - 'backend/app/tests/test_r2c_breakfast_grain_diversity.py'
       - 'backend/app/tests/test_r2c_breakfast_grain_diversity_adversarial.py'
+      - 'backend/app/tests/test_pr10_candidate_a_predecessor_readback.py'
+      - 'scripts/read_pr10_candidate_a_predecessor.py'
       - 'backend/app/seed/r2b_fish_main_diversity.py'
       - 'backend/app/seed/r2_breakfast_capacity.py'
       - 'backend/app/seed/r1h_school2022_main.py'
@@ -63,6 +65,7 @@ jobs:
           python -m pytest -q \
             backend/app/tests/test_r2c_breakfast_grain_diversity.py \
             backend/app/tests/test_r2c_breakfast_grain_diversity_adversarial.py \
+            backend/app/tests/test_pr10_candidate_a_predecessor_readback.py \
             backend/app/tests/test_r2b_fish_main_diversity.py \
             backend/app/tests/test_r2b_fish_main_diversity_adversarial.py \
             backend/app/tests/test_r2_breakfast_capacity.py \
@@ -82,10 +85,14 @@ jobs:
           set -euo pipefail
           python -m ruff check \
             backend/app/seed/r2c_breakfast_grain_diversity.py \
+            backend/app/tests/test_pr10_candidate_a_predecessor_readback.py \
+            scripts/read_pr10_candidate_a_predecessor.py \
             backend/app/tests/test_r2c_breakfast_grain_diversity.py \
             backend/app/tests/test_r2c_breakfast_grain_diversity_adversarial.py
           python -m ruff format --check \
             backend/app/seed/r2c_breakfast_grain_diversity.py \
+            backend/app/tests/test_pr10_candidate_a_predecessor_readback.py \
+            scripts/read_pr10_candidate_a_predecessor.py \
             backend/app/tests/test_r2c_breakfast_grain_diversity.py \
             backend/app/tests/test_r2c_breakfast_grain_diversity_adversarial.py
 
@@ -108,5 +115,5 @@ jobs:
           echo 'six exact-energy BREAKFAST candidates / capacity eighteen: PASS'
           echo 'persisted grain-diverse seven-BREAKFAST proof: PASS'
           echo 'hard wheat FoodIngredient exclusion: PASS'
-          echo 'migration head 0042 / no 0043: PASS'
+          echo 'accepted migration lineage and read-only Candidate A predecessor: PASS'
           echo 'AI_ENABLED=false: PASS'

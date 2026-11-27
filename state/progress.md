@@ -1,3 +1,9 @@
+# 2026-11-27 — PR #312 receipt export and regression coverage
+
+[PR #312](https://github.com/Mitronomik/family-food-os/pull/312) is open for review. Receipt V2 and the stored-Decimal fix passed 24 GitHub Actions workflows on `3f0d8840`, including 192 R2-C tests. Added separate regressions for an active recipe without a current `SOURCE_VERIFIED` version and for an unexpected value on a previously `UNKNOWN` nutrient. Both checks exercise the existing exporter behavior and preserve the snapshot bytes. The focused suite passed 47 tests locally. See [current PR checks](https://github.com/Mitronomik/family-food-os/pull/312/checks). The target receipt remains `NOT_CAPTURED`.
+
+---
+
 # 2026-11-27 — Регрессия удаления неизвестного продукта в PR #311
 
 Проверены два случая. При недоступных сведениях и отсутствующем русском

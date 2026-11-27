@@ -1,3 +1,9 @@
+# 2026-11-27 — Candidate A receipt on PR #312
+
+[PR #312](https://github.com/Mitronomik/family-food-os/pull/312) for [Issue #313](https://github.com/Mitronomik/family-food-os/issues/313) is open for review. On `3f0d8840`, 24 GitHub Actions workflows passed and independent technical AI review found no blocker. The two follow-up regressions exercise `PREDECESSOR_NOT_CURRENT` and `PREPARED_NUTRIENT_PARTITION_MISMATCH`. Check [CI on the current PR HEAD](https://github.com/Mitronomik/family-food-os/pull/312/checks), then obtain independent human review and an explicit owner merge decision. The target SQLite receipt remains `NOT_CAPTURED`. Use the [operator procedure](../docs/family-food/pr10-candidate-a-receipt-operation.md) to capture it when available. Source/process review, successor nutrition applicability, owner consent for the current-version change and historical replay remain separate publication gates.
+
+---
+
 # 2026-11-27 — Защита неидентифицированных исключений в PR #311
 
 В [PR #311](https://github.com/Mitronomik/family-food-os/pull/311) исправлено
